@@ -3,10 +3,10 @@
 # Site settings
 # title: 寻找H!
 # email: 
-description:  名字是因为我常常忘记自己的名字
+description:  
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "" # the base hostname & protocol for your site
-twitter_username: warmestbabyblue
+twitter_username: 
 github_username:  realhu1989
 encoding: utf-8
 
@@ -26,10 +26,10 @@ highlighter: pygments
 # Themes are encouraged to use these universal variables 
 # so be sure to set them if your theme uses them.
 #
-title :  寻找H!
+title : Calm down and do code.
 tagline: Site Tagline
 author :
-  name : Looking4H
+  name : realhu
   email : r341hu@gmail.com
   github : realhu1989
   twitter : 

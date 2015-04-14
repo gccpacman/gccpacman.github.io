@@ -17,12 +17,6 @@ tagline: Supporting tagline
 
 ## My TODO List
 
-1. play guitar
-2. play linux
-3. find a new job
-4. have a nice home
-
-## 我的每日打卡
 
 
 
