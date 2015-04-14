@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "博客，你好 hello , my blog"
+title:  " hello jekyll blog"
 date:   2011-01-01 16:16:00
 tags : [test, jekyll]
 ---
