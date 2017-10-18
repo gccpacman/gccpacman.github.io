@@ -1,3 +1,8 @@
+---
+title: PPTP Server搭建笔记
+date: 2015-04-19
+---
+
 # Setup PPTP Server on linux
 
 参考:
