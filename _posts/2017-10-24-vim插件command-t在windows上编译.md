@@ -7,12 +7,11 @@ date: 2017-10-24
 
 [官方文档](https://github.com/wincent/command-t/blob/master/doc/command-t.txt)写的安装编译过程代码大概是这样的，我省去了使用bundle的安装过程：
 
-   $ cd ~/vim\bundle\command-t\ruby\command-t\ext\command-t>
-   $ ruby extconf.rb
-   $ make
+    $ cd ~/vim\bundle\command-t\ruby\command-t\ext\command-t>
+    $ ruby extconf.rb
+    $ make
 
 要完成这些肯定得装ruby和make，网上的绝大多数答案也都已经过期，说的是vim7.4左右的版本，而现在已经是vim 8.0。于是只好自己探索。
-
 
 windows的ruby是一个特殊的安装包，和Ruby的官网都分开，网址是[RubyInstaller for windows](https://rubyinstaller.org/)。
 
@@ -22,11 +21,11 @@ windows的ruby是一个特殊的安装包，和Ruby的官网都分开，网址�
 
 假设Ruby 安装到 C:\Ruby22-x64， 配置PATH环境变量。然后将Development tools 就解压到 C:\Ruby22-x64\DevKit, 然后进入该目录执行
 
-    ruby dk.rb init
+    $ ruby dk.rb init
 
 成功后再执行
 
-    ruby dk.rb install
+    $ ruby dk.rb install
 
 接着进入`~/vim\bundle\command-t\ruby\command-t\ext\command-t>`文件夹，执行`ruby extconf.rb`命令，发现ruby执行成功了，用choco安装make并执行make一切都顺利。
 但是进入vim一按command-t的快捷键报错，报错内容是：
@@ -36,14 +35,13 @@ windows的ruby是一个特殊的安装包，和Ruby的官网都分开，网址�
     Vim Ruby version: 2.2.6
     Expected version: 2.3.3
 
-也就是vim内置的ruby版本和这个版本不匹配，看来我确实遗漏了vim内置版本的问题。于是继续降级到Ruby 2.2, 结果居然还是报错。报错内容依旧是`You have to install development tools first.` 然而我明明已经安装了`development tools`. 
+也就是vim内置的ruby版本和这个版本不匹配，看来我确实遗漏了vim内置版本的问题。于是继续降级到Ruby 2.2, 结果居然还是报错。报错内容依旧是`You have to install development tools first.` 然而我明明已经安装了development tools. 
 
-只好求助google，结果找到两个有用的东西，
-
-在[RubyInstaller wiki](https://github.com/OneClick/RubyInstaller/wiki/Development-Kit)
+求助google，结果在[RubyInstaller wiki](https://github.com/OneClick/RubyInstaller/wiki/Development-Kit)
 有一段话是：
 
-    The Hacky Developer Scenario – a developer building native gems wants to be able to quickly test that their extconf.rb file used to create a Makefile for the native library works correctly. To shorten the development cycle, the DevKit enables the developer to run `ruby -rdevkit extconf.rb`.
+> The Hacky Developer Scenario – a developer building native gems wants to be able to quickly test that their extconf.rb file used to create a Makefile for the native library works correctly. To shorten the development cycle, the DevKit enables the developer to run `ruby -rdevkit extconf.rb`.
+
 
 于是我尝试带`-rdevkit`参数执行extconf.rb，结果果然通过了，但是make命令却无法通过。继续搜索，发现[AskUbuntu]上有个command-t的问题，没有用官方文档的方法编译command-t而是用了`rake make`来编译，我知道rake是ruby的一个工具，在jekyll尝试搭博客的时候用到，但不知道原理。但是反正是编译只要过了就行，于是我就尝试执行`rake make`结果还是不信，报错`You have to install development tools first.`，但是这样我没有理由不去尝试帮`rake make` 带上`-rdevkit`这样一个参数，结果居然真的成功了。
 
