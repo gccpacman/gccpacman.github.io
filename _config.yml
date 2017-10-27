@@ -20,7 +20,7 @@ markdown: kramdown
 # For more see: http://jekyllrb.com/docs/permalinks/
 permalink: /:categories/:year/:month/:day/:title 
 
-exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md", "pages.html", "categories.html", "History.markdown"]
+exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md", "pages.html", "categories.html", "History.markdown", "sitemap.txt", "atom.xml"]
 highlighter: pygments
 
 # Themes are encouraged to use these universal variables 
