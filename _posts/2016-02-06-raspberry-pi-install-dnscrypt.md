@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "raspberry pi install dnscrypt"
+title: "树莓派安装dnscrypt"
 description: ""
 category: 
 tags: []
