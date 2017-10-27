@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "replace nvidia driver with nouveau driver arch linux"
+title: "ArchLinux将nvidia driver替换成开源的nouveau解决显卡驱动问题"
 description: ""
 category:
 tags: [driver, archlinux,]
