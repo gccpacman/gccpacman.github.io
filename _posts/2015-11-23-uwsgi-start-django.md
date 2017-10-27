@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "uwsgi start django"
+title: "uwsgi启动django应用"
 description: ""
 category:
 tags: [python, uwsgi, django]
