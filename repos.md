@@ -1,6 +1,6 @@
 ---
 layout: page
-title: My Repos
+title: Repos
 permalink: /repos/
 ---
 
