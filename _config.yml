@@ -26,7 +26,7 @@ highlighter: pygments
 # Themes are encouraged to use these universal variables 
 # so be sure to set them if your theme uses them.
 #
-title : Calm down and do code.
+title : Keep Calm and code
 tagline: Site Tagline
 author :
   name : gccpacman
