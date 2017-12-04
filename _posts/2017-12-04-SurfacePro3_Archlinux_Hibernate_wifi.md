@@ -18,7 +18,7 @@ date: 2017-12-04
 因此要做的操作就是`rmmod`和`modprobe`，休眠后执行下面的命令后，wifi和蓝牙就可以正常工作了。
 
      sudo rmmod -v btusb
-     sudo rmmod -v mwifiex_pcie
+     sudo rmbanbenmod -v mwifiex_pcie
      sudo modprobe -v btusb
      sudo modprobe -v mwifiex_pcie
  
@@ -26,8 +26,8 @@ date: 2017-12-04
 
 我的脚本`/usr/lib/systemd/system-sleep/wakeup_suspend_dev.sh`的内容是：
 
-    #!/bin/bash
-
+```
+    #!/bin/bash
     case $1 in
         pre)
           rmmod btusb
@@ -38,6 +38,7 @@ date: 2017-12-04
                 modprobe mwifiex_pcie
         ;;
     esac
+```
 
 `pre`是在休眠之前执行`rmmod`的操作，post是在休眠之后执行`modprobe`的操作。需要注意的是必须把这个脚本加可执行权限：
 
