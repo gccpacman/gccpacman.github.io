@@ -3,7 +3,7 @@ title: Surface Pro 3 安装Linux休眠唤醒后wifi和蓝牙无法正常使用�
 date: 2017-12-04
 ---
 
-大概`Manjaro Linux 17.02`开始匹配了Surface Pro 3， 这里必须非常感谢下Manjaro Team的工作，我现在可以再次在Surface上用畅快的用Linux了。
+`Manjaro Linux`从`17.02`版本开始匹配了Surface Pro 3， 这里必须非常感谢下Manjaro Team的工作，我现在可以再次在Surface上用畅快的用Linux了。
 
 具体可以看reddit上的这篇文章： https://cd-rw.org/t/running-linux-on-the-surface-pro-3/175/37。
 
