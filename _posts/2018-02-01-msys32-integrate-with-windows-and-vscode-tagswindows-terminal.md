@@ -33,9 +33,6 @@ tags: [windows, terminal]
     
 4.~~Install Python & Pip~~ (直接用windows的Python就好，用Mingw64的Python反而可能会有很多问题)
 
-~~$ Pacman -S mingw-w64-x86_64-python2  mingw-w64-x86_64-python3 mingw-w64-x86_64-python2-pip mingw-w64-x86_64-python3-pip ~~
-
-
 
 5. 让VSCode里的继承终端（VSCode Integrated Terminal）使用Msys2，在VSCode的settings里加入以下内容:
 ```
@@ -58,6 +55,8 @@ tags: [windows, terminal]
 https://getpocket.com/a/read/1169705865
 
 https://help.github.com/articles/dealing-with-line-endings
+
+https://groups.google.com/forum/#!topic/ustc_lug/_wL4OkWrVK4
 
 https://stackoverflow.com/questions/33942924/how-to-change-home-directory-and-start-directory-on-msys2
 
