@@ -22,19 +22,18 @@ tags: [windows, terminal]
 
 >>>
     安装git：
-        $ pacman --needed -S bash pacman msys2-runtime  git # 来自<https://getpocket.com/a/read/1169705865>
+        $ pacman --needed -S bash pacman msys2-runtime  git 
+
     修改git处理回车的方式：
-        $ git config --global core.autocrlf true  # 来自 <https://help.github.com/articles/dealing-with-line-endings/> 
-3. 修改Home目录路径, Msys2默认的Home目录是Mingw64的/home/username, 但是我希望使用windows的Home目录/c/Users/username. 
+        $ git config --global core.autocrlf true  
+	
+3. 修改Home目录路径, Msys2默认的Home目录是Mingw64的/home/username, 但是我希望使用windows的Home目录/c/Users/username. 方法是编辑`/etc/nsswitch.conf`, 并修改
 
->>>
-    If you would like to use your windows home folder as the home folder for MSYS2, you can edit `/etc/nsswitch.conf` and write:
-    	db_home: windows # 来自 <https://stackoverflow.com/questions/33942924/how-to-change-home-directory-and-start-directory-on-msys2> 
-
-
+    db_home: windows
+    
 4.~~Install Python & Pip~~ (直接用windows的Python就好，用Mingw64的Python反而可能会有很多问题)
 
-    ~~$ Pacman -S mingw-w64-x86_64-python2  mingw-w64-x86_64-python3 mingw-w64-x86_64-python2-pip mingw-w64-x86_64-python3-pip # 来自 <https://groups.google.com/forum/#!topic/ustc_lug/_wL4OkWrVK4> ~~
+~~$ Pacman -S mingw-w64-x86_64-python2  mingw-w64-x86_64-python3 mingw-w64-x86_64-python2-pip mingw-w64-x86_64-python3-pip ~~
 
 
 
@@ -50,7 +49,16 @@ tags: [windows, terminal]
 		"MSYSTEM": "MINGW64",
 	"MSYS2_PATH_TYPE": "inherit",
 	    },
-	}
+	} 
 ```
 
-来自 <https://stackoverflow.com/questions/45836650/how-do-i-integrate-msys2-shell-into-visual-studio-code-on-window/48016561#comment84105772_48016561> 
+
+参考：
+
+https://getpocket.com/a/read/1169705865
+
+https://help.github.com/articles/dealing-with-line-endings
+
+https://stackoverflow.com/questions/33942924/how-to-change-home-directory-and-start-directory-on-msys2
+
+https://stackoverflow.com/questions/45836650/how-do-i-integrate-msys2-shell-into-visual-studio-code-on-window/48016561#comment84105772_48016561
