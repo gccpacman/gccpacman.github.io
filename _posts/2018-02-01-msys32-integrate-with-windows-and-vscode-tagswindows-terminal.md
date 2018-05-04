@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Windows安装MSys32配置Git等开发环境并集成VSCode和"
+title: "Windows安装MSys32配置Git等开发环境并集成VSCode"
 description: ""
 category: 
 tags: [windows, terminal]
