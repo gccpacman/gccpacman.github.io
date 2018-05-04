@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "MSys32 integrate with Windows and VSCode"
+title: "Windows安装MSys32配置Git等开发环境并集成VSCode和"
 description: ""
 category: 
 tags: [windows, terminal]
