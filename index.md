@@ -5,12 +5,11 @@ tagline: Supporting tagline
 ---
 {% include JB/setup %}
 
-<ul class="posts">
+<ul class="posts" style="list-style-type: square;color: gainsboro;">
   {% for post in site.posts %}
     <li>
         <a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a>
-        &raquo; 
-        <span>{{ post.date | date_to_string }}</span> 
+        <span style="color:gray;font-size:0.7em">{{ post.date | date_to_string }}</span> 
     </li>
   {% endfor %}
 </ul>
