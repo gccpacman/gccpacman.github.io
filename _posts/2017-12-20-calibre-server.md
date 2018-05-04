@@ -1,8 +1,12 @@
 ---
-title: 用Calibre Server创建个人在线电子书阅读网站 
+layout: post
+title: "用Calibre Server创建个人在线电子书阅读网站 "
 date: 2017-12-20
+description: ""
+category: 
+tags: [linux, resources]
 ---
-
+{% include JB/setup %}
 
 
 DigitalOcean上有在ubuntu 14.04上安装calibre server的教程——[How To Create a Calibre Ebook Server on Ubuntu 14.04](https://www.digitalocean.com/community/tutorials/how-to-create-a-calibre-ebook-server-on-ubuntu-14-04), 但是已经过时了，一是calibre-server的参数已经改变，二是创建系统服务的方式已经不适用之后的Ubuntu版本，我的服务器是16.04，因此需要把/etc/init/里的脚本改写成systemctl脚本

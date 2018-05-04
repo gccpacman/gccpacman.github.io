@@ -1,7 +1,12 @@
 ---
 title: vim插件command-t在windows上编译
 date: 2017-10-24
+layout: post
+description: ""
+category: 
+tags: [windows, vim]
 ---
+{% include JB/setup %}
 
 用Bundle在Windows平台上配置成功了以后，绝大多数插件都已经可以使用，但是唯独[Command-T](https://github.com/wincent/Command-T)因为是Ruby集成的插件，需要手动编译。
 
