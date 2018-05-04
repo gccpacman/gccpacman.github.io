@@ -12,7 +12,7 @@ tags: [虚拟机, vmware, i3, linux]
 
 ![i3](https://i3wm.org/screenshots/i3-1.png)
 
-##这边的例子以Vmware为例：
+## 这边的例子以Vmware为例：
 
 ### 1. 首先要安装i3：
 
