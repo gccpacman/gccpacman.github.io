@@ -37,13 +37,23 @@ tags: [虚拟机, vmware, i3, linux]
     echo "Xft.dpi: 118" >> ~/.Xresources
 ```
 
-### 4. 安装lightdm后，修改`/etc/lightdm/lightdm.conf`，设置session成i3，并且因为是虚拟机不想每次开机都输入用户名密码，可以设置自动登陆：
+### 4. 安装lightdm/gdm后，，设置session成i3，并且因为是虚拟机不想每次开机都输入用户名密码，可以设置自动登陆：
+
+`lightdm`修改`/etc/lightdm/lightdm.conf`:
 
 ```
     [SeatDefaults]
     autologin-user= {{your username}}
     autologin-user-timeout=0
     user-session=i3
+```
+
+`gdm`修改`/etc/gdm3/daemon.conf`:
+
+```
+[daemon]
+AutomaticLoginEnable=true
+AutomaticLogin=teotfw
 ```
 
 
