@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "linux平台搭建git server"
+title: "linux平台搭建git服务器"
 description: ""
 category: git
 tags: [linux, git, server]

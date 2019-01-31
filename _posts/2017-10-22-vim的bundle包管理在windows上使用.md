@@ -1,6 +1,10 @@
 ---
 title: windows的包管理Chocolate和vim.Vundle
 date: 2017-10-22
+layout: post
+description: ""
+category: 
+tags: ['windows', 'vim']
 ---
 
 
