@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>Pacman News</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Pacman News Atom Feed" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">Pacman News </a></h1>
+                <nav><ul>
+                    <li><a href="/category/python.html">Python</a></li>
+                    <li><a href="/category/vim.html">Vim</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+
+            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="/windowsde-bao-guan-li-chocolatehe-vimvundle.html">windows的包管理Chocolate和vim.Vundle</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2017-10-22T10:20:00+08:00">
+                Published: Sun 22 October 2017
+        </abbr>
+		<br />
+        <abbr class="modified" title="2010-12-05T19:30:00+08:00">
+                Updated: Sun 05 December 2010
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/r341h.html">r341h</a>
+        </address>
+<p>In <a href="/category/vim.html">Vim</a>.</p>
+<p>tags: <a href="/tag/windows.html">windows</a> <a href="/tag/vim.html">vim</a> </p>
+</footer><!-- /.post-info --><p>Windows的开发环境一直都会让人比较头疼，一般解决方法有用Cygwin等模拟Linux的环境，Windows 10又自带了Ubuntu On Windows 10的环境。但是都或多或少有点问题，例如Cygwin的文件目录和windows分离，Ubuntu On Windows 10不能用Nodejs，打开X应用比较麻烦，只能用终端等。</p>
+<p>经过很多尝试，我认为最友好的环境还是windows原生的环境，只是你需要偶尔告别命令行搜索某些应用需要的依赖，依次安装，这样其实绝大多数的开发环境都是可以部署的。不过还是有工具可以帮助我们，例如Windows其实也有一个类似apt-get或者<a href="https://brew.sh/">Homebrew</a>的包管理工具，叫做<a href="https://chocolatey.org/">Chocolate</a>.</p>
+<p><a href="https://chocolatey.org/install">安装Chocolate</a>只要在Powershell里写这行代码即可：</p>
+<div class="highlight"><pre><span></span>Set-ExecutionPolicy Bypass; iex ((New-Object System.Net.WebClient).DownloadString(&#39;https://chocolatey.org/install.ps1&#39;))
+</pre></div>
+
+
+<p>安装包的方法是<code>choco install &lt;package_name&gt;</code> 但是这个命令必须用admin权限的powershell来执行。于是想是不是有个windows的<code>sudo</code>，结果一查还真的有，而且可以用chocolate安装。于是admin执行powershell并运行了<code>choco install sudo</code>就安装好了。以后只要在普通用户的powershell执行<code>sudo choco install &lt;package_name&gt;</code>即可了。</p>
+<p>我用choco安装了<code>git</code>, <code>vim</code>, <code>python</code>，<code>curl</code>，<code>wget</code>等工具，安装后powershell可以执行不少的类似linux的命令了。
+但vim是裸奔状态，如果我直接把以前配置的.vimrc文件拿过来，显然用不来，甚至连Vundle包管理都用不来。Vundle的官方文档有<a href="https://github.com/VundleVim/Vundle.vim/wiki/Vundle-for-Windows">windows上配置的方法</a>就是把:</p>
+<div class="highlight"><pre><span></span>set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+</pre></div>
+
+
+<p>改成</p>
+<div class="highlight"><pre><span></span>set rtp+=$HOME/.vim/bundle/Vundle.vim/
+call vundle#begin(&#39;$HOME/.vim/bundle/&#39;)
+</pre></div>
+
+
+<p>然后再执行<code>vim +BundleInstall +qall</code>就好了。</p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/my-super-post.html" rel="bookmark"
+                           title="Permalink to My super title">My super title</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2010-12-03T10:20:00+08:00">
+                Published: Fri 03 December 2010
+        </abbr>
+		<br />
+        <abbr class="modified" title="2010-12-05T19:30:00+08:00">
+                Updated: Sun 05 December 2010
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/alexis-metaireau.html">Alexis Metaireau</a>
+                        <a class="url fn" href="/author/conan-doyle.html">Conan Doyle</a>
+        </address>
+<p>In <a href="/category/python.html">Python</a>.</p>
+<p>tags: <a href="/tag/pelican.html">pelican</a> <a href="/tag/publishing.html">publishing</a> </p>
+</footer><!-- /.post-info -->                <p>Short version for index and feeds</p>
+                <a class="readmore" href="/my-super-post.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+                </ol><!-- /#posts-list -->
+                </section><!-- /#content -->
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>links</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                            <li><a href="#">You can modify those links in your config file</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                            <li><a href="#">You can add links in your config file</a></li>
+                            <li><a href="#">Another social link</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>
