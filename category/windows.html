@@ -47,33 +47,31 @@
 </li>
 <li>
 <p>安装和配置 <code>git</code>, 配置在windows上check出crlf格式文本，提交lf格式:</p>
+<p>2.1 安装git：</p>
+<div class="highlight"><pre><span></span>$ pacman --needed -S bash pacman msys2-runtime  git
+</pre></div>
+
+
+<p>2.2 修改git处理回车的方式：</p>
+<div class="highlight"><pre><span></span>$ git config --global core.autocrlf <span class="nb">true</span>
+</pre></div>
+
+
 </li>
-</ol>
-<blockquote>
-<blockquote>
-<blockquote>
-<div class="highlight"><pre><span></span>安装git：
-    $ pacman --needed -S bash pacman msys2-runtime  git
-</pre></div>
-
-
-</blockquote>
-</blockquote>
-</blockquote>
-<div class="highlight"><pre><span></span>修改git处理回车的方式：
-    $ git config --global core.autocrlf true
-</pre></div>
-
-
-<ol>
 <li>
 <p>修改Home目录路径, Msys2默认的Home目录是Mingw64的/home/username, 但是我希望使用windows的Home目录/c/Users/username. 方法是编辑<code>/etc/nsswitch.conf</code>, 并修改</p>
-<p>db_home: windows</p>
+<div class="highlight"><pre><span></span>$ db_home: windows
+</pre></div>
+
+
 </li>
-</ol>
-<p>4.~~Install Python &amp; Pip~~ (直接用windows的Python就好，用Mingw64的Python反而可能会有很多问题)</p>
-<ol>
-<li>让VSCode里的继承终端（VSCode Integrated Terminal）使用Msys2，在VSCode的settings里加入以下内容:</li>
+<li>
+<p><del> Install Python &amp; Pip </del><br>
+(直接用windows的Python就好，用Mingw64的Python反而可能会有很多问题)</p>
+</li>
+<li>
+<p>让VSCode里的继承终端（VSCode Integrated Terminal）使用Msys2，在VSCode的settings里加入以下内容:</p>
+</li>
 </ol>
 <div class="highlight"><pre><span></span>    {
         &quot;terminal.integrated.shell.windows&quot;: &quot;C:\\msys64\\usr\\bin\\bash.exe&quot;,
@@ -101,9 +99,6 @@
                         <h2>links</h2>
                         <ul>
                             <li><a href="http://getpelican.com/">Pelican</a></li>
-                            <li><a href="http://python.org/">Python.org</a></li>
-                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
-                            <li><a href="#">You can modify those links in your config file</a></li>
                         </ul>
                 </div><!-- /.blogroll -->
                 <div class="social">
@@ -111,8 +106,8 @@
                         <ul>
                             <li><a href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
 
-                            <li><a href="#">You can add links in your config file</a></li>
-                            <li><a href="#">Another social link</a></li>
+                            <li><a href="https://github.com/gccpacman">My Github</a></li>
+                            <li><a href="https://stackoverflow.com/users/4124310/realhu">My StackOverflow</a></li>
                         </ul>
                 </div><!-- /.social -->
         </section><!-- /#extras -->

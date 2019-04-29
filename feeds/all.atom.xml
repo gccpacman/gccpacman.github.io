@@ -80,27 +80,19 @@ exec i3&amp;quot; &amp;gt; ~/.xsession
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;安装和配置 &lt;code&gt;git&lt;/code&gt;, 配置在windows上check出crlf格式文本，提交lf格式:&lt;/p&gt;
+&lt;p&gt;2.1 安装git：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pacman --needed -S bash pacman msys2-runtime  git
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;2.2 修改git处理回车的方式：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ git config --global core.autocrlf &lt;span class="nb"&gt;true&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;/li&gt;
-&lt;/ol&gt;
-&lt;blockquote&gt;
-&lt;blockquote&gt;
-&lt;blockquote&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;安装git：
-    $ pacman --needed -S bash pacman msys2-runtime  git
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;/blockquote&gt;
-&lt;/blockquote&gt;
-&lt;/blockquote&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;修改git处理回车的方式：
-    $ git config --global core.autocrlf true
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;修改Home目录路径, Msys2默认的Home目录是Mingw64的/home/username, 但是我希望使用windows的Home目录/c/Users …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;在不久之前发现了Msys2，基于Cygwin但是却又有一个让我觉得无比美好的包管理器Pacman(和Arch Linux的一样)，于是决定试试。但是真的用于Windows的终端还有很多麻烦的地方要解决，主要是以下几点：
+&lt;p&gt;修改Home目录路径, Msys2默认的Home目录是Mingw64的/home …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;在不久之前发现了Msys2，基于Cygwin但是却又有一个让我觉得无比美好的包管理器Pacman(和Arch Linux的一样)，于是决定试试。但是真的用于Windows的终端还有很多麻烦的地方要解决，主要是以下几点：
 1. Git的ssh_keygen配置，你和windows自己的CMD里的ssh_keygen能否共用
 2. Msys用的换行符是和Linux一样的LF，而Windows的是CRLF
 3. Python能不能直接用Windows的Python而不用模拟Unix环境的Python（有很多的bug）
@@ -112,33 +104,31 @@ exec i3&amp;quot; &amp;gt; ~/.xsession
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;安装和配置 &lt;code&gt;git&lt;/code&gt;, 配置在windows上check出crlf格式文本，提交lf格式:&lt;/p&gt;
+&lt;p&gt;2.1 安装git：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pacman --needed -S bash pacman msys2-runtime  git
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;2.2 修改git处理回车的方式：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ git config --global core.autocrlf &lt;span class="nb"&gt;true&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;/li&gt;
-&lt;/ol&gt;
-&lt;blockquote&gt;
-&lt;blockquote&gt;
-&lt;blockquote&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;安装git：
-    $ pacman --needed -S bash pacman msys2-runtime  git
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;/blockquote&gt;
-&lt;/blockquote&gt;
-&lt;/blockquote&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;修改git处理回车的方式：
-    $ git config --global core.autocrlf true
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;修改Home目录路径, Msys2默认的Home目录是Mingw64的/home/username, 但是我希望使用windows的Home目录/c/Users/username. 方法是编辑&lt;code&gt;/etc/nsswitch.conf&lt;/code&gt;, 并修改&lt;/p&gt;
-&lt;p&gt;db_home: windows&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ db_home: windows
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;4.~~Install Python &amp;amp; Pip~~ (直接用windows的Python就好，用Mingw64的Python反而可能会有很多问题)&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;让VSCode里的继承终端（VSCode Integrated Terminal）使用Msys2，在VSCode的settings里加入以下内容:&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;del&gt; Install Python &amp;amp; Pip &lt;/del&gt;&lt;br&gt;
+(直接用windows的Python就好，用Mingw64的Python反而可能会有很多问题)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;让VSCode里的继承终端（VSCode Integrated Terminal）使用Msys2，在VSCode的settings里加入以下内容:&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    {
         &amp;quot;terminal.integrated.shell.windows&amp;quot;: &amp;quot;C:\\msys64\\usr\\bin\\bash.exe&amp;quot;,
