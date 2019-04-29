@@ -1,2 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Pacman News - Python</title><link href="/" rel="alternate"></link><link href="/feeds/python.atom.xml" rel="self"></link><id>/</id><updated>2010-12-05T19:30:00+08:00</updated><entry><title>My super title</title><link href="/my-super-post.html" rel="alternate"></link><published>2010-12-03T10:20:00+08:00</published><updated>2010-12-05T19:30:00+08:00</updated><author><name>Alexis Metaireau</name></author><id>tag:None,2010-12-03:/my-super-post.html</id><summary type="html">&lt;p&gt;Short version for index and feeds&lt;/p&gt;</summary><content type="html">&lt;p&gt;This is the content of my super blog post.&lt;/p&gt;</content><category term="pelican"></category><category term="publishing"></category></entry></feed>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Pacman News - python</title><link href="/" rel="alternate"></link><link href="/feeds/python.atom.xml" rel="self"></link><id>/</id><updated>2015-11-23T19:30:00+08:00</updated><entry><title>uwsgi方式启动django</title><link href="/uwsgifang-shi-qi-dong-django.html" rel="alternate"></link><published>2015-11-23T10:20:00+08:00</published><updated>2015-11-23T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:None,2015-11-23:/uwsgifang-shi-qi-dong-django.html</id><summary type="html">&lt;p&gt;没人访问的博客也不是不能升级。不过最近有点懒，趁着睡不着搞了下&lt;code&gt;uwsgi&lt;/code&gt;。
+额。平台ubuntu, 你最好有个django项目，假设已经用了&lt;code&gt;virtualenv&lt;/code&gt;，假设已经安装好&lt;code&gt;nginx&lt;/code&gt;并启动服务。&lt;/p&gt;
+&lt;p&gt;1）首先安装&lt;code&gt;uwsgi&lt;/code&gt;:  &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install uwsgi
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;2）然后启动， 指定端口号和进程号：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;uwsgi -s 127.0.0.1:38803 --http :8000 --module blog.wsgi
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;3) 配置nginx配置文件，放在&lt;code&gt;/etc/nginx/site-enabled/&lt;/code&gt;目录下，注意如果你要用80端口，就不要和其他的例如默认的配置冲突，如果有个default的文件，应该是一个软连接，可以直接删掉。我就直接贴我自己的了：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;upstream&lt;/span&gt; &lt;span class="nt"&gt;django&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="err"&gt;server&lt;/span&gt; &lt;span class="err"&gt;127 …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;没人访问的博客也不是不能升级。不过最近有点懒，趁着睡不着搞了下&lt;code&gt;uwsgi&lt;/code&gt;。
+额。平台ubuntu, 你最好有个django项目，假设已经用了&lt;code&gt;virtualenv&lt;/code&gt;，假设已经安装好&lt;code&gt;nginx&lt;/code&gt;并启动服务。&lt;/p&gt;
+&lt;p&gt;1）首先安装&lt;code&gt;uwsgi&lt;/code&gt;:  &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install uwsgi
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;2）然后启动， 指定端口号和进程号：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;uwsgi -s 127.0.0.1:38803 --http :8000 --module blog.wsgi
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;3) 配置nginx配置文件，放在&lt;code&gt;/etc/nginx/site-enabled/&lt;/code&gt;目录下，注意如果你要用80端口，就不要和其他的例如默认的配置冲突，如果有个default的文件，应该是一个软连接，可以直接删掉。我就直接贴我自己的了：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;upstream&lt;/span&gt; &lt;span class="nt"&gt;django&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="err"&gt;server&lt;/span&gt; &lt;span class="err"&gt;127.0.0.1:38803&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="nt"&gt;server&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="err"&gt;listen&lt;/span&gt; &lt;span class="err"&gt;80&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="err"&gt;server_name&lt;/span&gt; &lt;span class="err"&gt;localhost&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="err"&gt;charset&lt;/span&gt; &lt;span class="err"&gt;utf-8&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="err"&gt;client_max_body_size&lt;/span&gt; &lt;span class="err"&gt;75M&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="err"&gt;location&lt;/span&gt; &lt;span class="err"&gt;/&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
+        &lt;span class="err"&gt;uwsgi_pass&lt;/span&gt; &lt;span class="err"&gt;django&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="err"&gt;include&lt;/span&gt; &lt;span class="err"&gt;/etc/nginx/uwsgi_params&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="nt"&gt;location&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;static&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="err"&gt;alias&lt;/span&gt;   &lt;span class="err"&gt;/webapps/blog/static&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="err"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;4) 关于static，你应该在服务器某个地方建个目录(例如我的配置文件是&lt;code&gt;/webapps/blog/static&lt;/code&gt;)，然后配置一下&lt;code&gt;setting.py&lt;/code&gt;里的&lt;code&gt;STATIC_ROOT&lt;/code&gt;成该目录，然后每次static有更改就重新执行&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;python manage.py collectstatic.
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;然后尝试一下访问&lt;code&gt;127.0.0.1&lt;/code&gt;，当然如果是远程服务器，就是你的网址了。
+看看是否work了吧！&lt;/p&gt;</content><category term="python"></category><category term="django"></category><category term="webapps"></category></entry><entry><title>My super title</title><link href="/my-super-post.html" rel="alternate"></link><published>2010-12-03T10:20:00+08:00</published><updated>2010-12-05T19:30:00+08:00</updated><author><name>Alexis Metaireau</name></author><id>tag:None,2010-12-03:/my-super-post.html</id><summary type="html">&lt;p&gt;Short version for index and feeds&lt;/p&gt;</summary><content type="html">&lt;p&gt;This is the content of my super blog post.&lt;/p&gt;</content><category term="pelican"></category></entry></feed>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>Windows安装MSys32配置Git等开发环境并集成VSCode</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Pacman News Atom Feed" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">Pacman News </a></h1>
+                <nav><ul>
+                    <li><a href="/category/linux.html">Linux</a></li>
+                    <li><a href="/category/python.html">python</a></li>
+                    <li><a href="/category/vim.html">Vim</a></li>
+                    <li class="active"><a href="/category/windows.html">Windows</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="/windowsan-zhuang-msys32pei-zhi-gitdeng-kai-fa-huan-jing-bing-ji-cheng-vscode.html" rel="bookmark"
+           title="Permalink to Windows安装MSys32配置Git等开发环境并集成VSCode">Windows安装MSys32配置Git等开发环境并集成VSCode</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2018-02-01T10:20:00+08:00">
+                Published: Thu 01 February 2018
+        </abbr>
+		<br />
+        <abbr class="modified" title="2018-02-01T19:30:00+08:00">
+                Updated: Thu 01 February 2018
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/r341h.html">r341h</a>
+        </address>
+<p>In <a href="/category/windows.html">Windows</a>.</p>
+<p>tags: <a href="/tag/windows.html">windows</a> <a href="/tag/shell.html">shell</a> </p>
+</footer><!-- /.post-info -->      <p>在不久之前发现了Msys2，基于Cygwin但是却又有一个让我觉得无比美好的包管理器Pacman(和Arch Linux的一样)，于是决定试试。但是真的用于Windows的终端还有很多麻烦的地方要解决，主要是以下几点：
+1. Git的ssh_keygen配置，你和windows自己的CMD里的ssh_keygen能否共用
+2. Msys用的换行符是和Linux一样的LF，而Windows的是CRLF
+3. Python能不能直接用Windows的Python而不用模拟Unix环境的Python（有很多的bug）
+4. 能否和我目前用的最多的VSCode编辑器无缝集成</p>
+<p>经过一段时间的研究，每个问题都得到了很好的解决，目前来讲非常的完美，在这里分享一下：</p>
+<ol>
+<li>
+<p>下载并安装 <a href="http://www.msys2.org/">Msys2</a></p>
+</li>
+<li>
+<p>安装和配置 <code>git</code>, 配置在windows上check出crlf格式文本，提交lf格式:</p>
+</li>
+</ol>
+<blockquote>
+<blockquote>
+<blockquote>
+<div class="highlight"><pre><span></span>安装git：
+    $ pacman --needed -S bash pacman msys2-runtime  git
+</pre></div>
+
+
+</blockquote>
+</blockquote>
+</blockquote>
+<div class="highlight"><pre><span></span>修改git处理回车的方式：
+    $ git config --global core.autocrlf true
+</pre></div>
+
+
+<ol>
+<li>
+<p>修改Home目录路径, Msys2默认的Home目录是Mingw64的/home/username, 但是我希望使用windows的Home目录/c/Users/username. 方法是编辑<code>/etc/nsswitch.conf</code>, 并修改</p>
+<p>db_home: windows</p>
+</li>
+</ol>
+<p>4.~~Install Python &amp; Pip~~ (直接用windows的Python就好，用Mingw64的Python反而可能会有很多问题)</p>
+<ol>
+<li>让VSCode里的继承终端（VSCode Integrated Terminal）使用Msys2，在VSCode的settings里加入以下内容:</li>
+</ol>
+<div class="highlight"><pre><span></span>    {
+        &quot;terminal.integrated.shell.windows&quot;: &quot;C:\\msys64\\usr\\bin\\bash.exe&quot;,
+        &quot;terminal.integrated.shellArgs.windows&quot;: [
+        &quot;--login&quot;,
+        ],
+        &quot;terminal.integrated.env.windows&quot;: {
+        &quot;CHERE_INVOKING&quot;: &quot;1&quot;,
+        &quot;MSYSTEM&quot;: &quot;MINGW64&quot;,
+    &quot;MSYS2_PATH_TYPE&quot;: &quot;inherit&quot;,
+        },
+    } 
+</pre></div>
+
+
+<p>参考：</p>
+<p>https://getpocket.com/a/read/1169705865</p>
+<p>https://help.github.com/articles/dealing-with-line-endings</p>
+<p>https://groups.google.com/forum/#!topic/ustc_lug/_wL4OkWrVK4</p>
+<p>https://stackoverflow.com/questions/33942924/how-to-change-home-directory-and-start-directory-on-msys2</p>
+<p>https://stackoverflow.com/questions/45836650/how-do-i-integrate-msys2-shell-into-visual-studio-code-on-window/48016561#comment84105772_48016561</p>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>links</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                            <li><a href="#">You can modify those links in your config file</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                            <li><a href="#">You can add links in your config file</a></li>
+                            <li><a href="#">Another social link</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

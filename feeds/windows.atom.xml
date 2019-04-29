@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Pacman News - Windows</title><link href="/" rel="alternate"></link><link href="/feeds/windows.atom.xml" rel="self"></link><id>/</id><updated>2018-02-01T19:30:00+08:00</updated><entry><title>Windows安装MSys32配置Git等开发环境并集成VSCode</title><link href="/windowsan-zhuang-msys32pei-zhi-gitdeng-kai-fa-huan-jing-bing-ji-cheng-vscode.html" rel="alternate"></link><published>2018-02-01T10:20:00+08:00</published><updated>2018-02-01T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:None,2018-02-01:/windowsan-zhuang-msys32pei-zhi-gitdeng-kai-fa-huan-jing-bing-ji-cheng-vscode.html</id><summary type="html">&lt;p&gt;在不久之前发现了Msys2，基于Cygwin但是却又有一个让我觉得无比美好的包管理器Pacman(和Arch Linux的一样)，于是决定试试。但是真的用于Windows的终端还有很多麻烦的地方要解决，主要是以下几点：
+1. Git的ssh_keygen配置，你和windows自己的CMD里的ssh_keygen能否共用
+2. Msys用的换行符是和Linux一样的LF，而Windows的是CRLF
+3. Python能不能直接用Windows的Python而不用模拟Unix环境的Python（有很多的bug）
+4. 能否和我目前用的最多的VSCode编辑器无缝集成&lt;/p&gt;
+&lt;p&gt;经过一段时间的研究，每个问题都得到了很好的解决，目前来讲非常的完美，在这里分享一下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;下载并安装 &lt;a href="http://www.msys2.org/"&gt;Msys2&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;安装和配置 &lt;code&gt;git&lt;/code&gt;, 配置在windows上check出crlf格式文本，提交lf格式:&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;安装git：
+    $ pacman --needed -S bash pacman msys2-runtime  git
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;修改git处理回车的方式：
+    $ git config --global core.autocrlf true
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;修改Home目录路径, Msys2默认的Home目录是Mingw64的/home/username, 但是我希望使用windows的Home目录/c/Users …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;在不久之前发现了Msys2，基于Cygwin但是却又有一个让我觉得无比美好的包管理器Pacman(和Arch Linux的一样)，于是决定试试。但是真的用于Windows的终端还有很多麻烦的地方要解决，主要是以下几点：
+1. Git的ssh_keygen配置，你和windows自己的CMD里的ssh_keygen能否共用
+2. Msys用的换行符是和Linux一样的LF，而Windows的是CRLF
+3. Python能不能直接用Windows的Python而不用模拟Unix环境的Python（有很多的bug）
+4. 能否和我目前用的最多的VSCode编辑器无缝集成&lt;/p&gt;
+&lt;p&gt;经过一段时间的研究，每个问题都得到了很好的解决，目前来讲非常的完美，在这里分享一下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;下载并安装 &lt;a href="http://www.msys2.org/"&gt;Msys2&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;安装和配置 &lt;code&gt;git&lt;/code&gt;, 配置在windows上check出crlf格式文本，提交lf格式:&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;安装git：
+    $ pacman --needed -S bash pacman msys2-runtime  git
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;修改git处理回车的方式：
+    $ git config --global core.autocrlf true
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;修改Home目录路径, Msys2默认的Home目录是Mingw64的/home/username, 但是我希望使用windows的Home目录/c/Users/username. 方法是编辑&lt;code&gt;/etc/nsswitch.conf&lt;/code&gt;, 并修改&lt;/p&gt;
+&lt;p&gt;db_home: windows&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;4.~~Install Python &amp;amp; Pip~~ (直接用windows的Python就好，用Mingw64的Python反而可能会有很多问题)&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;让VSCode里的继承终端（VSCode Integrated Terminal）使用Msys2，在VSCode的settings里加入以下内容:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    {
+        &amp;quot;terminal.integrated.shell.windows&amp;quot;: &amp;quot;C:\\msys64\\usr\\bin\\bash.exe&amp;quot;,
+        &amp;quot;terminal.integrated.shellArgs.windows&amp;quot;: [
+        &amp;quot;--login&amp;quot;,
+        ],
+        &amp;quot;terminal.integrated.env.windows&amp;quot;: {
+        &amp;quot;CHERE_INVOKING&amp;quot;: &amp;quot;1&amp;quot;,
+        &amp;quot;MSYSTEM&amp;quot;: &amp;quot;MINGW64&amp;quot;,
+    &amp;quot;MSYS2_PATH_TYPE&amp;quot;: &amp;quot;inherit&amp;quot;,
+        },
+    } 
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;参考：&lt;/p&gt;
+&lt;p&gt;https://getpocket.com/a/read/1169705865&lt;/p&gt;
+&lt;p&gt;https://help.github.com/articles/dealing-with-line-endings&lt;/p&gt;
+&lt;p&gt;https://groups.google.com/forum/#!topic/ustc_lug/_wL4OkWrVK4&lt;/p&gt;
+&lt;p&gt;https://stackoverflow.com/questions/33942924/how-to-change-home-directory-and-start-directory-on-msys2&lt;/p&gt;
+&lt;p&gt;https://stackoverflow.com/questions/45836650/how-do-i-integrate-msys2-shell-into-visual-studio-code-on-window/48016561#comment84105772_48016561&lt;/p&gt;</content><category term="windows"></category><category term="shell"></category></entry></feed>
