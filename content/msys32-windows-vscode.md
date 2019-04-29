@@ -19,21 +19,26 @@ Authors: r341h
 
 2. 安装和配置 `git`, 配置在windows上check出crlf格式文本，提交lf格式:
 
->>>
-    安装git：
+    2.1 安装git：
+
         $ pacman --needed -S bash pacman msys2-runtime  git 
 
-    修改git处理回车的方式：
-        $ git config --global core.autocrlf true  
+    2.2 修改git处理回车的方式：
+    
+	    $ git config --global core.autocrlf true  
 	
 3. 修改Home目录路径, Msys2默认的Home目录是Mingw64的/home/username, 但是我希望使用windows的Home目录/c/Users/username. 方法是编辑`/etc/nsswitch.conf`, 并修改
 
-    db_home: windows
-    
-4.~~Install Python & Pip~~ (直接用windows的Python就好，用Mingw64的Python反而可能会有很多问题)
+
+	    $ db_home: windows
+
+
+4. <del> Install Python & Pip </del>  
+(直接用windows的Python就好，用Mingw64的Python反而可能会有很多问题)
 
 
 5. 让VSCode里的继承终端（VSCode Integrated Terminal）使用Msys2，在VSCode的settings里加入以下内容:
+
 ```
 	{
 	    "terminal.integrated.shell.windows": "C:\\msys64\\usr\\bin\\bash.exe",
