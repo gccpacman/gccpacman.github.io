@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
         <meta charset="utf-8" />
-        <title>Pacman News - Linux</title>
+        <title>Pacman News</title>
         <link rel="stylesheet" href="/theme/css/main.css" />
         <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Pacman News Atom Feed" />
 </head>
@@ -11,7 +11,7 @@
         <header id="banner" class="body">
                 <h1><a href="/">Pacman News </a></h1>
                 <nav><ul>
-                    <li class="active"><a href="/category/linux.html">Linux</a></li>
+                    <li><a href="/category/linux.html">Linux</a></li>
                     <li><a href="/category/python.html">python</a></li>
                     <li><a href="/category/vim.html">Vim</a></li>
                     <li><a href="/category/windows.html">Windows</a></li>
@@ -20,78 +20,6 @@
 
                 <section id="content" class="body">
                     <ol id="posts-list" class="hfeed" start="5">
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/an-zhuang-delugexia-zai-gong-ju-zi-dong-yuan-cheng-xia-zai.html" rel="bookmark"
-                           title="Permalink to 安装deluge下载工具自动远程下载">安装deluge下载工具自动远程下载</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2016-01-04T10:20:00+08:00">
-                Published: Mon 04 January 2016
-        </abbr>
-		<br />
-        <abbr class="modified" title="2016-01-04T19:30:00+08:00">
-                Updated: Mon 04 January 2016
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/r341h.html">r341h</a>
-        </address>
-<p>In <a href="/category/linux.html">Linux</a>.</p>
-<p>tags: <a href="/tag/linux.html">linux</a> <a href="/tag/resource.html">resource</a> </p>
-</footer><!-- /.post-info -->                <p>上一篇装完kodi后，我的旧电脑就彻底变成了一个kodi/XBMC媒体中心，那么比如我要下载新的美剧什么的，好像就还是不那么方便。
-p2p的torrent一直是我的最爱。deluge是一个跨平台的操作系统，支持linux, windows 和mac，还有远程控制等功能，什么是远程下载呢。我们都知道有迅雷远程下载，那么deluge其实也是一样，就是你在一台电脑操作，有一个下载链接，然后你可以直接在这台电脑上添加这个下载链接，唯一不同的是下载的任务被添加到了远程的机器上，文件也会下载到远程的机器上。
-这样的需求正符合我媒体中心的需要，我找到新的片源，并不需要下载到我的计算机，而是可以让我的Kodi在播放电影的同时，又可以执行下载的任务。</p>
-<h1>服务器端：</h1>
-<p>安装:</p>
-<div class="highlight"><pre><span></span>$ sudo apt-get install deluged deluge-web
-</pre></div>
-
-
-<p>新建一个deluge用户和用户组:</p>
-<div class="highlight"><pre><span></span>$ sudo adduser --system  --gecos <span class="s2">&quot;Deluge Service&quot;</span> --disabled-password --group --home /var/lib/deluge deluge
-</pre></div>
-
-
-<p>把用户添加到deluge用户组<code>adduser &lt;username&gt; deluge</code>，便于用户操作torrent和下载到的文件 …</p>
-                <a class="readmore" href="/an-zhuang-delugexia-zai-gong-ju-zi-dong-yuan-cheng-xia-zai.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/linuxan-zhuang-bing-kai-ji-jin-ru-kodimei-ti-zhong-xin.html" rel="bookmark"
-                           title="Permalink to Linux安装并开机进入Kodi媒体中心">Linux安装并开机进入Kodi媒体中心</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2016-01-04T10:20:00+08:00">
-                Published: Mon 04 January 2016
-        </abbr>
-		<br />
-        <abbr class="modified" title="2016-01-04T19:30:00+08:00">
-                Updated: Mon 04 January 2016
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/r341h.html">r341h</a>
-        </address>
-<p>In <a href="/category/linux.html">Linux</a>.</p>
-<p>tags: <a href="/tag/linux.html">linux</a> <a href="/tag/kodi.html">kodi</a> <a href="/tag/resource.html">resource</a> </p>
-</footer><!-- /.post-info -->                <p>把2G的硬盘拆到了一台旧电脑上，并且给旧电脑装了xubuntu,打算直接打造一个媒体中心。目前知道有里那个用的不错的东西，KODI（XBMC）是一个很不错的选择。当然用PLEX也是个不错的选择，整理资料库方面PLEX更加强大。不过KODI是开源和免费的，既然用了linux，就用个开源的吧。况且我发现kodi还有不少的好处，并且更加轻量级。</p>
-<p>其实Kodi有个基于ubuntu的发行版叫做kodibuntu，直接装得话效果其实也差不多。但是我还是喜欢从ubuntu去扩展，毕竟任何基于ubuntu的版本，相对ubuntu的开发肯定是有所滞后的。和Android的Rom一个道理。不过kubuntu因为是非常流行的发行版不用担心这个问题。</p>
-<p>下面的步骤基本上是参考了askubuntu的一个答案<a href="http://askubuntu.com/questions/596839/autostart-kodi-on-vivid">Autostart Kodi on Vivid</a>，只不过它是在纯净的server版本安装，而desktop版则因为有自身的启动器，需要将其禁用掉而已。</p>
-<p>1）安装kodi: sudo apt-get install kodi</p>
-<p>2）创建一个kodi的用户，并添加到和视频播放有关的组
-    sudo adduser --disabled-password --disabled-login --gecos "" kodi
-    sudo usermod -a -G audio kodi …</p>
-                <a class="readmore" href="/linuxan-zhuang-bing-kai-ji-jin-ru-kodimei-ti-zhong-xin.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
             <li><article class="hentry">
                 <header>
                     <h1><a href="/diao-zheng-linuxzhu-fen-qu-de-da-xiao.html" rel="bookmark"
@@ -150,6 +78,46 @@ specially things like a server can help me free browser the internet.
 But sometimes the connection between my own pc and the vps server are not quite good. So things not always go luck.</p>
 <p>!!! this tutorial is not done yet …</p>
                 <a class="readmore" href="/dockerda-jian-openvpn-server.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/uwsgifang-shi-qi-dong-django.html" rel="bookmark"
+                           title="Permalink to uwsgi方式启动django">uwsgi方式启动django</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-11-23T10:20:00+08:00">
+                Published: Mon 23 November 2015
+        </abbr>
+		<br />
+        <abbr class="modified" title="2015-11-23T19:30:00+08:00">
+                Updated: Mon 23 November 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/r341h.html">r341h</a>
+        </address>
+<p>In <a href="/category/python.html">python</a>.</p>
+<p>tags: <a href="/tag/python.html">python</a> <a href="/tag/django.html">django</a> <a href="/tag/webapps.html">webapps</a> </p>
+</footer><!-- /.post-info -->                <p>没人访问的博客也不是不能升级。不过最近有点懒，趁着睡不着搞了下<code>uwsgi</code>。
+额。平台ubuntu, 你最好有个django项目，假设已经用了<code>virtualenv</code>，假设已经安装好<code>nginx</code>并启动服务。</p>
+<p>1）首先安装<code>uwsgi</code>:  </p>
+<div class="highlight"><pre><span></span>pip install uwsgi
+</pre></div>
+
+
+<p>2）然后启动， 指定端口号和进程号：</p>
+<div class="highlight"><pre><span></span>uwsgi -s 127.0.0.1:38803 --http :8000 --module blog.wsgi
+</pre></div>
+
+
+<p>3) 配置nginx配置文件，放在<code>/etc/nginx/site-enabled/</code>目录下，注意如果你要用80端口，就不要和其他的例如默认的配置冲突，如果有个default的文件，应该是一个软连接，可以直接删掉。我就直接贴我自己的了：</p>
+<div class="highlight"><pre><span></span><span class="nt">upstream</span> <span class="nt">django</span> <span class="p">{</span>
+    <span class="err">server</span> <span class="err">127 …</span></pre></div>
+                <a class="readmore" href="/uwsgifang-shi-qi-dong-django.html">read more</a>
                 </div><!-- /.entry-content -->
             </article></li>
 
@@ -224,11 +192,48 @@ sudo apt-get install polipo
                 <a class="readmore" href="/linuxjiang-socksdai-li-zhuan-huan-cheng-httpdai-li.html">read more</a>
                 </div><!-- /.entry-content -->
             </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/linuxda-jian-pptp-vpn-server.html" rel="bookmark"
+                           title="Permalink to Linux搭建PPTP VPN Server">Linux搭建PPTP VPN Server</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-04-19T10:20:00+08:00">
+                Published: Sun 19 April 2015
+        </abbr>
+		<br />
+        <abbr class="modified" title="2015-04-19T19:30:00+08:00">
+                Updated: Sun 19 April 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/r341h.html">r341h</a>
+        </address>
+<p>In <a href="/category/linux.html">Linux</a>.</p>
+<p>tags: <a href="/tag/linux.html">linux</a> <a href="/tag/vpn.html">vpn</a> </p>
+</footer><!-- /.post-info -->                <h1>Setup PPTP Server on linux</h1>
+<p>参考:
+<a href="https://www.digitalocean.com/community/tutorials/how-to-setup-your-own-vpn-with-pptp">How To Setup Your Own VPN With PPTP</a></p>
+<p><a href="http://askubuntu.com/questions/492923/pptpd-vpn-no-internet-access-after-connecting">pptpd VPN: No internet access after connecting</a></p>
+<h2>PPTP Installation</h2>
+<p>====================</p>
+<h4>1. install server application</h4>
+<p>On CentOS 6 x64:</p>
+<blockquote>
+<p>rpm -i http://poptop.sourceforge.net/yum/stable/rhel6/pptp-release-current.noarch.rpm</p>
+<p>yum -y install pptpd</p>
+</blockquote>
+<p>On Ubuntu 12 …</p>
+                <a class="readmore" href="/linuxda-jian-pptp-vpn-server.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
                 </ol><!-- /#posts-list -->
 <p class="paginator">
-        <a href="/category/linux.html">&laquo;</a>
-    Page 2 / 3
-        <a href="/category/linux3.html">&raquo;</a>
+        <a href="/index2.html">&laquo;</a>
+    Page 3 / 3
 </p>
                 </section><!-- /#content -->
         <section id="extras" class="body">

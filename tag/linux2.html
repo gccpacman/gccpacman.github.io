@@ -19,7 +19,158 @@
         </header><!-- /#banner -->
 
                 <section id="content" class="body">
-                    <ol id="posts-list" class="hfeed" start="9">
+                    <ol id="posts-list" class="hfeed" start="5">
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/linuxda-jian-vncfu-wu-qi.html" rel="bookmark"
+                           title="Permalink to Linux搭建VNC服务器">Linux搭建VNC服务器</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2016-01-05T10:20:00+08:00">
+                Published: Tue 05 January 2016
+        </abbr>
+		<br />
+        <abbr class="modified" title="2016-01-05T19:30:00+08:00">
+                Updated: Tue 05 January 2016
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/r341h.html">r341h</a>
+        </address>
+<p>In <a href="/category/linux.html">Linux</a>.</p>
+<p>tags: <a href="/tag/linux.html">linux</a> <a href="/tag/vnc.html">vnc</a> <a href="/tag/gtk.html">gtk</a> <a href="/tag/rdp.html">rdp</a> </p>
+</footer><!-- /.post-info -->                <p>服务器端：</p>
+<p>1）在终端安装tigervnc：</p>
+<div class="highlight"><pre><span></span>$ sudo apt-get install tigervnc
+</pre></div>
+
+
+<p>2）启动tigervnc</p>
+<div class="highlight"><pre><span></span>$ vncserver
+</pre></div>
+
+
+<p>提示你输入vnc的密码：</p>
+<div class="highlight"><pre><span></span><span class="n">enter</span> <span class="n">your</span> <span class="n">password</span> (<span class="n">length</span> <span class="mi">8</span>)
+</pre></div>
+
+
+<p>然后终端会显示New 'X' desktop is kodi-kodibuntu:1</p>
+<p>3）（可选）如果需要改变桌面，例如不想用xvnc，可以编辑<code>$HOME/.vnc/xstartup</code>的内容。具体操作暂略。</p>
+<p>4）（可选）如果需要开机启动，一个是用supervisor，另外就是在/etc/systemd/system/下手动写一个服务。具体操作暂略。</p>
+<p>在客户端:</p>
+<p>1) 安装tigervnc:</p>
+<div class="highlight"><pre><span></span>$ sudo pacman -S tigervnc   <span class="o">(</span>archlinux …</pre></div>
+                <a class="readmore" href="/linuxda-jian-vncfu-wu-qi.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/an-zhuang-delugexia-zai-gong-ju-zi-dong-yuan-cheng-xia-zai.html" rel="bookmark"
+                           title="Permalink to 安装deluge下载工具自动远程下载">安装deluge下载工具自动远程下载</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2016-01-04T10:20:00+08:00">
+                Published: Mon 04 January 2016
+        </abbr>
+		<br />
+        <abbr class="modified" title="2016-01-04T19:30:00+08:00">
+                Updated: Mon 04 January 2016
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/r341h.html">r341h</a>
+        </address>
+<p>In <a href="/category/linux.html">Linux</a>.</p>
+<p>tags: <a href="/tag/linux.html">linux</a> <a href="/tag/resource.html">resource</a> </p>
+</footer><!-- /.post-info -->                <p>上一篇装完kodi后，我的旧电脑就彻底变成了一个kodi/XBMC媒体中心，那么比如我要下载新的美剧什么的，好像就还是不那么方便。
+p2p的torrent一直是我的最爱。deluge是一个跨平台的操作系统，支持linux, windows 和mac，还有远程控制等功能，什么是远程下载呢。我们都知道有迅雷远程下载，那么deluge其实也是一样，就是你在一台电脑操作，有一个下载链接，然后你可以直接在这台电脑上添加这个下载链接，唯一不同的是下载的任务被添加到了远程的机器上，文件也会下载到远程的机器上。
+这样的需求正符合我媒体中心的需要，我找到新的片源，并不需要下载到我的计算机，而是可以让我的Kodi在播放电影的同时，又可以执行下载的任务。</p>
+<h1>服务器端：</h1>
+<p>安装:</p>
+<div class="highlight"><pre><span></span>$ sudo apt-get install deluged deluge-web
+</pre></div>
+
+
+<p>新建一个deluge用户和用户组:</p>
+<div class="highlight"><pre><span></span>$ sudo adduser --system  --gecos <span class="s2">&quot;Deluge Service&quot;</span> --disabled-password --group --home /var/lib/deluge deluge
+</pre></div>
+
+
+<p>把用户添加到deluge用户组<code>adduser &lt;username&gt; deluge</code>，便于用户操作torrent和下载到的文件 …</p>
+                <a class="readmore" href="/an-zhuang-delugexia-zai-gong-ju-zi-dong-yuan-cheng-xia-zai.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/linuxan-zhuang-bing-kai-ji-jin-ru-kodimei-ti-zhong-xin.html" rel="bookmark"
+                           title="Permalink to Linux安装并开机进入Kodi媒体中心">Linux安装并开机进入Kodi媒体中心</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2016-01-04T10:20:00+08:00">
+                Published: Mon 04 January 2016
+        </abbr>
+		<br />
+        <abbr class="modified" title="2016-01-04T19:30:00+08:00">
+                Updated: Mon 04 January 2016
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/r341h.html">r341h</a>
+        </address>
+<p>In <a href="/category/linux.html">Linux</a>.</p>
+<p>tags: <a href="/tag/linux.html">linux</a> <a href="/tag/kodi.html">kodi</a> <a href="/tag/resource.html">resource</a> </p>
+</footer><!-- /.post-info -->                <p>把2G的硬盘拆到了一台旧电脑上，并且给旧电脑装了xubuntu,打算直接打造一个媒体中心。目前知道有里那个用的不错的东西，KODI（XBMC）是一个很不错的选择。当然用PLEX也是个不错的选择，整理资料库方面PLEX更加强大。不过KODI是开源和免费的，既然用了linux，就用个开源的吧。况且我发现kodi还有不少的好处，并且更加轻量级。</p>
+<p>其实Kodi有个基于ubuntu的发行版叫做kodibuntu，直接装得话效果其实也差不多。但是我还是喜欢从ubuntu去扩展，毕竟任何基于ubuntu的版本，相对ubuntu的开发肯定是有所滞后的。和Android的Rom一个道理。不过kubuntu因为是非常流行的发行版不用担心这个问题。</p>
+<p>下面的步骤基本上是参考了askubuntu的一个答案<a href="http://askubuntu.com/questions/596839/autostart-kodi-on-vivid">Autostart Kodi on Vivid</a>，只不过它是在纯净的server版本安装，而desktop版则因为有自身的启动器，需要将其禁用掉而已。</p>
+<p>1）安装kodi: sudo apt-get install kodi</p>
+<p>2）创建一个kodi的用户，并添加到和视频播放有关的组
+    sudo adduser --disabled-password --disabled-login --gecos "" kodi
+    sudo usermod -a -G audio kodi …</p>
+                <a class="readmore" href="/linuxan-zhuang-bing-kai-ji-jin-ru-kodimei-ti-zhong-xin.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/diao-zheng-linuxzhu-fen-qu-de-da-xiao.html" rel="bookmark"
+                           title="Permalink to 调整Linux主分区的大小">调整Linux主分区的大小</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2016-01-03T10:20:00+08:00">
+                Published: Sun 03 January 2016
+        </abbr>
+		<br />
+        <abbr class="modified" title="2016-01-03T19:30:00+08:00">
+                Updated: Sun 03 January 2016
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/r341h.html">r341h</a>
+        </address>
+<p>In <a href="/category/linux.html">Linux</a>.</p>
+<p>tags: <a href="/tag/linux.html">linux</a> <a href="/tag/partition.html">partition</a> </p>
+</footer><!-- /.post-info -->                <p>在安装我笔记本商的archlinux的时候，root分区和主分区是分开的，后来为了尝试KaliLinux，就把home分区牺牲掉，放弃了/home的单独分区。可是如今60G的空间已经不够用了。</p>
+<p>于是打算重新调整一个root分区的大小。我分区之前，256G硬盘的分区表大概是这样的，boot分区在最前，大概500M，，home分区紧随其后，66G左右，然后是8G的swap交换空间。还剩下170G左右的剩余空间。</p>
+<p>我的目标是把swap分区弄到最后，其他都扩展给HOME分区。</p>
+<p>依稀记得装arch的时候，swap并不是多大不了的事情，甚至说可以不需要swap。于是我打算先把swap禁用掉，然后删除。再重新创建swap分区，然后resize以下Root分区的大小基本就可以大功告成了。不过调整root分区的大小是不可以在当前系统下完成的。因此很有必要弄一个usb的镜像，通过镜像系统进去后调整没有mount的swap分区。</p>
+<p>在linux下把镜像刻录到usb是非常方便的。接上U盘以后，可以通过<code>lsblk</code> 查看一下u盘的设备路径,比如我的是<code>/dev/sdc</code>,基本上可以通过大小就能判断出来了。</p>
+<div class="highlight"><pre><span></span>sdc                   8:32   1   7.2G  0 disk
+├─sdc1                8:33   1   1 …</pre></div>
+                <a class="readmore" href="/diao-zheng-linuxzhu-fen-qu-de-da-xiao.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
             <li><article class="hentry">
                 <header>
                     <h1><a href="/dockerda-jian-openvpn-server.html" rel="bookmark"
@@ -86,82 +237,11 @@ But sometimes the connection between my own pc and the vps server are not quite 
                 <a class="readmore" href="/linuxli-yong-sshfan-xiang-duan-kou-zhuan-fa-bao-lu-nei-wang-duan-kou.html">read more</a>
                 </div><!-- /.entry-content -->
             </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/linuxjiang-socksdai-li-zhuan-huan-cheng-httpdai-li.html" rel="bookmark"
-                           title="Permalink to linux将Socks代理转换成Http代理">linux将Socks代理转换成Http代理</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2015-05-14T10:20:00+08:00">
-                Published: Thu 14 May 2015
-        </abbr>
-		<br />
-        <abbr class="modified" title="2015-05-14T19:30:00+08:00">
-                Updated: Thu 14 May 2015
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/r341h.html">r341h</a>
-        </address>
-<p>In <a href="/category/linux.html">Linux</a>.</p>
-<p>tags: <a href="/tag/linux.html">linux</a> <a href="/tag/proxy.html">proxy</a> </p>
-</footer><!-- /.post-info -->                <h1>covert socks proxy to http proxy</h1>
-<h2>install polipo and configure</h2>
-<p>First, start out by making sure you have universe enabled, up to date package lists and downloading the polipo package (it has no dependancies).</p>
-<div class="highlight"><pre><span></span>sudo apt-get update
-sudo apt-get install polipo
-</pre></div>
-
-
-<p>Now to edit the polipo config file. This is …</p>
-                <a class="readmore" href="/linuxjiang-socksdai-li-zhuan-huan-cheng-httpdai-li.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/linuxda-jian-pptp-vpn-server.html" rel="bookmark"
-                           title="Permalink to Linux搭建PPTP VPN Server">Linux搭建PPTP VPN Server</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2015-04-19T10:20:00+08:00">
-                Published: Sun 19 April 2015
-        </abbr>
-		<br />
-        <abbr class="modified" title="2015-04-19T19:30:00+08:00">
-                Updated: Sun 19 April 2015
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/r341h.html">r341h</a>
-        </address>
-<p>In <a href="/category/linux.html">Linux</a>.</p>
-<p>tags: <a href="/tag/linux.html">linux</a> <a href="/tag/vpn.html">vpn</a> </p>
-</footer><!-- /.post-info -->                <h1>Setup PPTP Server on linux</h1>
-<p>参考:
-<a href="https://www.digitalocean.com/community/tutorials/how-to-setup-your-own-vpn-with-pptp">How To Setup Your Own VPN With PPTP</a></p>
-<p><a href="http://askubuntu.com/questions/492923/pptpd-vpn-no-internet-access-after-connecting">pptpd VPN: No internet access after connecting</a></p>
-<h2>PPTP Installation</h2>
-<p>====================</p>
-<h4>1. install server application</h4>
-<p>On CentOS 6 x64:</p>
-<blockquote>
-<p>rpm -i http://poptop.sourceforge.net/yum/stable/rhel6/pptp-release-current.noarch.rpm</p>
-<p>yum -y install pptpd</p>
-</blockquote>
-<p>On Ubuntu 12 …</p>
-                <a class="readmore" href="/linuxda-jian-pptp-vpn-server.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
                 </ol><!-- /#posts-list -->
 <p class="paginator">
         <a href="/tag/linux.html">&laquo;</a>
-    Page 2 / 2
+    Page 2 / 3
+        <a href="/tag/linux3.html">&raquo;</a>
 </p>
                 </section><!-- /#content -->
         <section id="extras" class="body">
@@ -176,8 +256,8 @@ sudo apt-get install polipo
                         <ul>
                             <li><a href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
 
-                            <li><a href="https://github.com/gccpacman">My Github</a></li>
-                            <li><a href="https://stackoverflow.com/users/4124310/realhu">My StackOverflow</a></li>
+                            <li><a href="https://github.com/gccpacman">我的Github</a></li>
+                            <li><a href="https://stackoverflow.com/users/4124310/realhu">我的StackOverflow</a></li>
                         </ul>
                 </div><!-- /.social -->
         </section><!-- /#extras -->

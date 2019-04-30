@@ -19,7 +19,162 @@
         </header><!-- /#banner -->
 
                 <section id="content" class="body">
-                    <ol id="posts-list" class="hfeed" start="9">
+                    <ol id="posts-list" class="hfeed" start="5">
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/ba-yong-hu-tai-systemdfu-wu-gai-cheng-xi-tong-fu-wu-kai-ji-zi-qi-dong-xware.html" rel="bookmark"
+                           title="Permalink to 把用户态systemd服务改成系统服务，开机自启动xware">把用户态systemd服务改成系统服务，开机自启动xware</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2016-01-08T10:20:00+08:00">
+                Published: Fri 08 January 2016
+        </abbr>
+		<br />
+        <abbr class="modified" title="2016-01-08T19:30:00+08:00">
+                Updated: Fri 08 January 2016
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/r341h.html">r341h</a>
+        </address>
+<p>In <a href="/category/linux.html">Linux</a>.</p>
+<p>tags: <a href="/tag/linux.html">linux</a> <a href="/tag/kodi.html">kodi</a> <a href="/tag/resource.html">resource</a> </p>
+</footer><!-- /.post-info -->                <p>OK.. 怎么给xubuntu装个迅雷远程呢，迅雷的Linux版本Xware-Desktop，目前是很稳定的，而且有很详细的官方教程：
+https://github.com/Xinkai/XwareDesktop/wiki/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E</p>
+<p>这个就是针对ubuntu的，所以原封不动的执行就行了。</p>
+<p>但是我的需求有点不一样，迅雷xware版自己提供了几个开机自启动选项：
+1）由用户态systemd托管
+2）由用户态upstart托管
+3）简单的自动启动。</p>
+<p>这三个选项的特点就是都是以用户态启动，事实上，xware的配置文件也确实是保存在用户的HOME目录下的.xware-desktop里的。</p>
+<p>但是我希望Linux开机的时候并不会自动登录，更何况我的linux是运行kodi的，我也不会去手动登录，因此用户态的服务是不会自动启动的。</p>
+<p>但是我希望一开机，xware就自动打开，开始执行下载任务。因此依赖原来的代码显然不太符合我的需求，就自己写一个系统的service吧。</p>
+<p>还好几乎不需要改变xware用户态的服务，就可以搞定。用户态的服务创建在用户目录的<code>$HOME …</code></p>
+                <a class="readmore" href="/ba-yong-hu-tai-systemdfu-wu-gai-cheng-xi-tong-fu-wu-kai-ji-zi-qi-dong-xware.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/linuxchuang-jian-zi-ding-yi-de-ying-yong-cheng-xu-qi-dong-qi.html" rel="bookmark"
+                           title="Permalink to Linux创建自定义的应用程序启动器">Linux创建自定义的应用程序启动器</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2016-01-06T10:20:00+08:00">
+                Published: Wed 06 January 2016
+        </abbr>
+		<br />
+        <abbr class="modified" title="2016-01-06T19:30:00+08:00">
+                Updated: Wed 06 January 2016
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/r341h.html">r341h</a>
+        </address>
+<p>In <a href="/category/linux.html">Linux</a>.</p>
+<p>tags: <a href="/tag/linux.html">linux</a> <a href="/tag/gnome.html">gnome</a> <a href="/tag/gtk.html">gtk</a> </p>
+</footer><!-- /.post-info -->                <p>eclipse在linux下，下载以后不需要安装，直接在目录下执行.\eclipse就可以运行了，不过同时，每次都要切换到该目录去执行eclipse似乎也比较麻烦。
+又没有办法在应用程序菜单里找到，即使是gnome下，按super然后全局搜索，也找到这个。</p>
+<p>不过好在linux是自由的系统，自己建一个应用程序的启动器一点问题都没有。</p>
+<p>比如我的eclipse装在<code>/opt/eclipse-jee/</code>下,怎么新建一个启动器呢？</p>
+<p>所有用户共享的应用启动器的目录是<code>/usr/share/applications/</code>目录，那么用户自定义的启动器目录在哪里？找了下用户目录下的.config/，没有找到，只好去百度google了一下，原来启动器是在.local/下，具体是<code>.local/share/applications</code>.</p>
+<p>新建一个eclipse.desktop的文件，然后输入以下内容：</p>
+<div class="highlight"><pre><span></span><span class="k">[Desktop Entry]</span>
+<span class="na">Encoding</span><span class="o">=</span><span class="s">UTF-8</span>
+<span class="na">Name</span><span class="o">=</span><span class="s">Eclipse J2ee</span>
+<span class="na">Comment</span><span class="o">=</span><span class="s">Official desktop version of Telegram …</span></pre></div>
+                <a class="readmore" href="/linuxchuang-jian-zi-ding-yi-de-ying-yong-cheng-xu-qi-dong-qi.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/archlinuxjiang-nvidia-driverti-huan-cheng-kai-yuan-de-nouveaujie-jue-xian-qia-qu-dong-wen-ti.html" rel="bookmark"
+                           title="Permalink to ArchLinux将nvidia driver替换成开源的nouveau解决显卡驱动问题">ArchLinux将nvidia driver替换成开源的nouveau解决显卡驱动问题</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2016-01-05T10:20:00+08:00">
+                Published: Tue 05 January 2016
+        </abbr>
+		<br />
+        <abbr class="modified" title="2016-01-05T19:30:00+08:00">
+                Updated: Tue 05 January 2016
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/r341h.html">r341h</a>
+        </address>
+<p>In <a href="/category/linux.html">Linux</a>.</p>
+<p>tags: <a href="/tag/linux.html">linux</a> <a href="/tag/driver.html">driver</a> <a href="/tag/gtk.html">gtk</a> <a href="/tag/archlinux.html">archlinux</a> </p>
+</footer><!-- /.post-info -->                <p>昨天还装完arch兴高采烈，今天就差点放弃整个系统，罪魁祸首就是当年被linus喷了的nvidia.</p>
+<p>Archlinux装了使用nvidia驱动，一开始发现根本就没有加载，装了和没装没啥区别，但是跑的好好的阿跑的好好的，结果不小心手贱点了<code>nvidia-xconfig</code>的应用，莫名其妙的起不来了。（这个原因我想了半天才想出来，不然我实在是无力吐槽他妈跑了一天多好好的什么也没干突然就起步来的情况，一度怀疑是显卡硬件坏了）</p>
+<p>于是抢救三个多小时，<code>/var/log/xorg.0.log</code>里的报错也莫名其妙，比如:</p>
+<div class="highlight"><pre><span></span>not detect device nvidia, no screen found.
+</pre></div>
+
+
+<p>简直是日到狗。于是想着解决办法应该是彻底不要装nvidia的驱动， 用intel的集成显卡，照例来说应该也ok阿，于是直接删掉驱动：</p>
+<p>pacman -R nvidia nvidia-utils</p>
+<p>然后reboot, 没想到发生的事情更加奇葩了，连命令行就出不来了，直接黑屏了我草。</p>
+<p>心里十万个草尼马，还好安装过arch的人毕竟还是知道有个arch-chroot, 放入安装介质（我的是u盘），重启， mount各种好盘:</p>
+<div class="highlight"><pre><span></span>mount /dev …</pre></div>
+                <a class="readmore" href="/archlinuxjiang-nvidia-driverti-huan-cheng-kai-yuan-de-nouveaujie-jue-xian-qia-qu-dong-wen-ti.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/linuxda-jian-vncfu-wu-qi.html" rel="bookmark"
+                           title="Permalink to Linux搭建VNC服务器">Linux搭建VNC服务器</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2016-01-05T10:20:00+08:00">
+                Published: Tue 05 January 2016
+        </abbr>
+		<br />
+        <abbr class="modified" title="2016-01-05T19:30:00+08:00">
+                Updated: Tue 05 January 2016
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/r341h.html">r341h</a>
+        </address>
+<p>In <a href="/category/linux.html">Linux</a>.</p>
+<p>tags: <a href="/tag/linux.html">linux</a> <a href="/tag/vnc.html">vnc</a> <a href="/tag/gtk.html">gtk</a> <a href="/tag/rdp.html">rdp</a> </p>
+</footer><!-- /.post-info -->                <p>服务器端：</p>
+<p>1）在终端安装tigervnc：</p>
+<div class="highlight"><pre><span></span>$ sudo apt-get install tigervnc
+</pre></div>
+
+
+<p>2）启动tigervnc</p>
+<div class="highlight"><pre><span></span>$ vncserver
+</pre></div>
+
+
+<p>提示你输入vnc的密码：</p>
+<div class="highlight"><pre><span></span><span class="n">enter</span> <span class="n">your</span> <span class="n">password</span> (<span class="n">length</span> <span class="mi">8</span>)
+</pre></div>
+
+
+<p>然后终端会显示New 'X' desktop is kodi-kodibuntu:1</p>
+<p>3）（可选）如果需要改变桌面，例如不想用xvnc，可以编辑<code>$HOME/.vnc/xstartup</code>的内容。具体操作暂略。</p>
+<p>4）（可选）如果需要开机启动，一个是用supervisor，另外就是在/etc/systemd/system/下手动写一个服务。具体操作暂略。</p>
+<p>在客户端:</p>
+<p>1) 安装tigervnc:</p>
+<div class="highlight"><pre><span></span>$ sudo pacman -S tigervnc   <span class="o">(</span>archlinux …</pre></div>
+                <a class="readmore" href="/linuxda-jian-vncfu-wu-qi.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
             <li><article class="hentry">
                 <header>
                     <h1><a href="/an-zhuang-delugexia-zai-gong-ju-zi-dong-yuan-cheng-xia-zai.html" rel="bookmark"
@@ -91,221 +246,11 @@ p2p的torrent一直是我的最爱。deluge是一个跨平台的操作系统，�
                 <a class="readmore" href="/linuxan-zhuang-bing-kai-ji-jin-ru-kodimei-ti-zhong-xin.html">read more</a>
                 </div><!-- /.entry-content -->
             </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/diao-zheng-linuxzhu-fen-qu-de-da-xiao.html" rel="bookmark"
-                           title="Permalink to 调整Linux主分区的大小">调整Linux主分区的大小</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2016-01-03T10:20:00+08:00">
-                Published: Sun 03 January 2016
-        </abbr>
-		<br />
-        <abbr class="modified" title="2016-01-03T19:30:00+08:00">
-                Updated: Sun 03 January 2016
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/r341h.html">r341h</a>
-        </address>
-<p>In <a href="/category/linux.html">Linux</a>.</p>
-<p>tags: <a href="/tag/linux.html">linux</a> <a href="/tag/partition.html">partition</a> </p>
-</footer><!-- /.post-info -->                <p>在安装我笔记本商的archlinux的时候，root分区和主分区是分开的，后来为了尝试KaliLinux，就把home分区牺牲掉，放弃了/home的单独分区。可是如今60G的空间已经不够用了。</p>
-<p>于是打算重新调整一个root分区的大小。我分区之前，256G硬盘的分区表大概是这样的，boot分区在最前，大概500M，，home分区紧随其后，66G左右，然后是8G的swap交换空间。还剩下170G左右的剩余空间。</p>
-<p>我的目标是把swap分区弄到最后，其他都扩展给HOME分区。</p>
-<p>依稀记得装arch的时候，swap并不是多大不了的事情，甚至说可以不需要swap。于是我打算先把swap禁用掉，然后删除。再重新创建swap分区，然后resize以下Root分区的大小基本就可以大功告成了。不过调整root分区的大小是不可以在当前系统下完成的。因此很有必要弄一个usb的镜像，通过镜像系统进去后调整没有mount的swap分区。</p>
-<p>在linux下把镜像刻录到usb是非常方便的。接上U盘以后，可以通过<code>lsblk</code> 查看一下u盘的设备路径,比如我的是<code>/dev/sdc</code>,基本上可以通过大小就能判断出来了。</p>
-<div class="highlight"><pre><span></span>sdc                   8:32   1   7.2G  0 disk
-├─sdc1                8:33   1   1 …</pre></div>
-                <a class="readmore" href="/diao-zheng-linuxzhu-fen-qu-de-da-xiao.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/dockerda-jian-openvpn-server.html" rel="bookmark"
-                           title="Permalink to Docker搭建openvpn server">Docker搭建openvpn server</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2015-12-29T10:20:00+08:00">
-                Published: Tue 29 December 2015
-        </abbr>
-		<br />
-        <abbr class="modified" title="2015-12-29T19:30:00+08:00">
-                Updated: Tue 29 December 2015
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/r341h.html">r341h</a>
-        </address>
-<p>In <a href="/category/linux.html">Linux</a>.</p>
-<p>tags: <a href="/tag/linux.html">linux</a> <a href="/tag/vpn.html">vpn</a> <a href="/tag/openvpn.html">openvpn</a> </p>
-</footer><!-- /.post-info -->                <p>I always intersted in build services in my own VPS.
-specially things like a server can help me free browser the internet.
-But sometimes the connection between my own pc and the vps server are not quite good. So things not always go luck.</p>
-<p>!!! this tutorial is not done yet …</p>
-                <a class="readmore" href="/dockerda-jian-openvpn-server.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/uwsgifang-shi-qi-dong-django.html" rel="bookmark"
-                           title="Permalink to uwsgi方式启动django">uwsgi方式启动django</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2015-11-23T10:20:00+08:00">
-                Published: Mon 23 November 2015
-        </abbr>
-		<br />
-        <abbr class="modified" title="2015-11-23T19:30:00+08:00">
-                Updated: Mon 23 November 2015
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/r341h.html">r341h</a>
-        </address>
-<p>In <a href="/category/python.html">python</a>.</p>
-<p>tags: <a href="/tag/python.html">python</a> <a href="/tag/django.html">django</a> <a href="/tag/webapps.html">webapps</a> </p>
-</footer><!-- /.post-info -->                <p>没人访问的博客也不是不能升级。不过最近有点懒，趁着睡不着搞了下<code>uwsgi</code>。
-额。平台ubuntu, 你最好有个django项目，假设已经用了<code>virtualenv</code>，假设已经安装好<code>nginx</code>并启动服务。</p>
-<p>1）首先安装<code>uwsgi</code>:  </p>
-<div class="highlight"><pre><span></span>pip install uwsgi
-</pre></div>
-
-
-<p>2）然后启动， 指定端口号和进程号：</p>
-<div class="highlight"><pre><span></span>uwsgi -s 127.0.0.1:38803 --http :8000 --module blog.wsgi
-</pre></div>
-
-
-<p>3) 配置nginx配置文件，放在<code>/etc/nginx/site-enabled/</code>目录下，注意如果你要用80端口，就不要和其他的例如默认的配置冲突，如果有个default的文件，应该是一个软连接，可以直接删掉。我就直接贴我自己的了：</p>
-<div class="highlight"><pre><span></span><span class="nt">upstream</span> <span class="nt">django</span> <span class="p">{</span>
-    <span class="err">server</span> <span class="err">127 …</span></pre></div>
-                <a class="readmore" href="/uwsgifang-shi-qi-dong-django.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/linuxli-yong-sshfan-xiang-duan-kou-zhuan-fa-bao-lu-nei-wang-duan-kou.html" rel="bookmark"
-                           title="Permalink to Linux利用ssh反向端口转发暴露内网端口">Linux利用ssh反向端口转发暴露内网端口</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2015-10-30T10:20:00+08:00">
-                Published: Fri 30 October 2015
-        </abbr>
-		<br />
-        <abbr class="modified" title="2015-10-30T19:30:00+08:00">
-                Updated: Fri 30 October 2015
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/r341h.html">r341h</a>
-        </address>
-<p>In <a href="/category/linux.html">Linux</a>.</p>
-<p>tags: <a href="/tag/linux.html">linux</a> <a href="/tag/ssh.html">ssh</a> <a href="/tag/port-forward.html">port-forward</a> </p>
-</footer><!-- /.post-info -->                <p>从本地Host用SSH连接到目标主机，怎么让目标主机也可以连接本地的SSH呢？
-答案很简单，只要把本地主机的SSH端口转发到目标主机即可。可以先查看一下SSH命令的man手册:</p>
-<div class="highlight"><pre><span></span>man ssh
-</pre></div>
-
-
-<p>注意里面的R参数，就是要用到的参数：</p>
-<div class="highlight"><pre><span></span>-R [bind_address:]port:host:hostport
-         Specifies that the given port on the remote (server) host is to be forwarded to the given host and port on the local side.  This works by allocating a socket to listen to port
-</pre></div>
-
-
-<p>意思就是把一个远程主机的端口用于本地端口的端口转发。于是对应于假设远程主机IP …</p>
-                <a class="readmore" href="/linuxli-yong-sshfan-xiang-duan-kou-zhuan-fa-bao-lu-nei-wang-duan-kou.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/linuxjiang-socksdai-li-zhuan-huan-cheng-httpdai-li.html" rel="bookmark"
-                           title="Permalink to linux将Socks代理转换成Http代理">linux将Socks代理转换成Http代理</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2015-05-14T10:20:00+08:00">
-                Published: Thu 14 May 2015
-        </abbr>
-		<br />
-        <abbr class="modified" title="2015-05-14T19:30:00+08:00">
-                Updated: Thu 14 May 2015
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/r341h.html">r341h</a>
-        </address>
-<p>In <a href="/category/linux.html">Linux</a>.</p>
-<p>tags: <a href="/tag/linux.html">linux</a> <a href="/tag/proxy.html">proxy</a> </p>
-</footer><!-- /.post-info -->                <h1>covert socks proxy to http proxy</h1>
-<h2>install polipo and configure</h2>
-<p>First, start out by making sure you have universe enabled, up to date package lists and downloading the polipo package (it has no dependancies).</p>
-<div class="highlight"><pre><span></span>sudo apt-get update
-sudo apt-get install polipo
-</pre></div>
-
-
-<p>Now to edit the polipo config file. This is …</p>
-                <a class="readmore" href="/linuxjiang-socksdai-li-zhuan-huan-cheng-httpdai-li.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/linuxda-jian-pptp-vpn-server.html" rel="bookmark"
-                           title="Permalink to Linux搭建PPTP VPN Server">Linux搭建PPTP VPN Server</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2015-04-19T10:20:00+08:00">
-                Published: Sun 19 April 2015
-        </abbr>
-		<br />
-        <abbr class="modified" title="2015-04-19T19:30:00+08:00">
-                Updated: Sun 19 April 2015
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/r341h.html">r341h</a>
-        </address>
-<p>In <a href="/category/linux.html">Linux</a>.</p>
-<p>tags: <a href="/tag/linux.html">linux</a> <a href="/tag/vpn.html">vpn</a> </p>
-</footer><!-- /.post-info -->                <h1>Setup PPTP Server on linux</h1>
-<p>参考:
-<a href="https://www.digitalocean.com/community/tutorials/how-to-setup-your-own-vpn-with-pptp">How To Setup Your Own VPN With PPTP</a></p>
-<p><a href="http://askubuntu.com/questions/492923/pptpd-vpn-no-internet-access-after-connecting">pptpd VPN: No internet access after connecting</a></p>
-<h2>PPTP Installation</h2>
-<p>====================</p>
-<h4>1. install server application</h4>
-<p>On CentOS 6 x64:</p>
-<blockquote>
-<p>rpm -i http://poptop.sourceforge.net/yum/stable/rhel6/pptp-release-current.noarch.rpm</p>
-<p>yum -y install pptpd</p>
-</blockquote>
-<p>On Ubuntu 12 …</p>
-                <a class="readmore" href="/linuxda-jian-pptp-vpn-server.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
                 </ol><!-- /#posts-list -->
 <p class="paginator">
         <a href="/index.html">&laquo;</a>
-    Page 2 / 2
+    Page 2 / 3
+        <a href="/index3.html">&raquo;</a>
 </p>
                 </section><!-- /#content -->
         <section id="extras" class="body">
@@ -320,8 +265,8 @@ sudo apt-get install polipo
                         <ul>
                             <li><a href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
 
-                            <li><a href="https://github.com/gccpacman">My Github</a></li>
-                            <li><a href="https://stackoverflow.com/users/4124310/realhu">My StackOverflow</a></li>
+                            <li><a href="https://github.com/gccpacman">我的Github</a></li>
+                            <li><a href="https://stackoverflow.com/users/4124310/realhu">我的StackOverflow</a></li>
                         </ul>
                 </div><!-- /.social -->
         </section><!-- /#extras -->

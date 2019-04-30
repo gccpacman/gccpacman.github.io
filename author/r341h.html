@@ -286,164 +286,9 @@ wget https://download.libsodium.org/libsodium …</p></li></ol>
                 <a class="readmore" href="/linuxan-zhuang-dnscrypt.html">read more</a>
                 </div><!-- /.entry-content -->
             </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/ba-yong-hu-tai-systemdfu-wu-gai-cheng-xi-tong-fu-wu-kai-ji-zi-qi-dong-xware.html" rel="bookmark"
-                           title="Permalink to 把用户态systemd服务改成系统服务，开机自启动xware">把用户态systemd服务改成系统服务，开机自启动xware</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2016-01-08T10:20:00+08:00">
-                Published: Fri 08 January 2016
-        </abbr>
-		<br />
-        <abbr class="modified" title="2016-01-08T19:30:00+08:00">
-                Updated: Fri 08 January 2016
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/r341h.html">r341h</a>
-        </address>
-<p>In <a href="/category/linux.html">Linux</a>.</p>
-<p>tags: <a href="/tag/linux.html">linux</a> <a href="/tag/kodi.html">kodi</a> <a href="/tag/resource.html">resource</a> </p>
-</footer><!-- /.post-info -->                <p>OK.. 怎么给xubuntu装个迅雷远程呢，迅雷的Linux版本Xware-Desktop，目前是很稳定的，而且有很详细的官方教程：
-https://github.com/Xinkai/XwareDesktop/wiki/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E</p>
-<p>这个就是针对ubuntu的，所以原封不动的执行就行了。</p>
-<p>但是我的需求有点不一样，迅雷xware版自己提供了几个开机自启动选项：
-1）由用户态systemd托管
-2）由用户态upstart托管
-3）简单的自动启动。</p>
-<p>这三个选项的特点就是都是以用户态启动，事实上，xware的配置文件也确实是保存在用户的HOME目录下的.xware-desktop里的。</p>
-<p>但是我希望Linux开机的时候并不会自动登录，更何况我的linux是运行kodi的，我也不会去手动登录，因此用户态的服务是不会自动启动的。</p>
-<p>但是我希望一开机，xware就自动打开，开始执行下载任务。因此依赖原来的代码显然不太符合我的需求，就自己写一个系统的service吧。</p>
-<p>还好几乎不需要改变xware用户态的服务，就可以搞定。用户态的服务创建在用户目录的<code>$HOME …</code></p>
-                <a class="readmore" href="/ba-yong-hu-tai-systemdfu-wu-gai-cheng-xi-tong-fu-wu-kai-ji-zi-qi-dong-xware.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/linuxchuang-jian-zi-ding-yi-de-ying-yong-cheng-xu-qi-dong-qi.html" rel="bookmark"
-                           title="Permalink to Linux创建自定义的应用程序启动器">Linux创建自定义的应用程序启动器</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2016-01-06T10:20:00+08:00">
-                Published: Wed 06 January 2016
-        </abbr>
-		<br />
-        <abbr class="modified" title="2016-01-06T19:30:00+08:00">
-                Updated: Wed 06 January 2016
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/r341h.html">r341h</a>
-        </address>
-<p>In <a href="/category/linux.html">Linux</a>.</p>
-<p>tags: <a href="/tag/linux.html">linux</a> <a href="/tag/gnome.html">gnome</a> <a href="/tag/gtk.html">gtk</a> </p>
-</footer><!-- /.post-info -->                <p>eclipse在linux下，下载以后不需要安装，直接在目录下执行.\eclipse就可以运行了，不过同时，每次都要切换到该目录去执行eclipse似乎也比较麻烦。
-又没有办法在应用程序菜单里找到，即使是gnome下，按super然后全局搜索，也找到这个。</p>
-<p>不过好在linux是自由的系统，自己建一个应用程序的启动器一点问题都没有。</p>
-<p>比如我的eclipse装在<code>/opt/eclipse-jee/</code>下,怎么新建一个启动器呢？</p>
-<p>所有用户共享的应用启动器的目录是<code>/usr/share/applications/</code>目录，那么用户自定义的启动器目录在哪里？找了下用户目录下的.config/，没有找到，只好去百度google了一下，原来启动器是在.local/下，具体是<code>.local/share/applications</code>.</p>
-<p>新建一个eclipse.desktop的文件，然后输入以下内容：</p>
-<div class="highlight"><pre><span></span><span class="k">[Desktop Entry]</span>
-<span class="na">Encoding</span><span class="o">=</span><span class="s">UTF-8</span>
-<span class="na">Name</span><span class="o">=</span><span class="s">Eclipse J2ee</span>
-<span class="na">Comment</span><span class="o">=</span><span class="s">Official desktop version of Telegram …</span></pre></div>
-                <a class="readmore" href="/linuxchuang-jian-zi-ding-yi-de-ying-yong-cheng-xu-qi-dong-qi.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/archlinuxjiang-nvidia-driverti-huan-cheng-kai-yuan-de-nouveaujie-jue-xian-qia-qu-dong-wen-ti.html" rel="bookmark"
-                           title="Permalink to ArchLinux将nvidia driver替换成开源的nouveau解决显卡驱动问题">ArchLinux将nvidia driver替换成开源的nouveau解决显卡驱动问题</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2016-01-05T10:20:00+08:00">
-                Published: Tue 05 January 2016
-        </abbr>
-		<br />
-        <abbr class="modified" title="2016-01-05T19:30:00+08:00">
-                Updated: Tue 05 January 2016
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/r341h.html">r341h</a>
-        </address>
-<p>In <a href="/category/linux.html">Linux</a>.</p>
-<p>tags: <a href="/tag/linux.html">linux</a> <a href="/tag/driver.html">driver</a> <a href="/tag/gtk.html">gtk</a> <a href="/tag/archlinux.html">archlinux</a> </p>
-</footer><!-- /.post-info -->                <p>昨天还装完arch兴高采烈，今天就差点放弃整个系统，罪魁祸首就是当年被linus喷了的nvidia.</p>
-<p>Archlinux装了使用nvidia驱动，一开始发现根本就没有加载，装了和没装没啥区别，但是跑的好好的阿跑的好好的，结果不小心手贱点了<code>nvidia-xconfig</code>的应用，莫名其妙的起不来了。（这个原因我想了半天才想出来，不然我实在是无力吐槽他妈跑了一天多好好的什么也没干突然就起步来的情况，一度怀疑是显卡硬件坏了）</p>
-<p>于是抢救三个多小时，<code>/var/log/xorg.0.log</code>里的报错也莫名其妙，比如:</p>
-<div class="highlight"><pre><span></span>not detect device nvidia, no screen found.
-</pre></div>
-
-
-<p>简直是日到狗。于是想着解决办法应该是彻底不要装nvidia的驱动， 用intel的集成显卡，照例来说应该也ok阿，于是直接删掉驱动：</p>
-<p>pacman -R nvidia nvidia-utils</p>
-<p>然后reboot, 没想到发生的事情更加奇葩了，连命令行就出不来了，直接黑屏了我草。</p>
-<p>心里十万个草尼马，还好安装过arch的人毕竟还是知道有个arch-chroot, 放入安装介质（我的是u盘），重启， mount各种好盘:</p>
-<div class="highlight"><pre><span></span>mount /dev …</pre></div>
-                <a class="readmore" href="/archlinuxjiang-nvidia-driverti-huan-cheng-kai-yuan-de-nouveaujie-jue-xian-qia-qu-dong-wen-ti.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/linuxda-jian-vncfu-wu-qi.html" rel="bookmark"
-                           title="Permalink to Linux搭建VNC服务器">Linux搭建VNC服务器</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2016-01-05T10:20:00+08:00">
-                Published: Tue 05 January 2016
-        </abbr>
-		<br />
-        <abbr class="modified" title="2016-01-05T19:30:00+08:00">
-                Updated: Tue 05 January 2016
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/r341h.html">r341h</a>
-        </address>
-<p>In <a href="/category/linux.html">Linux</a>.</p>
-<p>tags: <a href="/tag/linux.html">linux</a> <a href="/tag/vnc.html">vnc</a> <a href="/tag/gtk.html">gtk</a> <a href="/tag/rdp.html">rdp</a> </p>
-</footer><!-- /.post-info -->                <p>服务器端：</p>
-<p>1）在终端安装tigervnc：</p>
-<div class="highlight"><pre><span></span>$ sudo apt-get install tigervnc
-</pre></div>
-
-
-<p>2）启动tigervnc</p>
-<div class="highlight"><pre><span></span>$ vncserver
-</pre></div>
-
-
-<p>提示你输入vnc的密码：</p>
-<div class="highlight"><pre><span></span><span class="n">enter</span> <span class="n">your</span> <span class="n">password</span> (<span class="n">length</span> <span class="mi">8</span>)
-</pre></div>
-
-
-<p>然后终端会显示New 'X' desktop is kodi-kodibuntu:1</p>
-<p>3）（可选）如果需要改变桌面，例如不想用xvnc，可以编辑<code>$HOME/.vnc/xstartup</code>的内容。具体操作暂略。</p>
-<p>4）（可选）如果需要开机启动，一个是用supervisor，另外就是在/etc/systemd/system/下手动写一个服务。具体操作暂略。</p>
-<p>在客户端:</p>
-<p>1) 安装tigervnc:</p>
-<div class="highlight"><pre><span></span>$ sudo pacman -S tigervnc   <span class="o">(</span>archlinux …</pre></div>
-                <a class="readmore" href="/linuxda-jian-vncfu-wu-qi.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
                 </ol><!-- /#posts-list -->
 <p class="paginator">
-    Page 1 / 2
+    Page 1 / 3
         <a href="/author/r341h2.html">&raquo;</a>
 </p>
                 </section><!-- /#content -->
@@ -459,8 +304,8 @@ https://github.com/Xinkai/XwareDesktop/wiki/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E
                         <ul>
                             <li><a href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
 
-                            <li><a href="https://github.com/gccpacman">My Github</a></li>
-                            <li><a href="https://stackoverflow.com/users/4124310/realhu">My StackOverflow</a></li>
+                            <li><a href="https://github.com/gccpacman">我的Github</a></li>
+                            <li><a href="https://stackoverflow.com/users/4124310/realhu">我的StackOverflow</a></li>
                         </ul>
                 </div><!-- /.social -->
         </section><!-- /#extras -->
