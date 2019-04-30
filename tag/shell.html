@@ -1,41 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
-        <meta charset="utf-8" />
-        <title>Pacman News - shell</title>
-        <link rel="stylesheet" href="/theme/css/main.css" />
-        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Pacman News Atom Feed" />
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Pacman News - shell</title>
+
+    <link rel="stylesheet" href="/theme/css/normalize.css" />
+    <link rel="stylesheet" href="/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="/theme/css/style.css" />
+    <link rel="stylesheet" href="/theme/css/pygments.css" />	
+    <script src="/theme/js/modernizr.js"></script>
 </head>
 
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="/">Pacman News </a></h1>
-                <nav><ul>
-                    <li><a href="/category/linux.html">Linux</a></li>
-                    <li><a href="/category/python.html">python</a></li>
-                    <li><a href="/category/vim.html">Vim</a></li>
-                    <li><a href="/category/windows.html">Windows</a></li>
-                </ul></nav>
-        </header><!-- /#banner -->
+<body>
 
-            <aside id="featured" class="body">
-                <article>
-                    <h1 class="entry-title"><a href="/windowsan-zhuang-msys32pei-zhi-gitdeng-kai-fa-huan-jing-bing-ji-cheng-vscode.html">Windows安装MSys32配置Git等开发环境并集成VSCode</a></h1>
-<footer class="post-info">
-        <abbr class="published" title="2018-02-01T10:20:00+08:00">
-                Published: Thu 01 February 2018
-        </abbr>
-		<br />
-        <abbr class="modified" title="2018-02-01T19:30:00+08:00">
-                Updated: Thu 01 February 2018
-        </abbr>
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="">Pacman News</a></h1>
+    </div>
+</div>
+</div>
 
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/r341h.html">r341h</a>
-        </address>
-<p>In <a href="/category/windows.html">Windows</a>.</p>
-<p>tags: <a href="/tag/windows.html">windows</a> <a href="/tag/shell.html">shell</a> </p>
-</footer><!-- /.post-info --><p>在不久之前发现了Msys2，基于Cygwin但是却又有一个让我觉得无比美好的包管理器Pacman(和Arch Linux的一样)，于是决定试试。但是真的用于Windows的终端还有很多麻烦的地方要解决，主要是以下几点：
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+        
+        
+
+            <article>
+                <a href="/windowsan-zhuang-msys32pei-zhi-gitdeng-kai-fa-huan-jing-bing-ji-cheng-vscode.html"><h3 class="article-title">Windows安装MSys32配置Git等开发环境并集成VSCode</h3></a>
+<h6 class="subheader" title="2018-02-01T10:20:00+08:00">Thu 01 February 2018
+</h6>
+
+
+<p>在不久之前发现了Msys2，基于Cygwin但是却又有一个让我觉得无比美好的包管理器Pacman(和Arch Linux的一样)，于是决定试试。但是真的用于Windows的终端还有很多麻烦的地方要解决，主要是以下几点：
 1. Git的ssh_keygen配置，你和windows自己的CMD里的ssh_keygen能否共用
 2. Msys用的换行符是和Linux一样的LF，而Windows的是CRLF
 3. Python能不能直接用Windows的Python而不用模拟Unix环境的Python（有很多的bug）
@@ -92,33 +108,76 @@
 <p>https://help.github.com/articles/dealing-with-line-endings</p>
 <p>https://groups.google.com/forum/#!topic/ustc_lug/_wL4OkWrVK4</p>
 <p>https://stackoverflow.com/questions/33942924/how-to-change-home-directory-and-start-directory-on-msys2</p>
-<p>https://stackoverflow.com/questions/45836650/how-do-i-integrate-msys2-shell-into-visual-studio-code-on-window/48016561#comment84105772_48016561</p>                </article>
-            </aside><!-- /#featured -->
-        <section id="extras" class="body">
-                <div class="blogroll">
-                        <h2>links</h2>
-                        <ul>
-                            <li><a href="http://getpelican.com/">Pelican</a></li>
-                        </ul>
-                </div><!-- /.blogroll -->
-                <div class="social">
-                        <h2>social</h2>
-                        <ul>
-                            <li><a href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+<p>https://stackoverflow.com/questions/45836650/how-do-i-integrate-msys2-shell-into-visual-studio-code-on-window/48016561#comment84105772_48016561</p><p class="subheader">Category: <a href="/category/windows.html">Windows</a>
 
-                            <li><a href="https://github.com/gccpacman">我的Github</a></li>
-                            <li><a href="https://stackoverflow.com/users/4124310/realhu">我的StackOverflow</a></li>
-                        </ul>
-                </div><!-- /.social -->
-        </section><!-- /#extras -->
+    Tagged: 
+    <a href="/tag/windows.html">windows </a>
+    <a href="/tag/shell.html">shell </a>
+</p>
 
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
 
-                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
-        </footer><!-- /#contentinfo -->
 
+            </article>
+
+<div class="pagination-centered">
+<h6 class="subheader">Page 1 of 1</h6>
+
+<p>
+
+</p>
+</div>
+
+
+
+            <!-- /#posts-list -->
+
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="/archives.html">Archives</a>
+            <li><a href="/tags.html">Tags</a>
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="/category/linux.html">Linux</a></li>
+            <li><a href="/category/python.html">python</a></li>
+            <li><a href="/category/vim.html">Vim</a></li>
+            <li><a href="/category/windows.html">Windows</a></li>
+   
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://getpelican.com/">Pelican</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="https://github.com/gccpacman">GccPacman @Github</a></li>
+            <li><a href="https://stackoverflow.com/users/4124310/realhu">r341h @StackOverflow</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Pacman News by r341h</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
 </body>
 </html>

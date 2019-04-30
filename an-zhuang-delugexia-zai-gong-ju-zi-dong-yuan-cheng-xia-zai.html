@@ -1,46 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
-        <meta charset="utf-8" />
-        <title>安装deluge下载工具自动远程下载</title>
-        <link rel="stylesheet" href="/theme/css/main.css" />
-        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Pacman News Atom Feed" />
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>安装deluge下载工具自动远程下载</title>
+
+    <link rel="stylesheet" href="/theme/css/normalize.css" />
+    <link rel="stylesheet" href="/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="/theme/css/style.css" />
+    <link rel="stylesheet" href="/theme/css/pygments.css" />	
+    <script src="/theme/js/modernizr.js"></script>
 </head>
 
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="/">Pacman News </a></h1>
-                <nav><ul>
-                    <li class="active"><a href="/category/linux.html">Linux</a></li>
-                    <li><a href="/category/python.html">python</a></li>
-                    <li><a href="/category/vim.html">Vim</a></li>
-                    <li><a href="/category/windows.html">Windows</a></li>
-                </ul></nav>
-        </header><!-- /#banner -->
-<section id="content" class="body">
-  <article>
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="">Pacman News</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
     <header>
-      <h1 class="entry-title">
-        <a href="/an-zhuang-delugexia-zai-gong-ju-zi-dong-yuan-cheng-xia-zai.html" rel="bookmark"
-           title="Permalink to 安装deluge下载工具自动远程下载">安装deluge下载工具自动远程下载</a></h1>
+        <h3 class="article-title"><a href="/an-zhuang-delugexia-zai-gong-ju-zi-dong-yuan-cheng-xia-zai.html" rel="bookmark"
+        title="Permalink to 安装deluge下载工具自动远程下载">安装deluge下载工具自动远程下载</a></h3>
     </header>
 
-    <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2016-01-04T10:20:00+08:00">
-                Published: Mon 04 January 2016
-        </abbr>
-		<br />
-        <abbr class="modified" title="2016-01-04T19:30:00+08:00">
-                Updated: Mon 04 January 2016
-        </abbr>
+<h6 class="subheader" title="2016-01-04T10:20:00+08:00">Mon 04 January 2016
+</h6>
 
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/r341h.html">r341h</a>
-        </address>
-<p>In <a href="/category/linux.html">Linux</a>.</p>
-<p>tags: <a href="/tag/linux.html">linux</a> <a href="/tag/resource.html">resource</a> </p>
-</footer><!-- /.post-info -->      <p>上一篇装完kodi后，我的旧电脑就彻底变成了一个kodi/XBMC媒体中心，那么比如我要下载新的美剧什么的，好像就还是不那么方便。
+
+    <p>上一篇装完kodi后，我的旧电脑就彻底变成了一个kodi/XBMC媒体中心，那么比如我要下载新的美剧什么的，好像就还是不那么方便。
 p2p的torrent一直是我的最爱。deluge是一个跨平台的操作系统，支持linux, windows 和mac，还有远程控制等功能，什么是远程下载呢。我们都知道有迅雷远程下载，那么deluge其实也是一样，就是你在一台电脑操作，有一个下载链接，然后你可以直接在这台电脑上添加这个下载链接，唯一不同的是下载的任务被添加到了远程的机器上，文件也会下载到远程的机器上。
 这样的需求正符合我媒体中心的需要，我找到新的片源，并不需要下载到我的计算机，而是可以让我的Kodi在播放电影的同时，又可以执行下载的任务。</p>
 <h1>服务器端：</h1>
@@ -126,35 +138,64 @@ Username用户名和Password密码就是之前在auth文件里的配置</p>
 <p><a href="http://dev.deluge-torrent.org/wiki/Installing/Linux/Ubuntu">Installing/Linux/Ubuntu – Deluge</a></p>
 </li>
 </ul>
-    </div><!-- /.entry-content -->
+<p class="subheader">Category: <a href="/category/linux.html">Linux</a>
 
-  </article>
-</section>
-        <section id="extras" class="body">
-                <div class="blogroll">
-                        <h2>links</h2>
-                        <ul>
-                            <li><a href="http://getpelican.com/">Pelican</a></li>
-                        </ul>
-                </div><!-- /.blogroll -->
-                <div class="social">
-                        <h2>social</h2>
-                        <ul>
-                            <li><a href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+    Tagged: 
+    <a href="/tag/linux.html">linux </a>
+    <a href="/tag/resource.html">resource </a>
+</p>
 
-                            <li><a href="https://github.com/gccpacman">我的Github</a></li>
-                            <li><a href="https://stackoverflow.com/users/4124310/realhu">我的StackOverflow</a></li>
-                        </ul>
-                </div><!-- /.social -->
-        </section><!-- /#extras -->
 
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
 
-                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
-        </footer><!-- /#contentinfo -->
 
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="/archives.html">Archives</a>
+            <li><a href="/tags.html">Tags</a>
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="/category/linux.html">Linux</a></li>
+            <li><a href="/category/python.html">python</a></li>
+            <li><a href="/category/vim.html">Vim</a></li>
+            <li><a href="/category/windows.html">Windows</a></li>
+   
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://getpelican.com/">Pelican</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="https://github.com/gccpacman">GccPacman @Github</a></li>
+            <li><a href="https://stackoverflow.com/users/4124310/realhu">r341h @StackOverflow</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Pacman News by r341h</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
 </body>
 </html>

@@ -1,89 +1,174 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
-        <meta charset="utf-8" />
-        <title>Pacman News</title>
-        <link rel="stylesheet" href="/theme/css/main.css" />
-        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Pacman News Atom Feed" />
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Pacman News</title>
+
+    <link rel="stylesheet" href="/theme/css/normalize.css" />
+    <link rel="stylesheet" href="/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="/theme/css/style.css" />
+    <link rel="stylesheet" href="/theme/css/pygments.css" />	
+    <script src="/theme/js/modernizr.js"></script>
 </head>
 
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="/">Pacman News </a></h1>
-                <nav><ul>
-                    <li><a href="/category/linux.html">Linux</a></li>
-                    <li><a href="/category/python.html">python</a></li>
-                    <li><a href="/category/vim.html">Vim</a></li>
-                    <li><a href="/category/windows.html">Windows</a></li>
-                </ul></nav>
-        </header><!-- /#banner -->
-<section id="content" class="body">
-<h1>Archives for Pacman News</h1>
+<body>
 
-<dl>
-    <dt>Fri 04 May 2018</dt>
-    <dd><a href="/zi-yuan-zhan-yong-chao-ji-di-de-i3zhuo-mian.html">资源占用超级低的i3桌面</a></dd>
-    <dt>Thu 01 February 2018</dt>
-    <dd><a href="/windowsan-zhuang-msys32pei-zhi-gitdeng-kai-fa-huan-jing-bing-ji-cheng-vscode.html">Windows安装MSys32配置Git等开发环境并集成VSCode</a></dd>
-    <dt>Mon 04 December 2017</dt>
-    <dd><a href="/linuxxiu-mian-hou-huan-xing-wifihe-lan-ya-wu-fa-zheng-chang-shi-yong-de-jie-jue-fang-fa.html">Linux休眠后唤醒，wifi和蓝牙无法正常使用的解决方法</a></dd>
-    <dt>Tue 24 October 2017</dt>
-    <dd><a href="/vimcha-jian-command-tzai-windowsshang-bian-yi.html">vim插件command-t在windows上编译</a></dd>
-    <dt>Sun 22 October 2017</dt>
-    <dd><a href="/windowsde-bao-guan-li-chocolatehe-vimvundle.html">windows的包管理Chocolate和vim.Vundle</a></dd>
-    <dt>Sat 06 February 2016</dt>
-    <dd><a href="/linuxan-zhuang-dnscrypt.html">Linux安装Dnscrypt</a></dd>
-    <dt>Fri 08 January 2016</dt>
-    <dd><a href="/ba-yong-hu-tai-systemdfu-wu-gai-cheng-xi-tong-fu-wu-kai-ji-zi-qi-dong-xware.html">把用户态systemd服务改成系统服务，开机自启动xware</a></dd>
-    <dt>Wed 06 January 2016</dt>
-    <dd><a href="/linuxchuang-jian-zi-ding-yi-de-ying-yong-cheng-xu-qi-dong-qi.html">Linux创建自定义的应用程序启动器</a></dd>
-    <dt>Tue 05 January 2016</dt>
-    <dd><a href="/archlinuxjiang-nvidia-driverti-huan-cheng-kai-yuan-de-nouveaujie-jue-xian-qia-qu-dong-wen-ti.html">ArchLinux将nvidia driver替换成开源的nouveau解决显卡驱动问题</a></dd>
-    <dt>Tue 05 January 2016</dt>
-    <dd><a href="/linuxda-jian-vncfu-wu-qi.html">Linux搭建VNC服务器</a></dd>
-    <dt>Mon 04 January 2016</dt>
-    <dd><a href="/an-zhuang-delugexia-zai-gong-ju-zi-dong-yuan-cheng-xia-zai.html">安装deluge下载工具自动远程下载</a></dd>
-    <dt>Mon 04 January 2016</dt>
-    <dd><a href="/linuxan-zhuang-bing-kai-ji-jin-ru-kodimei-ti-zhong-xin.html">Linux安装并开机进入Kodi媒体中心</a></dd>
-    <dt>Sun 03 January 2016</dt>
-    <dd><a href="/diao-zheng-linuxzhu-fen-qu-de-da-xiao.html">调整Linux主分区的大小</a></dd>
-    <dt>Tue 29 December 2015</dt>
-    <dd><a href="/dockerda-jian-openvpn-server.html">Docker搭建openvpn server</a></dd>
-    <dt>Mon 23 November 2015</dt>
-    <dd><a href="/uwsgifang-shi-qi-dong-django.html">uwsgi方式启动django</a></dd>
-    <dt>Fri 30 October 2015</dt>
-    <dd><a href="/linuxli-yong-sshfan-xiang-duan-kou-zhuan-fa-bao-lu-nei-wang-duan-kou.html">Linux利用ssh反向端口转发暴露内网端口</a></dd>
-    <dt>Thu 14 May 2015</dt>
-    <dd><a href="/linuxjiang-socksdai-li-zhuan-huan-cheng-httpdai-li.html">linux将Socks代理转换成Http代理</a></dd>
-    <dt>Sun 19 April 2015</dt>
-    <dd><a href="/linuxda-jian-pptp-vpn-server.html">Linux搭建PPTP VPN Server</a></dd>
-</dl>
-</section>
-        <section id="extras" class="body">
-                <div class="blogroll">
-                        <h2>links</h2>
-                        <ul>
-                            <li><a href="http://getpelican.com/">Pelican</a></li>
-                        </ul>
-                </div><!-- /.blogroll -->
-                <div class="social">
-                        <h2>social</h2>
-                        <ul>
-                            <li><a href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="">Pacman News</a></h1>
+    </div>
+</div>
+</div>
 
-                            <li><a href="https://github.com/gccpacman">我的Github</a></li>
-                            <li><a href="https://stackoverflow.com/users/4124310/realhu">我的StackOverflow</a></li>
-                        </ul>
-                </div><!-- /.social -->
-        </section><!-- /#extras -->
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
 
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
 
-                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
-        </footer><!-- /#contentinfo -->
 
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+
+<h3>Archives</h3>
+
+<table class="table-archive">
+    <tbody>
+        <tr>
+        <td>Fri 04 May 2018</td>
+        <td><a href='zi-yuan-zhan-yong-chao-ji-di-de-i3zhuo-mian.html'>资源占用超级低的i3桌面</a></td>
+        </tr>
+        <tr>
+        <td>Thu 01 February 2018</td>
+        <td><a href='windowsan-zhuang-msys32pei-zhi-gitdeng-kai-fa-huan-jing-bing-ji-cheng-vscode.html'>Windows安装MSys32配置Git等开发环境并集成VSCode</a></td>
+        </tr>
+        <tr>
+        <td>Mon 04 December 2017</td>
+        <td><a href='linuxxiu-mian-hou-huan-xing-wifihe-lan-ya-wu-fa-zheng-chang-shi-yong-de-jie-jue-fang-fa.html'>Linux休眠后唤醒，wifi和蓝牙无法正常使用的解决方法</a></td>
+        </tr>
+        <tr>
+        <td>Tue 24 October 2017</td>
+        <td><a href='vimcha-jian-command-tzai-windowsshang-bian-yi.html'>vim插件command-t在windows上编译</a></td>
+        </tr>
+        <tr>
+        <td>Sun 22 October 2017</td>
+        <td><a href='windowsde-bao-guan-li-chocolatehe-vimvundle.html'>windows的包管理Chocolate和vim.Vundle</a></td>
+        </tr>
+        <tr>
+        <td>Sat 06 February 2016</td>
+        <td><a href='linuxan-zhuang-dnscrypt.html'>Linux安装Dnscrypt</a></td>
+        </tr>
+        <tr>
+        <td>Fri 08 January 2016</td>
+        <td><a href='ba-yong-hu-tai-systemdfu-wu-gai-cheng-xi-tong-fu-wu-kai-ji-zi-qi-dong-xware.html'>把用户态systemd服务改成系统服务，开机自启动xware</a></td>
+        </tr>
+        <tr>
+        <td>Wed 06 January 2016</td>
+        <td><a href='linuxchuang-jian-zi-ding-yi-de-ying-yong-cheng-xu-qi-dong-qi.html'>Linux创建自定义的应用程序启动器</a></td>
+        </tr>
+        <tr>
+        <td>Tue 05 January 2016</td>
+        <td><a href='archlinuxjiang-nvidia-driverti-huan-cheng-kai-yuan-de-nouveaujie-jue-xian-qia-qu-dong-wen-ti.html'>ArchLinux将nvidia driver替换成开源的nouveau解决显卡驱动问题</a></td>
+        </tr>
+        <tr>
+        <td>Tue 05 January 2016</td>
+        <td><a href='linuxda-jian-vncfu-wu-qi.html'>Linux搭建VNC服务器</a></td>
+        </tr>
+        <tr>
+        <td>Mon 04 January 2016</td>
+        <td><a href='an-zhuang-delugexia-zai-gong-ju-zi-dong-yuan-cheng-xia-zai.html'>安装deluge下载工具自动远程下载</a></td>
+        </tr>
+        <tr>
+        <td>Mon 04 January 2016</td>
+        <td><a href='linuxan-zhuang-bing-kai-ji-jin-ru-kodimei-ti-zhong-xin.html'>Linux安装并开机进入Kodi媒体中心</a></td>
+        </tr>
+        <tr>
+        <td>Sun 03 January 2016</td>
+        <td><a href='diao-zheng-linuxzhu-fen-qu-de-da-xiao.html'>调整Linux主分区的大小</a></td>
+        </tr>
+        <tr>
+        <td>Tue 29 December 2015</td>
+        <td><a href='dockerda-jian-openvpn-server.html'>Docker搭建openvpn server</a></td>
+        </tr>
+        <tr>
+        <td>Mon 23 November 2015</td>
+        <td><a href='uwsgifang-shi-qi-dong-django.html'>uwsgi方式启动django</a></td>
+        </tr>
+        <tr>
+        <td>Fri 30 October 2015</td>
+        <td><a href='linuxli-yong-sshfan-xiang-duan-kou-zhuan-fa-bao-lu-nei-wang-duan-kou.html'>Linux利用ssh反向端口转发暴露内网端口</a></td>
+        </tr>
+        <tr>
+        <td>Thu 14 May 2015</td>
+        <td><a href='linuxjiang-socksdai-li-zhuan-huan-cheng-httpdai-li.html'>linux将Socks代理转换成Http代理</a></td>
+        </tr>
+        <tr>
+        <td>Sun 19 April 2015</td>
+        <td><a href='linuxda-jian-pptp-vpn-server.html'>Linux搭建PPTP VPN Server</a></td>
+        </tr>
+    </tbody>
+</table>
+
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="/archives.html">Archives</a>
+            <li><a href="/tags.html">Tags</a>
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="/category/linux.html">Linux</a></li>
+            <li><a href="/category/python.html">python</a></li>
+            <li><a href="/category/vim.html">Vim</a></li>
+            <li><a href="/category/windows.html">Windows</a></li>
+   
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://getpelican.com/">Pelican</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="https://github.com/gccpacman">GccPacman @Github</a></li>
+            <li><a href="https://stackoverflow.com/users/4124310/realhu">r341h @StackOverflow</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Pacman News by r341h</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
 </body>
 </html>

@@ -1,41 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
-        <meta charset="utf-8" />
-        <title>Pacman News - gtk</title>
-        <link rel="stylesheet" href="/theme/css/main.css" />
-        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Pacman News Atom Feed" />
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Pacman News - gtk</title>
+
+    <link rel="stylesheet" href="/theme/css/normalize.css" />
+    <link rel="stylesheet" href="/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="/theme/css/style.css" />
+    <link rel="stylesheet" href="/theme/css/pygments.css" />	
+    <script src="/theme/js/modernizr.js"></script>
 </head>
 
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="/">Pacman News </a></h1>
-                <nav><ul>
-                    <li><a href="/category/linux.html">Linux</a></li>
-                    <li><a href="/category/python.html">python</a></li>
-                    <li><a href="/category/vim.html">Vim</a></li>
-                    <li><a href="/category/windows.html">Windows</a></li>
-                </ul></nav>
-        </header><!-- /#banner -->
+<body>
 
-            <aside id="featured" class="body">
-                <article>
-                    <h1 class="entry-title"><a href="/zi-yuan-zhan-yong-chao-ji-di-de-i3zhuo-mian.html">资源占用超级低的i3桌面</a></h1>
-<footer class="post-info">
-        <abbr class="published" title="2018-05-04T10:20:00+08:00">
-                Published: Fri 04 May 2018
-        </abbr>
-		<br />
-        <abbr class="modified" title="2018-05-04T19:30:00+08:00">
-                Updated: Fri 04 May 2018
-        </abbr>
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="">Pacman News</a></h1>
+    </div>
+</div>
+</div>
 
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/r341h.html">r341h</a>
-        </address>
-<p>In <a href="/category/vim.html">Vim</a>.</p>
-<p>tags: <a href="/tag/linux.html">linux</a> <a href="/tag/vim.html">vim</a> <a href="/tag/gtk.html">gtk</a> <a href="/tag/vitual-machine.html">vitual machine</a> </p>
-</footer><!-- /.post-info --><p>现在的电脑是Surface，跑虚拟机很吃力了，但是不是不能跑，重点是优化后把linux的资源降下来，还是可以非常流畅。i3是个比xfce4更加轻量级的桌面管理器，而且不是像Windows那样悬浮窗口式的，而是tiling的桌面。随便网上找了个截图，大概就是这个意思：</p>
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+        
+        
+
+            <article>
+                <a href="/zi-yuan-zhan-yong-chao-ji-di-de-i3zhuo-mian.html"><h3 class="article-title">资源占用超级低的i3桌面</h3></a>
+<h6 class="subheader" title="2018-05-04T10:20:00+08:00">Fri 04 May 2018
+</h6>
+
+
+<p>现在的电脑是Surface，跑虚拟机很吃力了，但是不是不能跑，重点是优化后把linux的资源降下来，还是可以非常流畅。i3是个比xfce4更加轻量级的桌面管理器，而且不是像Windows那样悬浮窗口式的，而是tiling的桌面。随便网上找了个截图，大概就是这个意思：</p>
 <p><img alt="i3" src="https://i3wm.org/screenshots/i3-1.png"></p>
 <h1>这边的例子以Vmware为例：</h1>
 <h2>1. 首先要安装i3：</h2>
@@ -92,35 +108,33 @@ $ sudo pacman -S open-vm-tools     <span class="c1"># archlinux</span>
 echo &quot;#!/bin/sh
 xrandr
 exec i3&quot; &gt; ~/.xsession
-</pre></div>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+</pre></div><p class="subheader">Category: <a href="/category/vim.html">Vim</a>
 
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/linuxchuang-jian-zi-ding-yi-de-ying-yong-cheng-xu-qi-dong-qi.html" rel="bookmark"
-                           title="Permalink to Linux创建自定义的应用程序启动器">Linux创建自定义的应用程序启动器</a></h1>
-                </header>
+    Tagged: 
+    <a href="/tag/linux.html">linux </a>
+    <a href="/tag/vim.html">vim </a>
+    <a href="/tag/gtk.html">gtk </a>
+    <a href="/tag/vitual-machine.html">vitual machine </a>
+</p>
 
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2016-01-06T10:20:00+08:00">
-                Published: Wed 06 January 2016
-        </abbr>
-		<br />
-        <abbr class="modified" title="2016-01-06T19:30:00+08:00">
-                Updated: Wed 06 January 2016
-        </abbr>
 
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/r341h.html">r341h</a>
-        </address>
-<p>In <a href="/category/linux.html">Linux</a>.</p>
-<p>tags: <a href="/tag/linux.html">linux</a> <a href="/tag/gnome.html">gnome</a> <a href="/tag/gtk.html">gtk</a> </p>
-</footer><!-- /.post-info -->                <p>eclipse在linux下，下载以后不需要安装，直接在目录下执行.\eclipse就可以运行了，不过同时，每次都要切换到该目录去执行eclipse似乎也比较麻烦。
+
+            </article>
+
+
+                <hr  class="gradient"/>
+
+
+        
+
+
+            <article>
+                <a href="/linuxchuang-jian-zi-ding-yi-de-ying-yong-cheng-xu-qi-dong-qi.html"><h3 class="article-title">Linux创建自定义的应用程序启动器</h3></a>
+<h6 class="subheader" title="2016-01-06T10:20:00+08:00">Wed 06 January 2016
+</h6>
+
+
+<p>eclipse在linux下，下载以后不需要安装，直接在目录下执行.\eclipse就可以运行了，不过同时，每次都要切换到该目录去执行eclipse似乎也比较麻烦。
 又没有办法在应用程序菜单里找到，即使是gnome下，按super然后全局搜索，也找到这个。</p>
 <p>不过好在linux是自由的系统，自己建一个应用程序的启动器一点问题都没有。</p>
 <p>比如我的eclipse装在<code>/opt/eclipse-jee/</code>下,怎么新建一个启动器呢？</p>
@@ -129,33 +143,30 @@ exec i3&quot; &gt; ~/.xsession
 <div class="highlight"><pre><span></span><span class="k">[Desktop Entry]</span>
 <span class="na">Encoding</span><span class="o">=</span><span class="s">UTF-8</span>
 <span class="na">Name</span><span class="o">=</span><span class="s">Eclipse J2ee</span>
-<span class="na">Comment</span><span class="o">=</span><span class="s">Official desktop version of Telegram …</span></pre></div>
-                <a class="readmore" href="/linuxchuang-jian-zi-ding-yi-de-ying-yong-cheng-xu-qi-dong-qi.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
+<span class="na">Comment</span><span class="o">=</span><span class="s">Official desktop version of Telegram …</span></pre></div><p class="subheader">Category: <a href="/category/linux.html">Linux</a>
 
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/archlinuxjiang-nvidia-driverti-huan-cheng-kai-yuan-de-nouveaujie-jue-xian-qia-qu-dong-wen-ti.html" rel="bookmark"
-                           title="Permalink to ArchLinux将nvidia driver替换成开源的nouveau解决显卡驱动问题">ArchLinux将nvidia driver替换成开源的nouveau解决显卡驱动问题</a></h1>
-                </header>
+    Tagged: 
+    <a href="/tag/linux.html">linux </a>
+    <a href="/tag/gnome.html">gnome </a>
+    <a href="/tag/gtk.html">gtk </a>
+</p>
 
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2016-01-05T10:20:00+08:00">
-                Published: Tue 05 January 2016
-        </abbr>
-		<br />
-        <abbr class="modified" title="2016-01-05T19:30:00+08:00">
-                Updated: Tue 05 January 2016
-        </abbr>
 
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/r341h.html">r341h</a>
-        </address>
-<p>In <a href="/category/linux.html">Linux</a>.</p>
-<p>tags: <a href="/tag/linux.html">linux</a> <a href="/tag/driver.html">driver</a> <a href="/tag/gtk.html">gtk</a> <a href="/tag/archlinux.html">archlinux</a> </p>
-</footer><!-- /.post-info -->                <p>昨天还装完arch兴高采烈，今天就差点放弃整个系统，罪魁祸首就是当年被linus喷了的nvidia.</p>
+
+                <a class="button radius secondary small right" href="/linuxchuang-jian-zi-ding-yi-de-ying-yong-cheng-xu-qi-dong-qi.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+
+        
+
+
+            <article>
+                <a href="/archlinuxjiang-nvidia-driverti-huan-cheng-kai-yuan-de-nouveaujie-jue-xian-qia-qu-dong-wen-ti.html"><h3 class="article-title">ArchLinux将nvidia driver替换成开源的nouveau解决显卡驱动问题</h3></a>
+<h6 class="subheader" title="2016-01-05T10:20:00+08:00">Tue 05 January 2016
+</h6>
+
+
+<p>昨天还装完arch兴高采烈，今天就差点放弃整个系统，罪魁祸首就是当年被linus喷了的nvidia.</p>
 <p>Archlinux装了使用nvidia驱动，一开始发现根本就没有加载，装了和没装没啥区别，但是跑的好好的阿跑的好好的，结果不小心手贱点了<code>nvidia-xconfig</code>的应用，莫名其妙的起不来了。（这个原因我想了半天才想出来，不然我实在是无力吐槽他妈跑了一天多好好的什么也没干突然就起步来的情况，一度怀疑是显卡硬件坏了）</p>
 <p>于是抢救三个多小时，<code>/var/log/xorg.0.log</code>里的报错也莫名其妙，比如:</p>
 <div class="highlight"><pre><span></span>not detect device nvidia, no screen found.
@@ -166,33 +177,31 @@ exec i3&quot; &gt; ~/.xsession
 <p>pacman -R nvidia nvidia-utils</p>
 <p>然后reboot, 没想到发生的事情更加奇葩了，连命令行就出不来了，直接黑屏了我草。</p>
 <p>心里十万个草尼马，还好安装过arch的人毕竟还是知道有个arch-chroot, 放入安装介质（我的是u盘），重启， mount各种好盘:</p>
-<div class="highlight"><pre><span></span>mount /dev …</pre></div>
-                <a class="readmore" href="/archlinuxjiang-nvidia-driverti-huan-cheng-kai-yuan-de-nouveaujie-jue-xian-qia-qu-dong-wen-ti.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
+<div class="highlight"><pre><span></span>mount /dev …</pre></div><p class="subheader">Category: <a href="/category/linux.html">Linux</a>
 
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/linuxda-jian-vncfu-wu-qi.html" rel="bookmark"
-                           title="Permalink to Linux搭建VNC服务器">Linux搭建VNC服务器</a></h1>
-                </header>
+    Tagged: 
+    <a href="/tag/linux.html">linux </a>
+    <a href="/tag/driver.html">driver </a>
+    <a href="/tag/gtk.html">gtk </a>
+    <a href="/tag/archlinux.html">archlinux </a>
+</p>
 
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2016-01-05T10:20:00+08:00">
-                Published: Tue 05 January 2016
-        </abbr>
-		<br />
-        <abbr class="modified" title="2016-01-05T19:30:00+08:00">
-                Updated: Tue 05 January 2016
-        </abbr>
 
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/r341h.html">r341h</a>
-        </address>
-<p>In <a href="/category/linux.html">Linux</a>.</p>
-<p>tags: <a href="/tag/linux.html">linux</a> <a href="/tag/vnc.html">vnc</a> <a href="/tag/gtk.html">gtk</a> <a href="/tag/rdp.html">rdp</a> </p>
-</footer><!-- /.post-info -->                <p>服务器端：</p>
+
+                <a class="button radius secondary small right" href="/archlinuxjiang-nvidia-driverti-huan-cheng-kai-yuan-de-nouveaujie-jue-xian-qia-qu-dong-wen-ti.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+
+        
+
+
+            <article>
+                <a href="/linuxda-jian-vncfu-wu-qi.html"><h3 class="article-title">Linux搭建VNC服务器</h3></a>
+<h6 class="subheader" title="2016-01-05T10:20:00+08:00">Tue 05 January 2016
+</h6>
+
+
+<p>服务器端：</p>
 <p>1）在终端安装tigervnc：</p>
 <div class="highlight"><pre><span></span>$ sudo apt-get install tigervnc
 </pre></div>
@@ -213,37 +222,77 @@ exec i3&quot; &gt; ~/.xsession
 <p>4）（可选）如果需要开机启动，一个是用supervisor，另外就是在/etc/systemd/system/下手动写一个服务。具体操作暂略。</p>
 <p>在客户端:</p>
 <p>1) 安装tigervnc:</p>
-<div class="highlight"><pre><span></span>$ sudo pacman -S tigervnc   <span class="o">(</span>archlinux …</pre></div>
-                <a class="readmore" href="/linuxda-jian-vncfu-wu-qi.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-                </ol><!-- /#posts-list -->
-                </section><!-- /#content -->
-        <section id="extras" class="body">
-                <div class="blogroll">
-                        <h2>links</h2>
-                        <ul>
-                            <li><a href="http://getpelican.com/">Pelican</a></li>
-                        </ul>
-                </div><!-- /.blogroll -->
-                <div class="social">
-                        <h2>social</h2>
-                        <ul>
-                            <li><a href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+<div class="highlight"><pre><span></span>$ sudo pacman -S tigervnc   <span class="o">(</span>archlinux …</pre></div><p class="subheader">Category: <a href="/category/linux.html">Linux</a>
 
-                            <li><a href="https://github.com/gccpacman">我的Github</a></li>
-                            <li><a href="https://stackoverflow.com/users/4124310/realhu">我的StackOverflow</a></li>
-                        </ul>
-                </div><!-- /.social -->
-        </section><!-- /#extras -->
+    Tagged: 
+    <a href="/tag/linux.html">linux </a>
+    <a href="/tag/vnc.html">vnc </a>
+    <a href="/tag/gtk.html">gtk </a>
+    <a href="/tag/rdp.html">rdp </a>
+</p>
 
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
 
-                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
-        </footer><!-- /#contentinfo -->
 
+                <a class="button radius secondary small right" href="/linuxda-jian-vncfu-wu-qi.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+
+            <!-- /#posts-list -->
+<div class="pagination-centered">
+<h6 class="subheader">Page 1 of 1</h6>
+
+<p>
+
+</p>
+</div>
+
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="/archives.html">Archives</a>
+            <li><a href="/tags.html">Tags</a>
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="/category/linux.html">Linux</a></li>
+            <li><a href="/category/python.html">python</a></li>
+            <li><a href="/category/vim.html">Vim</a></li>
+            <li><a href="/category/windows.html">Windows</a></li>
+   
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://getpelican.com/">Pelican</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="https://github.com/gccpacman">GccPacman @Github</a></li>
+            <li><a href="https://stackoverflow.com/users/4124310/realhu">r341h @StackOverflow</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Pacman News by r341h</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
 </body>
 </html>

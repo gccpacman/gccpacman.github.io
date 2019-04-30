@@ -1,41 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
-        <meta charset="utf-8" />
-        <title>Pacman News - kodi</title>
-        <link rel="stylesheet" href="/theme/css/main.css" />
-        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Pacman News Atom Feed" />
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Pacman News - kodi</title>
+
+    <link rel="stylesheet" href="/theme/css/normalize.css" />
+    <link rel="stylesheet" href="/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="/theme/css/style.css" />
+    <link rel="stylesheet" href="/theme/css/pygments.css" />	
+    <script src="/theme/js/modernizr.js"></script>
 </head>
 
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="/">Pacman News </a></h1>
-                <nav><ul>
-                    <li><a href="/category/linux.html">Linux</a></li>
-                    <li><a href="/category/python.html">python</a></li>
-                    <li><a href="/category/vim.html">Vim</a></li>
-                    <li><a href="/category/windows.html">Windows</a></li>
-                </ul></nav>
-        </header><!-- /#banner -->
+<body>
 
-            <aside id="featured" class="body">
-                <article>
-                    <h1 class="entry-title"><a href="/linuxan-zhuang-dnscrypt.html">Linux安装Dnscrypt</a></h1>
-<footer class="post-info">
-        <abbr class="published" title="2016-02-06T10:20:00+08:00">
-                Published: Sat 06 February 2016
-        </abbr>
-		<br />
-        <abbr class="modified" title="2016-02-06T19:30:00+08:00">
-                Updated: Sat 06 February 2016
-        </abbr>
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="">Pacman News</a></h1>
+    </div>
+</div>
+</div>
 
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/r341h.html">r341h</a>
-        </address>
-<p>In <a href="/category/linux.html">Linux</a>.</p>
-<p>tags: <a href="/tag/linux.html">linux</a> <a href="/tag/kodi.html">kodi</a> <a href="/tag/resource.html">resource</a> </p>
-</footer><!-- /.post-info --><p>为什么就不言而喻不加解释了，就算你没有翻墙的打算，也建议你有一个优秀和安全的dns，因为国内的运营商除了干掉国外域名，还会帮你的国内网址投广告，甚至利用你进行ddns攻击。。</p>
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+        
+        
+
+            <article>
+                <a href="/linuxan-zhuang-dnscrypt.html"><h3 class="article-title">Linux安装Dnscrypt</h3></a>
+<h6 class="subheader" title="2016-02-06T10:20:00+08:00">Sat 06 February 2016
+</h6>
+
+
+<p>为什么就不言而喻不加解释了，就算你没有翻墙的打算，也建议你有一个优秀和安全的dns，因为国内的运营商除了干掉国外域名，还会帮你的国内网址投广告，甚至利用你进行ddns攻击。。</p>
 <p>很早以前dnscrypt这个东西就在热炒,后来不知道什么原因谈起的人也比较少了。因此我决定重新尝试一下是不是还有用呢。答案是肯定的。不过如果你只是在本机上使用，那么如果是桌面系统，似乎我有看到dnscrypt是有windows/macOS的客户端的，但是手机怎么办呢。这个时候就是树霉派发挥作用的时候了。</p>
 <p>树梅派安装dnscrypt相对与ubuntu之类的发行版其实也大同小异（我也没有试过ubuntu，arch上倒是非常简单，两三个命令就可以搞定），不过有些依赖包包括dnscrypt都是需要手动编译的。</p>
 <ol>
@@ -63,35 +79,32 @@ cd dnscrypt-proxy-1.6.1
 make -j2
 make install</p>
 </li>
-</ol>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+</ol><p class="subheader">Category: <a href="/category/linux.html">Linux</a>
 
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/ba-yong-hu-tai-systemdfu-wu-gai-cheng-xi-tong-fu-wu-kai-ji-zi-qi-dong-xware.html" rel="bookmark"
-                           title="Permalink to 把用户态systemd服务改成系统服务，开机自启动xware">把用户态systemd服务改成系统服务，开机自启动xware</a></h1>
-                </header>
+    Tagged: 
+    <a href="/tag/linux.html">linux </a>
+    <a href="/tag/kodi.html">kodi </a>
+    <a href="/tag/resource.html">resource </a>
+</p>
 
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2016-01-08T10:20:00+08:00">
-                Published: Fri 08 January 2016
-        </abbr>
-		<br />
-        <abbr class="modified" title="2016-01-08T19:30:00+08:00">
-                Updated: Fri 08 January 2016
-        </abbr>
 
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/r341h.html">r341h</a>
-        </address>
-<p>In <a href="/category/linux.html">Linux</a>.</p>
-<p>tags: <a href="/tag/linux.html">linux</a> <a href="/tag/kodi.html">kodi</a> <a href="/tag/resource.html">resource</a> </p>
-</footer><!-- /.post-info -->                <p>OK.. 怎么给xubuntu装个迅雷远程呢，迅雷的Linux版本Xware-Desktop，目前是很稳定的，而且有很详细的官方教程：
+
+            </article>
+
+
+                <hr  class="gradient"/>
+
+
+        
+
+
+            <article>
+                <a href="/ba-yong-hu-tai-systemdfu-wu-gai-cheng-xi-tong-fu-wu-kai-ji-zi-qi-dong-xware.html"><h3 class="article-title">把用户态systemd服务改成系统服务，开机自启动xware</h3></a>
+<h6 class="subheader" title="2016-01-08T10:20:00+08:00">Fri 08 January 2016
+</h6>
+
+
+<p>OK.. 怎么给xubuntu装个迅雷远程呢，迅雷的Linux版本Xware-Desktop，目前是很稳定的，而且有很详细的官方教程：
 https://github.com/Xinkai/XwareDesktop/wiki/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E</p>
 <p>这个就是针对ubuntu的，所以原封不动的执行就行了。</p>
 <p>但是我的需求有点不一样，迅雷xware版自己提供了几个开机自启动选项：
@@ -101,69 +114,105 @@ https://github.com/Xinkai/XwareDesktop/wiki/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E
 <p>这三个选项的特点就是都是以用户态启动，事实上，xware的配置文件也确实是保存在用户的HOME目录下的.xware-desktop里的。</p>
 <p>但是我希望Linux开机的时候并不会自动登录，更何况我的linux是运行kodi的，我也不会去手动登录，因此用户态的服务是不会自动启动的。</p>
 <p>但是我希望一开机，xware就自动打开，开始执行下载任务。因此依赖原来的代码显然不太符合我的需求，就自己写一个系统的service吧。</p>
-<p>还好几乎不需要改变xware用户态的服务，就可以搞定。用户态的服务创建在用户目录的<code>$HOME …</code></p>
-                <a class="readmore" href="/ba-yong-hu-tai-systemdfu-wu-gai-cheng-xi-tong-fu-wu-kai-ji-zi-qi-dong-xware.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
+<p>还好几乎不需要改变xware用户态的服务，就可以搞定。用户态的服务创建在用户目录的<code>$HOME …</code></p><p class="subheader">Category: <a href="/category/linux.html">Linux</a>
 
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/linuxan-zhuang-bing-kai-ji-jin-ru-kodimei-ti-zhong-xin.html" rel="bookmark"
-                           title="Permalink to Linux安装并开机进入Kodi媒体中心">Linux安装并开机进入Kodi媒体中心</a></h1>
-                </header>
+    Tagged: 
+    <a href="/tag/linux.html">linux </a>
+    <a href="/tag/kodi.html">kodi </a>
+    <a href="/tag/resource.html">resource </a>
+</p>
 
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2016-01-04T10:20:00+08:00">
-                Published: Mon 04 January 2016
-        </abbr>
-		<br />
-        <abbr class="modified" title="2016-01-04T19:30:00+08:00">
-                Updated: Mon 04 January 2016
-        </abbr>
 
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/r341h.html">r341h</a>
-        </address>
-<p>In <a href="/category/linux.html">Linux</a>.</p>
-<p>tags: <a href="/tag/linux.html">linux</a> <a href="/tag/kodi.html">kodi</a> <a href="/tag/resource.html">resource</a> </p>
-</footer><!-- /.post-info -->                <p>把2G的硬盘拆到了一台旧电脑上，并且给旧电脑装了xubuntu,打算直接打造一个媒体中心。目前知道有里那个用的不错的东西，KODI（XBMC）是一个很不错的选择。当然用PLEX也是个不错的选择，整理资料库方面PLEX更加强大。不过KODI是开源和免费的，既然用了linux，就用个开源的吧。况且我发现kodi还有不少的好处，并且更加轻量级。</p>
+
+                <a class="button radius secondary small right" href="/ba-yong-hu-tai-systemdfu-wu-gai-cheng-xi-tong-fu-wu-kai-ji-zi-qi-dong-xware.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+
+        
+
+
+            <article>
+                <a href="/linuxan-zhuang-bing-kai-ji-jin-ru-kodimei-ti-zhong-xin.html"><h3 class="article-title">Linux安装并开机进入Kodi媒体中心</h3></a>
+<h6 class="subheader" title="2016-01-04T10:20:00+08:00">Mon 04 January 2016
+</h6>
+
+
+<p>把2G的硬盘拆到了一台旧电脑上，并且给旧电脑装了xubuntu,打算直接打造一个媒体中心。目前知道有里那个用的不错的东西，KODI（XBMC）是一个很不错的选择。当然用PLEX也是个不错的选择，整理资料库方面PLEX更加强大。不过KODI是开源和免费的，既然用了linux，就用个开源的吧。况且我发现kodi还有不少的好处，并且更加轻量级。</p>
 <p>其实Kodi有个基于ubuntu的发行版叫做kodibuntu，直接装得话效果其实也差不多。但是我还是喜欢从ubuntu去扩展，毕竟任何基于ubuntu的版本，相对ubuntu的开发肯定是有所滞后的。和Android的Rom一个道理。不过kubuntu因为是非常流行的发行版不用担心这个问题。</p>
 <p>下面的步骤基本上是参考了askubuntu的一个答案<a href="http://askubuntu.com/questions/596839/autostart-kodi-on-vivid">Autostart Kodi on Vivid</a>，只不过它是在纯净的server版本安装，而desktop版则因为有自身的启动器，需要将其禁用掉而已。</p>
 <p>1）安装kodi: sudo apt-get install kodi</p>
 <p>2）创建一个kodi的用户，并添加到和视频播放有关的组
     sudo adduser --disabled-password --disabled-login --gecos "" kodi
-    sudo usermod -a -G audio kodi …</p>
-                <a class="readmore" href="/linuxan-zhuang-bing-kai-ji-jin-ru-kodimei-ti-zhong-xin.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-                </ol><!-- /#posts-list -->
-                </section><!-- /#content -->
-        <section id="extras" class="body">
-                <div class="blogroll">
-                        <h2>links</h2>
-                        <ul>
-                            <li><a href="http://getpelican.com/">Pelican</a></li>
-                        </ul>
-                </div><!-- /.blogroll -->
-                <div class="social">
-                        <h2>social</h2>
-                        <ul>
-                            <li><a href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+    sudo usermod -a -G audio kodi …</p><p class="subheader">Category: <a href="/category/linux.html">Linux</a>
 
-                            <li><a href="https://github.com/gccpacman">我的Github</a></li>
-                            <li><a href="https://stackoverflow.com/users/4124310/realhu">我的StackOverflow</a></li>
-                        </ul>
-                </div><!-- /.social -->
-        </section><!-- /#extras -->
+    Tagged: 
+    <a href="/tag/linux.html">linux </a>
+    <a href="/tag/kodi.html">kodi </a>
+    <a href="/tag/resource.html">resource </a>
+</p>
 
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
 
-                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
-        </footer><!-- /#contentinfo -->
 
+                <a class="button radius secondary small right" href="/linuxan-zhuang-bing-kai-ji-jin-ru-kodimei-ti-zhong-xin.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+
+            <!-- /#posts-list -->
+<div class="pagination-centered">
+<h6 class="subheader">Page 1 of 1</h6>
+
+<p>
+
+</p>
+</div>
+
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="/archives.html">Archives</a>
+            <li><a href="/tags.html">Tags</a>
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="/category/linux.html">Linux</a></li>
+            <li><a href="/category/python.html">python</a></li>
+            <li><a href="/category/vim.html">Vim</a></li>
+            <li><a href="/category/windows.html">Windows</a></li>
+   
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://getpelican.com/">Pelican</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="https://github.com/gccpacman">GccPacman @Github</a></li>
+            <li><a href="https://stackoverflow.com/users/4124310/realhu">r341h @StackOverflow</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Pacman News by r341h</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
 </body>
 </html>

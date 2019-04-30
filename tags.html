@@ -1,77 +1,216 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
-        <meta charset="utf-8" />
-        <title>Pacman News - Tags</title>
-        <link rel="stylesheet" href="/theme/css/main.css" />
-        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Pacman News Atom Feed" />
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Pacman News</title>
+
+    <link rel="stylesheet" href="/theme/css/normalize.css" />
+    <link rel="stylesheet" href="/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="/theme/css/style.css" />
+    <link rel="stylesheet" href="/theme/css/pygments.css" />	
+    <script src="/theme/js/modernizr.js"></script>
 </head>
 
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="/">Pacman News </a></h1>
-                <nav><ul>
-                    <li><a href="/category/linux.html">Linux</a></li>
-                    <li><a href="/category/python.html">python</a></li>
-                    <li><a href="/category/vim.html">Vim</a></li>
-                    <li><a href="/category/windows.html">Windows</a></li>
-                </ul></nav>
-        </header><!-- /#banner -->
+<body>
 
-<section id="content" class="body">
-    <h1>Tags for Pacman News</h1>
-    <ul>
-        <li><a href="/tag/archlinux.html">archlinux</a> (1)</li>
-        <li><a href="/tag/django.html">django</a> (1)</li>
-        <li><a href="/tag/driver.html">driver</a> (1)</li>
-        <li><a href="/tag/drivers.html">drivers</a> (1)</li>
-        <li><a href="/tag/gnome.html">gnome</a> (1)</li>
-        <li><a href="/tag/gtk.html">gtk</a> (4)</li>
-        <li><a href="/tag/kodi.html">kodi</a> (3)</li>
-        <li><a href="/tag/linux.html">linux</a> (14)</li>
-        <li><a href="/tag/openvpn.html">openvpn</a> (1)</li>
-        <li><a href="/tag/partition.html">partition</a> (1)</li>
-        <li><a href="/tag/port-forward.html">port-forward</a> (1)</li>
-        <li><a href="/tag/proxy.html">proxy</a> (1)</li>
-        <li><a href="/tag/python.html">python</a> (1)</li>
-        <li><a href="/tag/rdp.html">rdp</a> (1)</li>
-        <li><a href="/tag/resource.html">resource</a> (4)</li>
-        <li><a href="/tag/shell.html">shell</a> (1)</li>
-        <li><a href="/tag/ssh.html">ssh</a> (1)</li>
-        <li><a href="/tag/vim.html">vim</a> (3)</li>
-        <li><a href="/tag/vitual-machine.html">vitual machine</a> (1)</li>
-        <li><a href="/tag/vnc.html">vnc</a> (1)</li>
-        <li><a href="/tag/vpn.html">vpn</a> (2)</li>
-        <li><a href="/tag/webapps.html">webapps</a> (1)</li>
-        <li><a href="/tag/windows.html">windows</a> (3)</li>
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="">Pacman News</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
     </ul>
-</section>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
 
-        <section id="extras" class="body">
-                <div class="blogroll">
-                        <h2>links</h2>
-                        <ul>
-                            <li><a href="http://getpelican.com/">Pelican</a></li>
-                        </ul>
-                </div><!-- /.blogroll -->
-                <div class="social">
-                        <h2>social</h2>
-                        <ul>
-                            <li><a href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
 
-                            <li><a href="https://github.com/gccpacman">我的Github</a></li>
-                            <li><a href="https://stackoverflow.com/users/4124310/realhu">我的StackOverflow</a></li>
-                        </ul>
-                </div><!-- /.social -->
-        </section><!-- /#extras -->
+<!-- Main Page Content and Sidebar -->
+<div class="row">
 
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
 
-                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
-        </footer><!-- /#contentinfo -->
+<ul class="circle">
+	<li><a href="/tag/linux.html">linux</a></li>
+	<ul class="square">
+	<li><a href="/zi-yuan-zhan-yong-chao-ji-di-de-i3zhuo-mian.html"><small>资源占用超级低的i3桌面</small></li>
+	<li><a href="/linuxxiu-mian-hou-huan-xing-wifihe-lan-ya-wu-fa-zheng-chang-shi-yong-de-jie-jue-fang-fa.html"><small>Linux休眠后唤醒，wifi和蓝牙无法正常使用的解决方法</small></li>
+	<li><a href="/linuxan-zhuang-dnscrypt.html"><small>Linux安装Dnscrypt</small></li>
+	<li><a href="/ba-yong-hu-tai-systemdfu-wu-gai-cheng-xi-tong-fu-wu-kai-ji-zi-qi-dong-xware.html"><small>把用户态systemd服务改成系统服务，开机自启动xware</small></li>
+	<li><a href="/linuxchuang-jian-zi-ding-yi-de-ying-yong-cheng-xu-qi-dong-qi.html"><small>Linux创建自定义的应用程序启动器</small></li>
+	<li><a href="/archlinuxjiang-nvidia-driverti-huan-cheng-kai-yuan-de-nouveaujie-jue-xian-qia-qu-dong-wen-ti.html"><small>ArchLinux将nvidia driver替换成开源的nouveau解决显卡驱动问题</small></li>
+	<li><a href="/linuxda-jian-vncfu-wu-qi.html"><small>Linux搭建VNC服务器</small></li>
+	<li><a href="/an-zhuang-delugexia-zai-gong-ju-zi-dong-yuan-cheng-xia-zai.html"><small>安装deluge下载工具自动远程下载</small></li>
+	<li><a href="/linuxan-zhuang-bing-kai-ji-jin-ru-kodimei-ti-zhong-xin.html"><small>Linux安装并开机进入Kodi媒体中心</small></li>
+	<li><a href="/diao-zheng-linuxzhu-fen-qu-de-da-xiao.html"><small>调整Linux主分区的大小</small></li>
+	<li><a href="/dockerda-jian-openvpn-server.html"><small>Docker搭建openvpn server</small></li>
+	<li><a href="/linuxli-yong-sshfan-xiang-duan-kou-zhuan-fa-bao-lu-nei-wang-duan-kou.html"><small>Linux利用ssh反向端口转发暴露内网端口</small></li>
+	<li><a href="/linuxjiang-socksdai-li-zhuan-huan-cheng-httpdai-li.html"><small>linux将Socks代理转换成Http代理</small></li>
+	<li><a href="/linuxda-jian-pptp-vpn-server.html"><small>Linux搭建PPTP VPN Server</small></li>
+	</ul>
+	<li><a href="/tag/vim.html">vim</a></li>
+	<ul class="square">
+	<li><a href="/zi-yuan-zhan-yong-chao-ji-di-de-i3zhuo-mian.html"><small>资源占用超级低的i3桌面</small></li>
+	<li><a href="/vimcha-jian-command-tzai-windowsshang-bian-yi.html"><small>vim插件command-t在windows上编译</small></li>
+	<li><a href="/windowsde-bao-guan-li-chocolatehe-vimvundle.html"><small>windows的包管理Chocolate和vim.Vundle</small></li>
+	</ul>
+	<li><a href="/tag/gtk.html">gtk</a></li>
+	<ul class="square">
+	<li><a href="/zi-yuan-zhan-yong-chao-ji-di-de-i3zhuo-mian.html"><small>资源占用超级低的i3桌面</small></li>
+	<li><a href="/linuxchuang-jian-zi-ding-yi-de-ying-yong-cheng-xu-qi-dong-qi.html"><small>Linux创建自定义的应用程序启动器</small></li>
+	<li><a href="/archlinuxjiang-nvidia-driverti-huan-cheng-kai-yuan-de-nouveaujie-jue-xian-qia-qu-dong-wen-ti.html"><small>ArchLinux将nvidia driver替换成开源的nouveau解决显卡驱动问题</small></li>
+	<li><a href="/linuxda-jian-vncfu-wu-qi.html"><small>Linux搭建VNC服务器</small></li>
+	</ul>
+	<li><a href="/tag/vitual-machine.html">vitual machine</a></li>
+	<ul class="square">
+	<li><a href="/zi-yuan-zhan-yong-chao-ji-di-de-i3zhuo-mian.html"><small>资源占用超级低的i3桌面</small></li>
+	</ul>
+	<li><a href="/tag/windows.html">windows</a></li>
+	<ul class="square">
+	<li><a href="/windowsan-zhuang-msys32pei-zhi-gitdeng-kai-fa-huan-jing-bing-ji-cheng-vscode.html"><small>Windows安装MSys32配置Git等开发环境并集成VSCode</small></li>
+	<li><a href="/vimcha-jian-command-tzai-windowsshang-bian-yi.html"><small>vim插件command-t在windows上编译</small></li>
+	<li><a href="/windowsde-bao-guan-li-chocolatehe-vimvundle.html"><small>windows的包管理Chocolate和vim.Vundle</small></li>
+	</ul>
+	<li><a href="/tag/shell.html">shell</a></li>
+	<ul class="square">
+	<li><a href="/windowsan-zhuang-msys32pei-zhi-gitdeng-kai-fa-huan-jing-bing-ji-cheng-vscode.html"><small>Windows安装MSys32配置Git等开发环境并集成VSCode</small></li>
+	</ul>
+	<li><a href="/tag/drivers.html">drivers</a></li>
+	<ul class="square">
+	<li><a href="/linuxxiu-mian-hou-huan-xing-wifihe-lan-ya-wu-fa-zheng-chang-shi-yong-de-jie-jue-fang-fa.html"><small>Linux休眠后唤醒，wifi和蓝牙无法正常使用的解决方法</small></li>
+	</ul>
+	<li><a href="/tag/kodi.html">kodi</a></li>
+	<ul class="square">
+	<li><a href="/linuxan-zhuang-dnscrypt.html"><small>Linux安装Dnscrypt</small></li>
+	<li><a href="/ba-yong-hu-tai-systemdfu-wu-gai-cheng-xi-tong-fu-wu-kai-ji-zi-qi-dong-xware.html"><small>把用户态systemd服务改成系统服务，开机自启动xware</small></li>
+	<li><a href="/linuxan-zhuang-bing-kai-ji-jin-ru-kodimei-ti-zhong-xin.html"><small>Linux安装并开机进入Kodi媒体中心</small></li>
+	</ul>
+	<li><a href="/tag/resource.html">resource</a></li>
+	<ul class="square">
+	<li><a href="/linuxan-zhuang-dnscrypt.html"><small>Linux安装Dnscrypt</small></li>
+	<li><a href="/ba-yong-hu-tai-systemdfu-wu-gai-cheng-xi-tong-fu-wu-kai-ji-zi-qi-dong-xware.html"><small>把用户态systemd服务改成系统服务，开机自启动xware</small></li>
+	<li><a href="/an-zhuang-delugexia-zai-gong-ju-zi-dong-yuan-cheng-xia-zai.html"><small>安装deluge下载工具自动远程下载</small></li>
+	<li><a href="/linuxan-zhuang-bing-kai-ji-jin-ru-kodimei-ti-zhong-xin.html"><small>Linux安装并开机进入Kodi媒体中心</small></li>
+	</ul>
+	<li><a href="/tag/gnome.html">gnome</a></li>
+	<ul class="square">
+	<li><a href="/linuxchuang-jian-zi-ding-yi-de-ying-yong-cheng-xu-qi-dong-qi.html"><small>Linux创建自定义的应用程序启动器</small></li>
+	</ul>
+	<li><a href="/tag/driver.html">driver</a></li>
+	<ul class="square">
+	<li><a href="/archlinuxjiang-nvidia-driverti-huan-cheng-kai-yuan-de-nouveaujie-jue-xian-qia-qu-dong-wen-ti.html"><small>ArchLinux将nvidia driver替换成开源的nouveau解决显卡驱动问题</small></li>
+	</ul>
+	<li><a href="/tag/archlinux.html">archlinux</a></li>
+	<ul class="square">
+	<li><a href="/archlinuxjiang-nvidia-driverti-huan-cheng-kai-yuan-de-nouveaujie-jue-xian-qia-qu-dong-wen-ti.html"><small>ArchLinux将nvidia driver替换成开源的nouveau解决显卡驱动问题</small></li>
+	</ul>
+	<li><a href="/tag/vnc.html">vnc</a></li>
+	<ul class="square">
+	<li><a href="/linuxda-jian-vncfu-wu-qi.html"><small>Linux搭建VNC服务器</small></li>
+	</ul>
+	<li><a href="/tag/rdp.html">rdp</a></li>
+	<ul class="square">
+	<li><a href="/linuxda-jian-vncfu-wu-qi.html"><small>Linux搭建VNC服务器</small></li>
+	</ul>
+	<li><a href="/tag/partition.html">partition</a></li>
+	<ul class="square">
+	<li><a href="/diao-zheng-linuxzhu-fen-qu-de-da-xiao.html"><small>调整Linux主分区的大小</small></li>
+	</ul>
+	<li><a href="/tag/vpn.html">vpn</a></li>
+	<ul class="square">
+	<li><a href="/dockerda-jian-openvpn-server.html"><small>Docker搭建openvpn server</small></li>
+	<li><a href="/linuxda-jian-pptp-vpn-server.html"><small>Linux搭建PPTP VPN Server</small></li>
+	</ul>
+	<li><a href="/tag/openvpn.html">openvpn</a></li>
+	<ul class="square">
+	<li><a href="/dockerda-jian-openvpn-server.html"><small>Docker搭建openvpn server</small></li>
+	</ul>
+	<li><a href="/tag/python.html">python</a></li>
+	<ul class="square">
+	<li><a href="/uwsgifang-shi-qi-dong-django.html"><small>uwsgi方式启动django</small></li>
+	</ul>
+	<li><a href="/tag/django.html">django</a></li>
+	<ul class="square">
+	<li><a href="/uwsgifang-shi-qi-dong-django.html"><small>uwsgi方式启动django</small></li>
+	</ul>
+	<li><a href="/tag/webapps.html">webapps</a></li>
+	<ul class="square">
+	<li><a href="/uwsgifang-shi-qi-dong-django.html"><small>uwsgi方式启动django</small></li>
+	</ul>
+	<li><a href="/tag/ssh.html">ssh</a></li>
+	<ul class="square">
+	<li><a href="/linuxli-yong-sshfan-xiang-duan-kou-zhuan-fa-bao-lu-nei-wang-duan-kou.html"><small>Linux利用ssh反向端口转发暴露内网端口</small></li>
+	</ul>
+	<li><a href="/tag/port-forward.html">port-forward</a></li>
+	<ul class="square">
+	<li><a href="/linuxli-yong-sshfan-xiang-duan-kou-zhuan-fa-bao-lu-nei-wang-duan-kou.html"><small>Linux利用ssh反向端口转发暴露内网端口</small></li>
+	</ul>
+	<li><a href="/tag/proxy.html">proxy</a></li>
+	<ul class="square">
+	<li><a href="/linuxjiang-socksdai-li-zhuan-huan-cheng-httpdai-li.html"><small>linux将Socks代理转换成Http代理</small></li>
+	</ul>
+</ul>
 
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="/archives.html">Archives</a>
+            <li><a href="/tags.html">Tags</a>
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="/category/linux.html">Linux</a></li>
+            <li><a href="/category/python.html">python</a></li>
+            <li><a href="/category/vim.html">Vim</a></li>
+            <li><a href="/category/windows.html">Windows</a></li>
+   
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://getpelican.com/">Pelican</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="https://github.com/gccpacman">GccPacman @Github</a></li>
+            <li><a href="https://stackoverflow.com/users/4124310/realhu">r341h @StackOverflow</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Pacman News by r341h</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
 </body>
 </html>
