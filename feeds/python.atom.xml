@@ -52,4 +52,4 @@
 
 
 &lt;p&gt;然后尝试一下访问&lt;code&gt;127.0.0.1&lt;/code&gt;，当然如果是远程服务器，就是你的网址了。
-看看是否work了吧！&lt;/p&gt;</content><category term="python"></category><category term="django"></category><category term="webapps"></category></entry><entry><title>My super title</title><link href="/my-super-post.html" rel="alternate"></link><published>2010-12-03T10:20:00+08:00</published><updated>2010-12-05T19:30:00+08:00</updated><author><name>Alexis Metaireau</name></author><id>tag:None,2010-12-03:/my-super-post.html</id><summary type="html">&lt;p&gt;Short version for index and feeds&lt;/p&gt;</summary><content type="html">&lt;p&gt;This is the content of my super blog post.&lt;/p&gt;</content><category term="pelican"></category></entry></feed>
+看看是否work了吧！&lt;/p&gt;</content><category term="python"></category><category term="django"></category><category term="webapps"></category></entry></feed>

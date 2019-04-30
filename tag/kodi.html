@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>Pacman News - kodi</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Pacman News Atom Feed" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">Pacman News </a></h1>
+                <nav><ul>
+                    <li><a href="/category/linux.html">Linux</a></li>
+                    <li><a href="/category/python.html">python</a></li>
+                    <li><a href="/category/vim.html">Vim</a></li>
+                    <li><a href="/category/windows.html">Windows</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+
+            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="/linuxan-zhuang-dnscrypt.html">Linux安装Dnscrypt</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2016-02-06T10:20:00+08:00">
+                Published: Sat 06 February 2016
+        </abbr>
+		<br />
+        <abbr class="modified" title="2016-02-06T19:30:00+08:00">
+                Updated: Sat 06 February 2016
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/r341h.html">r341h</a>
+        </address>
+<p>In <a href="/category/linux.html">Linux</a>.</p>
+<p>tags: <a href="/tag/linux.html">linux</a> <a href="/tag/kodi.html">kodi</a> <a href="/tag/resource.html">resource</a> </p>
+</footer><!-- /.post-info --><p>为什么就不言而喻不加解释了，就算你没有翻墙的打算，也建议你有一个优秀和安全的dns，因为国内的运营商除了干掉国外域名，还会帮你的国内网址投广告，甚至利用你进行ddns攻击。。</p>
+<p>很早以前dnscrypt这个东西就在热炒,后来不知道什么原因谈起的人也比较少了。因此我决定重新尝试一下是不是还有用呢。答案是肯定的。不过如果你只是在本机上使用，那么如果是桌面系统，似乎我有看到dnscrypt是有windows/macOS的客户端的，但是手机怎么办呢。这个时候就是树霉派发挥作用的时候了。</p>
+<p>树梅派安装dnscrypt相对与ubuntu之类的发行版其实也大同小异（我也没有试过ubuntu，arch上倒是非常简单，两三个命令就可以搞定），不过有些依赖包包括dnscrypt都是需要手动编译的。</p>
+<ol>
+<li>
+<p>安装编译工具：</p>
+<p>sudo apt-get install libtool pkg-config build-essential autoconf automake</p>
+</li>
+<li>
+<p>安装一个叫做libsodium的依赖，因为apt工具里没有包含这个依赖，因此需要手动编译，去https://download.libsodium.org/libsodium/releases找最新的版本，下载并且编译：</p>
+<p>mkdir build
+cd build/
+wget https://download.libsodium.org/libsodium/releases/libsodium-1.0.3.tar.gz
+tar -zxvf libsodium-1.0.3.tar.gz
+cd libsodium-1.0.3/
+./configure
+make
+sudo make install</p>
+</li>
+<li>
+<p>下载dnscrypt编译：</p>
+<p>wget https://github.com/jedisct1/dnscrypt-proxy/releases/download/1.6.1/dnscrypt-proxy-1.6.1.tar.bz2
+tar -jxvf dnscrypt-proxy-1.6.1.tar.bz2
+cd dnscrypt-proxy-1.6.1
+./configure
+make -j2
+make install</p>
+</li>
+</ol>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/ba-yong-hu-tai-systemdfu-wu-gai-cheng-xi-tong-fu-wu-kai-ji-zi-qi-dong-xware.html" rel="bookmark"
+                           title="Permalink to 把用户态systemd服务改成系统服务，开机自启动xware">把用户态systemd服务改成系统服务，开机自启动xware</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2016-01-08T10:20:00+08:00">
+                Published: Fri 08 January 2016
+        </abbr>
+		<br />
+        <abbr class="modified" title="2016-01-08T19:30:00+08:00">
+                Updated: Fri 08 January 2016
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/r341h.html">r341h</a>
+        </address>
+<p>In <a href="/category/linux.html">Linux</a>.</p>
+<p>tags: <a href="/tag/linux.html">linux</a> <a href="/tag/kodi.html">kodi</a> <a href="/tag/resource.html">resource</a> </p>
+</footer><!-- /.post-info -->                <p>OK.. 怎么给xubuntu装个迅雷远程呢，迅雷的Linux版本Xware-Desktop，目前是很稳定的，而且有很详细的官方教程：
+https://github.com/Xinkai/XwareDesktop/wiki/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E</p>
+<p>这个就是针对ubuntu的，所以原封不动的执行就行了。</p>
+<p>但是我的需求有点不一样，迅雷xware版自己提供了几个开机自启动选项：
+1）由用户态systemd托管
+2）由用户态upstart托管
+3）简单的自动启动。</p>
+<p>这三个选项的特点就是都是以用户态启动，事实上，xware的配置文件也确实是保存在用户的HOME目录下的.xware-desktop里的。</p>
+<p>但是我希望Linux开机的时候并不会自动登录，更何况我的linux是运行kodi的，我也不会去手动登录，因此用户态的服务是不会自动启动的。</p>
+<p>但是我希望一开机，xware就自动打开，开始执行下载任务。因此依赖原来的代码显然不太符合我的需求，就自己写一个系统的service吧。</p>
+<p>还好几乎不需要改变xware用户态的服务，就可以搞定。用户态的服务创建在用户目录的<code>$HOME …</code></p>
+                <a class="readmore" href="/ba-yong-hu-tai-systemdfu-wu-gai-cheng-xi-tong-fu-wu-kai-ji-zi-qi-dong-xware.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/linuxan-zhuang-bing-kai-ji-jin-ru-kodimei-ti-zhong-xin.html" rel="bookmark"
+                           title="Permalink to Linux安装并开机进入Kodi媒体中心">Linux安装并开机进入Kodi媒体中心</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2016-01-04T10:20:00+08:00">
+                Published: Mon 04 January 2016
+        </abbr>
+		<br />
+        <abbr class="modified" title="2016-01-04T19:30:00+08:00">
+                Updated: Mon 04 January 2016
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/r341h.html">r341h</a>
+        </address>
+<p>In <a href="/category/linux.html">Linux</a>.</p>
+<p>tags: <a href="/tag/linux.html">linux</a> <a href="/tag/kodi.html">kodi</a> <a href="/tag/resource.html">resource</a> </p>
+</footer><!-- /.post-info -->                <p>把2G的硬盘拆到了一台旧电脑上，并且给旧电脑装了xubuntu,打算直接打造一个媒体中心。目前知道有里那个用的不错的东西，KODI（XBMC）是一个很不错的选择。当然用PLEX也是个不错的选择，整理资料库方面PLEX更加强大。不过KODI是开源和免费的，既然用了linux，就用个开源的吧。况且我发现kodi还有不少的好处，并且更加轻量级。</p>
+<p>其实Kodi有个基于ubuntu的发行版叫做kodibuntu，直接装得话效果其实也差不多。但是我还是喜欢从ubuntu去扩展，毕竟任何基于ubuntu的版本，相对ubuntu的开发肯定是有所滞后的。和Android的Rom一个道理。不过kubuntu因为是非常流行的发行版不用担心这个问题。</p>
+<p>下面的步骤基本上是参考了askubuntu的一个答案<a href="http://askubuntu.com/questions/596839/autostart-kodi-on-vivid">Autostart Kodi on Vivid</a>，只不过它是在纯净的server版本安装，而desktop版则因为有自身的启动器，需要将其禁用掉而已。</p>
+<p>1）安装kodi: sudo apt-get install kodi</p>
+<p>2）创建一个kodi的用户，并添加到和视频播放有关的组
+    sudo adduser --disabled-password --disabled-login --gecos "" kodi
+    sudo usermod -a -G audio kodi …</p>
+                <a class="readmore" href="/linuxan-zhuang-bing-kai-ji-jin-ru-kodimei-ti-zhong-xin.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+                </ol><!-- /#posts-list -->
+                </section><!-- /#content -->
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>links</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                            <li><a href="https://github.com/gccpacman">My Github</a></li>
+                            <li><a href="https://stackoverflow.com/users/4124310/realhu">My StackOverflow</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

@@ -35,4 +35,772 @@
 
 &lt;p&gt;&lt;code&gt;pre&lt;/code&gt;是在休眠之前执行&lt;code&gt;rmmod&lt;/code&gt;的操作，post是在休眠之后执行&lt;code&gt;modprobe&lt;/code&gt;的操作。需要注意的是必须把这个脚本加可执行权限：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo chmod +x wakeup_suspend_dev.sh
-&lt;/pre&gt;&lt;/div&gt;</content><category term="linux"></category><category term="drivers"></category></entry></feed>
+&lt;/pre&gt;&lt;/div&gt;</content><category term="linux"></category><category term="drivers"></category></entry><entry><title>Linux安装Dnscrypt</title><link href="/linuxan-zhuang-dnscrypt.html" rel="alternate"></link><published>2016-02-06T10:20:00+08:00</published><updated>2016-02-06T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:None,2016-02-06:/linuxan-zhuang-dnscrypt.html</id><summary type="html">&lt;p&gt;为什么就不言而喻不加解释了，就算你没有翻墙的打算，也建议你有一个优秀和安全的dns，因为国内的运营商除了干掉国外域名，还会帮你的国内网址投广告，甚至利用你进行ddns攻击。。&lt;/p&gt;
+&lt;p&gt;很早以前dnscrypt这个东西就在热炒,后来不知道什么原因谈起的人也比较少了。因此我决定重新尝试一下是不是还有用呢。答案是肯定的。不过如果你只是在本机上使用，那么如果是桌面系统，似乎我有看到dnscrypt是有windows/macOS的客户端的，但是手机怎么办呢。这个时候就是树霉派发挥作用的时候了。&lt;/p&gt;
+&lt;p&gt;树梅派安装dnscrypt相对与ubuntu之类的发行版其实也大同小异（我也没有试过ubuntu，arch上倒是非常简单，两三个命令就可以搞定），不过有些依赖包包括dnscrypt都是需要手动编译的。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;安装编译工具：&lt;/p&gt;
+&lt;p&gt;sudo apt-get install libtool pkg-config build-essential autoconf automake&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;安装一个叫做libsodium的依赖，因为apt工具里没有包含这个依赖，因此需要手动编译，去https://download.libsodium.org/libsodium/releases找最新的版本，下载并且编译：&lt;/p&gt;
+&lt;p&gt;mkdir build
+cd build/
+wget https://download.libsodium.org/libsodium …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;为什么就不言而喻不加解释了，就算你没有翻墙的打算，也建议你有一个优秀和安全的dns，因为国内的运营商除了干掉国外域名，还会帮你的国内网址投广告，甚至利用你进行ddns攻击。。&lt;/p&gt;
+&lt;p&gt;很早以前dnscrypt这个东西就在热炒,后来不知道什么原因谈起的人也比较少了。因此我决定重新尝试一下是不是还有用呢。答案是肯定的。不过如果你只是在本机上使用，那么如果是桌面系统，似乎我有看到dnscrypt是有windows/macOS的客户端的，但是手机怎么办呢。这个时候就是树霉派发挥作用的时候了。&lt;/p&gt;
+&lt;p&gt;树梅派安装dnscrypt相对与ubuntu之类的发行版其实也大同小异（我也没有试过ubuntu，arch上倒是非常简单，两三个命令就可以搞定），不过有些依赖包包括dnscrypt都是需要手动编译的。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;安装编译工具：&lt;/p&gt;
+&lt;p&gt;sudo apt-get install libtool pkg-config build-essential autoconf automake&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;安装一个叫做libsodium的依赖，因为apt工具里没有包含这个依赖，因此需要手动编译，去https://download.libsodium.org/libsodium/releases找最新的版本，下载并且编译：&lt;/p&gt;
+&lt;p&gt;mkdir build
+cd build/
+wget https://download.libsodium.org/libsodium/releases/libsodium-1.0.3.tar.gz
+tar -zxvf libsodium-1.0.3.tar.gz
+cd libsodium-1.0.3/
+./configure
+make
+sudo make install&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;下载dnscrypt编译：&lt;/p&gt;
+&lt;p&gt;wget https://github.com/jedisct1/dnscrypt-proxy/releases/download/1.6.1/dnscrypt-proxy-1.6.1.tar.bz2
+tar -jxvf dnscrypt-proxy-1.6.1.tar.bz2
+cd dnscrypt-proxy-1.6.1
+./configure
+make -j2
+make install&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="linux"></category><category term="kodi"></category><category term="resource"></category></entry><entry><title>把用户态systemd服务改成系统服务，开机自启动xware</title><link href="/ba-yong-hu-tai-systemdfu-wu-gai-cheng-xi-tong-fu-wu-kai-ji-zi-qi-dong-xware.html" rel="alternate"></link><published>2016-01-08T10:20:00+08:00</published><updated>2016-01-08T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:None,2016-01-08:/ba-yong-hu-tai-systemdfu-wu-gai-cheng-xi-tong-fu-wu-kai-ji-zi-qi-dong-xware.html</id><summary type="html">&lt;p&gt;OK.. 怎么给xubuntu装个迅雷远程呢，迅雷的Linux版本Xware-Desktop，目前是很稳定的，而且有很详细的官方教程：
+https://github.com/Xinkai/XwareDesktop/wiki/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E&lt;/p&gt;
+&lt;p&gt;这个就是针对ubuntu的，所以原封不动的执行就行了。&lt;/p&gt;
+&lt;p&gt;但是我的需求有点不一样，迅雷xware版自己提供了几个开机自启动选项：
+1）由用户态systemd托管
+2）由用户态upstart托管
+3）简单的自动启动。&lt;/p&gt;
+&lt;p&gt;这三个选项的特点就是都是以用户态启动，事实上，xware的配置文件也确实是保存在用户的HOME目录下的.xware-desktop里的。&lt;/p&gt;
+&lt;p&gt;但是我希望Linux开机的时候并不会自动登录，更何况我的linux是运行kodi的，我也不会去手动登录，因此用户态的服务是不会自动启动的。&lt;/p&gt;
+&lt;p&gt;但是我希望一开机，xware就自动打开，开始执行下载任务。因此依赖原来的代码显然不太符合我的需求，就自己写一个系统的service吧。&lt;/p&gt;
+&lt;p&gt;还好几乎不需要改变xware用户态的服务，就可以搞定。用户态的服务创建在用户目录的&lt;code&gt;$HOME …&lt;/code&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;OK.. 怎么给xubuntu装个迅雷远程呢，迅雷的Linux版本Xware-Desktop，目前是很稳定的，而且有很详细的官方教程：
+https://github.com/Xinkai/XwareDesktop/wiki/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E&lt;/p&gt;
+&lt;p&gt;这个就是针对ubuntu的，所以原封不动的执行就行了。&lt;/p&gt;
+&lt;p&gt;但是我的需求有点不一样，迅雷xware版自己提供了几个开机自启动选项：
+1）由用户态systemd托管
+2）由用户态upstart托管
+3）简单的自动启动。&lt;/p&gt;
+&lt;p&gt;这三个选项的特点就是都是以用户态启动，事实上，xware的配置文件也确实是保存在用户的HOME目录下的.xware-desktop里的。&lt;/p&gt;
+&lt;p&gt;但是我希望Linux开机的时候并不会自动登录，更何况我的linux是运行kodi的，我也不会去手动登录，因此用户态的服务是不会自动启动的。&lt;/p&gt;
+&lt;p&gt;但是我希望一开机，xware就自动打开，开始执行下载任务。因此依赖原来的代码显然不太符合我的需求，就自己写一个系统的service吧。&lt;/p&gt;
+&lt;p&gt;还好几乎不需要改变xware用户态的服务，就可以搞定。用户态的服务创建在用户目录的&lt;code&gt;$HOME/.config/systemd/user&lt;/code&gt;下，代码是这样的：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[Unit]&lt;/span&gt;
+&lt;span class="na"&gt;Description&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;Xware Service&lt;/span&gt;
+&lt;span class="na"&gt;After&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;network.target&lt;/span&gt;
+
+&lt;span class="k"&gt;[Service]&lt;/span&gt;
+&lt;span class="na"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;simple&lt;/span&gt;
+&lt;span class="na"&gt;ExecStart&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;/opt/xware-desktop/xwared --log-novomit&lt;/span&gt;
+
+&lt;span class="k"&gt;[Install]&lt;/span&gt;
+&lt;span class="na"&gt;WantedBy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;default.target&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;而系统服务在Ubuntu 14.04上位于&lt;code&gt;/etc/systemd/system/&lt;/code&gt;目录下, 因此可以先把这个拷贝过来，然后稍作修改即可，修改的文件如下所示：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[Unit]&lt;/span&gt;
+&lt;span class="na"&gt;Description&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;Xwared Service&lt;/span&gt;
+&lt;span class="na"&gt;After&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;network.target&lt;/span&gt;
+
+&lt;span class="k"&gt;[Service]&lt;/span&gt;
+&lt;span class="na"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;simple&lt;/span&gt;
+&lt;span class="na"&gt;User&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;kodi&lt;/span&gt;
+&lt;span class="na"&gt;Group&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;kodi&lt;/span&gt;
+&lt;span class="na"&gt;ExecStart&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;/opt/xware-desktop/xwared --log-novomit&lt;/span&gt;
+
+&lt;span class="k"&gt;[Install]&lt;/span&gt;
+&lt;span class="na"&gt;WantedBy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;multi-user.target&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;其实就是简单的加入了User和Group的选项而已，让系统知道以哪个用户启动，这样就可以了。&lt;/p&gt;</content><category term="linux"></category><category term="kodi"></category><category term="resource"></category></entry><entry><title>Linux创建自定义的应用程序启动器</title><link href="/linuxchuang-jian-zi-ding-yi-de-ying-yong-cheng-xu-qi-dong-qi.html" rel="alternate"></link><published>2016-01-06T10:20:00+08:00</published><updated>2016-01-06T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:None,2016-01-06:/linuxchuang-jian-zi-ding-yi-de-ying-yong-cheng-xu-qi-dong-qi.html</id><summary type="html">&lt;p&gt;eclipse在linux下，下载以后不需要安装，直接在目录下执行.\eclipse就可以运行了，不过同时，每次都要切换到该目录去执行eclipse似乎也比较麻烦。
+又没有办法在应用程序菜单里找到，即使是gnome下，按super然后全局搜索，也找到这个。&lt;/p&gt;
+&lt;p&gt;不过好在linux是自由的系统，自己建一个应用程序的启动器一点问题都没有。&lt;/p&gt;
+&lt;p&gt;比如我的eclipse装在&lt;code&gt;/opt/eclipse-jee/&lt;/code&gt;下,怎么新建一个启动器呢？&lt;/p&gt;
+&lt;p&gt;所有用户共享的应用启动器的目录是&lt;code&gt;/usr/share/applications/&lt;/code&gt;目录，那么用户自定义的启动器目录在哪里？找了下用户目录下的.config/，没有找到，只好去百度google了一下，原来启动器是在.local/下，具体是&lt;code&gt;.local/share/applications&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;新建一个eclipse.desktop的文件，然后输入以下内容：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[Desktop Entry]&lt;/span&gt;
+&lt;span class="na"&gt;Encoding&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;UTF-8&lt;/span&gt;
+&lt;span class="na"&gt;Name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;Eclipse J2ee&lt;/span&gt;
+&lt;span class="na"&gt;Comment&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;Official desktop version of Telegram …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;eclipse在linux下，下载以后不需要安装，直接在目录下执行.\eclipse就可以运行了，不过同时，每次都要切换到该目录去执行eclipse似乎也比较麻烦。
+又没有办法在应用程序菜单里找到，即使是gnome下，按super然后全局搜索，也找到这个。&lt;/p&gt;
+&lt;p&gt;不过好在linux是自由的系统，自己建一个应用程序的启动器一点问题都没有。&lt;/p&gt;
+&lt;p&gt;比如我的eclipse装在&lt;code&gt;/opt/eclipse-jee/&lt;/code&gt;下,怎么新建一个启动器呢？&lt;/p&gt;
+&lt;p&gt;所有用户共享的应用启动器的目录是&lt;code&gt;/usr/share/applications/&lt;/code&gt;目录，那么用户自定义的启动器目录在哪里？找了下用户目录下的.config/，没有找到，只好去百度google了一下，原来启动器是在.local/下，具体是&lt;code&gt;.local/share/applications&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;新建一个eclipse.desktop的文件，然后输入以下内容：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[Desktop Entry]&lt;/span&gt;
+&lt;span class="na"&gt;Encoding&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;UTF-8&lt;/span&gt;
+&lt;span class="na"&gt;Name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;Eclipse J2ee&lt;/span&gt;
+&lt;span class="na"&gt;Comment&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;Official desktop version of Telegram messaging app&lt;/span&gt;
+&lt;span class="na"&gt;Exec&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;/opt/eclipse-jee/eclipse&lt;/span&gt;
+&lt;span class="na"&gt;Icon&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;/opt/eclipse-jee/icon.xpm&lt;/span&gt;
+&lt;span class="na"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;Application&lt;/span&gt;
+&lt;span class="na"&gt;Categories&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;Development;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Categories就是类目，可以输入多个。编辑保存，不需要再做任何操作，eclipse就可以搜索到了。&lt;/p&gt;
+&lt;p&gt;参考：
+&lt;a href="http://askubuntu.com/questions/112186/how-do-you-create-a-custom-application-launcher-in-gnome-shell"&gt;How do you create a custom application launcher in Gnome Shell? &lt;/a&gt;&lt;/p&gt;</content><category term="linux"></category><category term="gnome"></category><category term="gtk"></category></entry><entry><title>ArchLinux将nvidia driver替换成开源的nouveau解决显卡驱动问题</title><link href="/archlinuxjiang-nvidia-driverti-huan-cheng-kai-yuan-de-nouveaujie-jue-xian-qia-qu-dong-wen-ti.html" rel="alternate"></link><published>2016-01-05T10:20:00+08:00</published><updated>2016-01-05T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:None,2016-01-05:/archlinuxjiang-nvidia-driverti-huan-cheng-kai-yuan-de-nouveaujie-jue-xian-qia-qu-dong-wen-ti.html</id><summary type="html">&lt;p&gt;昨天还装完arch兴高采烈，今天就差点放弃整个系统，罪魁祸首就是当年被linus喷了的nvidia.&lt;/p&gt;
+&lt;p&gt;Archlinux装了使用nvidia驱动，一开始发现根本就没有加载，装了和没装没啥区别，但是跑的好好的阿跑的好好的，结果不小心手贱点了&lt;code&gt;nvidia-xconfig&lt;/code&gt;的应用，莫名其妙的起不来了。（这个原因我想了半天才想出来，不然我实在是无力吐槽他妈跑了一天多好好的什么也没干突然就起步来的情况，一度怀疑是显卡硬件坏了）&lt;/p&gt;
+&lt;p&gt;于是抢救三个多小时，&lt;code&gt;/var/log/xorg.0.log&lt;/code&gt;里的报错也莫名其妙，比如:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;not detect device nvidia, no screen found.
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;简直是日到狗。于是想着解决办法应该是彻底不要装nvidia的驱动， 用intel的集成显卡，照例来说应该也ok阿，于是直接删掉驱动：&lt;/p&gt;
+&lt;p&gt;pacman -R nvidia nvidia-utils&lt;/p&gt;
+&lt;p&gt;然后reboot, 没想到发生的事情更加奇葩了，连命令行就出不来了，直接黑屏了我草。&lt;/p&gt;
+&lt;p&gt;心里十万个草尼马，还好安装过arch的人毕竟还是知道有个arch-chroot, 放入安装介质（我的是u盘），重启， mount各种好盘:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;mount /dev …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;昨天还装完arch兴高采烈，今天就差点放弃整个系统，罪魁祸首就是当年被linus喷了的nvidia.&lt;/p&gt;
+&lt;p&gt;Archlinux装了使用nvidia驱动，一开始发现根本就没有加载，装了和没装没啥区别，但是跑的好好的阿跑的好好的，结果不小心手贱点了&lt;code&gt;nvidia-xconfig&lt;/code&gt;的应用，莫名其妙的起不来了。（这个原因我想了半天才想出来，不然我实在是无力吐槽他妈跑了一天多好好的什么也没干突然就起步来的情况，一度怀疑是显卡硬件坏了）&lt;/p&gt;
+&lt;p&gt;于是抢救三个多小时，&lt;code&gt;/var/log/xorg.0.log&lt;/code&gt;里的报错也莫名其妙，比如:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;not detect device nvidia, no screen found.
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;简直是日到狗。于是想着解决办法应该是彻底不要装nvidia的驱动， 用intel的集成显卡，照例来说应该也ok阿，于是直接删掉驱动：&lt;/p&gt;
+&lt;p&gt;pacman -R nvidia nvidia-utils&lt;/p&gt;
+&lt;p&gt;然后reboot, 没想到发生的事情更加奇葩了，连命令行就出不来了，直接黑屏了我草。&lt;/p&gt;
+&lt;p&gt;心里十万个草尼马，还好安装过arch的人毕竟还是知道有个arch-chroot, 放入安装介质（我的是u盘），重启， mount各种好盘:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;mount /dev/sda2 mnt
+arch-chroot /mnt /bin/bash
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;然后咋办呢，突然在arch的官方教程里出现了一个词： nouveau（还好我还有台电脑阿，这时候如果只有一台电脑要在手机上查资料的话。。。我tm会不会放弃linux直接装个windows都不知道，我就是对自己那么没信心阿）&lt;/p&gt;
+&lt;p&gt;nouveau是个什么呢，简单的解释就是个nvidia的开源驱动。。。虽然还不是对其了解，但是还是对开源两个字报有信心，而且也是死马当活马医了。。。于是:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pacman -S xf86-video-nouveau
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;据说还有什么3d的实验特性支持, (还可以&lt;code&gt;pacman -S mesa mesa-libg1&lt;/code&gt;,  额这好像和我目前十万火急的状态没啥关系）&lt;/p&gt;
+&lt;p&gt;然后咋办呢。。。nouveau已经装好了，nvidia也已经卸载了，这样就ok了么，好像还不行&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;lsmod  | gerp nvidia
+dmesg | grep nvidia
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;两个命令显示，nouveau还没有work，系统还是在用nvidia，继续查arch wiki 的 nouveau页，删除mod的方法是&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;modprobe -r nvidia
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;然后加入nouveau的mod:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;modprobe nouveau
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;先就这样吧，从安装盘里推出来&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;umount -R /mnt
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;然后reboot，重启试试， 尝下startx还是不幸， 并且我们在dmesg | grep nouveau里看到了nouveau报错。。。额什么情况：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pointer to tmds table invalid...
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;实在不知道什么鬼，但是坚信一定是fuck的nvidia的问题，注意到startx时系统日志说了加载配置文件的路径/etc/X11/xorg.conf, 打开看看。。。一看吓一跳， 某个device里的driver,赫然写着nvidia这几个大字（于是就很显然了，一开始我打开nvidia-xconfig的时候，nvidia就是帮我做了这件事情，把xorg.conf文件给改了。更何况我还在/etc/X11目录下看到了一个文件名为xorg.conf.nvidia-xconfig-original的文件，我猜也知道这是nvidia-xconfig在改之前做的备份。。。（额，nvidia你居然知道做备份却不知道你的操作可能会导致用户进不了图形界面么），虽然打开来一看, 这个文件其实是空的，不过这大概这是巧合罢了吧，因为我之前也没有装过什么驱动。。。&lt;/p&gt;
+&lt;p&gt;于是我把这个文件还原回去，虽然还是觉得没什么希望，鬼知道nvidia还干了什么。reboot。。。startxfce4, 然后。。。图形界面回来了，亲爱的xfce...额&lt;/p&gt;
+&lt;p&gt;虽然我觉得可能一开始把那个xorg.conf文件改回来可能就解决问题了。。。折腾了一大堆的意义，几乎到了绝境快要放弃了，不断的尝试，事情还是总会给你惊喜的。而另一个收获是发现nouveau这个驱动，目前还不好说真正的效果到底比nvidia自己的驱动好还是不好，不过我坚定的表示继续用nouveau的驱动而不会用nvidia的驱动了。&lt;/p&gt;
+&lt;p&gt;说到这里不得不说arch社区和文档的强大。如果是别的发行版缺乏文档的情况下有时候尝试会越尝试系统越没救。&lt;/p&gt;
+&lt;p&gt;o了今天其实还拖着病体阿，早点去休息了，睡前亚冠决赛，恒大加油！&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;最后故事的结局是, nouveau的驱动也并不稳定，依旧出现间歇性的黑屏，只能说不管是 nvidia和nouveau的驱动，都不能很好的支持我的显卡，估计是因为2015年的太新了，顺便报以下我的显卡：NVIDIA® GeForce® 920M 4GB DDR3。。。于是还是奉劝各位装linux尽量还是买个集成显卡的算了，别买nvidia和amd的了，一是没太大用，二是驱动出问题的可能太多，难以调试。&lt;/p&gt;
+&lt;p&gt;所以打算也干掉nouveau的驱动&lt;/p&gt;
+&lt;p&gt;pacman -R xf86-video-nouveau&lt;/p&gt;
+&lt;p&gt;然后&lt;code&gt;rmmod nouveau&lt;/code&gt; 或者 &lt;code&gt;modprobe -r nouveau&lt;/code&gt;, 确认 &lt;code&gt;lsmod | gerp nouveau&lt;/code&gt;  和 &lt;code&gt;dmesg | grep nouveau&lt;/code&gt; 结果是————干不掉，reboot也没用。&lt;/p&gt;
+&lt;p&gt;原因是其实linux内核里其实是有nouveau的驱动的。怎么搞定呢，wiki里说有个东西叫modprobe的黑名单, 在&lt;code&gt;/etc/modprobe.d/&lt;/code&gt;里新建一个文件&lt;code&gt;blacklist_nouveau.conf&lt;/code&gt;， 写入:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;blacklist nouveau
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;重启，这样不管是&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;lsmod | gerp nouveau
+dmesg | grep nouveau
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;还是&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;lsmod | gerp nvidia
+dmesg | grep nvidia
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;都什么也查不到了，所名nvidia显卡没有用，系统现在用的是我的集成显卡。好吧，我的4g显存的显卡就这样完全闲置了。&lt;/p&gt;</content><category term="linux"></category><category term="driver"></category><category term="gtk"></category><category term="archlinux"></category></entry><entry><title>Linux搭建VNC服务器</title><link href="/linuxda-jian-vncfu-wu-qi.html" rel="alternate"></link><published>2016-01-05T10:20:00+08:00</published><updated>2016-01-05T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:None,2016-01-05:/linuxda-jian-vncfu-wu-qi.html</id><summary type="html">&lt;p&gt;服务器端：&lt;/p&gt;
+&lt;p&gt;1）在终端安装tigervnc：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt-get install tigervnc
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;2）启动tigervnc&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ vncserver
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;提示你输入vnc的密码：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;enter&lt;/span&gt; &lt;span class="n"&gt;your&lt;/span&gt; &lt;span class="n"&gt;password&lt;/span&gt; (&lt;span class="n"&gt;length&lt;/span&gt; &lt;span class="mi"&gt;8&lt;/span&gt;)
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;然后终端会显示New 'X' desktop is kodi-kodibuntu:1&lt;/p&gt;
+&lt;p&gt;3）（可选）如果需要改变桌面，例如不想用xvnc，可以编辑&lt;code&gt;$HOME/.vnc/xstartup&lt;/code&gt;的内容。具体操作暂略。&lt;/p&gt;
+&lt;p&gt;4）（可选）如果需要开机启动，一个是用supervisor，另外就是在/etc/systemd/system/下手动写一个服务。具体操作暂略。&lt;/p&gt;
+&lt;p&gt;在客户端:&lt;/p&gt;
+&lt;p&gt;1) 安装tigervnc:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo pacman -S tigervnc   &lt;span class="o"&gt;(&lt;/span&gt;archlinux …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;服务器端：&lt;/p&gt;
+&lt;p&gt;1）在终端安装tigervnc：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt-get install tigervnc
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;2）启动tigervnc&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ vncserver
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;提示你输入vnc的密码：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;enter&lt;/span&gt; &lt;span class="n"&gt;your&lt;/span&gt; &lt;span class="n"&gt;password&lt;/span&gt; (&lt;span class="n"&gt;length&lt;/span&gt; &lt;span class="mi"&gt;8&lt;/span&gt;)
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;然后终端会显示New 'X' desktop is kodi-kodibuntu:1&lt;/p&gt;
+&lt;p&gt;3）（可选）如果需要改变桌面，例如不想用xvnc，可以编辑&lt;code&gt;$HOME/.vnc/xstartup&lt;/code&gt;的内容。具体操作暂略。&lt;/p&gt;
+&lt;p&gt;4）（可选）如果需要开机启动，一个是用supervisor，另外就是在/etc/systemd/system/下手动写一个服务。具体操作暂略。&lt;/p&gt;
+&lt;p&gt;在客户端:&lt;/p&gt;
+&lt;p&gt;1) 安装tigervnc:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo pacman -S tigervnc   &lt;span class="o"&gt;(&lt;/span&gt;archlinux&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;或者&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt-get install tigervnc &lt;span class="o"&gt;(&lt;/span&gt;ubuntu/debian&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;2) 直接运行vncviewer或者在终端输入:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ vncviewer
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;端口默认是5900+n，根据New 'X' desktop is kodi-kodibuntu:1, 因为服务器上的提示是:1, 所以端口就是5901&lt;/p&gt;
+&lt;p&gt;输入你的ip地址是端口: 192.168.1.xxx:5901&lt;/p&gt;
+&lt;p&gt;会提示让你输入密码：&lt;/p&gt;
+&lt;p&gt;进去后就是vnc的桌面了, 在xubuntu下测试，不需要配置服务器上的&lt;code&gt;$HOME/.vnc/xstartup&lt;/code&gt;就可以直接进入xfce4桌面&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;更正，采用默认的.vnc/xstartup配置虽然能用，但是会有一些样式问题，比如图标无法显示。所以还是改一下好了：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ cp ~/.vnc/xstartup ~/.vnc/xstartup.bak
+$ vim ~/.vnv/xstartup
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;删除所有的内容，重启vncserver&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ vncserver -kill :1
+$ vncserver
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;进去以后基本商就是和你直接进入桌面一样的xfce了。&lt;/p&gt;
+&lt;h2&gt;开机自动启动&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://www.howtoforge.com/how-to-install-vnc-server-on-ubuntu-14.04"&gt;How To Install VNC Server On Ubuntu 14.04&lt;/a&gt;&lt;/p&gt;</content><category term="linux"></category><category term="vnc"></category><category term="gtk"></category><category term="rdp"></category></entry><entry><title>安装deluge下载工具自动远程下载</title><link href="/an-zhuang-delugexia-zai-gong-ju-zi-dong-yuan-cheng-xia-zai.html" rel="alternate"></link><published>2016-01-04T10:20:00+08:00</published><updated>2016-01-04T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:None,2016-01-04:/an-zhuang-delugexia-zai-gong-ju-zi-dong-yuan-cheng-xia-zai.html</id><summary type="html">&lt;p&gt;上一篇装完kodi后，我的旧电脑就彻底变成了一个kodi/XBMC媒体中心，那么比如我要下载新的美剧什么的，好像就还是不那么方便。
+p2p的torrent一直是我的最爱。deluge是一个跨平台的操作系统，支持linux, windows 和mac，还有远程控制等功能，什么是远程下载呢。我们都知道有迅雷远程下载，那么deluge其实也是一样，就是你在一台电脑操作，有一个下载链接，然后你可以直接在这台电脑上添加这个下载链接，唯一不同的是下载的任务被添加到了远程的机器上，文件也会下载到远程的机器上。
+这样的需求正符合我媒体中心的需要，我找到新的片源，并不需要下载到我的计算机，而是可以让我的Kodi在播放电影的同时，又可以执行下载的任务。&lt;/p&gt;
+&lt;h1&gt;服务器端：&lt;/h1&gt;
+&lt;p&gt;安装:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt-get install deluged deluge-web
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;新建一个deluge用户和用户组:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo adduser --system  --gecos &lt;span class="s2"&gt;&amp;quot;Deluge Service&amp;quot;&lt;/span&gt; --disabled-password --group --home /var/lib/deluge deluge
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;把用户添加到deluge用户组&lt;code&gt;adduser &amp;lt;username&amp;gt; deluge&lt;/code&gt;，便于用户操作torrent和下载到的文件 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;上一篇装完kodi后，我的旧电脑就彻底变成了一个kodi/XBMC媒体中心，那么比如我要下载新的美剧什么的，好像就还是不那么方便。
+p2p的torrent一直是我的最爱。deluge是一个跨平台的操作系统，支持linux, windows 和mac，还有远程控制等功能，什么是远程下载呢。我们都知道有迅雷远程下载，那么deluge其实也是一样，就是你在一台电脑操作，有一个下载链接，然后你可以直接在这台电脑上添加这个下载链接，唯一不同的是下载的任务被添加到了远程的机器上，文件也会下载到远程的机器上。
+这样的需求正符合我媒体中心的需要，我找到新的片源，并不需要下载到我的计算机，而是可以让我的Kodi在播放电影的同时，又可以执行下载的任务。&lt;/p&gt;
+&lt;h1&gt;服务器端：&lt;/h1&gt;
+&lt;p&gt;安装:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt-get install deluged deluge-web
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;新建一个deluge用户和用户组:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo adduser --system  --gecos &lt;span class="s2"&gt;&amp;quot;Deluge Service&amp;quot;&lt;/span&gt; --disabled-password --group --home /var/lib/deluge deluge
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;把用户添加到deluge用户组&lt;code&gt;adduser &amp;lt;username&amp;gt; deluge&lt;/code&gt;，便于用户操作torrent和下载到的文件，在我的kodi的xubuntu，当然就是kodi用户了：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo adduser kodi deluge
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;需要临时登录deluge用户配置远程管理, 因此如果系统不允许没有密码的用户登录，则需要给deluge设置一个密码&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo passwd deluge：
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;然后再登录deluge用户：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ su deluge
+
+$ deluge-console &lt;span class="s2"&gt;&amp;quot;config -s allow_remote True&amp;quot;&lt;/span&gt;
+$ deluge-console &lt;span class="s2"&gt;&amp;quot;config allow_remote&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;修改远程控制的密码，格式是&lt;code&gt;&amp;lt;username&amp;gt;:&amp;lt;password&amp;gt;:10&lt;/code&gt;：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ cp ~/.config/deluge/auth ~/.conf/deluge/auth.bak
+$ vim ~/.config/deluge/auth
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;退出deluge：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span class="nb"&gt;exit&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;执行deluge的守护进程：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ deluged
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;(可选)让deluge作为服务运行，暂略。&lt;/p&gt;
+&lt;h1&gt;客户端&lt;/h1&gt;
+&lt;p&gt;现在回到我的笔记本上：&lt;/p&gt;
+&lt;p&gt;安装deluge：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo pacman -S deluge
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;OR&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt-get install deluge
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;deluge安装好了，在终端执行deluge, 或者直接打开应用程序，在菜单中选择：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Preferences -&amp;gt; Interface : 把 Classic Mode 的勾勾掉
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;然后会自动重启deluge，重新启动后，系统会让你选择一个服务器，默认有一个127.0.0.1的本地deluge服务，显然这不是我们想要的：
+点击Add，输入服务器的ip地址:&lt;/p&gt;
+&lt;p&gt;Hostname就是服务器的IP地址.
+Port端口一般都是默认的58846.
+Username用户名和Password密码就是之前在auth文件里的配置&lt;/p&gt;
+&lt;p&gt;Ok. 完成，现在可以随便找个网站下个torrent文件测试下，kat.cr是我逛的最多的一个了。&lt;/p&gt;
+&lt;p&gt;Is that cool!&lt;/p&gt;
+&lt;p&gt;当然deluge还有更加厉害的地方，比如它可以自动检测某个目录下有了新的torrent文件，检测到以后会自动执行下载任务。这个特性让我想到了一些更加有趣的事情，下次再一一道来吧。&lt;/p&gt;
+&lt;p&gt;Document based on:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://dev.deluge-torrent.org/wiki/UserGuide/ThinClient"&gt;UserGuide/ThinClient – Deluge&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://dev.deluge-torrent.org/wiki/UserGuide/Service/systemd"&gt;UserGuide/Service/systemd – Deluge&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://dev.deluge-torrent.org/wiki/Installing/Linux/Ubuntu"&gt;Installing/Linux/Ubuntu – Deluge&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</content><category term="linux"></category><category term="resource"></category></entry><entry><title>Linux安装并开机进入Kodi媒体中心</title><link href="/linuxan-zhuang-bing-kai-ji-jin-ru-kodimei-ti-zhong-xin.html" rel="alternate"></link><published>2016-01-04T10:20:00+08:00</published><updated>2016-01-04T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:None,2016-01-04:/linuxan-zhuang-bing-kai-ji-jin-ru-kodimei-ti-zhong-xin.html</id><summary type="html">&lt;p&gt;把2G的硬盘拆到了一台旧电脑上，并且给旧电脑装了xubuntu,打算直接打造一个媒体中心。目前知道有里那个用的不错的东西，KODI（XBMC）是一个很不错的选择。当然用PLEX也是个不错的选择，整理资料库方面PLEX更加强大。不过KODI是开源和免费的，既然用了linux，就用个开源的吧。况且我发现kodi还有不少的好处，并且更加轻量级。&lt;/p&gt;
+&lt;p&gt;其实Kodi有个基于ubuntu的发行版叫做kodibuntu，直接装得话效果其实也差不多。但是我还是喜欢从ubuntu去扩展，毕竟任何基于ubuntu的版本，相对ubuntu的开发肯定是有所滞后的。和Android的Rom一个道理。不过kubuntu因为是非常流行的发行版不用担心这个问题。&lt;/p&gt;
+&lt;p&gt;下面的步骤基本上是参考了askubuntu的一个答案&lt;a href="http://askubuntu.com/questions/596839/autostart-kodi-on-vivid"&gt;Autostart Kodi on Vivid&lt;/a&gt;，只不过它是在纯净的server版本安装，而desktop版则因为有自身的启动器，需要将其禁用掉而已。&lt;/p&gt;
+&lt;p&gt;1）安装kodi: sudo apt-get install kodi&lt;/p&gt;
+&lt;p&gt;2）创建一个kodi的用户，并添加到和视频播放有关的组
+    sudo adduser --disabled-password --disabled-login --gecos "" kodi
+    sudo usermod -a -G audio kodi …&lt;/p&gt;</summary><content type="html">&lt;p&gt;把2G的硬盘拆到了一台旧电脑上，并且给旧电脑装了xubuntu,打算直接打造一个媒体中心。目前知道有里那个用的不错的东西，KODI（XBMC）是一个很不错的选择。当然用PLEX也是个不错的选择，整理资料库方面PLEX更加强大。不过KODI是开源和免费的，既然用了linux，就用个开源的吧。况且我发现kodi还有不少的好处，并且更加轻量级。&lt;/p&gt;
+&lt;p&gt;其实Kodi有个基于ubuntu的发行版叫做kodibuntu，直接装得话效果其实也差不多。但是我还是喜欢从ubuntu去扩展，毕竟任何基于ubuntu的版本，相对ubuntu的开发肯定是有所滞后的。和Android的Rom一个道理。不过kubuntu因为是非常流行的发行版不用担心这个问题。&lt;/p&gt;
+&lt;p&gt;下面的步骤基本上是参考了askubuntu的一个答案&lt;a href="http://askubuntu.com/questions/596839/autostart-kodi-on-vivid"&gt;Autostart Kodi on Vivid&lt;/a&gt;，只不过它是在纯净的server版本安装，而desktop版则因为有自身的启动器，需要将其禁用掉而已。&lt;/p&gt;
+&lt;p&gt;1）安装kodi: sudo apt-get install kodi&lt;/p&gt;
+&lt;p&gt;2）创建一个kodi的用户，并添加到和视频播放有关的组
+    sudo adduser --disabled-password --disabled-login --gecos "" kodi
+    sudo usermod -a -G audio kodi
+    sudo usermod -a -G video kodi
+    sudo usermod -a -G input kodi
+    sudo usermod -a -G dialout kodi
+    sudo usermod -a -G plugdev kodi
+    sudo usermod -a -G tty kodi&lt;/p&gt;
+&lt;p&gt;3) sudo dpkg-reconfigure x11-common 弹出的选项框选择任何人（anybody）&lt;/p&gt;
+&lt;p&gt;4) sudo vim /etc/systemd/system/kodi.service
+输入以下内容：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[Unit]&lt;/span&gt;
+&lt;span class="na"&gt;Description&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;Job that runs Kodi&lt;/span&gt;
+&lt;span class="na"&gt;After&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;default.target graphical.target getty.target sound.target&lt;/span&gt;
+
+&lt;span class="k"&gt;[Service]&lt;/span&gt;
+&lt;span class="na"&gt;User&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;kodi&lt;/span&gt;
+&lt;span class="na"&gt;Restart&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;always&lt;/span&gt;
+&lt;span class="na"&gt;RestartSec&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;1s&lt;/span&gt;
+&lt;span class="na"&gt;ExecStart&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;/usr/bin/xinit /usr/bin/kodi --standalone -- -nocursor&lt;/span&gt;
+
+&lt;span class="k"&gt;[Install]&lt;/span&gt;
+&lt;span class="na"&gt;WantedBy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;default.target&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;5) 开机启动kodi的服务， 并禁止启动lightdm的服务&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo systemctl daemon-reload
+sudo systemctl disable lightdm
+sudo systemctl enable kodi
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;6) 重启&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;reboot
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;下次电脑开机就可以直接进入kodi的界面了&lt;/p&gt;</content><category term="linux"></category><category term="kodi"></category><category term="resource"></category></entry><entry><title>调整Linux主分区的大小</title><link href="/diao-zheng-linuxzhu-fen-qu-de-da-xiao.html" rel="alternate"></link><published>2016-01-03T10:20:00+08:00</published><updated>2016-01-03T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:None,2016-01-03:/diao-zheng-linuxzhu-fen-qu-de-da-xiao.html</id><summary type="html">&lt;p&gt;在安装我笔记本商的archlinux的时候，root分区和主分区是分开的，后来为了尝试KaliLinux，就把home分区牺牲掉，放弃了/home的单独分区。可是如今60G的空间已经不够用了。&lt;/p&gt;
+&lt;p&gt;于是打算重新调整一个root分区的大小。我分区之前，256G硬盘的分区表大概是这样的，boot分区在最前，大概500M，，home分区紧随其后，66G左右，然后是8G的swap交换空间。还剩下170G左右的剩余空间。&lt;/p&gt;
+&lt;p&gt;我的目标是把swap分区弄到最后，其他都扩展给HOME分区。&lt;/p&gt;
+&lt;p&gt;依稀记得装arch的时候，swap并不是多大不了的事情，甚至说可以不需要swap。于是我打算先把swap禁用掉，然后删除。再重新创建swap分区，然后resize以下Root分区的大小基本就可以大功告成了。不过调整root分区的大小是不可以在当前系统下完成的。因此很有必要弄一个usb的镜像，通过镜像系统进去后调整没有mount的swap分区。&lt;/p&gt;
+&lt;p&gt;在linux下把镜像刻录到usb是非常方便的。接上U盘以后，可以通过&lt;code&gt;lsblk&lt;/code&gt; 查看一下u盘的设备路径,比如我的是&lt;code&gt;/dev/sdc&lt;/code&gt;,基本上可以通过大小就能判断出来了。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sdc                   8:32   1   7.2G  0 disk
+├─sdc1                8:33   1   1 …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;在安装我笔记本商的archlinux的时候，root分区和主分区是分开的，后来为了尝试KaliLinux，就把home分区牺牲掉，放弃了/home的单独分区。可是如今60G的空间已经不够用了。&lt;/p&gt;
+&lt;p&gt;于是打算重新调整一个root分区的大小。我分区之前，256G硬盘的分区表大概是这样的，boot分区在最前，大概500M，，home分区紧随其后，66G左右，然后是8G的swap交换空间。还剩下170G左右的剩余空间。&lt;/p&gt;
+&lt;p&gt;我的目标是把swap分区弄到最后，其他都扩展给HOME分区。&lt;/p&gt;
+&lt;p&gt;依稀记得装arch的时候，swap并不是多大不了的事情，甚至说可以不需要swap。于是我打算先把swap禁用掉，然后删除。再重新创建swap分区，然后resize以下Root分区的大小基本就可以大功告成了。不过调整root分区的大小是不可以在当前系统下完成的。因此很有必要弄一个usb的镜像，通过镜像系统进去后调整没有mount的swap分区。&lt;/p&gt;
+&lt;p&gt;在linux下把镜像刻录到usb是非常方便的。接上U盘以后，可以通过&lt;code&gt;lsblk&lt;/code&gt; 查看一下u盘的设备路径,比如我的是&lt;code&gt;/dev/sdc&lt;/code&gt;,基本上可以通过大小就能判断出来了。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sdc                   8:32   1   7.2G  0 disk
+├─sdc1                8:33   1   1.1G  0 part
+└─sdc2                8:34   1   2.2M  0 part
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;然后找到镜像的位置，输入以下命令，耐心等待几分钟就可以了。我因为之前刚刚用过kubuntu，所以也懒得在刻录别的。其实要实现分区大小调整，基本上只要能跑起来的发行版都可以。不过ubuntu下有个预装的工具叫&lt;code&gt;gparted&lt;/code&gt;，可以免掉一些麻烦。&lt;/p&gt;
+&lt;p&gt;sudo dd bs=4M if=/data/OS_ISOs/Linux/xubuntu-15.10-beta2-desktop-amd64.iso of=/dev/sdc&lt;/p&gt;
+&lt;p&gt;几分钟之后就刻录完成。&lt;/p&gt;
+&lt;p&gt;接下来在arch上，先把swap分区禁用掉，还是通过&lt;code&gt;lsblk&lt;/code&gt;, 记录/root分区和swap分区是哪个。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;─sda2                8:2    0  66.4G  0 part /
+─sda4                8:4    0     8G  0 part [SWAP]
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;我的是&lt;code&gt;/dev/sda4&lt;/code&gt;, 禁用swap:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo swapoff /dev/sda4
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;然后编辑分区表。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo cp /etc/fstab /etc/fstab.bak # 备份下，万一弄错了还可以恢复系统
+sudo vim /etc/fstab
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;在swap的那个设备前面加一个"#"，注释掉swap的分区。&lt;/p&gt;
+&lt;p&gt;接上u盘，重启。因为是Xubuntu，所以选择&lt;code&gt;try xubuntu&lt;/code&gt;以后，非常友好的进入的gui的界面。&lt;/p&gt;
+&lt;p&gt;然后只要在“开始”菜单（原谅我的windows叫法），找到&lt;code&gt;gparted&lt;/code&gt;，一切就很容易了。&lt;/p&gt;
+&lt;p&gt;在/dev/sda4上右键，选择delete，然后new一个swap，位置选择在硬盘的最后(gparted因为直接有示意图，可以直接在上面选择)，新的swap分区大小自然也和老的swap一致，一般都是推荐和内存一样。接着在/dev/sda2上右键，选择resize，直接用光所有的硬盘空间。确定，耐心等待一分钟左右，就会弹出'Done'的提示。&lt;/p&gt;
+&lt;p&gt;然后重启，重新进入archlinux，这时候如果系统成功进入，就说明重新分区已经成功了。&lt;/p&gt;
+&lt;p&gt;但是swap分区还并没有启用。执行&lt;code&gt;bklid&lt;/code&gt;, 确定swap分区的uuid，然后重新编辑分区表:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo vim /etc/fstab
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;把之前swap分区的uuid改成新的uuid，保存。然后根据swap的位置执行后面两条命令，启用swap，新的设备名称可能还是&lt;code&gt;/dev/sda4&lt;/code&gt;也可能不是。这时候可以输入&lt;code&gt;sudo bklid&lt;/code&gt;来确定以下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo mkswap /dev/sda4
+sudo swapon /dev/sda4
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;重启，reboot。重启以后&lt;/p&gt;</content><category term="linux"></category><category term="partition"></category></entry><entry><title>Docker搭建openvpn server</title><link href="/dockerda-jian-openvpn-server.html" rel="alternate"></link><published>2015-12-29T10:20:00+08:00</published><updated>2015-12-29T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:None,2015-12-29:/dockerda-jian-openvpn-server.html</id><summary type="html">&lt;p&gt;I always intersted in build services in my own VPS.
+specially things like a server can help me free browser the internet.
+But sometimes the connection between my own pc and the vps server are not quite good. So things not always go luck.&lt;/p&gt;
+&lt;p&gt;!!! this tutorial is not done yet …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I always intersted in build services in my own VPS.
+specially things like a server can help me free browser the internet.
+But sometimes the connection between my own pc and the vps server are not quite good. So things not always go luck.&lt;/p&gt;
+&lt;p&gt;!!! this tutorial is not done yet&lt;/p&gt;
+&lt;p&gt;I find out openvpn is quite useful these days. So I'm thinking I will build one of my own. First I find some tutorials by google：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-an-openvpn-server-on-ubuntu-14-04"&gt;How To Set Up an OpenVPN Server on Ubuntu 14.04 | DigitalOcean&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.slsmk.com/getting-started-with-openvpn/installing-openvpn-on-ubuntu-server-12-04-or-14-04-using-tap/"&gt;Installing OpenVPN on Ubuntu Server 12.04 or 14.04 using TAP – Super Library of Solutions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://wiki.archlinux.org/index.php/OpenVPN#Routing_all_client_traffic_through_the_server"&gt;OpenVPN - ArchWiki&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Then I picked one of my VPS for the test. It was installed with Ubuntu 14.04 and has 512MB memory. Here are the steps of how I did it:&lt;/p&gt;
+&lt;p&gt;1st, I install the openvpn and easy-rsa:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ apt-get install openvpn easy-rsa
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;2nd, change the value of &lt;code&gt;net.ipv4.ip_forward=1&lt;/code&gt; in /etc/sysctl.conf, then do &lt;code&gt;sysctl -p&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;3rd, copy &lt;code&gt;/usr/share/easy-rsa/&lt;/code&gt; to  &lt;code&gt;/etc/openvpn/&lt;/code&gt; and generate the openvpn keys in the directory of :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ make-cadir /etc/openvpn/easy-rsa &lt;span class="o"&gt;(&lt;/span&gt;ps: this seems another way to &lt;span class="k"&gt;do&lt;/span&gt; this&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;OR&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cp -r /usr/share/easy-rsa/ /etc/openvpn
+mkdir /etc/openvpn/easy-rsa/keys
+openssl dhparam -out /etc/openvpn/dh2048.pem 2048
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;4th, change the directory to easy-rsa, then do the following command:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cd /etc/openvpn/easy-rsa/
+source vars
+./clean-all
+./build-dh
+./pkitool --initca
+./pkitool --server server
+cd keys
+openvpn --genkey --secret ta.key
+ln -s openssl-1.0.0.cnf openssl.cnf     
+./pkitool --initca
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;OR&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;./clean-all
+./build-ca
+./build-key-server server
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;5th, cp the generated keys to &lt;code&gt;/etc/openvpn&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cp server.crt server.key ca.crt dh1024.pem ta.key /etc/openvpn/
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;6th, cp the &lt;code&gt;server.conf&lt;/code&gt; sample to &lt;code&gt;/etc/openvpn/server.conf&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;gunzip -c /usr/share/doc/openvpn/examples/sample-config-files/server.conf.gz &amp;gt; /etc/openvpn/server.conf
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;7th, change some value of the &lt;code&gt;server.conf&lt;/code&gt; file:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;;push &amp;quot;redirect-gateway def1 bypass-dhcp&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;to&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;push &amp;quot;redirect-gateway def1 bypass-dhcp&amp;quot;
+
+;push &amp;quot;dhcp-option DNS 208.67.222.222&amp;quot;
+;push &amp;quot;dhcp-option DNS 208.67.220.220&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;to&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;push &amp;quot;dhcp-option DNS 208.67.222.222&amp;quot;
+push &amp;quot;dhcp-option DNS 208.67.220.220&amp;quot;  (change to some dns server you trust)
+
+;user nobody
+;group nogroup
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;to&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;user nobody
+group nogroup
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;8th,  start and check the openvpn service:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;service openvpn start
+service openvpn status
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;9th, generate key of client:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;./build-key client1
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;10th, copy the sample and change the value of client.ovpn:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cp /usr/share/doc/openvpn/examples/sample-config-files/client.conf /etc/openvpn/easy-rsa/keys/client.ovpn
+
+remote my-server-1 1194
+user nobody
+group nogroup
+
+# SSL/TLS parms.
+# . . .
+#ca ca.crt
+#cert client.crt
+#key client.key
+&lt;span class="nt"&gt;&amp;lt;ca&amp;gt;&lt;/span&gt;
+(insert ca.crt here)
+&lt;span class="nt"&gt;&amp;lt;/ca&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;cert&amp;gt;&lt;/span&gt;
+(insert client1.crt here)
+&lt;span class="nt"&gt;&amp;lt;/cert&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;key&amp;gt;&lt;/span&gt;
+(insert client1.key here)
+&lt;span class="nt"&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="linux"></category><category term="vpn"></category><category term="openvpn"></category></entry><entry><title>Linux利用ssh反向端口转发暴露内网端口</title><link href="/linuxli-yong-sshfan-xiang-duan-kou-zhuan-fa-bao-lu-nei-wang-duan-kou.html" rel="alternate"></link><published>2015-10-30T10:20:00+08:00</published><updated>2015-10-30T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:None,2015-10-30:/linuxli-yong-sshfan-xiang-duan-kou-zhuan-fa-bao-lu-nei-wang-duan-kou.html</id><summary type="html">&lt;p&gt;从本地Host用SSH连接到目标主机，怎么让目标主机也可以连接本地的SSH呢？
+答案很简单，只要把本地主机的SSH端口转发到目标主机即可。可以先查看一下SSH命令的man手册:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;man ssh
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;注意里面的R参数，就是要用到的参数：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;-R [bind_address:]port:host:hostport
+         Specifies that the given port on the remote (server) host is to be forwarded to the given host and port on the local side.  This works by allocating a socket to listen to port
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;意思就是把一个远程主机的端口用于本地端口的端口转发。于是对应于假设远程主机IP …&lt;/p&gt;</summary><content type="html">&lt;p&gt;从本地Host用SSH连接到目标主机，怎么让目标主机也可以连接本地的SSH呢？
+答案很简单，只要把本地主机的SSH端口转发到目标主机即可。可以先查看一下SSH命令的man手册:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;man ssh
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;注意里面的R参数，就是要用到的参数：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;-R [bind_address:]port:host:hostport
+         Specifies that the given port on the remote (server) host is to be forwarded to the given host and port on the local side.  This works by allocating a socket to listen to port
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;意思就是把一个远程主机的端口用于本地端口的端口转发。于是对应于假设远程主机IP:192.168.172.11, 本地ssh端口是默认的22，我们可以这样做：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;ssh&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;R&lt;/span&gt; &lt;span class="mi"&gt;17999&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="nl"&gt;localhost&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;22&lt;/span&gt; &lt;span class="n"&gt;sourceuser&lt;/span&gt;&lt;span class="mf"&gt;@192.168.172.11&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;这一步完成以后，远程的17999端口会映射到本地主机的22端口，于是我们在远程终端，输入命令:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ssh -p 17999 127.0.0.1
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;这样就很方便的又重新连接到了本地的ssh。同样的技巧可以用于一些暴露本地端口的操作，例如你身处一个局域网里，且没有权限去操作路由。你却想要暴露一个本机的ip，比如说80，让远程的主机访问你的http服务，用同样的方式可以很轻易的做到。&lt;/p&gt;</content><category term="linux"></category><category term="ssh"></category><category term="port-forward"></category></entry><entry><title>linux将Socks代理转换成Http代理</title><link href="/linuxjiang-socksdai-li-zhuan-huan-cheng-httpdai-li.html" rel="alternate"></link><published>2015-05-14T10:20:00+08:00</published><updated>2015-05-14T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:None,2015-05-14:/linuxjiang-socksdai-li-zhuan-huan-cheng-httpdai-li.html</id><summary type="html">&lt;h1&gt;covert socks proxy to http proxy&lt;/h1&gt;
+&lt;h2&gt;install polipo and configure&lt;/h2&gt;
+&lt;p&gt;First, start out by making sure you have universe enabled, up to date package lists and downloading the polipo package (it has no dependancies).&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get update
+sudo apt-get install polipo
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now to edit the polipo config file. This is …&lt;/p&gt;</summary><content type="html">&lt;h1&gt;covert socks proxy to http proxy&lt;/h1&gt;
+&lt;h2&gt;install polipo and configure&lt;/h2&gt;
+&lt;p&gt;First, start out by making sure you have universe enabled, up to date package lists and downloading the polipo package (it has no dependancies).&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get update
+sudo apt-get install polipo
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now to edit the polipo config file. This is found in /etc/polipo/config, and by default is the only file there to configure.&lt;/p&gt;
+&lt;p&gt;Now I'm going to list the required changes to the config file - all 2 of them!. Remember to customise these as required :). Its also worth noting that theres lots of other options to play with, and you should feel free. these are just the 2 you need to change to get going.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;### Basic configuration
+
+# Add your proxy&amp;#39;s address
+proxyAddress = 192.168.0.1
+
+# Allow from anyone in the 192.168.0.* range to connect to your proxy
+allowedClients = 192.168.0.0/24
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Restart the service, and we are done!&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo /etc/init.d/polipo restart
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;client config&lt;/h2&gt;
+&lt;h3&gt;First things first - APT.  &lt;code&gt;may not working on Ubuntu 14.04, I'm not try yet&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;This one is stupidly easy - Open a terminal, and type the following (it creates a blank file)&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo vi /etc/apt/apt.conf
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;In the file, add&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;Acquire&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="nd"&gt;http&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="nd"&gt;Proxy&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;http://192.168.0.1:8123&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;as the only line.&lt;/p&gt;
+&lt;h3&gt;Firefox:&lt;/h3&gt;
+&lt;p&gt;Open the browser, click Edit -&amp;gt; Preferences. Click the 'connection settings' button, and click on 'manual proxy configuration'. In the top field add the following:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;HTTP Proxy:    192.168.0.1        Port:    8123
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;PS, if you go and set up privoxy as well, this port is changed. One step at a time though!&lt;/p&gt;
+&lt;h3&gt;GNOME:&lt;/h3&gt;
+&lt;p&gt;Click System -&amp;gt; Preferences -&amp;gt; network proxy. Click Manual proxy configuration, and put in the same details as above :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;HTTP Proxy:    192.168.0.1        Port:    8123
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Log out and in to apply GNOME settings, and your done!&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;a href="https://help.ubuntu.com/community/Polipo"&gt;Polipo - Community Help Wiki&lt;/a&gt;&lt;/p&gt;</content><category term="linux"></category><category term="proxy"></category></entry><entry><title>Linux搭建PPTP VPN Server</title><link href="/linuxda-jian-pptp-vpn-server.html" rel="alternate"></link><published>2015-04-19T10:20:00+08:00</published><updated>2015-04-19T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:None,2015-04-19:/linuxda-jian-pptp-vpn-server.html</id><summary type="html">&lt;h1&gt;Setup PPTP Server on linux&lt;/h1&gt;
+&lt;p&gt;参考:
+&lt;a href="https://www.digitalocean.com/community/tutorials/how-to-setup-your-own-vpn-with-pptp"&gt;How To Setup Your Own VPN With PPTP&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://askubuntu.com/questions/492923/pptpd-vpn-no-internet-access-after-connecting"&gt;pptpd VPN: No internet access after connecting&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;PPTP Installation&lt;/h2&gt;
+&lt;p&gt;====================&lt;/p&gt;
+&lt;h4&gt;1. install server application&lt;/h4&gt;
+&lt;p&gt;On CentOS 6 x64:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;rpm -i http://poptop.sourceforge.net/yum/stable/rhel6/pptp-release-current.noarch.rpm&lt;/p&gt;
+&lt;p&gt;yum -y install pptpd&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;On Ubuntu 12 …&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Setup PPTP Server on linux&lt;/h1&gt;
+&lt;p&gt;参考:
+&lt;a href="https://www.digitalocean.com/community/tutorials/how-to-setup-your-own-vpn-with-pptp"&gt;How To Setup Your Own VPN With PPTP&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://askubuntu.com/questions/492923/pptpd-vpn-no-internet-access-after-connecting"&gt;pptpd VPN: No internet access after connecting&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;PPTP Installation&lt;/h2&gt;
+&lt;p&gt;====================&lt;/p&gt;
+&lt;h4&gt;1. install server application&lt;/h4&gt;
+&lt;p&gt;On CentOS 6 x64:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;rpm -i http://poptop.sourceforge.net/yum/stable/rhel6/pptp-release-current.noarch.rpm&lt;/p&gt;
+&lt;p&gt;yum -y install pptpd&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;On Ubuntu 12.10 x64:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;apt-get install pptpd&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4&gt;2. edit &lt;strong&gt;/etc/pptpd.conf&lt;/strong&gt; and add the following lines:&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;localip 10.0.0.1&lt;/p&gt;
+&lt;p&gt;remoteip 10.0.0.100-200&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;localip本机ip(vpn的服务器ip), remoteip-分配给客户端的ip, 应该处于同一网段&lt;/p&gt;
+&lt;h4&gt;3. setup authentication for PPTP by adding users and passwords. Simply add them to &lt;strong&gt;/etc/ppp/chap-secrets&lt;/strong&gt; :&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;h1&gt;client server secret IP&lt;/h1&gt;
+&lt;p&gt;user1 pptpd 24odfjafdi34 *&lt;/p&gt;
+&lt;p&gt;user2 pptpd 3f3faf3fsdfI *&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Where client is the username, server is type of service – pptpd for our example, secret is the password, and IP addresses specifies which IP address may authenticate. By setting ‘*’ in IP addresses field, you specify that you would accept username/password pair for any IP.  &lt;/p&gt;
+&lt;h4&gt;4. Add DNS servers to &lt;strong&gt;/etc/ppp/pptpd-options&lt;/strong&gt;:&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;ms-dns 8.8.8.8
+ms-dns 8.8.4.4&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4&gt;5. start PPTP daemon:&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;service pptpd restart&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4&gt;6. verify  it is running and accepting connection&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;netstat -alpn | grep :1723&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4&gt;7. Setup Forwarding. edit &lt;strong&gt;/etc/sysctl.conf&lt;/strong&gt; and add the following line&lt;/h4&gt;
+&lt;p&gt;(It is important to enable IP forwarding on your PPTP server. This will allow you to forward packets between public IP and private IPs that you setup with PPTP. )&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;net.ipv4.ip_forward = 1&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;To make changes active, run sysctl -p&lt;/p&gt;
+&lt;h4&gt;8. The following iptables firewall rules allow port 1723, GRE and perform NAT:&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;iptables -I INPUT -p tcp --dport 1723 -m state --state NEW -j ACCEPT&lt;/p&gt;
+&lt;p&gt;iptables -I INPUT -p gre -j ACCEPT&lt;/p&gt;
+&lt;p&gt;iptables -t nat -I POSTROUTING -o eth0 -j MASQUERADE&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;In the last rule replace “eth0″ with the interface connecting to the internet on your VPN server. Finally the following rule is required to ensure websites load properly&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;iptables -I FORWARD -p tcp --tcp-flags SYN,RST SYN -s 172.20.1.0/24 -j TCPMSS  --clamp-mss-to-pmtu&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;ReReplace &lt;strong&gt;172.20.1.0/24&lt;/strong&gt; with the IP address range used in the “remoteip” option in the &lt;strong&gt;/etc/pptpd.conf&lt;/strong&gt; this firewall rule is used to ensure a proper MTU value is used to prevent fragmentation.&lt;/p&gt;</content><category term="linux"></category><category term="vpn"></category></entry></feed>

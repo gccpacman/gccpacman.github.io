@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>Linux创建自定义的应用程序启动器</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Pacman News Atom Feed" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">Pacman News </a></h1>
+                <nav><ul>
+                    <li class="active"><a href="/category/linux.html">Linux</a></li>
+                    <li><a href="/category/python.html">python</a></li>
+                    <li><a href="/category/vim.html">Vim</a></li>
+                    <li><a href="/category/windows.html">Windows</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="/linuxchuang-jian-zi-ding-yi-de-ying-yong-cheng-xu-qi-dong-qi.html" rel="bookmark"
+           title="Permalink to Linux创建自定义的应用程序启动器">Linux创建自定义的应用程序启动器</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2016-01-06T10:20:00+08:00">
+                Published: Wed 06 January 2016
+        </abbr>
+		<br />
+        <abbr class="modified" title="2016-01-06T19:30:00+08:00">
+                Updated: Wed 06 January 2016
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/r341h.html">r341h</a>
+        </address>
+<p>In <a href="/category/linux.html">Linux</a>.</p>
+<p>tags: <a href="/tag/linux.html">linux</a> <a href="/tag/gnome.html">gnome</a> <a href="/tag/gtk.html">gtk</a> </p>
+</footer><!-- /.post-info -->      <p>eclipse在linux下，下载以后不需要安装，直接在目录下执行.\eclipse就可以运行了，不过同时，每次都要切换到该目录去执行eclipse似乎也比较麻烦。
+又没有办法在应用程序菜单里找到，即使是gnome下，按super然后全局搜索，也找到这个。</p>
+<p>不过好在linux是自由的系统，自己建一个应用程序的启动器一点问题都没有。</p>
+<p>比如我的eclipse装在<code>/opt/eclipse-jee/</code>下,怎么新建一个启动器呢？</p>
+<p>所有用户共享的应用启动器的目录是<code>/usr/share/applications/</code>目录，那么用户自定义的启动器目录在哪里？找了下用户目录下的.config/，没有找到，只好去百度google了一下，原来启动器是在.local/下，具体是<code>.local/share/applications</code>.</p>
+<p>新建一个eclipse.desktop的文件，然后输入以下内容：</p>
+<div class="highlight"><pre><span></span><span class="k">[Desktop Entry]</span>
+<span class="na">Encoding</span><span class="o">=</span><span class="s">UTF-8</span>
+<span class="na">Name</span><span class="o">=</span><span class="s">Eclipse J2ee</span>
+<span class="na">Comment</span><span class="o">=</span><span class="s">Official desktop version of Telegram messaging app</span>
+<span class="na">Exec</span><span class="o">=</span><span class="s">/opt/eclipse-jee/eclipse</span>
+<span class="na">Icon</span><span class="o">=</span><span class="s">/opt/eclipse-jee/icon.xpm</span>
+<span class="na">Type</span><span class="o">=</span><span class="s">Application</span>
+<span class="na">Categories</span><span class="o">=</span><span class="s">Development;</span>
+</pre></div>
+
+
+<p>Categories就是类目，可以输入多个。编辑保存，不需要再做任何操作，eclipse就可以搜索到了。</p>
+<p>参考：
+<a href="http://askubuntu.com/questions/112186/how-do-you-create-a-custom-application-launcher-in-gnome-shell">How do you create a custom application launcher in Gnome Shell? </a></p>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>links</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                            <li><a href="https://github.com/gccpacman">My Github</a></li>
+                            <li><a href="https://stackoverflow.com/users/4124310/realhu">My StackOverflow</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

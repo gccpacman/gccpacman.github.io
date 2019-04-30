@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>Pacman News - linux</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Pacman News Atom Feed" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">Pacman News </a></h1>
+                <nav><ul>
+                    <li><a href="/category/linux.html">Linux</a></li>
+                    <li><a href="/category/python.html">python</a></li>
+                    <li><a href="/category/vim.html">Vim</a></li>
+                    <li><a href="/category/windows.html">Windows</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+
+                <section id="content" class="body">
+                    <ol id="posts-list" class="hfeed" start="9">
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/dockerda-jian-openvpn-server.html" rel="bookmark"
+                           title="Permalink to Docker搭建openvpn server">Docker搭建openvpn server</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-12-29T10:20:00+08:00">
+                Published: Tue 29 December 2015
+        </abbr>
+		<br />
+        <abbr class="modified" title="2015-12-29T19:30:00+08:00">
+                Updated: Tue 29 December 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/r341h.html">r341h</a>
+        </address>
+<p>In <a href="/category/linux.html">Linux</a>.</p>
+<p>tags: <a href="/tag/linux.html">linux</a> <a href="/tag/vpn.html">vpn</a> <a href="/tag/openvpn.html">openvpn</a> </p>
+</footer><!-- /.post-info -->                <p>I always intersted in build services in my own VPS.
+specially things like a server can help me free browser the internet.
+But sometimes the connection between my own pc and the vps server are not quite good. So things not always go luck.</p>
+<p>!!! this tutorial is not done yet …</p>
+                <a class="readmore" href="/dockerda-jian-openvpn-server.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/linuxli-yong-sshfan-xiang-duan-kou-zhuan-fa-bao-lu-nei-wang-duan-kou.html" rel="bookmark"
+                           title="Permalink to Linux利用ssh反向端口转发暴露内网端口">Linux利用ssh反向端口转发暴露内网端口</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-10-30T10:20:00+08:00">
+                Published: Fri 30 October 2015
+        </abbr>
+		<br />
+        <abbr class="modified" title="2015-10-30T19:30:00+08:00">
+                Updated: Fri 30 October 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/r341h.html">r341h</a>
+        </address>
+<p>In <a href="/category/linux.html">Linux</a>.</p>
+<p>tags: <a href="/tag/linux.html">linux</a> <a href="/tag/ssh.html">ssh</a> <a href="/tag/port-forward.html">port-forward</a> </p>
+</footer><!-- /.post-info -->                <p>从本地Host用SSH连接到目标主机，怎么让目标主机也可以连接本地的SSH呢？
+答案很简单，只要把本地主机的SSH端口转发到目标主机即可。可以先查看一下SSH命令的man手册:</p>
+<div class="highlight"><pre><span></span>man ssh
+</pre></div>
+
+
+<p>注意里面的R参数，就是要用到的参数：</p>
+<div class="highlight"><pre><span></span>-R [bind_address:]port:host:hostport
+         Specifies that the given port on the remote (server) host is to be forwarded to the given host and port on the local side.  This works by allocating a socket to listen to port
+</pre></div>
+
+
+<p>意思就是把一个远程主机的端口用于本地端口的端口转发。于是对应于假设远程主机IP …</p>
+                <a class="readmore" href="/linuxli-yong-sshfan-xiang-duan-kou-zhuan-fa-bao-lu-nei-wang-duan-kou.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/linuxjiang-socksdai-li-zhuan-huan-cheng-httpdai-li.html" rel="bookmark"
+                           title="Permalink to linux将Socks代理转换成Http代理">linux将Socks代理转换成Http代理</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-05-14T10:20:00+08:00">
+                Published: Thu 14 May 2015
+        </abbr>
+		<br />
+        <abbr class="modified" title="2015-05-14T19:30:00+08:00">
+                Updated: Thu 14 May 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/r341h.html">r341h</a>
+        </address>
+<p>In <a href="/category/linux.html">Linux</a>.</p>
+<p>tags: <a href="/tag/linux.html">linux</a> <a href="/tag/proxy.html">proxy</a> </p>
+</footer><!-- /.post-info -->                <h1>covert socks proxy to http proxy</h1>
+<h2>install polipo and configure</h2>
+<p>First, start out by making sure you have universe enabled, up to date package lists and downloading the polipo package (it has no dependancies).</p>
+<div class="highlight"><pre><span></span>sudo apt-get update
+sudo apt-get install polipo
+</pre></div>
+
+
+<p>Now to edit the polipo config file. This is …</p>
+                <a class="readmore" href="/linuxjiang-socksdai-li-zhuan-huan-cheng-httpdai-li.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/linuxda-jian-pptp-vpn-server.html" rel="bookmark"
+                           title="Permalink to Linux搭建PPTP VPN Server">Linux搭建PPTP VPN Server</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-04-19T10:20:00+08:00">
+                Published: Sun 19 April 2015
+        </abbr>
+		<br />
+        <abbr class="modified" title="2015-04-19T19:30:00+08:00">
+                Updated: Sun 19 April 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/r341h.html">r341h</a>
+        </address>
+<p>In <a href="/category/linux.html">Linux</a>.</p>
+<p>tags: <a href="/tag/linux.html">linux</a> <a href="/tag/vpn.html">vpn</a> </p>
+</footer><!-- /.post-info -->                <h1>Setup PPTP Server on linux</h1>
+<p>参考:
+<a href="https://www.digitalocean.com/community/tutorials/how-to-setup-your-own-vpn-with-pptp">How To Setup Your Own VPN With PPTP</a></p>
+<p><a href="http://askubuntu.com/questions/492923/pptpd-vpn-no-internet-access-after-connecting">pptpd VPN: No internet access after connecting</a></p>
+<h2>PPTP Installation</h2>
+<p>====================</p>
+<h4>1. install server application</h4>
+<p>On CentOS 6 x64:</p>
+<blockquote>
+<p>rpm -i http://poptop.sourceforge.net/yum/stable/rhel6/pptp-release-current.noarch.rpm</p>
+<p>yum -y install pptpd</p>
+</blockquote>
+<p>On Ubuntu 12 …</p>
+                <a class="readmore" href="/linuxda-jian-pptp-vpn-server.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+                </ol><!-- /#posts-list -->
+<p class="paginator">
+        <a href="/tag/linux.html">&laquo;</a>
+    Page 2 / 2
+</p>
+                </section><!-- /#content -->
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>links</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                            <li><a href="https://github.com/gccpacman">My Github</a></li>
+                            <li><a href="https://stackoverflow.com/users/4124310/realhu">My StackOverflow</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>Linux搭建PPTP VPN Server</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Pacman News Atom Feed" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">Pacman News </a></h1>
+                <nav><ul>
+                    <li class="active"><a href="/category/linux.html">Linux</a></li>
+                    <li><a href="/category/python.html">python</a></li>
+                    <li><a href="/category/vim.html">Vim</a></li>
+                    <li><a href="/category/windows.html">Windows</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="/linuxda-jian-pptp-vpn-server.html" rel="bookmark"
+           title="Permalink to Linux搭建PPTP VPN Server">Linux搭建PPTP VPN Server</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-04-19T10:20:00+08:00">
+                Published: Sun 19 April 2015
+        </abbr>
+		<br />
+        <abbr class="modified" title="2015-04-19T19:30:00+08:00">
+                Updated: Sun 19 April 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/r341h.html">r341h</a>
+        </address>
+<p>In <a href="/category/linux.html">Linux</a>.</p>
+<p>tags: <a href="/tag/linux.html">linux</a> <a href="/tag/vpn.html">vpn</a> </p>
+</footer><!-- /.post-info -->      <h1>Setup PPTP Server on linux</h1>
+<p>参考:
+<a href="https://www.digitalocean.com/community/tutorials/how-to-setup-your-own-vpn-with-pptp">How To Setup Your Own VPN With PPTP</a></p>
+<p><a href="http://askubuntu.com/questions/492923/pptpd-vpn-no-internet-access-after-connecting">pptpd VPN: No internet access after connecting</a></p>
+<h2>PPTP Installation</h2>
+<p>====================</p>
+<h4>1. install server application</h4>
+<p>On CentOS 6 x64:</p>
+<blockquote>
+<p>rpm -i http://poptop.sourceforge.net/yum/stable/rhel6/pptp-release-current.noarch.rpm</p>
+<p>yum -y install pptpd</p>
+</blockquote>
+<p>On Ubuntu 12.10 x64:</p>
+<blockquote>
+<p>apt-get install pptpd</p>
+</blockquote>
+<h4>2. edit <strong>/etc/pptpd.conf</strong> and add the following lines:</h4>
+<blockquote>
+<p>localip 10.0.0.1</p>
+<p>remoteip 10.0.0.100-200</p>
+</blockquote>
+<p>localip本机ip(vpn的服务器ip), remoteip-分配给客户端的ip, 应该处于同一网段</p>
+<h4>3. setup authentication for PPTP by adding users and passwords. Simply add them to <strong>/etc/ppp/chap-secrets</strong> :</h4>
+<blockquote>
+<h1>client server secret IP</h1>
+<p>user1 pptpd 24odfjafdi34 *</p>
+<p>user2 pptpd 3f3faf3fsdfI *</p>
+</blockquote>
+<p>Where client is the username, server is type of service – pptpd for our example, secret is the password, and IP addresses specifies which IP address may authenticate. By setting ‘*’ in IP addresses field, you specify that you would accept username/password pair for any IP.  </p>
+<h4>4. Add DNS servers to <strong>/etc/ppp/pptpd-options</strong>:</h4>
+<blockquote>
+<p>ms-dns 8.8.8.8
+ms-dns 8.8.4.4</p>
+</blockquote>
+<h4>5. start PPTP daemon:</h4>
+<blockquote>
+<p>service pptpd restart</p>
+</blockquote>
+<h4>6. verify  it is running and accepting connection</h4>
+<blockquote>
+<p>netstat -alpn | grep :1723</p>
+</blockquote>
+<h4>7. Setup Forwarding. edit <strong>/etc/sysctl.conf</strong> and add the following line</h4>
+<p>(It is important to enable IP forwarding on your PPTP server. This will allow you to forward packets between public IP and private IPs that you setup with PPTP. )</p>
+<blockquote>
+<p>net.ipv4.ip_forward = 1</p>
+</blockquote>
+<p>To make changes active, run sysctl -p</p>
+<h4>8. The following iptables firewall rules allow port 1723, GRE and perform NAT:</h4>
+<blockquote>
+<p>iptables -I INPUT -p tcp --dport 1723 -m state --state NEW -j ACCEPT</p>
+<p>iptables -I INPUT -p gre -j ACCEPT</p>
+<p>iptables -t nat -I POSTROUTING -o eth0 -j MASQUERADE</p>
+</blockquote>
+<p>In the last rule replace “eth0″ with the interface connecting to the internet on your VPN server. Finally the following rule is required to ensure websites load properly</p>
+<blockquote>
+<p>iptables -I FORWARD -p tcp --tcp-flags SYN,RST SYN -s 172.20.1.0/24 -j TCPMSS  --clamp-mss-to-pmtu</p>
+</blockquote>
+<p>ReReplace <strong>172.20.1.0/24</strong> with the IP address range used in the “remoteip” option in the <strong>/etc/pptpd.conf</strong> this firewall rule is used to ensure a proper MTU value is used to prevent fragmentation.</p>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>links</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                            <li><a href="https://github.com/gccpacman">My Github</a></li>
+                            <li><a href="https://stackoverflow.com/users/4124310/realhu">My StackOverflow</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

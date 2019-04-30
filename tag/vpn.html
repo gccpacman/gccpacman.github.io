@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>Pacman News - vpn</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Pacman News Atom Feed" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">Pacman News </a></h1>
+                <nav><ul>
+                    <li><a href="/category/linux.html">Linux</a></li>
+                    <li><a href="/category/python.html">python</a></li>
+                    <li><a href="/category/vim.html">Vim</a></li>
+                    <li><a href="/category/windows.html">Windows</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+
+            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="/dockerda-jian-openvpn-server.html">Docker搭建openvpn server</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2015-12-29T10:20:00+08:00">
+                Published: Tue 29 December 2015
+        </abbr>
+		<br />
+        <abbr class="modified" title="2015-12-29T19:30:00+08:00">
+                Updated: Tue 29 December 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/r341h.html">r341h</a>
+        </address>
+<p>In <a href="/category/linux.html">Linux</a>.</p>
+<p>tags: <a href="/tag/linux.html">linux</a> <a href="/tag/vpn.html">vpn</a> <a href="/tag/openvpn.html">openvpn</a> </p>
+</footer><!-- /.post-info --><p>I always intersted in build services in my own VPS.
+specially things like a server can help me free browser the internet.
+But sometimes the connection between my own pc and the vps server are not quite good. So things not always go luck.</p>
+<p>!!! this tutorial is not done yet</p>
+<p>I find out openvpn is quite useful these days. So I'm thinking I will build one of my own. First I find some tutorials by google：</p>
+<ol>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-an-openvpn-server-on-ubuntu-14-04">How To Set Up an OpenVPN Server on Ubuntu 14.04 | DigitalOcean</a></li>
+<li><a href="http://www.slsmk.com/getting-started-with-openvpn/installing-openvpn-on-ubuntu-server-12-04-or-14-04-using-tap/">Installing OpenVPN on Ubuntu Server 12.04 or 14.04 using TAP – Super Library of Solutions</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/OpenVPN#Routing_all_client_traffic_through_the_server">OpenVPN - ArchWiki</a></li>
+</ol>
+<p>Then I picked one of my VPS for the test. It was installed with Ubuntu 14.04 and has 512MB memory. Here are the steps of how I did it:</p>
+<p>1st, I install the openvpn and easy-rsa:</p>
+<div class="highlight"><pre><span></span>$ apt-get install openvpn easy-rsa
+</pre></div>
+
+
+<p>2nd, change the value of <code>net.ipv4.ip_forward=1</code> in /etc/sysctl.conf, then do <code>sysctl -p</code></p>
+<p>3rd, copy <code>/usr/share/easy-rsa/</code> to  <code>/etc/openvpn/</code> and generate the openvpn keys in the directory of :</p>
+<div class="highlight"><pre><span></span>$ make-cadir /etc/openvpn/easy-rsa <span class="o">(</span>ps: this seems another way to <span class="k">do</span> this<span class="o">)</span>
+</pre></div>
+
+
+<p>OR</p>
+<div class="highlight"><pre><span></span>cp -r /usr/share/easy-rsa/ /etc/openvpn
+mkdir /etc/openvpn/easy-rsa/keys
+openssl dhparam -out /etc/openvpn/dh2048.pem 2048
+</pre></div>
+
+
+<p>4th, change the directory to easy-rsa, then do the following command:</p>
+<div class="highlight"><pre><span></span>cd /etc/openvpn/easy-rsa/
+source vars
+./clean-all
+./build-dh
+./pkitool --initca
+./pkitool --server server
+cd keys
+openvpn --genkey --secret ta.key
+ln -s openssl-1.0.0.cnf openssl.cnf     
+./pkitool --initca
+</pre></div>
+
+
+<p>OR</p>
+<div class="highlight"><pre><span></span>./clean-all
+./build-ca
+./build-key-server server
+</pre></div>
+
+
+<p>5th, cp the generated keys to <code>/etc/openvpn</code>:</p>
+<div class="highlight"><pre><span></span>cp server.crt server.key ca.crt dh1024.pem ta.key /etc/openvpn/
+</pre></div>
+
+
+<p>6th, cp the <code>server.conf</code> sample to <code>/etc/openvpn/server.conf</code></p>
+<div class="highlight"><pre><span></span>gunzip -c /usr/share/doc/openvpn/examples/sample-config-files/server.conf.gz &gt; /etc/openvpn/server.conf
+</pre></div>
+
+
+<p>7th, change some value of the <code>server.conf</code> file:</p>
+<div class="highlight"><pre><span></span>;push &quot;redirect-gateway def1 bypass-dhcp&quot;
+</pre></div>
+
+
+<p>to</p>
+<div class="highlight"><pre><span></span>push &quot;redirect-gateway def1 bypass-dhcp&quot;
+
+;push &quot;dhcp-option DNS 208.67.222.222&quot;
+;push &quot;dhcp-option DNS 208.67.220.220&quot;
+</pre></div>
+
+
+<p>to</p>
+<div class="highlight"><pre><span></span>push &quot;dhcp-option DNS 208.67.222.222&quot;
+push &quot;dhcp-option DNS 208.67.220.220&quot;  (change to some dns server you trust)
+
+;user nobody
+;group nogroup
+</pre></div>
+
+
+<p>to</p>
+<div class="highlight"><pre><span></span>user nobody
+group nogroup
+</pre></div>
+
+
+<p>8th,  start and check the openvpn service:</p>
+<div class="highlight"><pre><span></span>service openvpn start
+service openvpn status
+</pre></div>
+
+
+<p>9th, generate key of client:</p>
+<div class="highlight"><pre><span></span>./build-key client1
+</pre></div>
+
+
+<p>10th, copy the sample and change the value of client.ovpn:</p>
+<div class="highlight"><pre><span></span>cp /usr/share/doc/openvpn/examples/sample-config-files/client.conf /etc/openvpn/easy-rsa/keys/client.ovpn
+
+remote my-server-1 1194
+user nobody
+group nogroup
+
+# SSL/TLS parms.
+# . . .
+#ca ca.crt
+#cert client.crt
+#key client.key
+<span class="nt">&lt;ca&gt;</span>
+(insert ca.crt here)
+<span class="nt">&lt;/ca&gt;</span>
+<span class="nt">&lt;cert&gt;</span>
+(insert client1.crt here)
+<span class="nt">&lt;/cert&gt;</span>
+<span class="nt">&lt;key&gt;</span>
+(insert client1.key here)
+<span class="nt">&lt;/key&gt;</span>
+</pre></div>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/linuxda-jian-pptp-vpn-server.html" rel="bookmark"
+                           title="Permalink to Linux搭建PPTP VPN Server">Linux搭建PPTP VPN Server</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-04-19T10:20:00+08:00">
+                Published: Sun 19 April 2015
+        </abbr>
+		<br />
+        <abbr class="modified" title="2015-04-19T19:30:00+08:00">
+                Updated: Sun 19 April 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/r341h.html">r341h</a>
+        </address>
+<p>In <a href="/category/linux.html">Linux</a>.</p>
+<p>tags: <a href="/tag/linux.html">linux</a> <a href="/tag/vpn.html">vpn</a> </p>
+</footer><!-- /.post-info -->                <h1>Setup PPTP Server on linux</h1>
+<p>参考:
+<a href="https://www.digitalocean.com/community/tutorials/how-to-setup-your-own-vpn-with-pptp">How To Setup Your Own VPN With PPTP</a></p>
+<p><a href="http://askubuntu.com/questions/492923/pptpd-vpn-no-internet-access-after-connecting">pptpd VPN: No internet access after connecting</a></p>
+<h2>PPTP Installation</h2>
+<p>====================</p>
+<h4>1. install server application</h4>
+<p>On CentOS 6 x64:</p>
+<blockquote>
+<p>rpm -i http://poptop.sourceforge.net/yum/stable/rhel6/pptp-release-current.noarch.rpm</p>
+<p>yum -y install pptpd</p>
+</blockquote>
+<p>On Ubuntu 12 …</p>
+                <a class="readmore" href="/linuxda-jian-pptp-vpn-server.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+                </ol><!-- /#posts-list -->
+                </section><!-- /#content -->
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>links</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                            <li><a href="https://github.com/gccpacman">My Github</a></li>
+                            <li><a href="https://stackoverflow.com/users/4124310/realhu">My StackOverflow</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

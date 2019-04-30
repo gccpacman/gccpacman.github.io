@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>安装deluge下载工具自动远程下载</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Pacman News Atom Feed" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">Pacman News </a></h1>
+                <nav><ul>
+                    <li class="active"><a href="/category/linux.html">Linux</a></li>
+                    <li><a href="/category/python.html">python</a></li>
+                    <li><a href="/category/vim.html">Vim</a></li>
+                    <li><a href="/category/windows.html">Windows</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="/an-zhuang-delugexia-zai-gong-ju-zi-dong-yuan-cheng-xia-zai.html" rel="bookmark"
+           title="Permalink to 安装deluge下载工具自动远程下载">安装deluge下载工具自动远程下载</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2016-01-04T10:20:00+08:00">
+                Published: Mon 04 January 2016
+        </abbr>
+		<br />
+        <abbr class="modified" title="2016-01-04T19:30:00+08:00">
+                Updated: Mon 04 January 2016
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/r341h.html">r341h</a>
+        </address>
+<p>In <a href="/category/linux.html">Linux</a>.</p>
+<p>tags: <a href="/tag/linux.html">linux</a> <a href="/tag/resource.html">resource</a> </p>
+</footer><!-- /.post-info -->      <p>上一篇装完kodi后，我的旧电脑就彻底变成了一个kodi/XBMC媒体中心，那么比如我要下载新的美剧什么的，好像就还是不那么方便。
+p2p的torrent一直是我的最爱。deluge是一个跨平台的操作系统，支持linux, windows 和mac，还有远程控制等功能，什么是远程下载呢。我们都知道有迅雷远程下载，那么deluge其实也是一样，就是你在一台电脑操作，有一个下载链接，然后你可以直接在这台电脑上添加这个下载链接，唯一不同的是下载的任务被添加到了远程的机器上，文件也会下载到远程的机器上。
+这样的需求正符合我媒体中心的需要，我找到新的片源，并不需要下载到我的计算机，而是可以让我的Kodi在播放电影的同时，又可以执行下载的任务。</p>
+<h1>服务器端：</h1>
+<p>安装:</p>
+<div class="highlight"><pre><span></span>$ sudo apt-get install deluged deluge-web
+</pre></div>
+
+
+<p>新建一个deluge用户和用户组:</p>
+<div class="highlight"><pre><span></span>$ sudo adduser --system  --gecos <span class="s2">&quot;Deluge Service&quot;</span> --disabled-password --group --home /var/lib/deluge deluge
+</pre></div>
+
+
+<p>把用户添加到deluge用户组<code>adduser &lt;username&gt; deluge</code>，便于用户操作torrent和下载到的文件，在我的kodi的xubuntu，当然就是kodi用户了：</p>
+<div class="highlight"><pre><span></span>$ sudo adduser kodi deluge
+</pre></div>
+
+
+<p>需要临时登录deluge用户配置远程管理, 因此如果系统不允许没有密码的用户登录，则需要给deluge设置一个密码</p>
+<div class="highlight"><pre><span></span>$ sudo passwd deluge：
+</pre></div>
+
+
+<p>然后再登录deluge用户：</p>
+<div class="highlight"><pre><span></span>$ su deluge
+
+$ deluge-console <span class="s2">&quot;config -s allow_remote True&quot;</span>
+$ deluge-console <span class="s2">&quot;config allow_remote&quot;</span>
+</pre></div>
+
+
+<p>修改远程控制的密码，格式是<code>&lt;username&gt;:&lt;password&gt;:10</code>：</p>
+<div class="highlight"><pre><span></span>$ cp ~/.config/deluge/auth ~/.conf/deluge/auth.bak
+$ vim ~/.config/deluge/auth
+</pre></div>
+
+
+<p>退出deluge：</p>
+<div class="highlight"><pre><span></span>$ <span class="nb">exit</span>
+</pre></div>
+
+
+<p>执行deluge的守护进程：</p>
+<div class="highlight"><pre><span></span>$ deluged
+</pre></div>
+
+
+<p>(可选)让deluge作为服务运行，暂略。</p>
+<h1>客户端</h1>
+<p>现在回到我的笔记本上：</p>
+<p>安装deluge：</p>
+<div class="highlight"><pre><span></span>$ sudo pacman -S deluge
+</pre></div>
+
+
+<p>OR</p>
+<div class="highlight"><pre><span></span>$ sudo apt-get install deluge
+</pre></div>
+
+
+<p>deluge安装好了，在终端执行deluge, 或者直接打开应用程序，在菜单中选择：</p>
+<div class="highlight"><pre><span></span>Preferences -&gt; Interface : 把 Classic Mode 的勾勾掉
+</pre></div>
+
+
+<p>然后会自动重启deluge，重新启动后，系统会让你选择一个服务器，默认有一个127.0.0.1的本地deluge服务，显然这不是我们想要的：
+点击Add，输入服务器的ip地址:</p>
+<p>Hostname就是服务器的IP地址.
+Port端口一般都是默认的58846.
+Username用户名和Password密码就是之前在auth文件里的配置</p>
+<p>Ok. 完成，现在可以随便找个网站下个torrent文件测试下，kat.cr是我逛的最多的一个了。</p>
+<p>Is that cool!</p>
+<p>当然deluge还有更加厉害的地方，比如它可以自动检测某个目录下有了新的torrent文件，检测到以后会自动执行下载任务。这个特性让我想到了一些更加有趣的事情，下次再一一道来吧。</p>
+<p>Document based on:</p>
+<ul>
+<li>
+<p><a href="http://dev.deluge-torrent.org/wiki/UserGuide/ThinClient">UserGuide/ThinClient – Deluge</a></p>
+</li>
+<li>
+<p><a href="http://dev.deluge-torrent.org/wiki/UserGuide/Service/systemd">UserGuide/Service/systemd – Deluge</a></p>
+</li>
+<li>
+<p><a href="http://dev.deluge-torrent.org/wiki/Installing/Linux/Ubuntu">Installing/Linux/Ubuntu – Deluge</a></p>
+</li>
+</ul>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>links</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                            <li><a href="https://github.com/gccpacman">My Github</a></li>
+                            <li><a href="https://stackoverflow.com/users/4124310/realhu">My StackOverflow</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>
