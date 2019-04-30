@@ -83,17 +83,17 @@
 <ol>
 <li>
 <p>安装lightdm/gdm后，，设置session成i3，并且因为是虚拟机不想每次开机都输入用户名密码，可以设置自动登陆：</p>
-<p>4.1 <code>lightdm</code>修改<code>/etc/lightdm/lightdm.conf</code>:
-<code>[SeatDefaults]
+<p>4.1 <code>lightdm</code>修改<code>/etc/lightdm/lightdm.conf</code>:</p>
+<p><code>[SeatDefaults]
     autologin-user= {{your username}}
     autologin-user-timeout=0
-    user-session=i3</code>
-4.2 <code>gdm</code>修改<code>/etc/gdm3/daemon.conf</code>:
-<code>[daemon]
+    user-session=i3</code></p>
+<p>4.2 <code>gdm</code>修改<code>/etc/gdm3/daemon.conf</code>:</p>
+<p><code>[daemon]
     AutomaticLoginEnable=true
-    AutomaticLogin=teotfw</code>
-4.3 或者直接disable x-manager, 用startx方式启动
-<code>sudo systemctl set-default multi-user.target
+    AutomaticLogin=teotfw</code></p>
+<p>4.3 或者直接disable x-manager, 用startx方式启动</p>
+<p><code>sudo systemctl set-default multi-user.target
     echo "exec i3" &gt; ~/.xinitrc
     startx # reboot并login后执行</code></p>
 </li>
