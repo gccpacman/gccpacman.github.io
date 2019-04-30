@@ -53,61 +53,66 @@
 
 <p>现在的电脑是Surface，跑虚拟机很吃力了，但是不是不能跑，重点是优化后把linux的资源降下来，还是可以非常流畅。i3是个比xfce4更加轻量级的桌面管理器，而且不是像Windows那样悬浮窗口式的，而是tiling的桌面。随便网上找了个截图，大概就是这个意思：</p>
 <p><img alt="i3" src="https://i3wm.org/screenshots/i3-1.png"></p>
-<h1>这边的例子以Vmware为例：</h1>
-<h2>1. 首先要安装i3：</h2>
-<div class="highlight"><pre><span></span>$ sudo yum install i3   <span class="c1"># centos</span>
-$ sudo apt install i3   <span class="c1"># debian &amp; ubuntu</span>
-$ sudo pacman -S i3     <span class="c1"># archlinux</span>
+<p>这边的例子以Vmware为例：</p>
+<ol>
+<li>首先要安装i3：</li>
+</ol>
+<div class="highlight"><pre><span></span>    $ sudo yum install i3   # centos
+    $ sudo apt install i3   # debian &amp; ubuntu
+    $ sudo pacman -S i3     # archlinux
 </pre></div>
 
 
-<h2>2. 备份并修改i3的配置文件，可以参考我的github，或者直接下载替换：</h2>
-<div class="highlight"><pre><span></span>cp ~/.config/i3/config ~/.config/i3/config.bak
-wget https://raw.githubusercontent.com/gccpacman/vm-i3wm-config/master/config
-cp config ~/.config/i3/config
+<ol>
+<li>备份并修改i3的配置文件，可以参考我的github，或者直接下载替换：</li>
+</ol>
+<div class="highlight"><pre><span></span>    cp ~/.config/i3/config ~/.config/i3/config.bak
+    wget https://raw.githubusercontent.com/gccpacman/vm-i3wm-config/master/config
+    cp config ~/.config/i3/config
 </pre></div>
 
 
-<h2>3. 因为我的是高分屏，默认vmware不支持，但是可以修改i3的dpi让文字和界面看起来舒服：</h2>
-<div class="highlight"><pre><span></span>echo &quot;Xft.dpi: 118&quot; &gt;&gt; ~/.Xresources
+<ol>
+<li>因为我的是高分屏，默认vmware不支持，但是可以修改i3的dpi让文字和界面看起来舒服：</li>
+</ol>
+<div class="highlight"><pre><span></span>    echo &quot;Xft.dpi: 118&quot; &gt;&gt; ~/.Xresources
 </pre></div>
 
 
-<h2>4 安装lightdm/gdm后，，设置session成i3，并且因为是虚拟机不想每次开机都输入用户名密码，可以设置自动登陆：</h2>
-<p><code>lightdm</code>修改<code>/etc/lightdm/lightdm.conf</code>:</p>
-<div class="highlight"><pre><span></span><span class="k">[SeatDefaults]</span>
-<span class="na">autologin-user</span><span class="o">=</span> <span class="s">{{your username}}</span>
-<span class="na">autologin-user-timeout</span><span class="o">=</span><span class="s">0</span>
-<span class="na">user-session</span><span class="o">=</span><span class="s">i3</span>
+<ol>
+<li>
+<p>安装lightdm/gdm后，，设置session成i3，并且因为是虚拟机不想每次开机都输入用户名密码，可以设置自动登陆：</p>
+<p>4.1 <code>lightdm</code>修改<code>/etc/lightdm/lightdm.conf</code>:
+<code>[SeatDefaults]
+    autologin-user= {{your username}}
+    autologin-user-timeout=0
+    user-session=i3</code>
+4.2 <code>gdm</code>修改<code>/etc/gdm3/daemon.conf</code>:
+<code>[daemon]
+    AutomaticLoginEnable=true
+    AutomaticLogin=teotfw</code>
+4.3 或者直接disable x-manager, 用startx方式启动
+<code>sudo systemctl set-default multi-user.target
+    echo "exec i3" &gt; ~/.xinitrc
+    startx # reboot并login后执行</code></p>
+</li>
+<li>
+<p>根据你的系统安装open-vm-tools</p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span>    $ sudo yum install open-vm-tools   # centos
+    $ sudo apt install open-vm-tools   # debian &amp; ubuntu
+    $ sudo pacman -S open-vm-tools     # archlinux
 </pre></div>
 
 
-<p><code>gdm</code>修改<code>/etc/gdm3/daemon.conf</code>:</p>
-<div class="highlight"><pre><span></span><span class="k">[daemon]</span>
-<span class="na">AutomaticLoginEnable</span><span class="o">=</span><span class="s">true</span>
-<span class="na">AutomaticLogin</span><span class="o">=</span><span class="s">teotfw</span>
-</pre></div>
-
-
-<p>PS: 或者直接disable x-manager, 用startx方式启动</p>
-<div class="highlight"><pre><span></span>sudo systemctl set-default multi-user.target
-echo &quot;exec i3&quot; &gt; ~/.xinitrc
-startx # reboot并login后执行
-</pre></div>
-
-
-<h2>5. 根据你的系统安装open-vm-tools</h2>
-<div class="highlight"><pre><span></span>$ sudo yum install open-vm-tools   <span class="c1"># centos</span>
-$ sudo apt install open-vm-tools   <span class="c1"># debian &amp; ubuntu</span>
-$ sudo pacman -S open-vm-tools     <span class="c1"># archlinux</span>
-</pre></div>
-
-
-<h2>6. 如果你无法加载open-vm-tools, 则需要做如下配置：</h2>
-<div class="highlight"><pre><span></span>cp ~/.xsession ~/.xsession.bak
-echo &quot;#!/bin/sh
-xrandr
-exec i3&quot; &gt; ~/.xsession
+<ol>
+<li>如果你无法加载open-vm-tools, 则需要做如下配置：</li>
+</ol>
+<div class="highlight"><pre><span></span>    cp ~/.xsession ~/.xsession.bak
+    echo &quot;#!/bin/sh
+    xrandr
+    exec i3&quot; &gt; ~/.xsession
 </pre></div><p class="subheader">Category: <a href="https://gccpacman.github.io/category/vim.html">Vim</a>
 
     Tagged: 
