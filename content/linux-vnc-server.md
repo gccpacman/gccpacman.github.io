@@ -1,4 +1,4 @@
-Title: Linux创建自定义的应用程序启动器
+Title: Linux搭建VNC服务器
 Date: 2016-01-05 10:20
 Modified: 2016-01-05 19:30
 Category: Linux

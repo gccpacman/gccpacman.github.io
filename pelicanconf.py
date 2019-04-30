@@ -19,15 +19,17 @@ TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
+THEME = "../pelican-themes/zurb-F5-basic"
+
 # Blogroll
 LINKS = (('Pelican', 'http://getpelican.com/'),
          )
 
 # Social widget
-SOCIAL = (('My Github', 'https://github.com/gccpacman'),
-          ('My StackOverflow', 'https://stackoverflow.com/users/4124310/realhu'),)
+SOCIAL = (('GccPacman @Github', 'https://github.com/gccpacman'),
+          ('r341h @StackOverflow', 'https://stackoverflow.com/users/4124310/realhu'),)
 
-DEFAULT_PAGINATION = 10
+DEFAULT_PAGINATION = 6
 
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True

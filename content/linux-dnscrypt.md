@@ -1,4 +1,4 @@
-Title: 把用户态systemd服务改成系统服务，开机自启动xware
+Title: Linux安装Dnscrypt
 Date: 2016-02-06 10:20
 Modified: 2016-02-06 19:30
 Category: Linux
@@ -36,4 +36,3 @@ Authors: r341h
     make -j2
     make install
 
-4.  
