@@ -83,24 +83,24 @@ cp config ~/.config/i3/config
 <li>
 <p>安装lightdm/gdm后，，设置session成i3，并且因为是虚拟机不想每次开机都输入用户名密码，可以设置自动登陆：</p>
 <p>4.1 <code>lightdm</code>修改<code>/etc/lightdm/lightdm.conf</code>:</p>
-<div class="highlight"><pre><span></span><span class="x">    [SeatDefaults]</span>
-<span class="x">    autologin-user= </span><span class="cp">{{</span><span class="nv">your</span> <span class="nv">username</span><span class="cp">}}</span><span class="x"></span>
-<span class="x">    autologin-user-timeout=0</span>
-<span class="x">    user-session=i3</span>
+<div class="highlight"><pre><span></span><span class="k">[SeatDefaults]</span>
+<span class="na">autologin-user</span><span class="o">=</span> <span class="s">{{your username}}</span>
+<span class="na">autologin-user-timeout</span><span class="o">=</span><span class="s">0</span>
+<span class="na">user-session</span><span class="o">=</span><span class="s">i3</span>
 </pre></div>
 
 
 <p>4.2 <code>gdm</code>修改<code>/etc/gdm3/daemon.conf</code>:</p>
-<div class="highlight"><pre><span></span>    [daemon]
-    AutomaticLoginEnable=true
-    AutomaticLogin=teotfw
+<div class="highlight"><pre><span></span><span class="k">[daemon]</span>
+<span class="na">AutomaticLoginEnable</span><span class="o">=</span><span class="s">true</span>
+<span class="na">AutomaticLogin</span><span class="o">=</span><span class="s">teotfw</span>
 </pre></div>
 
 
 <p>4.3 或者直接disable x-manager, 用startx方式启动</p>
-<div class="highlight"><pre><span></span>    sudo systemctl set-default multi-user.target
-    echo &quot;exec i3&quot; &gt; ~/.xinitrc
-    startx # reboot并login后执行
+<div class="highlight"><pre><span></span>sudo systemctl set-default multi-user.target
+echo &quot;exec i3&quot; &gt; ~/.xinitrc
+startx # reboot并login后执行
 </pre></div>
 
 
