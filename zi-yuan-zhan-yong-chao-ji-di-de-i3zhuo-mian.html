@@ -56,65 +56,76 @@
 <p><img alt="i3" src="https://i3wm.org/screenshots/i3-1.png"></p>
 <p>这边的例子以Vmware为例：</p>
 <ol>
-<li>首先要安装i3：</li>
-</ol>
-<div class="highlight"><pre><span></span>    $ sudo yum install i3   # centos
-    $ sudo apt install i3   # debian &amp; ubuntu
-    $ sudo pacman -S i3     # archlinux
+<li>
+<p>首先要安装i3：</p>
+<div class="highlight"><pre><span></span>$ sudo yum install i3   <span class="c1"># centos</span>
+$ sudo apt install i3   <span class="c1"># debian &amp; ubuntu</span>
+$ sudo pacman -S i3     <span class="c1"># archlinux</span>
 </pre></div>
 
 
-<ol>
-<li>备份并修改i3的配置文件，可以参考我的github，或者直接下载替换：</li>
-</ol>
-<div class="highlight"><pre><span></span>    cp ~/.config/i3/config ~/.config/i3/config.bak
-    wget https://raw.githubusercontent.com/gccpacman/vm-i3wm-config/master/config
-    cp config ~/.config/i3/config
+</li>
+<li>
+<p>备份并修改i3的配置文件，可以参考我的github，或者直接下载替换：</p>
+<div class="highlight"><pre><span></span>cp ~/.config/i3/config ~/.config/i3/config.bak
+wget https://raw.githubusercontent.com/gccpacman/vm-i3wm-config/master/config
+cp config ~/.config/i3/config
 </pre></div>
 
 
-<ol>
-<li>因为我的是高分屏，默认vmware不支持，但是可以修改i3的dpi让文字和界面看起来舒服：</li>
-</ol>
-<div class="highlight"><pre><span></span>    echo &quot;Xft.dpi: 118&quot; &gt;&gt; ~/.Xresources
+</li>
+<li>
+<p>因为我的是高分屏，默认vmware不支持，但是可以修改i3的dpi让文字和界面看起来舒服：</p>
+<div class="highlight"><pre><span></span>echo &quot;Xft.dpi: 118&quot; &gt;&gt; ~/.Xresources
 </pre></div>
 
 
-<ol>
+</li>
 <li>
 <p>安装lightdm/gdm后，，设置session成i3，并且因为是虚拟机不想每次开机都输入用户名密码，可以设置自动登陆：</p>
 <p>4.1 <code>lightdm</code>修改<code>/etc/lightdm/lightdm.conf</code>:</p>
-<p><code>[SeatDefaults]
-    autologin-user= {{your username}}
-    autologin-user-timeout=0
-    user-session=i3</code></p>
+<div class="highlight"><pre><span></span><span class="x">    [SeatDefaults]</span>
+<span class="x">    autologin-user= </span><span class="cp">{{</span><span class="nv">your</span> <span class="nv">username</span><span class="cp">}}</span><span class="x"></span>
+<span class="x">    autologin-user-timeout=0</span>
+<span class="x">    user-session=i3</span>
+</pre></div>
+
+
 <p>4.2 <code>gdm</code>修改<code>/etc/gdm3/daemon.conf</code>:</p>
-<p><code>[daemon]
+<div class="highlight"><pre><span></span>    [daemon]
     AutomaticLoginEnable=true
-    AutomaticLogin=teotfw</code></p>
+    AutomaticLogin=teotfw
+</pre></div>
+
+
 <p>4.3 或者直接disable x-manager, 用startx方式启动</p>
-<p><code>sudo systemctl set-default multi-user.target
-    echo "exec i3" &gt; ~/.xinitrc
-    startx # reboot并login后执行</code></p>
+<div class="highlight"><pre><span></span>    sudo systemctl set-default multi-user.target
+    echo &quot;exec i3&quot; &gt; ~/.xinitrc
+    startx # reboot并login后执行
+</pre></div>
+
+
 </li>
 <li>
 <p>根据你的系统安装open-vm-tools</p>
+<div class="highlight"><pre><span></span>$ sudo yum install open-vm-tools   <span class="c1"># centos</span>
+$ sudo apt install open-vm-tools   <span class="c1"># debian &amp; ubuntu</span>
+$ sudo pacman -S open-vm-tools     <span class="c1"># archlinux</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>如果你无法加载open-vm-tools, 则需要做如下配置：</p>
+<div class="highlight"><pre><span></span>cp ~/.xsession ~/.xsession.bak
+echo &quot;#!/bin/sh
+xrandr
+exec i3&quot; &gt; ~/.xsession
+</pre></div>
+
+
 </li>
 </ol>
-<div class="highlight"><pre><span></span>    $ sudo yum install open-vm-tools   # centos
-    $ sudo apt install open-vm-tools   # debian &amp; ubuntu
-    $ sudo pacman -S open-vm-tools     # archlinux
-</pre></div>
-
-
-<ol>
-<li>如果你无法加载open-vm-tools, 则需要做如下配置：</li>
-</ol>
-<div class="highlight"><pre><span></span>    cp ~/.xsession ~/.xsession.bak
-    echo &quot;#!/bin/sh
-    xrandr
-    exec i3&quot; &gt; ~/.xsession
-</pre></div>
 <p class="subheader">Category: <a href="https://gccpacman.github.io/category/vim.html">Vim</a>
 
     Tagged: 

@@ -3,82 +3,93 @@
 &lt;p&gt;&lt;img alt="i3" src="https://i3wm.org/screenshots/i3-1.png"&gt;&lt;/p&gt;
 &lt;p&gt;这边的例子以Vmware为例：&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;首先要安装i3：&lt;/li&gt;
-&lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    $ sudo yum install i3   # centos
-    $ sudo apt install i3   # debian &amp;amp; ubuntu
-    $ sudo pacman -S i3     # archlinux
+&lt;li&gt;
+&lt;p&gt;首先要安装i3：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo yum install i3   &lt;span class="c1"&gt;# centos&lt;/span&gt;
+$ sudo apt install i3   &lt;span class="c1"&gt;# debian &amp;amp; ubuntu&lt;/span&gt;
+$ sudo pacman -S i3     &lt;span class="c1"&gt;# archlinux&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;ol&gt;
-&lt;li&gt;备份并修改i3的配置文件，可以参考我的github，或者直接下载替换：&lt;/li&gt;
-&lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    cp ~/.config/i3/config ~/.config/i3/config.bak
-    wget https://raw.githubusercontent.com/gccpacman/vm-i3wm-config/master/config
-    cp config …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;现在的电脑是Surface，跑虚拟机很吃力了，但是不是不能跑，重点是优化后把linux的资源降下来，还是可以非常流畅。i3是个比xfce4更加轻量级的桌面管理器，而且不是像Windows那样悬浮窗口式的，而是tiling的桌面。随便网上找了个截图，大概就是这个意思：&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;备份并修改i3的配置文件，可以参考我的github，或者直接下载替换：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cp ~/.config/i3/config ~/.config/i3/config.bak
+wget https://raw.githubusercontent.com/gccpacman/vm-i3wm-config/master/config
+cp config …&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;现在的电脑是Surface，跑虚拟机很吃力了，但是不是不能跑，重点是优化后把linux的资源降下来，还是可以非常流畅。i3是个比xfce4更加轻量级的桌面管理器，而且不是像Windows那样悬浮窗口式的，而是tiling的桌面。随便网上找了个截图，大概就是这个意思：&lt;/p&gt;
 &lt;p&gt;&lt;img alt="i3" src="https://i3wm.org/screenshots/i3-1.png"&gt;&lt;/p&gt;
 &lt;p&gt;这边的例子以Vmware为例：&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;首先要安装i3：&lt;/li&gt;
-&lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    $ sudo yum install i3   # centos
-    $ sudo apt install i3   # debian &amp;amp; ubuntu
-    $ sudo pacman -S i3     # archlinux
+&lt;li&gt;
+&lt;p&gt;首先要安装i3：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo yum install i3   &lt;span class="c1"&gt;# centos&lt;/span&gt;
+$ sudo apt install i3   &lt;span class="c1"&gt;# debian &amp;amp; ubuntu&lt;/span&gt;
+$ sudo pacman -S i3     &lt;span class="c1"&gt;# archlinux&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;ol&gt;
-&lt;li&gt;备份并修改i3的配置文件，可以参考我的github，或者直接下载替换：&lt;/li&gt;
-&lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    cp ~/.config/i3/config ~/.config/i3/config.bak
-    wget https://raw.githubusercontent.com/gccpacman/vm-i3wm-config/master/config
-    cp config ~/.config/i3/config
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;备份并修改i3的配置文件，可以参考我的github，或者直接下载替换：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cp ~/.config/i3/config ~/.config/i3/config.bak
+wget https://raw.githubusercontent.com/gccpacman/vm-i3wm-config/master/config
+cp config ~/.config/i3/config
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;ol&gt;
-&lt;li&gt;因为我的是高分屏，默认vmware不支持，但是可以修改i3的dpi让文字和界面看起来舒服：&lt;/li&gt;
-&lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    echo &amp;quot;Xft.dpi: 118&amp;quot; &amp;gt;&amp;gt; ~/.Xresources
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;因为我的是高分屏，默认vmware不支持，但是可以修改i3的dpi让文字和界面看起来舒服：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;echo &amp;quot;Xft.dpi: 118&amp;quot; &amp;gt;&amp;gt; ~/.Xresources
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;ol&gt;
+&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;安装lightdm/gdm后，，设置session成i3，并且因为是虚拟机不想每次开机都输入用户名密码，可以设置自动登陆：&lt;/p&gt;
 &lt;p&gt;4.1 &lt;code&gt;lightdm&lt;/code&gt;修改&lt;code&gt;/etc/lightdm/lightdm.conf&lt;/code&gt;:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;[SeatDefaults]
-    autologin-user= {{your username}}
-    autologin-user-timeout=0
-    user-session=i3&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;4.2 &lt;code&gt;gdm&lt;/code&gt;修改&lt;code&gt;/etc/gdm3/daemon.conf&lt;/code&gt;:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;[daemon]
-    AutomaticLoginEnable=true
-    AutomaticLogin=teotfw&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;4.3 或者直接disable x-manager, 用startx方式启动&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;sudo systemctl set-default multi-user.target
-    echo "exec i3" &amp;gt; ~/.xinitrc
-    startx # reboot并login后执行&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;根据你的系统安装open-vm-tools&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    $ sudo yum install open-vm-tools   # centos
-    $ sudo apt install open-vm-tools   # debian &amp;amp; ubuntu
-    $ sudo pacman -S open-vm-tools     # archlinux
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;    [SeatDefaults]&lt;/span&gt;
+&lt;span class="x"&gt;    autologin-user= &lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt;&lt;span class="nv"&gt;your&lt;/span&gt; &lt;span class="nv"&gt;username&lt;/span&gt;&lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;span class="x"&gt;    autologin-user-timeout=0&lt;/span&gt;
+&lt;span class="x"&gt;    user-session=i3&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;ol&gt;
-&lt;li&gt;如果你无法加载open-vm-tools, 则需要做如下配置：&lt;/li&gt;
-&lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    cp ~/.xsession ~/.xsession.bak
-    echo &amp;quot;#!/bin/sh
-    xrandr
-    exec i3&amp;quot; &amp;gt; ~/.xsession
-&lt;/pre&gt;&lt;/div&gt;</content><category term="linux"></category><category term="vim"></category><category term="gtk"></category><category term="vitual machine"></category></entry><entry><title>vim插件command-t在windows上编译</title><link href="https://gccpacman.github.io/vimcha-jian-command-tzai-windowsshang-bian-yi.html" rel="alternate"></link><published>2017-10-24T10:20:00+08:00</published><updated>2017-10-24T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2017-10-24:/vimcha-jian-command-tzai-windowsshang-bian-yi.html</id><summary type="html">&lt;p&gt;用Bundle在Windows平台上配置成功了以后，绝大多数插件都已经可以使用，但是唯独&lt;a href="https://github.com/wincent/Command-T"&gt;Command-T&lt;/a&gt;因为是Ruby集成的插件，需要手动编译。&lt;/p&gt;
+&lt;p&gt;4.2 &lt;code&gt;gdm&lt;/code&gt;修改&lt;code&gt;/etc/gdm3/daemon.conf&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    [daemon]
+    AutomaticLoginEnable=true
+    AutomaticLogin=teotfw
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;4.3 或者直接disable x-manager, 用startx方式启动&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    sudo systemctl set-default multi-user.target
+    echo &amp;quot;exec i3&amp;quot; &amp;gt; ~/.xinitrc
+    startx # reboot并login后执行
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;根据你的系统安装open-vm-tools&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo yum install open-vm-tools   &lt;span class="c1"&gt;# centos&lt;/span&gt;
+$ sudo apt install open-vm-tools   &lt;span class="c1"&gt;# debian &amp;amp; ubuntu&lt;/span&gt;
+$ sudo pacman -S open-vm-tools     &lt;span class="c1"&gt;# archlinux&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果你无法加载open-vm-tools, 则需要做如下配置：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cp ~/.xsession ~/.xsession.bak
+echo &amp;quot;#!/bin/sh
+xrandr
+exec i3&amp;quot; &amp;gt; ~/.xsession
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="linux"></category><category term="vim"></category><category term="gtk"></category><category term="vitual machine"></category></entry><entry><title>vim插件command-t在windows上编译</title><link href="https://gccpacman.github.io/vimcha-jian-command-tzai-windowsshang-bian-yi.html" rel="alternate"></link><published>2017-10-24T10:20:00+08:00</published><updated>2017-10-24T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2017-10-24:/vimcha-jian-command-tzai-windowsshang-bian-yi.html</id><summary type="html">&lt;p&gt;用Bundle在Windows平台上配置成功了以后，绝大多数插件都已经可以使用，但是唯独&lt;a href="https://github.com/wincent/Command-T"&gt;Command-T&lt;/a&gt;因为是Ruby集成的插件，需要手动编译。&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://github.com/wincent/command-t/blob/master/doc/command-t.txt"&gt;官方文档&lt;/a&gt;写的安装编译过程代码大概是这样的，我省去了使用bundle的安装过程：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span class="nb"&gt;cd&lt;/span&gt; ~/vim&lt;span class="se"&gt;\b&lt;/span&gt;undle&lt;span class="se"&gt;\c&lt;/span&gt;ommand-t&lt;span class="se"&gt;\r&lt;/span&gt;uby&lt;span class="se"&gt;\c&lt;/span&gt;ommand-t&lt;span class="se"&gt;\e&lt;/span&gt;xt&lt;span class="se"&gt;\c&lt;/span&gt;ommand-t&amp;gt;
 $ ruby extconf.rb
