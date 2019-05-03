@@ -672,16 +672,14 @@ group nogroup
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;这样就很方便的又重新连接到了本地的ssh。同样的技巧可以用于一些暴露本地端口的操作，例如你身处一个局域网里，且没有权限去操作路由。你却想要暴露一个本机的ip，比如说80，让远程的主机访问你的http服务，用同样的方式可以很轻易的做到。&lt;/p&gt;</content><category term="linux"></category><category term="ssh"></category><category term="port-forward"></category></entry><entry><title>linux将Socks代理转换成Http代理</title><link href="https://gccpacman.github.io/linuxjiang-socksdai-li-zhuan-huan-cheng-httpdai-li.html" rel="alternate"></link><published>2015-05-14T10:20:00+08:00</published><updated>2015-05-14T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2015-05-14:/linuxjiang-socksdai-li-zhuan-huan-cheng-httpdai-li.html</id><summary type="html">&lt;h1&gt;covert socks proxy to http proxy&lt;/h1&gt;
-&lt;h2&gt;install polipo and configure&lt;/h2&gt;
+&lt;p&gt;这样就很方便的又重新连接到了本地的ssh。同样的技巧可以用于一些暴露本地端口的操作，例如你身处一个局域网里，且没有权限去操作路由。你却想要暴露一个本机的ip，比如说80，让远程的主机访问你的http服务，用同样的方式可以很轻易的做到。&lt;/p&gt;</content><category term="linux"></category><category term="ssh"></category><category term="port-forward"></category></entry><entry><title>linux将Socks代理转换成Http代理</title><link href="https://gccpacman.github.io/linuxjiang-socksdai-li-zhuan-huan-cheng-httpdai-li.html" rel="alternate"></link><published>2015-05-14T10:20:00+08:00</published><updated>2015-05-14T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2015-05-14:/linuxjiang-socksdai-li-zhuan-huan-cheng-httpdai-li.html</id><summary type="html">&lt;h2&gt;server config&lt;/h2&gt;
 &lt;p&gt;First, start out by making sure you have universe enabled, up to date package lists and downloading the polipo package (it has no dependancies).&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get update
 sudo apt-get install polipo
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Now to edit the polipo config file. This is …&lt;/p&gt;</summary><content type="html">&lt;h1&gt;covert socks proxy to http proxy&lt;/h1&gt;
-&lt;h2&gt;install polipo and configure&lt;/h2&gt;
+&lt;p&gt;Now to edit the polipo config file. This is found in /etc/polipo/config, and by default …&lt;/p&gt;</summary><content type="html">&lt;h2&gt;server config&lt;/h2&gt;
 &lt;p&gt;First, start out by making sure you have universe enabled, up to date package lists and downloading the polipo package (it has no dependancies).&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get update
 sudo apt-get install polipo
@@ -733,25 +731,21 @@ allowedClients = 192.168.0.0/24
 
 &lt;p&gt;Log out and in to apply GNOME settings, and your done!&lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;a href="https://help.ubuntu.com/community/Polipo"&gt;Polipo - Community Help Wiki&lt;/a&gt;&lt;/p&gt;</content><category term="linux"></category><category term="proxy"></category></entry><entry><title>Linux搭建PPTP VPN Server</title><link href="https://gccpacman.github.io/linuxda-jian-pptp-vpn-server.html" rel="alternate"></link><published>2015-04-19T10:20:00+08:00</published><updated>2015-04-19T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2015-04-19:/linuxda-jian-pptp-vpn-server.html</id><summary type="html">&lt;h1&gt;Setup PPTP Server on linux&lt;/h1&gt;
+&lt;p&gt;&lt;a href="https://help.ubuntu.com/community/Polipo"&gt;Polipo - Community Help Wiki&lt;/a&gt;&lt;/p&gt;</content><category term="linux"></category><category term="proxy"></category></entry><entry><title>Linux搭建PPTP VPN Server</title><link href="https://gccpacman.github.io/linuxda-jian-pptp-vpn-server.html" rel="alternate"></link><published>2015-04-19T10:20:00+08:00</published><updated>2015-04-19T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2015-04-19:/linuxda-jian-pptp-vpn-server.html</id><summary type="html">&lt;h2&gt;Setup PPTP Server on linux&lt;/h2&gt;
 &lt;p&gt;参考:
 &lt;a href="https://www.digitalocean.com/community/tutorials/how-to-setup-your-own-vpn-with-pptp"&gt;How To Setup Your Own VPN With PPTP&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://askubuntu.com/questions/492923/pptpd-vpn-no-internet-access-after-connecting"&gt;pptpd VPN: No internet access after connecting&lt;/a&gt;&lt;/p&gt;
-&lt;h2&gt;PPTP Installation&lt;/h2&gt;
-&lt;p&gt;====================&lt;/p&gt;
-&lt;h4&gt;1. install server application&lt;/h4&gt;
+&lt;h3&gt;1. install server application&lt;/h3&gt;
 &lt;p&gt;On CentOS 6 x64:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;rpm -i http://poptop.sourceforge.net/yum/stable/rhel6/pptp-release-current.noarch.rpm&lt;/p&gt;
 &lt;p&gt;yum -y install pptpd&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;On Ubuntu 12 …&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Setup PPTP Server on linux&lt;/h1&gt;
+&lt;p&gt;On Ubuntu 12.10 x64 …&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Setup PPTP Server on linux&lt;/h2&gt;
 &lt;p&gt;参考:
 &lt;a href="https://www.digitalocean.com/community/tutorials/how-to-setup-your-own-vpn-with-pptp"&gt;How To Setup Your Own VPN With PPTP&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://askubuntu.com/questions/492923/pptpd-vpn-no-internet-access-after-connecting"&gt;pptpd VPN: No internet access after connecting&lt;/a&gt;&lt;/p&gt;
-&lt;h2&gt;PPTP Installation&lt;/h2&gt;
-&lt;p&gt;====================&lt;/p&gt;
-&lt;h4&gt;1. install server application&lt;/h4&gt;
+&lt;h3&gt;1. install server application&lt;/h3&gt;
 &lt;p&gt;On CentOS 6 x64:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;rpm -i http://poptop.sourceforge.net/yum/stable/rhel6/pptp-release-current.noarch.rpm&lt;/p&gt;
@@ -761,39 +755,39 @@ allowedClients = 192.168.0.0/24
 &lt;blockquote&gt;
 &lt;p&gt;apt-get install pptpd&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h4&gt;2. edit &lt;strong&gt;/etc/pptpd.conf&lt;/strong&gt; and add the following lines:&lt;/h4&gt;
+&lt;h3&gt;2. edit &lt;strong&gt;/etc/pptpd.conf&lt;/strong&gt; and add the following lines:&lt;/h3&gt;
 &lt;blockquote&gt;
 &lt;p&gt;localip 10.0.0.1&lt;/p&gt;
 &lt;p&gt;remoteip 10.0.0.100-200&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;localip本机ip(vpn的服务器ip), remoteip-分配给客户端的ip, 应该处于同一网段&lt;/p&gt;
-&lt;h4&gt;3. setup authentication for PPTP by adding users and passwords. Simply add them to &lt;strong&gt;/etc/ppp/chap-secrets&lt;/strong&gt; :&lt;/h4&gt;
+&lt;h3&gt;3. setup authentication for PPTP by adding users and passwords. Simply add them to &lt;strong&gt;/etc/ppp/chap-secrets&lt;/strong&gt; :&lt;/h3&gt;
 &lt;blockquote&gt;
 &lt;h1&gt;client server secret IP&lt;/h1&gt;
 &lt;p&gt;user1 pptpd 24odfjafdi34 *&lt;/p&gt;
 &lt;p&gt;user2 pptpd 3f3faf3fsdfI *&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;Where client is the username, server is type of service – pptpd for our example, secret is the password, and IP addresses specifies which IP address may authenticate. By setting ‘*’ in IP addresses field, you specify that you would accept username/password pair for any IP.  &lt;/p&gt;
-&lt;h4&gt;4. Add DNS servers to &lt;strong&gt;/etc/ppp/pptpd-options&lt;/strong&gt;:&lt;/h4&gt;
+&lt;h3&gt;4. Add DNS servers to &lt;strong&gt;/etc/ppp/pptpd-options&lt;/strong&gt;:&lt;/h3&gt;
 &lt;blockquote&gt;
 &lt;p&gt;ms-dns 8.8.8.8
 ms-dns 8.8.4.4&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h4&gt;5. start PPTP daemon:&lt;/h4&gt;
+&lt;h3&gt;5. start PPTP daemon:&lt;/h3&gt;
 &lt;blockquote&gt;
 &lt;p&gt;service pptpd restart&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h4&gt;6. verify  it is running and accepting connection&lt;/h4&gt;
+&lt;h3&gt;6. verify  it is running and accepting connection&lt;/h3&gt;
 &lt;blockquote&gt;
 &lt;p&gt;netstat -alpn | grep :1723&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h4&gt;7. Setup Forwarding. edit &lt;strong&gt;/etc/sysctl.conf&lt;/strong&gt; and add the following line&lt;/h4&gt;
+&lt;h3&gt;7. Setup Forwarding. edit &lt;strong&gt;/etc/sysctl.conf&lt;/strong&gt; and add the following line&lt;/h3&gt;
 &lt;p&gt;(It is important to enable IP forwarding on your PPTP server. This will allow you to forward packets between public IP and private IPs that you setup with PPTP. )&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;net.ipv4.ip_forward = 1&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;To make changes active, run sysctl -p&lt;/p&gt;
-&lt;h4&gt;8. The following iptables firewall rules allow port 1723, GRE and perform NAT:&lt;/h4&gt;
+&lt;h3&gt;8. The following iptables firewall rules allow port 1723, GRE and perform NAT:&lt;/h3&gt;
 &lt;blockquote&gt;
 &lt;p&gt;iptables -I INPUT -p tcp --dport 1723 -m state --state NEW -j ACCEPT&lt;/p&gt;
 &lt;p&gt;iptables -I INPUT -p gre -j ACCEPT&lt;/p&gt;
