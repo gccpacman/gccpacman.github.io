@@ -5,9 +5,7 @@ Category: Linux
 Tags: linux, proxy
 Authors: r341h
 
-# covert socks proxy to http proxy
-
-## install polipo and configure
+## server config
 
 First, start out by making sure you have universe enabled, up to date package lists and downloading the polipo package (it has no dependancies).
 
@@ -33,7 +31,7 @@ Restart the service, and we are done!
 
 ## client config
 
-###First things first - APT.  ```may not working on Ubuntu 14.04, I'm not try yet```
+### First things first - APT.  ```may not working on Ubuntu 14.04, I'm not try yet```
 
 This one is stupidly easy - Open a terminal, and type the following (it creates a blank file)
 
@@ -45,7 +43,7 @@ In the file, add
 
 as the only line.
 
-###Firefox:
+### Firefox:
 
 Open the browser, click Edit -> Preferences. Click the 'connection settings' button, and click on 'manual proxy configuration'. In the top field add the following:
 
@@ -53,7 +51,7 @@ Open the browser, click Edit -> Preferences. Click the 'connection settings' but
 
 PS, if you go and set up privoxy as well, this port is changed. One step at a time though!
 
-###GNOME:
+### GNOME:
 
 Click System -> Preferences -> network proxy. Click Manual proxy configuration, and put in the same details as above :
 
