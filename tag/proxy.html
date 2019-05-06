@@ -51,58 +51,29 @@
 </h6>
 
 
-<h2>server config</h2>
-<p>First, start out by making sure you have universe enabled, up to date package lists and downloading the polipo package (it has no dependancies).</p>
+<p>安装polipo：</p>
 <div class="highlight"><pre><span></span>sudo apt-get update
 sudo apt-get install polipo
 </pre></div>
 
 
-<p>Now to edit the polipo config file. This is found in /etc/polipo/config, and by default is the only file there to configure.</p>
-<p>Now I'm going to list the required changes to the config file - all 2 of them!. Remember to customise these as required :). Its also worth noting that theres lots of other options to play with, and you should feel free. these are just the 2 you need to change to get going.</p>
-<div class="highlight"><pre><span></span>### Basic configuration
+<p>编辑polipo配置文件 <code>/etc/polipo/config</code> ：</p>
+<div class="highlight"><pre><span></span>    ### Basic configuration
 
-# Add your proxy&#39;s address
-proxyAddress = 192.168.0.1
+    # Add your proxy&#39;s address
+    proxyAddress = 192.168.0.1
 
-# Allow from anyone in the 192.168.0.* range to connect to your proxy
-allowedClients = 192.168.0.0/24
+    # Allow from anyone in the 192.168.0.* range to connect to your proxy
+    allowedClients = 192.168.0.0/24
 </pre></div>
 
 
-<p>Restart the service, and we are done!</p>
+<p>重启服务：</p>
 <div class="highlight"><pre><span></span>sudo /etc/init.d/polipo restart
 </pre></div>
 
 
-<h2>client config</h2>
-<h3>First things first - APT.  <code>may not working on Ubuntu 14.04, I'm not try yet</code></h3>
-<p>This one is stupidly easy - Open a terminal, and type the following (it creates a blank file)</p>
-<div class="highlight"><pre><span></span>sudo vi /etc/apt/apt.conf
-</pre></div>
-
-
-<p>In the file, add</p>
-<div class="highlight"><pre><span></span><span class="nt">Acquire</span><span class="p">::</span><span class="nd">http</span><span class="p">::</span><span class="nd">Proxy</span> <span class="s2">&quot;http://192.168.0.1:8123&quot;</span><span class="o">;</span>
-</pre></div>
-
-
-<p>as the only line.</p>
-<h3>Firefox:</h3>
-<p>Open the browser, click Edit -&gt; Preferences. Click the 'connection settings' button, and click on 'manual proxy configuration'. In the top field add the following:</p>
-<div class="highlight"><pre><span></span>HTTP Proxy:    192.168.0.1        Port:    8123
-</pre></div>
-
-
-<p>PS, if you go and set up privoxy as well, this port is changed. One step at a time though!</p>
-<h3>GNOME:</h3>
-<p>Click System -&gt; Preferences -&gt; network proxy. Click Manual proxy configuration, and put in the same details as above :</p>
-<div class="highlight"><pre><span></span>HTTP Proxy:    192.168.0.1        Port:    8123
-</pre></div>
-
-
-<p>Log out and in to apply GNOME settings, and your done!</p>
-<hr>
+<p>参考：</p>
 <p><a href="https://help.ubuntu.com/community/Polipo">Polipo - Community Help Wiki</a></p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
     Tagged: 

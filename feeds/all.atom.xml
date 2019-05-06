@@ -767,17 +767,10 @@ sudo swapon /dev/sda4
 &lt;p&gt;重启，reboot。重启以后&lt;/p&gt;</content><category term="linux"></category><category term="partition"></category></entry><entry><title>Docker搭建openvpn server</title><link href="https://gccpacman.github.io/dockerda-jian-openvpn-server.html" rel="alternate"></link><published>2015-12-29T10:20:00+08:00</published><updated>2015-12-29T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2015-12-29:/dockerda-jian-openvpn-server.html</id><summary type="html">&lt;p&gt;I always intersted in build services in my own VPS.
 specially things like a server can help me free browser the internet.
 But sometimes the connection between my own pc and the vps server are not quite good. So things not always go luck.&lt;/p&gt;
-&lt;p&gt;!!! this tutorial is not done yet …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I always intersted in build services in my own VPS.
+&lt;p&gt;I find out openvpn is quite …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I always intersted in build services in my own VPS.
 specially things like a server can help me free browser the internet.
 But sometimes the connection between my own pc and the vps server are not quite good. So things not always go luck.&lt;/p&gt;
-&lt;p&gt;!!! this tutorial is not done yet&lt;/p&gt;
-&lt;p&gt;I find out openvpn is quite useful these days. So I'm thinking I will build one of my own. First I find some tutorials by google：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-an-openvpn-server-on-ubuntu-14-04"&gt;How To Set Up an OpenVPN Server on Ubuntu 14.04 | DigitalOcean&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://www.slsmk.com/getting-started-with-openvpn/installing-openvpn-on-ubuntu-server-12-04-or-14-04-using-tap/"&gt;Installing OpenVPN on Ubuntu Server 12.04 or 14.04 using TAP – Super Library of Solutions&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://wiki.archlinux.org/index.php/OpenVPN#Routing_all_client_traffic_through_the_server"&gt;OpenVPN - ArchWiki&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Then I picked one of my VPS for the test. It was installed with Ubuntu 14.04 and has 512MB memory. Here are the steps of how I did it:&lt;/p&gt;
+&lt;p&gt;I find out openvpn is quite useful these days. So I'm thinking I will build one of my own. I picked one of my VPS for the test. It was installed with Ubuntu 14.04 and has 512MB memory. Here are the steps of how I did it:&lt;/p&gt;
 &lt;p&gt;1st, I install the openvpn and easy-rsa:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ apt-get install openvpn easy-rsa
 &lt;/pre&gt;&lt;/div&gt;
@@ -887,7 +880,15 @@ group nogroup
 &lt;span class="nt"&gt;&amp;lt;key&amp;gt;&lt;/span&gt;
 (insert client1.key here)
 &lt;span class="nt"&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</content><category term="linux"></category><category term="vpn"></category><category term="openvpn"></category></entry><entry><title>uwsgi方式启动django</title><link href="https://gccpacman.github.io/uwsgifang-shi-qi-dong-django.html" rel="alternate"></link><published>2015-11-23T10:20:00+08:00</published><updated>2015-11-23T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2015-11-23:/uwsgifang-shi-qi-dong-django.html</id><summary type="html">&lt;p&gt;没人访问的博客也不是不能升级。不过最近有点懒，趁着睡不着搞了下&lt;code&gt;uwsgi&lt;/code&gt;。
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;参考：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-an-openvpn-server-on-ubuntu-14-04"&gt;How To Set Up an OpenVPN Server on Ubuntu 14.04 | DigitalOcean&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.slsmk.com/getting-started-with-openvpn/installing-openvpn-on-ubuntu-server-12-04-or-14-04-using-tap/"&gt;Installing OpenVPN on Ubuntu Server 12.04 or 14.04 using TAP – Super Library of Solutions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://wiki.archlinux.org/index.php/OpenVPN#Routing_all_client_traffic_through_the_server"&gt;OpenVPN - ArchWiki&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="linux"></category><category term="vpn"></category><category term="openvpn"></category></entry><entry><title>uwsgi方式启动django</title><link href="https://gccpacman.github.io/uwsgifang-shi-qi-dong-django.html" rel="alternate"></link><published>2015-11-23T10:20:00+08:00</published><updated>2015-11-23T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2015-11-23:/uwsgifang-shi-qi-dong-django.html</id><summary type="html">&lt;p&gt;没人访问的博客也不是不能升级。不过最近有点懒，趁着睡不着搞了下&lt;code&gt;uwsgi&lt;/code&gt;。
 额。平台ubuntu, 你最好有个django项目，假设已经用了&lt;code&gt;virtualenv&lt;/code&gt;，假设已经安装好&lt;code&gt;nginx&lt;/code&gt;并启动服务。&lt;/p&gt;
 &lt;p&gt;1）首先安装&lt;code&gt;uwsgi&lt;/code&gt;:  &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install uwsgi
@@ -974,129 +975,156 @@ group nogroup
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;这样就很方便的又重新连接到了本地的ssh。同样的技巧可以用于一些暴露本地端口的操作，例如你身处一个局域网里，且没有权限去操作路由。你却想要暴露一个本机的ip，比如说80，让远程的主机访问你的http服务，用同样的方式可以很轻易的做到。&lt;/p&gt;</content><category term="linux"></category><category term="ssh"></category><category term="port-forward"></category></entry><entry><title>linux将Socks代理转换成Http代理</title><link href="https://gccpacman.github.io/linuxjiang-socksdai-li-zhuan-huan-cheng-httpdai-li.html" rel="alternate"></link><published>2015-05-14T10:20:00+08:00</published><updated>2015-05-14T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2015-05-14:/linuxjiang-socksdai-li-zhuan-huan-cheng-httpdai-li.html</id><summary type="html">&lt;h2&gt;server config&lt;/h2&gt;
-&lt;p&gt;First, start out by making sure you have universe enabled, up to date package lists and downloading the polipo package (it has no dependancies).&lt;/p&gt;
+&lt;p&gt;这样就很方便的又重新连接到了本地的ssh。同样的技巧可以用于一些暴露本地端口的操作，例如你身处一个局域网里，且没有权限去操作路由。你却想要暴露一个本机的ip，比如说80，让远程的主机访问你的http服务，用同样的方式可以很轻易的做到。&lt;/p&gt;</content><category term="linux"></category><category term="ssh"></category><category term="port-forward"></category></entry><entry><title>linux将Socks代理转换成Http代理</title><link href="https://gccpacman.github.io/linuxjiang-socksdai-li-zhuan-huan-cheng-httpdai-li.html" rel="alternate"></link><published>2015-05-14T10:20:00+08:00</published><updated>2015-05-14T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2015-05-14:/linuxjiang-socksdai-li-zhuan-huan-cheng-httpdai-li.html</id><summary type="html">&lt;p&gt;安装polipo：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get update
 sudo apt-get install polipo
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Now to edit the polipo config file. This is found in /etc/polipo/config, and by default …&lt;/p&gt;</summary><content type="html">&lt;h2&gt;server config&lt;/h2&gt;
-&lt;p&gt;First, start out by making sure you have universe enabled, up to date package lists and downloading the polipo package (it has no dependancies).&lt;/p&gt;
+&lt;p&gt;编辑polipo配置文件 &lt;code&gt;/etc/polipo/config&lt;/code&gt; ：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    ### Basic configuration
+
+    # Add your proxy&amp;#39;s address
+    proxyAddress = 192.168.0.1
+
+    # Allow from anyone in the 192.168.0.* range to connect to your proxy
+    allowedClients = 192.168.0.0/24
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;重启服务：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo /etc/init.d/polipo …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;安装polipo：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get update
 sudo apt-get install polipo
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Now to edit the polipo config file. This is found in /etc/polipo/config, and by default is the only file there to configure.&lt;/p&gt;
-&lt;p&gt;Now I'm going to list the required changes to the config file - all 2 of them!. Remember to customise these as required :). Its also worth noting that theres lots of other options to play with, and you should feel free. these are just the 2 you need to change to get going.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;### Basic configuration
+&lt;p&gt;编辑polipo配置文件 &lt;code&gt;/etc/polipo/config&lt;/code&gt; ：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    ### Basic configuration
 
-# Add your proxy&amp;#39;s address
-proxyAddress = 192.168.0.1
+    # Add your proxy&amp;#39;s address
+    proxyAddress = 192.168.0.1
 
-# Allow from anyone in the 192.168.0.* range to connect to your proxy
-allowedClients = 192.168.0.0/24
+    # Allow from anyone in the 192.168.0.* range to connect to your proxy
+    allowedClients = 192.168.0.0/24
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Restart the service, and we are done!&lt;/p&gt;
+&lt;p&gt;重启服务：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo /etc/init.d/polipo restart
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h2&gt;client config&lt;/h2&gt;
-&lt;h3&gt;First things first - APT.  &lt;code&gt;may not working on Ubuntu 14.04, I'm not try yet&lt;/code&gt;&lt;/h3&gt;
-&lt;p&gt;This one is stupidly easy - Open a terminal, and type the following (it creates a blank file)&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo vi /etc/apt/apt.conf
+&lt;p&gt;参考：&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://help.ubuntu.com/community/Polipo"&gt;Polipo - Community Help Wiki&lt;/a&gt;&lt;/p&gt;</content><category term="linux"></category><category term="proxy"></category></entry><entry><title>Linux搭建PPTP VPN Server</title><link href="https://gccpacman.github.io/linuxda-jian-pptp-vpn-server.html" rel="alternate"></link><published>2015-04-19T10:20:00+08:00</published><updated>2015-04-19T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2015-04-19:/linuxda-jian-pptp-vpn-server.html</id><summary type="html">&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;安装server&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# On CentOS 6 x64:
+rpm -i http://poptop.sourceforge.net/yum/stable/rhel6/pptp-release-current.noarch.rpm
+yum -y install pptpd
+# On Ubuntu 12.10 x64:
+apt-get install pptpd
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;In the file, add&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;Acquire&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="nd"&gt;http&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="nd"&gt;Proxy&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;http://192.168.0.1:8123&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;编辑 &lt;strong&gt;/etc/pptpd.conf&lt;/strong&gt; 添加以下行:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;localip 10.0.0.1
+remoteip 10.0.0.100-200
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;as the only line.&lt;/p&gt;
-&lt;h3&gt;Firefox:&lt;/h3&gt;
-&lt;p&gt;Open the browser, click Edit -&amp;gt; Preferences. Click the 'connection settings' button, and click on 'manual proxy configuration'. In the top field add the following:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;HTTP Proxy:    192.168.0.1        Port:    8123
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;PS, if you go and set up privoxy as well, this port is changed. One step at a time though!&lt;/p&gt;
-&lt;h3&gt;GNOME:&lt;/h3&gt;
-&lt;p&gt;Click System -&amp;gt; Preferences -&amp;gt; network proxy. Click Manual proxy configuration, and put in the same details as above :&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;HTTP Proxy:    192.168.0.1        Port:    8123
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;Log out and in to apply GNOME settings, and your done!&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;a href="https://help.ubuntu.com/community/Polipo"&gt;Polipo - Community Help Wiki&lt;/a&gt;&lt;/p&gt;</content><category term="linux"></category><category term="proxy"></category></entry><entry><title>Linux搭建PPTP VPN Server</title><link href="https://gccpacman.github.io/linuxda-jian-pptp-vpn-server.html" rel="alternate"></link><published>2015-04-19T10:20:00+08:00</published><updated>2015-04-19T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2015-04-19:/linuxda-jian-pptp-vpn-server.html</id><summary type="html">&lt;h2&gt;Setup PPTP Server on linux&lt;/h2&gt;
-&lt;p&gt;参考:
-&lt;a href="https://www.digitalocean.com/community/tutorials/how-to-setup-your-own-vpn-with-pptp"&gt;How To Setup Your Own VPN With PPTP&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://askubuntu.com/questions/492923/pptpd-vpn-no-internet-access-after-connecting"&gt;pptpd VPN: No internet access after connecting&lt;/a&gt;&lt;/p&gt;
-&lt;h3&gt;1. install server application&lt;/h3&gt;
-&lt;p&gt;On CentOS 6 x64:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;rpm -i http://poptop.sourceforge.net/yum/stable/rhel6/pptp-release-current.noarch.rpm&lt;/p&gt;
-&lt;p&gt;yum -y install pptpd&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;On Ubuntu 12.10 x64 …&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Setup PPTP Server on linux&lt;/h2&gt;
-&lt;p&gt;参考:
-&lt;a href="https://www.digitalocean.com/community/tutorials/how-to-setup-your-own-vpn-with-pptp"&gt;How To Setup Your Own VPN With PPTP&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://askubuntu.com/questions/492923/pptpd-vpn-no-internet-access-after-connecting"&gt;pptpd VPN: No internet access after connecting&lt;/a&gt;&lt;/p&gt;
-&lt;h3&gt;1. install server application&lt;/h3&gt;
-&lt;p&gt;On CentOS 6 x64:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;rpm -i http://poptop.sourceforge.net/yum/stable/rhel6/pptp-release-current.noarch.rpm&lt;/p&gt;
-&lt;p&gt;yum -y install pptpd&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;On Ubuntu 12.10 x64:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;apt-get install pptpd&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3&gt;2. edit &lt;strong&gt;/etc/pptpd.conf&lt;/strong&gt; and add the following lines:&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;localip 10.0.0.1&lt;/p&gt;
-&lt;p&gt;remoteip 10.0.0.100-200&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
 &lt;p&gt;localip本机ip(vpn的服务器ip), remoteip-分配给客户端的ip, 应该处于同一网段&lt;/p&gt;
-&lt;h3&gt;3. setup authentication for PPTP by adding users and passwords. Simply add them to &lt;strong&gt;/etc/ppp/chap-secrets&lt;/strong&gt; :&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;h1&gt;client server secret IP&lt;/h1&gt;
-&lt;p&gt;user1 pptpd 24odfjafdi34 *&lt;/p&gt;
-&lt;p&gt;user2 pptpd 3f3faf3fsdfI *&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Where client is the username, server is type of service – pptpd for our example, secret is the password, and IP addresses specifies which IP address may authenticate. By setting ‘*’ in IP addresses field, you specify that you would accept username/password pair for any IP.  &lt;/p&gt;
-&lt;h3&gt;4. Add DNS servers to &lt;strong&gt;/etc/ppp/pptpd-options&lt;/strong&gt;:&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;ms-dns 8.8.8.8
-ms-dns 8.8.4.4&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3&gt;5. start PPTP daemon:&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;service pptpd restart&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3&gt;6. verify  it is running and accepting connection&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;netstat -alpn | grep :1723&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3&gt;7. Setup Forwarding. edit &lt;strong&gt;/etc/sysctl.conf&lt;/strong&gt; and add the following line&lt;/h3&gt;
-&lt;p&gt;(It is important to enable IP forwarding on your PPTP server. This will allow you to forward packets between public IP and private IPs that you setup with PPTP. )&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;net.ipv4.ip_forward = 1&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;To make changes active, run sysctl -p&lt;/p&gt;
-&lt;h3&gt;8. The following iptables firewall rules allow port 1723, GRE and perform NAT:&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;iptables -I INPUT -p tcp --dport 1723 -m state --state NEW -j ACCEPT&lt;/p&gt;
-&lt;p&gt;iptables -I INPUT -p gre -j ACCEPT&lt;/p&gt;
-&lt;p&gt;iptables -t nat -I POSTROUTING -o eth0 -j MASQUERADE&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;In the last rule replace “eth0″ with the interface connecting to the internet on your VPN server. Finally the following rule is required to ensure websites load properly&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;iptables -I FORWARD -p tcp --tcp-flags SYN,RST SYN -s 172.20.1.0/24 -j TCPMSS  --clamp-mss-to-pmtu&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;ReReplace &lt;strong&gt;172.20.1.0/24&lt;/strong&gt; with the IP address range used in the “remoteip” option in the &lt;strong&gt;/etc/pptpd.conf&lt;/strong&gt; this firewall rule is used to ensure a proper MTU value is used to prevent fragmentation.&lt;/p&gt;</content><category term="linux"></category><category term="vpn"></category></entry></feed>
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;添加pptp用户名和密码到 &lt;strong&gt;/etc …&lt;/strong&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;安装server&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# On CentOS 6 x64:
+rpm -i http://poptop.sourceforge.net/yum/stable/rhel6/pptp-release-current.noarch.rpm
+yum -y install pptpd
+# On Ubuntu 12.10 x64:
+apt-get install pptpd
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;编辑 &lt;strong&gt;/etc/pptpd.conf&lt;/strong&gt; 添加以下行:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;localip 10.0.0.1
+remoteip 10.0.0.100-200
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;localip本机ip(vpn的服务器ip), remoteip-分配给客户端的ip, 应该处于同一网段&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;添加pptp用户名和密码到 &lt;strong&gt;/etc/ppp/chap-secrets&lt;/strong&gt; :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;#client server secret IP
+user1 pptpd 24odfjafdi34 *
+user2 pptpd 3f3faf3fsdfI *
+#Where client is the username, server is type of service – pptpd for our example, secret is the password, and IP addresses specifies which IP address may authenticate. By setting ‘*’ in IP addresses field, you specify that you would accept username/password pair for any IP.
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;添加DNS服务器地址到 &lt;strong&gt;/etc/ppp/pptpd-options&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ms-dns 8.8.8.8
+ms-dns 8.8.4.4
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;启动 PPTP 守护进程daemon:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;service pptpd restart
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;验证是否启动成功并接受连接&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;netstat -alpn | grep :1723
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;设置ipv4转发. 编辑 &lt;strong&gt;/etc/sysctl.conf&lt;/strong&gt; 添加：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;#It is important to enable IP forwarding on your PPTP server. This will allow you to forward packets between public IP and private IPs that you setup with PPTP. )
+
+net.ipv4.ip_forward = 1
+
+# To make changes active, run 
+sysctl -p
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;添加iptables规则&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;#The following iptables firewall rules allow port 1723, GRE and perform NAT:
+
+iptables -I INPUT -p tcp --dport 1723 -m state --state NEW -j ACCEPT
+iptables -I INPUT -p gre -j ACCEPT
+iptables -t nat -I POSTROUTING -o eth0 -j MASQUERADE
+
+# In the last rule replace “eth0″ with the interface connecting to the internet on your VPN server. Finally the following rule is required to ensure websites load properly
+
+iptables -I FORWARD -p tcp --tcp-flags SYN,RST SYN -s 172.20.1.0/24 -j TCPMSS  --clamp-mss-to-pmtu
+
+# ReReplace **172.20.1.0/24** with the IP address range used in the “remoteip” option in the **/etc/pptpd.conf** this firewall rule is used to ensure a proper MTU value is used to prevent fragmentation.
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;参考:
+&lt;a href="https://www.digitalocean.com/community/tutorials/how-to-setup-your-own-vpn-with-pptp"&gt;How To Setup Your Own VPN With PPTP&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://askubuntu.com/questions/492923/pptpd-vpn-no-internet-access-after-connecting"&gt;pptpd VPN: No internet access after connecting&lt;/a&gt;&lt;/p&gt;</content><category term="linux"></category><category term="vpn"></category></entry></feed>

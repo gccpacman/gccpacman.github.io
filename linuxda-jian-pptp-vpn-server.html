@@ -52,63 +52,94 @@
 </h6>
 
 
-    <h2>Setup PPTP Server on linux</h2>
+    <ol>
+<li>
+<p>安装server</p>
+<div class="highlight"><pre><span></span># On CentOS 6 x64:
+rpm -i http://poptop.sourceforge.net/yum/stable/rhel6/pptp-release-current.noarch.rpm
+yum -y install pptpd
+# On Ubuntu 12.10 x64:
+apt-get install pptpd
+</pre></div>
+
+
+</li>
+<li>
+<p>编辑 <strong>/etc/pptpd.conf</strong> 添加以下行:</p>
+<div class="highlight"><pre><span></span>localip 10.0.0.1
+remoteip 10.0.0.100-200
+</pre></div>
+
+
+</li>
+</ol>
+<p>localip本机ip(vpn的服务器ip), remoteip-分配给客户端的ip, 应该处于同一网段</p>
+<ol>
+<li>
+<p>添加pptp用户名和密码到 <strong>/etc/ppp/chap-secrets</strong> :</p>
+<div class="highlight"><pre><span></span>#client server secret IP
+user1 pptpd 24odfjafdi34 *
+user2 pptpd 3f3faf3fsdfI *
+#Where client is the username, server is type of service – pptpd for our example, secret is the password, and IP addresses specifies which IP address may authenticate. By setting ‘*’ in IP addresses field, you specify that you would accept username/password pair for any IP.
+</pre></div>
+
+
+</li>
+<li>
+<p>添加DNS服务器地址到 <strong>/etc/ppp/pptpd-options</strong>:</p>
+<div class="highlight"><pre><span></span>ms-dns 8.8.8.8
+ms-dns 8.8.4.4
+</pre></div>
+
+
+</li>
+<li>
+<p>启动 PPTP 守护进程daemon:</p>
+<div class="highlight"><pre><span></span>service pptpd restart
+</pre></div>
+
+
+</li>
+<li>
+<p>验证是否启动成功并接受连接</p>
+<div class="highlight"><pre><span></span>netstat -alpn | grep :1723
+</pre></div>
+
+
+</li>
+<li>
+<p>设置ipv4转发. 编辑 <strong>/etc/sysctl.conf</strong> 添加：</p>
+<div class="highlight"><pre><span></span>#It is important to enable IP forwarding on your PPTP server. This will allow you to forward packets between public IP and private IPs that you setup with PPTP. )
+
+net.ipv4.ip_forward = 1
+
+# To make changes active, run 
+sysctl -p
+</pre></div>
+
+
+</li>
+<li>
+<p>添加iptables规则</p>
+<div class="highlight"><pre><span></span>#The following iptables firewall rules allow port 1723, GRE and perform NAT:
+
+iptables -I INPUT -p tcp --dport 1723 -m state --state NEW -j ACCEPT
+iptables -I INPUT -p gre -j ACCEPT
+iptables -t nat -I POSTROUTING -o eth0 -j MASQUERADE
+
+# In the last rule replace “eth0″ with the interface connecting to the internet on your VPN server. Finally the following rule is required to ensure websites load properly
+
+iptables -I FORWARD -p tcp --tcp-flags SYN,RST SYN -s 172.20.1.0/24 -j TCPMSS  --clamp-mss-to-pmtu
+
+# ReReplace **172.20.1.0/24** with the IP address range used in the “remoteip” option in the **/etc/pptpd.conf** this firewall rule is used to ensure a proper MTU value is used to prevent fragmentation.
+</pre></div>
+
+
+</li>
+</ol>
 <p>参考:
 <a href="https://www.digitalocean.com/community/tutorials/how-to-setup-your-own-vpn-with-pptp">How To Setup Your Own VPN With PPTP</a></p>
 <p><a href="http://askubuntu.com/questions/492923/pptpd-vpn-no-internet-access-after-connecting">pptpd VPN: No internet access after connecting</a></p>
-<h3>1. install server application</h3>
-<p>On CentOS 6 x64:</p>
-<blockquote>
-<p>rpm -i http://poptop.sourceforge.net/yum/stable/rhel6/pptp-release-current.noarch.rpm</p>
-<p>yum -y install pptpd</p>
-</blockquote>
-<p>On Ubuntu 12.10 x64:</p>
-<blockquote>
-<p>apt-get install pptpd</p>
-</blockquote>
-<h3>2. edit <strong>/etc/pptpd.conf</strong> and add the following lines:</h3>
-<blockquote>
-<p>localip 10.0.0.1</p>
-<p>remoteip 10.0.0.100-200</p>
-</blockquote>
-<p>localip本机ip(vpn的服务器ip), remoteip-分配给客户端的ip, 应该处于同一网段</p>
-<h3>3. setup authentication for PPTP by adding users and passwords. Simply add them to <strong>/etc/ppp/chap-secrets</strong> :</h3>
-<blockquote>
-<h1>client server secret IP</h1>
-<p>user1 pptpd 24odfjafdi34 *</p>
-<p>user2 pptpd 3f3faf3fsdfI *</p>
-</blockquote>
-<p>Where client is the username, server is type of service – pptpd for our example, secret is the password, and IP addresses specifies which IP address may authenticate. By setting ‘*’ in IP addresses field, you specify that you would accept username/password pair for any IP.  </p>
-<h3>4. Add DNS servers to <strong>/etc/ppp/pptpd-options</strong>:</h3>
-<blockquote>
-<p>ms-dns 8.8.8.8
-ms-dns 8.8.4.4</p>
-</blockquote>
-<h3>5. start PPTP daemon:</h3>
-<blockquote>
-<p>service pptpd restart</p>
-</blockquote>
-<h3>6. verify  it is running and accepting connection</h3>
-<blockquote>
-<p>netstat -alpn | grep :1723</p>
-</blockquote>
-<h3>7. Setup Forwarding. edit <strong>/etc/sysctl.conf</strong> and add the following line</h3>
-<p>(It is important to enable IP forwarding on your PPTP server. This will allow you to forward packets between public IP and private IPs that you setup with PPTP. )</p>
-<blockquote>
-<p>net.ipv4.ip_forward = 1</p>
-</blockquote>
-<p>To make changes active, run sysctl -p</p>
-<h3>8. The following iptables firewall rules allow port 1723, GRE and perform NAT:</h3>
-<blockquote>
-<p>iptables -I INPUT -p tcp --dport 1723 -m state --state NEW -j ACCEPT</p>
-<p>iptables -I INPUT -p gre -j ACCEPT</p>
-<p>iptables -t nat -I POSTROUTING -o eth0 -j MASQUERADE</p>
-</blockquote>
-<p>In the last rule replace “eth0″ with the interface connecting to the internet on your VPN server. Finally the following rule is required to ensure websites load properly</p>
-<blockquote>
-<p>iptables -I FORWARD -p tcp --tcp-flags SYN,RST SYN -s 172.20.1.0/24 -j TCPMSS  --clamp-mss-to-pmtu</p>
-</blockquote>
-<p>ReReplace <strong>172.20.1.0/24</strong> with the IP address range used in the “remoteip” option in the <strong>/etc/pptpd.conf</strong> this firewall rule is used to ensure a proper MTU value is used to prevent fragmentation.</p>
 <p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
     Tagged: 

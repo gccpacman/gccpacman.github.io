@@ -148,7 +148,7 @@ p2p的torrent一直是我的最爱。deluge是一个跨平台的操作系统，�
 <p>I always intersted in build services in my own VPS.
 specially things like a server can help me free browser the internet.
 But sometimes the connection between my own pc and the vps server are not quite good. So things not always go luck.</p>
-<p>!!! this tutorial is not done yet …</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+<p>I find out openvpn is quite …</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
     Tagged: 
     <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
@@ -206,14 +206,25 @@ But sometimes the connection between my own pc and the vps server are not quite 
 </h6>
 
 
-<h2>server config</h2>
-<p>First, start out by making sure you have universe enabled, up to date package lists and downloading the polipo package (it has no dependancies).</p>
+<p>安装polipo：</p>
 <div class="highlight"><pre><span></span>sudo apt-get update
 sudo apt-get install polipo
 </pre></div>
 
 
-<p>Now to edit the polipo config file. This is found in /etc/polipo/config, and by default …</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+<p>编辑polipo配置文件 <code>/etc/polipo/config</code> ：</p>
+<div class="highlight"><pre><span></span>    ### Basic configuration
+
+    # Add your proxy&#39;s address
+    proxyAddress = 192.168.0.1
+
+    # Allow from anyone in the 192.168.0.* range to connect to your proxy
+    allowedClients = 192.168.0.0/24
+</pre></div>
+
+
+<p>重启服务：</p>
+<div class="highlight"><pre><span></span>sudo /etc/init.d/polipo …</pre></div><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
     Tagged: 
     <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
