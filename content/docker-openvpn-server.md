@@ -9,15 +9,8 @@ I always intersted in build services in my own VPS.
 specially things like a server can help me free browser the internet.
 But sometimes the connection between my own pc and the vps server are not quite good. So things not always go luck.
 
-!!! this tutorial is not done yet
 
-I find out openvpn is quite useful these days. So I'm thinking I will build one of my own. First I find some tutorials by google：
-
-1. [How To Set Up an OpenVPN Server on Ubuntu 14.04 | DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-set-up-an-openvpn-server-on-ubuntu-14-04)
-2. [Installing OpenVPN on Ubuntu Server 12.04 or 14.04 using TAP – Super Library of Solutions](http://www.slsmk.com/getting-started-with-openvpn/installing-openvpn-on-ubuntu-server-12-04-or-14-04-using-tap/)
-3. [OpenVPN - ArchWiki](https://wiki.archlinux.org/index.php/OpenVPN#Routing_all_client_traffic_through_the_server)
-
-Then I picked one of my VPS for the test. It was installed with Ubuntu 14.04 and has 512MB memory. Here are the steps of how I did it:
+I find out openvpn is quite useful these days. So I'm thinking I will build one of my own. I picked one of my VPS for the test. It was installed with Ubuntu 14.04 and has 512MB memory. Here are the steps of how I did it:
 
 1st, I install the openvpn and easy-rsa:
 
@@ -118,3 +111,10 @@ to
     <key>
     (insert client1.key here)
     </key>
+
+
+参考：
+
+1. [How To Set Up an OpenVPN Server on Ubuntu 14.04 | DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-set-up-an-openvpn-server-on-ubuntu-14-04)
+2. [Installing OpenVPN on Ubuntu Server 12.04 or 14.04 using TAP – Super Library of Solutions](http://www.slsmk.com/getting-started-with-openvpn/installing-openvpn-on-ubuntu-server-12-04-or-14-04-using-tap/)
+3. [OpenVPN - ArchWiki](https://wiki.archlinux.org/index.php/OpenVPN#Routing_all_client_traffic_through_the_server)
