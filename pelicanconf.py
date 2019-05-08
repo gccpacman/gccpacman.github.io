@@ -31,5 +31,7 @@ SOCIAL = (('GccPacman @Github', 'https://github.com/gccpacman'),
 
 DEFAULT_PAGINATION = 6
 
+STATIC_PATHS = ['images']
+
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True
