@@ -46,105 +46,6 @@
         
 
             <article>
-                <a href="https://gccpacman.github.io/zi-yuan-zhan-yong-chao-ji-di-de-i3zhuo-mian.html"><h3 class="article-title">资源占用超级低的i3桌面</h3></a>
-<h6 class="subheader" title="2018-05-04T10:20:00+08:00">Fri 04 May 2018
-</h6>
-
-
-<p>现在的电脑是Surface，跑虚拟机很吃力了，但是不是不能跑，重点是优化后把linux的资源降下来，还是可以非常流畅。i3是个比xfce4更加轻量级的桌面管理器，而且不是像Windows那样悬浮窗口式的，而是tiling的桌面。随便网上找了个截图，大概就是这个意思：</p>
-<p><img alt="i3" src="https://i3wm.org/screenshots/i3-1.png"></p>
-<p>这边的例子以Vmware为例：</p>
-<ol>
-<li>
-<p>首先要安装i3：</p>
-<div class="highlight"><pre><span></span>$ sudo yum install i3   <span class="c1"># centos</span>
-$ sudo apt install i3   <span class="c1"># debian &amp; ubuntu</span>
-$ sudo pacman -S i3     <span class="c1"># archlinux</span>
-</pre></div>
-
-
-</li>
-<li>
-<p>备份并修改i3的配置文件，可以参考我的github，或者直接下载替换：</p>
-<div class="highlight"><pre><span></span>cp ~/.config/i3/config ~/.config/i3/config.bak
-wget https://raw.githubusercontent.com/gccpacman/vm-i3wm-config/master/config
-cp config ~/.config/i3/config
-</pre></div>
-
-
-</li>
-<li>
-<p>因为我的是高分屏，默认vmware不支持，但是可以修改i3的dpi让文字和界面看起来舒服：</p>
-<div class="highlight"><pre><span></span>echo &quot;Xft.dpi: 118&quot; &gt;&gt; ~/.Xresources
-</pre></div>
-
-
-</li>
-<li>
-<p>安装lightdm/gdm后，，设置session成i3，并且因为是虚拟机不想每次开机都输入用户名密码，可以设置自动登陆：</p>
-<p>4.1 <code>lightdm</code>修改<code>/etc/lightdm/lightdm.conf</code>:</p>
-<div class="highlight"><pre><span></span><span class="k">[SeatDefaults]</span>
-<span class="na">autologin-user</span><span class="o">=</span> <span class="s">{{your username}}</span>
-<span class="na">autologin-user-timeout</span><span class="o">=</span><span class="s">0</span>
-<span class="na">user-session</span><span class="o">=</span><span class="s">i3</span>
-</pre></div>
-
-
-<p>4.2 <code>gdm</code>修改<code>/etc/gdm3/daemon.conf</code>:</p>
-<div class="highlight"><pre><span></span><span class="k">[daemon]</span>
-<span class="na">AutomaticLoginEnable</span><span class="o">=</span><span class="s">true</span>
-<span class="na">AutomaticLogin</span><span class="o">=</span><span class="s">teotfw</span>
-</pre></div>
-
-
-<p>4.3 或者直接disable x-manager, 用startx方式启动</p>
-<div class="highlight"><pre><span></span>sudo systemctl set-default multi-user.target
-echo &quot;exec i3&quot; &gt; ~/.xinitrc
-startx # reboot并login后执行
-</pre></div>
-
-
-</li>
-<li>
-<p>根据你的系统安装open-vm-tools</p>
-<div class="highlight"><pre><span></span>$ sudo yum install open-vm-tools   <span class="c1"># centos</span>
-$ sudo apt install open-vm-tools   <span class="c1"># debian &amp; ubuntu</span>
-$ sudo pacman -S open-vm-tools     <span class="c1"># archlinux</span>
-</pre></div>
-
-
-</li>
-<li>
-<p>如果你无法加载open-vm-tools, 则需要做如下配置：</p>
-<div class="highlight"><pre><span></span>cp ~/.xsession ~/.xsession.bak
-echo &quot;#!/bin/sh
-xrandr
-exec i3&quot; &gt; ~/.xsession
-</pre></div>
-
-
-</li>
-</ol><p class="subheader">Category: <a href="https://gccpacman.github.io/category/vim.html">Vim</a>
-
-    Tagged: 
-    <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
-    <a href="https://gccpacman.github.io/tag/vim.html">vim </a>
-    <a href="https://gccpacman.github.io/tag/gtk.html">gtk </a>
-    <a href="https://gccpacman.github.io/tag/vitual-machine.html">vitual machine </a>
-</p>
-
-
-
-            </article>
-
-
-                <hr  class="gradient"/>
-
-
-        
-
-
-            <article>
                 <a href="https://gccpacman.github.io/vimcha-jian-command-tzai-windowsshang-bian-yi.html"><h3 class="article-title">vim插件command-t在windows上编译</h3></a>
 <h6 class="subheader" title="2017-10-24T10:20:00+08:00">Tue 24 October 2017
 </h6>
@@ -161,7 +62,35 @@ $ make
 <p>要完成这些肯定得装ruby和make，网上的绝大多数答案也都已经过期，说的是vim7.4左右的版本，而现在已经是vim 8.0。于是只好自己探索。</p>
 <p>windows的ruby是一个特殊的安装包，和Ruby的官网都分开，网址是<a href="https://rubyinstaller.org/">RubyInstaller for windows</a>。</p>
 <p>可供下载的版本从2.0.0-p648到2.4.2-2版本。</p>
-<p>我从高版本开始尝试，安装2.4.2-2 …</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/vim.html">Vim</a>
+<p>我从高版本开始尝试，安装2.4.2-2，安装成功并设置好windows环境变量，开始编译。结果发现报错 <code>You have to install development tools first.</code>. 于是我在官网发现了<code>DEVELOPMENT KIT</code>可以下载，但是居然只支持（Ruby 2.0 到 2.3），只好重新安装了Ruby 2.3, 并且按照官网development tools。</p>
+<p>假设Ruby 安装到 C:\Ruby22-x64， 配置PATH环境变量。然后将Development tools 就解压到 C:\Ruby22-x64\DevKit, 然后进入该目录执行</p>
+<div class="highlight"><pre><span></span>$ ruby dk.rb init
+</pre></div>
+
+
+<p>成功后再执行</p>
+<div class="highlight"><pre><span></span>$ ruby dk.rb install
+</pre></div>
+
+
+<p>接着进入<code>~/vim\bundle\command-t\ruby\command-t\ext\command-t&gt;</code>文件夹，执行<code>ruby extconf.rb</code>命令，发现ruby执行成功了，用choco安装make并执行make一切都顺利。
+但是进入vim一按command-t的快捷键报错，报错内容是：</p>
+<div class="highlight"><pre><span></span>command-t.vim could not load the C extension
+Please see INSTALLATION and TROUBLE-SHOOTING in the help
+Vim Ruby version: 2.2.6
+Expected version: 2.3.3
+</pre></div>
+
+
+<p>也就是vim内置的ruby版本和这个版本不匹配，看来我确实遗漏了vim内置版本的问题。于是继续降级到Ruby 2.2, 结果居然还是报错。报错内容依旧是<code>You have to install development tools first.</code> 然而我明明已经安装了development tools. </p>
+<p>求助google，结果在<a href="https://github.com/OneClick/RubyInstaller/wiki/Development-Kit">RubyInstaller wiki</a>
+有一段话是：</p>
+<blockquote>
+<p>The Hacky Developer Scenario – a developer building native gems wants to be able to quickly test that their extconf.rb file used to create a Makefile for the native library works correctly. To shorten the development cycle, the DevKit enables the developer to run <code>ruby -rdevkit extconf.rb</code>.</p>
+</blockquote>
+<p>于是我尝试带<code>-rdevkit</code>参数执行extconf.rb，结果果然通过了，但是make命令却无法通过。继续搜索，发现[AskUbuntu]上有个command-t的问题，没有用官方文档的方法编译command-t而是用了<code>rake make</code>来编译，我知道rake是ruby的一个工具，在jekyll尝试搭博客的时候用到，但不知道原理。但是反正是编译只要过了就行，于是我就尝试执行<code>rake make</code>结果还是不信，报错<code>You have to install development tools first.</code>，但是这样我没有理由不去尝试帮<code>rake make</code> 带上<code>-rdevkit</code>这样一个参数，结果居然真的成功了。</p>
+<p>于是迫不及待打开vim，按下command-t的快捷键，一个漂亮的弹窗弹了出来。试着敲了几行，好像没有什么问题，大功告成。</p>
+<p><img alt="Command-T on Windows" src="https://gccpacman.github.io/images/command_t1.png"></p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/vim.html">Vim</a>
 
     Tagged: 
     <a href="https://gccpacman.github.io/tag/windows.html">windows </a>
@@ -170,9 +99,11 @@ $ make
 
 
 
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/vimcha-jian-command-tzai-windowsshang-bian-yi.html">Read More</a>
-                <hr  class="gradient"/>
             </article>
+
+
+                <hr  class="gradient"/>
+
 
         
 

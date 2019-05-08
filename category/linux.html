@@ -46,48 +46,90 @@
         
 
             <article>
-                <a href="https://gccpacman.github.io/linuxxiu-mian-hou-huan-xing-wifihe-lan-ya-wu-fa-zheng-chang-shi-yong-de-jie-jue-fang-fa.html"><h3 class="article-title">Linux休眠后唤醒，wifi和蓝牙无法正常使用的解决方法</h3></a>
-<h6 class="subheader" title="2017-12-04T10:20:00+08:00">Mon 04 December 2017
+                <a href="https://gccpacman.github.io/zi-yuan-zhan-yong-chao-ji-di-de-i3zhuo-mian.html"><h3 class="article-title">资源占用超级低的i3桌面</h3></a>
+<h6 class="subheader" title="2018-05-04T10:20:00+08:00">Fri 04 May 2018
 </h6>
 
 
-<p><code>Manjaro Linux</code>从<code>17.02</code>版本开始匹配了Surface Pro 3， 这里必须非常感谢下Manjaro Team的工作，我现在可以再次在Surface上用畅快的用Linux了。</p>
-<p>具体可以看reddit上的这篇文章： https://cd-rw.org/t/running-linux-on-the-surface-pro-3/175/37。</p>
-<p>我实际安装的版本是<code>17.1pre3</code>，不管是蓝牙，触摸板，WIFI，touchpad，音量键，甚至触摸屏都可以正常使用，甚至都不用升级内核。</p>
-<p>唯一的问题是启用休眠以后，wifi和蓝牙功能失灵了，即使通过重启<code>NetworkManager.service</code>也无法解决，因此基本上就是硬件驱动的问题，网上关于其他一些笔记本在休眠后无法解决的问题基本上就是用lsmod查到和wifi相关的模块，然后重新加载的方法，但是没有和surface pro有关的内容。</p>
-<p>找了几篇stackoverflow文章做了多次尝试，然后通过<code>lsmod　| grep wifi</code>和<code>lsmod | grep bluetooth</code>查出来的模块，依次尝试，终于找到了正确的模块。</p>
-<p>和wifi相关的模块是<code>mwifiex_pcie</code>， 和蓝牙相关的模块是<code>btusb</code>。</p>
-<p>因此要做的操作就是<code>rmmod</code>和<code>modprobe</code>，休眠后执行下面的命令后，wifi和蓝牙就可以正常工作了。</p>
-<div class="highlight"><pre><span></span> sudo rmmod -v btusb
- sudo rmbanbenmod -v mwifiex_pcie
- sudo modprobe -v btusb
- sudo modprobe -v mwifiex_pcie
+<p>现在的电脑是Surface，跑虚拟机很吃力了，但是不是不能跑，重点是优化后把linux的资源降下来，还是可以非常流畅。i3是个比xfce4更加轻量级的桌面管理器，而且不是像Windows那样悬浮窗口式的，而是tiling的桌面。随便网上找了个截图，大概就是这个意思：</p>
+<p><img alt="i3" src="https://i3wm.org/screenshots/i3-1.png"></p>
+<p>这边的例子以Vmware为例：</p>
+<ol>
+<li>
+<p>首先要安装i3：</p>
+<div class="highlight"><pre><span></span>$ sudo yum install i3   <span class="c1"># centos</span>
+$ sudo apt install i3   <span class="c1"># debian &amp; ubuntu</span>
+$ sudo pacman -S i3     <span class="c1"># archlinux</span>
 </pre></div>
 
 
-<p>但是这样就是每次都得再休眠后执行这些命令好像也略麻烦，最后看到又休眠后自动执行脚本的方法，<code>pm</code>和<code>systemctl</code>的休眠脚本位置不同，我对<code>pm</code>没印象，觉得arch的休眠几乎肯定是<code>systemctl</code>的，于是直接尝试了<code>systemctl</code>，<code>systemctl</code>的脚本位置在<code>/usr/lib/systemd/system-sleep</code>，这里的脚本会在sleep或者休眠时被调用。</p>
-<p>我的脚本<code>/usr/lib/systemd/system-sleep/wakeup_suspend_dev.sh</code>的内容是：</p>
-<div class="highlight"><pre><span></span>    #!/bin/bash
-    case $1 in
-        pre)
-          rmmod btusb
-          rmmod mwifiex_pcie
-        ;;
-        post)
-          modprobe btusb
-                modprobe mwifiex_pcie
-        ;;
-    esac
+</li>
+<li>
+<p>备份并修改i3的配置文件，可以参考我的github，或者直接下载替换：</p>
+<div class="highlight"><pre><span></span>cp ~/.config/i3/config ~/.config/i3/config.bak
+wget https://raw.githubusercontent.com/gccpacman/vm-i3wm-config/master/config
+cp config ~/.config/i3/config
 </pre></div>
 
 
-<p><code>pre</code>是在休眠之前执行<code>rmmod</code>的操作，post是在休眠之后执行<code>modprobe</code>的操作。需要注意的是必须把这个脚本加可执行权限：</p>
-<div class="highlight"><pre><span></span>sudo chmod +x wakeup_suspend_dev.sh
-</pre></div><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+</li>
+<li>
+<p>因为我的是高分屏，默认vmware不支持，但是可以修改i3的dpi让文字和界面看起来舒服：</p>
+<div class="highlight"><pre><span></span>echo &quot;Xft.dpi: 118&quot; &gt;&gt; ~/.Xresources
+</pre></div>
+
+
+</li>
+<li>
+<p>安装lightdm/gdm后，，设置session成i3，并且因为是虚拟机不想每次开机都输入用户名密码，可以设置自动登陆：</p>
+<p>4.1 <code>lightdm</code>修改<code>/etc/lightdm/lightdm.conf</code>:</p>
+<div class="highlight"><pre><span></span><span class="k">[SeatDefaults]</span>
+<span class="na">autologin-user</span><span class="o">=</span> <span class="s">{{your username}}</span>
+<span class="na">autologin-user-timeout</span><span class="o">=</span><span class="s">0</span>
+<span class="na">user-session</span><span class="o">=</span><span class="s">i3</span>
+</pre></div>
+
+
+<p>4.2 <code>gdm</code>修改<code>/etc/gdm3/daemon.conf</code>:</p>
+<div class="highlight"><pre><span></span><span class="k">[daemon]</span>
+<span class="na">AutomaticLoginEnable</span><span class="o">=</span><span class="s">true</span>
+<span class="na">AutomaticLogin</span><span class="o">=</span><span class="s">teotfw</span>
+</pre></div>
+
+
+<p>4.3 或者直接disable x-manager, 用startx方式启动</p>
+<div class="highlight"><pre><span></span>sudo systemctl set-default multi-user.target
+echo &quot;exec i3&quot; &gt; ~/.xinitrc
+startx # reboot并login后执行
+</pre></div>
+
+
+</li>
+<li>
+<p>根据你的系统安装open-vm-tools</p>
+<div class="highlight"><pre><span></span>$ sudo yum install open-vm-tools   <span class="c1"># centos</span>
+$ sudo apt install open-vm-tools   <span class="c1"># debian &amp; ubuntu</span>
+$ sudo pacman -S open-vm-tools     <span class="c1"># archlinux</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>如果你无法加载open-vm-tools, 则需要做如下配置：</p>
+<div class="highlight"><pre><span></span>cp ~/.xsession ~/.xsession.bak
+echo &quot;#!/bin/sh
+xrandr
+exec i3&quot; &gt; ~/.xsession
+</pre></div>
+
+
+</li>
+</ol><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
     Tagged: 
     <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
-    <a href="https://gccpacman.github.io/tag/drivers.html">drivers </a>
+    <a href="https://gccpacman.github.io/tag/gtk.html">gtk </a>
+    <a href="https://gccpacman.github.io/tag/vitual-machine.html">vitual machine </a>
 </p>
 
 
@@ -97,6 +139,32 @@
 
                 <hr  class="gradient"/>
 
+
+        
+
+
+            <article>
+                <a href="https://gccpacman.github.io/linuxxiu-mian-hou-huan-xing-wifihe-lan-ya-wu-fa-zheng-chang-shi-yong-de-jie-jue-fang-fa.html"><h3 class="article-title">Linux休眠后唤醒，wifi和蓝牙无法正常使用的解决方法</h3></a>
+<h6 class="subheader" title="2017-12-04T10:20:00+08:00">Mon 04 December 2017
+</h6>
+
+
+<p><code>Manjaro Linux</code>从<code>17.02</code>版本开始匹配了Surface Pro 3， 这里必须非常感谢下Manjaro Team的工作，我现在可以再次在Surface上用畅快的用Linux了。</p>
+<p>具体可以看reddit上的这篇文章： https://cd-rw.org/t/running-linux-on-the-surface-pro-3/175/37。</p>
+<p>我实际安装的版本是<code>17.1pre3</code>，不管是蓝牙，触摸板，WIFI，touchpad，音量键，甚至触摸屏都可以正常使用，甚至都不用升级内核。</p>
+<p>唯一的问题是启用休眠以后，wifi和蓝牙功能失灵了，即使通过重启<code>NetworkManager.service</code>也无法解决，因此基本上就是硬件驱动的问题，网上关于其他一些笔记本在休眠后无法解决的问题基本上就是用lsmod查到和wifi相关的模块，然后重新加载的方法，但是没有和surface pro有关的内容。</p>
+<p>找了几篇stackoverflow文章做了多次尝试，然后通过<code>lsmod　| grep wifi</code>和<code>lsmod | grep bluetooth</code>查出来的模块 …</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+
+    Tagged: 
+    <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
+    <a href="https://gccpacman.github.io/tag/drivers.html">drivers </a>
+</p>
+
+
+
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/linuxxiu-mian-hou-huan-xing-wifihe-lan-ya-wu-fa-zheng-chang-shi-yong-de-jie-jue-fang-fa.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
 
         
 
@@ -230,51 +298,6 @@ https://github.com/Xinkai/XwareDesktop/wiki/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E
 
 
                 <a class="button radius secondary small right" href="https://gccpacman.github.io/archlinuxjiang-nvidia-driverti-huan-cheng-kai-yuan-de-nouveaujie-jue-xian-qia-qu-dong-wen-ti.html">Read More</a>
-                <hr  class="gradient"/>
-            </article>
-
-        
-
-
-            <article>
-                <a href="https://gccpacman.github.io/linuxda-jian-vncfu-wu-qi.html"><h3 class="article-title">Linux搭建VNC服务器</h3></a>
-<h6 class="subheader" title="2016-01-05T10:20:00+08:00">Tue 05 January 2016
-</h6>
-
-
-<p>服务器端：</p>
-<p>1）在终端安装tigervnc：</p>
-<div class="highlight"><pre><span></span>$ sudo apt-get install tigervnc
-</pre></div>
-
-
-<p>2）启动tigervnc</p>
-<div class="highlight"><pre><span></span>$ vncserver
-</pre></div>
-
-
-<p>提示你输入vnc的密码：</p>
-<div class="highlight"><pre><span></span><span class="n">enter</span> <span class="n">your</span> <span class="n">password</span> (<span class="n">length</span> <span class="mi">8</span>)
-</pre></div>
-
-
-<p>然后终端会显示New 'X' desktop is kodi-kodibuntu:1</p>
-<p>3）（可选）如果需要改变桌面，例如不想用xvnc，可以编辑<code>$HOME/.vnc/xstartup</code>的内容。具体操作暂略。</p>
-<p>4）（可选）如果需要开机启动，一个是用supervisor，另外就是在/etc/systemd/system/下手动写一个服务。具体操作暂略。</p>
-<p>在客户端:</p>
-<p>1) 安装tigervnc:</p>
-<div class="highlight"><pre><span></span>$ sudo pacman -S tigervnc   <span class="o">(</span>archlinux …</pre></div><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
-
-    Tagged: 
-    <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
-    <a href="https://gccpacman.github.io/tag/vnc.html">vnc </a>
-    <a href="https://gccpacman.github.io/tag/gtk.html">gtk </a>
-    <a href="https://gccpacman.github.io/tag/rdp.html">rdp </a>
-</p>
-
-
-
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/linuxda-jian-vncfu-wu-qi.html">Read More</a>
                 <hr  class="gradient"/>
             </article>
 

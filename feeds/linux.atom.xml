@@ -1,5 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Pacman News - Linux</title><link href="https://gccpacman.github.io/" rel="alternate"></link><link href="https://gccpacman.github.io/feeds/linux.atom.xml" rel="self"></link><id>https://gccpacman.github.io/</id><updated>2017-12-04T19:30:00+08:00</updated><entry><title>Linux休眠后唤醒，wifi和蓝牙无法正常使用的解决方法</title><link href="https://gccpacman.github.io/linuxxiu-mian-hou-huan-xing-wifihe-lan-ya-wu-fa-zheng-chang-shi-yong-de-jie-jue-fang-fa.html" rel="alternate"></link><published>2017-12-04T10:20:00+08:00</published><updated>2017-12-04T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2017-12-04:/linuxxiu-mian-hou-huan-xing-wifihe-lan-ya-wu-fa-zheng-chang-shi-yong-de-jie-jue-fang-fa.html</id><summary type="html">&lt;p&gt;&lt;code&gt;Manjaro Linux&lt;/code&gt;从&lt;code&gt;17.02&lt;/code&gt;版本开始匹配了Surface Pro 3， 这里必须非常感谢下Manjaro Team的工作，我现在可以再次在Surface上用畅快的用Linux了。&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Pacman News - Linux</title><link href="https://gccpacman.github.io/" rel="alternate"></link><link href="https://gccpacman.github.io/feeds/linux.atom.xml" rel="self"></link><id>https://gccpacman.github.io/</id><updated>2018-05-04T19:30:00+08:00</updated><entry><title>资源占用超级低的i3桌面</title><link href="https://gccpacman.github.io/zi-yuan-zhan-yong-chao-ji-di-de-i3zhuo-mian.html" rel="alternate"></link><published>2018-05-04T10:20:00+08:00</published><updated>2018-05-04T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2018-05-04:/zi-yuan-zhan-yong-chao-ji-di-de-i3zhuo-mian.html</id><summary type="html">&lt;p&gt;现在的电脑是Surface，跑虚拟机很吃力了，但是不是不能跑，重点是优化后把linux的资源降下来，还是可以非常流畅。i3是个比xfce4更加轻量级的桌面管理器，而且不是像Windows那样悬浮窗口式的，而是tiling的桌面。随便网上找了个截图，大概就是这个意思：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="i3" src="https://i3wm.org/screenshots/i3-1.png"&gt;&lt;/p&gt;
+&lt;p&gt;这边的例子以Vmware为例：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;首先要安装i3：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo yum install i3   &lt;span class="c1"&gt;# centos&lt;/span&gt;
+$ sudo apt install i3   &lt;span class="c1"&gt;# debian &amp;amp; ubuntu&lt;/span&gt;
+$ sudo pacman -S i3     &lt;span class="c1"&gt;# archlinux&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;备份并修改i3的配置文件，可以参考我的github，或者直接下载替换：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cp ~/.config/i3/config ~/.config/i3/config.bak
+wget https://raw.githubusercontent.com/gccpacman/vm-i3wm-config/master/config
+cp config …&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;现在的电脑是Surface，跑虚拟机很吃力了，但是不是不能跑，重点是优化后把linux的资源降下来，还是可以非常流畅。i3是个比xfce4更加轻量级的桌面管理器，而且不是像Windows那样悬浮窗口式的，而是tiling的桌面。随便网上找了个截图，大概就是这个意思：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="i3" src="https://i3wm.org/screenshots/i3-1.png"&gt;&lt;/p&gt;
+&lt;p&gt;这边的例子以Vmware为例：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;首先要安装i3：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo yum install i3   &lt;span class="c1"&gt;# centos&lt;/span&gt;
+$ sudo apt install i3   &lt;span class="c1"&gt;# debian &amp;amp; ubuntu&lt;/span&gt;
+$ sudo pacman -S i3     &lt;span class="c1"&gt;# archlinux&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;备份并修改i3的配置文件，可以参考我的github，或者直接下载替换：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cp ~/.config/i3/config ~/.config/i3/config.bak
+wget https://raw.githubusercontent.com/gccpacman/vm-i3wm-config/master/config
+cp config ~/.config/i3/config
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;因为我的是高分屏，默认vmware不支持，但是可以修改i3的dpi让文字和界面看起来舒服：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;echo &amp;quot;Xft.dpi: 118&amp;quot; &amp;gt;&amp;gt; ~/.Xresources
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;安装lightdm/gdm后，，设置session成i3，并且因为是虚拟机不想每次开机都输入用户名密码，可以设置自动登陆：&lt;/p&gt;
+&lt;p&gt;4.1 &lt;code&gt;lightdm&lt;/code&gt;修改&lt;code&gt;/etc/lightdm/lightdm.conf&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[SeatDefaults]&lt;/span&gt;
+&lt;span class="na"&gt;autologin-user&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;{{your username}}&lt;/span&gt;
+&lt;span class="na"&gt;autologin-user-timeout&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;0&lt;/span&gt;
+&lt;span class="na"&gt;user-session&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;i3&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;4.2 &lt;code&gt;gdm&lt;/code&gt;修改&lt;code&gt;/etc/gdm3/daemon.conf&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[daemon]&lt;/span&gt;
+&lt;span class="na"&gt;AutomaticLoginEnable&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;true&lt;/span&gt;
+&lt;span class="na"&gt;AutomaticLogin&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;teotfw&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;4.3 或者直接disable x-manager, 用startx方式启动&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo systemctl set-default multi-user.target
+echo &amp;quot;exec i3&amp;quot; &amp;gt; ~/.xinitrc
+startx # reboot并login后执行
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;根据你的系统安装open-vm-tools&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo yum install open-vm-tools   &lt;span class="c1"&gt;# centos&lt;/span&gt;
+$ sudo apt install open-vm-tools   &lt;span class="c1"&gt;# debian &amp;amp; ubuntu&lt;/span&gt;
+$ sudo pacman -S open-vm-tools     &lt;span class="c1"&gt;# archlinux&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果你无法加载open-vm-tools, 则需要做如下配置：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cp ~/.xsession ~/.xsession.bak
+echo &amp;quot;#!/bin/sh
+xrandr
+exec i3&amp;quot; &amp;gt; ~/.xsession
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="linux"></category><category term="gtk"></category><category term="vitual machine"></category></entry><entry><title>Linux休眠后唤醒，wifi和蓝牙无法正常使用的解决方法</title><link href="https://gccpacman.github.io/linuxxiu-mian-hou-huan-xing-wifihe-lan-ya-wu-fa-zheng-chang-shi-yong-de-jie-jue-fang-fa.html" rel="alternate"></link><published>2017-12-04T10:20:00+08:00</published><updated>2017-12-04T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2017-12-04:/linuxxiu-mian-hou-huan-xing-wifihe-lan-ya-wu-fa-zheng-chang-shi-yong-de-jie-jue-fang-fa.html</id><summary type="html">&lt;p&gt;&lt;code&gt;Manjaro Linux&lt;/code&gt;从&lt;code&gt;17.02&lt;/code&gt;版本开始匹配了Surface Pro 3， 这里必须非常感谢下Manjaro Team的工作，我现在可以再次在Surface上用畅快的用Linux了。&lt;/p&gt;
 &lt;p&gt;具体可以看reddit上的这篇文章： https://cd-rw.org/t/running-linux-on-the-surface-pro-3/175/37。&lt;/p&gt;
 &lt;p&gt;我实际安装的版本是&lt;code&gt;17.1pre3&lt;/code&gt;，不管是蓝牙，触摸板，WIFI，touchpad，音量键，甚至触摸屏都可以正常使用，甚至都不用升级内核。&lt;/p&gt;
 &lt;p&gt;唯一的问题是启用休眠以后，wifi和蓝牙功能失灵了，即使通过重启&lt;code&gt;NetworkManager.service&lt;/code&gt;也无法解决，因此基本上就是硬件驱动的问题，网上关于其他一些笔记本在休眠后无法解决的问题基本上就是用lsmod查到和wifi相关的模块，然后重新加载的方法，但是没有和surface pro有关的内容。&lt;/p&gt;
