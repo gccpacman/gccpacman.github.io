@@ -1,8 +1,8 @@
 Title: 资源占用超级低的i3桌面
 Date: 2018-05-04 10:20
 Modified: 2018-05-04 19:30
-Category: Vim
-Tags: linux, vim, gtk, vitual machine
+Category: Linux
+Tags: linux, gtk, vitual machine
 Authors: r341h
 
 现在的电脑是Surface，跑虚拟机很吃力了，但是不是不能跑，重点是优化后把linux的资源降下来，还是可以非常流畅。i3是个比xfce4更加轻量级的桌面管理器，而且不是像Windows那样悬浮窗口式的，而是tiling的桌面。随便网上找了个截图，大概就是这个意思：

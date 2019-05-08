@@ -1,7 +1,7 @@
 Title: Windows在Hyperv安装Centos7并配置网络
 Date: 2019-05-07 11:13
 Category: Windows
-Tags: windows, hyper-v, centos
+Tags: windows, hyper-v, centos, vitual machine
 Authors: r341h
 
 Hyper-V安装Centos，网卡选择Hyper-V的Default Switch。

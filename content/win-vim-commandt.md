@@ -50,4 +50,4 @@ windows的ruby是一个特殊的安装包，和Ruby的官网都分开，网址�
 
 于是迫不及待打开vim，按下command-t的快捷键，一个漂亮的弹窗弹了出来。试着敲了几行，好像没有什么问题，大功告成。
 
-![Command-T on Windows]({filename}/images/command_t1.png)
+![Command-T on Windows]({static}/images/command_t1.png)
