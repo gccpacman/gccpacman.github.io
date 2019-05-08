@@ -1,11 +1,8 @@
----
-layout: post
-title: "利用babun, tmux, zsh高度定制shell"
-description: ""
-category:
-tags: [shell, tmux, zsh]
----
-{% include JB/setup %}
+Title: 利用babun, tmux, zsh高度定制shell
+Date: 2015-10-22 10:20
+Category: Windows
+Tags: windows, cygwin, tmux, zsh
+Authors: r341h
 
 深刻和彻底的切换到linux平台后，深切的感受到linux平台对程序员带来的便利。因此日常环境已经不再使用windows啦，奈何博主虽然是个穷逼，然而却舍得钱买一堆电脑，所以没事还是会折腾下windows，毕竟娱乐还是需要的。
 

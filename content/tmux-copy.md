@@ -1,11 +1,9 @@
----
-layout: post
-title: "tmux的复制和黏贴"
-description: ""
-category:
-tags: [linux, tmux]
----
-{% include JB/setup %}
+Title: Tmux的复制和黏贴
+Date: 2015-10-29 10:20
+Category: Tmux
+Tags: tmux, linux
+Authors: r341h
+
 
 tmux确实是一个吊炸的东西，功能和那个和他类似的鼻祖screen相比，确实多出了不少。比如他又一个可以对终端的内容进行复制和黏贴的功能。
 这里假定你设置的快捷键前缀是Ctrl+a:
