@@ -4,7 +4,7 @@
     <!-- Set the viewport width to device width for mobile -->
     <meta name="viewport" content="width=device-width" />
 
-    <title>Pacman News - Linux</title>
+    <title>Pacman News - r341h</title>
 
     <link rel="stylesheet" href="https://gccpacman.github.io/theme/css/normalize.css" />
     <link rel="stylesheet" href="https://gccpacman.github.io/theme/css/foundation.min.css" />
@@ -43,6 +43,81 @@
     <!-- Main Blog Content -->
     <div class="large-9 columns">
         
+        
+
+
+            <article>
+                <a href="https://gccpacman.github.io/linuxli-yong-sshfan-xiang-duan-kou-zhuan-fa-bao-lu-nei-wang-duan-kou.html"><h3 class="article-title">Linux利用ssh反向端口转发暴露内网端口</h3></a>
+<h6 class="subheader" title="2015-10-30T10:20:00+08:00">Fri 30 October 2015
+</h6>
+
+
+<p>从本地Host用SSH连接到目标主机，怎么让目标主机也可以连接本地的SSH呢？
+答案很简单，只要把本地主机的SSH端口转发到目标主机即可。可以先查看一下SSH命令的man手册:</p>
+<div class="highlight"><pre><span></span>man ssh
+</pre></div>
+
+
+<p>注意里面的R参数，就是要用到的参数：</p>
+<div class="highlight"><pre><span></span>-R [bind_address:]port:host:hostport
+         Specifies that the given port on the remote (server) host is to be forwarded to the given host and port on the local side.  This works by allocating a socket to listen to port
+</pre></div>
+
+
+<p>意思就是把一个远程主机的端口用于本地端口的端口转发。于是对应于假设远程主机IP …</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+
+    Tagged: 
+    <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
+    <a href="https://gccpacman.github.io/tag/ssh.html">ssh </a>
+    <a href="https://gccpacman.github.io/tag/port-forward.html">port-forward </a>
+</p>
+
+
+
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/linuxli-yong-sshfan-xiang-duan-kou-zhuan-fa-bao-lu-nei-wang-duan-kou.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+
+        
+
+
+            <article>
+                <a href="https://gccpacman.github.io/linuxjiang-socksdai-li-zhuan-huan-cheng-httpdai-li.html"><h3 class="article-title">linux将Socks代理转换成Http代理</h3></a>
+<h6 class="subheader" title="2015-05-14T10:20:00+08:00">Thu 14 May 2015
+</h6>
+
+
+<p>安装polipo：</p>
+<div class="highlight"><pre><span></span>sudo apt-get update
+sudo apt-get install polipo
+</pre></div>
+
+
+<p>编辑polipo配置文件 <code>/etc/polipo/config</code> ：</p>
+<div class="highlight"><pre><span></span>    ### Basic configuration
+
+    # Add your proxy&#39;s address
+    proxyAddress = 192.168.0.1
+
+    # Allow from anyone in the 192.168.0.* range to connect to your proxy
+    allowedClients = 192.168.0.0/24
+</pre></div>
+
+
+<p>重启服务：</p>
+<div class="highlight"><pre><span></span>sudo /etc/init.d/polipo …</pre></div><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+
+    Tagged: 
+    <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
+    <a href="https://gccpacman.github.io/tag/proxy.html">proxy </a>
+</p>
+
+
+
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/linuxjiang-socksdai-li-zhuan-huan-cheng-httpdai-li.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+
         
 
 
@@ -91,10 +166,10 @@ remoteip 10.0.0.100-200
 
             <!-- /#posts-list -->
 <div class="pagination-centered">
-<h6 class="subheader">Page 3 of 3</h6>
+<h6 class="subheader">Page 4 of 4</h6>
 
 <p>
-            <a href="https://gccpacman.github.io/category/linux2.html">&laquo; Prev</a>
+            <a href="https://gccpacman.github.io/author/r341h3.html">&laquo; Prev</a>
 
 </p>
 </div>

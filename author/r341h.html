@@ -46,6 +46,188 @@
         
 
             <article>
+                <a href="https://gccpacman.github.io/k8sming-ling-xing-gong-ju-kubectlde-shi-yong-ming-ling.html"><h3 class="article-title">K8S命令行工具Kubectl的实用命令</h3></a>
+<h6 class="subheader" title="2019-05-08T14:13:00+08:00">Wed 08 May 2019
+</h6>
+
+
+<ul>
+<li>安装配置Kubectl:<ul>
+<li>下载kubectl，地址：https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl</li>
+<li>下载完成后放置到本地$Path路径</li>
+<li>修改本地<code>$HOME/.kube/config</code>，设置集群地址，凭证等信息</li>
+</ul>
+</li>
+<li>
+<p>用kubectl获取k8s集群的基本信息：</p>
+<div class="highlight"><pre><span></span>$ kubectl get pods <span class="c1"># 查看default命名空间下的pods</span>
+$ kubectl get pods -n <span class="nb">test</span> <span class="c1"># 查看test命名空间下的pods</span>
+$ kubectl get deployments <span class="c1"># 查看default命名空间下的部署</span>
+$ kubectl get services <span class="c1"># 查看default命名空间下的服务</span>
+$ kubectl get pods -o<span class="o">=</span><span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&quot;{range .items[*]}{&#39;\n&#39;}{.metadata.name}{&#39;:\t&#39;}{range .spec.containers[*]}{.image}{&#39;, &#39;}{end}{end}&quot;</span> <span class="c1"># 查看pods里container的镜像和版本</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>查看资源情况：</p>
+<div class="highlight"><pre><span></span>$ kubectl top pod <span class="c1"># 查看pods的cpu和memory资源占用</span>
+$ kubectl top node <span class="c1"># 查看节点的cpu和memory资源占用和百分比</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>调试和进入Pod：</p>
+<div class="highlight"><pre><span></span>$ kubectl describe pod <span class="si">${</span><span class="nv">pod_name</span><span class="si">}</span> <span class="c1"># 查看某个pod的信息（例如在pod有问题可以debug）</span>
+$ kubectl <span class="nb">exec</span> -it <span class="si">${</span><span class="nv">pod_name</span><span class="si">}</span> bash <span class="c1"># 进入某个pod的某个容器进行调试</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>通过端口转发调试接口：</p>
+<div class="highlight"><pre><span></span>$ kubectl port-forward pods/pod_name <span class="m">30000</span>:30000 -n cicd
+$ curl <span class="m">127</span>.0.0.1:30000
+</pre></div>
+
+
+</li>
+<li>
+<p>通过kube-api代理调试接口：</p>
+<div class="highlight"><pre><span></span>$ kubectl proxy
+$ curl http://localhost:8001/api/v1/namespaces/default/pods/<span class="si">${</span><span class="nv">pod_name</span><span class="si">}</span><span class="o">[</span>:port_name<span class="o">]</span>/proxy/
+</pre></div>
+
+
+</li>
+<li>
+<p>Deployments手动伸缩Pods:</p>
+<div class="highlight"><pre><span></span>$ kubectl scale deployment &lt;deployment_name&gt; --replicas<span class="o">=</span><span class="m">3</span>
+$ kubectl scale deployment &lt;deployment_name&gt; --replicas<span class="o">=</span><span class="m">0</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Deployments添加和删除HorizontalPodScaler,自动伸缩pod：</p>
+<div class="highlight"><pre><span></span>$ kubectl autoscale deployment &lt;deployment_name&gt; -name &lt;hpa_name&gt; --min<span class="o">=</span><span class="m">1</span> --max<span class="o">=</span><span class="m">8</span> --cpu-percent<span class="o">=</span><span class="m">50</span>
+$ kubectl get hpa
+$ kubectl delete hpa &lt;hpa_name&gt;
+</pre></div>
+
+
+</li>
+<li>
+<p>切换kubectl配置文件</p>
+<div class="highlight"><pre><span></span>$ kubectl config use-context &lt;config-name&gt;
+</pre></div>
+
+
+</li>
+</ul><p class="subheader">Category: <a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a>
+
+    Tagged: 
+    <a href="https://gccpacman.github.io/tag/kubernetes.html">kubernetes </a>
+    <a href="https://gccpacman.github.io/tag/docker.html">docker </a>
+</p>
+
+
+
+            </article>
+
+
+                <hr  class="gradient"/>
+
+
+        
+
+
+            <article>
+                <a href="https://gccpacman.github.io/ben-di-xu-ni-ji-li-de-centos7an-zhuang-k8s.html"><h3 class="article-title">本地虚拟机里的Centos7安装K8S</h3></a>
+<h6 class="subheader" title="2019-05-07T11:13:00+08:00">Tue 07 May 2019
+</h6>
+
+
+<p>参考：</p>
+<p>https://juejin.im/post/5c36fd906fb9a049f8197c9b</p>
+<p>https://www.howtoforge.com/tutorial/centos-kubernetes-docker-cluster/</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/windows.html">Windows</a>
+
+    Tagged: 
+    <a href="https://gccpacman.github.io/tag/windows.html">windows </a>
+    <a href="https://gccpacman.github.io/tag/centos.html">centos </a>
+</p>
+
+
+
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/ben-di-xu-ni-ji-li-de-centos7an-zhuang-k8s.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+
+        
+
+
+            <article>
+                <a href="https://gccpacman.github.io/windowszai-hypervan-zhuang-centos7bing-pei-zhi-wang-luo.html"><h3 class="article-title">Windows在Hyperv安装Centos7并配置网络</h3></a>
+<h6 class="subheader" title="2019-05-07T11:13:00+08:00">Tue 07 May 2019
+</h6>
+
+
+<p>Hyper-V安装Centos，网卡选择Hyper-V的Default Switch。
+Default Switch默认是可以连接外网的，如果是windows机器不用配置直接可以联网，但是Linux不行，原因是网卡eth0默认没有配置dhcp：</p>
+<p>可以通过以下几部配置：</p>
+<ol>
+<li>
+<p>编辑<code>/etc/sysconfig/network-scripts/ifcfg-eth0</code>,修改以下三项:</p>
+<div class="highlight"><pre><span></span>DEVICE=eth0
+BOOTPROTO=dhcp
+ONBOOT=yes
+</pre></div>
+
+
+</li>
+<li>
+<p>编辑<code>/etc/sysconfig/network</code>, 替换server-name.company.lan为你的主机名：</p>
+<div class="highlight"><pre><span></span>NETWORKING=yes
+HOSTNAME=server-name.company.lan
+</pre></div>
+
+
+</li>
+<li>
+<p>重启network服务：</p>
+<div class="highlight"><pre><span></span>$ systemctl restart network
+</pre></div>
+
+
+</li>
+<li>
+<p>确认网络是否网络正常，正常的话重启，再次确认：</p>
+<div class="highlight"><pre><span></span>$ nslookup bing.com
+</pre></div>
+
+
+</li>
+</ol>
+<p>参考：
+https://unix.stackexchange.com/questions …</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/windows.html">Windows</a>
+
+    Tagged: 
+    <a href="https://gccpacman.github.io/tag/windows.html">windows </a>
+    <a href="https://gccpacman.github.io/tag/hyper-v.html">hyper-v </a>
+    <a href="https://gccpacman.github.io/tag/centos.html">centos </a>
+</p>
+
+
+
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/windowszai-hypervan-zhuang-centos7bing-pei-zhi-wang-luo.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+
+        
+
+
+            <article>
                 <a href="https://gccpacman.github.io/zi-yuan-zhan-yong-chao-ji-di-de-i3zhuo-mian.html"><h3 class="article-title">资源占用超级低的i3桌面</h3></a>
 <h6 class="subheader" title="2018-05-04T10:20:00+08:00">Fri 04 May 2018
 </h6>
@@ -68,63 +250,7 @@ $ sudo pacman -S i3     <span class="c1"># archlinux</span>
 <p>备份并修改i3的配置文件，可以参考我的github，或者直接下载替换：</p>
 <div class="highlight"><pre><span></span>cp ~/.config/i3/config ~/.config/i3/config.bak
 wget https://raw.githubusercontent.com/gccpacman/vm-i3wm-config/master/config
-cp config ~/.config/i3/config
-</pre></div>
-
-
-</li>
-<li>
-<p>因为我的是高分屏，默认vmware不支持，但是可以修改i3的dpi让文字和界面看起来舒服：</p>
-<div class="highlight"><pre><span></span>echo &quot;Xft.dpi: 118&quot; &gt;&gt; ~/.Xresources
-</pre></div>
-
-
-</li>
-<li>
-<p>安装lightdm/gdm后，，设置session成i3，并且因为是虚拟机不想每次开机都输入用户名密码，可以设置自动登陆：</p>
-<p>4.1 <code>lightdm</code>修改<code>/etc/lightdm/lightdm.conf</code>:</p>
-<div class="highlight"><pre><span></span><span class="k">[SeatDefaults]</span>
-<span class="na">autologin-user</span><span class="o">=</span> <span class="s">{{your username}}</span>
-<span class="na">autologin-user-timeout</span><span class="o">=</span><span class="s">0</span>
-<span class="na">user-session</span><span class="o">=</span><span class="s">i3</span>
-</pre></div>
-
-
-<p>4.2 <code>gdm</code>修改<code>/etc/gdm3/daemon.conf</code>:</p>
-<div class="highlight"><pre><span></span><span class="k">[daemon]</span>
-<span class="na">AutomaticLoginEnable</span><span class="o">=</span><span class="s">true</span>
-<span class="na">AutomaticLogin</span><span class="o">=</span><span class="s">teotfw</span>
-</pre></div>
-
-
-<p>4.3 或者直接disable x-manager, 用startx方式启动</p>
-<div class="highlight"><pre><span></span>sudo systemctl set-default multi-user.target
-echo &quot;exec i3&quot; &gt; ~/.xinitrc
-startx # reboot并login后执行
-</pre></div>
-
-
-</li>
-<li>
-<p>根据你的系统安装open-vm-tools</p>
-<div class="highlight"><pre><span></span>$ sudo yum install open-vm-tools   <span class="c1"># centos</span>
-$ sudo apt install open-vm-tools   <span class="c1"># debian &amp; ubuntu</span>
-$ sudo pacman -S open-vm-tools     <span class="c1"># archlinux</span>
-</pre></div>
-
-
-</li>
-<li>
-<p>如果你无法加载open-vm-tools, 则需要做如下配置：</p>
-<div class="highlight"><pre><span></span>cp ~/.xsession ~/.xsession.bak
-echo &quot;#!/bin/sh
-xrandr
-exec i3&quot; &gt; ~/.xsession
-</pre></div>
-
-
-</li>
-</ol><p class="subheader">Category: <a href="https://gccpacman.github.io/category/vim.html">Vim</a>
+cp config …</pre></div></li></ol><p class="subheader">Category: <a href="https://gccpacman.github.io/category/vim.html">Vim</a>
 
     Tagged: 
     <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
@@ -135,11 +261,9 @@ exec i3&quot; &gt; ~/.xsession
 
 
 
-            </article>
-
-
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/zi-yuan-zhan-yong-chao-ji-di-de-i3zhuo-mian.html">Read More</a>
                 <hr  class="gradient"/>
-
+            </article>
 
         
 
@@ -213,106 +337,9 @@ exec i3&quot; &gt; ~/.xsession
                 <hr  class="gradient"/>
             </article>
 
-        
-
-
-            <article>
-                <a href="https://gccpacman.github.io/vimcha-jian-command-tzai-windowsshang-bian-yi.html"><h3 class="article-title">vim插件command-t在windows上编译</h3></a>
-<h6 class="subheader" title="2017-10-24T10:20:00+08:00">Tue 24 October 2017
-</h6>
-
-
-<p>用Bundle在Windows平台上配置成功了以后，绝大多数插件都已经可以使用，但是唯独<a href="https://github.com/wincent/Command-T">Command-T</a>因为是Ruby集成的插件，需要手动编译。</p>
-<p><a href="https://github.com/wincent/command-t/blob/master/doc/command-t.txt">官方文档</a>写的安装编译过程代码大概是这样的，我省去了使用bundle的安装过程：</p>
-<div class="highlight"><pre><span></span>$ <span class="nb">cd</span> ~/vim<span class="se">\b</span>undle<span class="se">\c</span>ommand-t<span class="se">\r</span>uby<span class="se">\c</span>ommand-t<span class="se">\e</span>xt<span class="se">\c</span>ommand-t&gt;
-$ ruby extconf.rb
-$ make
-</pre></div>
-
-
-<p>要完成这些肯定得装ruby和make，网上的绝大多数答案也都已经过期，说的是vim7.4左右的版本，而现在已经是vim 8.0。于是只好自己探索。</p>
-<p>windows的ruby是一个特殊的安装包，和Ruby的官网都分开，网址是<a href="https://rubyinstaller.org/">RubyInstaller for windows</a>。</p>
-<p>可供下载的版本从2.0.0-p648到2.4.2-2版本。</p>
-<p>我从高版本开始尝试，安装2.4.2-2 …</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/vim.html">Vim</a>
-
-    Tagged: 
-    <a href="https://gccpacman.github.io/tag/windows.html">windows </a>
-    <a href="https://gccpacman.github.io/tag/vim.html">vim </a>
-</p>
-
-
-
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/vimcha-jian-command-tzai-windowsshang-bian-yi.html">Read More</a>
-                <hr  class="gradient"/>
-            </article>
-
-        
-
-
-            <article>
-                <a href="https://gccpacman.github.io/windowsde-bao-guan-li-chocolatehe-vimvundle.html"><h3 class="article-title">windows的包管理Chocolate和vim.Vundle</h3></a>
-<h6 class="subheader" title="2017-10-22T10:20:00+08:00">Sun 22 October 2017
-</h6>
-
-
-<p>Windows的开发环境一直都会让人比较头疼，一般解决方法有用Cygwin等模拟Linux的环境，Windows 10又自带了Ubuntu On Windows 10的环境。但是都或多或少有点问题，例如Cygwin的文件目录和windows分离，Ubuntu On Windows 10不能用Nodejs，打开X应用比较麻烦，只能用终端等。</p>
-<p>经过很多尝试，我认为最友好的环境还是windows原生的环境，只是你需要偶尔告别命令行搜索某些应用需要的依赖，依次安装，这样其实绝大多数的开发环境都是可以部署的。不过还是有工具可以帮助我们，例如Windows其实也有一个类似apt-get或者<a href="https://brew.sh/">Homebrew</a>的包管理工具，叫做<a href="https://chocolatey.org/">Chocolate</a>.</p>
-<p><a href="https://chocolatey.org/install">安装Chocolate</a>只要在Powershell里写这行代码即可：</p>
-<div class="highlight"><pre><span></span>Set-ExecutionPolicy Bypass; iex ((New-Object System.Net.WebClient).DownloadString(&#39;https://chocolatey.org/install.ps1&#39;))
-</pre></div>
-
-
-<p>安装包的方法是<code>choco install &lt;package_name&gt;</code> 但是这个命令必须用admin权限的powershell来执行。于是想是不是有个windows的<code>sudo</code>，结果一查还真的有，而且可以用chocolate安装 …</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/vim.html">Vim</a>
-
-    Tagged: 
-    <a href="https://gccpacman.github.io/tag/windows.html">windows </a>
-    <a href="https://gccpacman.github.io/tag/vim.html">vim </a>
-</p>
-
-
-
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/windowsde-bao-guan-li-chocolatehe-vimvundle.html">Read More</a>
-                <hr  class="gradient"/>
-            </article>
-
-        
-
-
-            <article>
-                <a href="https://gccpacman.github.io/linuxan-zhuang-dnscrypt.html"><h3 class="article-title">Linux安装Dnscrypt</h3></a>
-<h6 class="subheader" title="2016-02-06T10:20:00+08:00">Sat 06 February 2016
-</h6>
-
-
-<p>为什么就不言而喻不加解释了，就算你没有翻墙的打算，也建议你有一个优秀和安全的dns，因为国内的运营商除了干掉国外域名，还会帮你的国内网址投广告，甚至利用你进行ddns攻击。。</p>
-<p>很早以前dnscrypt这个东西就在热炒,后来不知道什么原因谈起的人也比较少了。因此我决定重新尝试一下是不是还有用呢。答案是肯定的。不过如果你只是在本机上使用，那么如果是桌面系统，似乎我有看到dnscrypt是有windows/macOS的客户端的，但是手机怎么办呢。这个时候就是树霉派发挥作用的时候了。</p>
-<p>树梅派安装dnscrypt相对与ubuntu之类的发行版其实也大同小异（我也没有试过ubuntu，arch上倒是非常简单，两三个命令就可以搞定），不过有些依赖包包括dnscrypt都是需要手动编译的。</p>
-<ol>
-<li>
-<p>安装编译工具：</p>
-<p>sudo apt-get install libtool pkg-config build-essential autoconf automake</p>
-</li>
-<li>
-<p>安装一个叫做libsodium的依赖，因为apt工具里没有包含这个依赖，因此需要手动编译，去https://download.libsodium.org/libsodium/releases找最新的版本，下载并且编译：</p>
-<p>mkdir build
-cd build/
-wget https://download.libsodium.org/libsodium …</p></li></ol><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
-
-    Tagged: 
-    <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
-    <a href="https://gccpacman.github.io/tag/kodi.html">kodi </a>
-    <a href="https://gccpacman.github.io/tag/resource.html">resource </a>
-</p>
-
-
-
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/linuxan-zhuang-dnscrypt.html">Read More</a>
-                <hr  class="gradient"/>
-            </article>
-
             <!-- /#posts-list -->
 <div class="pagination-centered">
-<h6 class="subheader">Page 1 of 3</h6>
+<h6 class="subheader">Page 1 of 4</h6>
 
 <p>
 
@@ -334,6 +361,7 @@ wget https://download.libsodium.org/libsodium …</p></li></ol><p class="subhead
 		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
+            <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
             <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
             <li><a href="https://gccpacman.github.io/category/python.html">python</a></li>
             <li><a href="https://gccpacman.github.io/category/vim.html">Vim</a></li>

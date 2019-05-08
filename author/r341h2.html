@@ -47,6 +47,103 @@
 
 
             <article>
+                <a href="https://gccpacman.github.io/vimcha-jian-command-tzai-windowsshang-bian-yi.html"><h3 class="article-title">vim插件command-t在windows上编译</h3></a>
+<h6 class="subheader" title="2017-10-24T10:20:00+08:00">Tue 24 October 2017
+</h6>
+
+
+<p>用Bundle在Windows平台上配置成功了以后，绝大多数插件都已经可以使用，但是唯独<a href="https://github.com/wincent/Command-T">Command-T</a>因为是Ruby集成的插件，需要手动编译。</p>
+<p><a href="https://github.com/wincent/command-t/blob/master/doc/command-t.txt">官方文档</a>写的安装编译过程代码大概是这样的，我省去了使用bundle的安装过程：</p>
+<div class="highlight"><pre><span></span>$ <span class="nb">cd</span> ~/vim<span class="se">\b</span>undle<span class="se">\c</span>ommand-t<span class="se">\r</span>uby<span class="se">\c</span>ommand-t<span class="se">\e</span>xt<span class="se">\c</span>ommand-t&gt;
+$ ruby extconf.rb
+$ make
+</pre></div>
+
+
+<p>要完成这些肯定得装ruby和make，网上的绝大多数答案也都已经过期，说的是vim7.4左右的版本，而现在已经是vim 8.0。于是只好自己探索。</p>
+<p>windows的ruby是一个特殊的安装包，和Ruby的官网都分开，网址是<a href="https://rubyinstaller.org/">RubyInstaller for windows</a>。</p>
+<p>可供下载的版本从2.0.0-p648到2.4.2-2版本。</p>
+<p>我从高版本开始尝试，安装2.4.2-2 …</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/vim.html">Vim</a>
+
+    Tagged: 
+    <a href="https://gccpacman.github.io/tag/windows.html">windows </a>
+    <a href="https://gccpacman.github.io/tag/vim.html">vim </a>
+</p>
+
+
+
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/vimcha-jian-command-tzai-windowsshang-bian-yi.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+
+        
+
+
+            <article>
+                <a href="https://gccpacman.github.io/windowsde-bao-guan-li-chocolatehe-vimvundle.html"><h3 class="article-title">windows的包管理Chocolate和vim.Vundle</h3></a>
+<h6 class="subheader" title="2017-10-22T10:20:00+08:00">Sun 22 October 2017
+</h6>
+
+
+<p>Windows的开发环境一直都会让人比较头疼，一般解决方法有用Cygwin等模拟Linux的环境，Windows 10又自带了Ubuntu On Windows 10的环境。但是都或多或少有点问题，例如Cygwin的文件目录和windows分离，Ubuntu On Windows 10不能用Nodejs，打开X应用比较麻烦，只能用终端等。</p>
+<p>经过很多尝试，我认为最友好的环境还是windows原生的环境，只是你需要偶尔告别命令行搜索某些应用需要的依赖，依次安装，这样其实绝大多数的开发环境都是可以部署的。不过还是有工具可以帮助我们，例如Windows其实也有一个类似apt-get或者<a href="https://brew.sh/">Homebrew</a>的包管理工具，叫做<a href="https://chocolatey.org/">Chocolate</a>.</p>
+<p><a href="https://chocolatey.org/install">安装Chocolate</a>只要在Powershell里写这行代码即可：</p>
+<div class="highlight"><pre><span></span>Set-ExecutionPolicy Bypass; iex ((New-Object System.Net.WebClient).DownloadString(&#39;https://chocolatey.org/install.ps1&#39;))
+</pre></div>
+
+
+<p>安装包的方法是<code>choco install &lt;package_name&gt;</code> 但是这个命令必须用admin权限的powershell来执行。于是想是不是有个windows的<code>sudo</code>，结果一查还真的有，而且可以用chocolate安装 …</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/vim.html">Vim</a>
+
+    Tagged: 
+    <a href="https://gccpacman.github.io/tag/windows.html">windows </a>
+    <a href="https://gccpacman.github.io/tag/vim.html">vim </a>
+</p>
+
+
+
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/windowsde-bao-guan-li-chocolatehe-vimvundle.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+
+        
+
+
+            <article>
+                <a href="https://gccpacman.github.io/linuxan-zhuang-dnscrypt.html"><h3 class="article-title">Linux安装Dnscrypt</h3></a>
+<h6 class="subheader" title="2016-02-06T10:20:00+08:00">Sat 06 February 2016
+</h6>
+
+
+<p>为什么就不言而喻不加解释了，就算你没有翻墙的打算，也建议你有一个优秀和安全的dns，因为国内的运营商除了干掉国外域名，还会帮你的国内网址投广告，甚至利用你进行ddns攻击。。</p>
+<p>很早以前dnscrypt这个东西就在热炒,后来不知道什么原因谈起的人也比较少了。因此我决定重新尝试一下是不是还有用呢。答案是肯定的。不过如果你只是在本机上使用，那么如果是桌面系统，似乎我有看到dnscrypt是有windows/macOS的客户端的，但是手机怎么办呢。这个时候就是树霉派发挥作用的时候了。</p>
+<p>树梅派安装dnscrypt相对与ubuntu之类的发行版其实也大同小异（我也没有试过ubuntu，arch上倒是非常简单，两三个命令就可以搞定），不过有些依赖包包括dnscrypt都是需要手动编译的。</p>
+<ol>
+<li>
+<p>安装编译工具：</p>
+<p>sudo apt-get install libtool pkg-config build-essential autoconf automake</p>
+</li>
+<li>
+<p>安装一个叫做libsodium的依赖，因为apt工具里没有包含这个依赖，因此需要手动编译，去https://download.libsodium.org/libsodium/releases找最新的版本，下载并且编译：</p>
+<p>mkdir build
+cd build/
+wget https://download.libsodium.org/libsodium …</p></li></ol><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+
+    Tagged: 
+    <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
+    <a href="https://gccpacman.github.io/tag/kodi.html">kodi </a>
+    <a href="https://gccpacman.github.io/tag/resource.html">resource </a>
+</p>
+
+
+
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/linuxan-zhuang-dnscrypt.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+
+        
+
+
+            <article>
                 <a href="https://gccpacman.github.io/ba-yong-hu-tai-systemdfu-wu-gai-cheng-xi-tong-fu-wu-kai-ji-zi-qi-dong-xware.html"><h3 class="article-title">把用户态systemd服务改成系统服务，开机自启动xware</h3></a>
 <h6 class="subheader" title="2016-01-08T10:20:00+08:00">Fri 08 January 2016
 </h6>
@@ -143,119 +240,9 @@ https://github.com/Xinkai/XwareDesktop/wiki/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E
                 <hr  class="gradient"/>
             </article>
 
-        
-
-
-            <article>
-                <a href="https://gccpacman.github.io/linuxda-jian-vncfu-wu-qi.html"><h3 class="article-title">Linux搭建VNC服务器</h3></a>
-<h6 class="subheader" title="2016-01-05T10:20:00+08:00">Tue 05 January 2016
-</h6>
-
-
-<p>服务器端：</p>
-<p>1）在终端安装tigervnc：</p>
-<div class="highlight"><pre><span></span>$ sudo apt-get install tigervnc
-</pre></div>
-
-
-<p>2）启动tigervnc</p>
-<div class="highlight"><pre><span></span>$ vncserver
-</pre></div>
-
-
-<p>提示你输入vnc的密码：</p>
-<div class="highlight"><pre><span></span><span class="n">enter</span> <span class="n">your</span> <span class="n">password</span> (<span class="n">length</span> <span class="mi">8</span>)
-</pre></div>
-
-
-<p>然后终端会显示New 'X' desktop is kodi-kodibuntu:1</p>
-<p>3）（可选）如果需要改变桌面，例如不想用xvnc，可以编辑<code>$HOME/.vnc/xstartup</code>的内容。具体操作暂略。</p>
-<p>4）（可选）如果需要开机启动，一个是用supervisor，另外就是在/etc/systemd/system/下手动写一个服务。具体操作暂略。</p>
-<p>在客户端:</p>
-<p>1) 安装tigervnc:</p>
-<div class="highlight"><pre><span></span>$ sudo pacman -S tigervnc   <span class="o">(</span>archlinux …</pre></div><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
-
-    Tagged: 
-    <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
-    <a href="https://gccpacman.github.io/tag/vnc.html">vnc </a>
-    <a href="https://gccpacman.github.io/tag/gtk.html">gtk </a>
-    <a href="https://gccpacman.github.io/tag/rdp.html">rdp </a>
-</p>
-
-
-
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/linuxda-jian-vncfu-wu-qi.html">Read More</a>
-                <hr  class="gradient"/>
-            </article>
-
-        
-
-
-            <article>
-                <a href="https://gccpacman.github.io/an-zhuang-delugexia-zai-gong-ju-zi-dong-yuan-cheng-xia-zai.html"><h3 class="article-title">安装deluge下载工具自动远程下载</h3></a>
-<h6 class="subheader" title="2016-01-04T10:20:00+08:00">Mon 04 January 2016
-</h6>
-
-
-<p>上一篇装完kodi后，我的旧电脑就彻底变成了一个kodi/XBMC媒体中心，那么比如我要下载新的美剧什么的，好像就还是不那么方便。
-p2p的torrent一直是我的最爱。deluge是一个跨平台的操作系统，支持linux, windows 和mac，还有远程控制等功能，什么是远程下载呢。我们都知道有迅雷远程下载，那么deluge其实也是一样，就是你在一台电脑操作，有一个下载链接，然后你可以直接在这台电脑上添加这个下载链接，唯一不同的是下载的任务被添加到了远程的机器上，文件也会下载到远程的机器上。
-这样的需求正符合我媒体中心的需要，我找到新的片源，并不需要下载到我的计算机，而是可以让我的Kodi在播放电影的同时，又可以执行下载的任务。</p>
-<h1>服务器端：</h1>
-<p>安装:</p>
-<div class="highlight"><pre><span></span>$ sudo apt-get install deluged deluge-web
-</pre></div>
-
-
-<p>新建一个deluge用户和用户组:</p>
-<div class="highlight"><pre><span></span>$ sudo adduser --system  --gecos <span class="s2">&quot;Deluge Service&quot;</span> --disabled-password --group --home /var/lib/deluge deluge
-</pre></div>
-
-
-<p>把用户添加到deluge用户组<code>adduser &lt;username&gt; deluge</code>，便于用户操作torrent和下载到的文件 …</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
-
-    Tagged: 
-    <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
-    <a href="https://gccpacman.github.io/tag/resource.html">resource </a>
-</p>
-
-
-
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/an-zhuang-delugexia-zai-gong-ju-zi-dong-yuan-cheng-xia-zai.html">Read More</a>
-                <hr  class="gradient"/>
-            </article>
-
-        
-
-
-            <article>
-                <a href="https://gccpacman.github.io/linuxan-zhuang-bing-kai-ji-jin-ru-kodimei-ti-zhong-xin.html"><h3 class="article-title">Linux安装并开机进入Kodi媒体中心</h3></a>
-<h6 class="subheader" title="2016-01-04T10:20:00+08:00">Mon 04 January 2016
-</h6>
-
-
-<p>把2G的硬盘拆到了一台旧电脑上，并且给旧电脑装了xubuntu,打算直接打造一个媒体中心。目前知道有里那个用的不错的东西，KODI（XBMC）是一个很不错的选择。当然用PLEX也是个不错的选择，整理资料库方面PLEX更加强大。不过KODI是开源和免费的，既然用了linux，就用个开源的吧。况且我发现kodi还有不少的好处，并且更加轻量级。</p>
-<p>其实Kodi有个基于ubuntu的发行版叫做kodibuntu，直接装得话效果其实也差不多。但是我还是喜欢从ubuntu去扩展，毕竟任何基于ubuntu的版本，相对ubuntu的开发肯定是有所滞后的。和Android的Rom一个道理。不过kubuntu因为是非常流行的发行版不用担心这个问题。</p>
-<p>下面的步骤基本上是参考了askubuntu的一个答案<a href="http://askubuntu.com/questions/596839/autostart-kodi-on-vivid">Autostart Kodi on Vivid</a>，只不过它是在纯净的server版本安装，而desktop版则因为有自身的启动器，需要将其禁用掉而已。</p>
-<p>1）安装kodi: sudo apt-get install kodi</p>
-<p>2）创建一个kodi的用户，并添加到和视频播放有关的组
-    sudo adduser --disabled-password --disabled-login --gecos "" kodi
-    sudo usermod -a -G audio kodi …</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
-
-    Tagged: 
-    <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
-    <a href="https://gccpacman.github.io/tag/kodi.html">kodi </a>
-    <a href="https://gccpacman.github.io/tag/resource.html">resource </a>
-</p>
-
-
-
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/linuxan-zhuang-bing-kai-ji-jin-ru-kodimei-ti-zhong-xin.html">Read More</a>
-                <hr  class="gradient"/>
-            </article>
-
             <!-- /#posts-list -->
 <div class="pagination-centered">
-<h6 class="subheader">Page 2 of 3</h6>
+<h6 class="subheader">Page 2 of 4</h6>
 
 <p>
             <a href="https://gccpacman.github.io/author/r341h.html">&laquo; Prev</a>
@@ -278,6 +265,7 @@ p2p的torrent一直是我的最爱。deluge是一个跨平台的操作系统，�
 		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
+            <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
             <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
             <li><a href="https://gccpacman.github.io/category/python.html">python</a></li>
             <li><a href="https://gccpacman.github.io/category/vim.html">Vim</a></li>

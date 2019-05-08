@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Pacman News - docker</title>
+
+    <link rel="stylesheet" href="https://gccpacman.github.io/theme/css/normalize.css" />
+    <link rel="stylesheet" href="https://gccpacman.github.io/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="https://gccpacman.github.io/theme/css/style.css" />
+    <link rel="stylesheet" href="https://gccpacman.github.io/theme/css/pygments.css" />	
+    <script src="https://gccpacman.github.io/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="https://gccpacman.github.io">Pacman News</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+        
+        
+
+            <article>
+                <a href="https://gccpacman.github.io/k8sming-ling-xing-gong-ju-kubectlde-shi-yong-ming-ling.html"><h3 class="article-title">K8S命令行工具Kubectl的实用命令</h3></a>
+<h6 class="subheader" title="2019-05-08T14:13:00+08:00">Wed 08 May 2019
+</h6>
+
+
+<ul>
+<li>安装配置Kubectl:<ul>
+<li>下载kubectl，地址：https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl</li>
+<li>下载完成后放置到本地$Path路径</li>
+<li>修改本地<code>$HOME/.kube/config</code>，设置集群地址，凭证等信息</li>
+</ul>
+</li>
+<li>
+<p>用kubectl获取k8s集群的基本信息：</p>
+<div class="highlight"><pre><span></span>$ kubectl get pods <span class="c1"># 查看default命名空间下的pods</span>
+$ kubectl get pods -n <span class="nb">test</span> <span class="c1"># 查看test命名空间下的pods</span>
+$ kubectl get deployments <span class="c1"># 查看default命名空间下的部署</span>
+$ kubectl get services <span class="c1"># 查看default命名空间下的服务</span>
+$ kubectl get pods -o<span class="o">=</span><span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&quot;{range .items[*]}{&#39;\n&#39;}{.metadata.name}{&#39;:\t&#39;}{range .spec.containers[*]}{.image}{&#39;, &#39;}{end}{end}&quot;</span> <span class="c1"># 查看pods里container的镜像和版本</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>查看资源情况：</p>
+<div class="highlight"><pre><span></span>$ kubectl top pod <span class="c1"># 查看pods的cpu和memory资源占用</span>
+$ kubectl top node <span class="c1"># 查看节点的cpu和memory资源占用和百分比</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>调试和进入Pod：</p>
+<div class="highlight"><pre><span></span>$ kubectl describe pod <span class="si">${</span><span class="nv">pod_name</span><span class="si">}</span> <span class="c1"># 查看某个pod的信息（例如在pod有问题可以debug）</span>
+$ kubectl <span class="nb">exec</span> -it <span class="si">${</span><span class="nv">pod_name</span><span class="si">}</span> bash <span class="c1"># 进入某个pod的某个容器进行调试</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>通过端口转发调试接口：</p>
+<div class="highlight"><pre><span></span>$ kubectl port-forward pods/pod_name <span class="m">30000</span>:30000 -n cicd
+$ curl <span class="m">127</span>.0.0.1:30000
+</pre></div>
+
+
+</li>
+<li>
+<p>通过kube-api代理调试接口：</p>
+<div class="highlight"><pre><span></span>$ kubectl proxy
+$ curl http://localhost:8001/api/v1/namespaces/default/pods/<span class="si">${</span><span class="nv">pod_name</span><span class="si">}</span><span class="o">[</span>:port_name<span class="o">]</span>/proxy/
+</pre></div>
+
+
+</li>
+<li>
+<p>Deployments手动伸缩Pods:</p>
+<div class="highlight"><pre><span></span>$ kubectl scale deployment &lt;deployment_name&gt; --replicas<span class="o">=</span><span class="m">3</span>
+$ kubectl scale deployment &lt;deployment_name&gt; --replicas<span class="o">=</span><span class="m">0</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Deployments添加和删除HorizontalPodScaler,自动伸缩pod：</p>
+<div class="highlight"><pre><span></span>$ kubectl autoscale deployment &lt;deployment_name&gt; -name &lt;hpa_name&gt; --min<span class="o">=</span><span class="m">1</span> --max<span class="o">=</span><span class="m">8</span> --cpu-percent<span class="o">=</span><span class="m">50</span>
+$ kubectl get hpa
+$ kubectl delete hpa &lt;hpa_name&gt;
+</pre></div>
+
+
+</li>
+<li>
+<p>切换kubectl配置文件</p>
+<div class="highlight"><pre><span></span>$ kubectl config use-context &lt;config-name&gt;
+</pre></div>
+
+
+</li>
+</ul><p class="subheader">Category: <a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a>
+
+    Tagged: 
+    <a href="https://gccpacman.github.io/tag/kubernetes.html">kubernetes </a>
+    <a href="https://gccpacman.github.io/tag/docker.html">docker </a>
+</p>
+
+
+
+            </article>
+
+<div class="pagination-centered">
+<h6 class="subheader">Page 1 of 1</h6>
+
+<p>
+
+</p>
+</div>
+
+
+
+            <!-- /#posts-list -->
+
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="https://gccpacman.github.io/archives.html">Archives</a>
+            <li><a href="https://gccpacman.github.io/tags.html">Tags</a>
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
+            <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
+            <li><a href="https://gccpacman.github.io/category/python.html">python</a></li>
+            <li><a href="https://gccpacman.github.io/category/vim.html">Vim</a></li>
+            <li><a href="https://gccpacman.github.io/category/windows.html">Windows</a></li>
+   
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://getpelican.com/">Pelican</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="https://github.com/gccpacman">GccPacman @Github</a></li>
+            <li><a href="https://stackoverflow.com/users/4124310/realhu">r341h @StackOverflow</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Pacman News by r341h</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

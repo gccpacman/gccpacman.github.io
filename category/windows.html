@@ -46,6 +46,92 @@
         
 
             <article>
+                <a href="https://gccpacman.github.io/ben-di-xu-ni-ji-li-de-centos7an-zhuang-k8s.html"><h3 class="article-title">本地虚拟机里的Centos7安装K8S</h3></a>
+<h6 class="subheader" title="2019-05-07T11:13:00+08:00">Tue 07 May 2019
+</h6>
+
+
+<p>参考：</p>
+<p>https://juejin.im/post/5c36fd906fb9a049f8197c9b</p>
+<p>https://www.howtoforge.com/tutorial/centos-kubernetes-docker-cluster/</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/windows.html">Windows</a>
+
+    Tagged: 
+    <a href="https://gccpacman.github.io/tag/windows.html">windows </a>
+    <a href="https://gccpacman.github.io/tag/centos.html">centos </a>
+</p>
+
+
+
+            </article>
+
+
+                <hr  class="gradient"/>
+
+
+        
+
+
+            <article>
+                <a href="https://gccpacman.github.io/windowszai-hypervan-zhuang-centos7bing-pei-zhi-wang-luo.html"><h3 class="article-title">Windows在Hyperv安装Centos7并配置网络</h3></a>
+<h6 class="subheader" title="2019-05-07T11:13:00+08:00">Tue 07 May 2019
+</h6>
+
+
+<p>Hyper-V安装Centos，网卡选择Hyper-V的Default Switch。
+Default Switch默认是可以连接外网的，如果是windows机器不用配置直接可以联网，但是Linux不行，原因是网卡eth0默认没有配置dhcp：</p>
+<p>可以通过以下几部配置：</p>
+<ol>
+<li>
+<p>编辑<code>/etc/sysconfig/network-scripts/ifcfg-eth0</code>,修改以下三项:</p>
+<div class="highlight"><pre><span></span>DEVICE=eth0
+BOOTPROTO=dhcp
+ONBOOT=yes
+</pre></div>
+
+
+</li>
+<li>
+<p>编辑<code>/etc/sysconfig/network</code>, 替换server-name.company.lan为你的主机名：</p>
+<div class="highlight"><pre><span></span>NETWORKING=yes
+HOSTNAME=server-name.company.lan
+</pre></div>
+
+
+</li>
+<li>
+<p>重启network服务：</p>
+<div class="highlight"><pre><span></span>$ systemctl restart network
+</pre></div>
+
+
+</li>
+<li>
+<p>确认网络是否网络正常，正常的话重启，再次确认：</p>
+<div class="highlight"><pre><span></span>$ nslookup bing.com
+</pre></div>
+
+
+</li>
+</ol>
+<p>参考：
+https://unix.stackexchange.com/questions …</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/windows.html">Windows</a>
+
+    Tagged: 
+    <a href="https://gccpacman.github.io/tag/windows.html">windows </a>
+    <a href="https://gccpacman.github.io/tag/hyper-v.html">hyper-v </a>
+    <a href="https://gccpacman.github.io/tag/centos.html">centos </a>
+</p>
+
+
+
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/windowszai-hypervan-zhuang-centos7bing-pei-zhi-wang-luo.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+
+        
+
+
+            <article>
                 <a href="https://gccpacman.github.io/windowsan-zhuang-msys32pei-zhi-gitdeng-kai-fa-huan-jing-bing-ji-cheng-vscode.html"><h3 class="article-title">Windows安装MSys32配置Git等开发环境并集成VSCode</h3></a>
 <h6 class="subheader" title="2018-02-01T10:20:00+08:00">Thu 01 February 2018
 </h6>
@@ -75,40 +161,7 @@
 
 </li>
 <li>
-<p>修改Home目录路径, Msys2默认的Home目录是Mingw64的/home/username, 但是我希望使用windows的Home目录/c/Users/username. 方法是编辑<code>/etc/nsswitch.conf</code>, 并修改</p>
-<div class="highlight"><pre><span></span>$ db_home: windows
-</pre></div>
-
-
-</li>
-<li>
-<p><del> Install Python &amp; Pip </del><br>
-(直接用windows的Python就好，用Mingw64的Python反而可能会有很多问题)</p>
-</li>
-<li>
-<p>让VSCode里的继承终端（VSCode Integrated Terminal）使用Msys2，在VSCode的settings里加入以下内容:</p>
-</li>
-</ol>
-<div class="highlight"><pre><span></span>    {
-        &quot;terminal.integrated.shell.windows&quot;: &quot;C:\\msys64\\usr\\bin\\bash.exe&quot;,
-        &quot;terminal.integrated.shellArgs.windows&quot;: [
-        &quot;--login&quot;,
-        ],
-        &quot;terminal.integrated.env.windows&quot;: {
-        &quot;CHERE_INVOKING&quot;: &quot;1&quot;,
-        &quot;MSYSTEM&quot;: &quot;MINGW64&quot;,
-    &quot;MSYS2_PATH_TYPE&quot;: &quot;inherit&quot;,
-        },
-    } 
-</pre></div>
-
-
-<p>参考：</p>
-<p>https://getpocket.com/a/read/1169705865</p>
-<p>https://help.github.com/articles/dealing-with-line-endings</p>
-<p>https://groups.google.com/forum/#!topic/ustc_lug/_wL4OkWrVK4</p>
-<p>https://stackoverflow.com/questions/33942924/how-to-change-home-directory-and-start-directory-on-msys2</p>
-<p>https://stackoverflow.com/questions/45836650/how-do-i-integrate-msys2-shell-into-visual-studio-code-on-window/48016561#comment84105772_48016561</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/windows.html">Windows</a>
+<p>修改Home目录路径, Msys2默认的Home目录是Mingw64的/home …</p></li></ol><p class="subheader">Category: <a href="https://gccpacman.github.io/category/windows.html">Windows</a>
 
     Tagged: 
     <a href="https://gccpacman.github.io/tag/windows.html">windows </a>
@@ -117,8 +170,11 @@
 
 
 
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/windowsan-zhuang-msys32pei-zhi-gitdeng-kai-fa-huan-jing-bing-ji-cheng-vscode.html">Read More</a>
+                <hr  class="gradient"/>
             </article>
 
+            <!-- /#posts-list -->
 <div class="pagination-centered">
 <h6 class="subheader">Page 1 of 1</h6>
 
@@ -126,10 +182,6 @@
 
 </p>
 </div>
-
-
-
-            <!-- /#posts-list -->
 
     </div>
     <!-- End Main Content -->
@@ -145,6 +197,7 @@
 		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
+            <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
             <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
             <li><a href="https://gccpacman.github.io/category/python.html">python</a></li>
             <li><a href="https://gccpacman.github.io/category/vim.html">Vim</a></li>

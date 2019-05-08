@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Pacman News - Kubernetes</title><link href="https://gccpacman.github.io/" rel="alternate"></link><link href="https://gccpacman.github.io/feeds/kubernetes.atom.xml" rel="self"></link><id>https://gccpacman.github.io/</id><updated>2019-05-08T14:13:00+08:00</updated><entry><title>K8S命令行工具Kubectl的实用命令</title><link href="https://gccpacman.github.io/k8sming-ling-xing-gong-ju-kubectlde-shi-yong-ming-ling.html" rel="alternate"></link><published>2019-05-08T14:13:00+08:00</published><updated>2019-05-08T14:13:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2019-05-08:/k8sming-ling-xing-gong-ju-kubectlde-shi-yong-ming-ling.html</id><summary type="html">&lt;ul&gt;
+&lt;li&gt;安装配置Kubectl:&lt;ul&gt;
+&lt;li&gt;下载kubectl，地址：https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl&lt;/li&gt;
+&lt;li&gt;下载完成后放置到本地$Path路径&lt;/li&gt;
+&lt;li&gt;修改本地&lt;code&gt;$HOME/.kube/config&lt;/code&gt;，设置集群地址，凭证等信息&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;用kubectl获取k8s集群的基本信息：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ kubectl get pods &lt;span class="c1"&gt;# 查看default命名空间下的pods&lt;/span&gt;
+$ kubectl get pods -n &lt;span class="nb"&gt;test&lt;/span&gt; &lt;span class="c1"&gt;# 查看test命名空间下的pods&lt;/span&gt;
+$ kubectl get deployments &lt;span class="c1"&gt;# 查看default命名空间下的部署&lt;/span&gt;
+$ kubectl get services &lt;span class="c1"&gt;# 查看default命名空间下的服务&lt;/span&gt;
+$ kubectl get pods -o&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;jsonpath&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;{range .items[*]}{&amp;#39;\n&amp;#39;}{.metadata.name}{&amp;#39;:\t&amp;#39;}{range …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;ul&gt;
+&lt;li&gt;安装配置Kubectl:&lt;ul&gt;
+&lt;li&gt;下载kubectl，地址：https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl&lt;/li&gt;
+&lt;li&gt;下载完成后放置到本地$Path路径&lt;/li&gt;
+&lt;li&gt;修改本地&lt;code&gt;$HOME/.kube/config&lt;/code&gt;，设置集群地址，凭证等信息&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;用kubectl获取k8s集群的基本信息：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ kubectl get pods &lt;span class="c1"&gt;# 查看default命名空间下的pods&lt;/span&gt;
+$ kubectl get pods -n &lt;span class="nb"&gt;test&lt;/span&gt; &lt;span class="c1"&gt;# 查看test命名空间下的pods&lt;/span&gt;
+$ kubectl get deployments &lt;span class="c1"&gt;# 查看default命名空间下的部署&lt;/span&gt;
+$ kubectl get services &lt;span class="c1"&gt;# 查看default命名空间下的服务&lt;/span&gt;
+$ kubectl get pods -o&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;jsonpath&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;{range .items[*]}{&amp;#39;\n&amp;#39;}{.metadata.name}{&amp;#39;:\t&amp;#39;}{range .spec.containers[*]}{.image}{&amp;#39;, &amp;#39;}{end}{end}&amp;quot;&lt;/span&gt; &lt;span class="c1"&gt;# 查看pods里container的镜像和版本&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;查看资源情况：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ kubectl top pod &lt;span class="c1"&gt;# 查看pods的cpu和memory资源占用&lt;/span&gt;
+$ kubectl top node &lt;span class="c1"&gt;# 查看节点的cpu和memory资源占用和百分比&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;调试和进入Pod：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ kubectl describe pod &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;pod_name&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="c1"&gt;# 查看某个pod的信息（例如在pod有问题可以debug）&lt;/span&gt;
+$ kubectl &lt;span class="nb"&gt;exec&lt;/span&gt; -it &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;pod_name&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; bash &lt;span class="c1"&gt;# 进入某个pod的某个容器进行调试&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;通过端口转发调试接口：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ kubectl port-forward pods/pod_name &lt;span class="m"&gt;30000&lt;/span&gt;:30000 -n cicd
+$ curl &lt;span class="m"&gt;127&lt;/span&gt;.0.0.1:30000
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;通过kube-api代理调试接口：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ kubectl proxy
+$ curl http://localhost:8001/api/v1/namespaces/default/pods/&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;pod_name&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;:port_name&lt;span class="o"&gt;]&lt;/span&gt;/proxy/
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Deployments手动伸缩Pods:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ kubectl scale deployment &amp;lt;deployment_name&amp;gt; --replicas&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;
+$ kubectl scale deployment &amp;lt;deployment_name&amp;gt; --replicas&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Deployments添加和删除HorizontalPodScaler,自动伸缩pod：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ kubectl autoscale deployment &amp;lt;deployment_name&amp;gt; -name &amp;lt;hpa_name&amp;gt; --min&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; --max&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;8&lt;/span&gt; --cpu-percent&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;50&lt;/span&gt;
+$ kubectl get hpa
+$ kubectl delete hpa &amp;lt;hpa_name&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;切换kubectl配置文件&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ kubectl config use-context &amp;lt;config-name&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ul&gt;</content><category term="kubernetes"></category><category term="docker"></category></entry></feed>
