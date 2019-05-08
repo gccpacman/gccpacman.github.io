@@ -144,6 +144,36 @@ exec i3&quot; &gt; ~/.xsession
 
 
             <article>
+                <a href="https://gccpacman.github.io/yong-calibre-serverchuang-jian-ge-ren-zai-xian-dian-zi-shu-yue-du-wang-zhan.html"><h3 class="article-title">用Calibre Server创建个人在线电子书阅读网站</h3></a>
+<h6 class="subheader" title="2017-12-20T10:20:00+08:00">Wed 20 December 2017
+</h6>
+
+
+<p>DigitalOcean上有在ubuntu 14.04上安装calibre server的教程——<a href="https://www.digitalocean.com/community/tutorials/how-to-create-a-calibre-ebook-server-on-ubuntu-14-04">How To Create a Calibre Ebook Server on Ubuntu 14.04</a>, 但是已经过时了，一是calibre-server的参数已经改变，二是创建系统服务的方式已经不适用之后的Ubuntu版本，我的服务器是16.04，因此需要把/etc/init/里的脚本改写成systemctl脚本</p>
+<p>改写的方法参考了：https://wiki.ubuntu.com/SystemdForUpstartUsers</p>
+<p>用户名和密码也不再支持digitalocean里的明文的形式, <a href="https://manual.calibre-ebook.com/server.html#managing-user-accounts-from-the-command-line-only">官方文档</a>里看到有<code>enable-auth</code>和<code>userdb</code>, 看来是出于安全性进行了改进, userdb指定最简单的sqlite数据库，并按照提示添加用户。
+最终的版本是：</p>
+<div class="highlight"><pre><span></span>  [Unit]
+  Description=Job that runs the calibre daemon
+
+  [Service]
+  Environment …</pre></div><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+
+    Tagged: 
+    <a href="https://gccpacman.github.io/tag/kodi.html">kodi </a>
+    <a href="https://gccpacman.github.io/tag/calibre.html">calibre </a>
+</p>
+
+
+
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/yong-calibre-serverchuang-jian-ge-ren-zai-xian-dian-zi-shu-yue-du-wang-zhan.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+
+        
+
+
+            <article>
                 <a href="https://gccpacman.github.io/linuxxiu-mian-hou-huan-xing-wifihe-lan-ya-wu-fa-zheng-chang-shi-yong-de-jie-jue-fang-fa.html"><h3 class="article-title">Linux休眠后唤醒，wifi和蓝牙无法正常使用的解决方法</h3></a>
 <h6 class="subheader" title="2017-12-04T10:20:00+08:00">Mon 04 December 2017
 </h6>
@@ -266,41 +296,6 @@ https://github.com/Xinkai/XwareDesktop/wiki/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E
                 <hr  class="gradient"/>
             </article>
 
-        
-
-
-            <article>
-                <a href="https://gccpacman.github.io/archlinuxjiang-nvidia-driverti-huan-cheng-kai-yuan-de-nouveaujie-jue-xian-qia-qu-dong-wen-ti.html"><h3 class="article-title">ArchLinux将nvidia driver替换成开源的nouveau解决显卡驱动问题</h3></a>
-<h6 class="subheader" title="2016-01-05T10:20:00+08:00">Tue 05 January 2016
-</h6>
-
-
-<p>昨天还装完arch兴高采烈，今天就差点放弃整个系统，罪魁祸首就是当年被linus喷了的nvidia.</p>
-<p>Archlinux装了使用nvidia驱动，一开始发现根本就没有加载，装了和没装没啥区别，但是跑的好好的阿跑的好好的，结果不小心手贱点了<code>nvidia-xconfig</code>的应用，莫名其妙的起不来了。（这个原因我想了半天才想出来，不然我实在是无力吐槽他妈跑了一天多好好的什么也没干突然就起步来的情况，一度怀疑是显卡硬件坏了）</p>
-<p>于是抢救三个多小时，<code>/var/log/xorg.0.log</code>里的报错也莫名其妙，比如:</p>
-<div class="highlight"><pre><span></span>not detect device nvidia, no screen found.
-</pre></div>
-
-
-<p>简直是日到狗。于是想着解决办法应该是彻底不要装nvidia的驱动， 用intel的集成显卡，照例来说应该也ok阿，于是直接删掉驱动：</p>
-<p>pacman -R nvidia nvidia-utils</p>
-<p>然后reboot, 没想到发生的事情更加奇葩了，连命令行就出不来了，直接黑屏了我草。</p>
-<p>心里十万个草尼马，还好安装过arch的人毕竟还是知道有个arch-chroot, 放入安装介质（我的是u盘），重启， mount各种好盘:</p>
-<div class="highlight"><pre><span></span>mount /dev …</pre></div><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
-
-    Tagged: 
-    <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
-    <a href="https://gccpacman.github.io/tag/driver.html">driver </a>
-    <a href="https://gccpacman.github.io/tag/gtk.html">gtk </a>
-    <a href="https://gccpacman.github.io/tag/archlinux.html">archlinux </a>
-</p>
-
-
-
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/archlinuxjiang-nvidia-driverti-huan-cheng-kai-yuan-de-nouveaujie-jue-xian-qia-qu-dong-wen-ti.html">Read More</a>
-                <hr  class="gradient"/>
-            </article>
-
             <!-- /#posts-list -->
 <div class="pagination-centered">
 <h6 class="subheader">Page 1 of 3</h6>
@@ -328,6 +323,7 @@ https://github.com/Xinkai/XwareDesktop/wiki/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E
             <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
             <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
             <li><a href="https://gccpacman.github.io/category/python.html">python</a></li>
+            <li><a href="https://gccpacman.github.io/category/tmux.html">Tmux</a></li>
             <li><a href="https://gccpacman.github.io/category/vim.html">Vim</a></li>
             <li><a href="https://gccpacman.github.io/category/windows.html">Windows</a></li>
    

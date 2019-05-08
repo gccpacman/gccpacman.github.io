@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Pacman News - zsh</title>
+
+    <link rel="stylesheet" href="https://gccpacman.github.io/theme/css/normalize.css" />
+    <link rel="stylesheet" href="https://gccpacman.github.io/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="https://gccpacman.github.io/theme/css/style.css" />
+    <link rel="stylesheet" href="https://gccpacman.github.io/theme/css/pygments.css" />	
+    <script src="https://gccpacman.github.io/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="https://gccpacman.github.io">Pacman News</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+        
+        
+
+            <article>
+                <a href="https://gccpacman.github.io/li-yong-babun-tmux-zshgao-du-ding-zhi-shell.html"><h3 class="article-title">利用babun, tmux, zsh高度定制shell</h3></a>
+<h6 class="subheader" title="2015-10-22T10:20:00+08:00">Thu 22 October 2015
+</h6>
+
+
+<p>深刻和彻底的切换到linux平台后，深切的感受到linux平台对程序员带来的便利。因此日常环境已经不再使用windows啦，奈何博主虽然是个穷逼，然而却舍得钱买一堆电脑，所以没事还是会折腾下windows，毕竟娱乐还是需要的。</p>
+<p>之前折腾过cygwin好一阵子，最终还是觉得真的搬到开发环境确实有很多麻烦的地方，不过现在既然为了娱乐又有一台没有装任何开发环境的win10，那就娱乐一下好了。</p>
+<h1>1） 安装和配置babun</h1>
+<p>首先可以装一个定制得非常好的cygwin shell, 那就是<a href="http://babun.github.io/">babun</a>, 已经默认为你装好并配置了cygwin环境下的zsh，用起来可比普通的shell爽多了。另外有个强大的包管理器，pact命令，用起来很像rpm和apt之类的，非常方便。例如要装tmux, 那么就执行</p>
+<div class="highlight"><pre><span></span>pact install tmux
+</pre></div>
+
+
+<p>就可以成功安装了。
+不过值得注意的是pact默认用的是kernel.org的镜像，国内访问非常慢，这时通过help发现有个--mirror的参数，可以手动指定成163的：</p>
+<div class="highlight"><pre><span></span>pact --mirror http://mirrors.163.com/cygwin/ install tree
+</pre></div>
+
+
+<p>不过每次要输入这个太麻烦，可以用alias, 在home目录下新建一个.bash_aliases的文件，输入alias pact='pact --mirror http://mirrors.163.com/cygwin/'这样下次就不需要再输--mirror了。</p>
+<h1>2） 安装和配置tmux</h1>
+<p>OK第一步装babun已经完成，接下来装tmux，也非常easy，其实上面已经介绍过了</p>
+<div class="highlight"><pre><span></span>pact install tmux
+</pre></div>
+
+
+<p>然后就可以用了，输入tmux, 下面就有了一个标签栏，tmux默认的前缀按键是Ctrl+B，然后再按另一个键，随便举几个例子：</p>
+<ol>
+<li>Ctrl+b c 创建标签</li>
+<li>Ctrl+b n 下一个标签</li>
+<li>Ctrl+b p 上一个标签</li>
+<li>Ctrl+b d 分离session，但并没有退出，而是在后台运行，如果要重新链接，输入tmux a</li>
+<li>Ctrl+b ? 查看帮助</li>
+</ol>
+<p>tmux非常强大，甚至有分屏这样的操作，具体可以在帮助里看。重要的是我们现在已经可以只打开一个窗口，就在几个window之前切换了。</p>
+<p>OK, 看起来非常不错，但是用过vim的同学知道，Ctrl+b是向下翻页的按键啊，所以我想把前缀按键换成Ctrl+a怎么办, 还是配置文件，linux的一切都是配置文件。
+在Home目录创建一个.tmux.conf文件，输入以下内容：</p>
+<div class="highlight"><pre><span></span>unbind C-b
+set -g prefix C-a
+bind C-a send-prefix
+</pre></div>
+
+
+<p>如果你的tmux已经打开，你想重载配置，怎么操作呢? 前缀Ctrl+b ：然后标签栏就会出现一个冒号，输入</p>
+<div class="highlight"><pre><span></span>source-file ~/.tmux.conf
+</pre></div>
+
+
+<p>回车，好了，此时前缀应该就已经变成了Ctrl+a了</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/windows.html">Windows</a>
+
+    Tagged: 
+    <a href="https://gccpacman.github.io/tag/windows.html">windows </a>
+    <a href="https://gccpacman.github.io/tag/cygwin.html">cygwin </a>
+    <a href="https://gccpacman.github.io/tag/tmux.html">tmux </a>
+    <a href="https://gccpacman.github.io/tag/zsh.html">zsh </a>
+</p>
+
+
+
+            </article>
+
+<div class="pagination-centered">
+<h6 class="subheader">Page 1 of 1</h6>
+
+<p>
+
+</p>
+</div>
+
+
+
+            <!-- /#posts-list -->
+
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="https://gccpacman.github.io/archives.html">Archives</a>
+            <li><a href="https://gccpacman.github.io/tags.html">Tags</a>
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
+            <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
+            <li><a href="https://gccpacman.github.io/category/python.html">python</a></li>
+            <li><a href="https://gccpacman.github.io/category/tmux.html">Tmux</a></li>
+            <li><a href="https://gccpacman.github.io/category/vim.html">Vim</a></li>
+            <li><a href="https://gccpacman.github.io/category/windows.html">Windows</a></li>
+   
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://getpelican.com/">Pelican</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="https://github.com/gccpacman">GccPacman @Github</a></li>
+            <li><a href="https://stackoverflow.com/users/4124310/realhu">r341h @StackOverflow</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Pacman News by r341h</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

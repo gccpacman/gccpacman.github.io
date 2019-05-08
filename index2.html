@@ -47,6 +47,62 @@
 
 
             <article>
+                <a href="https://gccpacman.github.io/yong-calibre-serverchuang-jian-ge-ren-zai-xian-dian-zi-shu-yue-du-wang-zhan.html"><h3 class="article-title">用Calibre Server创建个人在线电子书阅读网站</h3></a>
+<h6 class="subheader" title="2017-12-20T10:20:00+08:00">Wed 20 December 2017
+</h6>
+
+
+<p>DigitalOcean上有在ubuntu 14.04上安装calibre server的教程——<a href="https://www.digitalocean.com/community/tutorials/how-to-create-a-calibre-ebook-server-on-ubuntu-14-04">How To Create a Calibre Ebook Server on Ubuntu 14.04</a>, 但是已经过时了，一是calibre-server的参数已经改变，二是创建系统服务的方式已经不适用之后的Ubuntu版本，我的服务器是16.04，因此需要把/etc/init/里的脚本改写成systemctl脚本</p>
+<p>改写的方法参考了：https://wiki.ubuntu.com/SystemdForUpstartUsers</p>
+<p>用户名和密码也不再支持digitalocean里的明文的形式, <a href="https://manual.calibre-ebook.com/server.html#managing-user-accounts-from-the-command-line-only">官方文档</a>里看到有<code>enable-auth</code>和<code>userdb</code>, 看来是出于安全性进行了改进, userdb指定最简单的sqlite数据库，并按照提示添加用户。
+最终的版本是：</p>
+<div class="highlight"><pre><span></span>  [Unit]
+  Description=Job that runs the calibre daemon
+
+  [Service]
+  Environment …</pre></div><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+
+    Tagged: 
+    <a href="https://gccpacman.github.io/tag/kodi.html">kodi </a>
+    <a href="https://gccpacman.github.io/tag/calibre.html">calibre </a>
+</p>
+
+
+
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/yong-calibre-serverchuang-jian-ge-ren-zai-xian-dian-zi-shu-yue-du-wang-zhan.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+
+        
+
+
+            <article>
+                <a href="https://gccpacman.github.io/linuxxiu-mian-hou-huan-xing-wifihe-lan-ya-wu-fa-zheng-chang-shi-yong-de-jie-jue-fang-fa.html"><h3 class="article-title">Linux休眠后唤醒，wifi和蓝牙无法正常使用的解决方法</h3></a>
+<h6 class="subheader" title="2017-12-04T10:20:00+08:00">Mon 04 December 2017
+</h6>
+
+
+<p><code>Manjaro Linux</code>从<code>17.02</code>版本开始匹配了Surface Pro 3， 这里必须非常感谢下Manjaro Team的工作，我现在可以再次在Surface上用畅快的用Linux了。</p>
+<p>具体可以看reddit上的这篇文章： https://cd-rw.org/t/running-linux-on-the-surface-pro-3/175/37。</p>
+<p>我实际安装的版本是<code>17.1pre3</code>，不管是蓝牙，触摸板，WIFI，touchpad，音量键，甚至触摸屏都可以正常使用，甚至都不用升级内核。</p>
+<p>唯一的问题是启用休眠以后，wifi和蓝牙功能失灵了，即使通过重启<code>NetworkManager.service</code>也无法解决，因此基本上就是硬件驱动的问题，网上关于其他一些笔记本在休眠后无法解决的问题基本上就是用lsmod查到和wifi相关的模块，然后重新加载的方法，但是没有和surface pro有关的内容。</p>
+<p>找了几篇stackoverflow文章做了多次尝试，然后通过<code>lsmod　| grep wifi</code>和<code>lsmod | grep bluetooth</code>查出来的模块 …</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+
+    Tagged: 
+    <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
+    <a href="https://gccpacman.github.io/tag/drivers.html">drivers </a>
+</p>
+
+
+
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/linuxxiu-mian-hou-huan-xing-wifihe-lan-ya-wu-fa-zheng-chang-shi-yong-de-jie-jue-fang-fa.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+
+        
+
+
+            <article>
                 <a href="https://gccpacman.github.io/vimcha-jian-command-tzai-windowsshang-bian-yi.html"><h3 class="article-title">vim插件command-t在windows上编译</h3></a>
 <h6 class="subheader" title="2017-10-24T10:20:00+08:00">Tue 24 October 2017
 </h6>
@@ -173,76 +229,9 @@ https://github.com/Xinkai/XwareDesktop/wiki/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E
                 <hr  class="gradient"/>
             </article>
 
-        
-
-
-            <article>
-                <a href="https://gccpacman.github.io/linuxchuang-jian-zi-ding-yi-de-ying-yong-cheng-xu-qi-dong-qi.html"><h3 class="article-title">Linux创建自定义的应用程序启动器</h3></a>
-<h6 class="subheader" title="2016-01-06T10:20:00+08:00">Wed 06 January 2016
-</h6>
-
-
-<p>eclipse在linux下，下载以后不需要安装，直接在目录下执行.\eclipse就可以运行了，不过同时，每次都要切换到该目录去执行eclipse似乎也比较麻烦。
-又没有办法在应用程序菜单里找到，即使是gnome下，按super然后全局搜索，也找到这个。</p>
-<p>不过好在linux是自由的系统，自己建一个应用程序的启动器一点问题都没有。</p>
-<p>比如我的eclipse装在<code>/opt/eclipse-jee/</code>下,怎么新建一个启动器呢？</p>
-<p>所有用户共享的应用启动器的目录是<code>/usr/share/applications/</code>目录，那么用户自定义的启动器目录在哪里？找了下用户目录下的.config/，没有找到，只好去百度google了一下，原来启动器是在.local/下，具体是<code>.local/share/applications</code>.</p>
-<p>新建一个eclipse.desktop的文件，然后输入以下内容：</p>
-<div class="highlight"><pre><span></span><span class="k">[Desktop Entry]</span>
-<span class="na">Encoding</span><span class="o">=</span><span class="s">UTF-8</span>
-<span class="na">Name</span><span class="o">=</span><span class="s">Eclipse J2ee</span>
-<span class="na">Comment</span><span class="o">=</span><span class="s">Official desktop version of Telegram …</span></pre></div><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
-
-    Tagged: 
-    <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
-    <a href="https://gccpacman.github.io/tag/gnome.html">gnome </a>
-    <a href="https://gccpacman.github.io/tag/gtk.html">gtk </a>
-</p>
-
-
-
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/linuxchuang-jian-zi-ding-yi-de-ying-yong-cheng-xu-qi-dong-qi.html">Read More</a>
-                <hr  class="gradient"/>
-            </article>
-
-        
-
-
-            <article>
-                <a href="https://gccpacman.github.io/archlinuxjiang-nvidia-driverti-huan-cheng-kai-yuan-de-nouveaujie-jue-xian-qia-qu-dong-wen-ti.html"><h3 class="article-title">ArchLinux将nvidia driver替换成开源的nouveau解决显卡驱动问题</h3></a>
-<h6 class="subheader" title="2016-01-05T10:20:00+08:00">Tue 05 January 2016
-</h6>
-
-
-<p>昨天还装完arch兴高采烈，今天就差点放弃整个系统，罪魁祸首就是当年被linus喷了的nvidia.</p>
-<p>Archlinux装了使用nvidia驱动，一开始发现根本就没有加载，装了和没装没啥区别，但是跑的好好的阿跑的好好的，结果不小心手贱点了<code>nvidia-xconfig</code>的应用，莫名其妙的起不来了。（这个原因我想了半天才想出来，不然我实在是无力吐槽他妈跑了一天多好好的什么也没干突然就起步来的情况，一度怀疑是显卡硬件坏了）</p>
-<p>于是抢救三个多小时，<code>/var/log/xorg.0.log</code>里的报错也莫名其妙，比如:</p>
-<div class="highlight"><pre><span></span>not detect device nvidia, no screen found.
-</pre></div>
-
-
-<p>简直是日到狗。于是想着解决办法应该是彻底不要装nvidia的驱动， 用intel的集成显卡，照例来说应该也ok阿，于是直接删掉驱动：</p>
-<p>pacman -R nvidia nvidia-utils</p>
-<p>然后reboot, 没想到发生的事情更加奇葩了，连命令行就出不来了，直接黑屏了我草。</p>
-<p>心里十万个草尼马，还好安装过arch的人毕竟还是知道有个arch-chroot, 放入安装介质（我的是u盘），重启， mount各种好盘:</p>
-<div class="highlight"><pre><span></span>mount /dev …</pre></div><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
-
-    Tagged: 
-    <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
-    <a href="https://gccpacman.github.io/tag/driver.html">driver </a>
-    <a href="https://gccpacman.github.io/tag/gtk.html">gtk </a>
-    <a href="https://gccpacman.github.io/tag/archlinux.html">archlinux </a>
-</p>
-
-
-
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/archlinuxjiang-nvidia-driverti-huan-cheng-kai-yuan-de-nouveaujie-jue-xian-qia-qu-dong-wen-ti.html">Read More</a>
-                <hr  class="gradient"/>
-            </article>
-
             <!-- /#posts-list -->
 <div class="pagination-centered">
-<h6 class="subheader">Page 2 of 4</h6>
+<h6 class="subheader">Page 2 of 5</h6>
 
 <p>
             <a href="https://gccpacman.github.io/index.html">&laquo; Prev</a>
@@ -268,6 +257,7 @@ https://github.com/Xinkai/XwareDesktop/wiki/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E
             <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
             <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
             <li><a href="https://gccpacman.github.io/category/python.html">python</a></li>
+            <li><a href="https://gccpacman.github.io/category/tmux.html">Tmux</a></li>
             <li><a href="https://gccpacman.github.io/category/vim.html">Vim</a></li>
             <li><a href="https://gccpacman.github.io/category/windows.html">Windows</a></li>
    

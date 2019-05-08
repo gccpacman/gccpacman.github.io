@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>putty + tmux多窗口可用配置</title>
+
+    <link rel="stylesheet" href="https://gccpacman.github.io/theme/css/normalize.css" />
+    <link rel="stylesheet" href="https://gccpacman.github.io/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="https://gccpacman.github.io/theme/css/style.css" />
+    <link rel="stylesheet" href="https://gccpacman.github.io/theme/css/pygments.css" />	
+    <script src="https://gccpacman.github.io/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="https://gccpacman.github.io">Pacman News</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="https://gccpacman.github.io/putty-tmuxduo-chuang-kou-ke-yong-pei-zhi.html" rel="bookmark"
+        title="Permalink to putty + tmux多窗口可用配置">putty + tmux多窗口可用配置</a></h3>
+    </header>
+
+<h6 class="subheader" title="2018-08-28T10:20:00+08:00">Tue 28 August 2018
+</h6>
+
+
+    <ul>
+<li>
+<p>putty的执行命令填入如下命令，tmux名称同session名称，以便开多个putty窗口时候识别</p>
+<div class="highlight"><pre><span></span>$ tmux new -A -s <span class="o">{</span>session_name<span class="o">}</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>添加.tmux.conf配置</p>
+<div class="highlight"><pre><span></span>echo &quot;
+##########################################
+# STATUS BAR
+set -g status-keys vi
+set -g status-interval 1
+set -g status-attr bright
+set -g status-fg white
+set -g status-bg black
+set -g status-left-length 20
+set -g status-left &#39;#[fg=green][#[fg=red]#S#[fg=green]]#[default]&#39;
+set -g status-justify centre
+set -g status-right &#39;#[fg=green][ %m/%d %H:%M:%S ]#[default]&#39;
+setw -g window-status-current-format &#39;#[fg=yellow](#I.#P#F#W)#[default]&#39;
+setw -g window-status-format &#39;#I#F#W&#39;
+
+##########################################
+# TERMINAL EMULATOR TITLES
+set -g set-titles on
+set -g set-titles-string \&quot;#(tmux ls | awk -F: &#39;{print $1}&#39; | xargs | sed &#39;s/\ / | /g&#39;)\&quot;
+
+# Scroll History
+set -g history-limit 30000
+
+# Set ability to capture on start and restore on exit window data when running an application
+setw -g alternate-screen on
+
+# Lower escape timing from 500ms to 50ms for quicker response to scroll-buffer access.
+set -s escape-time 50
+&quot; &gt; .tmux.conf
+</pre></div>
+
+
+</li>
+<li>
+<p>（可选）Shell标题控制， 在.profile文件里添加</p>
+<div class="highlight"><pre><span></span>look_for_cmd=0
+print_cmd() {
+  if [ <span class="cp">${</span><span class="n">look_for_cmd</span><span class="cp">}</span> = 1 ] ;then
+    if [ &quot;<span class="cp">${</span><span class="n">BASH_COMMAND</span><span class="cp">}</span>&quot; != &#39;print_host&#39; ] ;then
+      cmdline=$(history 1 | xargs | cut -d\  -f3-)
+      if [[ &quot;<span class="cp">${</span><span class="n">cmdline</span><span class="cp">}</span>&quot; =~ ^(sudo|ssh|vi|man|more|less)\  ]] ;then
+        first=$(echo &quot;<span class="cp">${</span><span class="n">cmdline</span><span class="cp">}</span>&quot; | awk &#39;{print $1}&#39;)
+        for i in <span class="cp">${</span><span class="n">cmdline</span><span class="cp">}</span> ;do
+          if ! [[ &quot;<span class="cp">${</span><span class="n">i</span><span class="cp">}</span>&quot; =~ ^-.*$ ]] <span class="err">&amp;&amp;</span> ! [[ &quot;<span class="cp">${</span><span class="n">i</span><span class="cp">}</span>&quot; =~ ^<span class="cp">${</span><span class="n">first</span><span class="cp">}</span>$ ]] ;then
+            cmd=&quot;<span class="cp">${</span><span class="n">first</span><span class="cp">}</span>[<span class="cp">${</span><span class="n">i</span><span class="cp">}</span>]&quot;
+            break
+          fi
+        done
+      elif [[ &quot;<span class="cp">${</span><span class="n">cmdline</span><span class="cp">}</span>&quot; =~ ^[A-Z]*=.*$ ]] ;then
+        cmd=$(echo <span class="cp">${</span><span class="n">cmdline</span><span class="cp">}</span> | awk &#39;{print $2}&#39;)
+      else
+        cmd=$(echo <span class="cp">${</span><span class="n">cmdline</span><span class="cp">}</span> | awk &#39;{print $1}&#39;)
+      fi
+      echo -ne &quot;\033k<span class="cp">${</span><span class="n">cmd</span><span class="cp">}</span>\033\\&quot; 1&gt;<span class="err">&amp;</span>2
+      look_for_cmd=0
+    else
+      return
+    fi
+  fi
+}
+
+print_host() {
+  echo -ne &quot;\033k<span class="cp">${</span><span class="n">HOSTNAME</span><span class="cp">}</span>\033\\&quot; 1&gt;<span class="err">&amp;</span>2
+  look_for_cmd=1
+}
+
+PROMPT_COMMAND=&quot;print_host&quot;
+
+trap &quot;print_cmd&quot; DEBUG
+</pre></div>
+
+
+</li>
+</ul>
+<p class="subheader">Category: <a href="https://gccpacman.github.io/category/tmux.html">Tmux</a>
+
+    Tagged: 
+    <a href="https://gccpacman.github.io/tag/tmux.html">tmux </a>
+    <a href="https://gccpacman.github.io/tag/putty.html">putty </a>
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="https://gccpacman.github.io/archives.html">Archives</a>
+            <li><a href="https://gccpacman.github.io/tags.html">Tags</a>
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
+            <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
+            <li><a href="https://gccpacman.github.io/category/python.html">python</a></li>
+            <li><a href="https://gccpacman.github.io/category/tmux.html">Tmux</a></li>
+            <li><a href="https://gccpacman.github.io/category/vim.html">Vim</a></li>
+            <li><a href="https://gccpacman.github.io/category/windows.html">Windows</a></li>
+   
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://getpelican.com/">Pelican</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="https://github.com/gccpacman">GccPacman @Github</a></li>
+            <li><a href="https://stackoverflow.com/users/4124310/realhu">r341h @StackOverflow</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Pacman News by r341h</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

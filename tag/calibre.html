@@ -4,7 +4,7 @@
     <!-- Set the viewport width to device width for mobile -->
     <meta name="viewport" content="width=device-width" />
 
-    <title>linux将Socks代理转换成Http代理</title>
+    <title>Pacman News - calibre</title>
 
     <link rel="stylesheet" href="https://gccpacman.github.io/theme/css/normalize.css" />
     <link rel="stylesheet" href="https://gccpacman.github.io/theme/css/foundation.min.css" />
@@ -42,51 +42,61 @@
 
     <!-- Main Blog Content -->
     <div class="large-9 columns">
-<article>
-    <header>
-        <h3 class="article-title"><a href="https://gccpacman.github.io/linuxjiang-socksdai-li-zhuan-huan-cheng-httpdai-li.html" rel="bookmark"
-        title="Permalink to linux将Socks代理转换成Http代理">linux将Socks代理转换成Http代理</a></h3>
-    </header>
+        
+        
 
-<h6 class="subheader" title="2015-05-14T10:20:00+08:00">Thu 14 May 2015
+            <article>
+                <a href="https://gccpacman.github.io/yong-calibre-serverchuang-jian-ge-ren-zai-xian-dian-zi-shu-yue-du-wang-zhan.html"><h3 class="article-title">用Calibre Server创建个人在线电子书阅读网站</h3></a>
+<h6 class="subheader" title="2017-12-20T10:20:00+08:00">Wed 20 December 2017
 </h6>
 
 
-    <p>安装polipo：</p>
-<div class="highlight"><pre><span></span>sudo apt-get update
-sudo apt-get install polipo
+<p>DigitalOcean上有在ubuntu 14.04上安装calibre server的教程——<a href="https://www.digitalocean.com/community/tutorials/how-to-create-a-calibre-ebook-server-on-ubuntu-14-04">How To Create a Calibre Ebook Server on Ubuntu 14.04</a>, 但是已经过时了，一是calibre-server的参数已经改变，二是创建系统服务的方式已经不适用之后的Ubuntu版本，我的服务器是16.04，因此需要把/etc/init/里的脚本改写成systemctl脚本</p>
+<p>改写的方法参考了：https://wiki.ubuntu.com/SystemdForUpstartUsers</p>
+<p>用户名和密码也不再支持digitalocean里的明文的形式, <a href="https://manual.calibre-ebook.com/server.html#managing-user-accounts-from-the-command-line-only">官方文档</a>里看到有<code>enable-auth</code>和<code>userdb</code>, 看来是出于安全性进行了改进, userdb指定最简单的sqlite数据库，并按照提示添加用户。
+最终的版本是：</p>
+<div class="highlight"><pre><span></span>  [Unit]
+  Description=Job that runs the calibre daemon
+
+  [Service]
+  Environment=LIBRARY_PATH=/home/huyunyan_cn/calibre-library
+  Environment=PORT=8080
+  Environment=USERDB=/home/huyunyan_cn/calibre-library/users.sqlite
+  ExecStart=/usr/bin/calibre-server $LIBRARY_PATH \
+                                   --port $PORT --enable-auth --userdb $USERDB
+  [Install]
+  WantedBy=multi-user.target
 </pre></div>
 
 
-<p>编辑polipo配置文件 <code>/etc/polipo/config</code> ：</p>
-<div class="highlight"><pre><span></span>    ### Basic configuration
-
-    # Add your proxy&#39;s address
-    proxyAddress = 192.168.0.1
-
-    # Allow from anyone in the 192.168.0.* range to connect to your proxy
-    allowedClients = 192.168.0.0/24
-</pre></div>
-
-
-<p>重启服务：</p>
-<div class="highlight"><pre><span></span>sudo /etc/init.d/polipo restart
-</pre></div>
-
-
-<p>参考：</p>
-<p><a href="https://help.ubuntu.com/community/Polipo">Polipo - Community Help Wiki</a></p>
-<p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+<p>用户名和密码需要通过另一个参数<code>--manage-users</code>启动server后手动配置：</p>
+<p><code>sudo  calibre-server /home/huyunyan_cn/calibre-library/ --port 8080 --manage-users --userdb /home/huyunyan_cn/calibre-library/users.sqlite</code></p>
+<p>这样就完成了，访问域名后会提示输入用户名和密码，这样你自己可以在任何设备上访问，又不用担心别人来访问你的电子书。</p>
+<p>TODO:
+1. 自动刷新书库（--auto-reload这个参数已经不能用，需要通过restart service来实现）
+2. 远程同步书籍，可以从本地直接上传书到server</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
     Tagged: 
-    <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
-    <a href="https://gccpacman.github.io/tag/proxy.html">proxy </a>
+    <a href="https://gccpacman.github.io/tag/kodi.html">kodi </a>
+    <a href="https://gccpacman.github.io/tag/calibre.html">calibre </a>
 </p>
 
 
 
+            </article>
 
-</article>
+<div class="pagination-centered">
+<h6 class="subheader">Page 1 of 1</h6>
+
+<p>
+
+</p>
+</div>
+
+
+
+            <!-- /#posts-list -->
+
     </div>
     <!-- End Main Content -->
 

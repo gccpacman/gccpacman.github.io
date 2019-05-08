@@ -47,6 +47,41 @@
 
 
             <article>
+                <a href="https://gccpacman.github.io/archlinuxjiang-nvidia-driverti-huan-cheng-kai-yuan-de-nouveaujie-jue-xian-qia-qu-dong-wen-ti.html"><h3 class="article-title">ArchLinux将nvidia driver替换成开源的nouveau解决显卡驱动问题</h3></a>
+<h6 class="subheader" title="2016-01-05T10:20:00+08:00">Tue 05 January 2016
+</h6>
+
+
+<p>昨天还装完arch兴高采烈，今天就差点放弃整个系统，罪魁祸首就是当年被linus喷了的nvidia.</p>
+<p>Archlinux装了使用nvidia驱动，一开始发现根本就没有加载，装了和没装没啥区别，但是跑的好好的阿跑的好好的，结果不小心手贱点了<code>nvidia-xconfig</code>的应用，莫名其妙的起不来了。（这个原因我想了半天才想出来，不然我实在是无力吐槽他妈跑了一天多好好的什么也没干突然就起步来的情况，一度怀疑是显卡硬件坏了）</p>
+<p>于是抢救三个多小时，<code>/var/log/xorg.0.log</code>里的报错也莫名其妙，比如:</p>
+<div class="highlight"><pre><span></span>not detect device nvidia, no screen found.
+</pre></div>
+
+
+<p>简直是日到狗。于是想着解决办法应该是彻底不要装nvidia的驱动， 用intel的集成显卡，照例来说应该也ok阿，于是直接删掉驱动：</p>
+<p>pacman -R nvidia nvidia-utils</p>
+<p>然后reboot, 没想到发生的事情更加奇葩了，连命令行就出不来了，直接黑屏了我草。</p>
+<p>心里十万个草尼马，还好安装过arch的人毕竟还是知道有个arch-chroot, 放入安装介质（我的是u盘），重启， mount各种好盘:</p>
+<div class="highlight"><pre><span></span>mount /dev …</pre></div><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+
+    Tagged: 
+    <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
+    <a href="https://gccpacman.github.io/tag/driver.html">driver </a>
+    <a href="https://gccpacman.github.io/tag/gtk.html">gtk </a>
+    <a href="https://gccpacman.github.io/tag/archlinux.html">archlinux </a>
+</p>
+
+
+
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/archlinuxjiang-nvidia-driverti-huan-cheng-kai-yuan-de-nouveaujie-jue-xian-qia-qu-dong-wen-ti.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+
+        
+
+
+            <article>
                 <a href="https://gccpacman.github.io/linuxda-jian-vncfu-wu-qi.html"><h3 class="article-title">Linux搭建VNC服务器</h3></a>
 <h6 class="subheader" title="2016-01-05T10:20:00+08:00">Tue 05 January 2016
 </h6>
@@ -207,41 +242,6 @@ But sometimes the connection between my own pc and the vps server are not quite 
                 <hr  class="gradient"/>
             </article>
 
-        
-
-
-            <article>
-                <a href="https://gccpacman.github.io/linuxli-yong-sshfan-xiang-duan-kou-zhuan-fa-bao-lu-nei-wang-duan-kou.html"><h3 class="article-title">Linux利用ssh反向端口转发暴露内网端口</h3></a>
-<h6 class="subheader" title="2015-10-30T10:20:00+08:00">Fri 30 October 2015
-</h6>
-
-
-<p>从本地Host用SSH连接到目标主机，怎么让目标主机也可以连接本地的SSH呢？
-答案很简单，只要把本地主机的SSH端口转发到目标主机即可。可以先查看一下SSH命令的man手册:</p>
-<div class="highlight"><pre><span></span>man ssh
-</pre></div>
-
-
-<p>注意里面的R参数，就是要用到的参数：</p>
-<div class="highlight"><pre><span></span>-R [bind_address:]port:host:hostport
-         Specifies that the given port on the remote (server) host is to be forwarded to the given host and port on the local side.  This works by allocating a socket to listen to port
-</pre></div>
-
-
-<p>意思就是把一个远程主机的端口用于本地端口的端口转发。于是对应于假设远程主机IP …</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
-
-    Tagged: 
-    <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
-    <a href="https://gccpacman.github.io/tag/ssh.html">ssh </a>
-    <a href="https://gccpacman.github.io/tag/port-forward.html">port-forward </a>
-</p>
-
-
-
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/linuxli-yong-sshfan-xiang-duan-kou-zhuan-fa-bao-lu-nei-wang-duan-kou.html">Read More</a>
-                <hr  class="gradient"/>
-            </article>
-
             <!-- /#posts-list -->
 <div class="pagination-centered">
 <h6 class="subheader">Page 2 of 3</h6>
@@ -270,6 +270,7 @@ But sometimes the connection between my own pc and the vps server are not quite 
             <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
             <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
             <li><a href="https://gccpacman.github.io/category/python.html">python</a></li>
+            <li><a href="https://gccpacman.github.io/category/tmux.html">Tmux</a></li>
             <li><a href="https://gccpacman.github.io/category/vim.html">Vim</a></li>
             <li><a href="https://gccpacman.github.io/category/windows.html">Windows</a></li>
    

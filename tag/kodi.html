@@ -46,6 +46,53 @@
         
 
             <article>
+                <a href="https://gccpacman.github.io/yong-calibre-serverchuang-jian-ge-ren-zai-xian-dian-zi-shu-yue-du-wang-zhan.html"><h3 class="article-title">用Calibre Server创建个人在线电子书阅读网站</h3></a>
+<h6 class="subheader" title="2017-12-20T10:20:00+08:00">Wed 20 December 2017
+</h6>
+
+
+<p>DigitalOcean上有在ubuntu 14.04上安装calibre server的教程——<a href="https://www.digitalocean.com/community/tutorials/how-to-create-a-calibre-ebook-server-on-ubuntu-14-04">How To Create a Calibre Ebook Server on Ubuntu 14.04</a>, 但是已经过时了，一是calibre-server的参数已经改变，二是创建系统服务的方式已经不适用之后的Ubuntu版本，我的服务器是16.04，因此需要把/etc/init/里的脚本改写成systemctl脚本</p>
+<p>改写的方法参考了：https://wiki.ubuntu.com/SystemdForUpstartUsers</p>
+<p>用户名和密码也不再支持digitalocean里的明文的形式, <a href="https://manual.calibre-ebook.com/server.html#managing-user-accounts-from-the-command-line-only">官方文档</a>里看到有<code>enable-auth</code>和<code>userdb</code>, 看来是出于安全性进行了改进, userdb指定最简单的sqlite数据库，并按照提示添加用户。
+最终的版本是：</p>
+<div class="highlight"><pre><span></span>  [Unit]
+  Description=Job that runs the calibre daemon
+
+  [Service]
+  Environment=LIBRARY_PATH=/home/huyunyan_cn/calibre-library
+  Environment=PORT=8080
+  Environment=USERDB=/home/huyunyan_cn/calibre-library/users.sqlite
+  ExecStart=/usr/bin/calibre-server $LIBRARY_PATH \
+                                   --port $PORT --enable-auth --userdb $USERDB
+  [Install]
+  WantedBy=multi-user.target
+</pre></div>
+
+
+<p>用户名和密码需要通过另一个参数<code>--manage-users</code>启动server后手动配置：</p>
+<p><code>sudo  calibre-server /home/huyunyan_cn/calibre-library/ --port 8080 --manage-users --userdb /home/huyunyan_cn/calibre-library/users.sqlite</code></p>
+<p>这样就完成了，访问域名后会提示输入用户名和密码，这样你自己可以在任何设备上访问，又不用担心别人来访问你的电子书。</p>
+<p>TODO:
+1. 自动刷新书库（--auto-reload这个参数已经不能用，需要通过restart service来实现）
+2. 远程同步书籍，可以从本地直接上传书到server</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+
+    Tagged: 
+    <a href="https://gccpacman.github.io/tag/kodi.html">kodi </a>
+    <a href="https://gccpacman.github.io/tag/calibre.html">calibre </a>
+</p>
+
+
+
+            </article>
+
+
+                <hr  class="gradient"/>
+
+
+        
+
+
+            <article>
                 <a href="https://gccpacman.github.io/linuxan-zhuang-dnscrypt.html"><h3 class="article-title">Linux安装Dnscrypt</h3></a>
 <h6 class="subheader" title="2016-02-06T10:20:00+08:00">Sat 06 February 2016
 </h6>
@@ -63,23 +110,7 @@
 <p>安装一个叫做libsodium的依赖，因为apt工具里没有包含这个依赖，因此需要手动编译，去https://download.libsodium.org/libsodium/releases找最新的版本，下载并且编译：</p>
 <p>mkdir build
 cd build/
-wget https://download.libsodium.org/libsodium/releases/libsodium-1.0.3.tar.gz
-tar -zxvf libsodium-1.0.3.tar.gz
-cd libsodium-1.0.3/
-./configure
-make
-sudo make install</p>
-</li>
-<li>
-<p>下载dnscrypt编译：</p>
-<p>wget https://github.com/jedisct1/dnscrypt-proxy/releases/download/1.6.1/dnscrypt-proxy-1.6.1.tar.bz2
-tar -jxvf dnscrypt-proxy-1.6.1.tar.bz2
-cd dnscrypt-proxy-1.6.1
-./configure
-make -j2
-make install</p>
-</li>
-</ol><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+wget https://download.libsodium.org/libsodium …</p></li></ol><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
     Tagged: 
     <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
@@ -89,11 +120,9 @@ make install</p>
 
 
 
-            </article>
-
-
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/linuxan-zhuang-dnscrypt.html">Read More</a>
                 <hr  class="gradient"/>
-
+            </article>
 
         
 
@@ -183,6 +212,7 @@ https://github.com/Xinkai/XwareDesktop/wiki/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E
             <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
             <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
             <li><a href="https://gccpacman.github.io/category/python.html">python</a></li>
+            <li><a href="https://gccpacman.github.io/category/tmux.html">Tmux</a></li>
             <li><a href="https://gccpacman.github.io/category/vim.html">Vim</a></li>
             <li><a href="https://gccpacman.github.io/category/windows.html">Windows</a></li>
    

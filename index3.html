@@ -47,6 +47,73 @@
 
 
             <article>
+                <a href="https://gccpacman.github.io/linuxchuang-jian-zi-ding-yi-de-ying-yong-cheng-xu-qi-dong-qi.html"><h3 class="article-title">Linux创建自定义的应用程序启动器</h3></a>
+<h6 class="subheader" title="2016-01-06T10:20:00+08:00">Wed 06 January 2016
+</h6>
+
+
+<p>eclipse在linux下，下载以后不需要安装，直接在目录下执行.\eclipse就可以运行了，不过同时，每次都要切换到该目录去执行eclipse似乎也比较麻烦。
+又没有办法在应用程序菜单里找到，即使是gnome下，按super然后全局搜索，也找到这个。</p>
+<p>不过好在linux是自由的系统，自己建一个应用程序的启动器一点问题都没有。</p>
+<p>比如我的eclipse装在<code>/opt/eclipse-jee/</code>下,怎么新建一个启动器呢？</p>
+<p>所有用户共享的应用启动器的目录是<code>/usr/share/applications/</code>目录，那么用户自定义的启动器目录在哪里？找了下用户目录下的.config/，没有找到，只好去百度google了一下，原来启动器是在.local/下，具体是<code>.local/share/applications</code>.</p>
+<p>新建一个eclipse.desktop的文件，然后输入以下内容：</p>
+<div class="highlight"><pre><span></span><span class="k">[Desktop Entry]</span>
+<span class="na">Encoding</span><span class="o">=</span><span class="s">UTF-8</span>
+<span class="na">Name</span><span class="o">=</span><span class="s">Eclipse J2ee</span>
+<span class="na">Comment</span><span class="o">=</span><span class="s">Official desktop version of Telegram …</span></pre></div><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+
+    Tagged: 
+    <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
+    <a href="https://gccpacman.github.io/tag/gnome.html">gnome </a>
+    <a href="https://gccpacman.github.io/tag/gtk.html">gtk </a>
+</p>
+
+
+
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/linuxchuang-jian-zi-ding-yi-de-ying-yong-cheng-xu-qi-dong-qi.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+
+        
+
+
+            <article>
+                <a href="https://gccpacman.github.io/archlinuxjiang-nvidia-driverti-huan-cheng-kai-yuan-de-nouveaujie-jue-xian-qia-qu-dong-wen-ti.html"><h3 class="article-title">ArchLinux将nvidia driver替换成开源的nouveau解决显卡驱动问题</h3></a>
+<h6 class="subheader" title="2016-01-05T10:20:00+08:00">Tue 05 January 2016
+</h6>
+
+
+<p>昨天还装完arch兴高采烈，今天就差点放弃整个系统，罪魁祸首就是当年被linus喷了的nvidia.</p>
+<p>Archlinux装了使用nvidia驱动，一开始发现根本就没有加载，装了和没装没啥区别，但是跑的好好的阿跑的好好的，结果不小心手贱点了<code>nvidia-xconfig</code>的应用，莫名其妙的起不来了。（这个原因我想了半天才想出来，不然我实在是无力吐槽他妈跑了一天多好好的什么也没干突然就起步来的情况，一度怀疑是显卡硬件坏了）</p>
+<p>于是抢救三个多小时，<code>/var/log/xorg.0.log</code>里的报错也莫名其妙，比如:</p>
+<div class="highlight"><pre><span></span>not detect device nvidia, no screen found.
+</pre></div>
+
+
+<p>简直是日到狗。于是想着解决办法应该是彻底不要装nvidia的驱动， 用intel的集成显卡，照例来说应该也ok阿，于是直接删掉驱动：</p>
+<p>pacman -R nvidia nvidia-utils</p>
+<p>然后reboot, 没想到发生的事情更加奇葩了，连命令行就出不来了，直接黑屏了我草。</p>
+<p>心里十万个草尼马，还好安装过arch的人毕竟还是知道有个arch-chroot, 放入安装介质（我的是u盘），重启， mount各种好盘:</p>
+<div class="highlight"><pre><span></span>mount /dev …</pre></div><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+
+    Tagged: 
+    <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
+    <a href="https://gccpacman.github.io/tag/driver.html">driver </a>
+    <a href="https://gccpacman.github.io/tag/gtk.html">gtk </a>
+    <a href="https://gccpacman.github.io/tag/archlinux.html">archlinux </a>
+</p>
+
+
+
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/archlinuxjiang-nvidia-driverti-huan-cheng-kai-yuan-de-nouveaujie-jue-xian-qia-qu-dong-wen-ti.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+
+        
+
+
+            <article>
                 <a href="https://gccpacman.github.io/linuxda-jian-vncfu-wu-qi.html"><h3 class="article-title">Linux搭建VNC服务器</h3></a>
 <h6 class="subheader" title="2016-01-05T10:20:00+08:00">Tue 05 January 2016
 </h6>
@@ -181,72 +248,9 @@ p2p的torrent一直是我的最爱。deluge是一个跨平台的操作系统，�
                 <hr  class="gradient"/>
             </article>
 
-        
-
-
-            <article>
-                <a href="https://gccpacman.github.io/dockerda-jian-openvpn-server.html"><h3 class="article-title">Docker搭建openvpn server</h3></a>
-<h6 class="subheader" title="2015-12-29T10:20:00+08:00">Tue 29 December 2015
-</h6>
-
-
-<p>I always intersted in build services in my own VPS.
-specially things like a server can help me free browser the internet.
-But sometimes the connection between my own pc and the vps server are not quite good. So things not always go luck.</p>
-<p>I find out openvpn is quite …</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
-
-    Tagged: 
-    <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
-    <a href="https://gccpacman.github.io/tag/vpn.html">vpn </a>
-    <a href="https://gccpacman.github.io/tag/openvpn.html">openvpn </a>
-</p>
-
-
-
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/dockerda-jian-openvpn-server.html">Read More</a>
-                <hr  class="gradient"/>
-            </article>
-
-        
-
-
-            <article>
-                <a href="https://gccpacman.github.io/uwsgifang-shi-qi-dong-django.html"><h3 class="article-title">uwsgi方式启动django</h3></a>
-<h6 class="subheader" title="2015-11-23T10:20:00+08:00">Mon 23 November 2015
-</h6>
-
-
-<p>没人访问的博客也不是不能升级。不过最近有点懒，趁着睡不着搞了下<code>uwsgi</code>。
-额。平台ubuntu, 你最好有个django项目，假设已经用了<code>virtualenv</code>，假设已经安装好<code>nginx</code>并启动服务。</p>
-<p>1）首先安装<code>uwsgi</code>:  </p>
-<div class="highlight"><pre><span></span>pip install uwsgi
-</pre></div>
-
-
-<p>2）然后启动， 指定端口号和进程号：</p>
-<div class="highlight"><pre><span></span>uwsgi -s 127.0.0.1:38803 --http :8000 --module blog.wsgi
-</pre></div>
-
-
-<p>3) 配置nginx配置文件，放在<code>/etc/nginx/site-enabled/</code>目录下，注意如果你要用80端口，就不要和其他的例如默认的配置冲突，如果有个default的文件，应该是一个软连接，可以直接删掉。我就直接贴我自己的了：</p>
-<div class="highlight"><pre><span></span><span class="nt">upstream</span> <span class="nt">django</span> <span class="p">{</span>
-    <span class="err">server</span> <span class="err">127 …</span></pre></div><p class="subheader">Category: <a href="https://gccpacman.github.io/category/python.html">python</a>
-
-    Tagged: 
-    <a href="https://gccpacman.github.io/tag/python.html">python </a>
-    <a href="https://gccpacman.github.io/tag/django.html">django </a>
-    <a href="https://gccpacman.github.io/tag/webapps.html">webapps </a>
-</p>
-
-
-
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/uwsgifang-shi-qi-dong-django.html">Read More</a>
-                <hr  class="gradient"/>
-            </article>
-
             <!-- /#posts-list -->
 <div class="pagination-centered">
-<h6 class="subheader">Page 3 of 4</h6>
+<h6 class="subheader">Page 3 of 5</h6>
 
 <p>
             <a href="https://gccpacman.github.io/index2.html">&laquo; Prev</a>
@@ -272,6 +276,7 @@ But sometimes the connection between my own pc and the vps server are not quite 
             <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
             <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
             <li><a href="https://gccpacman.github.io/category/python.html">python</a></li>
+            <li><a href="https://gccpacman.github.io/category/tmux.html">Tmux</a></li>
             <li><a href="https://gccpacman.github.io/category/vim.html">Vim</a></li>
             <li><a href="https://gccpacman.github.io/category/windows.html">Windows</a></li>
    

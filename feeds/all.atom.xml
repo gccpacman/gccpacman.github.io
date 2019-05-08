@@ -165,7 +165,110 @@ HOSTNAME=server-name.company.lan
 &lt;/ol&gt;
 &lt;p&gt;参考：
 https://unix.stackexchange.com/questions/17436/centos-on-hyperv-eth0-not-in-ifconfig&lt;/p&gt;
-&lt;p&gt;https://www.krizna.com/centos/setup-network-centos-7/&lt;/p&gt;</content><category term="windows"></category><category term="hyper-v"></category><category term="centos"></category><category term="vitual machine"></category></entry><entry><title>资源占用超级低的i3桌面</title><link href="https://gccpacman.github.io/zi-yuan-zhan-yong-chao-ji-di-de-i3zhuo-mian.html" rel="alternate"></link><published>2018-05-04T10:20:00+08:00</published><updated>2018-05-04T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2018-05-04:/zi-yuan-zhan-yong-chao-ji-di-de-i3zhuo-mian.html</id><summary type="html">&lt;p&gt;现在的电脑是Surface，跑虚拟机很吃力了，但是不是不能跑，重点是优化后把linux的资源降下来，还是可以非常流畅。i3是个比xfce4更加轻量级的桌面管理器，而且不是像Windows那样悬浮窗口式的，而是tiling的桌面。随便网上找了个截图，大概就是这个意思：&lt;/p&gt;
+&lt;p&gt;https://www.krizna.com/centos/setup-network-centos-7/&lt;/p&gt;</content><category term="windows"></category><category term="hyper-v"></category><category term="centos"></category><category term="vitual machine"></category></entry><entry><title>putty + tmux多窗口可用配置</title><link href="https://gccpacman.github.io/putty-tmuxduo-chuang-kou-ke-yong-pei-zhi.html" rel="alternate"></link><published>2018-08-28T10:20:00+08:00</published><updated>2018-08-28T10:20:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2018-08-28:/putty-tmuxduo-chuang-kou-ke-yong-pei-zhi.html</id><summary type="html">&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;putty的执行命令填入如下命令，tmux名称同session名称，以便开多个putty窗口时候识别&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ tmux new -A -s &lt;span class="o"&gt;{&lt;/span&gt;session_name&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;添加.tmux.conf配置&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;echo &amp;quot;
+##########################################
+# STATUS BAR
+set -g status-keys vi
+set -g status-interval 1
+set -g status-attr bright
+set -g status-fg white
+set -g status-bg black
+set -g status-left-length 20
+set -g status-left &amp;#39;#[fg=green][#[fg=red]#S#[fg=green]]#[default]&amp;#39;
+set …&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;putty的执行命令填入如下命令，tmux名称同session名称，以便开多个putty窗口时候识别&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ tmux new -A -s &lt;span class="o"&gt;{&lt;/span&gt;session_name&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;添加.tmux.conf配置&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;echo &amp;quot;
+##########################################
+# STATUS BAR
+set -g status-keys vi
+set -g status-interval 1
+set -g status-attr bright
+set -g status-fg white
+set -g status-bg black
+set -g status-left-length 20
+set -g status-left &amp;#39;#[fg=green][#[fg=red]#S#[fg=green]]#[default]&amp;#39;
+set -g status-justify centre
+set -g status-right &amp;#39;#[fg=green][ %m/%d %H:%M:%S ]#[default]&amp;#39;
+setw -g window-status-current-format &amp;#39;#[fg=yellow](#I.#P#F#W)#[default]&amp;#39;
+setw -g window-status-format &amp;#39;#I#F#W&amp;#39;
+
+##########################################
+# TERMINAL EMULATOR TITLES
+set -g set-titles on
+set -g set-titles-string \&amp;quot;#(tmux ls | awk -F: &amp;#39;{print $1}&amp;#39; | xargs | sed &amp;#39;s/\ / | /g&amp;#39;)\&amp;quot;
+
+# Scroll History
+set -g history-limit 30000
+
+# Set ability to capture on start and restore on exit window data when running an application
+setw -g alternate-screen on
+
+# Lower escape timing from 500ms to 50ms for quicker response to scroll-buffer access.
+set -s escape-time 50
+&amp;quot; &amp;gt; .tmux.conf
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;（可选）Shell标题控制， 在.profile文件里添加&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;look_for_cmd=0
+print_cmd() {
+  if [ &lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;look_for_cmd&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt; = 1 ] ;then
+    if [ &amp;quot;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;BASH_COMMAND&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;&amp;quot; != &amp;#39;print_host&amp;#39; ] ;then
+      cmdline=$(history 1 | xargs | cut -d\  -f3-)
+      if [[ &amp;quot;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;cmdline&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;&amp;quot; =~ ^(sudo|ssh|vi|man|more|less)\  ]] ;then
+        first=$(echo &amp;quot;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;cmdline&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;&amp;quot; | awk &amp;#39;{print $1}&amp;#39;)
+        for i in &lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;cmdline&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt; ;do
+          if ! [[ &amp;quot;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;&amp;quot; =~ ^-.*$ ]] &lt;span class="err"&gt;&amp;amp;&amp;amp;&lt;/span&gt; ! [[ &amp;quot;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;&amp;quot; =~ ^&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;first&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;$ ]] ;then
+            cmd=&amp;quot;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;first&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;[&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;]&amp;quot;
+            break
+          fi
+        done
+      elif [[ &amp;quot;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;cmdline&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;&amp;quot; =~ ^[A-Z]*=.*$ ]] ;then
+        cmd=$(echo &lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;cmdline&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt; | awk &amp;#39;{print $2}&amp;#39;)
+      else
+        cmd=$(echo &lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;cmdline&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt; | awk &amp;#39;{print $1}&amp;#39;)
+      fi
+      echo -ne &amp;quot;\033k&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;cmd&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;\033\\&amp;quot; 1&amp;gt;&lt;span class="err"&gt;&amp;amp;&lt;/span&gt;2
+      look_for_cmd=0
+    else
+      return
+    fi
+  fi
+}
+
+print_host() {
+  echo -ne &amp;quot;\033k&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;HOSTNAME&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;\033\\&amp;quot; 1&amp;gt;&lt;span class="err"&gt;&amp;amp;&lt;/span&gt;2
+  look_for_cmd=1
+}
+
+PROMPT_COMMAND=&amp;quot;print_host&amp;quot;
+
+trap &amp;quot;print_cmd&amp;quot; DEBUG
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ul&gt;</content><category term="tmux"></category><category term="putty"></category></entry><entry><title>资源占用超级低的i3桌面</title><link href="https://gccpacman.github.io/zi-yuan-zhan-yong-chao-ji-di-de-i3zhuo-mian.html" rel="alternate"></link><published>2018-05-04T10:20:00+08:00</published><updated>2018-05-04T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2018-05-04:/zi-yuan-zhan-yong-chao-ji-di-de-i3zhuo-mian.html</id><summary type="html">&lt;p&gt;现在的电脑是Surface，跑虚拟机很吃力了，但是不是不能跑，重点是优化后把linux的资源降下来，还是可以非常流畅。i3是个比xfce4更加轻量级的桌面管理器，而且不是像Windows那样悬浮窗口式的，而是tiling的桌面。随便网上找了个截图，大概就是这个意思：&lt;/p&gt;
 &lt;p&gt;&lt;img alt="i3" src="https://i3wm.org/screenshots/i3-1.png"&gt;&lt;/p&gt;
 &lt;p&gt;这边的例子以Vmware为例：&lt;/p&gt;
 &lt;ol&gt;
@@ -336,7 +439,38 @@ exec i3&amp;quot; &amp;gt; ~/.xsession
 &lt;p&gt;https://help.github.com/articles/dealing-with-line-endings&lt;/p&gt;
 &lt;p&gt;https://groups.google.com/forum/#!topic/ustc_lug/_wL4OkWrVK4&lt;/p&gt;
 &lt;p&gt;https://stackoverflow.com/questions/33942924/how-to-change-home-directory-and-start-directory-on-msys2&lt;/p&gt;
-&lt;p&gt;https://stackoverflow.com/questions/45836650/how-do-i-integrate-msys2-shell-into-visual-studio-code-on-window/48016561#comment84105772_48016561&lt;/p&gt;</content><category term="windows"></category><category term="shell"></category></entry><entry><title>Linux休眠后唤醒，wifi和蓝牙无法正常使用的解决方法</title><link href="https://gccpacman.github.io/linuxxiu-mian-hou-huan-xing-wifihe-lan-ya-wu-fa-zheng-chang-shi-yong-de-jie-jue-fang-fa.html" rel="alternate"></link><published>2017-12-04T10:20:00+08:00</published><updated>2017-12-04T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2017-12-04:/linuxxiu-mian-hou-huan-xing-wifihe-lan-ya-wu-fa-zheng-chang-shi-yong-de-jie-jue-fang-fa.html</id><summary type="html">&lt;p&gt;&lt;code&gt;Manjaro Linux&lt;/code&gt;从&lt;code&gt;17.02&lt;/code&gt;版本开始匹配了Surface Pro 3， 这里必须非常感谢下Manjaro Team的工作，我现在可以再次在Surface上用畅快的用Linux了。&lt;/p&gt;
+&lt;p&gt;https://stackoverflow.com/questions/45836650/how-do-i-integrate-msys2-shell-into-visual-studio-code-on-window/48016561#comment84105772_48016561&lt;/p&gt;</content><category term="windows"></category><category term="shell"></category></entry><entry><title>用Calibre Server创建个人在线电子书阅读网站</title><link href="https://gccpacman.github.io/yong-calibre-serverchuang-jian-ge-ren-zai-xian-dian-zi-shu-yue-du-wang-zhan.html" rel="alternate"></link><published>2017-12-20T10:20:00+08:00</published><updated>2017-12-20T10:20:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2017-12-20:/yong-calibre-serverchuang-jian-ge-ren-zai-xian-dian-zi-shu-yue-du-wang-zhan.html</id><summary type="html">&lt;p&gt;DigitalOcean上有在ubuntu 14.04上安装calibre server的教程——&lt;a href="https://www.digitalocean.com/community/tutorials/how-to-create-a-calibre-ebook-server-on-ubuntu-14-04"&gt;How To Create a Calibre Ebook Server on Ubuntu 14.04&lt;/a&gt;, 但是已经过时了，一是calibre-server的参数已经改变，二是创建系统服务的方式已经不适用之后的Ubuntu版本，我的服务器是16.04，因此需要把/etc/init/里的脚本改写成systemctl脚本&lt;/p&gt;
+&lt;p&gt;改写的方法参考了：https://wiki.ubuntu.com/SystemdForUpstartUsers&lt;/p&gt;
+&lt;p&gt;用户名和密码也不再支持digitalocean里的明文的形式, &lt;a href="https://manual.calibre-ebook.com/server.html#managing-user-accounts-from-the-command-line-only"&gt;官方文档&lt;/a&gt;里看到有&lt;code&gt;enable-auth&lt;/code&gt;和&lt;code&gt;userdb&lt;/code&gt;, 看来是出于安全性进行了改进, userdb指定最简单的sqlite数据库，并按照提示添加用户。
+最终的版本是：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;  [Unit]
+  Description=Job that runs the calibre daemon
+
+  [Service]
+  Environment …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;DigitalOcean上有在ubuntu 14.04上安装calibre server的教程——&lt;a href="https://www.digitalocean.com/community/tutorials/how-to-create-a-calibre-ebook-server-on-ubuntu-14-04"&gt;How To Create a Calibre Ebook Server on Ubuntu 14.04&lt;/a&gt;, 但是已经过时了，一是calibre-server的参数已经改变，二是创建系统服务的方式已经不适用之后的Ubuntu版本，我的服务器是16.04，因此需要把/etc/init/里的脚本改写成systemctl脚本&lt;/p&gt;
+&lt;p&gt;改写的方法参考了：https://wiki.ubuntu.com/SystemdForUpstartUsers&lt;/p&gt;
+&lt;p&gt;用户名和密码也不再支持digitalocean里的明文的形式, &lt;a href="https://manual.calibre-ebook.com/server.html#managing-user-accounts-from-the-command-line-only"&gt;官方文档&lt;/a&gt;里看到有&lt;code&gt;enable-auth&lt;/code&gt;和&lt;code&gt;userdb&lt;/code&gt;, 看来是出于安全性进行了改进, userdb指定最简单的sqlite数据库，并按照提示添加用户。
+最终的版本是：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;  [Unit]
+  Description=Job that runs the calibre daemon
+
+  [Service]
+  Environment=LIBRARY_PATH=/home/huyunyan_cn/calibre-library
+  Environment=PORT=8080
+  Environment=USERDB=/home/huyunyan_cn/calibre-library/users.sqlite
+  ExecStart=/usr/bin/calibre-server $LIBRARY_PATH \
+                                   --port $PORT --enable-auth --userdb $USERDB
+  [Install]
+  WantedBy=multi-user.target
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;用户名和密码需要通过另一个参数&lt;code&gt;--manage-users&lt;/code&gt;启动server后手动配置：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo  calibre-server /home/huyunyan_cn/calibre-library/ --port 8080 --manage-users --userdb /home/huyunyan_cn/calibre-library/users.sqlite&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;这样就完成了，访问域名后会提示输入用户名和密码，这样你自己可以在任何设备上访问，又不用担心别人来访问你的电子书。&lt;/p&gt;
+&lt;p&gt;TODO:
+1. 自动刷新书库（--auto-reload这个参数已经不能用，需要通过restart service来实现）
+2. 远程同步书籍，可以从本地直接上传书到server&lt;/p&gt;</content><category term="kodi"></category><category term="calibre"></category></entry><entry><title>Linux休眠后唤醒，wifi和蓝牙无法正常使用的解决方法</title><link href="https://gccpacman.github.io/linuxxiu-mian-hou-huan-xing-wifihe-lan-ya-wu-fa-zheng-chang-shi-yong-de-jie-jue-fang-fa.html" rel="alternate"></link><published>2017-12-04T10:20:00+08:00</published><updated>2017-12-04T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2017-12-04:/linuxxiu-mian-hou-huan-xing-wifihe-lan-ya-wu-fa-zheng-chang-shi-yong-de-jie-jue-fang-fa.html</id><summary type="html">&lt;p&gt;&lt;code&gt;Manjaro Linux&lt;/code&gt;从&lt;code&gt;17.02&lt;/code&gt;版本开始匹配了Surface Pro 3， 这里必须非常感谢下Manjaro Team的工作，我现在可以再次在Surface上用畅快的用Linux了。&lt;/p&gt;
 &lt;p&gt;具体可以看reddit上的这篇文章： https://cd-rw.org/t/running-linux-on-the-surface-pro-3/175/37。&lt;/p&gt;
 &lt;p&gt;我实际安装的版本是&lt;code&gt;17.1pre3&lt;/code&gt;，不管是蓝牙，触摸板，WIFI，touchpad，音量键，甚至触摸屏都可以正常使用，甚至都不用升级内核。&lt;/p&gt;
 &lt;p&gt;唯一的问题是启用休眠以后，wifi和蓝牙功能失灵了，即使通过重启&lt;code&gt;NetworkManager.service&lt;/code&gt;也无法解决，因此基本上就是硬件驱动的问题，网上关于其他一些笔记本在休眠后无法解决的问题基本上就是用lsmod查到和wifi相关的模块，然后重新加载的方法，但是没有和surface pro有关的内容。&lt;/p&gt;
@@ -1141,7 +1275,98 @@ group nogroup
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;这样就很方便的又重新连接到了本地的ssh。同样的技巧可以用于一些暴露本地端口的操作，例如你身处一个局域网里，且没有权限去操作路由。你却想要暴露一个本机的ip，比如说80，让远程的主机访问你的http服务，用同样的方式可以很轻易的做到。&lt;/p&gt;</content><category term="linux"></category><category term="ssh"></category><category term="port-forward"></category></entry><entry><title>linux将Socks代理转换成Http代理</title><link href="https://gccpacman.github.io/linuxjiang-socksdai-li-zhuan-huan-cheng-httpdai-li.html" rel="alternate"></link><published>2015-05-14T10:20:00+08:00</published><updated>2015-05-14T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2015-05-14:/linuxjiang-socksdai-li-zhuan-huan-cheng-httpdai-li.html</id><summary type="html">&lt;p&gt;安装polipo：&lt;/p&gt;
+&lt;p&gt;这样就很方便的又重新连接到了本地的ssh。同样的技巧可以用于一些暴露本地端口的操作，例如你身处一个局域网里，且没有权限去操作路由。你却想要暴露一个本机的ip，比如说80，让远程的主机访问你的http服务，用同样的方式可以很轻易的做到。&lt;/p&gt;</content><category term="linux"></category><category term="ssh"></category><category term="port-forward"></category></entry><entry><title>Tmux的复制和黏贴</title><link href="https://gccpacman.github.io/tmuxde-fu-zhi-he-nian-tie.html" rel="alternate"></link><published>2015-10-29T10:20:00+08:00</published><updated>2015-10-29T10:20:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2015-10-29:/tmuxde-fu-zhi-he-nian-tie.html</id><summary type="html">&lt;p&gt;tmux确实是一个吊炸的东西，功能和那个和他类似的鼻祖screen相比，确实多出了不少。比如他又一个可以对终端的内容进行复制和黏贴的功能。
+这里假定你设置的快捷键前缀是Ctrl+a:
+进行复制的操作是：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;Ctrl+a [&lt;/code&gt;开始复制&lt;/li&gt;
+&lt;li&gt;把光标移动到开始复制的位置(上下左右键，或者Ctrl+n/p/b/f键移动光标)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Ctrl+Space&lt;/code&gt;  开始选择内容，类似vim的按下V的效果&lt;/li&gt;
+&lt;li&gt;完成选择，&lt;code&gt;Alt+w&lt;/code&gt; 完成复制&lt;/li&gt;
+&lt;li&gt;然后到你想要黏贴的地方， &lt;code&gt;Ctrl+a ]&lt;/code&gt; 黏贴成功&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;需要注意的是， Ctrl+space在windows和linux的某些桌面环境下，都是输入法切换键，所以如果这个方法不成功，很可能是因为快捷键冲突的原因了。那么解决方法一个是把冲突的快捷键解决掉，另一个这是通过配置.tmux.conf。其实上面的快捷键默认的快捷键，模仿的按键是emacs，因为我不用emacs（因为我不用emacs，所以也只觉得很不习惯)，其实还有另外的一种快捷键模式是模仿vim的，不过需要你在tmux配置文件里配置一下, 把下面这行加入.tmux.conf里:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;set-window-option …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;tmux确实是一个吊炸的东西，功能和那个和他类似的鼻祖screen相比，确实多出了不少。比如他又一个可以对终端的内容进行复制和黏贴的功能。
+这里假定你设置的快捷键前缀是Ctrl+a:
+进行复制的操作是：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;Ctrl+a [&lt;/code&gt;开始复制&lt;/li&gt;
+&lt;li&gt;把光标移动到开始复制的位置(上下左右键，或者Ctrl+n/p/b/f键移动光标)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Ctrl+Space&lt;/code&gt;  开始选择内容，类似vim的按下V的效果&lt;/li&gt;
+&lt;li&gt;完成选择，&lt;code&gt;Alt+w&lt;/code&gt; 完成复制&lt;/li&gt;
+&lt;li&gt;然后到你想要黏贴的地方， &lt;code&gt;Ctrl+a ]&lt;/code&gt; 黏贴成功&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;需要注意的是， Ctrl+space在windows和linux的某些桌面环境下，都是输入法切换键，所以如果这个方法不成功，很可能是因为快捷键冲突的原因了。那么解决方法一个是把冲突的快捷键解决掉，另一个这是通过配置.tmux.conf。其实上面的快捷键默认的快捷键，模仿的按键是emacs，因为我不用emacs（因为我不用emacs，所以也只觉得很不习惯)，其实还有另外的一种快捷键模式是模仿vim的，不过需要你在tmux配置文件里配置一下, 把下面这行加入.tmux.conf里:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;set-window-option -g mode-keys vi
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;设置成这样以后，重新载入配置（可以用&lt;code&gt;ctrl+a :&lt;/code&gt;然后输入&lt;code&gt;source-file ~/.tmux.conf&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;然后复制黏贴的操作就变成了：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;Ctrl+a [&lt;/code&gt;开始复制&lt;/li&gt;
+&lt;li&gt;把光标移动到开始复制的位置(上下左右键，或者Ctrl+n/p/b/f键移动光标)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Space&lt;/code&gt;  开始选择内容，类似vim的按下V的效果&lt;/li&gt;
+&lt;li&gt;完成选择，&lt;code&gt;Enter&lt;/code&gt; 完成复制&lt;/li&gt;
+&lt;li&gt;然后到你想要黏贴的地方， &lt;code&gt;Ctrl+a ]&lt;/code&gt; 黏贴成功&lt;/li&gt;
+&lt;/ol&gt;</content><category term="tmux"></category><category term="linux"></category></entry><entry><title>利用babun, tmux, zsh高度定制shell</title><link href="https://gccpacman.github.io/li-yong-babun-tmux-zshgao-du-ding-zhi-shell.html" rel="alternate"></link><published>2015-10-22T10:20:00+08:00</published><updated>2015-10-22T10:20:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2015-10-22:/li-yong-babun-tmux-zshgao-du-ding-zhi-shell.html</id><summary type="html">&lt;p&gt;深刻和彻底的切换到linux平台后，深切的感受到linux平台对程序员带来的便利。因此日常环境已经不再使用windows啦，奈何博主虽然是个穷逼，然而却舍得钱买一堆电脑，所以没事还是会折腾下windows，毕竟娱乐还是需要的。&lt;/p&gt;
+&lt;p&gt;之前折腾过cygwin好一阵子，最终还是觉得真的搬到开发环境确实有很多麻烦的地方，不过现在既然为了娱乐又有一台没有装任何开发环境的win10，那就娱乐一下好了。&lt;/p&gt;
+&lt;h1&gt;1） 安装和配置babun&lt;/h1&gt;
+&lt;p&gt;首先可以装一个定制得非常好的cygwin shell, 那就是&lt;a href="http://babun.github.io/"&gt;babun&lt;/a&gt;, 已经默认为你装好并配置了cygwin环境下的zsh，用起来可比普通的shell爽多了。另外有个强大的包管理器，pact命令，用起来很像rpm和apt之类的，非常方便。例如要装tmux, 那么就执行&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pact install tmux
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;就可以成功安装了。
+不过值得注意的是pact默认用的是kernel.org的镜像，国内访问非常慢，这时通过help发现有个--mirror的参数，可以手动指定成163的：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pact --mirror http://mirrors.163.com/cygwin/ install tree
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;不过每次要输入这个太麻烦，可以用alias, 在home目录下新建一个.bash_aliases的文件，输入alias pact='pact …&lt;/p&gt;</summary><content type="html">&lt;p&gt;深刻和彻底的切换到linux平台后，深切的感受到linux平台对程序员带来的便利。因此日常环境已经不再使用windows啦，奈何博主虽然是个穷逼，然而却舍得钱买一堆电脑，所以没事还是会折腾下windows，毕竟娱乐还是需要的。&lt;/p&gt;
+&lt;p&gt;之前折腾过cygwin好一阵子，最终还是觉得真的搬到开发环境确实有很多麻烦的地方，不过现在既然为了娱乐又有一台没有装任何开发环境的win10，那就娱乐一下好了。&lt;/p&gt;
+&lt;h1&gt;1） 安装和配置babun&lt;/h1&gt;
+&lt;p&gt;首先可以装一个定制得非常好的cygwin shell, 那就是&lt;a href="http://babun.github.io/"&gt;babun&lt;/a&gt;, 已经默认为你装好并配置了cygwin环境下的zsh，用起来可比普通的shell爽多了。另外有个强大的包管理器，pact命令，用起来很像rpm和apt之类的，非常方便。例如要装tmux, 那么就执行&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pact install tmux
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;就可以成功安装了。
+不过值得注意的是pact默认用的是kernel.org的镜像，国内访问非常慢，这时通过help发现有个--mirror的参数，可以手动指定成163的：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pact --mirror http://mirrors.163.com/cygwin/ install tree
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;不过每次要输入这个太麻烦，可以用alias, 在home目录下新建一个.bash_aliases的文件，输入alias pact='pact --mirror http://mirrors.163.com/cygwin/'这样下次就不需要再输--mirror了。&lt;/p&gt;
+&lt;h1&gt;2） 安装和配置tmux&lt;/h1&gt;
+&lt;p&gt;OK第一步装babun已经完成，接下来装tmux，也非常easy，其实上面已经介绍过了&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pact install tmux
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;然后就可以用了，输入tmux, 下面就有了一个标签栏，tmux默认的前缀按键是Ctrl+B，然后再按另一个键，随便举几个例子：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Ctrl+b c 创建标签&lt;/li&gt;
+&lt;li&gt;Ctrl+b n 下一个标签&lt;/li&gt;
+&lt;li&gt;Ctrl+b p 上一个标签&lt;/li&gt;
+&lt;li&gt;Ctrl+b d 分离session，但并没有退出，而是在后台运行，如果要重新链接，输入tmux a&lt;/li&gt;
+&lt;li&gt;Ctrl+b ? 查看帮助&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;tmux非常强大，甚至有分屏这样的操作，具体可以在帮助里看。重要的是我们现在已经可以只打开一个窗口，就在几个window之前切换了。&lt;/p&gt;
+&lt;p&gt;OK, 看起来非常不错，但是用过vim的同学知道，Ctrl+b是向下翻页的按键啊，所以我想把前缀按键换成Ctrl+a怎么办, 还是配置文件，linux的一切都是配置文件。
+在Home目录创建一个.tmux.conf文件，输入以下内容：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;unbind C-b
+set -g prefix C-a
+bind C-a send-prefix
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;如果你的tmux已经打开，你想重载配置，怎么操作呢? 前缀Ctrl+b ：然后标签栏就会出现一个冒号，输入&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;source-file ~/.tmux.conf
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;回车，好了，此时前缀应该就已经变成了Ctrl+a了&lt;/p&gt;</content><category term="windows"></category><category term="cygwin"></category><category term="tmux"></category><category term="zsh"></category></entry><entry><title>linux将Socks代理转换成Http代理</title><link href="https://gccpacman.github.io/linuxjiang-socksdai-li-zhuan-huan-cheng-httpdai-li.html" rel="alternate"></link><published>2015-05-14T10:20:00+08:00</published><updated>2015-05-14T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2015-05-14:/linuxjiang-socksdai-li-zhuan-huan-cheng-httpdai-li.html</id><summary type="html">&lt;p&gt;安装polipo：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get update
 sudo apt-get install polipo
 &lt;/pre&gt;&lt;/div&gt;
