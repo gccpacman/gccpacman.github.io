@@ -136,6 +136,59 @@ $ kubectl delete hpa &lt;hpa_name&gt;
 
             </article>
 
+
+                <hr  class="gradient"/>
+
+
+        
+
+
+            <article>
+                <a href="https://gccpacman.github.io/qiang-nei-de-centos7-linuxan-zhuang-k8s.html"><h3 class="article-title">墙内的Centos7 Linux安装K8S</h3></a>
+<h6 class="subheader" title="2019-05-07T11:13:00+08:00">Tue 07 May 2019
+</h6>
+
+
+<ol>
+<li>
+<p>安装基础构建依赖</p>
+<div class="highlight"><pre><span></span>$ yum -y install yum-utils device-mapper-persistent-data lvm2
+</pre></div>
+
+
+</li>
+<li>
+<p>安装Docker</p>
+<div class="highlight"><pre><span></span>$ yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+$ yum -y install docker-ce
+$ systemctl start docker <span class="o">&amp;&amp;</span> systemctl <span class="nb">enable</span> docker 
+$ docker images   <span class="c1"># 确定docker命令正常</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>安装Kubernetes</p>
+<p>3.1 安装kubeadm, kubelet, kubectl</p>
+<div class="highlight"><pre><span></span>$ vim kubernetes.repo
+
+<span class="o">[</span>kubernetes<span class="o">]</span>
+<span class="nv">name</span><span class="o">=</span>Kubernetes
+<span class="nv">baseurl</span><span class="o">=</span>https://mirrors.aliyun.com/kubernetes/yum …</pre></div></li></ol><p class="subheader">Category: <a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a>
+
+    Tagged: 
+    <a href="https://gccpacman.github.io/tag/kubernetes.html">kubernetes </a>
+    <a href="https://gccpacman.github.io/tag/centos7.html">centos7 </a>
+    <a href="https://gccpacman.github.io/tag/docker.html">docker </a>
+</p>
+
+
+
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/qiang-nei-de-centos7-linuxan-zhuang-k8s.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+
+            <!-- /#posts-list -->
 <div class="pagination-centered">
 <h6 class="subheader">Page 1 of 1</h6>
 
@@ -143,10 +196,6 @@ $ kubectl delete hpa &lt;hpa_name&gt;
 
 </p>
 </div>
-
-
-
-            <!-- /#posts-list -->
 
     </div>
     <!-- End Main Content -->

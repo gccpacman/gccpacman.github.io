@@ -86,4 +86,124 @@ $ kubectl delete hpa &amp;lt;hpa_name&amp;gt;
 
 
 &lt;/li&gt;
-&lt;/ul&gt;</content><category term="kubernetes"></category><category term="docker"></category></entry></feed>
+&lt;/ul&gt;</content><category term="kubernetes"></category><category term="docker"></category></entry><entry><title>墙内的Centos7 Linux安装K8S</title><link href="https://gccpacman.github.io/qiang-nei-de-centos7-linuxan-zhuang-k8s.html" rel="alternate"></link><published>2019-05-07T11:13:00+08:00</published><updated>2019-05-07T11:13:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2019-05-07:/qiang-nei-de-centos7-linuxan-zhuang-k8s.html</id><summary type="html">&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;安装基础构建依赖&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ yum -y install yum-utils device-mapper-persistent-data lvm2
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;安装Docker&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+$ yum -y install docker-ce
+$ systemctl start docker &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; systemctl &lt;span class="nb"&gt;enable&lt;/span&gt; docker 
+$ docker images   &lt;span class="c1"&gt;# 确定docker命令正常&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;安装Kubernetes&lt;/p&gt;
+&lt;p&gt;3.1 安装kubeadm, kubelet, kubectl&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ vim kubernetes.repo
+
+&lt;span class="o"&gt;[&lt;/span&gt;kubernetes&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="nv"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Kubernetes
+&lt;span class="nv"&gt;baseurl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;https://mirrors.aliyun.com/kubernetes/yum …&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;安装基础构建依赖&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ yum -y install yum-utils device-mapper-persistent-data lvm2
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;安装Docker&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+$ yum -y install docker-ce
+$ systemctl start docker &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; systemctl &lt;span class="nb"&gt;enable&lt;/span&gt; docker 
+$ docker images   &lt;span class="c1"&gt;# 确定docker命令正常&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;安装Kubernetes&lt;/p&gt;
+&lt;p&gt;3.1 安装kubeadm, kubelet, kubectl&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ vim kubernetes.repo
+
+&lt;span class="o"&gt;[&lt;/span&gt;kubernetes&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="nv"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Kubernetes
+&lt;span class="nv"&gt;baseurl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64
+&lt;span class="nv"&gt;enabled&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;
+&lt;span class="nv"&gt;gpgcheck&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;
+
+$ yum -y install kubelet kubeadm kubectl kubernetes-cni
+$ systemctl &lt;span class="nb"&gt;enable&lt;/span&gt; kubelet &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; systemctl start kubelet
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;3.2 pull下来kubernetes要要到的镜像，因为k8s.gcr.io这个域名被墙，需要从阿里云pull下来然后重新打tag，参考文档里的几篇版本都对不上，首先可以通过这个命令&lt;code&gt;列出&lt;/code&gt;确定需要pull的镜像和版本：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ kubeadm config images list
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;3.3 根据上一步列出的镜像和版本号，参考&lt;code&gt;https://github.com/cookcodeblog/k8s-deploy&lt;/code&gt;的目录&lt;code&gt;kubeadm_v1.13.0/04_pull_kubernetes_images_from_aliyun.sh&lt;/code&gt;编写一个脚本，注意替换成你需要的版本，然后执行。&lt;/p&gt;
+&lt;p&gt;3.4 关闭swap，注释掉&lt;code&gt;/etc/fstab&lt;/code&gt;里的swap一行，重启后生效，并关闭selinux&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ swapoff -a
+$ setenforce &lt;span class="m"&gt;0&lt;/span&gt;
+$ sed -i &lt;span class="s1"&gt;&amp;#39;s/SELINUX=permissive/SELINUX=disabled/&amp;#39;&lt;/span&gt; /etc/sysconfig/selinux
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;3.5 配置网络转发&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ vim /etc/sysctl.d/k8s.conf
+
+net.bridge.bridge-nf-call-ip6tables &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;
+net.bridge.bridge-nf-call-iptables &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;
+net.ipv4.conf.all.forwarding &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;
+vm.swappiness &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;
+
+$ sysctl --system  &lt;span class="c1"&gt;# 确定配置生效&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;3.6 初始化kubeadm，等待命令执行完成&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ kubeadm init
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;3.7 配置kubectl&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ mkdir -p &lt;span class="nv"&gt;$HOME&lt;/span&gt;/.kube
+$ cp -i /etc/kubernetes/admin.conf &lt;span class="nv"&gt;$HOME&lt;/span&gt;/.kube/config
+$ chown &lt;span class="k"&gt;$(&lt;/span&gt;id -u&lt;span class="k"&gt;)&lt;/span&gt;:&lt;span class="k"&gt;$(&lt;/span&gt;id -g&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="nv"&gt;$HOME&lt;/span&gt;/.kube/config
+$ kubectl get nodes &lt;span class="c1"&gt;# 确认kubectl配置成功&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在Kubenetes里安装Flannel网络&lt;/p&gt;
+&lt;p&gt;4.1 pull下Flannel镜像过程因为防火墙的原因依旧类似3.3操作，参考&lt;code&gt;https://github.com/cookcodeblog/k8s-deploy/tree/master/kubeadm_v1.13.0&lt;/code&gt;里的&lt;code&gt;kubeadm_v1.13.0/pull_flannel_images_from_aliyun.sh&lt;/code&gt;写一个脚本文件，这次的版本就用&lt;code&gt;v0.11.0&lt;/code&gt;就好，便写完成执行脚本&lt;/p&gt;
+&lt;p&gt;4.2 安装Flannel网络&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;wget -O kube-flannel.yml https://raw.githubusercontent.com/coreos/flannel/a70459be0084506e4ec919aa1c114638878db11b/Documentation/kube-flannel.yml
+kubectl apply -f kube-flannel.yml
+
+# 过几十秒确认是否启动成功
+kubectl get pods --all-namespaces
+kubectl get cs
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;通过这四个步骤的成功执行，一个单机版本的Kubernetes已经安装完毕，接下去还可以做以下事情继续折腾，等之后有时间再折腾：
+1. 添加一个worker节点加入到K8S集群
+2. 可以根据参考文档，安装一个&lt;code&gt;K8S Dashboard&lt;/code&gt;等或者部署应用
+3. 尝试在自己实现Ingress的负载均衡&lt;/p&gt;
+&lt;p&gt;参考：&lt;/p&gt;
+&lt;p&gt;https://juejin.im/post/5c36fd906fb9a049f8197c9b&lt;/p&gt;
+&lt;p&gt;https://www.howtoforge.com/tutorial/centos-kubernetes-docker-cluster/&lt;/p&gt;
+&lt;p&gt;https://github.com/cookcodeblog/k8s-deploy&lt;/p&gt;</content><category term="kubernetes"></category><category term="centos7"></category><category term="docker"></category></entry></feed>
