@@ -47,7 +47,7 @@
 
             <article>
                 <a href="https://gccpacman.github.io/linuxan-zhuang-dnscrypt.html"><h3 class="article-title">Linux安装Dnscrypt</h3></a>
-<h6 class="subheader" title="2016-02-06T10:20:00+08:00">Sat 06 February 2016
+<h6 class="subheader" title="2016-02-06T10:20:00+08:00">周六 06 二月 2016
 </h6>
 
 
@@ -99,8 +99,8 @@ make install</p>
 
 
             <article>
-                <a href="https://gccpacman.github.io/ba-yong-hu-tai-systemdfu-wu-gai-cheng-xi-tong-fu-wu-kai-ji-zi-qi-dong-xware.html"><h3 class="article-title">把用户态systemd服务改成系统服务，开机自启动xware</h3></a>
-<h6 class="subheader" title="2016-01-08T10:20:00+08:00">Fri 08 January 2016
+                <a href="https://gccpacman.github.io/linuxba-yong-hu-tai-systemdfu-wu-gai-cheng-xi-tong-fu-wu-kai-ji-zi-qi-dong-xun-lei-xware.html"><h3 class="article-title">Linux把用户态systemd服务改成系统服务，开机自启动迅雷(xware)</h3></a>
+<h6 class="subheader" title="2016-01-08T10:20:00+08:00">周五 08 一月 2016
 </h6>
 
 
@@ -118,13 +118,13 @@ https://github.com/Xinkai/XwareDesktop/wiki/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E
 
     Tagged: 
     <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
-    <a href="https://gccpacman.github.io/tag/kodi.html">kodi </a>
+    <a href="https://gccpacman.github.io/tag/download.html">download </a>
     <a href="https://gccpacman.github.io/tag/resource.html">resource </a>
 </p>
 
 
 
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/ba-yong-hu-tai-systemdfu-wu-gai-cheng-xi-tong-fu-wu-kai-ji-zi-qi-dong-xware.html">Read More</a>
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/linuxba-yong-hu-tai-systemdfu-wu-gai-cheng-xi-tong-fu-wu-kai-ji-zi-qi-dong-xun-lei-xware.html">Read More</a>
                 <hr  class="gradient"/>
             </article>
 
@@ -132,8 +132,37 @@ https://github.com/Xinkai/XwareDesktop/wiki/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E
 
 
             <article>
-                <a href="https://gccpacman.github.io/an-zhuang-delugexia-zai-gong-ju-zi-dong-yuan-cheng-xia-zai.html"><h3 class="article-title">安装deluge下载工具自动远程下载</h3></a>
-<h6 class="subheader" title="2016-01-04T10:20:00+08:00">Mon 04 January 2016
+                <a href="https://gccpacman.github.io/linuxan-zhuang-bing-kai-ji-jin-ru-kodimei-ti-zhong-xin.html"><h3 class="article-title">Linux安装并开机进入Kodi媒体中心</h3></a>
+<h6 class="subheader" title="2016-01-04T10:20:00+08:00">周一 04 一月 2016
+</h6>
+
+
+<p>把2G的硬盘拆到了一台旧电脑上，并且给旧电脑装了xubuntu,打算直接打造一个媒体中心。目前知道有里那个用的不错的东西，KODI（XBMC）是一个很不错的选择。当然用PLEX也是个不错的选择，整理资料库方面PLEX更加强大。不过KODI是开源和免费的，既然用了linux，就用个开源的吧。况且我发现kodi还有不少的好处，并且更加轻量级。</p>
+<p>其实Kodi有个基于ubuntu的发行版叫做kodibuntu，直接装得话效果其实也差不多。但是我还是喜欢从ubuntu去扩展，毕竟任何基于ubuntu的版本，相对ubuntu的开发肯定是有所滞后的。和Android的Rom一个道理。不过kubuntu因为是非常流行的发行版不用担心这个问题。</p>
+<p>下面的步骤基本上是参考了askubuntu的一个答案<a href="http://askubuntu.com/questions/596839/autostart-kodi-on-vivid">Autostart Kodi on Vivid</a>，只不过它是在纯净的server版本安装，而desktop版则因为有自身的启动器，需要将其禁用掉而已。</p>
+<p>1）安装kodi: sudo apt-get install kodi</p>
+<p>2）创建一个kodi的用户，并添加到和视频播放有关的组
+    sudo adduser --disabled-password --disabled-login --gecos "" kodi
+    sudo usermod -a -G audio kodi …</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+
+    Tagged: 
+    <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
+    <a href="https://gccpacman.github.io/tag/kodi.html">kodi </a>
+    <a href="https://gccpacman.github.io/tag/resource.html">resource </a>
+</p>
+
+
+
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/linuxan-zhuang-bing-kai-ji-jin-ru-kodimei-ti-zhong-xin.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+
+        
+
+
+            <article>
+                <a href="https://gccpacman.github.io/linuxan-zhuang-delugexia-zai-gong-ju-zi-dong-yuan-cheng-xia-zai.html"><h3 class="article-title">Linux安装deluge下载工具自动远程下载</h3></a>
+<h6 class="subheader" title="2016-01-04T10:20:00+08:00">周一 04 一月 2016
 </h6>
 
 
@@ -160,36 +189,7 @@ p2p的torrent一直是我的最爱。deluge是一个跨平台的操作系统，�
 
 
 
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/an-zhuang-delugexia-zai-gong-ju-zi-dong-yuan-cheng-xia-zai.html">Read More</a>
-                <hr  class="gradient"/>
-            </article>
-
-        
-
-
-            <article>
-                <a href="https://gccpacman.github.io/linuxan-zhuang-bing-kai-ji-jin-ru-kodimei-ti-zhong-xin.html"><h3 class="article-title">Linux安装并开机进入Kodi媒体中心</h3></a>
-<h6 class="subheader" title="2016-01-04T10:20:00+08:00">Mon 04 January 2016
-</h6>
-
-
-<p>把2G的硬盘拆到了一台旧电脑上，并且给旧电脑装了xubuntu,打算直接打造一个媒体中心。目前知道有里那个用的不错的东西，KODI（XBMC）是一个很不错的选择。当然用PLEX也是个不错的选择，整理资料库方面PLEX更加强大。不过KODI是开源和免费的，既然用了linux，就用个开源的吧。况且我发现kodi还有不少的好处，并且更加轻量级。</p>
-<p>其实Kodi有个基于ubuntu的发行版叫做kodibuntu，直接装得话效果其实也差不多。但是我还是喜欢从ubuntu去扩展，毕竟任何基于ubuntu的版本，相对ubuntu的开发肯定是有所滞后的。和Android的Rom一个道理。不过kubuntu因为是非常流行的发行版不用担心这个问题。</p>
-<p>下面的步骤基本上是参考了askubuntu的一个答案<a href="http://askubuntu.com/questions/596839/autostart-kodi-on-vivid">Autostart Kodi on Vivid</a>，只不过它是在纯净的server版本安装，而desktop版则因为有自身的启动器，需要将其禁用掉而已。</p>
-<p>1）安装kodi: sudo apt-get install kodi</p>
-<p>2）创建一个kodi的用户，并添加到和视频播放有关的组
-    sudo adduser --disabled-password --disabled-login --gecos "" kodi
-    sudo usermod -a -G audio kodi …</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
-
-    Tagged: 
-    <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
-    <a href="https://gccpacman.github.io/tag/kodi.html">kodi </a>
-    <a href="https://gccpacman.github.io/tag/resource.html">resource </a>
-</p>
-
-
-
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/linuxan-zhuang-bing-kai-ji-jin-ru-kodimei-ti-zhong-xin.html">Read More</a>
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/linuxan-zhuang-delugexia-zai-gong-ju-zi-dong-yuan-cheng-xia-zai.html">Read More</a>
                 <hr  class="gradient"/>
             </article>
 
@@ -218,6 +218,7 @@ p2p的torrent一直是我的最爱。deluge是一个跨平台的操作系统，�
         <ul class="side-nav">
             <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
             <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
+            <li><a href="https://gccpacman.github.io/category/nodejs.html">Nodejs</a></li>
             <li><a href="https://gccpacman.github.io/category/python.html">python</a></li>
             <li><a href="https://gccpacman.github.io/category/tmux.html">Tmux</a></li>
             <li><a href="https://gccpacman.github.io/category/vim.html">Vim</a></li>

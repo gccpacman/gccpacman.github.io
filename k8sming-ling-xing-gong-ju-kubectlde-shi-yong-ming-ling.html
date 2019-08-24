@@ -48,7 +48,7 @@
         title="Permalink to K8S命令行工具Kubectl的实用命令">K8S命令行工具Kubectl的实用命令</a></h3>
     </header>
 
-<h6 class="subheader" title="2019-05-08T14:13:00+08:00">Wed 08 May 2019
+<h6 class="subheader" title="2019-05-08T14:13:00+08:00">周三 08 五月 2019
 </h6>
 
 
@@ -61,11 +61,11 @@
 </li>
 <li>
 <p>用kubectl获取k8s集群的基本信息：</p>
-<div class="highlight"><pre><span></span>$ kubectl get pods <span class="c1"># 查看default命名空间下的pods</span>
-$ kubectl get pods -n <span class="nb">test</span> <span class="c1"># 查看test命名空间下的pods</span>
-$ kubectl get deployments <span class="c1"># 查看default命名空间下的部署</span>
-$ kubectl get services <span class="c1"># 查看default命名空间下的服务</span>
-$ kubectl get pods -o<span class="o">=</span><span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&quot;{range .items[*]}{&#39;\n&#39;}{.metadata.name}{&#39;:\t&#39;}{range .spec.containers[*]}{.image}{&#39;, &#39;}{end}{end}&quot;</span> <span class="c1"># 查看pods里container的镜像和版本</span>
+<div class="highlight"><pre><span></span>$ <span class="nv">kubectl</span> <span class="nv">get</span> <span class="nv">pods</span> # 查看<span class="nv">default</span>命名空间下的<span class="nv">pods</span>
+$ <span class="nv">kubectl</span> <span class="nv">get</span> <span class="nv">pods</span> <span class="o">-</span><span class="nv">n</span> <span class="nv">test</span> # 查看<span class="nv">test</span>命名空间下的<span class="nv">pods</span>
+$ <span class="nv">kubectl</span> <span class="nv">get</span> <span class="nv">deployments</span> # 查看<span class="nv">default</span>命名空间下的部署
+$ <span class="nv">kubectl</span> <span class="nv">get</span> <span class="nv">services</span> # 查看<span class="nv">default</span>命名空间下的服务
+$ <span class="nv">kubectl</span> <span class="nv">get</span> <span class="nv">pods</span> <span class="o">-</span><span class="nv">o</span><span class="o">=</span><span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">{range .items[*]}{&#39;</span><span class="se">\n</span><span class="s">&#39;}{.metadata.name}{&#39;:</span><span class="se">\t</span><span class="s">&#39;}{range .spec.containers[*]}{.image}{&#39;, &#39;}{end}{end}</span><span class="s2">&quot;</span> # 查看<span class="nv">pods</span>里<span class="nv">container</span>的镜像和版本
 </pre></div>
 
 
@@ -80,8 +80,8 @@ $ kubectl top node <span class="c1"># 查看节点的cpu和memory资源占用和
 </li>
 <li>
 <p>调试和进入Pod：</p>
-<div class="highlight"><pre><span></span>$ kubectl describe pod <span class="si">${</span><span class="nv">pod_name</span><span class="si">}</span> <span class="c1"># 查看某个pod的信息（例如在pod有问题可以debug）</span>
-$ kubectl <span class="nb">exec</span> -it <span class="si">${</span><span class="nv">pod_name</span><span class="si">}</span> bash <span class="c1"># 进入某个pod的某个容器进行调试</span>
+<div class="highlight"><pre><span></span>$ <span class="nv">kubectl</span> <span class="nv">describe</span> <span class="nv">pod</span> ${<span class="nv">pod_name</span>} # 查看某个<span class="nv">pod</span>的信息（例如在<span class="nv">pod</span>有问题可以<span class="nv">debug</span>）
+$ <span class="nv">kubectl</span> <span class="k">exec</span> <span class="o">-</span><span class="nv">it</span> ${<span class="nv">pod_name</span>} <span class="nv">bash</span> # 进入某个<span class="nv">pod</span>的某个容器进行调试
 </pre></div>
 
 
@@ -132,6 +132,7 @@ $ kubectl delete hpa &lt;hpa_name&gt;
     Tagged: 
     <a href="https://gccpacman.github.io/tag/kubernetes.html">kubernetes </a>
     <a href="https://gccpacman.github.io/tag/docker.html">docker </a>
+    <a href="https://gccpacman.github.io/tag/kubectl.html">kubectl </a>
 </p>
 
 
@@ -154,6 +155,7 @@ $ kubectl delete hpa &lt;hpa_name&gt;
         <ul class="side-nav">
             <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
             <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
+            <li><a href="https://gccpacman.github.io/category/nodejs.html">Nodejs</a></li>
             <li><a href="https://gccpacman.github.io/category/python.html">python</a></li>
             <li><a href="https://gccpacman.github.io/category/tmux.html">Tmux</a></li>
             <li><a href="https://gccpacman.github.io/category/vim.html">Vim</a></li>

@@ -46,8 +46,8 @@
         
 
             <article>
-                <a href="https://gccpacman.github.io/li-yong-babun-tmux-zshgao-du-ding-zhi-shell.html"><h3 class="article-title">利用babun, tmux, zsh高度定制shell</h3></a>
-<h6 class="subheader" title="2015-10-22T10:20:00+08:00">Thu 22 October 2015
+                <a href="https://gccpacman.github.io/windowssshang-li-yong-babun-tmux-zshgao-du-ding-zhi-shell.html"><h3 class="article-title">Windowss上利用babun, tmux, zsh高度定制shell</h3></a>
+<h6 class="subheader" title="2015-10-22T10:20:00+08:00">周四 22 十月 2015
 </h6>
 
 
@@ -55,20 +55,20 @@
 <p>之前折腾过cygwin好一阵子，最终还是觉得真的搬到开发环境确实有很多麻烦的地方，不过现在既然为了娱乐又有一台没有装任何开发环境的win10，那就娱乐一下好了。</p>
 <h1>1） 安装和配置babun</h1>
 <p>首先可以装一个定制得非常好的cygwin shell, 那就是<a href="http://babun.github.io/">babun</a>, 已经默认为你装好并配置了cygwin环境下的zsh，用起来可比普通的shell爽多了。另外有个强大的包管理器，pact命令，用起来很像rpm和apt之类的，非常方便。例如要装tmux, 那么就执行</p>
-<div class="highlight"><pre><span></span>pact install tmux
+<div class="highlight"><pre><span></span><span class="n">pact</span> <span class="n">install</span> <span class="n">tmux</span>
 </pre></div>
 
 
 <p>就可以成功安装了。
 不过值得注意的是pact默认用的是kernel.org的镜像，国内访问非常慢，这时通过help发现有个--mirror的参数，可以手动指定成163的：</p>
-<div class="highlight"><pre><span></span>pact --mirror http://mirrors.163.com/cygwin/ install tree
+<div class="highlight"><pre><span></span><span class="n">pact</span> <span class="c1">--mirror http://mirrors.163.com/cygwin/ install tree</span>
 </pre></div>
 
 
 <p>不过每次要输入这个太麻烦，可以用alias, 在home目录下新建一个.bash_aliases的文件，输入alias pact='pact --mirror http://mirrors.163.com/cygwin/'这样下次就不需要再输--mirror了。</p>
 <h1>2） 安装和配置tmux</h1>
 <p>OK第一步装babun已经完成，接下来装tmux，也非常easy，其实上面已经介绍过了</p>
-<div class="highlight"><pre><span></span>pact install tmux
+<div class="highlight"><pre><span></span><span class="n">pact</span> <span class="n">install</span> <span class="n">tmux</span>
 </pre></div>
 
 
@@ -83,14 +83,14 @@
 <p>tmux非常强大，甚至有分屏这样的操作，具体可以在帮助里看。重要的是我们现在已经可以只打开一个窗口，就在几个window之前切换了。</p>
 <p>OK, 看起来非常不错，但是用过vim的同学知道，Ctrl+b是向下翻页的按键啊，所以我想把前缀按键换成Ctrl+a怎么办, 还是配置文件，linux的一切都是配置文件。
 在Home目录创建一个.tmux.conf文件，输入以下内容：</p>
-<div class="highlight"><pre><span></span>unbind C-b
-set -g prefix C-a
-bind C-a send-prefix
+<div class="highlight"><pre><span></span><span class="nv">unbind</span> <span class="nv">C</span><span class="o">-</span><span class="nv">b</span>
+<span class="nv">set</span> <span class="o">-</span><span class="nv">g</span> <span class="nv">prefix</span> <span class="nv">C</span><span class="o">-</span><span class="nv">a</span>
+<span class="nv">bind</span> <span class="nv">C</span><span class="o">-</span><span class="nv">a</span> <span class="k">send</span><span class="o">-</span><span class="nv">prefix</span>
 </pre></div>
 
 
 <p>如果你的tmux已经打开，你想重载配置，怎么操作呢? 前缀Ctrl+b ：然后标签栏就会出现一个冒号，输入</p>
-<div class="highlight"><pre><span></span>source-file ~/.tmux.conf
+<div class="highlight"><pre><span></span><span class="k">source</span><span class="o">-</span><span class="n">file</span> <span class="o">~/</span><span class="p">.</span><span class="n">tmux</span><span class="p">.</span><span class="n">conf</span>
 </pre></div>
 
 
@@ -135,6 +135,7 @@ bind C-a send-prefix
         <ul class="side-nav">
             <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
             <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
+            <li><a href="https://gccpacman.github.io/category/nodejs.html">Nodejs</a></li>
             <li><a href="https://gccpacman.github.io/category/python.html">python</a></li>
             <li><a href="https://gccpacman.github.io/category/tmux.html">Tmux</a></li>
             <li><a href="https://gccpacman.github.io/category/vim.html">Vim</a></li>

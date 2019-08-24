@@ -4,7 +4,7 @@
     <!-- Set the viewport width to device width for mobile -->
     <meta name="viewport" content="width=device-width" />
 
-    <title>资源占用超级低的i3桌面</title>
+    <title>在虚拟机里跑资源占用超低的Linux桌面环境i3</title>
 
     <link rel="stylesheet" href="https://gccpacman.github.io/theme/css/normalize.css" />
     <link rel="stylesheet" href="https://gccpacman.github.io/theme/css/foundation.min.css" />
@@ -44,11 +44,11 @@
     <div class="large-9 columns">
 <article>
     <header>
-        <h3 class="article-title"><a href="https://gccpacman.github.io/zi-yuan-zhan-yong-chao-ji-di-de-i3zhuo-mian.html" rel="bookmark"
-        title="Permalink to 资源占用超级低的i3桌面">资源占用超级低的i3桌面</a></h3>
+        <h3 class="article-title"><a href="https://gccpacman.github.io/zai-xu-ni-ji-li-pao-zi-yuan-zhan-yong-chao-di-de-linuxzhuo-mian-huan-jing-i3.html" rel="bookmark"
+        title="Permalink to 在虚拟机里跑资源占用超低的Linux桌面环境i3">在虚拟机里跑资源占用超低的Linux桌面环境i3</a></h3>
     </header>
 
-<h6 class="subheader" title="2018-05-04T10:20:00+08:00">Fri 04 May 2018
+<h6 class="subheader" title="2018-05-04T10:20:00+08:00">周五 04 五月 2018
 </h6>
 
 
@@ -67,16 +67,16 @@ $ sudo pacman -S i3     <span class="c1"># archlinux</span>
 </li>
 <li>
 <p>备份并修改i3的配置文件，可以参考我的github，或者直接下载替换：</p>
-<div class="highlight"><pre><span></span>cp ~/.config/i3/config ~/.config/i3/config.bak
-wget https://raw.githubusercontent.com/gccpacman/vm-i3wm-config/master/config
-cp config ~/.config/i3/config
+<div class="highlight"><pre><span></span><span class="n">cp</span> <span class="o">~/</span><span class="p">.</span><span class="n">config</span><span class="o">/</span><span class="n">i3</span><span class="o">/</span><span class="n">config</span> <span class="o">~/</span><span class="p">.</span><span class="n">config</span><span class="o">/</span><span class="n">i3</span><span class="o">/</span><span class="n">config</span><span class="p">.</span><span class="n">bak</span>
+<span class="n">wget</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">raw</span><span class="p">.</span><span class="n">githubusercontent</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">gccpacman</span><span class="o">/</span><span class="n">vm</span><span class="o">-</span><span class="n">i3wm</span><span class="o">-</span><span class="n">config</span><span class="o">/</span><span class="n">master</span><span class="o">/</span><span class="n">config</span>
+<span class="n">cp</span> <span class="n">config</span> <span class="o">~/</span><span class="p">.</span><span class="n">config</span><span class="o">/</span><span class="n">i3</span><span class="o">/</span><span class="n">config</span>
 </pre></div>
 
 
 </li>
 <li>
 <p>因为我的是高分屏，默认vmware不支持，但是可以修改i3的dpi让文字和界面看起来舒服：</p>
-<div class="highlight"><pre><span></span>echo &quot;Xft.dpi: 118&quot; &gt;&gt; ~/.Xresources
+<div class="highlight"><pre><span></span><span class="n">echo</span> <span class="ss">&quot;Xft.dpi: 118&quot;</span> <span class="o">&gt;&gt;</span> <span class="o">~/</span><span class="p">.</span><span class="n">Xresources</span>
 </pre></div>
 
 
@@ -99,9 +99,9 @@ cp config ~/.config/i3/config
 
 
 <p>4.3 或者直接disable x-manager, 用startx方式启动</p>
-<div class="highlight"><pre><span></span>sudo systemctl set-default multi-user.target
-echo &quot;exec i3&quot; &gt; ~/.xinitrc
-startx # reboot并login后执行
+<div class="highlight"><pre><span></span><span class="nv">sudo</span> <span class="nv">systemctl</span> <span class="nv">set</span><span class="o">-</span><span class="nv">default</span> <span class="nv">multi</span><span class="o">-</span><span class="nv">user</span>.<span class="nv">target</span>
+<span class="nv">echo</span> <span class="s2">&quot;</span><span class="s">exec i3</span><span class="s2">&quot;</span> <span class="o">&gt;</span> <span class="o">~/</span>.<span class="nv">xinitrc</span>
+<span class="nv">startx</span> # <span class="nv">reboot</span>并<span class="nv">login</span>后执行
 </pre></div>
 
 
@@ -117,10 +117,10 @@ $ sudo pacman -S open-vm-tools     <span class="c1"># archlinux</span>
 </li>
 <li>
 <p>如果你无法加载open-vm-tools, 则需要做如下配置：</p>
-<div class="highlight"><pre><span></span>cp ~/.xsession ~/.xsession.bak
-echo &quot;#!/bin/sh
-xrandr
-exec i3&quot; &gt; ~/.xsession
+<div class="highlight"><pre><span></span><span class="nv">cp</span> <span class="o">~/</span>.<span class="nv">xsession</span> <span class="o">~/</span>.<span class="nv">xsession</span>.<span class="nv">bak</span>
+<span class="nv">echo</span> <span class="s2">&quot;</span><span class="s">#!/bin/sh</span>
+<span class="nv">xrandr</span>
+<span class="k">exec</span> <span class="nv">i3</span><span class="s2">&quot;</span><span class="s"> &gt; ~/.xsession</span>
 </pre></div>
 
 
@@ -154,6 +154,7 @@ exec i3&quot; &gt; ~/.xsession
         <ul class="side-nav">
             <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
             <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
+            <li><a href="https://gccpacman.github.io/category/nodejs.html">Nodejs</a></li>
             <li><a href="https://gccpacman.github.io/category/python.html">python</a></li>
             <li><a href="https://gccpacman.github.io/category/tmux.html">Tmux</a></li>
             <li><a href="https://gccpacman.github.io/category/vim.html">Vim</a></li>

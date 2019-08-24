@@ -4,7 +4,7 @@
     <!-- Set the viewport width to device width for mobile -->
     <meta name="viewport" content="width=device-width" />
 
-    <title>vim插件command-t在windows上编译</title>
+    <title>Windows上编译vim文件导航跳转插件command-t</title>
 
     <link rel="stylesheet" href="https://gccpacman.github.io/theme/css/normalize.css" />
     <link rel="stylesheet" href="https://gccpacman.github.io/theme/css/foundation.min.css" />
@@ -44,15 +44,15 @@
     <div class="large-9 columns">
 <article>
     <header>
-        <h3 class="article-title"><a href="https://gccpacman.github.io/vimcha-jian-command-tzai-windowsshang-bian-yi.html" rel="bookmark"
-        title="Permalink to vim插件command-t在windows上编译">vim插件command-t在windows上编译</a></h3>
+        <h3 class="article-title"><a href="https://gccpacman.github.io/windowsshang-bian-yi-vimwen-jian-dao-hang-tiao-zhuan-cha-jian-command-t.html" rel="bookmark"
+        title="Permalink to Windows上编译vim文件导航跳转插件command-t">Windows上编译vim文件导航跳转插件command-t</a></h3>
     </header>
 
-<h6 class="subheader" title="2017-10-24T10:20:00+08:00">Tue 24 October 2017
+<h6 class="subheader" title="2017-10-24T10:20:00+08:00">周二 24 十月 2017
 </h6>
 
 
-    <p>用Bundle在Windows平台上配置成功了以后，绝大多数插件都已经可以使用，但是唯独<a href="https://github.com/wincent/Command-T">Command-T</a>因为是Ruby集成的插件，需要手动编译。</p>
+    <p>用Bundle在Windows平台上配置成功了以后，绝大多数插件都已经可以使用，但是唯独强大的文件导航<a href="https://github.com/wincent/Command-T">Command-T</a>因为Ruby开发的插件，需要手动编译。</p>
 <p><a href="https://github.com/wincent/command-t/blob/master/doc/command-t.txt">官方文档</a>写的安装编译过程代码大概是这样的，我省去了使用bundle的安装过程：</p>
 <div class="highlight"><pre><span></span>$ <span class="nb">cd</span> ~/vim<span class="se">\b</span>undle<span class="se">\c</span>ommand-t<span class="se">\r</span>uby<span class="se">\c</span>ommand-t<span class="se">\e</span>xt<span class="se">\c</span>ommand-t&gt;
 $ ruby extconf.rb
@@ -76,10 +76,10 @@ $ make
 
 <p>接着进入<code>~/vim\bundle\command-t\ruby\command-t\ext\command-t&gt;</code>文件夹，执行<code>ruby extconf.rb</code>命令，发现ruby执行成功了，用choco安装make并执行make一切都顺利。
 但是进入vim一按command-t的快捷键报错，报错内容是：</p>
-<div class="highlight"><pre><span></span>command-t.vim could not load the C extension
-Please see INSTALLATION and TROUBLE-SHOOTING in the help
-Vim Ruby version: 2.2.6
-Expected version: 2.3.3
+<div class="highlight"><pre><span></span><span class="n">command</span><span class="o">-</span><span class="n">t</span><span class="p">.</span><span class="n">vim</span> <span class="n">could</span> <span class="k">not</span> <span class="k">load</span> <span class="n">the</span> <span class="k">C</span> <span class="n">extension</span>
+<span class="n">Please</span> <span class="n">see</span> <span class="n">INSTALLATION</span> <span class="k">and</span> <span class="n">TROUBLE</span><span class="o">-</span><span class="n">SHOOTING</span> <span class="k">in</span> <span class="n">the</span> <span class="n">help</span>
+<span class="n">Vim</span> <span class="n">Ruby</span> <span class="k">version</span><span class="p">:</span> <span class="mi">2</span><span class="p">.</span><span class="mi">2</span><span class="p">.</span><span class="mi">6</span>
+<span class="n">Expected</span> <span class="k">version</span><span class="p">:</span> <span class="mi">2</span><span class="p">.</span><span class="mi">3</span><span class="p">.</span><span class="mi">3</span>
 </pre></div>
 
 
@@ -119,6 +119,7 @@ Expected version: 2.3.3
         <ul class="side-nav">
             <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
             <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
+            <li><a href="https://gccpacman.github.io/category/nodejs.html">Nodejs</a></li>
             <li><a href="https://gccpacman.github.io/category/python.html">python</a></li>
             <li><a href="https://gccpacman.github.io/category/tmux.html">Tmux</a></li>
             <li><a href="https://gccpacman.github.io/category/vim.html">Vim</a></li>

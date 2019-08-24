@@ -47,7 +47,7 @@
 
             <article>
                 <a href="https://gccpacman.github.io/yong-calibre-serverchuang-jian-ge-ren-zai-xian-dian-zi-shu-yue-du-wang-zhan.html"><h3 class="article-title">用Calibre Server创建个人在线电子书阅读网站</h3></a>
-<h6 class="subheader" title="2017-12-20T10:20:00+08:00">Wed 20 December 2017
+<h6 class="subheader" title="2017-12-20T10:20:00+08:00">周三 20 十二月 2017
 </h6>
 
 
@@ -55,17 +55,17 @@
 <p>改写的方法参考了：https://wiki.ubuntu.com/SystemdForUpstartUsers</p>
 <p>用户名和密码也不再支持digitalocean里的明文的形式, <a href="https://manual.calibre-ebook.com/server.html#managing-user-accounts-from-the-command-line-only">官方文档</a>里看到有<code>enable-auth</code>和<code>userdb</code>, 看来是出于安全性进行了改进, userdb指定最简单的sqlite数据库，并按照提示添加用户。
 最终的版本是：</p>
-<div class="highlight"><pre><span></span>  [Unit]
-  Description=Job that runs the calibre daemon
+<div class="highlight"><pre><span></span><span class="w">  </span><span class="o">[</span><span class="n">Unit</span><span class="o">]</span><span class="w"></span>
+<span class="w">  </span><span class="n">Description</span><span class="o">=</span><span class="n">Job</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">runs</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">calibre</span><span class="w"> </span><span class="n">daemon</span><span class="w"></span>
 
-  [Service]
-  Environment=LIBRARY_PATH=/home/huyunyan_cn/calibre-library
-  Environment=PORT=8080
-  Environment=USERDB=/home/huyunyan_cn/calibre-library/users.sqlite
-  ExecStart=/usr/bin/calibre-server $LIBRARY_PATH \
-                                   --port $PORT --enable-auth --userdb $USERDB
-  [Install]
-  WantedBy=multi-user.target
+<span class="w">  </span><span class="o">[</span><span class="n">Service</span><span class="o">]</span><span class="w"></span>
+<span class="w">  </span><span class="n">Environment</span><span class="o">=</span><span class="n">LIBRARY_PATH</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">huyunyan_cn</span><span class="o">/</span><span class="n">calibre</span><span class="o">-</span><span class="n">library</span><span class="w"></span>
+<span class="w">  </span><span class="n">Environment</span><span class="o">=</span><span class="n">PORT</span><span class="o">=</span><span class="mi">8080</span><span class="w"></span>
+<span class="w">  </span><span class="n">Environment</span><span class="o">=</span><span class="n">USERDB</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">huyunyan_cn</span><span class="o">/</span><span class="n">calibre</span><span class="o">-</span><span class="n">library</span><span class="o">/</span><span class="n">users</span><span class="p">.</span><span class="n">sqlite</span><span class="w"></span>
+<span class="w">  </span><span class="n">ExecStart</span><span class="o">=/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">calibre</span><span class="o">-</span><span class="n">server</span><span class="w"> </span><span class="err">$</span><span class="n">LIBRARY_PATH</span><span class="w"> </span><span class="err">\</span><span class="w"></span>
+<span class="w">                                   </span><span class="c1">--port $PORT --enable-auth --userdb $USERDB</span>
+<span class="w">  </span><span class="o">[</span><span class="n">Install</span><span class="o">]</span><span class="w"></span>
+<span class="w">  </span><span class="n">WantedBy</span><span class="o">=</span><span class="n">multi</span><span class="o">-</span><span class="k">user</span><span class="p">.</span><span class="n">target</span><span class="w"></span>
 </pre></div>
 
 
@@ -113,6 +113,7 @@
         <ul class="side-nav">
             <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
             <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
+            <li><a href="https://gccpacman.github.io/category/nodejs.html">Nodejs</a></li>
             <li><a href="https://gccpacman.github.io/category/python.html">python</a></li>
             <li><a href="https://gccpacman.github.io/category/tmux.html">Tmux</a></li>
             <li><a href="https://gccpacman.github.io/category/vim.html">Vim</a></li>

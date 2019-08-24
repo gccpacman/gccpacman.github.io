@@ -48,7 +48,7 @@
         title="Permalink to 墙内的Centos7 Linux安装K8S">墙内的Centos7 Linux安装K8S</a></h3>
     </header>
 
-<h6 class="subheader" title="2019-05-07T11:13:00+08:00">Tue 07 May 2019
+<h6 class="subheader" title="2019-05-07T11:13:00+08:00">周二 07 五月 2019
 </h6>
 
 
@@ -73,16 +73,16 @@ $ docker images   <span class="c1"># 确定docker命令正常</span>
 <li>
 <p>安装Kubernetes</p>
 <p>3.1 安装kubeadm, kubelet, kubectl</p>
-<div class="highlight"><pre><span></span>$ vim kubernetes.repo
+<div class="highlight"><pre><span></span><span class="err">$</span><span class="w"> </span><span class="n">vim</span><span class="w"> </span><span class="n">kubernetes</span><span class="p">.</span><span class="n">repo</span><span class="w"></span>
 
-<span class="o">[</span>kubernetes<span class="o">]</span>
-<span class="nv">name</span><span class="o">=</span>Kubernetes
-<span class="nv">baseurl</span><span class="o">=</span>https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64
-<span class="nv">enabled</span><span class="o">=</span><span class="m">1</span>
-<span class="nv">gpgcheck</span><span class="o">=</span><span class="m">0</span>
+<span class="o">[</span><span class="n">kubernetes</span><span class="o">]</span><span class="w"></span>
+<span class="n">name</span><span class="o">=</span><span class="n">Kubernetes</span><span class="w"></span>
+<span class="n">baseurl</span><span class="o">=</span><span class="nl">https</span><span class="p">:</span><span class="o">//</span><span class="n">mirrors</span><span class="p">.</span><span class="n">aliyun</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">kubernetes</span><span class="o">/</span><span class="n">yum</span><span class="o">/</span><span class="n">repos</span><span class="o">/</span><span class="n">kubernetes</span><span class="o">-</span><span class="n">el7</span><span class="o">-</span><span class="n">x86_64</span><span class="w"></span>
+<span class="n">enabled</span><span class="o">=</span><span class="mi">1</span><span class="w"></span>
+<span class="n">gpgcheck</span><span class="o">=</span><span class="mi">0</span><span class="w"></span>
 
-$ yum -y install kubelet kubeadm kubectl kubernetes-cni
-$ systemctl <span class="nb">enable</span> kubelet <span class="o">&amp;&amp;</span> systemctl start kubelet
+<span class="err">$</span><span class="w"> </span><span class="n">yum</span><span class="w"> </span><span class="o">-</span><span class="n">y</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">kubelet</span><span class="w"> </span><span class="n">kubeadm</span><span class="w"> </span><span class="n">kubectl</span><span class="w"> </span><span class="n">kubernetes</span><span class="o">-</span><span class="n">cni</span><span class="w"></span>
+<span class="err">$</span><span class="w"> </span><span class="n">systemctl</span><span class="w"> </span><span class="n">enable</span><span class="w"> </span><span class="n">kubelet</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">systemctl</span><span class="w"> </span><span class="k">start</span><span class="w"> </span><span class="n">kubelet</span><span class="w"></span>
 </pre></div>
 
 
@@ -129,12 +129,12 @@ $ kubectl get nodes <span class="c1"># 确认kubectl配置成功</span>
 <p>在Kubenetes里安装Flannel网络</p>
 <p>4.1 pull下Flannel镜像过程因为防火墙的原因依旧类似3.3操作，参考<code>https://github.com/cookcodeblog/k8s-deploy/tree/master/kubeadm_v1.13.0</code>里的<code>kubeadm_v1.13.0/pull_flannel_images_from_aliyun.sh</code>写一个脚本文件，这次的版本就用<code>v0.11.0</code>就好，便写完成执行脚本</p>
 <p>4.2 安装Flannel网络</p>
-<div class="highlight"><pre><span></span>wget -O kube-flannel.yml https://raw.githubusercontent.com/coreos/flannel/a70459be0084506e4ec919aa1c114638878db11b/Documentation/kube-flannel.yml
-kubectl apply -f kube-flannel.yml
+<div class="highlight"><pre><span></span><span class="n">wget</span> <span class="o">-</span><span class="n">O</span> <span class="n">kube</span><span class="o">-</span><span class="n">flannel</span><span class="p">.</span><span class="n">yml</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">raw</span><span class="p">.</span><span class="n">githubusercontent</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">coreos</span><span class="o">/</span><span class="n">flannel</span><span class="o">/</span><span class="n">a70459be0084506e4ec919aa1c114638878db11b</span><span class="o">/</span><span class="n">Documentation</span><span class="o">/</span><span class="n">kube</span><span class="o">-</span><span class="n">flannel</span><span class="p">.</span><span class="n">yml</span>
+<span class="n">kubectl</span> <span class="n">apply</span> <span class="o">-</span><span class="n">f</span> <span class="n">kube</span><span class="o">-</span><span class="n">flannel</span><span class="p">.</span><span class="n">yml</span>
 
-# 过几十秒确认是否启动成功
-kubectl get pods --all-namespaces
-kubectl get cs
+<span class="o">#</span> <span class="err">过几十秒确认是否启动成功</span>
+<span class="n">kubectl</span> <span class="k">get</span> <span class="n">pods</span> <span class="c1">--all-namespaces</span>
+<span class="n">kubectl</span> <span class="k">get</span> <span class="n">cs</span>
 </pre></div>
 
 
@@ -152,7 +152,7 @@ kubectl get cs
 
     Tagged: 
     <a href="https://gccpacman.github.io/tag/kubernetes.html">kubernetes </a>
-    <a href="https://gccpacman.github.io/tag/centos7.html">centos7 </a>
+    <a href="https://gccpacman.github.io/tag/centos.html">centos </a>
     <a href="https://gccpacman.github.io/tag/docker.html">docker </a>
 </p>
 
@@ -176,6 +176,7 @@ kubectl get cs
         <ul class="side-nav">
             <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
             <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
+            <li><a href="https://gccpacman.github.io/category/nodejs.html">Nodejs</a></li>
             <li><a href="https://gccpacman.github.io/category/python.html">python</a></li>
             <li><a href="https://gccpacman.github.io/category/tmux.html">Tmux</a></li>
             <li><a href="https://gccpacman.github.io/category/vim.html">Vim</a></li>

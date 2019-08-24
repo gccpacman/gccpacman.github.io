@@ -47,7 +47,7 @@
 
             <article>
                 <a href="https://gccpacman.github.io/diao-zheng-linuxzhu-fen-qu-de-da-xiao.html"><h3 class="article-title">调整Linux主分区的大小</h3></a>
-<h6 class="subheader" title="2016-01-03T10:20:00+08:00">Sun 03 January 2016
+<h6 class="subheader" title="2016-01-03T10:20:00+08:00">周日 03 一月 2016
 </h6>
 
 
@@ -56,9 +56,9 @@
 <p>我的目标是把swap分区弄到最后，其他都扩展给HOME分区。</p>
 <p>依稀记得装arch的时候，swap并不是多大不了的事情，甚至说可以不需要swap。于是我打算先把swap禁用掉，然后删除。再重新创建swap分区，然后resize以下Root分区的大小基本就可以大功告成了。不过调整root分区的大小是不可以在当前系统下完成的。因此很有必要弄一个usb的镜像，通过镜像系统进去后调整没有mount的swap分区。</p>
 <p>在linux下把镜像刻录到usb是非常方便的。接上U盘以后，可以通过<code>lsblk</code> 查看一下u盘的设备路径,比如我的是<code>/dev/sdc</code>,基本上可以通过大小就能判断出来了。</p>
-<div class="highlight"><pre><span></span>sdc                   8:32   1   7.2G  0 disk
-├─sdc1                8:33   1   1.1G  0 part
-└─sdc2                8:34   1   2.2M  0 part
+<div class="highlight"><pre><span></span><span class="n">sdc</span>                   <span class="mi">8</span><span class="p">:</span><span class="mi">32</span>   <span class="mi">1</span>   <span class="mi">7</span><span class="p">.</span><span class="mi">2</span><span class="k">G</span>  <span class="mi">0</span> <span class="n">disk</span>
+<span class="err">├─</span><span class="n">sdc1</span>                <span class="mi">8</span><span class="p">:</span><span class="mi">33</span>   <span class="mi">1</span>   <span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="k">G</span>  <span class="mi">0</span> <span class="n">part</span>
+<span class="err">└─</span><span class="n">sdc2</span>                <span class="mi">8</span><span class="p">:</span><span class="mi">34</span>   <span class="mi">1</span>   <span class="mi">2</span><span class="p">.</span><span class="mi">2</span><span class="n">M</span>  <span class="mi">0</span> <span class="n">part</span>
 </pre></div>
 
 
@@ -66,19 +66,19 @@
 <p>sudo dd bs=4M if=/data/OS_ISOs/Linux/xubuntu-15.10-beta2-desktop-amd64.iso of=/dev/sdc</p>
 <p>几分钟之后就刻录完成。</p>
 <p>接下来在arch上，先把swap分区禁用掉，还是通过<code>lsblk</code>, 记录/root分区和swap分区是哪个。</p>
-<div class="highlight"><pre><span></span>─sda2                8:2    0  66.4G  0 part /
-─sda4                8:4    0     8G  0 part [SWAP]
+<div class="highlight"><pre><span></span><span class="err">─</span><span class="n">sda2</span><span class="w">                </span><span class="mi">8</span><span class="err">:</span><span class="mi">2</span><span class="w">    </span><span class="mi">0</span><span class="w">  </span><span class="mf">66.4</span><span class="n">G</span><span class="w">  </span><span class="mi">0</span><span class="w"> </span><span class="n">part</span><span class="w"> </span><span class="o">/</span><span class="w"></span>
+<span class="err">─</span><span class="n">sda4</span><span class="w">                </span><span class="mi">8</span><span class="err">:</span><span class="mi">4</span><span class="w">    </span><span class="mi">0</span><span class="w">     </span><span class="mi">8</span><span class="n">G</span><span class="w">  </span><span class="mi">0</span><span class="w"> </span><span class="n">part</span><span class="w"> </span><span class="o">[</span><span class="n">SWAP</span><span class="o">]</span><span class="w"></span>
 </pre></div>
 
 
 <p>我的是<code>/dev/sda4</code>, 禁用swap:</p>
-<div class="highlight"><pre><span></span>sudo swapoff /dev/sda4
+<div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">swapoff</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">sda4</span>
 </pre></div>
 
 
 <p>然后编辑分区表。</p>
-<div class="highlight"><pre><span></span>sudo cp /etc/fstab /etc/fstab.bak # 备份下，万一弄错了还可以恢复系统
-sudo vim /etc/fstab
+<div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">cp</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">fstab</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">fstab</span><span class="p">.</span><span class="n">bak</span> <span class="o">#</span> <span class="err">备份下，万一弄错了还可以恢复系统</span>
+<span class="n">sudo</span> <span class="n">vim</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">fstab</span>
 </pre></div>
 
 
@@ -88,13 +88,13 @@ sudo vim /etc/fstab
 <p>在/dev/sda4上右键，选择delete，然后new一个swap，位置选择在硬盘的最后(gparted因为直接有示意图，可以直接在上面选择)，新的swap分区大小自然也和老的swap一致，一般都是推荐和内存一样。接着在/dev/sda2上右键，选择resize，直接用光所有的硬盘空间。确定，耐心等待一分钟左右，就会弹出'Done'的提示。</p>
 <p>然后重启，重新进入archlinux，这时候如果系统成功进入，就说明重新分区已经成功了。</p>
 <p>但是swap分区还并没有启用。执行<code>bklid</code>, 确定swap分区的uuid，然后重新编辑分区表:</p>
-<div class="highlight"><pre><span></span>sudo vim /etc/fstab
+<div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">vim</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">fstab</span>
 </pre></div>
 
 
 <p>把之前swap分区的uuid改成新的uuid，保存。然后根据swap的位置执行后面两条命令，启用swap，新的设备名称可能还是<code>/dev/sda4</code>也可能不是。这时候可以输入<code>sudo bklid</code>来确定以下：</p>
-<div class="highlight"><pre><span></span>sudo mkswap /dev/sda4
-sudo swapon /dev/sda4
+<div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">mkswap</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">sda4</span>
+<span class="n">sudo</span> <span class="n">swapon</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">sda4</span>
 </pre></div>
 
 
@@ -137,6 +137,7 @@ sudo swapon /dev/sda4
         <ul class="side-nav">
             <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
             <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
+            <li><a href="https://gccpacman.github.io/category/nodejs.html">Nodejs</a></li>
             <li><a href="https://gccpacman.github.io/category/python.html">python</a></li>
             <li><a href="https://gccpacman.github.io/category/tmux.html">Tmux</a></li>
             <li><a href="https://gccpacman.github.io/category/vim.html">Vim</a></li>

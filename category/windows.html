@@ -47,7 +47,7 @@
 
             <article>
                 <a href="https://gccpacman.github.io/windowszai-hypervan-zhuang-centos7bing-pei-zhi-wang-luo.html"><h3 class="article-title">Windows在Hyperv安装Centos7并配置网络</h3></a>
-<h6 class="subheader" title="2019-05-07T11:13:00+08:00">Tue 07 May 2019
+<h6 class="subheader" title="2019-05-07T11:13:00+08:00">周二 07 五月 2019
 </h6>
 
 
@@ -57,17 +57,17 @@ Default Switch默认是可以连接外网的，如果是windows机器不用配�
 <ol>
 <li>
 <p>编辑<code>/etc/sysconfig/network-scripts/ifcfg-eth0</code>,修改以下三项:</p>
-<div class="highlight"><pre><span></span>DEVICE=eth0
-BOOTPROTO=dhcp
-ONBOOT=yes
+<div class="highlight"><pre><span></span><span class="n">DEVICE</span><span class="o">=</span><span class="n">eth0</span>
+<span class="n">BOOTPROTO</span><span class="o">=</span><span class="n">dhcp</span>
+<span class="n">ONBOOT</span><span class="o">=</span><span class="n">yes</span>
 </pre></div>
 
 
 </li>
 <li>
 <p>编辑<code>/etc/sysconfig/network</code>, 替换server-name.company.lan为你的主机名：</p>
-<div class="highlight"><pre><span></span>NETWORKING=yes
-HOSTNAME=server-name.company.lan
+<div class="highlight"><pre><span></span><span class="n">NETWORKING</span><span class="o">=</span><span class="n">yes</span>
+<span class="n">HOSTNAME</span><span class="o">=</span><span class="n">server</span><span class="o">-</span><span class="n">name</span><span class="p">.</span><span class="n">company</span><span class="p">.</span><span class="n">lan</span>
 </pre></div>
 
 
@@ -111,7 +111,7 @@ https://unix.stackexchange.com/questions/17436/centos-on-hyperv-eth0-not-in-ifco
 
             <article>
                 <a href="https://gccpacman.github.io/windowsan-zhuang-msys32pei-zhi-gitdeng-kai-fa-huan-jing-bing-ji-cheng-vscode.html"><h3 class="article-title">Windows安装MSys32配置Git等开发环境并集成VSCode</h3></a>
-<h6 class="subheader" title="2018-02-01T10:20:00+08:00">Thu 01 February 2018
+<h6 class="subheader" title="2018-02-01T10:20:00+08:00">周四 01 二月 2018
 </h6>
 
 
@@ -156,8 +156,8 @@ https://unix.stackexchange.com/questions/17436/centos-on-hyperv-eth0-not-in-ifco
 
 
             <article>
-                <a href="https://gccpacman.github.io/li-yong-babun-tmux-zshgao-du-ding-zhi-shell.html"><h3 class="article-title">利用babun, tmux, zsh高度定制shell</h3></a>
-<h6 class="subheader" title="2015-10-22T10:20:00+08:00">Thu 22 October 2015
+                <a href="https://gccpacman.github.io/windowssshang-li-yong-babun-tmux-zshgao-du-ding-zhi-shell.html"><h3 class="article-title">Windowss上利用babun, tmux, zsh高度定制shell</h3></a>
+<h6 class="subheader" title="2015-10-22T10:20:00+08:00">周四 22 十月 2015
 </h6>
 
 
@@ -165,13 +165,13 @@ https://unix.stackexchange.com/questions/17436/centos-on-hyperv-eth0-not-in-ifco
 <p>之前折腾过cygwin好一阵子，最终还是觉得真的搬到开发环境确实有很多麻烦的地方，不过现在既然为了娱乐又有一台没有装任何开发环境的win10，那就娱乐一下好了。</p>
 <h1>1） 安装和配置babun</h1>
 <p>首先可以装一个定制得非常好的cygwin shell, 那就是<a href="http://babun.github.io/">babun</a>, 已经默认为你装好并配置了cygwin环境下的zsh，用起来可比普通的shell爽多了。另外有个强大的包管理器，pact命令，用起来很像rpm和apt之类的，非常方便。例如要装tmux, 那么就执行</p>
-<div class="highlight"><pre><span></span>pact install tmux
+<div class="highlight"><pre><span></span><span class="n">pact</span> <span class="n">install</span> <span class="n">tmux</span>
 </pre></div>
 
 
 <p>就可以成功安装了。
 不过值得注意的是pact默认用的是kernel.org的镜像，国内访问非常慢，这时通过help发现有个--mirror的参数，可以手动指定成163的：</p>
-<div class="highlight"><pre><span></span>pact --mirror http://mirrors.163.com/cygwin/ install tree
+<div class="highlight"><pre><span></span><span class="n">pact</span> <span class="c1">--mirror http://mirrors.163.com/cygwin/ install tree</span>
 </pre></div>
 
 
@@ -186,7 +186,7 @@ https://unix.stackexchange.com/questions/17436/centos-on-hyperv-eth0-not-in-ifco
 
 
 
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/li-yong-babun-tmux-zshgao-du-ding-zhi-shell.html">Read More</a>
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/windowssshang-li-yong-babun-tmux-zshgao-du-ding-zhi-shell.html">Read More</a>
                 <hr  class="gradient"/>
             </article>
 
@@ -215,6 +215,7 @@ https://unix.stackexchange.com/questions/17436/centos-on-hyperv-eth0-not-in-ifco
         <ul class="side-nav">
             <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
             <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
+            <li><a href="https://gccpacman.github.io/category/nodejs.html">Nodejs</a></li>
             <li><a href="https://gccpacman.github.io/category/python.html">python</a></li>
             <li><a href="https://gccpacman.github.io/category/tmux.html">Tmux</a></li>
             <li><a href="https://gccpacman.github.io/category/vim.html">Vim</a></li>

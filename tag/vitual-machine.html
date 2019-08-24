@@ -47,7 +47,7 @@
 
             <article>
                 <a href="https://gccpacman.github.io/windowszai-hypervan-zhuang-centos7bing-pei-zhi-wang-luo.html"><h3 class="article-title">Windows在Hyperv安装Centos7并配置网络</h3></a>
-<h6 class="subheader" title="2019-05-07T11:13:00+08:00">Tue 07 May 2019
+<h6 class="subheader" title="2019-05-07T11:13:00+08:00">周二 07 五月 2019
 </h6>
 
 
@@ -57,17 +57,17 @@ Default Switch默认是可以连接外网的，如果是windows机器不用配�
 <ol>
 <li>
 <p>编辑<code>/etc/sysconfig/network-scripts/ifcfg-eth0</code>,修改以下三项:</p>
-<div class="highlight"><pre><span></span>DEVICE=eth0
-BOOTPROTO=dhcp
-ONBOOT=yes
+<div class="highlight"><pre><span></span><span class="n">DEVICE</span><span class="o">=</span><span class="n">eth0</span>
+<span class="n">BOOTPROTO</span><span class="o">=</span><span class="n">dhcp</span>
+<span class="n">ONBOOT</span><span class="o">=</span><span class="n">yes</span>
 </pre></div>
 
 
 </li>
 <li>
 <p>编辑<code>/etc/sysconfig/network</code>, 替换server-name.company.lan为你的主机名：</p>
-<div class="highlight"><pre><span></span>NETWORKING=yes
-HOSTNAME=server-name.company.lan
+<div class="highlight"><pre><span></span><span class="n">NETWORKING</span><span class="o">=</span><span class="n">yes</span>
+<span class="n">HOSTNAME</span><span class="o">=</span><span class="n">server</span><span class="o">-</span><span class="n">name</span><span class="p">.</span><span class="n">company</span><span class="p">.</span><span class="n">lan</span>
 </pre></div>
 
 
@@ -110,8 +110,8 @@ https://unix.stackexchange.com/questions/17436/centos-on-hyperv-eth0-not-in-ifco
 
 
             <article>
-                <a href="https://gccpacman.github.io/zi-yuan-zhan-yong-chao-ji-di-de-i3zhuo-mian.html"><h3 class="article-title">资源占用超级低的i3桌面</h3></a>
-<h6 class="subheader" title="2018-05-04T10:20:00+08:00">Fri 04 May 2018
+                <a href="https://gccpacman.github.io/zai-xu-ni-ji-li-pao-zi-yuan-zhan-yong-chao-di-de-linuxzhuo-mian-huan-jing-i3.html"><h3 class="article-title">在虚拟机里跑资源占用超低的Linux桌面环境i3</h3></a>
+<h6 class="subheader" title="2018-05-04T10:20:00+08:00">周五 04 五月 2018
 </h6>
 
 
@@ -130,9 +130,8 @@ $ sudo pacman -S i3     <span class="c1"># archlinux</span>
 </li>
 <li>
 <p>备份并修改i3的配置文件，可以参考我的github，或者直接下载替换：</p>
-<div class="highlight"><pre><span></span>cp ~/.config/i3/config ~/.config/i3/config.bak
-wget https://raw.githubusercontent.com/gccpacman/vm-i3wm-config/master/config
-cp config …</pre></div></li></ol><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+<div class="highlight"><pre><span></span><span class="n">cp</span> <span class="o">~/</span><span class="p">.</span><span class="n">config</span><span class="o">/</span><span class="n">i3</span><span class="o">/</span><span class="n">config</span> <span class="o">~/</span><span class="p">.</span><span class="n">config</span><span class="o">/</span><span class="n">i3</span><span class="o">/</span><span class="n">config</span><span class="p">.</span><span class="n">bak</span>
+<span class="n">wget</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">raw</span><span class="p">.</span><span class="n">githubusercontent</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">gccpacman</span><span class="o">/</span><span class="n">vm</span><span class="o">-</span><span class="n">i3wm</span><span class="o">-</span><span class="n">config</span><span class="o">/</span><span class="n">master</span><span class="o">/</span><span class="n">config …</span></pre></div></li></ol><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
     Tagged: 
     <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
@@ -142,7 +141,7 @@ cp config …</pre></div></li></ol><p class="subheader">Category: <a href="https
 
 
 
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/zi-yuan-zhan-yong-chao-ji-di-de-i3zhuo-mian.html">Read More</a>
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/zai-xu-ni-ji-li-pao-zi-yuan-zhan-yong-chao-di-de-linuxzhuo-mian-huan-jing-i3.html">Read More</a>
                 <hr  class="gradient"/>
             </article>
 
@@ -171,6 +170,7 @@ cp config …</pre></div></li></ol><p class="subheader">Category: <a href="https
         <ul class="side-nav">
             <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
             <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
+            <li><a href="https://gccpacman.github.io/category/nodejs.html">Nodejs</a></li>
             <li><a href="https://gccpacman.github.io/category/python.html">python</a></li>
             <li><a href="https://gccpacman.github.io/category/tmux.html">Tmux</a></li>
             <li><a href="https://gccpacman.github.io/category/vim.html">Vim</a></li>

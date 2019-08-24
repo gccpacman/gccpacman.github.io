@@ -46,90 +46,36 @@
         
 
             <article>
-                <a href="https://gccpacman.github.io/k8sming-ling-xing-gong-ju-kubectlde-shi-yong-ming-ling.html"><h3 class="article-title">K8S命令行工具Kubectl的实用命令</h3></a>
-<h6 class="subheader" title="2019-05-08T14:13:00+08:00">Wed 08 May 2019
+                <a href="https://gccpacman.github.io/bu-shu-vuejsjing-tai-wang-zhan-dao-a-li-yun-oss.html"><h3 class="article-title">部署VueJS静态网站到阿里云OSS</h3></a>
+<h6 class="subheader" title="2019-08-19T10:20:00+08:00">周一 19 八月 2019
 </h6>
 
 
-<ul>
-<li>安装配置Kubectl:<ul>
-<li>下载kubectl，地址：https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl</li>
-<li>下载完成后放置到本地$Path路径</li>
-<li>修改本地<code>$HOME/.kube/config</code>，设置集群地址，凭证等信息</li>
-</ul>
-</li>
-<li>
-<p>用kubectl获取k8s集群的基本信息：</p>
-<div class="highlight"><pre><span></span>$ kubectl get pods <span class="c1"># 查看default命名空间下的pods</span>
-$ kubectl get pods -n <span class="nb">test</span> <span class="c1"># 查看test命名空间下的pods</span>
-$ kubectl get deployments <span class="c1"># 查看default命名空间下的部署</span>
-$ kubectl get services <span class="c1"># 查看default命名空间下的服务</span>
-$ kubectl get pods -o<span class="o">=</span><span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&quot;{range .items[*]}{&#39;\n&#39;}{.metadata.name}{&#39;:\t&#39;}{range .spec.containers[*]}{.image}{&#39;, &#39;}{end}{end}&quot;</span> <span class="c1"># 查看pods里container的镜像和版本</span>
-</pre></div>
-
-
-</li>
-<li>
-<p>查看资源情况：</p>
-<div class="highlight"><pre><span></span>$ kubectl top pod <span class="c1"># 查看pods的cpu和memory资源占用</span>
-$ kubectl top node <span class="c1"># 查看节点的cpu和memory资源占用和百分比</span>
-</pre></div>
-
-
-</li>
-<li>
-<p>调试和进入Pod：</p>
-<div class="highlight"><pre><span></span>$ kubectl describe pod <span class="si">${</span><span class="nv">pod_name</span><span class="si">}</span> <span class="c1"># 查看某个pod的信息（例如在pod有问题可以debug）</span>
-$ kubectl <span class="nb">exec</span> -it <span class="si">${</span><span class="nv">pod_name</span><span class="si">}</span> bash <span class="c1"># 进入某个pod的某个容器进行调试</span>
-</pre></div>
-
-
-</li>
-<li>
-<p>通过端口转发调试接口：</p>
-<div class="highlight"><pre><span></span>$ kubectl port-forward pods/pod_name <span class="m">30000</span>:30000 -n cicd
-$ curl <span class="m">127</span>.0.0.1:30000
-</pre></div>
-
-
-</li>
-<li>
-<p>通过kube-api代理调试接口：</p>
-<div class="highlight"><pre><span></span>$ kubectl proxy
-$ curl http://localhost:8001/api/v1/namespaces/default/pods/<span class="si">${</span><span class="nv">pod_name</span><span class="si">}</span><span class="o">[</span>:port_name<span class="o">]</span>/proxy/
-</pre></div>
-
-
-</li>
-<li>
-<p>Deployments手动伸缩Pods:</p>
-<div class="highlight"><pre><span></span>$ kubectl scale deployment &lt;deployment_name&gt; --replicas<span class="o">=</span><span class="m">3</span>
-$ kubectl scale deployment &lt;deployment_name&gt; --replicas<span class="o">=</span><span class="m">0</span>
-</pre></div>
-
-
-</li>
-<li>
-<p>Deployments添加和删除HorizontalPodScaler,自动伸缩pod：</p>
-<div class="highlight"><pre><span></span>$ kubectl autoscale deployment &lt;deployment_name&gt; -name &lt;hpa_name&gt; --min<span class="o">=</span><span class="m">1</span> --max<span class="o">=</span><span class="m">8</span> --cpu-percent<span class="o">=</span><span class="m">50</span>
-$ kubectl get hpa
-$ kubectl delete hpa &lt;hpa_name&gt;
-</pre></div>
-
-
-</li>
-<li>
-<p>切换kubectl配置文件</p>
-<div class="highlight"><pre><span></span>$ kubectl config use-context &lt;config-name&gt;
-</pre></div>
-
-
-</li>
-</ul><p class="subheader">Category: <a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a>
+<p><code>VueJS</code> 非常不错，对于一个后端开发也很友好。近期我有机会在写一个网站的时候接触了VueJS，虽然不是一个很专业的前端，但是感觉VueJS非常容易上手。
+出于为了性能的需要，打算将该网站通过 <code>webpack</code> 编译后上传到阿里云的 <code>OSS</code> 作为静态网站发布，但是遇到了一些坑，特意将踩坑的过程分享一下。</p>
+<p>首先在托管静态网站的时候，创建OSS桶需要注意两点配置：</p>
+<p>1） OSS桶必须设置公共读，因为网站需要所有人都可以访问</p>
+<p>2） OSS桶里有个默认首页的配置，需要配置成 <code>index.html</code></p>
+<p>因为使用了Vue-Router，在阿里云上一开始部署的时候有个严重的问题，就是在非主页刷新页面，OSS都找不到资源，这时候重新刷新，阿里云又找不到该目录下的这个文件，就会报找不到资源的错误。例如有一个路径是 <code>www.example.com/hello/world</code> ，通过主页 <code>www.example.com/index.html</code> 跳转到 <code>www.example.com/hello/worlds</code> 是正常的，但是当刷新页面，阿里云会直接去找OSS桶里的 <code>hello/world</code> 这个路径，发现找不到，直接报404.</p>
+<p>然后发现阿里云里的设置，其实有个“默认 404 页”的设置，所以一开始异想天开，把默认页面设置成了 <code>index.html</code> ，结果虽然不报404了，却每次刷新都跳转到主页，显然也不符合我想要的想过。</p>
+<p>然后我通过一番调研，发现原来是因为我的 Vue Router 配置，无法直接用阿里云OSS桶实现静态页面托管。</p>
+<p>因为 Vue Router 有两种模式</p>
+<p>1）<code>hash模式</code> ：用地址栏里的“#”来路由，不会改变实际的请求，例如 www.example.com/hello 和 www.example.com/hello#world 的Http请求是一样的，因此不需要改变请求，只通过#后面的内容进行路由</p>
+<p>2）<code>history模式</code> ：用html5中的 pushState() 和 replaceState() 在不刷新页面的情况下实现路由跳转。</p>
+<p>所有我的问题就很明显了，因为一开始我Vue Router的理解不够，认为history模式没有“#”看上去更加美观，就用了history模式。但是因为没有“#”，当刷新页面的时候，Http请求直接就去请求OSS桶里的该路径下的资源，结果当然是404了。我最后的解决方案便是放弃了美观，直接用了hash模式来托管网站，网站的路由就没有什么问题了。</p>
+<p>但是我觉得，其实OSS不可以挂在history模式的VueJS似乎也不太可能，应该有别的方法。但是目前搜不到oss和vuejs的history模式相关的资料，只搜到部署到AWS S3的资料，里面的方法居然就是把 <code>404页</code> 跳转到 <code>index.html</code>。我的理解是 <code>OSS</code> 和 <code>S3</code> 并不完全相同，又或者我的Vue Router里面还有其他的配置需要调整，总之目前还不确定OSS能否成功实现history方式的VueJS网站托管。</p>
+<p>找到的资料链接我先放在这里了，下次会再做一些尝试验证一下。</p>
+<p>参考资料：</p>
+<p><a href="https://router.vuejs.org/guide/essentials/history-mode.html#example-server-configurations">HTML5 History Mode - Vue Offical Docs</a></p>
+<p><a href="https://stackoverflow.com/questions/43095823/vue-js-router-history-mode-and-aws-s3-routingrules">Vue.js Router: history mode and AWS S3 (RoutingRules) - StackOverflow
+</a></p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/nodejs.html">Nodejs</a>
 
     Tagged: 
-    <a href="https://gccpacman.github.io/tag/kubernetes.html">kubernetes </a>
-    <a href="https://gccpacman.github.io/tag/docker.html">docker </a>
+    <a href="https://gccpacman.github.io/tag/aliyun.html">aliyun </a>
+    <a href="https://gccpacman.github.io/tag/web.html">web </a>
+    <a href="https://gccpacman.github.io/tag/vuejs.html">vuejs </a>
+    <a href="https://gccpacman.github.io/tag/webpack.html">webpack </a>
+    <a href="https://gccpacman.github.io/tag/router.html">router </a>
 </p>
 
 
@@ -144,8 +90,44 @@ $ kubectl delete hpa &lt;hpa_name&gt;
 
 
             <article>
+                <a href="https://gccpacman.github.io/k8sming-ling-xing-gong-ju-kubectlde-shi-yong-ming-ling.html"><h3 class="article-title">K8S命令行工具Kubectl的实用命令</h3></a>
+<h6 class="subheader" title="2019-05-08T14:13:00+08:00">周三 08 五月 2019
+</h6>
+
+
+<ul>
+<li>安装配置Kubectl:<ul>
+<li>下载kubectl，地址：https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl</li>
+<li>下载完成后放置到本地$Path路径</li>
+<li>修改本地<code>$HOME/.kube/config</code>，设置集群地址，凭证等信息</li>
+</ul>
+</li>
+<li>
+<p>用kubectl获取k8s集群的基本信息：</p>
+<div class="highlight"><pre><span></span>$ <span class="nv">kubectl</span> <span class="nv">get</span> <span class="nv">pods</span> # 查看<span class="nv">default</span>命名空间下的<span class="nv">pods</span>
+$ <span class="nv">kubectl</span> <span class="nv">get</span> <span class="nv">pods</span> <span class="o">-</span><span class="nv">n</span> <span class="nv">test</span> # 查看<span class="nv">test</span>命名空间下的<span class="nv">pods</span>
+$ <span class="nv">kubectl</span> <span class="nv">get</span> <span class="nv">deployments</span> # 查看<span class="nv">default</span>命名空间下的部署
+$ <span class="nv">kubectl</span> <span class="nv">get</span> <span class="nv">services</span> # 查看<span class="nv">default</span>命名空间下的服务
+$ <span class="nv">kubectl</span> <span class="nv">get …</span></pre></div></li></ul><p class="subheader">Category: <a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a>
+
+    Tagged: 
+    <a href="https://gccpacman.github.io/tag/kubernetes.html">kubernetes </a>
+    <a href="https://gccpacman.github.io/tag/docker.html">docker </a>
+    <a href="https://gccpacman.github.io/tag/kubectl.html">kubectl </a>
+</p>
+
+
+
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/k8sming-ling-xing-gong-ju-kubectlde-shi-yong-ming-ling.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+
+        
+
+
+            <article>
                 <a href="https://gccpacman.github.io/qiang-nei-de-centos7-linuxan-zhuang-k8s.html"><h3 class="article-title">墙内的Centos7 Linux安装K8S</h3></a>
-<h6 class="subheader" title="2019-05-07T11:13:00+08:00">Tue 07 May 2019
+<h6 class="subheader" title="2019-05-07T11:13:00+08:00">周二 07 五月 2019
 </h6>
 
 
@@ -170,15 +152,15 @@ $ docker images   <span class="c1"># 确定docker命令正常</span>
 <li>
 <p>安装Kubernetes</p>
 <p>3.1 安装kubeadm, kubelet, kubectl</p>
-<div class="highlight"><pre><span></span>$ vim kubernetes.repo
+<div class="highlight"><pre><span></span><span class="err">$</span><span class="w"> </span><span class="n">vim</span><span class="w"> </span><span class="n">kubernetes</span><span class="p">.</span><span class="n">repo</span><span class="w"></span>
 
-<span class="o">[</span>kubernetes<span class="o">]</span>
-<span class="nv">name</span><span class="o">=</span>Kubernetes
-<span class="nv">baseurl</span><span class="o">=</span>https://mirrors.aliyun.com/kubernetes/yum …</pre></div></li></ol><p class="subheader">Category: <a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a>
+<span class="o">[</span><span class="n">kubernetes</span><span class="o">]</span><span class="w"></span>
+<span class="n">name</span><span class="o">=</span><span class="n">Kubernetes</span><span class="w"></span>
+<span class="n">baseurl</span><span class="o">=</span><span class="nl">https</span><span class="p">:</span><span class="o">//</span><span class="n">mirrors</span><span class="p">.</span><span class="n">aliyun</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">kubernetes</span><span class="o">/</span><span class="n">yum …</span></pre></div></li></ol><p class="subheader">Category: <a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a>
 
     Tagged: 
     <a href="https://gccpacman.github.io/tag/kubernetes.html">kubernetes </a>
-    <a href="https://gccpacman.github.io/tag/centos7.html">centos7 </a>
+    <a href="https://gccpacman.github.io/tag/centos.html">centos </a>
     <a href="https://gccpacman.github.io/tag/docker.html">docker </a>
 </p>
 
@@ -193,7 +175,7 @@ $ docker images   <span class="c1"># 确定docker命令正常</span>
 
             <article>
                 <a href="https://gccpacman.github.io/windowszai-hypervan-zhuang-centos7bing-pei-zhi-wang-luo.html"><h3 class="article-title">Windows在Hyperv安装Centos7并配置网络</h3></a>
-<h6 class="subheader" title="2019-05-07T11:13:00+08:00">Tue 07 May 2019
+<h6 class="subheader" title="2019-05-07T11:13:00+08:00">周二 07 五月 2019
 </h6>
 
 
@@ -203,17 +185,17 @@ Default Switch默认是可以连接外网的，如果是windows机器不用配�
 <ol>
 <li>
 <p>编辑<code>/etc/sysconfig/network-scripts/ifcfg-eth0</code>,修改以下三项:</p>
-<div class="highlight"><pre><span></span>DEVICE=eth0
-BOOTPROTO=dhcp
-ONBOOT=yes
+<div class="highlight"><pre><span></span><span class="n">DEVICE</span><span class="o">=</span><span class="n">eth0</span>
+<span class="n">BOOTPROTO</span><span class="o">=</span><span class="n">dhcp</span>
+<span class="n">ONBOOT</span><span class="o">=</span><span class="n">yes</span>
 </pre></div>
 
 
 </li>
 <li>
 <p>编辑<code>/etc/sysconfig/network</code>, 替换server-name.company.lan为你的主机名：</p>
-<div class="highlight"><pre><span></span>NETWORKING=yes
-HOSTNAME=server-name.company.lan
+<div class="highlight"><pre><span></span><span class="n">NETWORKING</span><span class="o">=</span><span class="n">yes</span>
+<span class="n">HOSTNAME</span><span class="o">=</span><span class="n">server</span><span class="o">-</span><span class="n">name</span><span class="p">.</span><span class="n">company</span><span class="p">.</span><span class="n">lan</span>
 </pre></div>
 
 
@@ -234,7 +216,7 @@ HOSTNAME=server-name.company.lan
 </li>
 </ol>
 <p>参考：
-https://unix.stackexchange.com/questions …</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/windows.html">Windows</a>
+https://unix.stackexchange.com …</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/windows.html">Windows</a>
 
     Tagged: 
     <a href="https://gccpacman.github.io/tag/windows.html">windows </a>
@@ -254,7 +236,7 @@ https://unix.stackexchange.com/questions …</p><p class="subheader">Category: <
 
             <article>
                 <a href="https://gccpacman.github.io/putty-tmuxduo-chuang-kou-ke-yong-pei-zhi.html"><h3 class="article-title">putty + tmux多窗口可用配置</h3></a>
-<h6 class="subheader" title="2018-08-28T10:20:00+08:00">Tue 28 August 2018
+<h6 class="subheader" title="2018-08-28T10:20:00+08:00">周二 28 八月 2018
 </h6>
 
 
@@ -268,21 +250,22 @@ https://unix.stackexchange.com/questions …</p><p class="subheader">Category: <
 </li>
 <li>
 <p>添加.tmux.conf配置</p>
-<div class="highlight"><pre><span></span>echo &quot;
+<div class="highlight"><pre><span></span><span class="nv">echo</span> <span class="s2">&quot;</span>
 ##########################################
-# STATUS BAR
-set -g status-keys vi
-set -g status-interval 1
-set -g status-attr bright
-set -g status-fg white
-set -g status-bg black
-set -g status-left-length 20
-set -g status-left &#39;#[fg=green][#[fg=red]#S#[fg=green]]#[default]&#39;
-set …</pre></div></li></ul><p class="subheader">Category: <a href="https://gccpacman.github.io/category/tmux.html">Tmux</a>
+# <span class="nv">STATUS</span> <span class="nv">BAR</span>
+<span class="nv">set</span> <span class="o">-</span><span class="nv">g</span> <span class="nv">status</span><span class="o">-</span><span class="nv">keys</span> <span class="nv">vi</span>
+<span class="nv">set</span> <span class="o">-</span><span class="nv">g</span> <span class="nv">status</span><span class="o">-</span><span class="nv">interval</span> <span class="mi">1</span>
+<span class="nv">set</span> <span class="o">-</span><span class="nv">g</span> <span class="nv">status</span><span class="o">-</span><span class="nv">attr</span> <span class="nv">bright</span>
+<span class="nv">set</span> <span class="o">-</span><span class="nv">g</span> <span class="nv">status</span><span class="o">-</span><span class="nv">fg</span> <span class="nv">white</span>
+<span class="nv">set</span> <span class="o">-</span><span class="nv">g</span> <span class="nv">status</span><span class="o">-</span><span class="nv">bg</span> <span class="nv">black</span>
+<span class="nv">set</span> <span class="o">-</span><span class="nv">g</span> <span class="nv">status</span><span class="o">-</span><span class="nv">left</span><span class="o">-</span><span class="nv">length</span> <span class="mi">20</span>
+<span class="nv">set</span> <span class="o">-</span><span class="nv">g</span> <span class="nv">status</span><span class="o">-</span><span class="nv">left</span> <span class="s1">&#39;</span><span class="s">#[fg …</span></pre></div></li></ul><p class="subheader">Category: <a href="https://gccpacman.github.io/category/tmux.html">Tmux</a>
 
     Tagged: 
     <a href="https://gccpacman.github.io/tag/tmux.html">tmux </a>
     <a href="https://gccpacman.github.io/tag/putty.html">putty </a>
+    <a href="https://gccpacman.github.io/tag/ssh.html">ssh </a>
+    <a href="https://gccpacman.github.io/tag/windows.html">windows </a>
 </p>
 
 
@@ -295,8 +278,8 @@ set …</pre></div></li></ul><p class="subheader">Category: <a href="https://gcc
 
 
             <article>
-                <a href="https://gccpacman.github.io/zi-yuan-zhan-yong-chao-ji-di-de-i3zhuo-mian.html"><h3 class="article-title">资源占用超级低的i3桌面</h3></a>
-<h6 class="subheader" title="2018-05-04T10:20:00+08:00">Fri 04 May 2018
+                <a href="https://gccpacman.github.io/zai-xu-ni-ji-li-pao-zi-yuan-zhan-yong-chao-di-de-linuxzhuo-mian-huan-jing-i3.html"><h3 class="article-title">在虚拟机里跑资源占用超低的Linux桌面环境i3</h3></a>
+<h6 class="subheader" title="2018-05-04T10:20:00+08:00">周五 04 五月 2018
 </h6>
 
 
@@ -315,9 +298,8 @@ $ sudo pacman -S i3     <span class="c1"># archlinux</span>
 </li>
 <li>
 <p>备份并修改i3的配置文件，可以参考我的github，或者直接下载替换：</p>
-<div class="highlight"><pre><span></span>cp ~/.config/i3/config ~/.config/i3/config.bak
-wget https://raw.githubusercontent.com/gccpacman/vm-i3wm-config/master/config
-cp config …</pre></div></li></ol><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+<div class="highlight"><pre><span></span><span class="n">cp</span> <span class="o">~/</span><span class="p">.</span><span class="n">config</span><span class="o">/</span><span class="n">i3</span><span class="o">/</span><span class="n">config</span> <span class="o">~/</span><span class="p">.</span><span class="n">config</span><span class="o">/</span><span class="n">i3</span><span class="o">/</span><span class="n">config</span><span class="p">.</span><span class="n">bak</span>
+<span class="n">wget</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">raw</span><span class="p">.</span><span class="n">githubusercontent</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">gccpacman</span><span class="o">/</span><span class="n">vm</span><span class="o">-</span><span class="n">i3wm</span><span class="o">-</span><span class="n">config</span><span class="o">/</span><span class="n">master</span><span class="o">/</span><span class="n">config …</span></pre></div></li></ol><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
     Tagged: 
     <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
@@ -327,53 +309,7 @@ cp config …</pre></div></li></ol><p class="subheader">Category: <a href="https
 
 
 
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/zi-yuan-zhan-yong-chao-ji-di-de-i3zhuo-mian.html">Read More</a>
-                <hr  class="gradient"/>
-            </article>
-
-        
-
-
-            <article>
-                <a href="https://gccpacman.github.io/windowsan-zhuang-msys32pei-zhi-gitdeng-kai-fa-huan-jing-bing-ji-cheng-vscode.html"><h3 class="article-title">Windows安装MSys32配置Git等开发环境并集成VSCode</h3></a>
-<h6 class="subheader" title="2018-02-01T10:20:00+08:00">Thu 01 February 2018
-</h6>
-
-
-<p>在不久之前发现了Msys2，基于Cygwin但是却又有一个让我觉得无比美好的包管理器Pacman(和Arch Linux的一样)，于是决定试试。但是真的用于Windows的终端还有很多麻烦的地方要解决，主要是以下几点：
-1. Git的ssh_keygen配置，你和windows自己的CMD里的ssh_keygen能否共用
-2. Msys用的换行符是和Linux一样的LF，而Windows的是CRLF
-3. Python能不能直接用Windows的Python而不用模拟Unix环境的Python（有很多的bug）
-4. 能否和我目前用的最多的VSCode编辑器无缝集成</p>
-<p>经过一段时间的研究，每个问题都得到了很好的解决，目前来讲非常的完美，在这里分享一下：</p>
-<ol>
-<li>
-<p>下载并安装 <a href="http://www.msys2.org/">Msys2</a></p>
-</li>
-<li>
-<p>安装和配置 <code>git</code>, 配置在windows上check出crlf格式文本，提交lf格式:</p>
-<p>2.1 安装git：</p>
-<div class="highlight"><pre><span></span>$ pacman --needed -S bash pacman msys2-runtime  git
-</pre></div>
-
-
-<p>2.2 修改git处理回车的方式：</p>
-<div class="highlight"><pre><span></span>$ git config --global core.autocrlf <span class="nb">true</span>
-</pre></div>
-
-
-</li>
-<li>
-<p>修改Home目录路径, Msys2默认的Home目录是Mingw64的/home …</p></li></ol><p class="subheader">Category: <a href="https://gccpacman.github.io/category/windows.html">Windows</a>
-
-    Tagged: 
-    <a href="https://gccpacman.github.io/tag/windows.html">windows </a>
-    <a href="https://gccpacman.github.io/tag/shell.html">shell </a>
-</p>
-
-
-
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/windowsan-zhuang-msys32pei-zhi-gitdeng-kai-fa-huan-jing-bing-ji-cheng-vscode.html">Read More</a>
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/zai-xu-ni-ji-li-pao-zi-yuan-zhan-yong-chao-di-de-linuxzhuo-mian-huan-jing-i3.html">Read More</a>
                 <hr  class="gradient"/>
             </article>
 
@@ -403,6 +339,7 @@ cp config …</pre></div></li></ol><p class="subheader">Category: <a href="https
         <ul class="side-nav">
             <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
             <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
+            <li><a href="https://gccpacman.github.io/category/nodejs.html">Nodejs</a></li>
             <li><a href="https://gccpacman.github.io/category/python.html">python</a></li>
             <li><a href="https://gccpacman.github.io/category/tmux.html">Tmux</a></li>
             <li><a href="https://gccpacman.github.io/category/vim.html">Vim</a></li>

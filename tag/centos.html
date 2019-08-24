@@ -46,8 +46,128 @@
         
 
             <article>
+                <a href="https://gccpacman.github.io/qiang-nei-de-centos7-linuxan-zhuang-k8s.html"><h3 class="article-title">墙内的Centos7 Linux安装K8S</h3></a>
+<h6 class="subheader" title="2019-05-07T11:13:00+08:00">周二 07 五月 2019
+</h6>
+
+
+<ol>
+<li>
+<p>安装基础构建依赖</p>
+<div class="highlight"><pre><span></span>$ yum -y install yum-utils device-mapper-persistent-data lvm2
+</pre></div>
+
+
+</li>
+<li>
+<p>安装Docker</p>
+<div class="highlight"><pre><span></span>$ yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+$ yum -y install docker-ce
+$ systemctl start docker <span class="o">&amp;&amp;</span> systemctl <span class="nb">enable</span> docker 
+$ docker images   <span class="c1"># 确定docker命令正常</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>安装Kubernetes</p>
+<p>3.1 安装kubeadm, kubelet, kubectl</p>
+<div class="highlight"><pre><span></span><span class="err">$</span><span class="w"> </span><span class="n">vim</span><span class="w"> </span><span class="n">kubernetes</span><span class="p">.</span><span class="n">repo</span><span class="w"></span>
+
+<span class="o">[</span><span class="n">kubernetes</span><span class="o">]</span><span class="w"></span>
+<span class="n">name</span><span class="o">=</span><span class="n">Kubernetes</span><span class="w"></span>
+<span class="n">baseurl</span><span class="o">=</span><span class="nl">https</span><span class="p">:</span><span class="o">//</span><span class="n">mirrors</span><span class="p">.</span><span class="n">aliyun</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">kubernetes</span><span class="o">/</span><span class="n">yum</span><span class="o">/</span><span class="n">repos</span><span class="o">/</span><span class="n">kubernetes</span><span class="o">-</span><span class="n">el7</span><span class="o">-</span><span class="n">x86_64</span><span class="w"></span>
+<span class="n">enabled</span><span class="o">=</span><span class="mi">1</span><span class="w"></span>
+<span class="n">gpgcheck</span><span class="o">=</span><span class="mi">0</span><span class="w"></span>
+
+<span class="err">$</span><span class="w"> </span><span class="n">yum</span><span class="w"> </span><span class="o">-</span><span class="n">y</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">kubelet</span><span class="w"> </span><span class="n">kubeadm</span><span class="w"> </span><span class="n">kubectl</span><span class="w"> </span><span class="n">kubernetes</span><span class="o">-</span><span class="n">cni</span><span class="w"></span>
+<span class="err">$</span><span class="w"> </span><span class="n">systemctl</span><span class="w"> </span><span class="n">enable</span><span class="w"> </span><span class="n">kubelet</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">systemctl</span><span class="w"> </span><span class="k">start</span><span class="w"> </span><span class="n">kubelet</span><span class="w"></span>
+</pre></div>
+
+
+<p>3.2 pull下来kubernetes要要到的镜像，因为k8s.gcr.io这个域名被墙，需要从阿里云pull下来然后重新打tag，参考文档里的几篇版本都对不上，首先可以通过这个命令<code>列出</code>确定需要pull的镜像和版本：</p>
+<div class="highlight"><pre><span></span>$ kubeadm config images list
+</pre></div>
+
+
+<p>3.3 根据上一步列出的镜像和版本号，参考<code>https://github.com/cookcodeblog/k8s-deploy</code>的目录<code>kubeadm_v1.13.0/04_pull_kubernetes_images_from_aliyun.sh</code>编写一个脚本，注意替换成你需要的版本，然后执行。</p>
+<p>3.4 关闭swap，注释掉<code>/etc/fstab</code>里的swap一行，重启后生效，并关闭selinux</p>
+<div class="highlight"><pre><span></span>$ swapoff -a
+$ setenforce <span class="m">0</span>
+$ sed -i <span class="s1">&#39;s/SELINUX=permissive/SELINUX=disabled/&#39;</span> /etc/sysconfig/selinux
+</pre></div>
+
+
+<p>3.5 配置网络转发</p>
+<div class="highlight"><pre><span></span>$ vim /etc/sysctl.d/k8s.conf
+
+net.bridge.bridge-nf-call-ip6tables <span class="o">=</span> <span class="m">1</span>
+net.bridge.bridge-nf-call-iptables <span class="o">=</span> <span class="m">1</span>
+net.ipv4.conf.all.forwarding <span class="o">=</span> <span class="m">1</span>
+vm.swappiness <span class="o">=</span> <span class="m">0</span>
+
+$ sysctl --system  <span class="c1"># 确定配置生效</span>
+</pre></div>
+
+
+<p>3.6 初始化kubeadm，等待命令执行完成</p>
+<div class="highlight"><pre><span></span>$ kubeadm init
+</pre></div>
+
+
+<p>3.7 配置kubectl</p>
+<div class="highlight"><pre><span></span>$ mkdir -p <span class="nv">$HOME</span>/.kube
+$ cp -i /etc/kubernetes/admin.conf <span class="nv">$HOME</span>/.kube/config
+$ chown <span class="k">$(</span>id -u<span class="k">)</span>:<span class="k">$(</span>id -g<span class="k">)</span> <span class="nv">$HOME</span>/.kube/config
+$ kubectl get nodes <span class="c1"># 确认kubectl配置成功</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>在Kubenetes里安装Flannel网络</p>
+<p>4.1 pull下Flannel镜像过程因为防火墙的原因依旧类似3.3操作，参考<code>https://github.com/cookcodeblog/k8s-deploy/tree/master/kubeadm_v1.13.0</code>里的<code>kubeadm_v1.13.0/pull_flannel_images_from_aliyun.sh</code>写一个脚本文件，这次的版本就用<code>v0.11.0</code>就好，便写完成执行脚本</p>
+<p>4.2 安装Flannel网络</p>
+<div class="highlight"><pre><span></span><span class="n">wget</span> <span class="o">-</span><span class="n">O</span> <span class="n">kube</span><span class="o">-</span><span class="n">flannel</span><span class="p">.</span><span class="n">yml</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">raw</span><span class="p">.</span><span class="n">githubusercontent</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">coreos</span><span class="o">/</span><span class="n">flannel</span><span class="o">/</span><span class="n">a70459be0084506e4ec919aa1c114638878db11b</span><span class="o">/</span><span class="n">Documentation</span><span class="o">/</span><span class="n">kube</span><span class="o">-</span><span class="n">flannel</span><span class="p">.</span><span class="n">yml</span>
+<span class="n">kubectl</span> <span class="n">apply</span> <span class="o">-</span><span class="n">f</span> <span class="n">kube</span><span class="o">-</span><span class="n">flannel</span><span class="p">.</span><span class="n">yml</span>
+
+<span class="o">#</span> <span class="err">过几十秒确认是否启动成功</span>
+<span class="n">kubectl</span> <span class="k">get</span> <span class="n">pods</span> <span class="c1">--all-namespaces</span>
+<span class="n">kubectl</span> <span class="k">get</span> <span class="n">cs</span>
+</pre></div>
+
+
+</li>
+</ol>
+<p>通过这四个步骤的成功执行，一个单机版本的Kubernetes已经安装完毕，接下去还可以做以下事情继续折腾，等之后有时间再折腾：
+1. 添加一个worker节点加入到K8S集群
+2. 可以根据参考文档，安装一个<code>K8S Dashboard</code>等或者部署应用
+3. 尝试在自己实现Ingress的负载均衡</p>
+<p>参考：</p>
+<p>https://juejin.im/post/5c36fd906fb9a049f8197c9b</p>
+<p>https://www.howtoforge.com/tutorial/centos-kubernetes-docker-cluster/</p>
+<p>https://github.com/cookcodeblog/k8s-deploy</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a>
+
+    Tagged: 
+    <a href="https://gccpacman.github.io/tag/kubernetes.html">kubernetes </a>
+    <a href="https://gccpacman.github.io/tag/centos.html">centos </a>
+    <a href="https://gccpacman.github.io/tag/docker.html">docker </a>
+</p>
+
+
+
+            </article>
+
+
+                <hr  class="gradient"/>
+
+
+        
+
+
+            <article>
                 <a href="https://gccpacman.github.io/windowszai-hypervan-zhuang-centos7bing-pei-zhi-wang-luo.html"><h3 class="article-title">Windows在Hyperv安装Centos7并配置网络</h3></a>
-<h6 class="subheader" title="2019-05-07T11:13:00+08:00">Tue 07 May 2019
+<h6 class="subheader" title="2019-05-07T11:13:00+08:00">周二 07 五月 2019
 </h6>
 
 
@@ -57,17 +177,17 @@ Default Switch默认是可以连接外网的，如果是windows机器不用配�
 <ol>
 <li>
 <p>编辑<code>/etc/sysconfig/network-scripts/ifcfg-eth0</code>,修改以下三项:</p>
-<div class="highlight"><pre><span></span>DEVICE=eth0
-BOOTPROTO=dhcp
-ONBOOT=yes
+<div class="highlight"><pre><span></span><span class="n">DEVICE</span><span class="o">=</span><span class="n">eth0</span>
+<span class="n">BOOTPROTO</span><span class="o">=</span><span class="n">dhcp</span>
+<span class="n">ONBOOT</span><span class="o">=</span><span class="n">yes</span>
 </pre></div>
 
 
 </li>
 <li>
 <p>编辑<code>/etc/sysconfig/network</code>, 替换server-name.company.lan为你的主机名：</p>
-<div class="highlight"><pre><span></span>NETWORKING=yes
-HOSTNAME=server-name.company.lan
+<div class="highlight"><pre><span></span><span class="n">NETWORKING</span><span class="o">=</span><span class="n">yes</span>
+<span class="n">HOSTNAME</span><span class="o">=</span><span class="n">server</span><span class="o">-</span><span class="n">name</span><span class="p">.</span><span class="n">company</span><span class="p">.</span><span class="n">lan</span>
 </pre></div>
 
 
@@ -88,8 +208,7 @@ HOSTNAME=server-name.company.lan
 </li>
 </ol>
 <p>参考：
-https://unix.stackexchange.com/questions/17436/centos-on-hyperv-eth0-not-in-ifconfig</p>
-<p>https://www.krizna.com/centos/setup-network-centos-7/</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/windows.html">Windows</a>
+https://unix.stackexchange.com …</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/windows.html">Windows</a>
 
     Tagged: 
     <a href="https://gccpacman.github.io/tag/windows.html">windows </a>
@@ -100,8 +219,11 @@ https://unix.stackexchange.com/questions/17436/centos-on-hyperv-eth0-not-in-ifco
 
 
 
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/windowszai-hypervan-zhuang-centos7bing-pei-zhi-wang-luo.html">Read More</a>
+                <hr  class="gradient"/>
             </article>
 
+            <!-- /#posts-list -->
 <div class="pagination-centered">
 <h6 class="subheader">Page 1 of 1</h6>
 
@@ -109,10 +231,6 @@ https://unix.stackexchange.com/questions/17436/centos-on-hyperv-eth0-not-in-ifco
 
 </p>
 </div>
-
-
-
-            <!-- /#posts-list -->
 
     </div>
     <!-- End Main Content -->
@@ -130,6 +248,7 @@ https://unix.stackexchange.com/questions/17436/centos-on-hyperv-eth0-not-in-ifco
         <ul class="side-nav">
             <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
             <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
+            <li><a href="https://gccpacman.github.io/category/nodejs.html">Nodejs</a></li>
             <li><a href="https://gccpacman.github.io/category/python.html">python</a></li>
             <li><a href="https://gccpacman.github.io/category/tmux.html">Tmux</a></li>
             <li><a href="https://gccpacman.github.io/category/vim.html">Vim</a></li>

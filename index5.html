@@ -47,36 +47,73 @@
 
 
             <article>
+                <a href="https://gccpacman.github.io/linuxjiang-socksdai-li-zhuan-huan-cheng-httpdai-li.html"><h3 class="article-title">Linux将Socks代理转换成Http代理</h3></a>
+<h6 class="subheader" title="2015-05-14T10:20:00+08:00">周四 14 五月 2015
+</h6>
+
+
+<p>安装polipo：</p>
+<div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="k">get</span> <span class="k">update</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="k">get</span> <span class="n">install</span> <span class="n">polipo</span>
+</pre></div>
+
+
+<p>编辑polipo配置文件 <code>/etc/polipo/config</code> ：</p>
+<div class="highlight"><pre><span></span>    ### <span class="nv">Basic</span> <span class="nv">configuration</span>
+
+    # <span class="nv">Add</span> <span class="nv">your</span> <span class="nv">proxy</span><span class="s1">&#39;</span><span class="s">s address</span>
+    <span class="nv">proxyAddress</span> <span class="o">=</span> <span class="mi">192</span>.<span class="mi">168</span>.<span class="mi">0</span>.<span class="mi">1</span>
+
+    # <span class="nv">Allow</span> <span class="nv">from</span> <span class="nv">anyone</span> <span class="nv">in</span> <span class="nv">the</span> <span class="mi">192</span>.<span class="mi">168</span>.<span class="mi">0</span>.<span class="o">*</span> <span class="nv">range</span> <span class="nv">to</span> <span class="k">connect</span> <span class="nv">to</span> <span class="nv">your</span> <span class="nv">proxy</span>
+    <span class="nv">allowedClients</span> <span class="o">=</span> <span class="mi">192</span>.<span class="mi">168</span>.<span class="mi">0</span>.<span class="mi">0</span><span class="o">/</span><span class="mi">24</span>
+</pre></div>
+
+
+<p>重启服务：</p>
+<div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init …</span></pre></div><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+
+    Tagged: 
+    <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
+    <a href="https://gccpacman.github.io/tag/proxy.html">proxy </a>
+</p>
+
+
+
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/linuxjiang-socksdai-li-zhuan-huan-cheng-httpdai-li.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+
+        
+
+
+            <article>
                 <a href="https://gccpacman.github.io/linuxda-jian-pptp-vpn-server.html"><h3 class="article-title">Linux搭建PPTP VPN Server</h3></a>
-<h6 class="subheader" title="2015-04-19T10:20:00+08:00">Sun 19 April 2015
+<h6 class="subheader" title="2015-04-19T10:20:00+08:00">周日 19 四月 2015
 </h6>
 
 
 <ol>
 <li>
 <p>安装server</p>
-<div class="highlight"><pre><span></span># On CentOS 6 x64:
-rpm -i http://poptop.sourceforge.net/yum/stable/rhel6/pptp-release-current.noarch.rpm
-yum -y install pptpd
-# On Ubuntu 12.10 x64:
-apt-get install pptpd
+<div class="highlight"><pre><span></span><span class="o">#</span> <span class="k">On</span> <span class="n">CentOS</span> <span class="mi">6</span> <span class="n">x64</span><span class="p">:</span>
+<span class="n">rpm</span> <span class="o">-</span><span class="n">i</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">poptop</span><span class="p">.</span><span class="n">sourceforge</span><span class="p">.</span><span class="n">net</span><span class="o">/</span><span class="n">yum</span><span class="o">/</span><span class="k">stable</span><span class="o">/</span><span class="n">rhel6</span><span class="o">/</span><span class="n">pptp</span><span class="o">-</span><span class="n">release</span><span class="o">-</span><span class="k">current</span><span class="p">.</span><span class="n">noarch</span><span class="p">.</span><span class="n">rpm</span>
+<span class="n">yum</span> <span class="o">-</span><span class="n">y</span> <span class="n">install</span> <span class="n">pptpd</span>
+<span class="o">#</span> <span class="k">On</span> <span class="n">Ubuntu</span> <span class="mi">12</span><span class="p">.</span><span class="mi">10</span> <span class="n">x64</span><span class="p">:</span>
+<span class="n">apt</span><span class="o">-</span><span class="k">get</span> <span class="n">install</span> <span class="n">pptpd</span>
 </pre></div>
 
 
 </li>
 <li>
 <p>编辑 <strong>/etc/pptpd.conf</strong> 添加以下行:</p>
-<div class="highlight"><pre><span></span>localip 10.0.0.1
-remoteip 10.0.0.100-200
+<div class="highlight"><pre><span></span><span class="n">localip</span> <span class="mi">10</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">1</span>
+<span class="n">remoteip</span> <span class="mi">10</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">100</span><span class="o">-</span><span class="mi">200</span>
 </pre></div>
 
 
 </li>
 </ol>
-<p>localip本机ip(vpn的服务器ip), remoteip-分配给客户端的ip, 应该处于同一网段</p>
-<ol>
-<li>
-<p>添加pptp用户名和密码到 <strong>/etc …</strong></p></li></ol><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+<p>localip本机ip(vpn的服务器ip …</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
     Tagged: 
     <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
@@ -115,6 +152,7 @@ remoteip 10.0.0.100-200
         <ul class="side-nav">
             <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
             <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
+            <li><a href="https://gccpacman.github.io/category/nodejs.html">Nodejs</a></li>
             <li><a href="https://gccpacman.github.io/category/python.html">python</a></li>
             <li><a href="https://gccpacman.github.io/category/tmux.html">Tmux</a></li>
             <li><a href="https://gccpacman.github.io/category/vim.html">Vim</a></li>

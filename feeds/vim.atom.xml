@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Pacman News - Vim</title><link href="https://gccpacman.github.io/" rel="alternate"></link><link href="https://gccpacman.github.io/feeds/vim.atom.xml" rel="self"></link><id>https://gccpacman.github.io/</id><updated>2017-10-24T19:30:00+08:00</updated><entry><title>vim插件command-t在windows上编译</title><link href="https://gccpacman.github.io/vimcha-jian-command-tzai-windowsshang-bian-yi.html" rel="alternate"></link><published>2017-10-24T10:20:00+08:00</published><updated>2017-10-24T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2017-10-24:/vimcha-jian-command-tzai-windowsshang-bian-yi.html</id><summary type="html">&lt;p&gt;用Bundle在Windows平台上配置成功了以后，绝大多数插件都已经可以使用，但是唯独&lt;a href="https://github.com/wincent/Command-T"&gt;Command-T&lt;/a&gt;因为是Ruby集成的插件，需要手动编译。&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Pacman News - Vim</title><link href="https://gccpacman.github.io/" rel="alternate"></link><link href="https://gccpacman.github.io/feeds/vim.atom.xml" rel="self"></link><id>https://gccpacman.github.io/</id><updated>2017-10-24T19:30:00+08:00</updated><entry><title>Windows上编译vim文件导航跳转插件command-t</title><link href="https://gccpacman.github.io/windowsshang-bian-yi-vimwen-jian-dao-hang-tiao-zhuan-cha-jian-command-t.html" rel="alternate"></link><published>2017-10-24T10:20:00+08:00</published><updated>2017-10-24T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2017-10-24:/windowsshang-bian-yi-vimwen-jian-dao-hang-tiao-zhuan-cha-jian-command-t.html</id><summary type="html">&lt;p&gt;用Bundle在Windows平台上配置成功了以后，绝大多数插件都已经可以使用，但是唯独强大的文件导航&lt;a href="https://github.com/wincent/Command-T"&gt;Command-T&lt;/a&gt;因为Ruby开发的插件，需要手动编译。&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://github.com/wincent/command-t/blob/master/doc/command-t.txt"&gt;官方文档&lt;/a&gt;写的安装编译过程代码大概是这样的，我省去了使用bundle的安装过程：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span class="nb"&gt;cd&lt;/span&gt; ~/vim&lt;span class="se"&gt;\b&lt;/span&gt;undle&lt;span class="se"&gt;\c&lt;/span&gt;ommand-t&lt;span class="se"&gt;\r&lt;/span&gt;uby&lt;span class="se"&gt;\c&lt;/span&gt;ommand-t&lt;span class="se"&gt;\e&lt;/span&gt;xt&lt;span class="se"&gt;\c&lt;/span&gt;ommand-t&amp;gt;
 $ ruby extconf.rb
@@ -10,7 +10,7 @@ $ make
 &lt;p&gt;要完成这些肯定得装ruby和make，网上的绝大多数答案也都已经过期，说的是vim7.4左右的版本，而现在已经是vim 8.0。于是只好自己探索。&lt;/p&gt;
 &lt;p&gt;windows的ruby是一个特殊的安装包，和Ruby的官网都分开，网址是&lt;a href="https://rubyinstaller.org/"&gt;RubyInstaller for windows&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;可供下载的版本从2.0.0-p648到2.4.2-2版本。&lt;/p&gt;
-&lt;p&gt;我从高版本开始尝试，安装2.4.2-2 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;用Bundle在Windows平台上配置成功了以后，绝大多数插件都已经可以使用，但是唯独&lt;a href="https://github.com/wincent/Command-T"&gt;Command-T&lt;/a&gt;因为是Ruby集成的插件，需要手动编译。&lt;/p&gt;
+&lt;p&gt;我从高版本开始尝试，安装2.4.2-2 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;用Bundle在Windows平台上配置成功了以后，绝大多数插件都已经可以使用，但是唯独强大的文件导航&lt;a href="https://github.com/wincent/Command-T"&gt;Command-T&lt;/a&gt;因为Ruby开发的插件，需要手动编译。&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://github.com/wincent/command-t/blob/master/doc/command-t.txt"&gt;官方文档&lt;/a&gt;写的安装编译过程代码大概是这样的，我省去了使用bundle的安装过程：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span class="nb"&gt;cd&lt;/span&gt; ~/vim&lt;span class="se"&gt;\b&lt;/span&gt;undle&lt;span class="se"&gt;\c&lt;/span&gt;ommand-t&lt;span class="se"&gt;\r&lt;/span&gt;uby&lt;span class="se"&gt;\c&lt;/span&gt;ommand-t&lt;span class="se"&gt;\e&lt;/span&gt;xt&lt;span class="se"&gt;\c&lt;/span&gt;ommand-t&amp;gt;
 $ ruby extconf.rb
@@ -34,10 +34,10 @@ $ make
 
 &lt;p&gt;接着进入&lt;code&gt;~/vim\bundle\command-t\ruby\command-t\ext\command-t&amp;gt;&lt;/code&gt;文件夹，执行&lt;code&gt;ruby extconf.rb&lt;/code&gt;命令，发现ruby执行成功了，用choco安装make并执行make一切都顺利。
 但是进入vim一按command-t的快捷键报错，报错内容是：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;command-t.vim could not load the C extension
-Please see INSTALLATION and TROUBLE-SHOOTING in the help
-Vim Ruby version: 2.2.6
-Expected version: 2.3.3
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;command&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;vim&lt;/span&gt; &lt;span class="n"&gt;could&lt;/span&gt; &lt;span class="k"&gt;not&lt;/span&gt; &lt;span class="k"&gt;load&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="k"&gt;C&lt;/span&gt; &lt;span class="n"&gt;extension&lt;/span&gt;
+&lt;span class="n"&gt;Please&lt;/span&gt; &lt;span class="n"&gt;see&lt;/span&gt; &lt;span class="n"&gt;INSTALLATION&lt;/span&gt; &lt;span class="k"&gt;and&lt;/span&gt; &lt;span class="n"&gt;TROUBLE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;SHOOTING&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;help&lt;/span&gt;
+&lt;span class="n"&gt;Vim&lt;/span&gt; &lt;span class="n"&gt;Ruby&lt;/span&gt; &lt;span class="k"&gt;version&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;
+&lt;span class="n"&gt;Expected&lt;/span&gt; &lt;span class="k"&gt;version&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -52,28 +52,28 @@ Expected version: 2.3.3
 &lt;p&gt;&lt;img alt="Command-T on Windows" src="https://gccpacman.github.io/images/command_t1.png"&gt;&lt;/p&gt;</content><category term="windows"></category><category term="vim"></category></entry><entry><title>windows的包管理Chocolate和vim.Vundle</title><link href="https://gccpacman.github.io/windowsde-bao-guan-li-chocolatehe-vimvundle.html" rel="alternate"></link><published>2017-10-22T10:20:00+08:00</published><updated>2017-10-22T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2017-10-22:/windowsde-bao-guan-li-chocolatehe-vimvundle.html</id><summary type="html">&lt;p&gt;Windows的开发环境一直都会让人比较头疼，一般解决方法有用Cygwin等模拟Linux的环境，Windows 10又自带了Ubuntu On Windows 10的环境。但是都或多或少有点问题，例如Cygwin的文件目录和windows分离，Ubuntu On Windows 10不能用Nodejs，打开X应用比较麻烦，只能用终端等。&lt;/p&gt;
 &lt;p&gt;经过很多尝试，我认为最友好的环境还是windows原生的环境，只是你需要偶尔告别命令行搜索某些应用需要的依赖，依次安装，这样其实绝大多数的开发环境都是可以部署的。不过还是有工具可以帮助我们，例如Windows其实也有一个类似apt-get或者&lt;a href="https://brew.sh/"&gt;Homebrew&lt;/a&gt;的包管理工具，叫做&lt;a href="https://chocolatey.org/"&gt;Chocolate&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://chocolatey.org/install"&gt;安装Chocolate&lt;/a&gt;只要在Powershell里写这行代码即可：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Set-ExecutionPolicy Bypass; iex ((New-Object System.Net.WebClient).DownloadString(&amp;#39;https://chocolatey.org/install.ps1&amp;#39;))
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;Set&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;ExecutionPolicy&lt;/span&gt; &lt;span class="n"&gt;Bypass&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;iex&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="k"&gt;New&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;Object&lt;/span&gt; &lt;span class="k"&gt;System&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Net&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;WebClient&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="n"&gt;DownloadString&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;https://chocolatey.org/install.ps1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;安装包的方法是&lt;code&gt;choco install &amp;lt;package_name&amp;gt;&lt;/code&gt; 但是这个命令必须用admin权限的powershell来执行。于是想是不是有个windows的&lt;code&gt;sudo&lt;/code&gt;，结果一查还真的有，而且可以用chocolate安装 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Windows的开发环境一直都会让人比较头疼，一般解决方法有用Cygwin等模拟Linux的环境，Windows 10又自带了Ubuntu On Windows 10的环境。但是都或多或少有点问题，例如Cygwin的文件目录和windows分离，Ubuntu On Windows 10不能用Nodejs，打开X应用比较麻烦，只能用终端等。&lt;/p&gt;
+&lt;p&gt;安装包的方法是&lt;code&gt;choco install &amp;lt;package_name&amp;gt;&lt;/code&gt; 但是这个命令必须用admin权限的powershell来执行。于是想是不是有个windows的&lt;code&gt;sudo …&lt;/code&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;Windows的开发环境一直都会让人比较头疼，一般解决方法有用Cygwin等模拟Linux的环境，Windows 10又自带了Ubuntu On Windows 10的环境。但是都或多或少有点问题，例如Cygwin的文件目录和windows分离，Ubuntu On Windows 10不能用Nodejs，打开X应用比较麻烦，只能用终端等。&lt;/p&gt;
 &lt;p&gt;经过很多尝试，我认为最友好的环境还是windows原生的环境，只是你需要偶尔告别命令行搜索某些应用需要的依赖，依次安装，这样其实绝大多数的开发环境都是可以部署的。不过还是有工具可以帮助我们，例如Windows其实也有一个类似apt-get或者&lt;a href="https://brew.sh/"&gt;Homebrew&lt;/a&gt;的包管理工具，叫做&lt;a href="https://chocolatey.org/"&gt;Chocolate&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://chocolatey.org/install"&gt;安装Chocolate&lt;/a&gt;只要在Powershell里写这行代码即可：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Set-ExecutionPolicy Bypass; iex ((New-Object System.Net.WebClient).DownloadString(&amp;#39;https://chocolatey.org/install.ps1&amp;#39;))
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;Set&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;ExecutionPolicy&lt;/span&gt; &lt;span class="n"&gt;Bypass&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;iex&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="k"&gt;New&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;Object&lt;/span&gt; &lt;span class="k"&gt;System&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Net&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;WebClient&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="n"&gt;DownloadString&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;https://chocolatey.org/install.ps1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;安装包的方法是&lt;code&gt;choco install &amp;lt;package_name&amp;gt;&lt;/code&gt; 但是这个命令必须用admin权限的powershell来执行。于是想是不是有个windows的&lt;code&gt;sudo&lt;/code&gt;，结果一查还真的有，而且可以用chocolate安装。于是admin执行powershell并运行了&lt;code&gt;choco install sudo&lt;/code&gt;就安装好了。以后只要在普通用户的powershell执行&lt;code&gt;sudo choco install &amp;lt;package_name&amp;gt;&lt;/code&gt;即可了。&lt;/p&gt;
 &lt;p&gt;我用choco安装了&lt;code&gt;git&lt;/code&gt;, &lt;code&gt;vim&lt;/code&gt;, &lt;code&gt;python&lt;/code&gt;，&lt;code&gt;curl&lt;/code&gt;，&lt;code&gt;wget&lt;/code&gt;等工具，安装后powershell可以执行不少的类似linux的命令了。
 但vim是裸奔状态，如果我直接把以前配置的.vimrc文件拿过来，显然用不来，甚至连Vundle包管理都用不来。Vundle的官方文档有&lt;a href="https://github.com/VundleVim/Vundle.vim/wiki/Vundle-for-Windows"&gt;windows上配置的方法&lt;/a&gt;就是把:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;set&lt;/span&gt; &lt;span class="n"&gt;rtp&lt;/span&gt;&lt;span class="o"&gt;+=~/&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;vim&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bundle&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;Vundle&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;vim&lt;/span&gt;
+&lt;span class="k"&gt;call&lt;/span&gt; &lt;span class="n"&gt;vundle&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="k"&gt;begin&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;改成&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;set rtp+=$HOME/.vim/bundle/Vundle.vim/
-call vundle#begin(&amp;#39;$HOME/.vim/bundle/&amp;#39;)
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;set&lt;/span&gt; &lt;span class="n"&gt;rtp&lt;/span&gt;&lt;span class="o"&gt;+=&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;HOME&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;vim&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bundle&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;Vundle&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;vim&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+&lt;span class="k"&gt;call&lt;/span&gt; &lt;span class="n"&gt;vundle&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="k"&gt;begin&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;$HOME/.vim/bundle/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 

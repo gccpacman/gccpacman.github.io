@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Pacman News - aliyun</title>
+
+    <link rel="stylesheet" href="https://gccpacman.github.io/theme/css/normalize.css" />
+    <link rel="stylesheet" href="https://gccpacman.github.io/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="https://gccpacman.github.io/theme/css/style.css" />
+    <link rel="stylesheet" href="https://gccpacman.github.io/theme/css/pygments.css" />	
+    <script src="https://gccpacman.github.io/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="https://gccpacman.github.io">Pacman News</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+        
+        
+
+            <article>
+                <a href="https://gccpacman.github.io/bu-shu-vuejsjing-tai-wang-zhan-dao-a-li-yun-oss.html"><h3 class="article-title">部署VueJS静态网站到阿里云OSS</h3></a>
+<h6 class="subheader" title="2019-08-19T10:20:00+08:00">周一 19 八月 2019
+</h6>
+
+
+<p><code>VueJS</code> 非常不错，对于一个后端开发也很友好。近期我有机会在写一个网站的时候接触了VueJS，虽然不是一个很专业的前端，但是感觉VueJS非常容易上手。
+出于为了性能的需要，打算将该网站通过 <code>webpack</code> 编译后上传到阿里云的 <code>OSS</code> 作为静态网站发布，但是遇到了一些坑，特意将踩坑的过程分享一下。</p>
+<p>首先在托管静态网站的时候，创建OSS桶需要注意两点配置：</p>
+<p>1） OSS桶必须设置公共读，因为网站需要所有人都可以访问</p>
+<p>2） OSS桶里有个默认首页的配置，需要配置成 <code>index.html</code></p>
+<p>因为使用了Vue-Router，在阿里云上一开始部署的时候有个严重的问题，就是在非主页刷新页面，OSS都找不到资源，这时候重新刷新，阿里云又找不到该目录下的这个文件，就会报找不到资源的错误。例如有一个路径是 <code>www.example.com/hello/world</code> ，通过主页 <code>www.example.com/index.html</code> 跳转到 <code>www.example.com/hello/worlds</code> 是正常的，但是当刷新页面，阿里云会直接去找OSS桶里的 <code>hello/world</code> 这个路径，发现找不到，直接报404.</p>
+<p>然后发现阿里云里的设置，其实有个“默认 404 页”的设置，所以一开始异想天开，把默认页面设置成了 <code>index.html</code> ，结果虽然不报404了，却每次刷新都跳转到主页，显然也不符合我想要的想过。</p>
+<p>然后我通过一番调研，发现原来是因为我的 Vue Router 配置，无法直接用阿里云OSS桶实现静态页面托管。</p>
+<p>因为 Vue Router 有两种模式</p>
+<p>1）<code>hash模式</code> ：用地址栏里的“#”来路由，不会改变实际的请求，例如 www.example.com/hello 和 www.example.com/hello#world 的Http请求是一样的，因此不需要改变请求，只通过#后面的内容进行路由</p>
+<p>2）<code>history模式</code> ：用html5中的 pushState() 和 replaceState() 在不刷新页面的情况下实现路由跳转。</p>
+<p>所有我的问题就很明显了，因为一开始我Vue Router的理解不够，认为history模式没有“#”看上去更加美观，就用了history模式。但是因为没有“#”，当刷新页面的时候，Http请求直接就去请求OSS桶里的该路径下的资源，结果当然是404了。我最后的解决方案便是放弃了美观，直接用了hash模式来托管网站，网站的路由就没有什么问题了。</p>
+<p>但是我觉得，其实OSS不可以挂在history模式的VueJS似乎也不太可能，应该有别的方法。但是目前搜不到oss和vuejs的history模式相关的资料，只搜到部署到AWS S3的资料，里面的方法居然就是把 <code>404页</code> 跳转到 <code>index.html</code>。我的理解是 <code>OSS</code> 和 <code>S3</code> 并不完全相同，又或者我的Vue Router里面还有其他的配置需要调整，总之目前还不确定OSS能否成功实现history方式的VueJS网站托管。</p>
+<p>找到的资料链接我先放在这里了，下次会再做一些尝试验证一下。</p>
+<p>参考资料：</p>
+<p><a href="https://router.vuejs.org/guide/essentials/history-mode.html#example-server-configurations">HTML5 History Mode - Vue Offical Docs</a></p>
+<p><a href="https://stackoverflow.com/questions/43095823/vue-js-router-history-mode-and-aws-s3-routingrules">Vue.js Router: history mode and AWS S3 (RoutingRules) - StackOverflow
+</a></p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/nodejs.html">Nodejs</a>
+
+    Tagged: 
+    <a href="https://gccpacman.github.io/tag/aliyun.html">aliyun </a>
+    <a href="https://gccpacman.github.io/tag/web.html">web </a>
+    <a href="https://gccpacman.github.io/tag/vuejs.html">vuejs </a>
+    <a href="https://gccpacman.github.io/tag/webpack.html">webpack </a>
+    <a href="https://gccpacman.github.io/tag/router.html">router </a>
+</p>
+
+
+
+            </article>
+
+<div class="pagination-centered">
+<h6 class="subheader">Page 1 of 1</h6>
+
+<p>
+
+</p>
+</div>
+
+
+
+            <!-- /#posts-list -->
+
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="https://gccpacman.github.io/archives.html">Archives</a>
+            <li><a href="https://gccpacman.github.io/tags.html">Tags</a>
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
+            <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
+            <li><a href="https://gccpacman.github.io/category/nodejs.html">Nodejs</a></li>
+            <li><a href="https://gccpacman.github.io/category/python.html">python</a></li>
+            <li><a href="https://gccpacman.github.io/category/tmux.html">Tmux</a></li>
+            <li><a href="https://gccpacman.github.io/category/vim.html">Vim</a></li>
+            <li><a href="https://gccpacman.github.io/category/windows.html">Windows</a></li>
+   
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://getpelican.com/">Pelican</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="https://github.com/gccpacman">GccPacman @Github</a></li>
+            <li><a href="https://stackoverflow.com/users/4124310/realhu">r341h @StackOverflow</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Pacman News by r341h</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

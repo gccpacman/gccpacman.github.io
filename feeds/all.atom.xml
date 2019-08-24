@@ -1,5 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Pacman News</title><link href="https://gccpacman.github.io/" rel="alternate"></link><link href="https://gccpacman.github.io/feeds/all.atom.xml" rel="self"></link><id>https://gccpacman.github.io/</id><updated>2019-05-08T14:13:00+08:00</updated><entry><title>K8S命令行工具Kubectl的实用命令</title><link href="https://gccpacman.github.io/k8sming-ling-xing-gong-ju-kubectlde-shi-yong-ming-ling.html" rel="alternate"></link><published>2019-05-08T14:13:00+08:00</published><updated>2019-05-08T14:13:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2019-05-08:/k8sming-ling-xing-gong-ju-kubectlde-shi-yong-ming-ling.html</id><summary type="html">&lt;ul&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Pacman News</title><link href="https://gccpacman.github.io/" rel="alternate"></link><link href="https://gccpacman.github.io/feeds/all.atom.xml" rel="self"></link><id>https://gccpacman.github.io/</id><updated>2019-08-19T19:30:00+08:00</updated><entry><title>部署VueJS静态网站到阿里云OSS</title><link href="https://gccpacman.github.io/bu-shu-vuejsjing-tai-wang-zhan-dao-a-li-yun-oss.html" rel="alternate"></link><published>2019-08-19T10:20:00+08:00</published><updated>2019-08-19T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2019-08-19:/bu-shu-vuejsjing-tai-wang-zhan-dao-a-li-yun-oss.html</id><summary type="html">&lt;p&gt;&lt;code&gt;VueJS&lt;/code&gt; 非常不错，对于一个后端开发也很友好。近期我有机会在写一个网站的时候接触了VueJS，虽然不是一个很专业的前端，但是感觉VueJS非常容易上手。
+出于为了性能的需要，打算将该网站通过 &lt;code&gt;webpack&lt;/code&gt; 编译后上传到阿里云的 &lt;code&gt;OSS&lt;/code&gt; 作为静态网站发布，但是遇到了一些坑，特意将踩坑的过程分享一下。&lt;/p&gt;
+&lt;p&gt;首先在托管静态网站的时候，创建OSS桶需要注意两点配置：&lt;/p&gt;
+&lt;p&gt;1） OSS桶必须设置公共读，因为网站需要所有人都可以访问&lt;/p&gt;
+&lt;p&gt;2） OSS桶里有个默认首页的配置，需要配置成 &lt;code&gt;index.html&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;因为使用了Vue-Router，在阿里云上一开始部署的时候有个严重的问题，就是在非主页刷新页面，OSS都找不到资源，这时候重新刷新，阿里云又找不到该目录下的这个文件，就会报找不到资源的错误。例如有一个路径是 &lt;code&gt;www.example.com/hello/world&lt;/code&gt; ，通过主页 &lt;code&gt;www.example.com/index.html&lt;/code&gt; 跳转到 &lt;code&gt;www.example.com/hello/worlds&lt;/code&gt; 是正常的 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;code&gt;VueJS&lt;/code&gt; 非常不错，对于一个后端开发也很友好。近期我有机会在写一个网站的时候接触了VueJS，虽然不是一个很专业的前端，但是感觉VueJS非常容易上手。
+出于为了性能的需要，打算将该网站通过 &lt;code&gt;webpack&lt;/code&gt; 编译后上传到阿里云的 &lt;code&gt;OSS&lt;/code&gt; 作为静态网站发布，但是遇到了一些坑，特意将踩坑的过程分享一下。&lt;/p&gt;
+&lt;p&gt;首先在托管静态网站的时候，创建OSS桶需要注意两点配置：&lt;/p&gt;
+&lt;p&gt;1） OSS桶必须设置公共读，因为网站需要所有人都可以访问&lt;/p&gt;
+&lt;p&gt;2） OSS桶里有个默认首页的配置，需要配置成 &lt;code&gt;index.html&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;因为使用了Vue-Router，在阿里云上一开始部署的时候有个严重的问题，就是在非主页刷新页面，OSS都找不到资源，这时候重新刷新，阿里云又找不到该目录下的这个文件，就会报找不到资源的错误。例如有一个路径是 &lt;code&gt;www.example.com/hello/world&lt;/code&gt; ，通过主页 &lt;code&gt;www.example.com/index.html&lt;/code&gt; 跳转到 &lt;code&gt;www.example.com/hello/worlds&lt;/code&gt; 是正常的，但是当刷新页面，阿里云会直接去找OSS桶里的 &lt;code&gt;hello/world&lt;/code&gt; 这个路径，发现找不到，直接报404.&lt;/p&gt;
+&lt;p&gt;然后发现阿里云里的设置，其实有个“默认 404 页”的设置，所以一开始异想天开，把默认页面设置成了 &lt;code&gt;index.html&lt;/code&gt; ，结果虽然不报404了，却每次刷新都跳转到主页，显然也不符合我想要的想过。&lt;/p&gt;
+&lt;p&gt;然后我通过一番调研，发现原来是因为我的 Vue Router 配置，无法直接用阿里云OSS桶实现静态页面托管。&lt;/p&gt;
+&lt;p&gt;因为 Vue Router 有两种模式&lt;/p&gt;
+&lt;p&gt;1）&lt;code&gt;hash模式&lt;/code&gt; ：用地址栏里的“#”来路由，不会改变实际的请求，例如 www.example.com/hello 和 www.example.com/hello#world 的Http请求是一样的，因此不需要改变请求，只通过#后面的内容进行路由&lt;/p&gt;
+&lt;p&gt;2）&lt;code&gt;history模式&lt;/code&gt; ：用html5中的 pushState() 和 replaceState() 在不刷新页面的情况下实现路由跳转。&lt;/p&gt;
+&lt;p&gt;所有我的问题就很明显了，因为一开始我Vue Router的理解不够，认为history模式没有“#”看上去更加美观，就用了history模式。但是因为没有“#”，当刷新页面的时候，Http请求直接就去请求OSS桶里的该路径下的资源，结果当然是404了。我最后的解决方案便是放弃了美观，直接用了hash模式来托管网站，网站的路由就没有什么问题了。&lt;/p&gt;
+&lt;p&gt;但是我觉得，其实OSS不可以挂在history模式的VueJS似乎也不太可能，应该有别的方法。但是目前搜不到oss和vuejs的history模式相关的资料，只搜到部署到AWS S3的资料，里面的方法居然就是把 &lt;code&gt;404页&lt;/code&gt; 跳转到 &lt;code&gt;index.html&lt;/code&gt;。我的理解是 &lt;code&gt;OSS&lt;/code&gt; 和 &lt;code&gt;S3&lt;/code&gt; 并不完全相同，又或者我的Vue Router里面还有其他的配置需要调整，总之目前还不确定OSS能否成功实现history方式的VueJS网站托管。&lt;/p&gt;
+&lt;p&gt;找到的资料链接我先放在这里了，下次会再做一些尝试验证一下。&lt;/p&gt;
+&lt;p&gt;参考资料：&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://router.vuejs.org/guide/essentials/history-mode.html#example-server-configurations"&gt;HTML5 History Mode - Vue Offical Docs&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://stackoverflow.com/questions/43095823/vue-js-router-history-mode-and-aws-s3-routingrules"&gt;Vue.js Router: history mode and AWS S3 (RoutingRules) - StackOverflow
+&lt;/a&gt;&lt;/p&gt;</content><category term="aliyun"></category><category term="web"></category><category term="vuejs"></category><category term="webpack"></category><category term="router"></category></entry><entry><title>K8S命令行工具Kubectl的实用命令</title><link href="https://gccpacman.github.io/k8sming-ling-xing-gong-ju-kubectlde-shi-yong-ming-ling.html" rel="alternate"></link><published>2019-05-08T14:13:00+08:00</published><updated>2019-05-08T14:13:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2019-05-08:/k8sming-ling-xing-gong-ju-kubectlde-shi-yong-ming-ling.html</id><summary type="html">&lt;ul&gt;
 &lt;li&gt;安装配置Kubectl:&lt;ul&gt;
 &lt;li&gt;下载kubectl，地址：https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl&lt;/li&gt;
 &lt;li&gt;下载完成后放置到本地$Path路径&lt;/li&gt;
@@ -8,11 +30,11 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;用kubectl获取k8s集群的基本信息：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ kubectl get pods &lt;span class="c1"&gt;# 查看default命名空间下的pods&lt;/span&gt;
-$ kubectl get pods -n &lt;span class="nb"&gt;test&lt;/span&gt; &lt;span class="c1"&gt;# 查看test命名空间下的pods&lt;/span&gt;
-$ kubectl get deployments &lt;span class="c1"&gt;# 查看default命名空间下的部署&lt;/span&gt;
-$ kubectl get services &lt;span class="c1"&gt;# 查看default命名空间下的服务&lt;/span&gt;
-$ kubectl get pods -o&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;jsonpath&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;{range .items[*]}{&amp;#39;\n&amp;#39;}{.metadata.name}{&amp;#39;:\t&amp;#39;}{range …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span class="nv"&gt;kubectl&lt;/span&gt; &lt;span class="nv"&gt;get&lt;/span&gt; &lt;span class="nv"&gt;pods&lt;/span&gt; # 查看&lt;span class="nv"&gt;default&lt;/span&gt;命名空间下的&lt;span class="nv"&gt;pods&lt;/span&gt;
+$ &lt;span class="nv"&gt;kubectl&lt;/span&gt; &lt;span class="nv"&gt;get&lt;/span&gt; &lt;span class="nv"&gt;pods&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="nv"&gt;test&lt;/span&gt; # 查看&lt;span class="nv"&gt;test&lt;/span&gt;命名空间下的&lt;span class="nv"&gt;pods&lt;/span&gt;
+$ &lt;span class="nv"&gt;kubectl&lt;/span&gt; &lt;span class="nv"&gt;get&lt;/span&gt; &lt;span class="nv"&gt;deployments&lt;/span&gt; # 查看&lt;span class="nv"&gt;default&lt;/span&gt;命名空间下的部署
+$ &lt;span class="nv"&gt;kubectl&lt;/span&gt; &lt;span class="nv"&gt;get&lt;/span&gt; &lt;span class="nv"&gt;services&lt;/span&gt; # 查看&lt;span class="nv"&gt;default&lt;/span&gt;命名空间下的服务
+$ &lt;span class="nv"&gt;kubectl&lt;/span&gt; &lt;span class="nv"&gt;get …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;ul&gt;
 &lt;li&gt;安装配置Kubectl:&lt;ul&gt;
 &lt;li&gt;下载kubectl，地址：https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl&lt;/li&gt;
 &lt;li&gt;下载完成后放置到本地$Path路径&lt;/li&gt;
@@ -21,11 +43,11 @@ $ kubectl get pods -o&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;用kubectl获取k8s集群的基本信息：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ kubectl get pods &lt;span class="c1"&gt;# 查看default命名空间下的pods&lt;/span&gt;
-$ kubectl get pods -n &lt;span class="nb"&gt;test&lt;/span&gt; &lt;span class="c1"&gt;# 查看test命名空间下的pods&lt;/span&gt;
-$ kubectl get deployments &lt;span class="c1"&gt;# 查看default命名空间下的部署&lt;/span&gt;
-$ kubectl get services &lt;span class="c1"&gt;# 查看default命名空间下的服务&lt;/span&gt;
-$ kubectl get pods -o&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;jsonpath&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;{range .items[*]}{&amp;#39;\n&amp;#39;}{.metadata.name}{&amp;#39;:\t&amp;#39;}{range .spec.containers[*]}{.image}{&amp;#39;, &amp;#39;}{end}{end}&amp;quot;&lt;/span&gt; &lt;span class="c1"&gt;# 查看pods里container的镜像和版本&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span class="nv"&gt;kubectl&lt;/span&gt; &lt;span class="nv"&gt;get&lt;/span&gt; &lt;span class="nv"&gt;pods&lt;/span&gt; # 查看&lt;span class="nv"&gt;default&lt;/span&gt;命名空间下的&lt;span class="nv"&gt;pods&lt;/span&gt;
+$ &lt;span class="nv"&gt;kubectl&lt;/span&gt; &lt;span class="nv"&gt;get&lt;/span&gt; &lt;span class="nv"&gt;pods&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="nv"&gt;test&lt;/span&gt; # 查看&lt;span class="nv"&gt;test&lt;/span&gt;命名空间下的&lt;span class="nv"&gt;pods&lt;/span&gt;
+$ &lt;span class="nv"&gt;kubectl&lt;/span&gt; &lt;span class="nv"&gt;get&lt;/span&gt; &lt;span class="nv"&gt;deployments&lt;/span&gt; # 查看&lt;span class="nv"&gt;default&lt;/span&gt;命名空间下的部署
+$ &lt;span class="nv"&gt;kubectl&lt;/span&gt; &lt;span class="nv"&gt;get&lt;/span&gt; &lt;span class="nv"&gt;services&lt;/span&gt; # 查看&lt;span class="nv"&gt;default&lt;/span&gt;命名空间下的服务
+$ &lt;span class="nv"&gt;kubectl&lt;/span&gt; &lt;span class="nv"&gt;get&lt;/span&gt; &lt;span class="nv"&gt;pods&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;o&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;jsonpath&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;{range .items[*]}{&amp;#39;&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;}{.metadata.name}{&amp;#39;:&lt;/span&gt;&lt;span class="se"&gt;\t&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;}{range .spec.containers[*]}{.image}{&amp;#39;, &amp;#39;}{end}{end}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; # 查看&lt;span class="nv"&gt;pods&lt;/span&gt;里&lt;span class="nv"&gt;container&lt;/span&gt;的镜像和版本
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -40,8 +62,8 @@ $ kubectl top node &lt;span class="c1"&gt;# 查看节点的cpu和memory资源占
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;调试和进入Pod：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ kubectl describe pod &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;pod_name&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="c1"&gt;# 查看某个pod的信息（例如在pod有问题可以debug）&lt;/span&gt;
-$ kubectl &lt;span class="nb"&gt;exec&lt;/span&gt; -it &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;pod_name&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; bash &lt;span class="c1"&gt;# 进入某个pod的某个容器进行调试&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span class="nv"&gt;kubectl&lt;/span&gt; &lt;span class="nv"&gt;describe&lt;/span&gt; &lt;span class="nv"&gt;pod&lt;/span&gt; ${&lt;span class="nv"&gt;pod_name&lt;/span&gt;} # 查看某个&lt;span class="nv"&gt;pod&lt;/span&gt;的信息（例如在&lt;span class="nv"&gt;pod&lt;/span&gt;有问题可以&lt;span class="nv"&gt;debug&lt;/span&gt;）
+$ &lt;span class="nv"&gt;kubectl&lt;/span&gt; &lt;span class="k"&gt;exec&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;it&lt;/span&gt; ${&lt;span class="nv"&gt;pod_name&lt;/span&gt;} &lt;span class="nv"&gt;bash&lt;/span&gt; # 进入某个&lt;span class="nv"&gt;pod&lt;/span&gt;的某个容器进行调试
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -86,7 +108,7 @@ $ kubectl delete hpa &amp;lt;hpa_name&amp;gt;
 
 
 &lt;/li&gt;
-&lt;/ul&gt;</content><category term="kubernetes"></category><category term="docker"></category></entry><entry><title>墙内的Centos7 Linux安装K8S</title><link href="https://gccpacman.github.io/qiang-nei-de-centos7-linuxan-zhuang-k8s.html" rel="alternate"></link><published>2019-05-07T11:13:00+08:00</published><updated>2019-05-07T11:13:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2019-05-07:/qiang-nei-de-centos7-linuxan-zhuang-k8s.html</id><summary type="html">&lt;ol&gt;
+&lt;/ul&gt;</content><category term="kubernetes"></category><category term="docker"></category><category term="kubectl"></category></entry><entry><title>墙内的Centos7 Linux安装K8S</title><link href="https://gccpacman.github.io/qiang-nei-de-centos7-linuxan-zhuang-k8s.html" rel="alternate"></link><published>2019-05-07T11:13:00+08:00</published><updated>2019-05-07T11:13:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2019-05-07:/qiang-nei-de-centos7-linuxan-zhuang-k8s.html</id><summary type="html">&lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;安装基础构建依赖&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ yum -y install yum-utils device-mapper-persistent-data lvm2
@@ -107,11 +129,11 @@ $ docker images   &lt;span class="c1"&gt;# 确定docker命令正常&lt;/span&gt;
 &lt;li&gt;
 &lt;p&gt;安装Kubernetes&lt;/p&gt;
 &lt;p&gt;3.1 安装kubeadm, kubelet, kubectl&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ vim kubernetes.repo
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;vim&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;kubernetes&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;repo&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
-&lt;span class="o"&gt;[&lt;/span&gt;kubernetes&lt;span class="o"&gt;]&lt;/span&gt;
-&lt;span class="nv"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Kubernetes
-&lt;span class="nv"&gt;baseurl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;https://mirrors.aliyun.com/kubernetes/yum …&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;ol&gt;
+&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;kubernetes&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;Kubernetes&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;baseurl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nl"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;mirrors&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;aliyun&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;kubernetes&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;yum …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;安装基础构建依赖&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ yum -y install yum-utils device-mapper-persistent-data lvm2
@@ -132,16 +154,16 @@ $ docker images   &lt;span class="c1"&gt;# 确定docker命令正常&lt;/span&gt;
 &lt;li&gt;
 &lt;p&gt;安装Kubernetes&lt;/p&gt;
 &lt;p&gt;3.1 安装kubeadm, kubelet, kubectl&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ vim kubernetes.repo
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;vim&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;kubernetes&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;repo&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
-&lt;span class="o"&gt;[&lt;/span&gt;kubernetes&lt;span class="o"&gt;]&lt;/span&gt;
-&lt;span class="nv"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Kubernetes
-&lt;span class="nv"&gt;baseurl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64
-&lt;span class="nv"&gt;enabled&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;
-&lt;span class="nv"&gt;gpgcheck&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;kubernetes&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;Kubernetes&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;baseurl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nl"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;mirrors&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;aliyun&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;kubernetes&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;yum&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;repos&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;kubernetes&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;el7&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;x86_64&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;enabled&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;gpgcheck&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
-$ yum -y install kubelet kubeadm kubectl kubernetes-cni
-$ systemctl &lt;span class="nb"&gt;enable&lt;/span&gt; kubelet &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; systemctl start kubelet
+&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;yum&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;install&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;kubelet&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;kubeadm&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;kubectl&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;kubernetes&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;cni&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;systemctl&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;enable&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;kubelet&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;systemctl&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;start&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;kubelet&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -188,12 +210,12 @@ $ kubectl get nodes &lt;span class="c1"&gt;# 确认kubectl配置成功&lt;/span&
 &lt;p&gt;在Kubenetes里安装Flannel网络&lt;/p&gt;
 &lt;p&gt;4.1 pull下Flannel镜像过程因为防火墙的原因依旧类似3.3操作，参考&lt;code&gt;https://github.com/cookcodeblog/k8s-deploy/tree/master/kubeadm_v1.13.0&lt;/code&gt;里的&lt;code&gt;kubeadm_v1.13.0/pull_flannel_images_from_aliyun.sh&lt;/code&gt;写一个脚本文件，这次的版本就用&lt;code&gt;v0.11.0&lt;/code&gt;就好，便写完成执行脚本&lt;/p&gt;
 &lt;p&gt;4.2 安装Flannel网络&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;wget -O kube-flannel.yml https://raw.githubusercontent.com/coreos/flannel/a70459be0084506e4ec919aa1c114638878db11b/Documentation/kube-flannel.yml
-kubectl apply -f kube-flannel.yml
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;wget&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;O&lt;/span&gt; &lt;span class="n"&gt;kube&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;flannel&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;yml&lt;/span&gt; &lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;raw&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;githubusercontent&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;coreos&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;flannel&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;a70459be0084506e4ec919aa1c114638878db11b&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;Documentation&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;kube&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;flannel&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;yml&lt;/span&gt;
+&lt;span class="n"&gt;kubectl&lt;/span&gt; &lt;span class="n"&gt;apply&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="n"&gt;kube&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;flannel&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;yml&lt;/span&gt;
 
-# 过几十秒确认是否启动成功
-kubectl get pods --all-namespaces
-kubectl get cs
+&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;过几十秒确认是否启动成功&lt;/span&gt;
+&lt;span class="n"&gt;kubectl&lt;/span&gt; &lt;span class="k"&gt;get&lt;/span&gt; &lt;span class="n"&gt;pods&lt;/span&gt; &lt;span class="c1"&gt;--all-namespaces&lt;/span&gt;
+&lt;span class="n"&gt;kubectl&lt;/span&gt; &lt;span class="k"&gt;get&lt;/span&gt; &lt;span class="n"&gt;cs&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -206,23 +228,23 @@ kubectl get cs
 &lt;p&gt;参考：&lt;/p&gt;
 &lt;p&gt;https://juejin.im/post/5c36fd906fb9a049f8197c9b&lt;/p&gt;
 &lt;p&gt;https://www.howtoforge.com/tutorial/centos-kubernetes-docker-cluster/&lt;/p&gt;
-&lt;p&gt;https://github.com/cookcodeblog/k8s-deploy&lt;/p&gt;</content><category term="kubernetes"></category><category term="centos7"></category><category term="docker"></category></entry><entry><title>Windows在Hyperv安装Centos7并配置网络</title><link href="https://gccpacman.github.io/windowszai-hypervan-zhuang-centos7bing-pei-zhi-wang-luo.html" rel="alternate"></link><published>2019-05-07T11:13:00+08:00</published><updated>2019-05-07T11:13:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2019-05-07:/windowszai-hypervan-zhuang-centos7bing-pei-zhi-wang-luo.html</id><summary type="html">&lt;p&gt;Hyper-V安装Centos，网卡选择Hyper-V的Default Switch。
+&lt;p&gt;https://github.com/cookcodeblog/k8s-deploy&lt;/p&gt;</content><category term="kubernetes"></category><category term="centos"></category><category term="docker"></category></entry><entry><title>Windows在Hyperv安装Centos7并配置网络</title><link href="https://gccpacman.github.io/windowszai-hypervan-zhuang-centos7bing-pei-zhi-wang-luo.html" rel="alternate"></link><published>2019-05-07T11:13:00+08:00</published><updated>2019-05-07T11:13:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2019-05-07:/windowszai-hypervan-zhuang-centos7bing-pei-zhi-wang-luo.html</id><summary type="html">&lt;p&gt;Hyper-V安装Centos，网卡选择Hyper-V的Default Switch。
 Default Switch默认是可以连接外网的，如果是windows机器不用配置直接可以联网，但是Linux不行，原因是网卡eth0默认没有配置dhcp：&lt;/p&gt;
 &lt;p&gt;可以通过以下几部配置：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;编辑&lt;code&gt;/etc/sysconfig/network-scripts/ifcfg-eth0&lt;/code&gt;,修改以下三项:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;DEVICE=eth0
-BOOTPROTO=dhcp
-ONBOOT=yes
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;DEVICE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;eth0&lt;/span&gt;
+&lt;span class="n"&gt;BOOTPROTO&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;dhcp&lt;/span&gt;
+&lt;span class="n"&gt;ONBOOT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;yes&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;编辑&lt;code&gt;/etc/sysconfig/network&lt;/code&gt;, 替换server-name.company.lan为你的主机名：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;NETWORKING=yes
-HOSTNAME=server-name.company.lan
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;NETWORKING&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;yes&lt;/span&gt;
+&lt;span class="n"&gt;HOSTNAME&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;company&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lan&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -243,23 +265,23 @@ HOSTNAME=server-name.company.lan
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;参考：
-https://unix.stackexchange.com/questions …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Hyper-V安装Centos，网卡选择Hyper-V的Default Switch。
+https://unix.stackexchange.com …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Hyper-V安装Centos，网卡选择Hyper-V的Default Switch。
 Default Switch默认是可以连接外网的，如果是windows机器不用配置直接可以联网，但是Linux不行，原因是网卡eth0默认没有配置dhcp：&lt;/p&gt;
 &lt;p&gt;可以通过以下几部配置：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;编辑&lt;code&gt;/etc/sysconfig/network-scripts/ifcfg-eth0&lt;/code&gt;,修改以下三项:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;DEVICE=eth0
-BOOTPROTO=dhcp
-ONBOOT=yes
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;DEVICE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;eth0&lt;/span&gt;
+&lt;span class="n"&gt;BOOTPROTO&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;dhcp&lt;/span&gt;
+&lt;span class="n"&gt;ONBOOT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;yes&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;编辑&lt;code&gt;/etc/sysconfig/network&lt;/code&gt;, 替换server-name.company.lan为你的主机名：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;NETWORKING=yes
-HOSTNAME=server-name.company.lan
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;NETWORKING&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;yes&lt;/span&gt;
+&lt;span class="n"&gt;HOSTNAME&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;company&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lan&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -291,17 +313,16 @@ https://unix.stackexchange.com/questions/17436/centos-on-hyperv-eth0-not-in-ifco
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;添加.tmux.conf配置&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;echo &amp;quot;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
 ##########################################
-# STATUS BAR
-set -g status-keys vi
-set -g status-interval 1
-set -g status-attr bright
-set -g status-fg white
-set -g status-bg black
-set -g status-left-length 20
-set -g status-left &amp;#39;#[fg=green][#[fg=red]#S#[fg=green]]#[default]&amp;#39;
-set …&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;ul&gt;
+# &lt;span class="nv"&gt;STATUS&lt;/span&gt; &lt;span class="nv"&gt;BAR&lt;/span&gt;
+&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;status&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;keys&lt;/span&gt; &lt;span class="nv"&gt;vi&lt;/span&gt;
+&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;status&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;interval&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;status&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;attr&lt;/span&gt; &lt;span class="nv"&gt;bright&lt;/span&gt;
+&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;status&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;fg&lt;/span&gt; &lt;span class="nv"&gt;white&lt;/span&gt;
+&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;status&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;bg&lt;/span&gt; &lt;span class="nv"&gt;black&lt;/span&gt;
+&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;status&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;left&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;length&lt;/span&gt; &lt;span class="mi"&gt;20&lt;/span&gt;
+&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;status&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;left&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;#[fg …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;putty的执行命令填入如下命令，tmux名称同session名称，以便开多个putty窗口时候识别&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ tmux new -A -s &lt;span class="o"&gt;{&lt;/span&gt;session_name&lt;span class="o"&gt;}&lt;/span&gt;
@@ -311,80 +332,80 @@ set …&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ul&gt;</summary><content type="ht
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;添加.tmux.conf配置&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;echo &amp;quot;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
 ##########################################
-# STATUS BAR
-set -g status-keys vi
-set -g status-interval 1
-set -g status-attr bright
-set -g status-fg white
-set -g status-bg black
-set -g status-left-length 20
-set -g status-left &amp;#39;#[fg=green][#[fg=red]#S#[fg=green]]#[default]&amp;#39;
-set -g status-justify centre
-set -g status-right &amp;#39;#[fg=green][ %m/%d %H:%M:%S ]#[default]&amp;#39;
-setw -g window-status-current-format &amp;#39;#[fg=yellow](#I.#P#F#W)#[default]&amp;#39;
-setw -g window-status-format &amp;#39;#I#F#W&amp;#39;
+# &lt;span class="nv"&gt;STATUS&lt;/span&gt; &lt;span class="nv"&gt;BAR&lt;/span&gt;
+&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;status&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;keys&lt;/span&gt; &lt;span class="nv"&gt;vi&lt;/span&gt;
+&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;status&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;interval&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;status&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;attr&lt;/span&gt; &lt;span class="nv"&gt;bright&lt;/span&gt;
+&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;status&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;fg&lt;/span&gt; &lt;span class="nv"&gt;white&lt;/span&gt;
+&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;status&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;bg&lt;/span&gt; &lt;span class="nv"&gt;black&lt;/span&gt;
+&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;status&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;left&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;length&lt;/span&gt; &lt;span class="mi"&gt;20&lt;/span&gt;
+&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;status&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;left&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;#[fg=green][#[fg=red]#S#[fg=green]]#[default]&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;
+&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;status&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;justify&lt;/span&gt; &lt;span class="nv"&gt;centre&lt;/span&gt;
+&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;status&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;right&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;#[fg=green][ %m/%d %H:%M:%S ]#[default]&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;
+&lt;span class="nv"&gt;setw&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;window&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;status&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;current&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;format&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;#[fg=yellow](#I.#P#F#W)#[default]&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;
+&lt;span class="nv"&gt;setw&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;window&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;status&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;format&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;#I#F#W&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;
 
 ##########################################
-# TERMINAL EMULATOR TITLES
-set -g set-titles on
-set -g set-titles-string \&amp;quot;#(tmux ls | awk -F: &amp;#39;{print $1}&amp;#39; | xargs | sed &amp;#39;s/\ / | /g&amp;#39;)\&amp;quot;
+# &lt;span class="nv"&gt;TERMINAL&lt;/span&gt; &lt;span class="nv"&gt;EMULATOR&lt;/span&gt; &lt;span class="nv"&gt;TITLES&lt;/span&gt;
+&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;set&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;titles&lt;/span&gt; &lt;span class="nv"&gt;on&lt;/span&gt;
+&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;set&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;titles&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;string&lt;/span&gt; \&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;#(tmux ls | awk -F: &amp;#39;{print $1}&amp;#39; | xargs | sed &amp;#39;s/\ / | /g&amp;#39;)\&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
 
-# Scroll History
-set -g history-limit 30000
+# &lt;span class="nv"&gt;Scroll&lt;/span&gt; &lt;span class="nv"&gt;History&lt;/span&gt;
+&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;history&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;limit&lt;/span&gt; &lt;span class="mi"&gt;30000&lt;/span&gt;
 
-# Set ability to capture on start and restore on exit window data when running an application
-setw -g alternate-screen on
+# &lt;span class="nv"&gt;Set&lt;/span&gt; &lt;span class="nv"&gt;ability&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="nv"&gt;capture&lt;/span&gt; &lt;span class="nv"&gt;on&lt;/span&gt; &lt;span class="nv"&gt;start&lt;/span&gt; &lt;span class="nv"&gt;and&lt;/span&gt; &lt;span class="nv"&gt;restore&lt;/span&gt; &lt;span class="nv"&gt;on&lt;/span&gt; &lt;span class="k"&gt;exit&lt;/span&gt; &lt;span class="nv"&gt;window&lt;/span&gt; &lt;span class="nv"&gt;data&lt;/span&gt; &lt;span class="nv"&gt;when&lt;/span&gt; &lt;span class="nv"&gt;running&lt;/span&gt; &lt;span class="nv"&gt;an&lt;/span&gt; &lt;span class="nv"&gt;application&lt;/span&gt;
+&lt;span class="nv"&gt;setw&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;alternate&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;screen&lt;/span&gt; &lt;span class="nv"&gt;on&lt;/span&gt;
 
-# Lower escape timing from 500ms to 50ms for quicker response to scroll-buffer access.
-set -s escape-time 50
-&amp;quot; &amp;gt; .tmux.conf
+# &lt;span class="nv"&gt;Lower&lt;/span&gt; &lt;span class="nv"&gt;escape&lt;/span&gt; &lt;span class="nv"&gt;timing&lt;/span&gt; &lt;span class="nv"&gt;from&lt;/span&gt; &lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="nv"&gt;ms&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="nv"&gt;ms&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nv"&gt;quicker&lt;/span&gt; &lt;span class="nv"&gt;response&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="nv"&gt;scroll&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;buffer&lt;/span&gt; &lt;span class="nv"&gt;access&lt;/span&gt;.
+&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;s&lt;/span&gt; &lt;span class="nv"&gt;escape&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;time&lt;/span&gt; &lt;span class="mi"&gt;50&lt;/span&gt;
+&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt; &amp;gt; .tmux.conf&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;（可选）Shell标题控制， 在.profile文件里添加&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;look_for_cmd=0
-print_cmd() {
-  if [ &lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;look_for_cmd&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt; = 1 ] ;then
-    if [ &amp;quot;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;BASH_COMMAND&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;&amp;quot; != &amp;#39;print_host&amp;#39; ] ;then
-      cmdline=$(history 1 | xargs | cut -d\  -f3-)
-      if [[ &amp;quot;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;cmdline&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;&amp;quot; =~ ^(sudo|ssh|vi|man|more|less)\  ]] ;then
-        first=$(echo &amp;quot;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;cmdline&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;&amp;quot; | awk &amp;#39;{print $1}&amp;#39;)
-        for i in &lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;cmdline&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt; ;do
-          if ! [[ &amp;quot;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;&amp;quot; =~ ^-.*$ ]] &lt;span class="err"&gt;&amp;amp;&amp;amp;&lt;/span&gt; ! [[ &amp;quot;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;&amp;quot; =~ ^&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;first&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;$ ]] ;then
-            cmd=&amp;quot;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;first&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;[&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;]&amp;quot;
-            break
-          fi
-        done
-      elif [[ &amp;quot;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;cmdline&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;&amp;quot; =~ ^[A-Z]*=.*$ ]] ;then
-        cmd=$(echo &lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;cmdline&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt; | awk &amp;#39;{print $2}&amp;#39;)
-      else
-        cmd=$(echo &lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;cmdline&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt; | awk &amp;#39;{print $1}&amp;#39;)
-      fi
-      echo -ne &amp;quot;\033k&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;cmd&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;\033\\&amp;quot; 1&amp;gt;&lt;span class="err"&gt;&amp;amp;&lt;/span&gt;2
-      look_for_cmd=0
-    else
-      return
-    fi
-  fi
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;look_for_cmd&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="nv"&gt;print_cmd&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt; {
+  &lt;span class="k"&gt;if&lt;/span&gt; [ ${&lt;span class="nv"&gt;look_for_cmd&lt;/span&gt;} &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; ] &lt;span class="c1"&gt;;then&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; [ &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;${BASH_COMMAND}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;print_host&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt; ] &lt;span class="c1"&gt;;then&lt;/span&gt;
+      &lt;span class="nv"&gt;cmdline&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;$&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;history&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;xargs&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;cut&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;d&lt;/span&gt;\  &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;f3&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+      &lt;span class="k"&gt;if&lt;/span&gt; [[ &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;${cmdline}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;=~&lt;/span&gt; &lt;span class="o"&gt;^&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;sudo&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="nv"&gt;ssh&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="nv"&gt;vi&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="nv"&gt;man&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="nv"&gt;more&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="nv"&gt;less&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;\  ]] &lt;span class="c1"&gt;;then&lt;/span&gt;
+        &lt;span class="nv"&gt;first&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;$&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;${cmdline}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;awk&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;{print $1}&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nv"&gt;i&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt; ${&lt;span class="nv"&gt;cmdline&lt;/span&gt;} &lt;span class="c1"&gt;;do&lt;/span&gt;
+          &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;!&lt;/span&gt; [[ &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;${i}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;=~&lt;/span&gt; &lt;span class="o"&gt;^-&lt;/span&gt;.&lt;span class="o"&gt;*&lt;/span&gt;$ ]] &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="o"&gt;!&lt;/span&gt; [[ &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;${i}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;=~&lt;/span&gt; &lt;span class="o"&gt;^&lt;/span&gt;${&lt;span class="nv"&gt;first&lt;/span&gt;}$ ]] &lt;span class="c1"&gt;;then&lt;/span&gt;
+            &lt;span class="nv"&gt;cmd&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;${first}[${i}]&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+            &lt;span class="k"&gt;break&lt;/span&gt;
+          &lt;span class="nv"&gt;fi&lt;/span&gt;
+        &lt;span class="nv"&gt;done&lt;/span&gt;
+      &lt;span class="nv"&gt;elif&lt;/span&gt; [[ &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;${cmdline}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;=~&lt;/span&gt; &lt;span class="o"&gt;^&lt;/span&gt;[&lt;span class="nv"&gt;A&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;Z&lt;/span&gt;]&lt;span class="o"&gt;*=&lt;/span&gt;.&lt;span class="o"&gt;*&lt;/span&gt;$ ]] &lt;span class="c1"&gt;;then&lt;/span&gt;
+        &lt;span class="nv"&gt;cmd&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;$&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;echo&lt;/span&gt; ${&lt;span class="nv"&gt;cmdline&lt;/span&gt;} &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;awk&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;{print $2}&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+      &lt;span class="k"&gt;else&lt;/span&gt;
+        &lt;span class="nv"&gt;cmd&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;$&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;echo&lt;/span&gt; ${&lt;span class="nv"&gt;cmdline&lt;/span&gt;} &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;awk&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;{print $1}&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+      &lt;span class="nv"&gt;fi&lt;/span&gt;
+      &lt;span class="nv"&gt;echo&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;ne&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;\033k${cmd}\033&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;amp;&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;
+      &lt;span class="nv"&gt;look_for_cmd&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;
+      &lt;span class="k"&gt;return&lt;/span&gt;
+    &lt;span class="nv"&gt;fi&lt;/span&gt;
+  &lt;span class="nv"&gt;fi&lt;/span&gt;
 }
 
-print_host() {
-  echo -ne &amp;quot;\033k&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;HOSTNAME&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;\033\\&amp;quot; 1&amp;gt;&lt;span class="err"&gt;&amp;amp;&lt;/span&gt;2
-  look_for_cmd=1
+&lt;span class="nv"&gt;print_host&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt; {
+  &lt;span class="nv"&gt;echo&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;ne&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;\033k${HOSTNAME}\033&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;amp;&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;
+  &lt;span class="nv"&gt;look_for_cmd&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;
 }
 
-PROMPT_COMMAND=&amp;quot;print_host&amp;quot;
+&lt;span class="nv"&gt;PROMPT_COMMAND&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;print_host&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
 
-trap &amp;quot;print_cmd&amp;quot; DEBUG
+&lt;span class="nv"&gt;trap&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;print_cmd&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;DEBUG&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;/li&gt;
-&lt;/ul&gt;</content><category term="tmux"></category><category term="putty"></category></entry><entry><title>资源占用超级低的i3桌面</title><link href="https://gccpacman.github.io/zi-yuan-zhan-yong-chao-ji-di-de-i3zhuo-mian.html" rel="alternate"></link><published>2018-05-04T10:20:00+08:00</published><updated>2018-05-04T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2018-05-04:/zi-yuan-zhan-yong-chao-ji-di-de-i3zhuo-mian.html</id><summary type="html">&lt;p&gt;现在的电脑是Surface，跑虚拟机很吃力了，但是不是不能跑，重点是优化后把linux的资源降下来，还是可以非常流畅。i3是个比xfce4更加轻量级的桌面管理器，而且不是像Windows那样悬浮窗口式的，而是tiling的桌面。随便网上找了个截图，大概就是这个意思：&lt;/p&gt;
+&lt;/ul&gt;</content><category term="tmux"></category><category term="putty"></category><category term="ssh"></category><category term="windows"></category></entry><entry><title>在虚拟机里跑资源占用超低的Linux桌面环境i3</title><link href="https://gccpacman.github.io/zai-xu-ni-ji-li-pao-zi-yuan-zhan-yong-chao-di-de-linuxzhuo-mian-huan-jing-i3.html" rel="alternate"></link><published>2018-05-04T10:20:00+08:00</published><updated>2018-05-04T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2018-05-04:/zai-xu-ni-ji-li-pao-zi-yuan-zhan-yong-chao-di-de-linuxzhuo-mian-huan-jing-i3.html</id><summary type="html">&lt;p&gt;现在的电脑是Surface，跑虚拟机很吃力了，但是不是不能跑，重点是优化后把linux的资源降下来，还是可以非常流畅。i3是个比xfce4更加轻量级的桌面管理器，而且不是像Windows那样悬浮窗口式的，而是tiling的桌面。随便网上找了个截图，大概就是这个意思：&lt;/p&gt;
 &lt;p&gt;&lt;img alt="i3" src="https://i3wm.org/screenshots/i3-1.png"&gt;&lt;/p&gt;
 &lt;p&gt;这边的例子以Vmware为例：&lt;/p&gt;
 &lt;ol&gt;
@@ -399,9 +420,8 @@ $ sudo pacman -S i3     &lt;span class="c1"&gt;# archlinux&lt;/span&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;备份并修改i3的配置文件，可以参考我的github，或者直接下载替换：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cp ~/.config/i3/config ~/.config/i3/config.bak
-wget https://raw.githubusercontent.com/gccpacman/vm-i3wm-config/master/config
-cp config …&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;现在的电脑是Surface，跑虚拟机很吃力了，但是不是不能跑，重点是优化后把linux的资源降下来，还是可以非常流畅。i3是个比xfce4更加轻量级的桌面管理器，而且不是像Windows那样悬浮窗口式的，而是tiling的桌面。随便网上找了个截图，大概就是这个意思：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;cp&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;i3&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;i3&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;bak&lt;/span&gt;
+&lt;span class="n"&gt;wget&lt;/span&gt; &lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;raw&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;githubusercontent&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;gccpacman&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;vm&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;i3wm&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;master&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;config …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;现在的电脑是Surface，跑虚拟机很吃力了，但是不是不能跑，重点是优化后把linux的资源降下来，还是可以非常流畅。i3是个比xfce4更加轻量级的桌面管理器，而且不是像Windows那样悬浮窗口式的，而是tiling的桌面。随便网上找了个截图，大概就是这个意思：&lt;/p&gt;
 &lt;p&gt;&lt;img alt="i3" src="https://i3wm.org/screenshots/i3-1.png"&gt;&lt;/p&gt;
 &lt;p&gt;这边的例子以Vmware为例：&lt;/p&gt;
 &lt;ol&gt;
@@ -416,16 +436,16 @@ $ sudo pacman -S i3     &lt;span class="c1"&gt;# archlinux&lt;/span&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;备份并修改i3的配置文件，可以参考我的github，或者直接下载替换：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cp ~/.config/i3/config ~/.config/i3/config.bak
-wget https://raw.githubusercontent.com/gccpacman/vm-i3wm-config/master/config
-cp config ~/.config/i3/config
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;cp&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;i3&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;i3&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;bak&lt;/span&gt;
+&lt;span class="n"&gt;wget&lt;/span&gt; &lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;raw&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;githubusercontent&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;gccpacman&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;vm&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;i3wm&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;master&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;
+&lt;span class="n"&gt;cp&lt;/span&gt; &lt;span class="n"&gt;config&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;i3&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;因为我的是高分屏，默认vmware不支持，但是可以修改i3的dpi让文字和界面看起来舒服：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;echo &amp;quot;Xft.dpi: 118&amp;quot; &amp;gt;&amp;gt; ~/.Xresources
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;echo&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;Xft.dpi: 118&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Xresources&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -448,9 +468,9 @@ cp config ~/.config/i3/config
 
 
 &lt;p&gt;4.3 或者直接disable x-manager, 用startx方式启动&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo systemctl set-default multi-user.target
-echo &amp;quot;exec i3&amp;quot; &amp;gt; ~/.xinitrc
-startx # reboot并login后执行
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;sudo&lt;/span&gt; &lt;span class="nv"&gt;systemctl&lt;/span&gt; &lt;span class="nv"&gt;set&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;default&lt;/span&gt; &lt;span class="nv"&gt;multi&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;user&lt;/span&gt;.&lt;span class="nv"&gt;target&lt;/span&gt;
+&lt;span class="nv"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;exec i3&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;.&lt;span class="nv"&gt;xinitrc&lt;/span&gt;
+&lt;span class="nv"&gt;startx&lt;/span&gt; # &lt;span class="nv"&gt;reboot&lt;/span&gt;并&lt;span class="nv"&gt;login&lt;/span&gt;后执行
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -466,10 +486,10 @@ $ sudo pacman -S open-vm-tools     &lt;span class="c1"&gt;# archlinux&lt;/span&g
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;如果你无法加载open-vm-tools, 则需要做如下配置：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cp ~/.xsession ~/.xsession.bak
-echo &amp;quot;#!/bin/sh
-xrandr
-exec i3&amp;quot; &amp;gt; ~/.xsession
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;cp&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;.&lt;span class="nv"&gt;xsession&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;.&lt;span class="nv"&gt;xsession&lt;/span&gt;.&lt;span class="nv"&gt;bak&lt;/span&gt;
+&lt;span class="nv"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;#!/bin/sh&lt;/span&gt;
+&lt;span class="nv"&gt;xrandr&lt;/span&gt;
+&lt;span class="k"&gt;exec&lt;/span&gt; &lt;span class="nv"&gt;i3&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt; &amp;gt; ~/.xsession&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -536,17 +556,17 @@ exec i3&amp;quot; &amp;gt; ~/.xsession
 &lt;p&gt;让VSCode里的继承终端（VSCode Integrated Terminal）使用Msys2，在VSCode的settings里加入以下内容:&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    {
-        &amp;quot;terminal.integrated.shell.windows&amp;quot;: &amp;quot;C:\\msys64\\usr\\bin\\bash.exe&amp;quot;,
-        &amp;quot;terminal.integrated.shellArgs.windows&amp;quot;: [
-        &amp;quot;--login&amp;quot;,
-        ],
-        &amp;quot;terminal.integrated.env.windows&amp;quot;: {
-        &amp;quot;CHERE_INVOKING&amp;quot;: &amp;quot;1&amp;quot;,
-        &amp;quot;MSYSTEM&amp;quot;: &amp;quot;MINGW64&amp;quot;,
-    &amp;quot;MSYS2_PATH_TYPE&amp;quot;: &amp;quot;inherit&amp;quot;,
-        },
-    } 
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class="err"&gt;{&lt;/span&gt;
+        &lt;span class="ss"&gt;&amp;quot;terminal.integrated.shell.windows&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;C:\\msys64\\usr\\bin\\bash.exe&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="ss"&gt;&amp;quot;terminal.integrated.shellArgs.windows&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+        &lt;span class="ss"&gt;&amp;quot;--login&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="p"&gt;],&lt;/span&gt;
+        &lt;span class="ss"&gt;&amp;quot;terminal.integrated.env.windows&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
+        &lt;span class="ss"&gt;&amp;quot;CHERE_INVOKING&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;1&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="ss"&gt;&amp;quot;MSYSTEM&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;MINGW64&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="ss"&gt;&amp;quot;MSYS2_PATH_TYPE&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;inherit&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="err"&gt;}&lt;/span&gt; 
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -559,25 +579,25 @@ exec i3&amp;quot; &amp;gt; ~/.xsession
 &lt;p&gt;改写的方法参考了：https://wiki.ubuntu.com/SystemdForUpstartUsers&lt;/p&gt;
 &lt;p&gt;用户名和密码也不再支持digitalocean里的明文的形式, &lt;a href="https://manual.calibre-ebook.com/server.html#managing-user-accounts-from-the-command-line-only"&gt;官方文档&lt;/a&gt;里看到有&lt;code&gt;enable-auth&lt;/code&gt;和&lt;code&gt;userdb&lt;/code&gt;, 看来是出于安全性进行了改进, userdb指定最简单的sqlite数据库，并按照提示添加用户。
 最终的版本是：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;  [Unit]
-  Description=Job that runs the calibre daemon
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Unit&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;Description&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;Job&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;that&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;runs&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;the&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;calibre&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;daemon&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
-  [Service]
-  Environment …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;DigitalOcean上有在ubuntu 14.04上安装calibre server的教程——&lt;a href="https://www.digitalocean.com/community/tutorials/how-to-create-a-calibre-ebook-server-on-ubuntu-14-04"&gt;How To Create a Calibre Ebook Server on Ubuntu 14.04&lt;/a&gt;, 但是已经过时了，一是calibre-server的参数已经改变，二是创建系统服务的方式已经不适用之后的Ubuntu版本，我的服务器是16.04，因此需要把/etc/init/里的脚本改写成systemctl脚本&lt;/p&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Service&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;Environment …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;DigitalOcean上有在ubuntu 14.04上安装calibre server的教程——&lt;a href="https://www.digitalocean.com/community/tutorials/how-to-create-a-calibre-ebook-server-on-ubuntu-14-04"&gt;How To Create a Calibre Ebook Server on Ubuntu 14.04&lt;/a&gt;, 但是已经过时了，一是calibre-server的参数已经改变，二是创建系统服务的方式已经不适用之后的Ubuntu版本，我的服务器是16.04，因此需要把/etc/init/里的脚本改写成systemctl脚本&lt;/p&gt;
 &lt;p&gt;改写的方法参考了：https://wiki.ubuntu.com/SystemdForUpstartUsers&lt;/p&gt;
 &lt;p&gt;用户名和密码也不再支持digitalocean里的明文的形式, &lt;a href="https://manual.calibre-ebook.com/server.html#managing-user-accounts-from-the-command-line-only"&gt;官方文档&lt;/a&gt;里看到有&lt;code&gt;enable-auth&lt;/code&gt;和&lt;code&gt;userdb&lt;/code&gt;, 看来是出于安全性进行了改进, userdb指定最简单的sqlite数据库，并按照提示添加用户。
 最终的版本是：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;  [Unit]
-  Description=Job that runs the calibre daemon
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Unit&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;Description&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;Job&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;that&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;runs&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;the&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;calibre&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;daemon&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
-  [Service]
-  Environment=LIBRARY_PATH=/home/huyunyan_cn/calibre-library
-  Environment=PORT=8080
-  Environment=USERDB=/home/huyunyan_cn/calibre-library/users.sqlite
-  ExecStart=/usr/bin/calibre-server $LIBRARY_PATH \
-                                   --port $PORT --enable-auth --userdb $USERDB
-  [Install]
-  WantedBy=multi-user.target
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Service&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;Environment&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;LIBRARY_PATH&lt;/span&gt;&lt;span class="o"&gt;=/&lt;/span&gt;&lt;span class="n"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;huyunyan_cn&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;calibre&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;library&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;Environment&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;PORT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;8080&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;Environment&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;USERDB&lt;/span&gt;&lt;span class="o"&gt;=/&lt;/span&gt;&lt;span class="n"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;huyunyan_cn&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;calibre&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;library&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;users&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sqlite&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;ExecStart&lt;/span&gt;&lt;span class="o"&gt;=/&lt;/span&gt;&lt;span class="n"&gt;usr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;calibre&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;LIBRARY_PATH&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;                                   &lt;/span&gt;&lt;span class="c1"&gt;--port $PORT --enable-auth --userdb $USERDB&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Install&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;WantedBy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;multi&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;target&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -586,7 +606,7 @@ exec i3&amp;quot; &amp;gt; ~/.xsession
 &lt;p&gt;这样就完成了，访问域名后会提示输入用户名和密码，这样你自己可以在任何设备上访问，又不用担心别人来访问你的电子书。&lt;/p&gt;
 &lt;p&gt;TODO:
 1. 自动刷新书库（--auto-reload这个参数已经不能用，需要通过restart service来实现）
-2. 远程同步书籍，可以从本地直接上传书到server&lt;/p&gt;</content><category term="kodi"></category><category term="calibre"></category></entry><entry><title>Linux休眠后唤醒，wifi和蓝牙无法正常使用的解决方法</title><link href="https://gccpacman.github.io/linuxxiu-mian-hou-huan-xing-wifihe-lan-ya-wu-fa-zheng-chang-shi-yong-de-jie-jue-fang-fa.html" rel="alternate"></link><published>2017-12-04T10:20:00+08:00</published><updated>2017-12-04T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2017-12-04:/linuxxiu-mian-hou-huan-xing-wifihe-lan-ya-wu-fa-zheng-chang-shi-yong-de-jie-jue-fang-fa.html</id><summary type="html">&lt;p&gt;&lt;code&gt;Manjaro Linux&lt;/code&gt;从&lt;code&gt;17.02&lt;/code&gt;版本开始匹配了Surface Pro 3， 这里必须非常感谢下Manjaro Team的工作，我现在可以再次在Surface上用畅快的用Linux了。&lt;/p&gt;
+2. 远程同步书籍，可以从本地直接上传书到server&lt;/p&gt;</content><category term="kodi"></category><category term="calibre"></category></entry><entry><title>ArchLinux休眠后唤醒，wifi和蓝牙无法正常使用的解决方法</title><link href="https://gccpacman.github.io/archlinuxxiu-mian-hou-huan-xing-wifihe-lan-ya-wu-fa-zheng-chang-shi-yong-de-jie-jue-fang-fa.html" rel="alternate"></link><published>2017-12-04T10:20:00+08:00</published><updated>2017-12-04T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2017-12-04:/archlinuxxiu-mian-hou-huan-xing-wifihe-lan-ya-wu-fa-zheng-chang-shi-yong-de-jie-jue-fang-fa.html</id><summary type="html">&lt;p&gt;&lt;code&gt;Manjaro Linux&lt;/code&gt;从&lt;code&gt;17.02&lt;/code&gt;版本开始匹配了Surface Pro 3， 这里必须非常感谢下Manjaro Team的工作，我现在可以再次在Surface上用畅快的用Linux了。&lt;/p&gt;
 &lt;p&gt;具体可以看reddit上的这篇文章： https://cd-rw.org/t/running-linux-on-the-surface-pro-3/175/37。&lt;/p&gt;
 &lt;p&gt;我实际安装的版本是&lt;code&gt;17.1pre3&lt;/code&gt;，不管是蓝牙，触摸板，WIFI，touchpad，音量键，甚至触摸屏都可以正常使用，甚至都不用升级内核。&lt;/p&gt;
 &lt;p&gt;唯一的问题是启用休眠以后，wifi和蓝牙功能失灵了，即使通过重启&lt;code&gt;NetworkManager.service&lt;/code&gt;也无法解决，因此基本上就是硬件驱动的问题，网上关于其他一些笔记本在休眠后无法解决的问题基本上就是用lsmod查到和wifi相关的模块，然后重新加载的方法，但是没有和surface pro有关的内容。&lt;/p&gt;
@@ -597,32 +617,32 @@ exec i3&amp;quot; &amp;gt; ~/.xsession
 &lt;p&gt;找了几篇stackoverflow文章做了多次尝试，然后通过&lt;code&gt;lsmod　| grep wifi&lt;/code&gt;和&lt;code&gt;lsmod | grep bluetooth&lt;/code&gt;查出来的模块，依次尝试，终于找到了正确的模块。&lt;/p&gt;
 &lt;p&gt;和wifi相关的模块是&lt;code&gt;mwifiex_pcie&lt;/code&gt;， 和蓝牙相关的模块是&lt;code&gt;btusb&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;因此要做的操作就是&lt;code&gt;rmmod&lt;/code&gt;和&lt;code&gt;modprobe&lt;/code&gt;，休眠后执行下面的命令后，wifi和蓝牙就可以正常工作了。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt; sudo rmmod -v btusb
- sudo rmbanbenmod -v mwifiex_pcie
- sudo modprobe -v btusb
- sudo modprobe -v mwifiex_pcie
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt; &lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;rmmod&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;v&lt;/span&gt; &lt;span class="n"&gt;btusb&lt;/span&gt;
+ &lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;rmbanbenmod&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;v&lt;/span&gt; &lt;span class="n"&gt;mwifiex_pcie&lt;/span&gt;
+ &lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;modprobe&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;v&lt;/span&gt; &lt;span class="n"&gt;btusb&lt;/span&gt;
+ &lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;modprobe&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;v&lt;/span&gt; &lt;span class="n"&gt;mwifiex_pcie&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;但是这样就是每次都得再休眠后执行这些命令好像也略麻烦，最后看到又休眠后自动执行脚本的方法，&lt;code&gt;pm&lt;/code&gt;和&lt;code&gt;systemctl&lt;/code&gt;的休眠脚本位置不同，我对&lt;code&gt;pm&lt;/code&gt;没印象，觉得arch的休眠几乎肯定是&lt;code&gt;systemctl&lt;/code&gt;的，于是直接尝试了&lt;code&gt;systemctl&lt;/code&gt;，&lt;code&gt;systemctl&lt;/code&gt;的脚本位置在&lt;code&gt;/usr/lib/systemd/system-sleep&lt;/code&gt;，这里的脚本会在sleep或者休眠时被调用。&lt;/p&gt;
 &lt;p&gt;我的脚本&lt;code&gt;/usr/lib/systemd/system-sleep/wakeup_suspend_dev.sh&lt;/code&gt;的内容是：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    #!/bin/bash
-    case $1 in
-        pre)
-          rmmod btusb
-          rmmod mwifiex_pcie
-        ;;
-        post)
-          modprobe btusb
-                modprobe mwifiex_pcie
-        ;;
-    esac
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class="o"&gt;#!/&lt;/span&gt;&lt;span class="n"&gt;bin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bash&lt;/span&gt;
+    &lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt;
+        &lt;span class="n"&gt;pre&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+          &lt;span class="n"&gt;rmmod&lt;/span&gt; &lt;span class="n"&gt;btusb&lt;/span&gt;
+          &lt;span class="n"&gt;rmmod&lt;/span&gt; &lt;span class="n"&gt;mwifiex_pcie&lt;/span&gt;
+        &lt;span class="p"&gt;;;&lt;/span&gt;
+        &lt;span class="n"&gt;post&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+          &lt;span class="n"&gt;modprobe&lt;/span&gt; &lt;span class="n"&gt;btusb&lt;/span&gt;
+                &lt;span class="n"&gt;modprobe&lt;/span&gt; &lt;span class="n"&gt;mwifiex_pcie&lt;/span&gt;
+        &lt;span class="p"&gt;;;&lt;/span&gt;
+    &lt;span class="n"&gt;esac&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;&lt;code&gt;pre&lt;/code&gt;是在休眠之前执行&lt;code&gt;rmmod&lt;/code&gt;的操作，post是在休眠之后执行&lt;code&gt;modprobe&lt;/code&gt;的操作。需要注意的是必须把这个脚本加可执行权限：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo chmod +x wakeup_suspend_dev.sh
-&lt;/pre&gt;&lt;/div&gt;</content><category term="linux"></category><category term="drivers"></category></entry><entry><title>vim插件command-t在windows上编译</title><link href="https://gccpacman.github.io/vimcha-jian-command-tzai-windowsshang-bian-yi.html" rel="alternate"></link><published>2017-10-24T10:20:00+08:00</published><updated>2017-10-24T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2017-10-24:/vimcha-jian-command-tzai-windowsshang-bian-yi.html</id><summary type="html">&lt;p&gt;用Bundle在Windows平台上配置成功了以后，绝大多数插件都已经可以使用，但是唯独&lt;a href="https://github.com/wincent/Command-T"&gt;Command-T&lt;/a&gt;因为是Ruby集成的插件，需要手动编译。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;chmod&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="n"&gt;wakeup_suspend_dev&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="linux"></category><category term="driver"></category></entry><entry><title>Windows上编译vim文件导航跳转插件command-t</title><link href="https://gccpacman.github.io/windowsshang-bian-yi-vimwen-jian-dao-hang-tiao-zhuan-cha-jian-command-t.html" rel="alternate"></link><published>2017-10-24T10:20:00+08:00</published><updated>2017-10-24T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2017-10-24:/windowsshang-bian-yi-vimwen-jian-dao-hang-tiao-zhuan-cha-jian-command-t.html</id><summary type="html">&lt;p&gt;用Bundle在Windows平台上配置成功了以后，绝大多数插件都已经可以使用，但是唯独强大的文件导航&lt;a href="https://github.com/wincent/Command-T"&gt;Command-T&lt;/a&gt;因为Ruby开发的插件，需要手动编译。&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://github.com/wincent/command-t/blob/master/doc/command-t.txt"&gt;官方文档&lt;/a&gt;写的安装编译过程代码大概是这样的，我省去了使用bundle的安装过程：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span class="nb"&gt;cd&lt;/span&gt; ~/vim&lt;span class="se"&gt;\b&lt;/span&gt;undle&lt;span class="se"&gt;\c&lt;/span&gt;ommand-t&lt;span class="se"&gt;\r&lt;/span&gt;uby&lt;span class="se"&gt;\c&lt;/span&gt;ommand-t&lt;span class="se"&gt;\e&lt;/span&gt;xt&lt;span class="se"&gt;\c&lt;/span&gt;ommand-t&amp;gt;
 $ ruby extconf.rb
@@ -633,7 +653,7 @@ $ make
 &lt;p&gt;要完成这些肯定得装ruby和make，网上的绝大多数答案也都已经过期，说的是vim7.4左右的版本，而现在已经是vim 8.0。于是只好自己探索。&lt;/p&gt;
 &lt;p&gt;windows的ruby是一个特殊的安装包，和Ruby的官网都分开，网址是&lt;a href="https://rubyinstaller.org/"&gt;RubyInstaller for windows&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;可供下载的版本从2.0.0-p648到2.4.2-2版本。&lt;/p&gt;
-&lt;p&gt;我从高版本开始尝试，安装2.4.2-2 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;用Bundle在Windows平台上配置成功了以后，绝大多数插件都已经可以使用，但是唯独&lt;a href="https://github.com/wincent/Command-T"&gt;Command-T&lt;/a&gt;因为是Ruby集成的插件，需要手动编译。&lt;/p&gt;
+&lt;p&gt;我从高版本开始尝试，安装2.4.2-2 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;用Bundle在Windows平台上配置成功了以后，绝大多数插件都已经可以使用，但是唯独强大的文件导航&lt;a href="https://github.com/wincent/Command-T"&gt;Command-T&lt;/a&gt;因为Ruby开发的插件，需要手动编译。&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://github.com/wincent/command-t/blob/master/doc/command-t.txt"&gt;官方文档&lt;/a&gt;写的安装编译过程代码大概是这样的，我省去了使用bundle的安装过程：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span class="nb"&gt;cd&lt;/span&gt; ~/vim&lt;span class="se"&gt;\b&lt;/span&gt;undle&lt;span class="se"&gt;\c&lt;/span&gt;ommand-t&lt;span class="se"&gt;\r&lt;/span&gt;uby&lt;span class="se"&gt;\c&lt;/span&gt;ommand-t&lt;span class="se"&gt;\e&lt;/span&gt;xt&lt;span class="se"&gt;\c&lt;/span&gt;ommand-t&amp;gt;
 $ ruby extconf.rb
@@ -657,10 +677,10 @@ $ make
 
 &lt;p&gt;接着进入&lt;code&gt;~/vim\bundle\command-t\ruby\command-t\ext\command-t&amp;gt;&lt;/code&gt;文件夹，执行&lt;code&gt;ruby extconf.rb&lt;/code&gt;命令，发现ruby执行成功了，用choco安装make并执行make一切都顺利。
 但是进入vim一按command-t的快捷键报错，报错内容是：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;command-t.vim could not load the C extension
-Please see INSTALLATION and TROUBLE-SHOOTING in the help
-Vim Ruby version: 2.2.6
-Expected version: 2.3.3
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;command&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;vim&lt;/span&gt; &lt;span class="n"&gt;could&lt;/span&gt; &lt;span class="k"&gt;not&lt;/span&gt; &lt;span class="k"&gt;load&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="k"&gt;C&lt;/span&gt; &lt;span class="n"&gt;extension&lt;/span&gt;
+&lt;span class="n"&gt;Please&lt;/span&gt; &lt;span class="n"&gt;see&lt;/span&gt; &lt;span class="n"&gt;INSTALLATION&lt;/span&gt; &lt;span class="k"&gt;and&lt;/span&gt; &lt;span class="n"&gt;TROUBLE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;SHOOTING&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;help&lt;/span&gt;
+&lt;span class="n"&gt;Vim&lt;/span&gt; &lt;span class="n"&gt;Ruby&lt;/span&gt; &lt;span class="k"&gt;version&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;
+&lt;span class="n"&gt;Expected&lt;/span&gt; &lt;span class="k"&gt;version&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -675,28 +695,28 @@ Expected version: 2.3.3
 &lt;p&gt;&lt;img alt="Command-T on Windows" src="https://gccpacman.github.io/images/command_t1.png"&gt;&lt;/p&gt;</content><category term="windows"></category><category term="vim"></category></entry><entry><title>windows的包管理Chocolate和vim.Vundle</title><link href="https://gccpacman.github.io/windowsde-bao-guan-li-chocolatehe-vimvundle.html" rel="alternate"></link><published>2017-10-22T10:20:00+08:00</published><updated>2017-10-22T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2017-10-22:/windowsde-bao-guan-li-chocolatehe-vimvundle.html</id><summary type="html">&lt;p&gt;Windows的开发环境一直都会让人比较头疼，一般解决方法有用Cygwin等模拟Linux的环境，Windows 10又自带了Ubuntu On Windows 10的环境。但是都或多或少有点问题，例如Cygwin的文件目录和windows分离，Ubuntu On Windows 10不能用Nodejs，打开X应用比较麻烦，只能用终端等。&lt;/p&gt;
 &lt;p&gt;经过很多尝试，我认为最友好的环境还是windows原生的环境，只是你需要偶尔告别命令行搜索某些应用需要的依赖，依次安装，这样其实绝大多数的开发环境都是可以部署的。不过还是有工具可以帮助我们，例如Windows其实也有一个类似apt-get或者&lt;a href="https://brew.sh/"&gt;Homebrew&lt;/a&gt;的包管理工具，叫做&lt;a href="https://chocolatey.org/"&gt;Chocolate&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://chocolatey.org/install"&gt;安装Chocolate&lt;/a&gt;只要在Powershell里写这行代码即可：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Set-ExecutionPolicy Bypass; iex ((New-Object System.Net.WebClient).DownloadString(&amp;#39;https://chocolatey.org/install.ps1&amp;#39;))
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;Set&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;ExecutionPolicy&lt;/span&gt; &lt;span class="n"&gt;Bypass&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;iex&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="k"&gt;New&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;Object&lt;/span&gt; &lt;span class="k"&gt;System&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Net&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;WebClient&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="n"&gt;DownloadString&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;https://chocolatey.org/install.ps1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;安装包的方法是&lt;code&gt;choco install &amp;lt;package_name&amp;gt;&lt;/code&gt; 但是这个命令必须用admin权限的powershell来执行。于是想是不是有个windows的&lt;code&gt;sudo&lt;/code&gt;，结果一查还真的有，而且可以用chocolate安装 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Windows的开发环境一直都会让人比较头疼，一般解决方法有用Cygwin等模拟Linux的环境，Windows 10又自带了Ubuntu On Windows 10的环境。但是都或多或少有点问题，例如Cygwin的文件目录和windows分离，Ubuntu On Windows 10不能用Nodejs，打开X应用比较麻烦，只能用终端等。&lt;/p&gt;
+&lt;p&gt;安装包的方法是&lt;code&gt;choco install &amp;lt;package_name&amp;gt;&lt;/code&gt; 但是这个命令必须用admin权限的powershell来执行。于是想是不是有个windows的&lt;code&gt;sudo …&lt;/code&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;Windows的开发环境一直都会让人比较头疼，一般解决方法有用Cygwin等模拟Linux的环境，Windows 10又自带了Ubuntu On Windows 10的环境。但是都或多或少有点问题，例如Cygwin的文件目录和windows分离，Ubuntu On Windows 10不能用Nodejs，打开X应用比较麻烦，只能用终端等。&lt;/p&gt;
 &lt;p&gt;经过很多尝试，我认为最友好的环境还是windows原生的环境，只是你需要偶尔告别命令行搜索某些应用需要的依赖，依次安装，这样其实绝大多数的开发环境都是可以部署的。不过还是有工具可以帮助我们，例如Windows其实也有一个类似apt-get或者&lt;a href="https://brew.sh/"&gt;Homebrew&lt;/a&gt;的包管理工具，叫做&lt;a href="https://chocolatey.org/"&gt;Chocolate&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://chocolatey.org/install"&gt;安装Chocolate&lt;/a&gt;只要在Powershell里写这行代码即可：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Set-ExecutionPolicy Bypass; iex ((New-Object System.Net.WebClient).DownloadString(&amp;#39;https://chocolatey.org/install.ps1&amp;#39;))
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;Set&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;ExecutionPolicy&lt;/span&gt; &lt;span class="n"&gt;Bypass&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;iex&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="k"&gt;New&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;Object&lt;/span&gt; &lt;span class="k"&gt;System&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Net&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;WebClient&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="n"&gt;DownloadString&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;https://chocolatey.org/install.ps1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;安装包的方法是&lt;code&gt;choco install &amp;lt;package_name&amp;gt;&lt;/code&gt; 但是这个命令必须用admin权限的powershell来执行。于是想是不是有个windows的&lt;code&gt;sudo&lt;/code&gt;，结果一查还真的有，而且可以用chocolate安装。于是admin执行powershell并运行了&lt;code&gt;choco install sudo&lt;/code&gt;就安装好了。以后只要在普通用户的powershell执行&lt;code&gt;sudo choco install &amp;lt;package_name&amp;gt;&lt;/code&gt;即可了。&lt;/p&gt;
 &lt;p&gt;我用choco安装了&lt;code&gt;git&lt;/code&gt;, &lt;code&gt;vim&lt;/code&gt;, &lt;code&gt;python&lt;/code&gt;，&lt;code&gt;curl&lt;/code&gt;，&lt;code&gt;wget&lt;/code&gt;等工具，安装后powershell可以执行不少的类似linux的命令了。
 但vim是裸奔状态，如果我直接把以前配置的.vimrc文件拿过来，显然用不来，甚至连Vundle包管理都用不来。Vundle的官方文档有&lt;a href="https://github.com/VundleVim/Vundle.vim/wiki/Vundle-for-Windows"&gt;windows上配置的方法&lt;/a&gt;就是把:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;set&lt;/span&gt; &lt;span class="n"&gt;rtp&lt;/span&gt;&lt;span class="o"&gt;+=~/&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;vim&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bundle&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;Vundle&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;vim&lt;/span&gt;
+&lt;span class="k"&gt;call&lt;/span&gt; &lt;span class="n"&gt;vundle&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="k"&gt;begin&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;改成&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;set rtp+=$HOME/.vim/bundle/Vundle.vim/
-call vundle#begin(&amp;#39;$HOME/.vim/bundle/&amp;#39;)
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;set&lt;/span&gt; &lt;span class="n"&gt;rtp&lt;/span&gt;&lt;span class="o"&gt;+=&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;HOME&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;vim&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bundle&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;Vundle&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;vim&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+&lt;span class="k"&gt;call&lt;/span&gt; &lt;span class="n"&gt;vundle&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="k"&gt;begin&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;$HOME/.vim/bundle/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -740,7 +760,7 @@ cd dnscrypt-proxy-1.6.1
 make -j2
 make install&lt;/p&gt;
 &lt;/li&gt;
-&lt;/ol&gt;</content><category term="linux"></category><category term="kodi"></category><category term="resource"></category></entry><entry><title>把用户态systemd服务改成系统服务，开机自启动xware</title><link href="https://gccpacman.github.io/ba-yong-hu-tai-systemdfu-wu-gai-cheng-xi-tong-fu-wu-kai-ji-zi-qi-dong-xware.html" rel="alternate"></link><published>2016-01-08T10:20:00+08:00</published><updated>2016-01-08T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2016-01-08:/ba-yong-hu-tai-systemdfu-wu-gai-cheng-xi-tong-fu-wu-kai-ji-zi-qi-dong-xware.html</id><summary type="html">&lt;p&gt;OK.. 怎么给xubuntu装个迅雷远程呢，迅雷的Linux版本Xware-Desktop，目前是很稳定的，而且有很详细的官方教程：
+&lt;/ol&gt;</content><category term="linux"></category><category term="kodi"></category><category term="resource"></category></entry><entry><title>Linux把用户态systemd服务改成系统服务，开机自启动迅雷(xware)</title><link href="https://gccpacman.github.io/linuxba-yong-hu-tai-systemdfu-wu-gai-cheng-xi-tong-fu-wu-kai-ji-zi-qi-dong-xun-lei-xware.html" rel="alternate"></link><published>2016-01-08T10:20:00+08:00</published><updated>2016-01-08T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2016-01-08:/linuxba-yong-hu-tai-systemdfu-wu-gai-cheng-xi-tong-fu-wu-kai-ji-zi-qi-dong-xun-lei-xware.html</id><summary type="html">&lt;p&gt;OK.. 怎么给xubuntu装个迅雷远程呢，迅雷的Linux版本Xware-Desktop，目前是很稳定的，而且有很详细的官方教程：
 https://github.com/Xinkai/XwareDesktop/wiki/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E&lt;/p&gt;
 &lt;p&gt;这个就是针对ubuntu的，所以原封不动的执行就行了。&lt;/p&gt;
 &lt;p&gt;但是我的需求有点不一样，迅雷xware版自己提供了几个开机自启动选项：
@@ -790,7 +810,7 @@ https://github.com/Xinkai/XwareDesktop/wiki/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;其实就是简单的加入了User和Group的选项而已，让系统知道以哪个用户启动，这样就可以了。&lt;/p&gt;</content><category term="linux"></category><category term="kodi"></category><category term="resource"></category></entry><entry><title>Linux创建自定义的应用程序启动器</title><link href="https://gccpacman.github.io/linuxchuang-jian-zi-ding-yi-de-ying-yong-cheng-xu-qi-dong-qi.html" rel="alternate"></link><published>2016-01-06T10:20:00+08:00</published><updated>2016-01-06T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2016-01-06:/linuxchuang-jian-zi-ding-yi-de-ying-yong-cheng-xu-qi-dong-qi.html</id><summary type="html">&lt;p&gt;eclipse在linux下，下载以后不需要安装，直接在目录下执行.\eclipse就可以运行了，不过同时，每次都要切换到该目录去执行eclipse似乎也比较麻烦。
+&lt;p&gt;其实就是简单的加入了User和Group的选项而已，让系统知道以哪个用户启动，这样就可以了。&lt;/p&gt;</content><category term="linux"></category><category term="download"></category><category term="resource"></category></entry><entry><title>Linux创建自定义的应用程序启动器</title><link href="https://gccpacman.github.io/linuxchuang-jian-zi-ding-yi-de-ying-yong-cheng-xu-qi-dong-qi.html" rel="alternate"></link><published>2016-01-06T10:20:00+08:00</published><updated>2016-01-06T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2016-01-06:/linuxchuang-jian-zi-ding-yi-de-ying-yong-cheng-xu-qi-dong-qi.html</id><summary type="html">&lt;p&gt;eclipse在linux下，下载以后不需要安装，直接在目录下执行.\eclipse就可以运行了，不过同时，每次都要切换到该目录去执行eclipse似乎也比较麻烦。
 又没有办法在应用程序菜单里找到，即使是gnome下，按super然后全局搜索，也找到这个。&lt;/p&gt;
 &lt;p&gt;不过好在linux是自由的系统，自己建一个应用程序的启动器一点问题都没有。&lt;/p&gt;
 &lt;p&gt;比如我的eclipse装在&lt;code&gt;/opt/eclipse-jee/&lt;/code&gt;下,怎么新建一个启动器呢？&lt;/p&gt;
@@ -821,7 +841,7 @@ https://github.com/Xinkai/XwareDesktop/wiki/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E
 &lt;a href="http://askubuntu.com/questions/112186/how-do-you-create-a-custom-application-launcher-in-gnome-shell"&gt;How do you create a custom application launcher in Gnome Shell? &lt;/a&gt;&lt;/p&gt;</content><category term="linux"></category><category term="gnome"></category><category term="gtk"></category></entry><entry><title>ArchLinux将nvidia driver替换成开源的nouveau解决显卡驱动问题</title><link href="https://gccpacman.github.io/archlinuxjiang-nvidia-driverti-huan-cheng-kai-yuan-de-nouveaujie-jue-xian-qia-qu-dong-wen-ti.html" rel="alternate"></link><published>2016-01-05T10:20:00+08:00</published><updated>2016-01-05T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2016-01-05:/archlinuxjiang-nvidia-driverti-huan-cheng-kai-yuan-de-nouveaujie-jue-xian-qia-qu-dong-wen-ti.html</id><summary type="html">&lt;p&gt;昨天还装完arch兴高采烈，今天就差点放弃整个系统，罪魁祸首就是当年被linus喷了的nvidia.&lt;/p&gt;
 &lt;p&gt;Archlinux装了使用nvidia驱动，一开始发现根本就没有加载，装了和没装没啥区别，但是跑的好好的阿跑的好好的，结果不小心手贱点了&lt;code&gt;nvidia-xconfig&lt;/code&gt;的应用，莫名其妙的起不来了。（这个原因我想了半天才想出来，不然我实在是无力吐槽他妈跑了一天多好好的什么也没干突然就起步来的情况，一度怀疑是显卡硬件坏了）&lt;/p&gt;
 &lt;p&gt;于是抢救三个多小时，&lt;code&gt;/var/log/xorg.0.log&lt;/code&gt;里的报错也莫名其妙，比如:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;not detect device nvidia, no screen found.
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;not&lt;/span&gt; &lt;span class="n"&gt;detect&lt;/span&gt; &lt;span class="n"&gt;device&lt;/span&gt; &lt;span class="n"&gt;nvidia&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;no&lt;/span&gt; &lt;span class="n"&gt;screen&lt;/span&gt; &lt;span class="k"&gt;found&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -829,10 +849,10 @@ https://github.com/Xinkai/XwareDesktop/wiki/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E
 &lt;p&gt;pacman -R nvidia nvidia-utils&lt;/p&gt;
 &lt;p&gt;然后reboot, 没想到发生的事情更加奇葩了，连命令行就出不来了，直接黑屏了我草。&lt;/p&gt;
 &lt;p&gt;心里十万个草尼马，还好安装过arch的人毕竟还是知道有个arch-chroot, 放入安装介质（我的是u盘），重启， mount各种好盘:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;mount /dev …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;昨天还装完arch兴高采烈，今天就差点放弃整个系统，罪魁祸首就是当年被linus喷了的nvidia.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;mount&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dev …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;昨天还装完arch兴高采烈，今天就差点放弃整个系统，罪魁祸首就是当年被linus喷了的nvidia.&lt;/p&gt;
 &lt;p&gt;Archlinux装了使用nvidia驱动，一开始发现根本就没有加载，装了和没装没啥区别，但是跑的好好的阿跑的好好的，结果不小心手贱点了&lt;code&gt;nvidia-xconfig&lt;/code&gt;的应用，莫名其妙的起不来了。（这个原因我想了半天才想出来，不然我实在是无力吐槽他妈跑了一天多好好的什么也没干突然就起步来的情况，一度怀疑是显卡硬件坏了）&lt;/p&gt;
 &lt;p&gt;于是抢救三个多小时，&lt;code&gt;/var/log/xorg.0.log&lt;/code&gt;里的报错也莫名其妙，比如:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;not detect device nvidia, no screen found.
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;not&lt;/span&gt; &lt;span class="n"&gt;detect&lt;/span&gt; &lt;span class="n"&gt;device&lt;/span&gt; &lt;span class="n"&gt;nvidia&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;no&lt;/span&gt; &lt;span class="n"&gt;screen&lt;/span&gt; &lt;span class="k"&gt;found&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -840,41 +860,41 @@ https://github.com/Xinkai/XwareDesktop/wiki/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E
 &lt;p&gt;pacman -R nvidia nvidia-utils&lt;/p&gt;
 &lt;p&gt;然后reboot, 没想到发生的事情更加奇葩了，连命令行就出不来了，直接黑屏了我草。&lt;/p&gt;
 &lt;p&gt;心里十万个草尼马，还好安装过arch的人毕竟还是知道有个arch-chroot, 放入安装介质（我的是u盘），重启， mount各种好盘:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;mount /dev/sda2 mnt
-arch-chroot /mnt /bin/bash
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;mount&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sda2&lt;/span&gt; &lt;span class="n"&gt;mnt&lt;/span&gt;
+&lt;span class="n"&gt;arch&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;chroot&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mnt&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bash&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;然后咋办呢，突然在arch的官方教程里出现了一个词： nouveau（还好我还有台电脑阿，这时候如果只有一台电脑要在手机上查资料的话。。。我tm会不会放弃linux直接装个windows都不知道，我就是对自己那么没信心阿）&lt;/p&gt;
 &lt;p&gt;nouveau是个什么呢，简单的解释就是个nvidia的开源驱动。。。虽然还不是对其了解，但是还是对开源两个字报有信心，而且也是死马当活马医了。。。于是:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pacman -S xf86-video-nouveau
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pacman&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;S&lt;/span&gt; &lt;span class="n"&gt;xf86&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;video&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;nouveau&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;据说还有什么3d的实验特性支持, (还可以&lt;code&gt;pacman -S mesa mesa-libg1&lt;/code&gt;,  额这好像和我目前十万火急的状态没啥关系）&lt;/p&gt;
 &lt;p&gt;然后咋办呢。。。nouveau已经装好了，nvidia也已经卸载了，这样就ok了么，好像还不行&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;lsmod  | gerp nvidia
-dmesg | grep nvidia
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;lsmod&lt;/span&gt;  &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;gerp&lt;/span&gt; &lt;span class="n"&gt;nvidia&lt;/span&gt;
+&lt;span class="n"&gt;dmesg&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;grep&lt;/span&gt; &lt;span class="n"&gt;nvidia&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;两个命令显示，nouveau还没有work，系统还是在用nvidia，继续查arch wiki 的 nouveau页，删除mod的方法是&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;modprobe -r nvidia
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;modprobe&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="n"&gt;nvidia&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;然后加入nouveau的mod:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;modprobe nouveau
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;modprobe&lt;/span&gt; &lt;span class="n"&gt;nouveau&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;先就这样吧，从安装盘里推出来&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;umount -R /mnt
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;umount&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;R&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mnt&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;然后reboot，重启试试， 尝下startx还是不幸， 并且我们在dmesg | grep nouveau里看到了nouveau报错。。。额什么情况：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pointer to tmds table invalid...
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pointer&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;tmds&lt;/span&gt; &lt;span class="k"&gt;table&lt;/span&gt; &lt;span class="n"&gt;invalid&lt;/span&gt;&lt;span class="p"&gt;...&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -889,19 +909,19 @@ dmesg | grep nvidia
 &lt;p&gt;pacman -R xf86-video-nouveau&lt;/p&gt;
 &lt;p&gt;然后&lt;code&gt;rmmod nouveau&lt;/code&gt; 或者 &lt;code&gt;modprobe -r nouveau&lt;/code&gt;, 确认 &lt;code&gt;lsmod | gerp nouveau&lt;/code&gt;  和 &lt;code&gt;dmesg | grep nouveau&lt;/code&gt; 结果是————干不掉，reboot也没用。&lt;/p&gt;
 &lt;p&gt;原因是其实linux内核里其实是有nouveau的驱动的。怎么搞定呢，wiki里说有个东西叫modprobe的黑名单, 在&lt;code&gt;/etc/modprobe.d/&lt;/code&gt;里新建一个文件&lt;code&gt;blacklist_nouveau.conf&lt;/code&gt;， 写入:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;blacklist nouveau
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;blacklist&lt;/span&gt; &lt;span class="n"&gt;nouveau&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;重启，这样不管是&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;lsmod | gerp nouveau
-dmesg | grep nouveau
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;lsmod&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;gerp&lt;/span&gt; &lt;span class="n"&gt;nouveau&lt;/span&gt;
+&lt;span class="n"&gt;dmesg&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;grep&lt;/span&gt; &lt;span class="n"&gt;nouveau&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;还是&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;lsmod | gerp nvidia
-dmesg | grep nvidia
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;lsmod&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;gerp&lt;/span&gt; &lt;span class="n"&gt;nvidia&lt;/span&gt;
+&lt;span class="n"&gt;dmesg&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;grep&lt;/span&gt; &lt;span class="n"&gt;nvidia&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -980,7 +1000,55 @@ $ vncserver
 
 &lt;p&gt;进去以后基本商就是和你直接进入桌面一样的xfce了。&lt;/p&gt;
 &lt;h2&gt;开机自动启动&lt;/h2&gt;
-&lt;p&gt;&lt;a href="https://www.howtoforge.com/how-to-install-vnc-server-on-ubuntu-14.04"&gt;How To Install VNC Server On Ubuntu 14.04&lt;/a&gt;&lt;/p&gt;</content><category term="linux"></category><category term="vnc"></category><category term="gtk"></category><category term="rdp"></category></entry><entry><title>安装deluge下载工具自动远程下载</title><link href="https://gccpacman.github.io/an-zhuang-delugexia-zai-gong-ju-zi-dong-yuan-cheng-xia-zai.html" rel="alternate"></link><published>2016-01-04T10:20:00+08:00</published><updated>2016-01-04T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2016-01-04:/an-zhuang-delugexia-zai-gong-ju-zi-dong-yuan-cheng-xia-zai.html</id><summary type="html">&lt;p&gt;上一篇装完kodi后，我的旧电脑就彻底变成了一个kodi/XBMC媒体中心，那么比如我要下载新的美剧什么的，好像就还是不那么方便。
+&lt;p&gt;&lt;a href="https://www.howtoforge.com/how-to-install-vnc-server-on-ubuntu-14.04"&gt;How To Install VNC Server On Ubuntu 14.04&lt;/a&gt;&lt;/p&gt;</content><category term="linux"></category><category term="vnc"></category><category term="gtk"></category><category term="rdp"></category></entry><entry><title>Linux安装并开机进入Kodi媒体中心</title><link href="https://gccpacman.github.io/linuxan-zhuang-bing-kai-ji-jin-ru-kodimei-ti-zhong-xin.html" rel="alternate"></link><published>2016-01-04T10:20:00+08:00</published><updated>2016-01-04T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2016-01-04:/linuxan-zhuang-bing-kai-ji-jin-ru-kodimei-ti-zhong-xin.html</id><summary type="html">&lt;p&gt;把2G的硬盘拆到了一台旧电脑上，并且给旧电脑装了xubuntu,打算直接打造一个媒体中心。目前知道有里那个用的不错的东西，KODI（XBMC）是一个很不错的选择。当然用PLEX也是个不错的选择，整理资料库方面PLEX更加强大。不过KODI是开源和免费的，既然用了linux，就用个开源的吧。况且我发现kodi还有不少的好处，并且更加轻量级。&lt;/p&gt;
+&lt;p&gt;其实Kodi有个基于ubuntu的发行版叫做kodibuntu，直接装得话效果其实也差不多。但是我还是喜欢从ubuntu去扩展，毕竟任何基于ubuntu的版本，相对ubuntu的开发肯定是有所滞后的。和Android的Rom一个道理。不过kubuntu因为是非常流行的发行版不用担心这个问题。&lt;/p&gt;
+&lt;p&gt;下面的步骤基本上是参考了askubuntu的一个答案&lt;a href="http://askubuntu.com/questions/596839/autostart-kodi-on-vivid"&gt;Autostart Kodi on Vivid&lt;/a&gt;，只不过它是在纯净的server版本安装，而desktop版则因为有自身的启动器，需要将其禁用掉而已。&lt;/p&gt;
+&lt;p&gt;1）安装kodi: sudo apt-get install kodi&lt;/p&gt;
+&lt;p&gt;2）创建一个kodi的用户，并添加到和视频播放有关的组
+    sudo adduser --disabled-password --disabled-login --gecos "" kodi
+    sudo usermod -a -G audio kodi …&lt;/p&gt;</summary><content type="html">&lt;p&gt;把2G的硬盘拆到了一台旧电脑上，并且给旧电脑装了xubuntu,打算直接打造一个媒体中心。目前知道有里那个用的不错的东西，KODI（XBMC）是一个很不错的选择。当然用PLEX也是个不错的选择，整理资料库方面PLEX更加强大。不过KODI是开源和免费的，既然用了linux，就用个开源的吧。况且我发现kodi还有不少的好处，并且更加轻量级。&lt;/p&gt;
+&lt;p&gt;其实Kodi有个基于ubuntu的发行版叫做kodibuntu，直接装得话效果其实也差不多。但是我还是喜欢从ubuntu去扩展，毕竟任何基于ubuntu的版本，相对ubuntu的开发肯定是有所滞后的。和Android的Rom一个道理。不过kubuntu因为是非常流行的发行版不用担心这个问题。&lt;/p&gt;
+&lt;p&gt;下面的步骤基本上是参考了askubuntu的一个答案&lt;a href="http://askubuntu.com/questions/596839/autostart-kodi-on-vivid"&gt;Autostart Kodi on Vivid&lt;/a&gt;，只不过它是在纯净的server版本安装，而desktop版则因为有自身的启动器，需要将其禁用掉而已。&lt;/p&gt;
+&lt;p&gt;1）安装kodi: sudo apt-get install kodi&lt;/p&gt;
+&lt;p&gt;2）创建一个kodi的用户，并添加到和视频播放有关的组
+    sudo adduser --disabled-password --disabled-login --gecos "" kodi
+    sudo usermod -a -G audio kodi
+    sudo usermod -a -G video kodi
+    sudo usermod -a -G input kodi
+    sudo usermod -a -G dialout kodi
+    sudo usermod -a -G plugdev kodi
+    sudo usermod -a -G tty kodi&lt;/p&gt;
+&lt;p&gt;3) sudo dpkg-reconfigure x11-common 弹出的选项框选择任何人（anybody）&lt;/p&gt;
+&lt;p&gt;4) sudo vim /etc/systemd/system/kodi.service
+输入以下内容：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[Unit]&lt;/span&gt;
+&lt;span class="na"&gt;Description&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;Job that runs Kodi&lt;/span&gt;
+&lt;span class="na"&gt;After&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;default.target graphical.target getty.target sound.target&lt;/span&gt;
+
+&lt;span class="k"&gt;[Service]&lt;/span&gt;
+&lt;span class="na"&gt;User&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;kodi&lt;/span&gt;
+&lt;span class="na"&gt;Restart&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;always&lt;/span&gt;
+&lt;span class="na"&gt;RestartSec&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;1s&lt;/span&gt;
+&lt;span class="na"&gt;ExecStart&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;/usr/bin/xinit /usr/bin/kodi --standalone -- -nocursor&lt;/span&gt;
+
+&lt;span class="k"&gt;[Install]&lt;/span&gt;
+&lt;span class="na"&gt;WantedBy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;default.target&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;5) 开机启动kodi的服务， 并禁止启动lightdm的服务&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;systemctl&lt;/span&gt; &lt;span class="n"&gt;daemon&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;reload&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;systemctl&lt;/span&gt; &lt;span class="n"&gt;disable&lt;/span&gt; &lt;span class="n"&gt;lightdm&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;systemctl&lt;/span&gt; &lt;span class="n"&gt;enable&lt;/span&gt; &lt;span class="n"&gt;kodi&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;6) 重启&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;reboot&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;下次电脑开机就可以直接进入kodi的界面了&lt;/p&gt;</content><category term="linux"></category><category term="kodi"></category><category term="resource"></category></entry><entry><title>Linux安装deluge下载工具自动远程下载</title><link href="https://gccpacman.github.io/linuxan-zhuang-delugexia-zai-gong-ju-zi-dong-yuan-cheng-xia-zai.html" rel="alternate"></link><published>2016-01-04T10:20:00+08:00</published><updated>2016-01-04T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2016-01-04:/linuxan-zhuang-delugexia-zai-gong-ju-zi-dong-yuan-cheng-xia-zai.html</id><summary type="html">&lt;p&gt;上一篇装完kodi后，我的旧电脑就彻底变成了一个kodi/XBMC媒体中心，那么比如我要下载新的美剧什么的，好像就还是不那么方便。
 p2p的torrent一直是我的最爱。deluge是一个跨平台的操作系统，支持linux, windows 和mac，还有远程控制等功能，什么是远程下载呢。我们都知道有迅雷远程下载，那么deluge其实也是一样，就是你在一台电脑操作，有一个下载链接，然后你可以直接在这台电脑上添加这个下载链接，唯一不同的是下载的任务被添加到了远程的机器上，文件也会下载到远程的机器上。
 这样的需求正符合我媒体中心的需要，我找到新的片源，并不需要下载到我的计算机，而是可以让我的Kodi在播放电影的同时，又可以执行下载的任务。&lt;/p&gt;
 &lt;h1&gt;服务器端：&lt;/h1&gt;
@@ -1033,7 +1101,7 @@ $ vim ~/.config/deluge/auth
 
 
 &lt;p&gt;退出deluge：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span class="nb"&gt;exit&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span class="k"&gt;exit&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -1056,7 +1124,7 @@ $ vim ~/.config/deluge/auth
 
 
 &lt;p&gt;deluge安装好了，在终端执行deluge, 或者直接打开应用程序，在菜单中选择：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Preferences -&amp;gt; Interface : 把 Classic Mode 的勾勾掉
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;Preferences&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;Interface&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="err"&gt;把&lt;/span&gt; &lt;span class="n"&gt;Classic&lt;/span&gt; &lt;span class="k"&gt;Mode&lt;/span&gt; &lt;span class="err"&gt;的勾勾掉&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -1079,68 +1147,20 @@ Username用户名和Password密码就是之前在auth文件里的配置&lt;/p&gt
 &lt;li&gt;
 &lt;p&gt;&lt;a href="http://dev.deluge-torrent.org/wiki/Installing/Linux/Ubuntu"&gt;Installing/Linux/Ubuntu – Deluge&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
-&lt;/ul&gt;</content><category term="linux"></category><category term="resource"></category></entry><entry><title>Linux安装并开机进入Kodi媒体中心</title><link href="https://gccpacman.github.io/linuxan-zhuang-bing-kai-ji-jin-ru-kodimei-ti-zhong-xin.html" rel="alternate"></link><published>2016-01-04T10:20:00+08:00</published><updated>2016-01-04T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2016-01-04:/linuxan-zhuang-bing-kai-ji-jin-ru-kodimei-ti-zhong-xin.html</id><summary type="html">&lt;p&gt;把2G的硬盘拆到了一台旧电脑上，并且给旧电脑装了xubuntu,打算直接打造一个媒体中心。目前知道有里那个用的不错的东西，KODI（XBMC）是一个很不错的选择。当然用PLEX也是个不错的选择，整理资料库方面PLEX更加强大。不过KODI是开源和免费的，既然用了linux，就用个开源的吧。况且我发现kodi还有不少的好处，并且更加轻量级。&lt;/p&gt;
-&lt;p&gt;其实Kodi有个基于ubuntu的发行版叫做kodibuntu，直接装得话效果其实也差不多。但是我还是喜欢从ubuntu去扩展，毕竟任何基于ubuntu的版本，相对ubuntu的开发肯定是有所滞后的。和Android的Rom一个道理。不过kubuntu因为是非常流行的发行版不用担心这个问题。&lt;/p&gt;
-&lt;p&gt;下面的步骤基本上是参考了askubuntu的一个答案&lt;a href="http://askubuntu.com/questions/596839/autostart-kodi-on-vivid"&gt;Autostart Kodi on Vivid&lt;/a&gt;，只不过它是在纯净的server版本安装，而desktop版则因为有自身的启动器，需要将其禁用掉而已。&lt;/p&gt;
-&lt;p&gt;1）安装kodi: sudo apt-get install kodi&lt;/p&gt;
-&lt;p&gt;2）创建一个kodi的用户，并添加到和视频播放有关的组
-    sudo adduser --disabled-password --disabled-login --gecos "" kodi
-    sudo usermod -a -G audio kodi …&lt;/p&gt;</summary><content type="html">&lt;p&gt;把2G的硬盘拆到了一台旧电脑上，并且给旧电脑装了xubuntu,打算直接打造一个媒体中心。目前知道有里那个用的不错的东西，KODI（XBMC）是一个很不错的选择。当然用PLEX也是个不错的选择，整理资料库方面PLEX更加强大。不过KODI是开源和免费的，既然用了linux，就用个开源的吧。况且我发现kodi还有不少的好处，并且更加轻量级。&lt;/p&gt;
-&lt;p&gt;其实Kodi有个基于ubuntu的发行版叫做kodibuntu，直接装得话效果其实也差不多。但是我还是喜欢从ubuntu去扩展，毕竟任何基于ubuntu的版本，相对ubuntu的开发肯定是有所滞后的。和Android的Rom一个道理。不过kubuntu因为是非常流行的发行版不用担心这个问题。&lt;/p&gt;
-&lt;p&gt;下面的步骤基本上是参考了askubuntu的一个答案&lt;a href="http://askubuntu.com/questions/596839/autostart-kodi-on-vivid"&gt;Autostart Kodi on Vivid&lt;/a&gt;，只不过它是在纯净的server版本安装，而desktop版则因为有自身的启动器，需要将其禁用掉而已。&lt;/p&gt;
-&lt;p&gt;1）安装kodi: sudo apt-get install kodi&lt;/p&gt;
-&lt;p&gt;2）创建一个kodi的用户，并添加到和视频播放有关的组
-    sudo adduser --disabled-password --disabled-login --gecos "" kodi
-    sudo usermod -a -G audio kodi
-    sudo usermod -a -G video kodi
-    sudo usermod -a -G input kodi
-    sudo usermod -a -G dialout kodi
-    sudo usermod -a -G plugdev kodi
-    sudo usermod -a -G tty kodi&lt;/p&gt;
-&lt;p&gt;3) sudo dpkg-reconfigure x11-common 弹出的选项框选择任何人（anybody）&lt;/p&gt;
-&lt;p&gt;4) sudo vim /etc/systemd/system/kodi.service
-输入以下内容：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[Unit]&lt;/span&gt;
-&lt;span class="na"&gt;Description&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;Job that runs Kodi&lt;/span&gt;
-&lt;span class="na"&gt;After&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;default.target graphical.target getty.target sound.target&lt;/span&gt;
-
-&lt;span class="k"&gt;[Service]&lt;/span&gt;
-&lt;span class="na"&gt;User&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;kodi&lt;/span&gt;
-&lt;span class="na"&gt;Restart&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;always&lt;/span&gt;
-&lt;span class="na"&gt;RestartSec&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;1s&lt;/span&gt;
-&lt;span class="na"&gt;ExecStart&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;/usr/bin/xinit /usr/bin/kodi --standalone -- -nocursor&lt;/span&gt;
-
-&lt;span class="k"&gt;[Install]&lt;/span&gt;
-&lt;span class="na"&gt;WantedBy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;default.target&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;5) 开机启动kodi的服务， 并禁止启动lightdm的服务&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo systemctl daemon-reload
-sudo systemctl disable lightdm
-sudo systemctl enable kodi
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;6) 重启&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;reboot
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;下次电脑开机就可以直接进入kodi的界面了&lt;/p&gt;</content><category term="linux"></category><category term="kodi"></category><category term="resource"></category></entry><entry><title>调整Linux主分区的大小</title><link href="https://gccpacman.github.io/diao-zheng-linuxzhu-fen-qu-de-da-xiao.html" rel="alternate"></link><published>2016-01-03T10:20:00+08:00</published><updated>2016-01-03T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2016-01-03:/diao-zheng-linuxzhu-fen-qu-de-da-xiao.html</id><summary type="html">&lt;p&gt;在安装我笔记本商的archlinux的时候，root分区和主分区是分开的，后来为了尝试KaliLinux，就把home分区牺牲掉，放弃了/home的单独分区。可是如今60G的空间已经不够用了。&lt;/p&gt;
+&lt;/ul&gt;</content><category term="linux"></category><category term="resource"></category></entry><entry><title>调整Linux主分区的大小</title><link href="https://gccpacman.github.io/diao-zheng-linuxzhu-fen-qu-de-da-xiao.html" rel="alternate"></link><published>2016-01-03T10:20:00+08:00</published><updated>2016-01-03T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2016-01-03:/diao-zheng-linuxzhu-fen-qu-de-da-xiao.html</id><summary type="html">&lt;p&gt;在安装我笔记本商的archlinux的时候，root分区和主分区是分开的，后来为了尝试KaliLinux，就把home分区牺牲掉，放弃了/home的单独分区。可是如今60G的空间已经不够用了。&lt;/p&gt;
 &lt;p&gt;于是打算重新调整一个root分区的大小。我分区之前，256G硬盘的分区表大概是这样的，boot分区在最前，大概500M，，home分区紧随其后，66G左右，然后是8G的swap交换空间。还剩下170G左右的剩余空间。&lt;/p&gt;
 &lt;p&gt;我的目标是把swap分区弄到最后，其他都扩展给HOME分区。&lt;/p&gt;
 &lt;p&gt;依稀记得装arch的时候，swap并不是多大不了的事情，甚至说可以不需要swap。于是我打算先把swap禁用掉，然后删除。再重新创建swap分区，然后resize以下Root分区的大小基本就可以大功告成了。不过调整root分区的大小是不可以在当前系统下完成的。因此很有必要弄一个usb的镜像，通过镜像系统进去后调整没有mount的swap分区。&lt;/p&gt;
 &lt;p&gt;在linux下把镜像刻录到usb是非常方便的。接上U盘以后，可以通过&lt;code&gt;lsblk&lt;/code&gt; 查看一下u盘的设备路径,比如我的是&lt;code&gt;/dev/sdc&lt;/code&gt;,基本上可以通过大小就能判断出来了。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sdc                   8:32   1   7.2G  0 disk
-├─sdc1                8:33   1   1 …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;在安装我笔记本商的archlinux的时候，root分区和主分区是分开的，后来为了尝试KaliLinux，就把home分区牺牲掉，放弃了/home的单独分区。可是如今60G的空间已经不够用了。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sdc&lt;/span&gt;                   &lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;32&lt;/span&gt;   &lt;span class="mi"&gt;1&lt;/span&gt;   &lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="k"&gt;G&lt;/span&gt;  &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="n"&gt;disk&lt;/span&gt;
+&lt;span class="err"&gt;├─&lt;/span&gt;&lt;span class="n"&gt;sdc1&lt;/span&gt;                &lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;33&lt;/span&gt;   &lt;span class="mi"&gt;1 …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;在安装我笔记本商的archlinux的时候，root分区和主分区是分开的，后来为了尝试KaliLinux，就把home分区牺牲掉，放弃了/home的单独分区。可是如今60G的空间已经不够用了。&lt;/p&gt;
 &lt;p&gt;于是打算重新调整一个root分区的大小。我分区之前，256G硬盘的分区表大概是这样的，boot分区在最前，大概500M，，home分区紧随其后，66G左右，然后是8G的swap交换空间。还剩下170G左右的剩余空间。&lt;/p&gt;
 &lt;p&gt;我的目标是把swap分区弄到最后，其他都扩展给HOME分区。&lt;/p&gt;
 &lt;p&gt;依稀记得装arch的时候，swap并不是多大不了的事情，甚至说可以不需要swap。于是我打算先把swap禁用掉，然后删除。再重新创建swap分区，然后resize以下Root分区的大小基本就可以大功告成了。不过调整root分区的大小是不可以在当前系统下完成的。因此很有必要弄一个usb的镜像，通过镜像系统进去后调整没有mount的swap分区。&lt;/p&gt;
 &lt;p&gt;在linux下把镜像刻录到usb是非常方便的。接上U盘以后，可以通过&lt;code&gt;lsblk&lt;/code&gt; 查看一下u盘的设备路径,比如我的是&lt;code&gt;/dev/sdc&lt;/code&gt;,基本上可以通过大小就能判断出来了。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sdc                   8:32   1   7.2G  0 disk
-├─sdc1                8:33   1   1.1G  0 part
-└─sdc2                8:34   1   2.2M  0 part
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sdc&lt;/span&gt;                   &lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;32&lt;/span&gt;   &lt;span class="mi"&gt;1&lt;/span&gt;   &lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="k"&gt;G&lt;/span&gt;  &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="n"&gt;disk&lt;/span&gt;
+&lt;span class="err"&gt;├─&lt;/span&gt;&lt;span class="n"&gt;sdc1&lt;/span&gt;                &lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;33&lt;/span&gt;   &lt;span class="mi"&gt;1&lt;/span&gt;   &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="k"&gt;G&lt;/span&gt;  &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="n"&gt;part&lt;/span&gt;
+&lt;span class="err"&gt;└─&lt;/span&gt;&lt;span class="n"&gt;sdc2&lt;/span&gt;                &lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;34&lt;/span&gt;   &lt;span class="mi"&gt;1&lt;/span&gt;   &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="n"&gt;M&lt;/span&gt;  &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="n"&gt;part&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -1148,19 +1168,19 @@ sudo systemctl enable kodi
 &lt;p&gt;sudo dd bs=4M if=/data/OS_ISOs/Linux/xubuntu-15.10-beta2-desktop-amd64.iso of=/dev/sdc&lt;/p&gt;
 &lt;p&gt;几分钟之后就刻录完成。&lt;/p&gt;
 &lt;p&gt;接下来在arch上，先把swap分区禁用掉，还是通过&lt;code&gt;lsblk&lt;/code&gt;, 记录/root分区和swap分区是哪个。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;─sda2                8:2    0  66.4G  0 part /
-─sda4                8:4    0     8G  0 part [SWAP]
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;─&lt;/span&gt;&lt;span class="n"&gt;sda2&lt;/span&gt;&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="mf"&gt;66.4&lt;/span&gt;&lt;span class="n"&gt;G&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;part&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="err"&gt;─&lt;/span&gt;&lt;span class="n"&gt;sda4&lt;/span&gt;&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="w"&gt;     &lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="n"&gt;G&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;part&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;SWAP&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;我的是&lt;code&gt;/dev/sda4&lt;/code&gt;, 禁用swap:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo swapoff /dev/sda4
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;swapoff&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sda4&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;然后编辑分区表。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo cp /etc/fstab /etc/fstab.bak # 备份下，万一弄错了还可以恢复系统
-sudo vim /etc/fstab
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;cp&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;fstab&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;fstab&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;bak&lt;/span&gt; &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;备份下，万一弄错了还可以恢复系统&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;vim&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;fstab&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -1170,13 +1190,13 @@ sudo vim /etc/fstab
 &lt;p&gt;在/dev/sda4上右键，选择delete，然后new一个swap，位置选择在硬盘的最后(gparted因为直接有示意图，可以直接在上面选择)，新的swap分区大小自然也和老的swap一致，一般都是推荐和内存一样。接着在/dev/sda2上右键，选择resize，直接用光所有的硬盘空间。确定，耐心等待一分钟左右，就会弹出'Done'的提示。&lt;/p&gt;
 &lt;p&gt;然后重启，重新进入archlinux，这时候如果系统成功进入，就说明重新分区已经成功了。&lt;/p&gt;
 &lt;p&gt;但是swap分区还并没有启用。执行&lt;code&gt;bklid&lt;/code&gt;, 确定swap分区的uuid，然后重新编辑分区表:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo vim /etc/fstab
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;vim&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;fstab&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;把之前swap分区的uuid改成新的uuid，保存。然后根据swap的位置执行后面两条命令，启用swap，新的设备名称可能还是&lt;code&gt;/dev/sda4&lt;/code&gt;也可能不是。这时候可以输入&lt;code&gt;sudo bklid&lt;/code&gt;来确定以下：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo mkswap /dev/sda4
-sudo swapon /dev/sda4
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;mkswap&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sda4&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;swapon&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sda4&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -1194,84 +1214,84 @@ But sometimes the connection between my own pc and the vps server are not quite 
 
 &lt;p&gt;2nd, change the value of &lt;code&gt;net.ipv4.ip_forward=1&lt;/code&gt; in /etc/sysctl.conf, then do &lt;code&gt;sysctl -p&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;3rd, copy &lt;code&gt;/usr/share/easy-rsa/&lt;/code&gt; to  &lt;code&gt;/etc/openvpn/&lt;/code&gt; and generate the openvpn keys in the directory of :&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ make-cadir /etc/openvpn/easy-rsa &lt;span class="o"&gt;(&lt;/span&gt;ps: this seems another way to &lt;span class="k"&gt;do&lt;/span&gt; this&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span class="nv"&gt;make&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;cadir&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;openvpn&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;easy&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;rsa&lt;/span&gt; &lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;ps&lt;/span&gt;: &lt;span class="nv"&gt;this&lt;/span&gt; &lt;span class="nv"&gt;seems&lt;/span&gt; &lt;span class="nv"&gt;another&lt;/span&gt; &lt;span class="nv"&gt;way&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="nv"&gt;this&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;OR&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cp -r /usr/share/easy-rsa/ /etc/openvpn
-mkdir /etc/openvpn/easy-rsa/keys
-openssl dhparam -out /etc/openvpn/dh2048.pem 2048
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;cp&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;usr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;share&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;easy&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;rsa&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;openvpn&lt;/span&gt;
+&lt;span class="n"&gt;mkdir&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;openvpn&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;easy&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;rsa&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;keys&lt;/span&gt;
+&lt;span class="n"&gt;openssl&lt;/span&gt; &lt;span class="n"&gt;dhparam&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;out&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;openvpn&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dh2048&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pem&lt;/span&gt; &lt;span class="mi"&gt;2048&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;4th, change the directory to easy-rsa, then do the following command:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cd /etc/openvpn/easy-rsa/
-source vars
-./clean-all
-./build-dh
-./pkitool --initca
-./pkitool --server server
-cd keys
-openvpn --genkey --secret ta.key
-ln -s openssl-1.0.0.cnf openssl.cnf     
-./pkitool --initca
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;openvpn&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;easy&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;rsa&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+&lt;span class="k"&gt;source&lt;/span&gt; &lt;span class="n"&gt;vars&lt;/span&gt;
+&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;clean&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;all&lt;/span&gt;
+&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;build&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;dh&lt;/span&gt;
+&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;pkitool&lt;/span&gt; &lt;span class="c1"&gt;--initca&lt;/span&gt;
+&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;pkitool&lt;/span&gt; &lt;span class="c1"&gt;--server server&lt;/span&gt;
+&lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="n"&gt;keys&lt;/span&gt;
+&lt;span class="n"&gt;openvpn&lt;/span&gt; &lt;span class="c1"&gt;--genkey --secret ta.key&lt;/span&gt;
+&lt;span class="n"&gt;ln&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="n"&gt;openssl&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cnf&lt;/span&gt; &lt;span class="n"&gt;openssl&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cnf&lt;/span&gt;     
+&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;pkitool&lt;/span&gt; &lt;span class="c1"&gt;--initca&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;OR&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;./clean-all
-./build-ca
-./build-key-server server
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;clean&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;all&lt;/span&gt;
+&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;build&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;ca&lt;/span&gt;
+&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;build&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;key&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;server&lt;/span&gt; &lt;span class="n"&gt;server&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;5th, cp the generated keys to &lt;code&gt;/etc/openvpn&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cp server.crt server.key ca.crt dh1024.pem ta.key /etc/openvpn/
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;cp&lt;/span&gt; &lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;crt&lt;/span&gt; &lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;key&lt;/span&gt; &lt;span class="n"&gt;ca&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;crt&lt;/span&gt; &lt;span class="n"&gt;dh1024&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pem&lt;/span&gt; &lt;span class="n"&gt;ta&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;key&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;openvpn&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;6th, cp the &lt;code&gt;server.conf&lt;/code&gt; sample to &lt;code&gt;/etc/openvpn/server.conf&lt;/code&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;gunzip -c /usr/share/doc/openvpn/examples/sample-config-files/server.conf.gz &amp;gt; /etc/openvpn/server.conf
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;gunzip&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;c&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;usr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;share&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;doc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;openvpn&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;examples&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sample&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;files&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;conf&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;gz&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;openvpn&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;conf&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;7th, change some value of the &lt;code&gt;server.conf&lt;/code&gt; file:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;;push &amp;quot;redirect-gateway def1 bypass-dhcp&amp;quot;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="n"&gt;push&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;redirect-gateway def1 bypass-dhcp&amp;quot;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;to&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;push &amp;quot;redirect-gateway def1 bypass-dhcp&amp;quot;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;push&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;redirect-gateway def1 bypass-dhcp&amp;quot;&lt;/span&gt;
 
-;push &amp;quot;dhcp-option DNS 208.67.222.222&amp;quot;
-;push &amp;quot;dhcp-option DNS 208.67.220.220&amp;quot;
+&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="n"&gt;push&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;dhcp-option DNS 208.67.222.222&amp;quot;&lt;/span&gt;
+&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="n"&gt;push&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;dhcp-option DNS 208.67.220.220&amp;quot;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;to&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;push &amp;quot;dhcp-option DNS 208.67.222.222&amp;quot;
-push &amp;quot;dhcp-option DNS 208.67.220.220&amp;quot;  (change to some dns server you trust)
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;push&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;dhcp-option DNS 208.67.222.222&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;push&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;dhcp-option DNS 208.67.220.220&amp;quot;&lt;/span&gt;  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;change&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="k"&gt;some&lt;/span&gt; &lt;span class="n"&gt;dns&lt;/span&gt; &lt;span class="n"&gt;server&lt;/span&gt; &lt;span class="n"&gt;you&lt;/span&gt; &lt;span class="n"&gt;trust&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-;user nobody
-;group nogroup
+&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="k"&gt;user&lt;/span&gt; &lt;span class="n"&gt;nobody&lt;/span&gt;
+&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="k"&gt;group&lt;/span&gt; &lt;span class="n"&gt;nogroup&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;to&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;user nobody
-group nogroup
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;user&lt;/span&gt; &lt;span class="n"&gt;nobody&lt;/span&gt;
+&lt;span class="k"&gt;group&lt;/span&gt; &lt;span class="n"&gt;nogroup&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;8th,  start and check the openvpn service:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;service openvpn start
-service openvpn status
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;service&lt;/span&gt; &lt;span class="n"&gt;openvpn&lt;/span&gt; &lt;span class="k"&gt;start&lt;/span&gt;
+&lt;span class="n"&gt;service&lt;/span&gt; &lt;span class="n"&gt;openvpn&lt;/span&gt; &lt;span class="n"&gt;status&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;9th, generate key of client:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;./build-key client1
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;build&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;key&lt;/span&gt; &lt;span class="n"&gt;client1&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -1307,77 +1327,77 @@ group nogroup
 &lt;/ol&gt;</content><category term="linux"></category><category term="vpn"></category><category term="openvpn"></category></entry><entry><title>uwsgi方式启动django</title><link href="https://gccpacman.github.io/uwsgifang-shi-qi-dong-django.html" rel="alternate"></link><published>2015-11-23T10:20:00+08:00</published><updated>2015-11-23T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2015-11-23:/uwsgifang-shi-qi-dong-django.html</id><summary type="html">&lt;p&gt;没人访问的博客也不是不能升级。不过最近有点懒，趁着睡不着搞了下&lt;code&gt;uwsgi&lt;/code&gt;。
 额。平台ubuntu, 你最好有个django项目，假设已经用了&lt;code&gt;virtualenv&lt;/code&gt;，假设已经安装好&lt;code&gt;nginx&lt;/code&gt;并启动服务。&lt;/p&gt;
 &lt;p&gt;1）首先安装&lt;code&gt;uwsgi&lt;/code&gt;:  &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install uwsgi
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;uwsgi&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;2）然后启动， 指定端口号和进程号：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;uwsgi -s 127.0.0.1:38803 --http :8000 --module blog.wsgi
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;uwsgi&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="mi"&gt;127&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;38803&lt;/span&gt; &lt;span class="c1"&gt;--http :8000 --module blog.wsgi&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;3) 配置nginx配置文件，放在&lt;code&gt;/etc/nginx/site-enabled/&lt;/code&gt;目录下，注意如果你要用80端口，就不要和其他的例如默认的配置冲突，如果有个default的文件，应该是一个软连接，可以直接删掉。我就直接贴我自己的了：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;upstream&lt;/span&gt; &lt;span class="nt"&gt;django&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="err"&gt;server&lt;/span&gt; &lt;span class="err"&gt;127 …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;没人访问的博客也不是不能升级。不过最近有点懒，趁着睡不着搞了下&lt;code&gt;uwsgi&lt;/code&gt;。
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;upstream&lt;/span&gt; &lt;span class="nv"&gt;django&lt;/span&gt; {
+    &lt;span class="nv"&gt;server&lt;/span&gt; &lt;span class="mi"&gt;127 …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;没人访问的博客也不是不能升级。不过最近有点懒，趁着睡不着搞了下&lt;code&gt;uwsgi&lt;/code&gt;。
 额。平台ubuntu, 你最好有个django项目，假设已经用了&lt;code&gt;virtualenv&lt;/code&gt;，假设已经安装好&lt;code&gt;nginx&lt;/code&gt;并启动服务。&lt;/p&gt;
 &lt;p&gt;1）首先安装&lt;code&gt;uwsgi&lt;/code&gt;:  &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install uwsgi
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;uwsgi&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;2）然后启动， 指定端口号和进程号：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;uwsgi -s 127.0.0.1:38803 --http :8000 --module blog.wsgi
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;uwsgi&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="mi"&gt;127&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;38803&lt;/span&gt; &lt;span class="c1"&gt;--http :8000 --module blog.wsgi&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;3) 配置nginx配置文件，放在&lt;code&gt;/etc/nginx/site-enabled/&lt;/code&gt;目录下，注意如果你要用80端口，就不要和其他的例如默认的配置冲突，如果有个default的文件，应该是一个软连接，可以直接删掉。我就直接贴我自己的了：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;upstream&lt;/span&gt; &lt;span class="nt"&gt;django&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="err"&gt;server&lt;/span&gt; &lt;span class="err"&gt;127.0.0.1:38803&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;upstream&lt;/span&gt; &lt;span class="nv"&gt;django&lt;/span&gt; {
+    &lt;span class="nv"&gt;server&lt;/span&gt; &lt;span class="mi"&gt;127&lt;/span&gt;.&lt;span class="mi"&gt;0&lt;/span&gt;.&lt;span class="mi"&gt;0&lt;/span&gt;.&lt;span class="mi"&gt;1&lt;/span&gt;:&lt;span class="mi"&gt;38803&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+}
 
-&lt;span class="nt"&gt;server&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="err"&gt;listen&lt;/span&gt; &lt;span class="err"&gt;80&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="err"&gt;server_name&lt;/span&gt; &lt;span class="err"&gt;localhost&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="err"&gt;charset&lt;/span&gt; &lt;span class="err"&gt;utf-8&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="err"&gt;client_max_body_size&lt;/span&gt; &lt;span class="err"&gt;75M&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="err"&gt;location&lt;/span&gt; &lt;span class="err"&gt;/&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
-        &lt;span class="err"&gt;uwsgi_pass&lt;/span&gt; &lt;span class="err"&gt;django&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-        &lt;span class="err"&gt;include&lt;/span&gt; &lt;span class="err"&gt;/etc/nginx/uwsgi_params&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="p"&gt;}&lt;/span&gt;
-    &lt;span class="nt"&gt;location&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;static&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="err"&gt;alias&lt;/span&gt;   &lt;span class="err"&gt;/webapps/blog/static&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="err"&gt;}&lt;/span&gt;
+&lt;span class="nv"&gt;server&lt;/span&gt; {
+    &lt;span class="nv"&gt;listen&lt;/span&gt; &lt;span class="mi"&gt;80&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+    &lt;span class="nv"&gt;server_name&lt;/span&gt; &lt;span class="nv"&gt;localhost&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+    &lt;span class="nv"&gt;charset&lt;/span&gt; &lt;span class="nv"&gt;utf&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+    &lt;span class="nv"&gt;client_max_body_size&lt;/span&gt; &lt;span class="mi"&gt;75&lt;/span&gt;&lt;span class="nv"&gt;M&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+    &lt;span class="nv"&gt;location&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; {
+        &lt;span class="nv"&gt;uwsgi_pass&lt;/span&gt; &lt;span class="nv"&gt;django&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+        &lt;span class="k"&gt;include&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;nginx&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;uwsgi_params&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+    }
+    &lt;span class="nv"&gt;location&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;static&lt;/span&gt; {
+        &lt;span class="nv"&gt;alias&lt;/span&gt;   &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;webapps&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;blog&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;static&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+    }
+}
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;4) 关于static，你应该在服务器某个地方建个目录(例如我的配置文件是&lt;code&gt;/webapps/blog/static&lt;/code&gt;)，然后配置一下&lt;code&gt;setting.py&lt;/code&gt;里的&lt;code&gt;STATIC_ROOT&lt;/code&gt;成该目录，然后每次static有更改就重新执行&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;python manage.py collectstatic.
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;python&lt;/span&gt; &lt;span class="n"&gt;manage&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt; &lt;span class="n"&gt;collectstatic&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;然后尝试一下访问&lt;code&gt;127.0.0.1&lt;/code&gt;，当然如果是远程服务器，就是你的网址了。
-看看是否work了吧！&lt;/p&gt;</content><category term="python"></category><category term="django"></category><category term="webapps"></category></entry><entry><title>Linux利用ssh反向端口转发暴露内网端口</title><link href="https://gccpacman.github.io/linuxli-yong-sshfan-xiang-duan-kou-zhuan-fa-bao-lu-nei-wang-duan-kou.html" rel="alternate"></link><published>2015-10-30T10:20:00+08:00</published><updated>2015-10-30T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2015-10-30:/linuxli-yong-sshfan-xiang-duan-kou-zhuan-fa-bao-lu-nei-wang-duan-kou.html</id><summary type="html">&lt;p&gt;从本地Host用SSH连接到目标主机，怎么让目标主机也可以连接本地的SSH呢？
+看看是否work了吧！&lt;/p&gt;</content><category term="python"></category><category term="django"></category><category term="web"></category><category term="develop"></category></entry><entry><title>Linux利用ssh反向端口转发暴露内网端口</title><link href="https://gccpacman.github.io/linuxli-yong-sshfan-xiang-duan-kou-zhuan-fa-bao-lu-nei-wang-duan-kou.html" rel="alternate"></link><published>2015-10-30T10:20:00+08:00</published><updated>2015-10-30T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2015-10-30:/linuxli-yong-sshfan-xiang-duan-kou-zhuan-fa-bao-lu-nei-wang-duan-kou.html</id><summary type="html">&lt;p&gt;从本地Host用SSH连接到目标主机，怎么让目标主机也可以连接本地的SSH呢？
 答案很简单，只要把本地主机的SSH端口转发到目标主机即可。可以先查看一下SSH命令的man手册:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;man ssh
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;man&lt;/span&gt; &lt;span class="n"&gt;ssh&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;注意里面的R参数，就是要用到的参数：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;-R [bind_address:]port:host:hostport
-         Specifies that the given port on the remote (server) host is to be forwarded to the given host and port on the local side.  This works by allocating a socket to listen to port
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;R&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;bind_address&lt;/span&gt;&lt;span class="p"&gt;:]&lt;/span&gt;&lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="k"&gt;host&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;hostport&lt;/span&gt;
+         &lt;span class="n"&gt;Specifies&lt;/span&gt; &lt;span class="n"&gt;that&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;given&lt;/span&gt; &lt;span class="n"&gt;port&lt;/span&gt; &lt;span class="k"&gt;on&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;remote&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;host&lt;/span&gt; &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;be&lt;/span&gt; &lt;span class="n"&gt;forwarded&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;given&lt;/span&gt; &lt;span class="k"&gt;host&lt;/span&gt; &lt;span class="k"&gt;and&lt;/span&gt; &lt;span class="n"&gt;port&lt;/span&gt; &lt;span class="k"&gt;on&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="k"&gt;local&lt;/span&gt; &lt;span class="n"&gt;side&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;  &lt;span class="n"&gt;This&lt;/span&gt; &lt;span class="n"&gt;works&lt;/span&gt; &lt;span class="k"&gt;by&lt;/span&gt; &lt;span class="n"&gt;allocating&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;socket&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="k"&gt;listen&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;port&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;意思就是把一个远程主机的端口用于本地端口的端口转发。于是对应于假设远程主机IP …&lt;/p&gt;</summary><content type="html">&lt;p&gt;从本地Host用SSH连接到目标主机，怎么让目标主机也可以连接本地的SSH呢？
 答案很简单，只要把本地主机的SSH端口转发到目标主机即可。可以先查看一下SSH命令的man手册:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;man ssh
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;man&lt;/span&gt; &lt;span class="n"&gt;ssh&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;注意里面的R参数，就是要用到的参数：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;-R [bind_address:]port:host:hostport
-         Specifies that the given port on the remote (server) host is to be forwarded to the given host and port on the local side.  This works by allocating a socket to listen to port
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;R&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;bind_address&lt;/span&gt;&lt;span class="p"&gt;:]&lt;/span&gt;&lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="k"&gt;host&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;hostport&lt;/span&gt;
+         &lt;span class="n"&gt;Specifies&lt;/span&gt; &lt;span class="n"&gt;that&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;given&lt;/span&gt; &lt;span class="n"&gt;port&lt;/span&gt; &lt;span class="k"&gt;on&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;remote&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;host&lt;/span&gt; &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;be&lt;/span&gt; &lt;span class="n"&gt;forwarded&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;given&lt;/span&gt; &lt;span class="k"&gt;host&lt;/span&gt; &lt;span class="k"&gt;and&lt;/span&gt; &lt;span class="n"&gt;port&lt;/span&gt; &lt;span class="k"&gt;on&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="k"&gt;local&lt;/span&gt; &lt;span class="n"&gt;side&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;  &lt;span class="n"&gt;This&lt;/span&gt; &lt;span class="n"&gt;works&lt;/span&gt; &lt;span class="k"&gt;by&lt;/span&gt; &lt;span class="n"&gt;allocating&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;socket&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="k"&gt;listen&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;port&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -1387,7 +1407,7 @@ group nogroup
 
 
 &lt;p&gt;这一步完成以后，远程的17999端口会映射到本地主机的22端口，于是我们在远程终端，输入命令:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ssh -p 17999 127.0.0.1
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;ssh&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="mi"&gt;17999&lt;/span&gt; &lt;span class="mi"&gt;127&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -1402,7 +1422,7 @@ group nogroup
 &lt;li&gt;然后到你想要黏贴的地方， &lt;code&gt;Ctrl+a ]&lt;/code&gt; 黏贴成功&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;需要注意的是， Ctrl+space在windows和linux的某些桌面环境下，都是输入法切换键，所以如果这个方法不成功，很可能是因为快捷键冲突的原因了。那么解决方法一个是把冲突的快捷键解决掉，另一个这是通过配置.tmux.conf。其实上面的快捷键默认的快捷键，模仿的按键是emacs，因为我不用emacs（因为我不用emacs，所以也只觉得很不习惯)，其实还有另外的一种快捷键模式是模仿vim的，不过需要你在tmux配置文件里配置一下, 把下面这行加入.tmux.conf里:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;set-window-option …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;tmux确实是一个吊炸的东西，功能和那个和他类似的鼻祖screen相比，确实多出了不少。比如他又一个可以对终端的内容进行复制和黏贴的功能。
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;set …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;tmux确实是一个吊炸的东西，功能和那个和他类似的鼻祖screen相比，确实多出了不少。比如他又一个可以对终端的内容进行复制和黏贴的功能。
 这里假定你设置的快捷键前缀是Ctrl+a:
 进行复制的操作是：&lt;/p&gt;
 &lt;ol&gt;
@@ -1413,7 +1433,7 @@ group nogroup
 &lt;li&gt;然后到你想要黏贴的地方， &lt;code&gt;Ctrl+a ]&lt;/code&gt; 黏贴成功&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;需要注意的是， Ctrl+space在windows和linux的某些桌面环境下，都是输入法切换键，所以如果这个方法不成功，很可能是因为快捷键冲突的原因了。那么解决方法一个是把冲突的快捷键解决掉，另一个这是通过配置.tmux.conf。其实上面的快捷键默认的快捷键，模仿的按键是emacs，因为我不用emacs（因为我不用emacs，所以也只觉得很不习惯)，其实还有另外的一种快捷键模式是模仿vim的，不过需要你在tmux配置文件里配置一下, 把下面这行加入.tmux.conf里:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;set-window-option -g mode-keys vi
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;set&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;window&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;option&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;g&lt;/span&gt; &lt;span class="k"&gt;mode&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;keys&lt;/span&gt; &lt;span class="n"&gt;vi&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -1425,17 +1445,17 @@ group nogroup
 &lt;li&gt;&lt;code&gt;Space&lt;/code&gt;  开始选择内容，类似vim的按下V的效果&lt;/li&gt;
 &lt;li&gt;完成选择，&lt;code&gt;Enter&lt;/code&gt; 完成复制&lt;/li&gt;
 &lt;li&gt;然后到你想要黏贴的地方， &lt;code&gt;Ctrl+a ]&lt;/code&gt; 黏贴成功&lt;/li&gt;
-&lt;/ol&gt;</content><category term="tmux"></category><category term="linux"></category></entry><entry><title>利用babun, tmux, zsh高度定制shell</title><link href="https://gccpacman.github.io/li-yong-babun-tmux-zshgao-du-ding-zhi-shell.html" rel="alternate"></link><published>2015-10-22T10:20:00+08:00</published><updated>2015-10-22T10:20:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2015-10-22:/li-yong-babun-tmux-zshgao-du-ding-zhi-shell.html</id><summary type="html">&lt;p&gt;深刻和彻底的切换到linux平台后，深切的感受到linux平台对程序员带来的便利。因此日常环境已经不再使用windows啦，奈何博主虽然是个穷逼，然而却舍得钱买一堆电脑，所以没事还是会折腾下windows，毕竟娱乐还是需要的。&lt;/p&gt;
+&lt;/ol&gt;</content><category term="tmux"></category><category term="linux"></category></entry><entry><title>Windowss上利用babun, tmux, zsh高度定制shell</title><link href="https://gccpacman.github.io/windowssshang-li-yong-babun-tmux-zshgao-du-ding-zhi-shell.html" rel="alternate"></link><published>2015-10-22T10:20:00+08:00</published><updated>2015-10-22T10:20:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2015-10-22:/windowssshang-li-yong-babun-tmux-zshgao-du-ding-zhi-shell.html</id><summary type="html">&lt;p&gt;深刻和彻底的切换到linux平台后，深切的感受到linux平台对程序员带来的便利。因此日常环境已经不再使用windows啦，奈何博主虽然是个穷逼，然而却舍得钱买一堆电脑，所以没事还是会折腾下windows，毕竟娱乐还是需要的。&lt;/p&gt;
 &lt;p&gt;之前折腾过cygwin好一阵子，最终还是觉得真的搬到开发环境确实有很多麻烦的地方，不过现在既然为了娱乐又有一台没有装任何开发环境的win10，那就娱乐一下好了。&lt;/p&gt;
 &lt;h1&gt;1） 安装和配置babun&lt;/h1&gt;
 &lt;p&gt;首先可以装一个定制得非常好的cygwin shell, 那就是&lt;a href="http://babun.github.io/"&gt;babun&lt;/a&gt;, 已经默认为你装好并配置了cygwin环境下的zsh，用起来可比普通的shell爽多了。另外有个强大的包管理器，pact命令，用起来很像rpm和apt之类的，非常方便。例如要装tmux, 那么就执行&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pact install tmux
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pact&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;tmux&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;就可以成功安装了。
 不过值得注意的是pact默认用的是kernel.org的镜像，国内访问非常慢，这时通过help发现有个--mirror的参数，可以手动指定成163的：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pact --mirror http://mirrors.163.com/cygwin/ install tree
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pact&lt;/span&gt; &lt;span class="c1"&gt;--mirror http://mirrors.163.com/cygwin/ install tree&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -1443,20 +1463,20 @@ group nogroup
 &lt;p&gt;之前折腾过cygwin好一阵子，最终还是觉得真的搬到开发环境确实有很多麻烦的地方，不过现在既然为了娱乐又有一台没有装任何开发环境的win10，那就娱乐一下好了。&lt;/p&gt;
 &lt;h1&gt;1） 安装和配置babun&lt;/h1&gt;
 &lt;p&gt;首先可以装一个定制得非常好的cygwin shell, 那就是&lt;a href="http://babun.github.io/"&gt;babun&lt;/a&gt;, 已经默认为你装好并配置了cygwin环境下的zsh，用起来可比普通的shell爽多了。另外有个强大的包管理器，pact命令，用起来很像rpm和apt之类的，非常方便。例如要装tmux, 那么就执行&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pact install tmux
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pact&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;tmux&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;就可以成功安装了。
 不过值得注意的是pact默认用的是kernel.org的镜像，国内访问非常慢，这时通过help发现有个--mirror的参数，可以手动指定成163的：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pact --mirror http://mirrors.163.com/cygwin/ install tree
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pact&lt;/span&gt; &lt;span class="c1"&gt;--mirror http://mirrors.163.com/cygwin/ install tree&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;不过每次要输入这个太麻烦，可以用alias, 在home目录下新建一个.bash_aliases的文件，输入alias pact='pact --mirror http://mirrors.163.com/cygwin/'这样下次就不需要再输--mirror了。&lt;/p&gt;
 &lt;h1&gt;2） 安装和配置tmux&lt;/h1&gt;
 &lt;p&gt;OK第一步装babun已经完成，接下来装tmux，也非常easy，其实上面已经介绍过了&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pact install tmux
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pact&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;tmux&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -1471,54 +1491,54 @@ group nogroup
 &lt;p&gt;tmux非常强大，甚至有分屏这样的操作，具体可以在帮助里看。重要的是我们现在已经可以只打开一个窗口，就在几个window之前切换了。&lt;/p&gt;
 &lt;p&gt;OK, 看起来非常不错，但是用过vim的同学知道，Ctrl+b是向下翻页的按键啊，所以我想把前缀按键换成Ctrl+a怎么办, 还是配置文件，linux的一切都是配置文件。
 在Home目录创建一个.tmux.conf文件，输入以下内容：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;unbind C-b
-set -g prefix C-a
-bind C-a send-prefix
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;unbind&lt;/span&gt; &lt;span class="nv"&gt;C&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;b&lt;/span&gt;
+&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;prefix&lt;/span&gt; &lt;span class="nv"&gt;C&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;a&lt;/span&gt;
+&lt;span class="nv"&gt;bind&lt;/span&gt; &lt;span class="nv"&gt;C&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;a&lt;/span&gt; &lt;span class="k"&gt;send&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;prefix&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;如果你的tmux已经打开，你想重载配置，怎么操作呢? 前缀Ctrl+b ：然后标签栏就会出现一个冒号，输入&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;source-file ~/.tmux.conf
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;source&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tmux&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;conf&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;回车，好了，此时前缀应该就已经变成了Ctrl+a了&lt;/p&gt;</content><category term="windows"></category><category term="cygwin"></category><category term="tmux"></category><category term="zsh"></category></entry><entry><title>linux将Socks代理转换成Http代理</title><link href="https://gccpacman.github.io/linuxjiang-socksdai-li-zhuan-huan-cheng-httpdai-li.html" rel="alternate"></link><published>2015-05-14T10:20:00+08:00</published><updated>2015-05-14T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2015-05-14:/linuxjiang-socksdai-li-zhuan-huan-cheng-httpdai-li.html</id><summary type="html">&lt;p&gt;安装polipo：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get update
-sudo apt-get install polipo
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;编辑polipo配置文件 &lt;code&gt;/etc/polipo/config&lt;/code&gt; ：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    ### Basic configuration
-
-    # Add your proxy&amp;#39;s address
-    proxyAddress = 192.168.0.1
-
-    # Allow from anyone in the 192.168.0.* range to connect to your proxy
-    allowedClients = 192.168.0.0/24
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;重启服务：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo /etc/init.d/polipo …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;安装polipo：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get update
-sudo apt-get install polipo
+&lt;p&gt;回车，好了，此时前缀应该就已经变成了Ctrl+a了&lt;/p&gt;</content><category term="windows"></category><category term="cygwin"></category><category term="tmux"></category><category term="zsh"></category></entry><entry><title>Linux将Socks代理转换成Http代理</title><link href="https://gccpacman.github.io/linuxjiang-socksdai-li-zhuan-huan-cheng-httpdai-li.html" rel="alternate"></link><published>2015-05-14T10:20:00+08:00</published><updated>2015-05-14T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2015-05-14:/linuxjiang-socksdai-li-zhuan-huan-cheng-httpdai-li.html</id><summary type="html">&lt;p&gt;安装polipo：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;get&lt;/span&gt; &lt;span class="k"&gt;update&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;get&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;polipo&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;编辑polipo配置文件 &lt;code&gt;/etc/polipo/config&lt;/code&gt; ：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    ### Basic configuration
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    ### &lt;span class="nv"&gt;Basic&lt;/span&gt; &lt;span class="nv"&gt;configuration&lt;/span&gt;
 
-    # Add your proxy&amp;#39;s address
-    proxyAddress = 192.168.0.1
+    # &lt;span class="nv"&gt;Add&lt;/span&gt; &lt;span class="nv"&gt;your&lt;/span&gt; &lt;span class="nv"&gt;proxy&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;s address&lt;/span&gt;
+    &lt;span class="nv"&gt;proxyAddress&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;192&lt;/span&gt;.&lt;span class="mi"&gt;168&lt;/span&gt;.&lt;span class="mi"&gt;0&lt;/span&gt;.&lt;span class="mi"&gt;1&lt;/span&gt;
 
-    # Allow from anyone in the 192.168.0.* range to connect to your proxy
-    allowedClients = 192.168.0.0/24
+    # &lt;span class="nv"&gt;Allow&lt;/span&gt; &lt;span class="nv"&gt;from&lt;/span&gt; &lt;span class="nv"&gt;anyone&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="mi"&gt;192&lt;/span&gt;.&lt;span class="mi"&gt;168&lt;/span&gt;.&lt;span class="mi"&gt;0&lt;/span&gt;.&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="nv"&gt;range&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="k"&gt;connect&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="nv"&gt;your&lt;/span&gt; &lt;span class="nv"&gt;proxy&lt;/span&gt;
+    &lt;span class="nv"&gt;allowedClients&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;192&lt;/span&gt;.&lt;span class="mi"&gt;168&lt;/span&gt;.&lt;span class="mi"&gt;0&lt;/span&gt;.&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;24&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;重启服务：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo /etc/init.d/polipo restart
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;init …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;安装polipo：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;get&lt;/span&gt; &lt;span class="k"&gt;update&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;get&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;polipo&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;编辑polipo配置文件 &lt;code&gt;/etc/polipo/config&lt;/code&gt; ：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    ### &lt;span class="nv"&gt;Basic&lt;/span&gt; &lt;span class="nv"&gt;configuration&lt;/span&gt;
+
+    # &lt;span class="nv"&gt;Add&lt;/span&gt; &lt;span class="nv"&gt;your&lt;/span&gt; &lt;span class="nv"&gt;proxy&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;s address&lt;/span&gt;
+    &lt;span class="nv"&gt;proxyAddress&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;192&lt;/span&gt;.&lt;span class="mi"&gt;168&lt;/span&gt;.&lt;span class="mi"&gt;0&lt;/span&gt;.&lt;span class="mi"&gt;1&lt;/span&gt;
+
+    # &lt;span class="nv"&gt;Allow&lt;/span&gt; &lt;span class="nv"&gt;from&lt;/span&gt; &lt;span class="nv"&gt;anyone&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="mi"&gt;192&lt;/span&gt;.&lt;span class="mi"&gt;168&lt;/span&gt;.&lt;span class="mi"&gt;0&lt;/span&gt;.&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="nv"&gt;range&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="k"&gt;connect&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="nv"&gt;your&lt;/span&gt; &lt;span class="nv"&gt;proxy&lt;/span&gt;
+    &lt;span class="nv"&gt;allowedClients&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;192&lt;/span&gt;.&lt;span class="mi"&gt;168&lt;/span&gt;.&lt;span class="mi"&gt;0&lt;/span&gt;.&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;24&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;重启服务：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;init&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;polipo&lt;/span&gt; &lt;span class="k"&gt;restart&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -1526,43 +1546,40 @@ sudo apt-get install polipo
 &lt;p&gt;&lt;a href="https://help.ubuntu.com/community/Polipo"&gt;Polipo - Community Help Wiki&lt;/a&gt;&lt;/p&gt;</content><category term="linux"></category><category term="proxy"></category></entry><entry><title>Linux搭建PPTP VPN Server</title><link href="https://gccpacman.github.io/linuxda-jian-pptp-vpn-server.html" rel="alternate"></link><published>2015-04-19T10:20:00+08:00</published><updated>2015-04-19T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2015-04-19:/linuxda-jian-pptp-vpn-server.html</id><summary type="html">&lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;安装server&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# On CentOS 6 x64:
-rpm -i http://poptop.sourceforge.net/yum/stable/rhel6/pptp-release-current.noarch.rpm
-yum -y install pptpd
-# On Ubuntu 12.10 x64:
-apt-get install pptpd
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="k"&gt;On&lt;/span&gt; &lt;span class="n"&gt;CentOS&lt;/span&gt; &lt;span class="mi"&gt;6&lt;/span&gt; &lt;span class="n"&gt;x64&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="n"&gt;rpm&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;poptop&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sourceforge&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;net&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;yum&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;stable&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;rhel6&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;pptp&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;release&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;current&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;noarch&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rpm&lt;/span&gt;
+&lt;span class="n"&gt;yum&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;pptpd&lt;/span&gt;
+&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="k"&gt;On&lt;/span&gt; &lt;span class="n"&gt;Ubuntu&lt;/span&gt; &lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="n"&gt;x64&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;get&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;pptpd&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;编辑 &lt;strong&gt;/etc/pptpd.conf&lt;/strong&gt; 添加以下行:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;localip 10.0.0.1
-remoteip 10.0.0.100-200
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;localip&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="n"&gt;remoteip&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;200&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;localip本机ip(vpn的服务器ip), remoteip-分配给客户端的ip, 应该处于同一网段&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;添加pptp用户名和密码到 &lt;strong&gt;/etc …&lt;/strong&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;ol&gt;
+&lt;p&gt;localip本机ip(vpn的服务器ip …&lt;/p&gt;</summary><content type="html">&lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;安装server&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# On CentOS 6 x64:
-rpm -i http://poptop.sourceforge.net/yum/stable/rhel6/pptp-release-current.noarch.rpm
-yum -y install pptpd
-# On Ubuntu 12.10 x64:
-apt-get install pptpd
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="k"&gt;On&lt;/span&gt; &lt;span class="n"&gt;CentOS&lt;/span&gt; &lt;span class="mi"&gt;6&lt;/span&gt; &lt;span class="n"&gt;x64&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="n"&gt;rpm&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;poptop&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sourceforge&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;net&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;yum&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;stable&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;rhel6&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;pptp&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;release&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;current&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;noarch&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rpm&lt;/span&gt;
+&lt;span class="n"&gt;yum&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;pptpd&lt;/span&gt;
+&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="k"&gt;On&lt;/span&gt; &lt;span class="n"&gt;Ubuntu&lt;/span&gt; &lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="n"&gt;x64&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;get&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;pptpd&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;编辑 &lt;strong&gt;/etc/pptpd.conf&lt;/strong&gt; 添加以下行:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;localip 10.0.0.1
-remoteip 10.0.0.100-200
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;localip&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="n"&gt;remoteip&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;200&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -1572,61 +1589,61 @@ remoteip 10.0.0.100-200
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;添加pptp用户名和密码到 &lt;strong&gt;/etc/ppp/chap-secrets&lt;/strong&gt; :&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;#client server secret IP
-user1 pptpd 24odfjafdi34 *
-user2 pptpd 3f3faf3fsdfI *
-#Where client is the username, server is type of service – pptpd for our example, secret is the password, and IP addresses specifies which IP address may authenticate. By setting ‘*’ in IP addresses field, you specify that you would accept username/password pair for any IP.
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;#&lt;span class="nv"&gt;client&lt;/span&gt; &lt;span class="nv"&gt;server&lt;/span&gt; &lt;span class="nv"&gt;secret&lt;/span&gt; &lt;span class="nv"&gt;IP&lt;/span&gt;
+&lt;span class="nv"&gt;user1&lt;/span&gt; &lt;span class="nv"&gt;pptpd&lt;/span&gt; &lt;span class="mi"&gt;24&lt;/span&gt;&lt;span class="nv"&gt;odfjafdi34&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;
+&lt;span class="nv"&gt;user2&lt;/span&gt; &lt;span class="nv"&gt;pptpd&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="nv"&gt;f3faf3fsdfI&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;
+#&lt;span class="nv"&gt;Where&lt;/span&gt; &lt;span class="nv"&gt;client&lt;/span&gt; &lt;span class="nv"&gt;is&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;username&lt;/span&gt;, &lt;span class="nv"&gt;server&lt;/span&gt; &lt;span class="nv"&gt;is&lt;/span&gt; &lt;span class="nv"&gt;type&lt;/span&gt; &lt;span class="nv"&gt;of&lt;/span&gt; &lt;span class="nv"&gt;service&lt;/span&gt; – &lt;span class="nv"&gt;pptpd&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nv"&gt;our&lt;/span&gt; &lt;span class="nv"&gt;example&lt;/span&gt;, &lt;span class="nv"&gt;secret&lt;/span&gt; &lt;span class="nv"&gt;is&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;password&lt;/span&gt;, &lt;span class="nv"&gt;and&lt;/span&gt; &lt;span class="nv"&gt;IP&lt;/span&gt; &lt;span class="nv"&gt;addresses&lt;/span&gt; &lt;span class="nv"&gt;specifies&lt;/span&gt; &lt;span class="nv"&gt;which&lt;/span&gt; &lt;span class="nv"&gt;IP&lt;/span&gt; &lt;span class="nv"&gt;address&lt;/span&gt; &lt;span class="nv"&gt;may&lt;/span&gt; &lt;span class="nv"&gt;authenticate&lt;/span&gt;. &lt;span class="nv"&gt;By&lt;/span&gt; &lt;span class="nv"&gt;setting&lt;/span&gt; ‘&lt;span class="o"&gt;*&lt;/span&gt;’ &lt;span class="nv"&gt;in&lt;/span&gt; &lt;span class="nv"&gt;IP&lt;/span&gt; &lt;span class="nv"&gt;addresses&lt;/span&gt; &lt;span class="nv"&gt;field&lt;/span&gt;, &lt;span class="nv"&gt;you&lt;/span&gt; &lt;span class="nv"&gt;specify&lt;/span&gt; &lt;span class="nv"&gt;that&lt;/span&gt; &lt;span class="nv"&gt;you&lt;/span&gt; &lt;span class="nv"&gt;would&lt;/span&gt; &lt;span class="nv"&gt;accept&lt;/span&gt; &lt;span class="nv"&gt;username&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;password&lt;/span&gt; &lt;span class="nv"&gt;pair&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nv"&gt;any&lt;/span&gt; &lt;span class="nv"&gt;IP&lt;/span&gt;.
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;添加DNS服务器地址到 &lt;strong&gt;/etc/ppp/pptpd-options&lt;/strong&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ms-dns 8.8.8.8
-ms-dns 8.8.4.4
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;dns&lt;/span&gt; &lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;
+&lt;span class="n"&gt;ms&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;dns&lt;/span&gt; &lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;启动 PPTP 守护进程daemon:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;service pptpd restart
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;service&lt;/span&gt; &lt;span class="n"&gt;pptpd&lt;/span&gt; &lt;span class="k"&gt;restart&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;验证是否启动成功并接受连接&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;netstat -alpn | grep :1723
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;netstat&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;alpn&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;grep&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;1723&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;设置ipv4转发. 编辑 &lt;strong&gt;/etc/sysctl.conf&lt;/strong&gt; 添加：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;#It is important to enable IP forwarding on your PPTP server. This will allow you to forward packets between public IP and private IPs that you setup with PPTP. )
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="n"&gt;It&lt;/span&gt; &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="n"&gt;important&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;enable&lt;/span&gt; &lt;span class="n"&gt;IP&lt;/span&gt; &lt;span class="n"&gt;forwarding&lt;/span&gt; &lt;span class="k"&gt;on&lt;/span&gt; &lt;span class="n"&gt;your&lt;/span&gt; &lt;span class="n"&gt;PPTP&lt;/span&gt; &lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="n"&gt;This&lt;/span&gt; &lt;span class="n"&gt;will&lt;/span&gt; &lt;span class="n"&gt;allow&lt;/span&gt; &lt;span class="n"&gt;you&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="k"&gt;forward&lt;/span&gt; &lt;span class="n"&gt;packets&lt;/span&gt; &lt;span class="k"&gt;between&lt;/span&gt; &lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="n"&gt;IP&lt;/span&gt; &lt;span class="k"&gt;and&lt;/span&gt; &lt;span class="n"&gt;private&lt;/span&gt; &lt;span class="n"&gt;IPs&lt;/span&gt; &lt;span class="n"&gt;that&lt;/span&gt; &lt;span class="n"&gt;you&lt;/span&gt; &lt;span class="n"&gt;setup&lt;/span&gt; &lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="n"&gt;PPTP&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;
 
-net.ipv4.ip_forward = 1
+&lt;span class="n"&gt;net&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ipv4&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ip_forward&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
 
-# To make changes active, run 
-sysctl -p
+&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="k"&gt;To&lt;/span&gt; &lt;span class="n"&gt;make&lt;/span&gt; &lt;span class="n"&gt;changes&lt;/span&gt; &lt;span class="n"&gt;active&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;run&lt;/span&gt; 
+&lt;span class="n"&gt;sysctl&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;添加iptables规则&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;#The following iptables firewall rules allow port 1723, GRE and perform NAT:
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="n"&gt;The&lt;/span&gt; &lt;span class="n"&gt;following&lt;/span&gt; &lt;span class="n"&gt;iptables&lt;/span&gt; &lt;span class="n"&gt;firewall&lt;/span&gt; &lt;span class="n"&gt;rules&lt;/span&gt; &lt;span class="n"&gt;allow&lt;/span&gt; &lt;span class="n"&gt;port&lt;/span&gt; &lt;span class="mi"&gt;1723&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;GRE&lt;/span&gt; &lt;span class="k"&gt;and&lt;/span&gt; &lt;span class="n"&gt;perform&lt;/span&gt; &lt;span class="n"&gt;NAT&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
 
-iptables -I INPUT -p tcp --dport 1723 -m state --state NEW -j ACCEPT
-iptables -I INPUT -p gre -j ACCEPT
-iptables -t nat -I POSTROUTING -o eth0 -j MASQUERADE
+&lt;span class="n"&gt;iptables&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;I&lt;/span&gt; &lt;span class="k"&gt;INPUT&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="n"&gt;tcp&lt;/span&gt; &lt;span class="c1"&gt;--dport 1723 -m state --state NEW -j ACCEPT&lt;/span&gt;
+&lt;span class="n"&gt;iptables&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;I&lt;/span&gt; &lt;span class="k"&gt;INPUT&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="n"&gt;gre&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt; &lt;span class="n"&gt;ACCEPT&lt;/span&gt;
+&lt;span class="n"&gt;iptables&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="n"&gt;nat&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;I&lt;/span&gt; &lt;span class="n"&gt;POSTROUTING&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;o&lt;/span&gt; &lt;span class="n"&gt;eth0&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt; &lt;span class="n"&gt;MASQUERADE&lt;/span&gt;
 
-# In the last rule replace “eth0″ with the interface connecting to the internet on your VPN server. Finally the following rule is required to ensure websites load properly
+&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="k"&gt;In&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="k"&gt;last&lt;/span&gt; &lt;span class="k"&gt;rule&lt;/span&gt; &lt;span class="k"&gt;replace&lt;/span&gt; &lt;span class="err"&gt;“&lt;/span&gt;&lt;span class="n"&gt;eth0&lt;/span&gt;&lt;span class="err"&gt;″&lt;/span&gt; &lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;interface&lt;/span&gt; &lt;span class="n"&gt;connecting&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;internet&lt;/span&gt; &lt;span class="k"&gt;on&lt;/span&gt; &lt;span class="n"&gt;your&lt;/span&gt; &lt;span class="n"&gt;VPN&lt;/span&gt; &lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="n"&gt;Finally&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;following&lt;/span&gt; &lt;span class="k"&gt;rule&lt;/span&gt; &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="n"&gt;required&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;ensure&lt;/span&gt; &lt;span class="n"&gt;websites&lt;/span&gt; &lt;span class="k"&gt;load&lt;/span&gt; &lt;span class="n"&gt;properly&lt;/span&gt;
 
-iptables -I FORWARD -p tcp --tcp-flags SYN,RST SYN -s 172.20.1.0/24 -j TCPMSS  --clamp-mss-to-pmtu
+&lt;span class="n"&gt;iptables&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;I&lt;/span&gt; &lt;span class="k"&gt;FORWARD&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="n"&gt;tcp&lt;/span&gt; &lt;span class="c1"&gt;--tcp-flags SYN,RST SYN -s 172.20.1.0/24 -j TCPMSS  --clamp-mss-to-pmtu&lt;/span&gt;
 
-# ReReplace **172.20.1.0/24** with the IP address range used in the “remoteip” option in the **/etc/pptpd.conf** this firewall rule is used to ensure a proper MTU value is used to prevent fragmentation.
+&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;ReReplace&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="mi"&gt;172&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;24&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt; &lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;IP&lt;/span&gt; &lt;span class="n"&gt;address&lt;/span&gt; &lt;span class="n"&gt;range&lt;/span&gt; &lt;span class="n"&gt;used&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="err"&gt;“&lt;/span&gt;&lt;span class="n"&gt;remoteip&lt;/span&gt;&lt;span class="err"&gt;”&lt;/span&gt; &lt;span class="k"&gt;option&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="o"&gt;**/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;pptpd&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;conf&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt; &lt;span class="n"&gt;this&lt;/span&gt; &lt;span class="n"&gt;firewall&lt;/span&gt; &lt;span class="k"&gt;rule&lt;/span&gt; &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="n"&gt;used&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;ensure&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;proper&lt;/span&gt; &lt;span class="n"&gt;MTU&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="n"&gt;used&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;prevent&lt;/span&gt; &lt;span class="n"&gt;fragmentation&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 

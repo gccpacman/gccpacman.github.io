@@ -48,26 +48,26 @@
         title="Permalink to Linux搭建PPTP VPN Server">Linux搭建PPTP VPN Server</a></h3>
     </header>
 
-<h6 class="subheader" title="2015-04-19T10:20:00+08:00">Sun 19 April 2015
+<h6 class="subheader" title="2015-04-19T10:20:00+08:00">周日 19 四月 2015
 </h6>
 
 
     <ol>
 <li>
 <p>安装server</p>
-<div class="highlight"><pre><span></span># On CentOS 6 x64:
-rpm -i http://poptop.sourceforge.net/yum/stable/rhel6/pptp-release-current.noarch.rpm
-yum -y install pptpd
-# On Ubuntu 12.10 x64:
-apt-get install pptpd
+<div class="highlight"><pre><span></span><span class="o">#</span> <span class="k">On</span> <span class="n">CentOS</span> <span class="mi">6</span> <span class="n">x64</span><span class="p">:</span>
+<span class="n">rpm</span> <span class="o">-</span><span class="n">i</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">poptop</span><span class="p">.</span><span class="n">sourceforge</span><span class="p">.</span><span class="n">net</span><span class="o">/</span><span class="n">yum</span><span class="o">/</span><span class="k">stable</span><span class="o">/</span><span class="n">rhel6</span><span class="o">/</span><span class="n">pptp</span><span class="o">-</span><span class="n">release</span><span class="o">-</span><span class="k">current</span><span class="p">.</span><span class="n">noarch</span><span class="p">.</span><span class="n">rpm</span>
+<span class="n">yum</span> <span class="o">-</span><span class="n">y</span> <span class="n">install</span> <span class="n">pptpd</span>
+<span class="o">#</span> <span class="k">On</span> <span class="n">Ubuntu</span> <span class="mi">12</span><span class="p">.</span><span class="mi">10</span> <span class="n">x64</span><span class="p">:</span>
+<span class="n">apt</span><span class="o">-</span><span class="k">get</span> <span class="n">install</span> <span class="n">pptpd</span>
 </pre></div>
 
 
 </li>
 <li>
 <p>编辑 <strong>/etc/pptpd.conf</strong> 添加以下行:</p>
-<div class="highlight"><pre><span></span>localip 10.0.0.1
-remoteip 10.0.0.100-200
+<div class="highlight"><pre><span></span><span class="n">localip</span> <span class="mi">10</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">1</span>
+<span class="n">remoteip</span> <span class="mi">10</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">100</span><span class="o">-</span><span class="mi">200</span>
 </pre></div>
 
 
@@ -77,61 +77,61 @@ remoteip 10.0.0.100-200
 <ol>
 <li>
 <p>添加pptp用户名和密码到 <strong>/etc/ppp/chap-secrets</strong> :</p>
-<div class="highlight"><pre><span></span>#client server secret IP
-user1 pptpd 24odfjafdi34 *
-user2 pptpd 3f3faf3fsdfI *
-#Where client is the username, server is type of service – pptpd for our example, secret is the password, and IP addresses specifies which IP address may authenticate. By setting ‘*’ in IP addresses field, you specify that you would accept username/password pair for any IP.
+<div class="highlight"><pre><span></span>#<span class="nv">client</span> <span class="nv">server</span> <span class="nv">secret</span> <span class="nv">IP</span>
+<span class="nv">user1</span> <span class="nv">pptpd</span> <span class="mi">24</span><span class="nv">odfjafdi34</span> <span class="o">*</span>
+<span class="nv">user2</span> <span class="nv">pptpd</span> <span class="mi">3</span><span class="nv">f3faf3fsdfI</span> <span class="o">*</span>
+#<span class="nv">Where</span> <span class="nv">client</span> <span class="nv">is</span> <span class="nv">the</span> <span class="nv">username</span>, <span class="nv">server</span> <span class="nv">is</span> <span class="nv">type</span> <span class="nv">of</span> <span class="nv">service</span> – <span class="nv">pptpd</span> <span class="k">for</span> <span class="nv">our</span> <span class="nv">example</span>, <span class="nv">secret</span> <span class="nv">is</span> <span class="nv">the</span> <span class="nv">password</span>, <span class="nv">and</span> <span class="nv">IP</span> <span class="nv">addresses</span> <span class="nv">specifies</span> <span class="nv">which</span> <span class="nv">IP</span> <span class="nv">address</span> <span class="nv">may</span> <span class="nv">authenticate</span>. <span class="nv">By</span> <span class="nv">setting</span> ‘<span class="o">*</span>’ <span class="nv">in</span> <span class="nv">IP</span> <span class="nv">addresses</span> <span class="nv">field</span>, <span class="nv">you</span> <span class="nv">specify</span> <span class="nv">that</span> <span class="nv">you</span> <span class="nv">would</span> <span class="nv">accept</span> <span class="nv">username</span><span class="o">/</span><span class="nv">password</span> <span class="nv">pair</span> <span class="k">for</span> <span class="nv">any</span> <span class="nv">IP</span>.
 </pre></div>
 
 
 </li>
 <li>
 <p>添加DNS服务器地址到 <strong>/etc/ppp/pptpd-options</strong>:</p>
-<div class="highlight"><pre><span></span>ms-dns 8.8.8.8
-ms-dns 8.8.4.4
+<div class="highlight"><pre><span></span><span class="n">ms</span><span class="o">-</span><span class="n">dns</span> <span class="mi">8</span><span class="p">.</span><span class="mi">8</span><span class="p">.</span><span class="mi">8</span><span class="p">.</span><span class="mi">8</span>
+<span class="n">ms</span><span class="o">-</span><span class="n">dns</span> <span class="mi">8</span><span class="p">.</span><span class="mi">8</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">4</span>
 </pre></div>
 
 
 </li>
 <li>
 <p>启动 PPTP 守护进程daemon:</p>
-<div class="highlight"><pre><span></span>service pptpd restart
+<div class="highlight"><pre><span></span><span class="n">service</span> <span class="n">pptpd</span> <span class="k">restart</span>
 </pre></div>
 
 
 </li>
 <li>
 <p>验证是否启动成功并接受连接</p>
-<div class="highlight"><pre><span></span>netstat -alpn | grep :1723
+<div class="highlight"><pre><span></span><span class="n">netstat</span> <span class="o">-</span><span class="n">alpn</span> <span class="o">|</span> <span class="n">grep</span> <span class="p">:</span><span class="mi">1723</span>
 </pre></div>
 
 
 </li>
 <li>
 <p>设置ipv4转发. 编辑 <strong>/etc/sysctl.conf</strong> 添加：</p>
-<div class="highlight"><pre><span></span>#It is important to enable IP forwarding on your PPTP server. This will allow you to forward packets between public IP and private IPs that you setup with PPTP. )
+<div class="highlight"><pre><span></span><span class="o">#</span><span class="n">It</span> <span class="k">is</span> <span class="n">important</span> <span class="k">to</span> <span class="n">enable</span> <span class="n">IP</span> <span class="n">forwarding</span> <span class="k">on</span> <span class="n">your</span> <span class="n">PPTP</span> <span class="n">server</span><span class="p">.</span> <span class="n">This</span> <span class="n">will</span> <span class="n">allow</span> <span class="n">you</span> <span class="k">to</span> <span class="k">forward</span> <span class="n">packets</span> <span class="k">between</span> <span class="k">public</span> <span class="n">IP</span> <span class="k">and</span> <span class="n">private</span> <span class="n">IPs</span> <span class="n">that</span> <span class="n">you</span> <span class="n">setup</span> <span class="k">with</span> <span class="n">PPTP</span><span class="p">.</span> <span class="p">)</span>
 
-net.ipv4.ip_forward = 1
+<span class="n">net</span><span class="p">.</span><span class="n">ipv4</span><span class="p">.</span><span class="n">ip_forward</span> <span class="o">=</span> <span class="mi">1</span>
 
-# To make changes active, run 
-sysctl -p
+<span class="o">#</span> <span class="k">To</span> <span class="n">make</span> <span class="n">changes</span> <span class="n">active</span><span class="p">,</span> <span class="n">run</span> 
+<span class="n">sysctl</span> <span class="o">-</span><span class="n">p</span>
 </pre></div>
 
 
 </li>
 <li>
 <p>添加iptables规则</p>
-<div class="highlight"><pre><span></span>#The following iptables firewall rules allow port 1723, GRE and perform NAT:
+<div class="highlight"><pre><span></span><span class="o">#</span><span class="n">The</span> <span class="n">following</span> <span class="n">iptables</span> <span class="n">firewall</span> <span class="n">rules</span> <span class="n">allow</span> <span class="n">port</span> <span class="mi">1723</span><span class="p">,</span> <span class="n">GRE</span> <span class="k">and</span> <span class="n">perform</span> <span class="n">NAT</span><span class="p">:</span>
 
-iptables -I INPUT -p tcp --dport 1723 -m state --state NEW -j ACCEPT
-iptables -I INPUT -p gre -j ACCEPT
-iptables -t nat -I POSTROUTING -o eth0 -j MASQUERADE
+<span class="n">iptables</span> <span class="o">-</span><span class="n">I</span> <span class="k">INPUT</span> <span class="o">-</span><span class="n">p</span> <span class="n">tcp</span> <span class="c1">--dport 1723 -m state --state NEW -j ACCEPT</span>
+<span class="n">iptables</span> <span class="o">-</span><span class="n">I</span> <span class="k">INPUT</span> <span class="o">-</span><span class="n">p</span> <span class="n">gre</span> <span class="o">-</span><span class="n">j</span> <span class="n">ACCEPT</span>
+<span class="n">iptables</span> <span class="o">-</span><span class="n">t</span> <span class="n">nat</span> <span class="o">-</span><span class="n">I</span> <span class="n">POSTROUTING</span> <span class="o">-</span><span class="n">o</span> <span class="n">eth0</span> <span class="o">-</span><span class="n">j</span> <span class="n">MASQUERADE</span>
 
-# In the last rule replace “eth0″ with the interface connecting to the internet on your VPN server. Finally the following rule is required to ensure websites load properly
+<span class="o">#</span> <span class="k">In</span> <span class="n">the</span> <span class="k">last</span> <span class="k">rule</span> <span class="k">replace</span> <span class="err">“</span><span class="n">eth0</span><span class="err">″</span> <span class="k">with</span> <span class="n">the</span> <span class="n">interface</span> <span class="n">connecting</span> <span class="k">to</span> <span class="n">the</span> <span class="n">internet</span> <span class="k">on</span> <span class="n">your</span> <span class="n">VPN</span> <span class="n">server</span><span class="p">.</span> <span class="n">Finally</span> <span class="n">the</span> <span class="n">following</span> <span class="k">rule</span> <span class="k">is</span> <span class="n">required</span> <span class="k">to</span> <span class="n">ensure</span> <span class="n">websites</span> <span class="k">load</span> <span class="n">properly</span>
 
-iptables -I FORWARD -p tcp --tcp-flags SYN,RST SYN -s 172.20.1.0/24 -j TCPMSS  --clamp-mss-to-pmtu
+<span class="n">iptables</span> <span class="o">-</span><span class="n">I</span> <span class="k">FORWARD</span> <span class="o">-</span><span class="n">p</span> <span class="n">tcp</span> <span class="c1">--tcp-flags SYN,RST SYN -s 172.20.1.0/24 -j TCPMSS  --clamp-mss-to-pmtu</span>
 
-# ReReplace **172.20.1.0/24** with the IP address range used in the “remoteip” option in the **/etc/pptpd.conf** this firewall rule is used to ensure a proper MTU value is used to prevent fragmentation.
+<span class="o">#</span> <span class="n">ReReplace</span> <span class="o">**</span><span class="mi">172</span><span class="p">.</span><span class="mi">20</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="o">/</span><span class="mi">24</span><span class="o">**</span> <span class="k">with</span> <span class="n">the</span> <span class="n">IP</span> <span class="n">address</span> <span class="n">range</span> <span class="n">used</span> <span class="k">in</span> <span class="n">the</span> <span class="err">“</span><span class="n">remoteip</span><span class="err">”</span> <span class="k">option</span> <span class="k">in</span> <span class="n">the</span> <span class="o">**/</span><span class="n">etc</span><span class="o">/</span><span class="n">pptpd</span><span class="p">.</span><span class="n">conf</span><span class="o">**</span> <span class="n">this</span> <span class="n">firewall</span> <span class="k">rule</span> <span class="k">is</span> <span class="n">used</span> <span class="k">to</span> <span class="n">ensure</span> <span class="n">a</span> <span class="n">proper</span> <span class="n">MTU</span> <span class="n">value</span> <span class="k">is</span> <span class="n">used</span> <span class="k">to</span> <span class="n">prevent</span> <span class="n">fragmentation</span><span class="p">.</span>
 </pre></div>
 
 
@@ -167,6 +167,7 @@ iptables -I FORWARD -p tcp --tcp-flags SYN,RST SYN -s 172.20.1.0/24 -j TCPMSS  -
         <ul class="side-nav">
             <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
             <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
+            <li><a href="https://gccpacman.github.io/category/nodejs.html">Nodejs</a></li>
             <li><a href="https://gccpacman.github.io/category/python.html">python</a></li>
             <li><a href="https://gccpacman.github.io/category/tmux.html">Tmux</a></li>
             <li><a href="https://gccpacman.github.io/category/vim.html">Vim</a></li>

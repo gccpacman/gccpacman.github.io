@@ -46,34 +46,133 @@
         
 
             <article>
+                <a href="https://gccpacman.github.io/putty-tmuxduo-chuang-kou-ke-yong-pei-zhi.html"><h3 class="article-title">putty + tmux多窗口可用配置</h3></a>
+<h6 class="subheader" title="2018-08-28T10:20:00+08:00">周二 28 八月 2018
+</h6>
+
+
+<ul>
+<li>
+<p>putty的执行命令填入如下命令，tmux名称同session名称，以便开多个putty窗口时候识别</p>
+<div class="highlight"><pre><span></span>$ tmux new -A -s <span class="o">{</span>session_name<span class="o">}</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>添加.tmux.conf配置</p>
+<div class="highlight"><pre><span></span><span class="nv">echo</span> <span class="s2">&quot;</span>
+##########################################
+# <span class="nv">STATUS</span> <span class="nv">BAR</span>
+<span class="nv">set</span> <span class="o">-</span><span class="nv">g</span> <span class="nv">status</span><span class="o">-</span><span class="nv">keys</span> <span class="nv">vi</span>
+<span class="nv">set</span> <span class="o">-</span><span class="nv">g</span> <span class="nv">status</span><span class="o">-</span><span class="nv">interval</span> <span class="mi">1</span>
+<span class="nv">set</span> <span class="o">-</span><span class="nv">g</span> <span class="nv">status</span><span class="o">-</span><span class="nv">attr</span> <span class="nv">bright</span>
+<span class="nv">set</span> <span class="o">-</span><span class="nv">g</span> <span class="nv">status</span><span class="o">-</span><span class="nv">fg</span> <span class="nv">white</span>
+<span class="nv">set</span> <span class="o">-</span><span class="nv">g</span> <span class="nv">status</span><span class="o">-</span><span class="nv">bg</span> <span class="nv">black</span>
+<span class="nv">set</span> <span class="o">-</span><span class="nv">g</span> <span class="nv">status</span><span class="o">-</span><span class="nv">left</span><span class="o">-</span><span class="nv">length</span> <span class="mi">20</span>
+<span class="nv">set</span> <span class="o">-</span><span class="nv">g</span> <span class="nv">status</span><span class="o">-</span><span class="nv">left</span> <span class="s1">&#39;</span><span class="s">#[fg=green][#[fg=red]#S#[fg=green]]#[default]</span><span class="s1">&#39;</span>
+<span class="nv">set</span> <span class="o">-</span><span class="nv">g</span> <span class="nv">status</span><span class="o">-</span><span class="nv">justify</span> <span class="nv">centre</span>
+<span class="nv">set</span> <span class="o">-</span><span class="nv">g</span> <span class="nv">status</span><span class="o">-</span><span class="nv">right</span> <span class="s1">&#39;</span><span class="s">#[fg=green][ %m/%d %H:%M:%S ]#[default]</span><span class="s1">&#39;</span>
+<span class="nv">setw</span> <span class="o">-</span><span class="nv">g</span> <span class="nv">window</span><span class="o">-</span><span class="nv">status</span><span class="o">-</span><span class="nv">current</span><span class="o">-</span><span class="nv">format</span> <span class="s1">&#39;</span><span class="s">#[fg=yellow](#I.#P#F#W)#[default]</span><span class="s1">&#39;</span>
+<span class="nv">setw</span> <span class="o">-</span><span class="nv">g</span> <span class="nv">window</span><span class="o">-</span><span class="nv">status</span><span class="o">-</span><span class="nv">format</span> <span class="s1">&#39;</span><span class="s">#I#F#W</span><span class="s1">&#39;</span>
+
+##########################################
+# <span class="nv">TERMINAL</span> <span class="nv">EMULATOR</span> <span class="nv">TITLES</span>
+<span class="nv">set</span> <span class="o">-</span><span class="nv">g</span> <span class="nv">set</span><span class="o">-</span><span class="nv">titles</span> <span class="nv">on</span>
+<span class="nv">set</span> <span class="o">-</span><span class="nv">g</span> <span class="nv">set</span><span class="o">-</span><span class="nv">titles</span><span class="o">-</span><span class="nv">string</span> \<span class="s2">&quot;</span><span class="s">#(tmux ls | awk -F: &#39;{print $1}&#39; | xargs | sed &#39;s/\ / | /g&#39;)\</span><span class="s2">&quot;</span>
+
+# <span class="nv">Scroll</span> <span class="nv">History</span>
+<span class="nv">set</span> <span class="o">-</span><span class="nv">g</span> <span class="nv">history</span><span class="o">-</span><span class="nv">limit</span> <span class="mi">30000</span>
+
+# <span class="nv">Set</span> <span class="nv">ability</span> <span class="nv">to</span> <span class="nv">capture</span> <span class="nv">on</span> <span class="nv">start</span> <span class="nv">and</span> <span class="nv">restore</span> <span class="nv">on</span> <span class="k">exit</span> <span class="nv">window</span> <span class="nv">data</span> <span class="nv">when</span> <span class="nv">running</span> <span class="nv">an</span> <span class="nv">application</span>
+<span class="nv">setw</span> <span class="o">-</span><span class="nv">g</span> <span class="nv">alternate</span><span class="o">-</span><span class="nv">screen</span> <span class="nv">on</span>
+
+# <span class="nv">Lower</span> <span class="nv">escape</span> <span class="nv">timing</span> <span class="nv">from</span> <span class="mi">500</span><span class="nv">ms</span> <span class="nv">to</span> <span class="mi">50</span><span class="nv">ms</span> <span class="k">for</span> <span class="nv">quicker</span> <span class="nv">response</span> <span class="nv">to</span> <span class="nv">scroll</span><span class="o">-</span><span class="nv">buffer</span> <span class="nv">access</span>.
+<span class="nv">set</span> <span class="o">-</span><span class="nv">s</span> <span class="nv">escape</span><span class="o">-</span><span class="nv">time</span> <span class="mi">50</span>
+<span class="s2">&quot;</span><span class="s"> &gt; .tmux.conf</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>（可选）Shell标题控制， 在.profile文件里添加</p>
+<div class="highlight"><pre><span></span><span class="nv">look_for_cmd</span><span class="o">=</span><span class="mi">0</span>
+<span class="nv">print_cmd</span><span class="ss">()</span> {
+  <span class="k">if</span> [ ${<span class="nv">look_for_cmd</span>} <span class="o">=</span> <span class="mi">1</span> ] <span class="c1">;then</span>
+    <span class="k">if</span> [ <span class="s2">&quot;</span><span class="s">${BASH_COMMAND}</span><span class="s2">&quot;</span> <span class="o">!=</span> <span class="s1">&#39;</span><span class="s">print_host</span><span class="s1">&#39;</span> ] <span class="c1">;then</span>
+      <span class="nv">cmdline</span><span class="o">=</span>$<span class="ss">(</span><span class="nv">history</span> <span class="mi">1</span> <span class="o">|</span> <span class="nv">xargs</span> <span class="o">|</span> <span class="nv">cut</span> <span class="o">-</span><span class="nv">d</span>\  <span class="o">-</span><span class="nv">f3</span><span class="o">-</span><span class="ss">)</span>
+      <span class="k">if</span> [[ <span class="s2">&quot;</span><span class="s">${cmdline}</span><span class="s2">&quot;</span> <span class="o">=~</span> <span class="o">^</span><span class="ss">(</span><span class="nv">sudo</span><span class="o">|</span><span class="nv">ssh</span><span class="o">|</span><span class="nv">vi</span><span class="o">|</span><span class="nv">man</span><span class="o">|</span><span class="nv">more</span><span class="o">|</span><span class="nv">less</span><span class="ss">)</span>\  ]] <span class="c1">;then</span>
+        <span class="nv">first</span><span class="o">=</span>$<span class="ss">(</span><span class="nv">echo</span> <span class="s2">&quot;</span><span class="s">${cmdline}</span><span class="s2">&quot;</span> <span class="o">|</span> <span class="nv">awk</span> <span class="s1">&#39;</span><span class="s">{print $1}</span><span class="s1">&#39;</span><span class="ss">)</span>
+        <span class="k">for</span> <span class="nv">i</span> <span class="nv">in</span> ${<span class="nv">cmdline</span>} <span class="c1">;do</span>
+          <span class="k">if</span> <span class="o">!</span> [[ <span class="s2">&quot;</span><span class="s">${i}</span><span class="s2">&quot;</span> <span class="o">=~</span> <span class="o">^-</span>.<span class="o">*</span>$ ]] <span class="o">&amp;&amp;</span> <span class="o">!</span> [[ <span class="s2">&quot;</span><span class="s">${i}</span><span class="s2">&quot;</span> <span class="o">=~</span> <span class="o">^</span>${<span class="nv">first</span>}$ ]] <span class="c1">;then</span>
+            <span class="nv">cmd</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">${first}[${i}]</span><span class="s2">&quot;</span>
+            <span class="k">break</span>
+          <span class="nv">fi</span>
+        <span class="nv">done</span>
+      <span class="nv">elif</span> [[ <span class="s2">&quot;</span><span class="s">${cmdline}</span><span class="s2">&quot;</span> <span class="o">=~</span> <span class="o">^</span>[<span class="nv">A</span><span class="o">-</span><span class="nv">Z</span>]<span class="o">*=</span>.<span class="o">*</span>$ ]] <span class="c1">;then</span>
+        <span class="nv">cmd</span><span class="o">=</span>$<span class="ss">(</span><span class="nv">echo</span> ${<span class="nv">cmdline</span>} <span class="o">|</span> <span class="nv">awk</span> <span class="s1">&#39;</span><span class="s">{print $2}</span><span class="s1">&#39;</span><span class="ss">)</span>
+      <span class="k">else</span>
+        <span class="nv">cmd</span><span class="o">=</span>$<span class="ss">(</span><span class="nv">echo</span> ${<span class="nv">cmdline</span>} <span class="o">|</span> <span class="nv">awk</span> <span class="s1">&#39;</span><span class="s">{print $1}</span><span class="s1">&#39;</span><span class="ss">)</span>
+      <span class="nv">fi</span>
+      <span class="nv">echo</span> <span class="o">-</span><span class="nv">ne</span> <span class="s2">&quot;</span><span class="s">\033k${cmd}\033</span><span class="se">\\</span><span class="s2">&quot;</span> <span class="mi">1</span><span class="o">&gt;&amp;</span><span class="mi">2</span>
+      <span class="nv">look_for_cmd</span><span class="o">=</span><span class="mi">0</span>
+    <span class="k">else</span>
+      <span class="k">return</span>
+    <span class="nv">fi</span>
+  <span class="nv">fi</span>
+}
+
+<span class="nv">print_host</span><span class="ss">()</span> {
+  <span class="nv">echo</span> <span class="o">-</span><span class="nv">ne</span> <span class="s2">&quot;</span><span class="s">\033k${HOSTNAME}\033</span><span class="se">\\</span><span class="s2">&quot;</span> <span class="mi">1</span><span class="o">&gt;&amp;</span><span class="mi">2</span>
+  <span class="nv">look_for_cmd</span><span class="o">=</span><span class="mi">1</span>
+}
+
+<span class="nv">PROMPT_COMMAND</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">print_host</span><span class="s2">&quot;</span>
+
+<span class="nv">trap</span> <span class="s2">&quot;</span><span class="s">print_cmd</span><span class="s2">&quot;</span> <span class="nv">DEBUG</span>
+</pre></div>
+
+
+</li>
+</ul><p class="subheader">Category: <a href="https://gccpacman.github.io/category/tmux.html">Tmux</a>
+
+    Tagged: 
+    <a href="https://gccpacman.github.io/tag/tmux.html">tmux </a>
+    <a href="https://gccpacman.github.io/tag/putty.html">putty </a>
+    <a href="https://gccpacman.github.io/tag/ssh.html">ssh </a>
+    <a href="https://gccpacman.github.io/tag/windows.html">windows </a>
+</p>
+
+
+
+            </article>
+
+
+                <hr  class="gradient"/>
+
+
+        
+
+
+            <article>
                 <a href="https://gccpacman.github.io/linuxli-yong-sshfan-xiang-duan-kou-zhuan-fa-bao-lu-nei-wang-duan-kou.html"><h3 class="article-title">Linux利用ssh反向端口转发暴露内网端口</h3></a>
-<h6 class="subheader" title="2015-10-30T10:20:00+08:00">Fri 30 October 2015
+<h6 class="subheader" title="2015-10-30T10:20:00+08:00">周五 30 十月 2015
 </h6>
 
 
 <p>从本地Host用SSH连接到目标主机，怎么让目标主机也可以连接本地的SSH呢？
 答案很简单，只要把本地主机的SSH端口转发到目标主机即可。可以先查看一下SSH命令的man手册:</p>
-<div class="highlight"><pre><span></span>man ssh
+<div class="highlight"><pre><span></span><span class="n">man</span> <span class="n">ssh</span>
 </pre></div>
 
 
 <p>注意里面的R参数，就是要用到的参数：</p>
-<div class="highlight"><pre><span></span>-R [bind_address:]port:host:hostport
-         Specifies that the given port on the remote (server) host is to be forwarded to the given host and port on the local side.  This works by allocating a socket to listen to port
+<div class="highlight"><pre><span></span><span class="o">-</span><span class="n">R</span> <span class="p">[</span><span class="n">bind_address</span><span class="p">:]</span><span class="n">port</span><span class="p">:</span><span class="k">host</span><span class="p">:</span><span class="n">hostport</span>
+         <span class="n">Specifies</span> <span class="n">that</span> <span class="n">the</span> <span class="n">given</span> <span class="n">port</span> <span class="k">on</span> <span class="n">the</span> <span class="n">remote</span> <span class="p">(</span><span class="n">server</span><span class="p">)</span> <span class="k">host</span> <span class="k">is</span> <span class="k">to</span> <span class="n">be</span> <span class="n">forwarded</span> <span class="k">to</span> <span class="n">the</span> <span class="n">given</span> <span class="k">host</span> <span class="k">and</span> <span class="n">port</span> <span class="k">on</span> <span class="n">the</span> <span class="k">local</span> <span class="n">side</span><span class="p">.</span>  <span class="n">This</span> <span class="n">works</span> <span class="k">by</span> <span class="n">allocating</span> <span class="n">a</span> <span class="n">socket</span> <span class="k">to</span> <span class="k">listen</span> <span class="k">to</span> <span class="n">port</span>
 </pre></div>
 
 
-<p>意思就是把一个远程主机的端口用于本地端口的端口转发。于是对应于假设远程主机IP:192.168.172.11, 本地ssh端口是默认的22，我们可以这样做：</p>
-<div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="o">-</span><span class="n">R</span> <span class="mi">17999</span><span class="o">:</span><span class="nl">localhost</span><span class="p">:</span><span class="mi">22</span> <span class="n">sourceuser</span><span class="mf">@192.168.172.11</span>
-</pre></div>
-
-
-<p>这一步完成以后，远程的17999端口会映射到本地主机的22端口，于是我们在远程终端，输入命令:</p>
-<div class="highlight"><pre><span></span>ssh -p 17999 127.0.0.1
-</pre></div>
-
-
-<p>这样就很方便的又重新连接到了本地的ssh。同样的技巧可以用于一些暴露本地端口的操作，例如你身处一个局域网里，且没有权限去操作路由。你却想要暴露一个本机的ip，比如说80，让远程的主机访问你的http服务，用同样的方式可以很轻易的做到。</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+<p>意思就是把一个远程主机的端口用于本地端口的端口转发。于是对应于假设远程主机IP …</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
     Tagged: 
     <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
@@ -83,8 +182,11 @@
 
 
 
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/linuxli-yong-sshfan-xiang-duan-kou-zhuan-fa-bao-lu-nei-wang-duan-kou.html">Read More</a>
+                <hr  class="gradient"/>
             </article>
 
+            <!-- /#posts-list -->
 <div class="pagination-centered">
 <h6 class="subheader">Page 1 of 1</h6>
 
@@ -92,10 +194,6 @@
 
 </p>
 </div>
-
-
-
-            <!-- /#posts-list -->
 
     </div>
     <!-- End Main Content -->
@@ -113,6 +211,7 @@
         <ul class="side-nav">
             <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
             <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
+            <li><a href="https://gccpacman.github.io/category/nodejs.html">Nodejs</a></li>
             <li><a href="https://gccpacman.github.io/category/python.html">python</a></li>
             <li><a href="https://gccpacman.github.io/category/tmux.html">Tmux</a></li>
             <li><a href="https://gccpacman.github.io/category/vim.html">Vim</a></li>

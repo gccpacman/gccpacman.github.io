@@ -47,8 +47,54 @@
 
 
             <article>
+                <a href="https://gccpacman.github.io/windowsan-zhuang-msys32pei-zhi-gitdeng-kai-fa-huan-jing-bing-ji-cheng-vscode.html"><h3 class="article-title">Windows安装MSys32配置Git等开发环境并集成VSCode</h3></a>
+<h6 class="subheader" title="2018-02-01T10:20:00+08:00">周四 01 二月 2018
+</h6>
+
+
+<p>在不久之前发现了Msys2，基于Cygwin但是却又有一个让我觉得无比美好的包管理器Pacman(和Arch Linux的一样)，于是决定试试。但是真的用于Windows的终端还有很多麻烦的地方要解决，主要是以下几点：
+1. Git的ssh_keygen配置，你和windows自己的CMD里的ssh_keygen能否共用
+2. Msys用的换行符是和Linux一样的LF，而Windows的是CRLF
+3. Python能不能直接用Windows的Python而不用模拟Unix环境的Python（有很多的bug）
+4. 能否和我目前用的最多的VSCode编辑器无缝集成</p>
+<p>经过一段时间的研究，每个问题都得到了很好的解决，目前来讲非常的完美，在这里分享一下：</p>
+<ol>
+<li>
+<p>下载并安装 <a href="http://www.msys2.org/">Msys2</a></p>
+</li>
+<li>
+<p>安装和配置 <code>git</code>, 配置在windows上check出crlf格式文本，提交lf格式:</p>
+<p>2.1 安装git：</p>
+<div class="highlight"><pre><span></span>$ pacman --needed -S bash pacman msys2-runtime  git
+</pre></div>
+
+
+<p>2.2 修改git处理回车的方式：</p>
+<div class="highlight"><pre><span></span>$ git config --global core.autocrlf <span class="nb">true</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>修改Home目录路径, Msys2默认的Home目录是Mingw64的/home …</p></li></ol><p class="subheader">Category: <a href="https://gccpacman.github.io/category/windows.html">Windows</a>
+
+    Tagged: 
+    <a href="https://gccpacman.github.io/tag/windows.html">windows </a>
+    <a href="https://gccpacman.github.io/tag/shell.html">shell </a>
+</p>
+
+
+
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/windowsan-zhuang-msys32pei-zhi-gitdeng-kai-fa-huan-jing-bing-ji-cheng-vscode.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+
+        
+
+
+            <article>
                 <a href="https://gccpacman.github.io/yong-calibre-serverchuang-jian-ge-ren-zai-xian-dian-zi-shu-yue-du-wang-zhan.html"><h3 class="article-title">用Calibre Server创建个人在线电子书阅读网站</h3></a>
-<h6 class="subheader" title="2017-12-20T10:20:00+08:00">Wed 20 December 2017
+<h6 class="subheader" title="2017-12-20T10:20:00+08:00">周三 20 十二月 2017
 </h6>
 
 
@@ -56,11 +102,11 @@
 <p>改写的方法参考了：https://wiki.ubuntu.com/SystemdForUpstartUsers</p>
 <p>用户名和密码也不再支持digitalocean里的明文的形式, <a href="https://manual.calibre-ebook.com/server.html#managing-user-accounts-from-the-command-line-only">官方文档</a>里看到有<code>enable-auth</code>和<code>userdb</code>, 看来是出于安全性进行了改进, userdb指定最简单的sqlite数据库，并按照提示添加用户。
 最终的版本是：</p>
-<div class="highlight"><pre><span></span>  [Unit]
-  Description=Job that runs the calibre daemon
+<div class="highlight"><pre><span></span><span class="w">  </span><span class="o">[</span><span class="n">Unit</span><span class="o">]</span><span class="w"></span>
+<span class="w">  </span><span class="n">Description</span><span class="o">=</span><span class="n">Job</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">runs</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">calibre</span><span class="w"> </span><span class="n">daemon</span><span class="w"></span>
 
-  [Service]
-  Environment …</pre></div><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+<span class="w">  </span><span class="o">[</span><span class="n">Service</span><span class="o">]</span><span class="w"></span>
+<span class="w">  </span><span class="n">Environment …</span></pre></div><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
     Tagged: 
     <a href="https://gccpacman.github.io/tag/kodi.html">kodi </a>
@@ -77,8 +123,8 @@
 
 
             <article>
-                <a href="https://gccpacman.github.io/linuxxiu-mian-hou-huan-xing-wifihe-lan-ya-wu-fa-zheng-chang-shi-yong-de-jie-jue-fang-fa.html"><h3 class="article-title">Linux休眠后唤醒，wifi和蓝牙无法正常使用的解决方法</h3></a>
-<h6 class="subheader" title="2017-12-04T10:20:00+08:00">Mon 04 December 2017
+                <a href="https://gccpacman.github.io/archlinuxxiu-mian-hou-huan-xing-wifihe-lan-ya-wu-fa-zheng-chang-shi-yong-de-jie-jue-fang-fa.html"><h3 class="article-title">ArchLinux休眠后唤醒，wifi和蓝牙无法正常使用的解决方法</h3></a>
+<h6 class="subheader" title="2017-12-04T10:20:00+08:00">周一 04 十二月 2017
 </h6>
 
 
@@ -90,12 +136,12 @@
 
     Tagged: 
     <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
-    <a href="https://gccpacman.github.io/tag/drivers.html">drivers </a>
+    <a href="https://gccpacman.github.io/tag/driver.html">driver </a>
 </p>
 
 
 
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/linuxxiu-mian-hou-huan-xing-wifihe-lan-ya-wu-fa-zheng-chang-shi-yong-de-jie-jue-fang-fa.html">Read More</a>
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/archlinuxxiu-mian-hou-huan-xing-wifihe-lan-ya-wu-fa-zheng-chang-shi-yong-de-jie-jue-fang-fa.html">Read More</a>
                 <hr  class="gradient"/>
             </article>
 
@@ -103,12 +149,12 @@
 
 
             <article>
-                <a href="https://gccpacman.github.io/vimcha-jian-command-tzai-windowsshang-bian-yi.html"><h3 class="article-title">vim插件command-t在windows上编译</h3></a>
-<h6 class="subheader" title="2017-10-24T10:20:00+08:00">Tue 24 October 2017
+                <a href="https://gccpacman.github.io/windowsshang-bian-yi-vimwen-jian-dao-hang-tiao-zhuan-cha-jian-command-t.html"><h3 class="article-title">Windows上编译vim文件导航跳转插件command-t</h3></a>
+<h6 class="subheader" title="2017-10-24T10:20:00+08:00">周二 24 十月 2017
 </h6>
 
 
-<p>用Bundle在Windows平台上配置成功了以后，绝大多数插件都已经可以使用，但是唯独<a href="https://github.com/wincent/Command-T">Command-T</a>因为是Ruby集成的插件，需要手动编译。</p>
+<p>用Bundle在Windows平台上配置成功了以后，绝大多数插件都已经可以使用，但是唯独强大的文件导航<a href="https://github.com/wincent/Command-T">Command-T</a>因为Ruby开发的插件，需要手动编译。</p>
 <p><a href="https://github.com/wincent/command-t/blob/master/doc/command-t.txt">官方文档</a>写的安装编译过程代码大概是这样的，我省去了使用bundle的安装过程：</p>
 <div class="highlight"><pre><span></span>$ <span class="nb">cd</span> ~/vim<span class="se">\b</span>undle<span class="se">\c</span>ommand-t<span class="se">\r</span>uby<span class="se">\c</span>ommand-t<span class="se">\e</span>xt<span class="se">\c</span>ommand-t&gt;
 $ ruby extconf.rb
@@ -128,7 +174,7 @@ $ make
 
 
 
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/vimcha-jian-command-tzai-windowsshang-bian-yi.html">Read More</a>
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/windowsshang-bian-yi-vimwen-jian-dao-hang-tiao-zhuan-cha-jian-command-t.html">Read More</a>
                 <hr  class="gradient"/>
             </article>
 
@@ -137,18 +183,18 @@ $ make
 
             <article>
                 <a href="https://gccpacman.github.io/windowsde-bao-guan-li-chocolatehe-vimvundle.html"><h3 class="article-title">windows的包管理Chocolate和vim.Vundle</h3></a>
-<h6 class="subheader" title="2017-10-22T10:20:00+08:00">Sun 22 October 2017
+<h6 class="subheader" title="2017-10-22T10:20:00+08:00">周日 22 十月 2017
 </h6>
 
 
 <p>Windows的开发环境一直都会让人比较头疼，一般解决方法有用Cygwin等模拟Linux的环境，Windows 10又自带了Ubuntu On Windows 10的环境。但是都或多或少有点问题，例如Cygwin的文件目录和windows分离，Ubuntu On Windows 10不能用Nodejs，打开X应用比较麻烦，只能用终端等。</p>
 <p>经过很多尝试，我认为最友好的环境还是windows原生的环境，只是你需要偶尔告别命令行搜索某些应用需要的依赖，依次安装，这样其实绝大多数的开发环境都是可以部署的。不过还是有工具可以帮助我们，例如Windows其实也有一个类似apt-get或者<a href="https://brew.sh/">Homebrew</a>的包管理工具，叫做<a href="https://chocolatey.org/">Chocolate</a>.</p>
 <p><a href="https://chocolatey.org/install">安装Chocolate</a>只要在Powershell里写这行代码即可：</p>
-<div class="highlight"><pre><span></span>Set-ExecutionPolicy Bypass; iex ((New-Object System.Net.WebClient).DownloadString(&#39;https://chocolatey.org/install.ps1&#39;))
+<div class="highlight"><pre><span></span><span class="k">Set</span><span class="o">-</span><span class="n">ExecutionPolicy</span> <span class="n">Bypass</span><span class="p">;</span> <span class="n">iex</span> <span class="p">((</span><span class="k">New</span><span class="o">-</span><span class="k">Object</span> <span class="k">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">WebClient</span><span class="p">).</span><span class="n">DownloadString</span><span class="p">(</span><span class="s1">&#39;https://chocolatey.org/install.ps1&#39;</span><span class="p">))</span>
 </pre></div>
 
 
-<p>安装包的方法是<code>choco install &lt;package_name&gt;</code> 但是这个命令必须用admin权限的powershell来执行。于是想是不是有个windows的<code>sudo</code>，结果一查还真的有，而且可以用chocolate安装 …</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/vim.html">Vim</a>
+<p>安装包的方法是<code>choco install &lt;package_name&gt;</code> 但是这个命令必须用admin权限的powershell来执行。于是想是不是有个windows的<code>sudo …</code></p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/vim.html">Vim</a>
 
     Tagged: 
     <a href="https://gccpacman.github.io/tag/windows.html">windows </a>
@@ -166,7 +212,7 @@ $ make
 
             <article>
                 <a href="https://gccpacman.github.io/linuxan-zhuang-dnscrypt.html"><h3 class="article-title">Linux安装Dnscrypt</h3></a>
-<h6 class="subheader" title="2016-02-06T10:20:00+08:00">Sat 06 February 2016
+<h6 class="subheader" title="2016-02-06T10:20:00+08:00">周六 06 二月 2016
 </h6>
 
 
@@ -193,39 +239,6 @@ wget https://download.libsodium.org/libsodium …</p></li></ol><p class="subhead
 
 
                 <a class="button radius secondary small right" href="https://gccpacman.github.io/linuxan-zhuang-dnscrypt.html">Read More</a>
-                <hr  class="gradient"/>
-            </article>
-
-        
-
-
-            <article>
-                <a href="https://gccpacman.github.io/ba-yong-hu-tai-systemdfu-wu-gai-cheng-xi-tong-fu-wu-kai-ji-zi-qi-dong-xware.html"><h3 class="article-title">把用户态systemd服务改成系统服务，开机自启动xware</h3></a>
-<h6 class="subheader" title="2016-01-08T10:20:00+08:00">Fri 08 January 2016
-</h6>
-
-
-<p>OK.. 怎么给xubuntu装个迅雷远程呢，迅雷的Linux版本Xware-Desktop，目前是很稳定的，而且有很详细的官方教程：
-https://github.com/Xinkai/XwareDesktop/wiki/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E</p>
-<p>这个就是针对ubuntu的，所以原封不动的执行就行了。</p>
-<p>但是我的需求有点不一样，迅雷xware版自己提供了几个开机自启动选项：
-1）由用户态systemd托管
-2）由用户态upstart托管
-3）简单的自动启动。</p>
-<p>这三个选项的特点就是都是以用户态启动，事实上，xware的配置文件也确实是保存在用户的HOME目录下的.xware-desktop里的。</p>
-<p>但是我希望Linux开机的时候并不会自动登录，更何况我的linux是运行kodi的，我也不会去手动登录，因此用户态的服务是不会自动启动的。</p>
-<p>但是我希望一开机，xware就自动打开，开始执行下载任务。因此依赖原来的代码显然不太符合我的需求，就自己写一个系统的service吧。</p>
-<p>还好几乎不需要改变xware用户态的服务，就可以搞定。用户态的服务创建在用户目录的<code>$HOME …</code></p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
-
-    Tagged: 
-    <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
-    <a href="https://gccpacman.github.io/tag/kodi.html">kodi </a>
-    <a href="https://gccpacman.github.io/tag/resource.html">resource </a>
-</p>
-
-
-
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/ba-yong-hu-tai-systemdfu-wu-gai-cheng-xi-tong-fu-wu-kai-ji-zi-qi-dong-xware.html">Read More</a>
                 <hr  class="gradient"/>
             </article>
 
@@ -256,6 +269,7 @@ https://github.com/Xinkai/XwareDesktop/wiki/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E
         <ul class="side-nav">
             <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
             <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
+            <li><a href="https://gccpacman.github.io/category/nodejs.html">Nodejs</a></li>
             <li><a href="https://gccpacman.github.io/category/python.html">python</a></li>
             <li><a href="https://gccpacman.github.io/category/tmux.html">Tmux</a></li>
             <li><a href="https://gccpacman.github.io/category/vim.html">Vim</a></li>

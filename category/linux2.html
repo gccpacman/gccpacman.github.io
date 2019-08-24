@@ -48,14 +48,14 @@
 
             <article>
                 <a href="https://gccpacman.github.io/archlinuxjiang-nvidia-driverti-huan-cheng-kai-yuan-de-nouveaujie-jue-xian-qia-qu-dong-wen-ti.html"><h3 class="article-title">ArchLinux将nvidia driver替换成开源的nouveau解决显卡驱动问题</h3></a>
-<h6 class="subheader" title="2016-01-05T10:20:00+08:00">Tue 05 January 2016
+<h6 class="subheader" title="2016-01-05T10:20:00+08:00">周二 05 一月 2016
 </h6>
 
 
 <p>昨天还装完arch兴高采烈，今天就差点放弃整个系统，罪魁祸首就是当年被linus喷了的nvidia.</p>
 <p>Archlinux装了使用nvidia驱动，一开始发现根本就没有加载，装了和没装没啥区别，但是跑的好好的阿跑的好好的，结果不小心手贱点了<code>nvidia-xconfig</code>的应用，莫名其妙的起不来了。（这个原因我想了半天才想出来，不然我实在是无力吐槽他妈跑了一天多好好的什么也没干突然就起步来的情况，一度怀疑是显卡硬件坏了）</p>
 <p>于是抢救三个多小时，<code>/var/log/xorg.0.log</code>里的报错也莫名其妙，比如:</p>
-<div class="highlight"><pre><span></span>not detect device nvidia, no screen found.
+<div class="highlight"><pre><span></span><span class="k">not</span> <span class="n">detect</span> <span class="n">device</span> <span class="n">nvidia</span><span class="p">,</span> <span class="k">no</span> <span class="n">screen</span> <span class="k">found</span><span class="p">.</span>
 </pre></div>
 
 
@@ -63,7 +63,7 @@
 <p>pacman -R nvidia nvidia-utils</p>
 <p>然后reboot, 没想到发生的事情更加奇葩了，连命令行就出不来了，直接黑屏了我草。</p>
 <p>心里十万个草尼马，还好安装过arch的人毕竟还是知道有个arch-chroot, 放入安装介质（我的是u盘），重启， mount各种好盘:</p>
-<div class="highlight"><pre><span></span>mount /dev …</pre></div><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+<div class="highlight"><pre><span></span><span class="n">mount</span> <span class="o">/</span><span class="n">dev …</span></pre></div><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
     Tagged: 
     <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
@@ -83,7 +83,7 @@
 
             <article>
                 <a href="https://gccpacman.github.io/linuxda-jian-vncfu-wu-qi.html"><h3 class="article-title">Linux搭建VNC服务器</h3></a>
-<h6 class="subheader" title="2016-01-05T10:20:00+08:00">Tue 05 January 2016
+<h6 class="subheader" title="2016-01-05T10:20:00+08:00">周二 05 一月 2016
 </h6>
 
 
@@ -127,44 +127,8 @@
 
 
             <article>
-                <a href="https://gccpacman.github.io/an-zhuang-delugexia-zai-gong-ju-zi-dong-yuan-cheng-xia-zai.html"><h3 class="article-title">安装deluge下载工具自动远程下载</h3></a>
-<h6 class="subheader" title="2016-01-04T10:20:00+08:00">Mon 04 January 2016
-</h6>
-
-
-<p>上一篇装完kodi后，我的旧电脑就彻底变成了一个kodi/XBMC媒体中心，那么比如我要下载新的美剧什么的，好像就还是不那么方便。
-p2p的torrent一直是我的最爱。deluge是一个跨平台的操作系统，支持linux, windows 和mac，还有远程控制等功能，什么是远程下载呢。我们都知道有迅雷远程下载，那么deluge其实也是一样，就是你在一台电脑操作，有一个下载链接，然后你可以直接在这台电脑上添加这个下载链接，唯一不同的是下载的任务被添加到了远程的机器上，文件也会下载到远程的机器上。
-这样的需求正符合我媒体中心的需要，我找到新的片源，并不需要下载到我的计算机，而是可以让我的Kodi在播放电影的同时，又可以执行下载的任务。</p>
-<h1>服务器端：</h1>
-<p>安装:</p>
-<div class="highlight"><pre><span></span>$ sudo apt-get install deluged deluge-web
-</pre></div>
-
-
-<p>新建一个deluge用户和用户组:</p>
-<div class="highlight"><pre><span></span>$ sudo adduser --system  --gecos <span class="s2">&quot;Deluge Service&quot;</span> --disabled-password --group --home /var/lib/deluge deluge
-</pre></div>
-
-
-<p>把用户添加到deluge用户组<code>adduser &lt;username&gt; deluge</code>，便于用户操作torrent和下载到的文件 …</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
-
-    Tagged: 
-    <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
-    <a href="https://gccpacman.github.io/tag/resource.html">resource </a>
-</p>
-
-
-
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/an-zhuang-delugexia-zai-gong-ju-zi-dong-yuan-cheng-xia-zai.html">Read More</a>
-                <hr  class="gradient"/>
-            </article>
-
-        
-
-
-            <article>
                 <a href="https://gccpacman.github.io/linuxan-zhuang-bing-kai-ji-jin-ru-kodimei-ti-zhong-xin.html"><h3 class="article-title">Linux安装并开机进入Kodi媒体中心</h3></a>
-<h6 class="subheader" title="2016-01-04T10:20:00+08:00">Mon 04 January 2016
+<h6 class="subheader" title="2016-01-04T10:20:00+08:00">周一 04 一月 2016
 </h6>
 
 
@@ -192,8 +156,44 @@ p2p的torrent一直是我的最爱。deluge是一个跨平台的操作系统，�
 
 
             <article>
+                <a href="https://gccpacman.github.io/linuxan-zhuang-delugexia-zai-gong-ju-zi-dong-yuan-cheng-xia-zai.html"><h3 class="article-title">Linux安装deluge下载工具自动远程下载</h3></a>
+<h6 class="subheader" title="2016-01-04T10:20:00+08:00">周一 04 一月 2016
+</h6>
+
+
+<p>上一篇装完kodi后，我的旧电脑就彻底变成了一个kodi/XBMC媒体中心，那么比如我要下载新的美剧什么的，好像就还是不那么方便。
+p2p的torrent一直是我的最爱。deluge是一个跨平台的操作系统，支持linux, windows 和mac，还有远程控制等功能，什么是远程下载呢。我们都知道有迅雷远程下载，那么deluge其实也是一样，就是你在一台电脑操作，有一个下载链接，然后你可以直接在这台电脑上添加这个下载链接，唯一不同的是下载的任务被添加到了远程的机器上，文件也会下载到远程的机器上。
+这样的需求正符合我媒体中心的需要，我找到新的片源，并不需要下载到我的计算机，而是可以让我的Kodi在播放电影的同时，又可以执行下载的任务。</p>
+<h1>服务器端：</h1>
+<p>安装:</p>
+<div class="highlight"><pre><span></span>$ sudo apt-get install deluged deluge-web
+</pre></div>
+
+
+<p>新建一个deluge用户和用户组:</p>
+<div class="highlight"><pre><span></span>$ sudo adduser --system  --gecos <span class="s2">&quot;Deluge Service&quot;</span> --disabled-password --group --home /var/lib/deluge deluge
+</pre></div>
+
+
+<p>把用户添加到deluge用户组<code>adduser &lt;username&gt; deluge</code>，便于用户操作torrent和下载到的文件 …</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+
+    Tagged: 
+    <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
+    <a href="https://gccpacman.github.io/tag/resource.html">resource </a>
+</p>
+
+
+
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/linuxan-zhuang-delugexia-zai-gong-ju-zi-dong-yuan-cheng-xia-zai.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+
+        
+
+
+            <article>
                 <a href="https://gccpacman.github.io/diao-zheng-linuxzhu-fen-qu-de-da-xiao.html"><h3 class="article-title">调整Linux主分区的大小</h3></a>
-<h6 class="subheader" title="2016-01-03T10:20:00+08:00">Sun 03 January 2016
+<h6 class="subheader" title="2016-01-03T10:20:00+08:00">周日 03 一月 2016
 </h6>
 
 
@@ -202,8 +202,8 @@ p2p的torrent一直是我的最爱。deluge是一个跨平台的操作系统，�
 <p>我的目标是把swap分区弄到最后，其他都扩展给HOME分区。</p>
 <p>依稀记得装arch的时候，swap并不是多大不了的事情，甚至说可以不需要swap。于是我打算先把swap禁用掉，然后删除。再重新创建swap分区，然后resize以下Root分区的大小基本就可以大功告成了。不过调整root分区的大小是不可以在当前系统下完成的。因此很有必要弄一个usb的镜像，通过镜像系统进去后调整没有mount的swap分区。</p>
 <p>在linux下把镜像刻录到usb是非常方便的。接上U盘以后，可以通过<code>lsblk</code> 查看一下u盘的设备路径,比如我的是<code>/dev/sdc</code>,基本上可以通过大小就能判断出来了。</p>
-<div class="highlight"><pre><span></span>sdc                   8:32   1   7.2G  0 disk
-├─sdc1                8:33   1   1 …</pre></div><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+<div class="highlight"><pre><span></span><span class="n">sdc</span>                   <span class="mi">8</span><span class="p">:</span><span class="mi">32</span>   <span class="mi">1</span>   <span class="mi">7</span><span class="p">.</span><span class="mi">2</span><span class="k">G</span>  <span class="mi">0</span> <span class="n">disk</span>
+<span class="err">├─</span><span class="n">sdc1</span>                <span class="mi">8</span><span class="p">:</span><span class="mi">33</span>   <span class="mi">1 …</span></pre></div><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
     Tagged: 
     <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
@@ -221,7 +221,7 @@ p2p的torrent一直是我的最爱。deluge是一个跨平台的操作系统，�
 
             <article>
                 <a href="https://gccpacman.github.io/dockerda-jian-openvpn-server.html"><h3 class="article-title">Docker搭建openvpn server</h3></a>
-<h6 class="subheader" title="2015-12-29T10:20:00+08:00">Tue 29 December 2015
+<h6 class="subheader" title="2015-12-29T10:20:00+08:00">周二 29 十二月 2015
 </h6>
 
 
@@ -269,6 +269,7 @@ But sometimes the connection between my own pc and the vps server are not quite 
         <ul class="side-nav">
             <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
             <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
+            <li><a href="https://gccpacman.github.io/category/nodejs.html">Nodejs</a></li>
             <li><a href="https://gccpacman.github.io/category/python.html">python</a></li>
             <li><a href="https://gccpacman.github.io/category/tmux.html">Tmux</a></li>
             <li><a href="https://gccpacman.github.io/category/vim.html">Vim</a></li>

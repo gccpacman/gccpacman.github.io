@@ -46,12 +46,12 @@
         
 
             <article>
-                <a href="https://gccpacman.github.io/vimcha-jian-command-tzai-windowsshang-bian-yi.html"><h3 class="article-title">vim插件command-t在windows上编译</h3></a>
-<h6 class="subheader" title="2017-10-24T10:20:00+08:00">Tue 24 October 2017
+                <a href="https://gccpacman.github.io/windowsshang-bian-yi-vimwen-jian-dao-hang-tiao-zhuan-cha-jian-command-t.html"><h3 class="article-title">Windows上编译vim文件导航跳转插件command-t</h3></a>
+<h6 class="subheader" title="2017-10-24T10:20:00+08:00">周二 24 十月 2017
 </h6>
 
 
-<p>用Bundle在Windows平台上配置成功了以后，绝大多数插件都已经可以使用，但是唯独<a href="https://github.com/wincent/Command-T">Command-T</a>因为是Ruby集成的插件，需要手动编译。</p>
+<p>用Bundle在Windows平台上配置成功了以后，绝大多数插件都已经可以使用，但是唯独强大的文件导航<a href="https://github.com/wincent/Command-T">Command-T</a>因为Ruby开发的插件，需要手动编译。</p>
 <p><a href="https://github.com/wincent/command-t/blob/master/doc/command-t.txt">官方文档</a>写的安装编译过程代码大概是这样的，我省去了使用bundle的安装过程：</p>
 <div class="highlight"><pre><span></span>$ <span class="nb">cd</span> ~/vim<span class="se">\b</span>undle<span class="se">\c</span>ommand-t<span class="se">\r</span>uby<span class="se">\c</span>ommand-t<span class="se">\e</span>xt<span class="se">\c</span>ommand-t&gt;
 $ ruby extconf.rb
@@ -75,10 +75,10 @@ $ make
 
 <p>接着进入<code>~/vim\bundle\command-t\ruby\command-t\ext\command-t&gt;</code>文件夹，执行<code>ruby extconf.rb</code>命令，发现ruby执行成功了，用choco安装make并执行make一切都顺利。
 但是进入vim一按command-t的快捷键报错，报错内容是：</p>
-<div class="highlight"><pre><span></span>command-t.vim could not load the C extension
-Please see INSTALLATION and TROUBLE-SHOOTING in the help
-Vim Ruby version: 2.2.6
-Expected version: 2.3.3
+<div class="highlight"><pre><span></span><span class="n">command</span><span class="o">-</span><span class="n">t</span><span class="p">.</span><span class="n">vim</span> <span class="n">could</span> <span class="k">not</span> <span class="k">load</span> <span class="n">the</span> <span class="k">C</span> <span class="n">extension</span>
+<span class="n">Please</span> <span class="n">see</span> <span class="n">INSTALLATION</span> <span class="k">and</span> <span class="n">TROUBLE</span><span class="o">-</span><span class="n">SHOOTING</span> <span class="k">in</span> <span class="n">the</span> <span class="n">help</span>
+<span class="n">Vim</span> <span class="n">Ruby</span> <span class="k">version</span><span class="p">:</span> <span class="mi">2</span><span class="p">.</span><span class="mi">2</span><span class="p">.</span><span class="mi">6</span>
+<span class="n">Expected</span> <span class="k">version</span><span class="p">:</span> <span class="mi">2</span><span class="p">.</span><span class="mi">3</span><span class="p">.</span><span class="mi">3</span>
 </pre></div>
 
 
@@ -110,18 +110,18 @@ Expected version: 2.3.3
 
             <article>
                 <a href="https://gccpacman.github.io/windowsde-bao-guan-li-chocolatehe-vimvundle.html"><h3 class="article-title">windows的包管理Chocolate和vim.Vundle</h3></a>
-<h6 class="subheader" title="2017-10-22T10:20:00+08:00">Sun 22 October 2017
+<h6 class="subheader" title="2017-10-22T10:20:00+08:00">周日 22 十月 2017
 </h6>
 
 
 <p>Windows的开发环境一直都会让人比较头疼，一般解决方法有用Cygwin等模拟Linux的环境，Windows 10又自带了Ubuntu On Windows 10的环境。但是都或多或少有点问题，例如Cygwin的文件目录和windows分离，Ubuntu On Windows 10不能用Nodejs，打开X应用比较麻烦，只能用终端等。</p>
 <p>经过很多尝试，我认为最友好的环境还是windows原生的环境，只是你需要偶尔告别命令行搜索某些应用需要的依赖，依次安装，这样其实绝大多数的开发环境都是可以部署的。不过还是有工具可以帮助我们，例如Windows其实也有一个类似apt-get或者<a href="https://brew.sh/">Homebrew</a>的包管理工具，叫做<a href="https://chocolatey.org/">Chocolate</a>.</p>
 <p><a href="https://chocolatey.org/install">安装Chocolate</a>只要在Powershell里写这行代码即可：</p>
-<div class="highlight"><pre><span></span>Set-ExecutionPolicy Bypass; iex ((New-Object System.Net.WebClient).DownloadString(&#39;https://chocolatey.org/install.ps1&#39;))
+<div class="highlight"><pre><span></span><span class="k">Set</span><span class="o">-</span><span class="n">ExecutionPolicy</span> <span class="n">Bypass</span><span class="p">;</span> <span class="n">iex</span> <span class="p">((</span><span class="k">New</span><span class="o">-</span><span class="k">Object</span> <span class="k">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">WebClient</span><span class="p">).</span><span class="n">DownloadString</span><span class="p">(</span><span class="s1">&#39;https://chocolatey.org/install.ps1&#39;</span><span class="p">))</span>
 </pre></div>
 
 
-<p>安装包的方法是<code>choco install &lt;package_name&gt;</code> 但是这个命令必须用admin权限的powershell来执行。于是想是不是有个windows的<code>sudo</code>，结果一查还真的有，而且可以用chocolate安装 …</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/vim.html">Vim</a>
+<p>安装包的方法是<code>choco install &lt;package_name&gt;</code> 但是这个命令必须用admin权限的powershell来执行。于是想是不是有个windows的<code>sudo …</code></p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/vim.html">Vim</a>
 
     Tagged: 
     <a href="https://gccpacman.github.io/tag/windows.html">windows </a>
@@ -159,6 +159,7 @@ Expected version: 2.3.3
         <ul class="side-nav">
             <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
             <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
+            <li><a href="https://gccpacman.github.io/category/nodejs.html">Nodejs</a></li>
             <li><a href="https://gccpacman.github.io/category/python.html">python</a></li>
             <li><a href="https://gccpacman.github.io/category/tmux.html">Tmux</a></li>
             <li><a href="https://gccpacman.github.io/category/vim.html">Vim</a></li>

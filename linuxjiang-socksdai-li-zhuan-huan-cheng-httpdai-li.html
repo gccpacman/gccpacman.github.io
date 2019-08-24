@@ -4,7 +4,7 @@
     <!-- Set the viewport width to device width for mobile -->
     <meta name="viewport" content="width=device-width" />
 
-    <title>linux将Socks代理转换成Http代理</title>
+    <title>Linux将Socks代理转换成Http代理</title>
 
     <link rel="stylesheet" href="https://gccpacman.github.io/theme/css/normalize.css" />
     <link rel="stylesheet" href="https://gccpacman.github.io/theme/css/foundation.min.css" />
@@ -45,32 +45,32 @@
 <article>
     <header>
         <h3 class="article-title"><a href="https://gccpacman.github.io/linuxjiang-socksdai-li-zhuan-huan-cheng-httpdai-li.html" rel="bookmark"
-        title="Permalink to linux将Socks代理转换成Http代理">linux将Socks代理转换成Http代理</a></h3>
+        title="Permalink to Linux将Socks代理转换成Http代理">Linux将Socks代理转换成Http代理</a></h3>
     </header>
 
-<h6 class="subheader" title="2015-05-14T10:20:00+08:00">Thu 14 May 2015
+<h6 class="subheader" title="2015-05-14T10:20:00+08:00">周四 14 五月 2015
 </h6>
 
 
     <p>安装polipo：</p>
-<div class="highlight"><pre><span></span>sudo apt-get update
-sudo apt-get install polipo
+<div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="k">get</span> <span class="k">update</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="k">get</span> <span class="n">install</span> <span class="n">polipo</span>
 </pre></div>
 
 
 <p>编辑polipo配置文件 <code>/etc/polipo/config</code> ：</p>
-<div class="highlight"><pre><span></span>    ### Basic configuration
+<div class="highlight"><pre><span></span>    ### <span class="nv">Basic</span> <span class="nv">configuration</span>
 
-    # Add your proxy&#39;s address
-    proxyAddress = 192.168.0.1
+    # <span class="nv">Add</span> <span class="nv">your</span> <span class="nv">proxy</span><span class="s1">&#39;</span><span class="s">s address</span>
+    <span class="nv">proxyAddress</span> <span class="o">=</span> <span class="mi">192</span>.<span class="mi">168</span>.<span class="mi">0</span>.<span class="mi">1</span>
 
-    # Allow from anyone in the 192.168.0.* range to connect to your proxy
-    allowedClients = 192.168.0.0/24
+    # <span class="nv">Allow</span> <span class="nv">from</span> <span class="nv">anyone</span> <span class="nv">in</span> <span class="nv">the</span> <span class="mi">192</span>.<span class="mi">168</span>.<span class="mi">0</span>.<span class="o">*</span> <span class="nv">range</span> <span class="nv">to</span> <span class="k">connect</span> <span class="nv">to</span> <span class="nv">your</span> <span class="nv">proxy</span>
+    <span class="nv">allowedClients</span> <span class="o">=</span> <span class="mi">192</span>.<span class="mi">168</span>.<span class="mi">0</span>.<span class="mi">0</span><span class="o">/</span><span class="mi">24</span>
 </pre></div>
 
 
 <p>重启服务：</p>
-<div class="highlight"><pre><span></span>sudo /etc/init.d/polipo restart
+<div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">polipo</span> <span class="k">restart</span>
 </pre></div>
 
 
@@ -103,6 +103,7 @@ sudo apt-get install polipo
         <ul class="side-nav">
             <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
             <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
+            <li><a href="https://gccpacman.github.io/category/nodejs.html">Nodejs</a></li>
             <li><a href="https://gccpacman.github.io/category/python.html">python</a></li>
             <li><a href="https://gccpacman.github.io/category/tmux.html">Tmux</a></li>
             <li><a href="https://gccpacman.github.io/category/vim.html">Vim</a></li>

@@ -48,19 +48,19 @@
         title="Permalink to Linux利用ssh反向端口转发暴露内网端口">Linux利用ssh反向端口转发暴露内网端口</a></h3>
     </header>
 
-<h6 class="subheader" title="2015-10-30T10:20:00+08:00">Fri 30 October 2015
+<h6 class="subheader" title="2015-10-30T10:20:00+08:00">周五 30 十月 2015
 </h6>
 
 
     <p>从本地Host用SSH连接到目标主机，怎么让目标主机也可以连接本地的SSH呢？
 答案很简单，只要把本地主机的SSH端口转发到目标主机即可。可以先查看一下SSH命令的man手册:</p>
-<div class="highlight"><pre><span></span>man ssh
+<div class="highlight"><pre><span></span><span class="n">man</span> <span class="n">ssh</span>
 </pre></div>
 
 
 <p>注意里面的R参数，就是要用到的参数：</p>
-<div class="highlight"><pre><span></span>-R [bind_address:]port:host:hostport
-         Specifies that the given port on the remote (server) host is to be forwarded to the given host and port on the local side.  This works by allocating a socket to listen to port
+<div class="highlight"><pre><span></span><span class="o">-</span><span class="n">R</span> <span class="p">[</span><span class="n">bind_address</span><span class="p">:]</span><span class="n">port</span><span class="p">:</span><span class="k">host</span><span class="p">:</span><span class="n">hostport</span>
+         <span class="n">Specifies</span> <span class="n">that</span> <span class="n">the</span> <span class="n">given</span> <span class="n">port</span> <span class="k">on</span> <span class="n">the</span> <span class="n">remote</span> <span class="p">(</span><span class="n">server</span><span class="p">)</span> <span class="k">host</span> <span class="k">is</span> <span class="k">to</span> <span class="n">be</span> <span class="n">forwarded</span> <span class="k">to</span> <span class="n">the</span> <span class="n">given</span> <span class="k">host</span> <span class="k">and</span> <span class="n">port</span> <span class="k">on</span> <span class="n">the</span> <span class="k">local</span> <span class="n">side</span><span class="p">.</span>  <span class="n">This</span> <span class="n">works</span> <span class="k">by</span> <span class="n">allocating</span> <span class="n">a</span> <span class="n">socket</span> <span class="k">to</span> <span class="k">listen</span> <span class="k">to</span> <span class="n">port</span>
 </pre></div>
 
 
@@ -70,7 +70,7 @@
 
 
 <p>这一步完成以后，远程的17999端口会映射到本地主机的22端口，于是我们在远程终端，输入命令:</p>
-<div class="highlight"><pre><span></span>ssh -p 17999 127.0.0.1
+<div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="o">-</span><span class="n">p</span> <span class="mi">17999</span> <span class="mi">127</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">1</span>
 </pre></div>
 
 
@@ -103,6 +103,7 @@
         <ul class="side-nav">
             <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
             <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
+            <li><a href="https://gccpacman.github.io/category/nodejs.html">Nodejs</a></li>
             <li><a href="https://gccpacman.github.io/category/python.html">python</a></li>
             <li><a href="https://gccpacman.github.io/category/tmux.html">Tmux</a></li>
             <li><a href="https://gccpacman.github.io/category/vim.html">Vim</a></li>

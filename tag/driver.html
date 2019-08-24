@@ -46,15 +46,71 @@
         
 
             <article>
+                <a href="https://gccpacman.github.io/archlinuxxiu-mian-hou-huan-xing-wifihe-lan-ya-wu-fa-zheng-chang-shi-yong-de-jie-jue-fang-fa.html"><h3 class="article-title">ArchLinux休眠后唤醒，wifi和蓝牙无法正常使用的解决方法</h3></a>
+<h6 class="subheader" title="2017-12-04T10:20:00+08:00">周一 04 十二月 2017
+</h6>
+
+
+<p><code>Manjaro Linux</code>从<code>17.02</code>版本开始匹配了Surface Pro 3， 这里必须非常感谢下Manjaro Team的工作，我现在可以再次在Surface上用畅快的用Linux了。</p>
+<p>具体可以看reddit上的这篇文章： https://cd-rw.org/t/running-linux-on-the-surface-pro-3/175/37。</p>
+<p>我实际安装的版本是<code>17.1pre3</code>，不管是蓝牙，触摸板，WIFI，touchpad，音量键，甚至触摸屏都可以正常使用，甚至都不用升级内核。</p>
+<p>唯一的问题是启用休眠以后，wifi和蓝牙功能失灵了，即使通过重启<code>NetworkManager.service</code>也无法解决，因此基本上就是硬件驱动的问题，网上关于其他一些笔记本在休眠后无法解决的问题基本上就是用lsmod查到和wifi相关的模块，然后重新加载的方法，但是没有和surface pro有关的内容。</p>
+<p>找了几篇stackoverflow文章做了多次尝试，然后通过<code>lsmod　| grep wifi</code>和<code>lsmod | grep bluetooth</code>查出来的模块，依次尝试，终于找到了正确的模块。</p>
+<p>和wifi相关的模块是<code>mwifiex_pcie</code>， 和蓝牙相关的模块是<code>btusb</code>。</p>
+<p>因此要做的操作就是<code>rmmod</code>和<code>modprobe</code>，休眠后执行下面的命令后，wifi和蓝牙就可以正常工作了。</p>
+<div class="highlight"><pre><span></span> <span class="n">sudo</span> <span class="n">rmmod</span> <span class="o">-</span><span class="n">v</span> <span class="n">btusb</span>
+ <span class="n">sudo</span> <span class="n">rmbanbenmod</span> <span class="o">-</span><span class="n">v</span> <span class="n">mwifiex_pcie</span>
+ <span class="n">sudo</span> <span class="n">modprobe</span> <span class="o">-</span><span class="n">v</span> <span class="n">btusb</span>
+ <span class="n">sudo</span> <span class="n">modprobe</span> <span class="o">-</span><span class="n">v</span> <span class="n">mwifiex_pcie</span>
+</pre></div>
+
+
+<p>但是这样就是每次都得再休眠后执行这些命令好像也略麻烦，最后看到又休眠后自动执行脚本的方法，<code>pm</code>和<code>systemctl</code>的休眠脚本位置不同，我对<code>pm</code>没印象，觉得arch的休眠几乎肯定是<code>systemctl</code>的，于是直接尝试了<code>systemctl</code>，<code>systemctl</code>的脚本位置在<code>/usr/lib/systemd/system-sleep</code>，这里的脚本会在sleep或者休眠时被调用。</p>
+<p>我的脚本<code>/usr/lib/systemd/system-sleep/wakeup_suspend_dev.sh</code>的内容是：</p>
+<div class="highlight"><pre><span></span>    <span class="o">#!/</span><span class="n">bin</span><span class="o">/</span><span class="n">bash</span>
+    <span class="k">case</span> <span class="err">$</span><span class="mi">1</span> <span class="k">in</span>
+        <span class="n">pre</span><span class="p">)</span>
+          <span class="n">rmmod</span> <span class="n">btusb</span>
+          <span class="n">rmmod</span> <span class="n">mwifiex_pcie</span>
+        <span class="p">;;</span>
+        <span class="n">post</span><span class="p">)</span>
+          <span class="n">modprobe</span> <span class="n">btusb</span>
+                <span class="n">modprobe</span> <span class="n">mwifiex_pcie</span>
+        <span class="p">;;</span>
+    <span class="n">esac</span>
+</pre></div>
+
+
+<p><code>pre</code>是在休眠之前执行<code>rmmod</code>的操作，post是在休眠之后执行<code>modprobe</code>的操作。需要注意的是必须把这个脚本加可执行权限：</p>
+<div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">chmod</span> <span class="o">+</span><span class="n">x</span> <span class="n">wakeup_suspend_dev</span><span class="p">.</span><span class="n">sh</span>
+</pre></div><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+
+    Tagged: 
+    <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
+    <a href="https://gccpacman.github.io/tag/driver.html">driver </a>
+</p>
+
+
+
+            </article>
+
+
+                <hr  class="gradient"/>
+
+
+        
+
+
+            <article>
                 <a href="https://gccpacman.github.io/archlinuxjiang-nvidia-driverti-huan-cheng-kai-yuan-de-nouveaujie-jue-xian-qia-qu-dong-wen-ti.html"><h3 class="article-title">ArchLinux将nvidia driver替换成开源的nouveau解决显卡驱动问题</h3></a>
-<h6 class="subheader" title="2016-01-05T10:20:00+08:00">Tue 05 January 2016
+<h6 class="subheader" title="2016-01-05T10:20:00+08:00">周二 05 一月 2016
 </h6>
 
 
 <p>昨天还装完arch兴高采烈，今天就差点放弃整个系统，罪魁祸首就是当年被linus喷了的nvidia.</p>
 <p>Archlinux装了使用nvidia驱动，一开始发现根本就没有加载，装了和没装没啥区别，但是跑的好好的阿跑的好好的，结果不小心手贱点了<code>nvidia-xconfig</code>的应用，莫名其妙的起不来了。（这个原因我想了半天才想出来，不然我实在是无力吐槽他妈跑了一天多好好的什么也没干突然就起步来的情况，一度怀疑是显卡硬件坏了）</p>
 <p>于是抢救三个多小时，<code>/var/log/xorg.0.log</code>里的报错也莫名其妙，比如:</p>
-<div class="highlight"><pre><span></span>not detect device nvidia, no screen found.
+<div class="highlight"><pre><span></span><span class="k">not</span> <span class="n">detect</span> <span class="n">device</span> <span class="n">nvidia</span><span class="p">,</span> <span class="k">no</span> <span class="n">screen</span> <span class="k">found</span><span class="p">.</span>
 </pre></div>
 
 
@@ -62,72 +118,7 @@
 <p>pacman -R nvidia nvidia-utils</p>
 <p>然后reboot, 没想到发生的事情更加奇葩了，连命令行就出不来了，直接黑屏了我草。</p>
 <p>心里十万个草尼马，还好安装过arch的人毕竟还是知道有个arch-chroot, 放入安装介质（我的是u盘），重启， mount各种好盘:</p>
-<div class="highlight"><pre><span></span>mount /dev/sda2 mnt
-arch-chroot /mnt /bin/bash
-</pre></div>
-
-
-<p>然后咋办呢，突然在arch的官方教程里出现了一个词： nouveau（还好我还有台电脑阿，这时候如果只有一台电脑要在手机上查资料的话。。。我tm会不会放弃linux直接装个windows都不知道，我就是对自己那么没信心阿）</p>
-<p>nouveau是个什么呢，简单的解释就是个nvidia的开源驱动。。。虽然还不是对其了解，但是还是对开源两个字报有信心，而且也是死马当活马医了。。。于是:</p>
-<div class="highlight"><pre><span></span>pacman -S xf86-video-nouveau
-</pre></div>
-
-
-<p>据说还有什么3d的实验特性支持, (还可以<code>pacman -S mesa mesa-libg1</code>,  额这好像和我目前十万火急的状态没啥关系）</p>
-<p>然后咋办呢。。。nouveau已经装好了，nvidia也已经卸载了，这样就ok了么，好像还不行</p>
-<div class="highlight"><pre><span></span>lsmod  | gerp nvidia
-dmesg | grep nvidia
-</pre></div>
-
-
-<p>两个命令显示，nouveau还没有work，系统还是在用nvidia，继续查arch wiki 的 nouveau页，删除mod的方法是</p>
-<div class="highlight"><pre><span></span>modprobe -r nvidia
-</pre></div>
-
-
-<p>然后加入nouveau的mod:</p>
-<div class="highlight"><pre><span></span>modprobe nouveau
-</pre></div>
-
-
-<p>先就这样吧，从安装盘里推出来</p>
-<div class="highlight"><pre><span></span>umount -R /mnt
-</pre></div>
-
-
-<p>然后reboot，重启试试， 尝下startx还是不幸， 并且我们在dmesg | grep nouveau里看到了nouveau报错。。。额什么情况：</p>
-<div class="highlight"><pre><span></span>pointer to tmds table invalid...
-</pre></div>
-
-
-<p>实在不知道什么鬼，但是坚信一定是fuck的nvidia的问题，注意到startx时系统日志说了加载配置文件的路径/etc/X11/xorg.conf, 打开看看。。。一看吓一跳， 某个device里的driver,赫然写着nvidia这几个大字（于是就很显然了，一开始我打开nvidia-xconfig的时候，nvidia就是帮我做了这件事情，把xorg.conf文件给改了。更何况我还在/etc/X11目录下看到了一个文件名为xorg.conf.nvidia-xconfig-original的文件，我猜也知道这是nvidia-xconfig在改之前做的备份。。。（额，nvidia你居然知道做备份却不知道你的操作可能会导致用户进不了图形界面么），虽然打开来一看, 这个文件其实是空的，不过这大概这是巧合罢了吧，因为我之前也没有装过什么驱动。。。</p>
-<p>于是我把这个文件还原回去，虽然还是觉得没什么希望，鬼知道nvidia还干了什么。reboot。。。startxfce4, 然后。。。图形界面回来了，亲爱的xfce...额</p>
-<p>虽然我觉得可能一开始把那个xorg.conf文件改回来可能就解决问题了。。。折腾了一大堆的意义，几乎到了绝境快要放弃了，不断的尝试，事情还是总会给你惊喜的。而另一个收获是发现nouveau这个驱动，目前还不好说真正的效果到底比nvidia自己的驱动好还是不好，不过我坚定的表示继续用nouveau的驱动而不会用nvidia的驱动了。</p>
-<p>说到这里不得不说arch社区和文档的强大。如果是别的发行版缺乏文档的情况下有时候尝试会越尝试系统越没救。</p>
-<p>o了今天其实还拖着病体阿，早点去休息了，睡前亚冠决赛，恒大加油！</p>
-<hr>
-<p>最后故事的结局是, nouveau的驱动也并不稳定，依旧出现间歇性的黑屏，只能说不管是 nvidia和nouveau的驱动，都不能很好的支持我的显卡，估计是因为2015年的太新了，顺便报以下我的显卡：NVIDIA® GeForce® 920M 4GB DDR3。。。于是还是奉劝各位装linux尽量还是买个集成显卡的算了，别买nvidia和amd的了，一是没太大用，二是驱动出问题的可能太多，难以调试。</p>
-<p>所以打算也干掉nouveau的驱动</p>
-<p>pacman -R xf86-video-nouveau</p>
-<p>然后<code>rmmod nouveau</code> 或者 <code>modprobe -r nouveau</code>, 确认 <code>lsmod | gerp nouveau</code>  和 <code>dmesg | grep nouveau</code> 结果是————干不掉，reboot也没用。</p>
-<p>原因是其实linux内核里其实是有nouveau的驱动的。怎么搞定呢，wiki里说有个东西叫modprobe的黑名单, 在<code>/etc/modprobe.d/</code>里新建一个文件<code>blacklist_nouveau.conf</code>， 写入:</p>
-<div class="highlight"><pre><span></span>blacklist nouveau
-</pre></div>
-
-
-<p>重启，这样不管是</p>
-<div class="highlight"><pre><span></span>lsmod | gerp nouveau
-dmesg | grep nouveau
-</pre></div>
-
-
-<p>还是</p>
-<div class="highlight"><pre><span></span>lsmod | gerp nvidia
-dmesg | grep nvidia
-</pre></div>
-
-
-<p>都什么也查不到了，所名nvidia显卡没有用，系统现在用的是我的集成显卡。好吧，我的4g显存的显卡就这样完全闲置了。</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+<div class="highlight"><pre><span></span><span class="n">mount</span> <span class="o">/</span><span class="n">dev …</span></pre></div><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
     Tagged: 
     <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
@@ -138,8 +129,11 @@ dmesg | grep nvidia
 
 
 
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/archlinuxjiang-nvidia-driverti-huan-cheng-kai-yuan-de-nouveaujie-jue-xian-qia-qu-dong-wen-ti.html">Read More</a>
+                <hr  class="gradient"/>
             </article>
 
+            <!-- /#posts-list -->
 <div class="pagination-centered">
 <h6 class="subheader">Page 1 of 1</h6>
 
@@ -147,10 +141,6 @@ dmesg | grep nvidia
 
 </p>
 </div>
-
-
-
-            <!-- /#posts-list -->
 
     </div>
     <!-- End Main Content -->
@@ -168,6 +158,7 @@ dmesg | grep nvidia
         <ul class="side-nav">
             <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
             <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
+            <li><a href="https://gccpacman.github.io/category/nodejs.html">Nodejs</a></li>
             <li><a href="https://gccpacman.github.io/category/python.html">python</a></li>
             <li><a href="https://gccpacman.github.io/category/tmux.html">Tmux</a></li>
             <li><a href="https://gccpacman.github.io/category/vim.html">Vim</a></li>
