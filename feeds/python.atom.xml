@@ -7,13 +7,7 @@
 
 
 &lt;p&gt;2）然后启动， 指定端口号和进程号：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;uwsgi&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="mi"&gt;127&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;38803&lt;/span&gt; &lt;span class="c1"&gt;--http :8000 --module blog.wsgi&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;3) 配置nginx配置文件，放在&lt;code&gt;/etc/nginx/site-enabled/&lt;/code&gt;目录下，注意如果你要用80端口，就不要和其他的例如默认的配置冲突，如果有个default的文件，应该是一个软连接，可以直接删掉。我就直接贴我自己的了：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;upstream&lt;/span&gt; &lt;span class="nv"&gt;django&lt;/span&gt; {
-    &lt;span class="nv"&gt;server&lt;/span&gt; &lt;span class="mi"&gt;127 …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;没人访问的博客也不是不能升级。不过最近有点懒，趁着睡不着搞了下&lt;code&gt;uwsgi&lt;/code&gt;。
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;uwsgi&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="mi"&gt;127&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0 …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;没人访问的博客也不是不能升级。不过最近有点懒，趁着睡不着搞了下&lt;code&gt;uwsgi&lt;/code&gt;。
 额。平台ubuntu, 你最好有个django项目，假设已经用了&lt;code&gt;virtualenv&lt;/code&gt;，假设已经安装好&lt;code&gt;nginx&lt;/code&gt;并启动服务。&lt;/p&gt;
 &lt;p&gt;1）首先安装&lt;code&gt;uwsgi&lt;/code&gt;:  &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;uwsgi&lt;/span&gt;

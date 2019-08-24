@@ -20,7 +20,7 @@
 <div class="top-bar">
 <div class="row">
     <div class="large-9 large-centered columns">
-	    <h1><a href="https://gccpacman.github.io">Pacman News</a></h1>
+	    <h1><a href="/">Pacman News</a></h1>
     </div>
 </div>
 </div>
@@ -52,37 +52,16 @@
 
 
 <p>DigitalOcean上有在ubuntu 14.04上安装calibre server的教程——<a href="https://www.digitalocean.com/community/tutorials/how-to-create-a-calibre-ebook-server-on-ubuntu-14-04">How To Create a Calibre Ebook Server on Ubuntu 14.04</a>, 但是已经过时了，一是calibre-server的参数已经改变，二是创建系统服务的方式已经不适用之后的Ubuntu版本，我的服务器是16.04，因此需要把/etc/init/里的脚本改写成systemctl脚本</p>
-<p>改写的方法参考了：https://wiki.ubuntu.com/SystemdForUpstartUsers</p>
-<p>用户名和密码也不再支持digitalocean里的明文的形式, <a href="https://manual.calibre-ebook.com/server.html#managing-user-accounts-from-the-command-line-only">官方文档</a>里看到有<code>enable-auth</code>和<code>userdb</code>, 看来是出于安全性进行了改进, userdb指定最简单的sqlite数据库，并按照提示添加用户。
-最终的版本是：</p>
-<div class="highlight"><pre><span></span><span class="w">  </span><span class="o">[</span><span class="n">Unit</span><span class="o">]</span><span class="w"></span>
-<span class="w">  </span><span class="n">Description</span><span class="o">=</span><span class="n">Job</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">runs</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">calibre</span><span class="w"> </span><span class="n">daemon</span><span class="w"></span>
+<p>改写的方法参考了 …</p><p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
-<span class="w">  </span><span class="o">[</span><span class="n">Service</span><span class="o">]</span><span class="w"></span>
-<span class="w">  </span><span class="n">Environment</span><span class="o">=</span><span class="n">LIBRARY_PATH</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">huyunyan_cn</span><span class="o">/</span><span class="n">calibre</span><span class="o">-</span><span class="n">library</span><span class="w"></span>
-<span class="w">  </span><span class="n">Environment</span><span class="o">=</span><span class="n">PORT</span><span class="o">=</span><span class="mi">8080</span><span class="w"></span>
-<span class="w">  </span><span class="n">Environment</span><span class="o">=</span><span class="n">USERDB</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">huyunyan_cn</span><span class="o">/</span><span class="n">calibre</span><span class="o">-</span><span class="n">library</span><span class="o">/</span><span class="n">users</span><span class="p">.</span><span class="n">sqlite</span><span class="w"></span>
-<span class="w">  </span><span class="n">ExecStart</span><span class="o">=/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">calibre</span><span class="o">-</span><span class="n">server</span><span class="w"> </span><span class="err">$</span><span class="n">LIBRARY_PATH</span><span class="w"> </span><span class="err">\</span><span class="w"></span>
-<span class="w">                                   </span><span class="c1">--port $PORT --enable-auth --userdb $USERDB</span>
-<span class="w">  </span><span class="o">[</span><span class="n">Install</span><span class="o">]</span><span class="w"></span>
-<span class="w">  </span><span class="n">WantedBy</span><span class="o">=</span><span class="n">multi</span><span class="o">-</span><span class="k">user</span><span class="p">.</span><span class="n">target</span><span class="w"></span>
-</pre></div>
-
-
-<p>用户名和密码需要通过另一个参数<code>--manage-users</code>启动server后手动配置：</p>
-<p><code>sudo  calibre-server /home/huyunyan_cn/calibre-library/ --port 8080 --manage-users --userdb /home/huyunyan_cn/calibre-library/users.sqlite</code></p>
-<p>这样就完成了，访问域名后会提示输入用户名和密码，这样你自己可以在任何设备上访问，又不用担心别人来访问你的电子书。</p>
-<p>TODO:
-1. 自动刷新书库（--auto-reload这个参数已经不能用，需要通过restart service来实现）
-2. 远程同步书籍，可以从本地直接上传书到server</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
-
-    Tagged: 
+    标签: 
     <a href="https://gccpacman.github.io/tag/kodi.html">kodi </a>
     <a href="https://gccpacman.github.io/tag/calibre.html">calibre </a>
 </p>
 
 
 
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/yong-calibre-serverchuang-jian-ge-ren-zai-xian-dian-zi-shu-yue-du-wang-zhan.html">阅读全文</a>
             </article>
 
 <div class="pagination-centered">
@@ -102,14 +81,13 @@
 
     <!-- Sidebar -->
     <aside class="large-3 columns">
-        <h5 class="sidebar-title">Site</h5>
         <ul class="side-nav">
-            <li><a href="https://gccpacman.github.io/archives.html">Archives</a>
-            <li><a href="https://gccpacman.github.io/tags.html">Tags</a>
+            <li><a href="https://gccpacman.github.io/archives.html">归档</a>
+            <li><a href="https://gccpacman.github.io/tags.html">标签</a>
         </ul>
 
 		
-        <h5 class="sidebar-title">Categories</h5>
+        <h5 class="sidebar-title">分类</h5>
         <ul class="side-nav">
             <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
             <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
@@ -120,17 +98,13 @@
             <li><a href="https://gccpacman.github.io/category/windows.html">Windows</a></li>
    
         </ul>
-
-        <h5 class="sidebar-title">Links</h5>
-        <ul class="side-nav">
-            <li><a href="http://getpelican.com/">Pelican</a></li>
-        </ul>
 		
-        <h5 class="sidebar-title">Social</h5>
+        <h5 class="sidebar-title">我的社交账号</h5>
         <ul class="side-nav">
-            <li><a href="https://github.com/gccpacman">GccPacman @Github</a></li>
-            <li><a href="https://stackoverflow.com/users/4124310/realhu">r341h @StackOverflow</a></li>
+            <li><a href="https://github.com/gccpacman">Github</a></li>
+            <li><a href="https://stackoverflow.com/users/4124310/realhu">StackOverflow</a></li>
         </ul>
+
 
     </aside> <!-- End Sidebar -->
 

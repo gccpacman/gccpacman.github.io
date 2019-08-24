@@ -20,7 +20,7 @@
 <div class="top-bar">
 <div class="row">
     <div class="large-9 large-centered columns">
-	    <h1><a href="https://gccpacman.github.io">Pacman News</a></h1>
+	    <h1><a href="/">Pacman News</a></h1>
     </div>
 </div>
 </div>
@@ -65,33 +65,9 @@ Default Switch默认是可以连接外网的，如果是windows机器不用配�
 
 </li>
 <li>
-<p>编辑<code>/etc/sysconfig/network</code>, 替换server-name.company.lan为你的主机名：</p>
-<div class="highlight"><pre><span></span><span class="n">NETWORKING</span><span class="o">=</span><span class="n">yes</span>
-<span class="n">HOSTNAME</span><span class="o">=</span><span class="n">server</span><span class="o">-</span><span class="n">name</span><span class="p">.</span><span class="n">company</span><span class="p">.</span><span class="n">lan</span>
-</pre></div>
+<p>编辑<code>/etc/sysconfig/network …</code></p></li></ol><p class="subheader">分类: <a href="https://gccpacman.github.io/category/windows.html">Windows</a>
 
-
-</li>
-<li>
-<p>重启network服务：</p>
-<div class="highlight"><pre><span></span>$ systemctl restart network
-</pre></div>
-
-
-</li>
-<li>
-<p>确认网络是否网络正常，正常的话重启，再次确认：</p>
-<div class="highlight"><pre><span></span>$ nslookup bing.com
-</pre></div>
-
-
-</li>
-</ol>
-<p>参考：
-https://unix.stackexchange.com/questions/17436/centos-on-hyperv-eth0-not-in-ifconfig</p>
-<p>https://www.krizna.com/centos/setup-network-centos-7/</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/windows.html">Windows</a>
-
-    Tagged: 
+    标签: 
     <a href="https://gccpacman.github.io/tag/windows.html">windows </a>
     <a href="https://gccpacman.github.io/tag/hyper-v.html">hyper-v </a>
     <a href="https://gccpacman.github.io/tag/centos.html">centos </a>
@@ -100,6 +76,7 @@ https://unix.stackexchange.com/questions/17436/centos-on-hyperv-eth0-not-in-ifco
 
 
 
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/windowszai-hypervan-zhuang-centos7bing-pei-zhi-wang-luo.html">阅读全文</a>
             </article>
 
 
@@ -126,29 +103,16 @@ https://unix.stackexchange.com/questions/17436/centos-on-hyperv-eth0-not-in-ifco
 <p>下载并安装 <a href="http://www.msys2.org/">Msys2</a></p>
 </li>
 <li>
-<p>安装和配置 <code>git</code>, 配置在windows上check出crlf格式文本，提交lf格式:</p>
-<p>2.1 安装git：</p>
-<div class="highlight"><pre><span></span>$ pacman --needed -S bash pacman msys2-runtime  git
-</pre></div>
+<p>安装和配置 …</p></li></ol><p class="subheader">分类: <a href="https://gccpacman.github.io/category/windows.html">Windows</a>
 
-
-<p>2.2 修改git处理回车的方式：</p>
-<div class="highlight"><pre><span></span>$ git config --global core.autocrlf <span class="nb">true</span>
-</pre></div>
-
-
-</li>
-<li>
-<p>修改Home目录路径, Msys2默认的Home目录是Mingw64的/home …</p></li></ol><p class="subheader">Category: <a href="https://gccpacman.github.io/category/windows.html">Windows</a>
-
-    Tagged: 
+    标签: 
     <a href="https://gccpacman.github.io/tag/windows.html">windows </a>
     <a href="https://gccpacman.github.io/tag/shell.html">shell </a>
 </p>
 
 
 
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/windowsan-zhuang-msys32pei-zhi-gitdeng-kai-fa-huan-jing-bing-ji-cheng-vscode.html">Read More</a>
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/windowsan-zhuang-msys32pei-zhi-gitdeng-kai-fa-huan-jing-bing-ji-cheng-vscode.html">阅读全文</a>
                 <hr  class="gradient"/>
             </article>
 
@@ -164,20 +128,9 @@ https://unix.stackexchange.com/questions/17436/centos-on-hyperv-eth0-not-in-ifco
 <p>深刻和彻底的切换到linux平台后，深切的感受到linux平台对程序员带来的便利。因此日常环境已经不再使用windows啦，奈何博主虽然是个穷逼，然而却舍得钱买一堆电脑，所以没事还是会折腾下windows，毕竟娱乐还是需要的。</p>
 <p>之前折腾过cygwin好一阵子，最终还是觉得真的搬到开发环境确实有很多麻烦的地方，不过现在既然为了娱乐又有一台没有装任何开发环境的win10，那就娱乐一下好了。</p>
 <h1>1） 安装和配置babun</h1>
-<p>首先可以装一个定制得非常好的cygwin shell, 那就是<a href="http://babun.github.io/">babun</a>, 已经默认为你装好并配置了cygwin环境下的zsh，用起来可比普通的shell爽多了。另外有个强大的包管理器，pact命令，用起来很像rpm和apt之类的，非常方便。例如要装tmux, 那么就执行</p>
-<div class="highlight"><pre><span></span><span class="n">pact</span> <span class="n">install</span> <span class="n">tmux</span>
-</pre></div>
+<p>首先可以装一个定制得非常好的cygwin shell, 那就是<a href="http://babun.github.io/">babun</a>, 已经默认为你装好并配置了cygwin环境下的zsh，用起来可比普通的shell爽多了。另外有个强大的包管理器，pact命令，用起来很像rpm和apt之类的，非常方便。例如要装tmux, 那么就执行 …</p><p class="subheader">分类: <a href="https://gccpacman.github.io/category/windows.html">Windows</a>
 
-
-<p>就可以成功安装了。
-不过值得注意的是pact默认用的是kernel.org的镜像，国内访问非常慢，这时通过help发现有个--mirror的参数，可以手动指定成163的：</p>
-<div class="highlight"><pre><span></span><span class="n">pact</span> <span class="c1">--mirror http://mirrors.163.com/cygwin/ install tree</span>
-</pre></div>
-
-
-<p>不过每次要输入这个太麻烦，可以用alias, 在home目录下新建一个.bash_aliases的文件，输入alias pact='pact …</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/windows.html">Windows</a>
-
-    Tagged: 
+    标签: 
     <a href="https://gccpacman.github.io/tag/windows.html">windows </a>
     <a href="https://gccpacman.github.io/tag/cygwin.html">cygwin </a>
     <a href="https://gccpacman.github.io/tag/tmux.html">tmux </a>
@@ -186,7 +139,7 @@ https://unix.stackexchange.com/questions/17436/centos-on-hyperv-eth0-not-in-ifco
 
 
 
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/windowssshang-li-yong-babun-tmux-zshgao-du-ding-zhi-shell.html">Read More</a>
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/windowssshang-li-yong-babun-tmux-zshgao-du-ding-zhi-shell.html">阅读全文</a>
                 <hr  class="gradient"/>
             </article>
 
@@ -204,14 +157,13 @@ https://unix.stackexchange.com/questions/17436/centos-on-hyperv-eth0-not-in-ifco
 
     <!-- Sidebar -->
     <aside class="large-3 columns">
-        <h5 class="sidebar-title">Site</h5>
         <ul class="side-nav">
-            <li><a href="https://gccpacman.github.io/archives.html">Archives</a>
-            <li><a href="https://gccpacman.github.io/tags.html">Tags</a>
+            <li><a href="https://gccpacman.github.io/archives.html">归档</a>
+            <li><a href="https://gccpacman.github.io/tags.html">标签</a>
         </ul>
 
 		
-        <h5 class="sidebar-title">Categories</h5>
+        <h5 class="sidebar-title">分类</h5>
         <ul class="side-nav">
             <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
             <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
@@ -222,17 +174,13 @@ https://unix.stackexchange.com/questions/17436/centos-on-hyperv-eth0-not-in-ifco
             <li><a href="https://gccpacman.github.io/category/windows.html">Windows</a></li>
    
         </ul>
-
-        <h5 class="sidebar-title">Links</h5>
-        <ul class="side-nav">
-            <li><a href="http://getpelican.com/">Pelican</a></li>
-        </ul>
 		
-        <h5 class="sidebar-title">Social</h5>
+        <h5 class="sidebar-title">我的社交账号</h5>
         <ul class="side-nav">
-            <li><a href="https://github.com/gccpacman">GccPacman @Github</a></li>
-            <li><a href="https://stackoverflow.com/users/4124310/realhu">r341h @StackOverflow</a></li>
+            <li><a href="https://github.com/gccpacman">Github</a></li>
+            <li><a href="https://stackoverflow.com/users/4124310/realhu">StackOverflow</a></li>
         </ul>
+
 
     </aside> <!-- End Sidebar -->
 

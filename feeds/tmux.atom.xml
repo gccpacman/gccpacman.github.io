@@ -14,11 +14,7 @@
 # &lt;span class="nv"&gt;STATUS&lt;/span&gt; &lt;span class="nv"&gt;BAR&lt;/span&gt;
 &lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;status&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;keys&lt;/span&gt; &lt;span class="nv"&gt;vi&lt;/span&gt;
 &lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;status&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;interval&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
-&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;status&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;attr&lt;/span&gt; &lt;span class="nv"&gt;bright&lt;/span&gt;
-&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;status&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;fg&lt;/span&gt; &lt;span class="nv"&gt;white&lt;/span&gt;
-&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;status&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;bg&lt;/span&gt; &lt;span class="nv"&gt;black&lt;/span&gt;
-&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;status&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;left&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;length&lt;/span&gt; &lt;span class="mi"&gt;20&lt;/span&gt;
-&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;status&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;left&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;#[fg …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;ul&gt;
+&lt;span class="nv"&gt;set …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;putty的执行命令填入如下命令，tmux名称同session名称，以便开多个putty窗口时候识别&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ tmux new -A -s &lt;span class="o"&gt;{&lt;/span&gt;session_name&lt;span class="o"&gt;}&lt;/span&gt;
@@ -108,11 +104,7 @@
 &lt;li&gt;&lt;code&gt;Ctrl+a [&lt;/code&gt;开始复制&lt;/li&gt;
 &lt;li&gt;把光标移动到开始复制的位置(上下左右键，或者Ctrl+n/p/b/f键移动光标)&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;Ctrl+Space&lt;/code&gt;  开始选择内容，类似vim的按下V的效果&lt;/li&gt;
-&lt;li&gt;完成选择，&lt;code&gt;Alt+w&lt;/code&gt; 完成复制&lt;/li&gt;
-&lt;li&gt;然后到你想要黏贴的地方， &lt;code&gt;Ctrl+a ]&lt;/code&gt; 黏贴成功&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;需要注意的是， Ctrl+space在windows和linux的某些桌面环境下，都是输入法切换键，所以如果这个方法不成功，很可能是因为快捷键冲突的原因了。那么解决方法一个是把冲突的快捷键解决掉，另一个这是通过配置.tmux.conf。其实上面的快捷键默认的快捷键，模仿的按键是emacs，因为我不用emacs（因为我不用emacs，所以也只觉得很不习惯)，其实还有另外的一种快捷键模式是模仿vim的，不过需要你在tmux配置文件里配置一下, 把下面这行加入.tmux.conf里:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;set …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;tmux确实是一个吊炸的东西，功能和那个和他类似的鼻祖screen相比，确实多出了不少。比如他又一个可以对终端的内容进行复制和黏贴的功能。
+&lt;li&gt;完成选择，&lt;code&gt;Alt+w&lt;/code&gt; 完成复制 …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;tmux确实是一个吊炸的东西，功能和那个和他类似的鼻祖screen相比，确实多出了不少。比如他又一个可以对终端的内容进行复制和黏贴的功能。
 这里假定你设置的快捷键前缀是Ctrl+a:
 进行复制的操作是：&lt;/p&gt;
 &lt;ol&gt;

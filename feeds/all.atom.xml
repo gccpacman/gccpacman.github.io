@@ -4,7 +4,7 @@
 &lt;p&gt;首先在托管静态网站的时候，创建OSS桶需要注意两点配置：&lt;/p&gt;
 &lt;p&gt;1） OSS桶必须设置公共读，因为网站需要所有人都可以访问&lt;/p&gt;
 &lt;p&gt;2） OSS桶里有个默认首页的配置，需要配置成 &lt;code&gt;index.html&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;因为使用了Vue-Router，在阿里云上一开始部署的时候有个严重的问题，就是在非主页刷新页面，OSS都找不到资源，这时候重新刷新，阿里云又找不到该目录下的这个文件，就会报找不到资源的错误。例如有一个路径是 &lt;code&gt;www.example.com/hello/world&lt;/code&gt; ，通过主页 &lt;code&gt;www.example.com/index.html&lt;/code&gt; 跳转到 &lt;code&gt;www.example.com/hello/worlds&lt;/code&gt; 是正常的 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;code&gt;VueJS&lt;/code&gt; 非常不错，对于一个后端开发也很友好。近期我有机会在写一个网站的时候接触了VueJS，虽然不是一个很专业的前端，但是感觉VueJS非常容易上手。
+&lt;p&gt;因为使用了Vue-Router …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;code&gt;VueJS&lt;/code&gt; 非常不错，对于一个后端开发也很友好。近期我有机会在写一个网站的时候接触了VueJS，虽然不是一个很专业的前端，但是感觉VueJS非常容易上手。
 出于为了性能的需要，打算将该网站通过 &lt;code&gt;webpack&lt;/code&gt; 编译后上传到阿里云的 &lt;code&gt;OSS&lt;/code&gt; 作为静态网站发布，但是遇到了一些坑，特意将踩坑的过程分享一下。&lt;/p&gt;
 &lt;p&gt;首先在托管静态网站的时候，创建OSS桶需要注意两点配置：&lt;/p&gt;
 &lt;p&gt;1） OSS桶必须设置公共读，因为网站需要所有人都可以访问&lt;/p&gt;
@@ -30,11 +30,7 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;用kubectl获取k8s集群的基本信息：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span class="nv"&gt;kubectl&lt;/span&gt; &lt;span class="nv"&gt;get&lt;/span&gt; &lt;span class="nv"&gt;pods&lt;/span&gt; # 查看&lt;span class="nv"&gt;default&lt;/span&gt;命名空间下的&lt;span class="nv"&gt;pods&lt;/span&gt;
-$ &lt;span class="nv"&gt;kubectl&lt;/span&gt; &lt;span class="nv"&gt;get&lt;/span&gt; &lt;span class="nv"&gt;pods&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="nv"&gt;test&lt;/span&gt; # 查看&lt;span class="nv"&gt;test&lt;/span&gt;命名空间下的&lt;span class="nv"&gt;pods&lt;/span&gt;
-$ &lt;span class="nv"&gt;kubectl&lt;/span&gt; &lt;span class="nv"&gt;get&lt;/span&gt; &lt;span class="nv"&gt;deployments&lt;/span&gt; # 查看&lt;span class="nv"&gt;default&lt;/span&gt;命名空间下的部署
-$ &lt;span class="nv"&gt;kubectl&lt;/span&gt; &lt;span class="nv"&gt;get&lt;/span&gt; &lt;span class="nv"&gt;services&lt;/span&gt; # 查看&lt;span class="nv"&gt;default&lt;/span&gt;命名空间下的服务
-$ &lt;span class="nv"&gt;kubectl&lt;/span&gt; &lt;span class="nv"&gt;get …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span class="nv"&gt;kubectl&lt;/span&gt; &lt;span class="nv"&gt;get&lt;/span&gt; &lt;span class="nv"&gt;pods&lt;/span&gt; # 查看&lt;span class="nv"&gt;default …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;ul&gt;
 &lt;li&gt;安装配置Kubectl:&lt;ul&gt;
 &lt;li&gt;下载kubectl，地址：https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl&lt;/li&gt;
 &lt;li&gt;下载完成后放置到本地$Path路径&lt;/li&gt;
@@ -120,20 +116,7 @@ $ kubectl delete hpa &amp;lt;hpa_name&amp;gt;
 &lt;p&gt;安装Docker&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 $ yum -y install docker-ce
-$ systemctl start docker &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; systemctl &lt;span class="nb"&gt;enable&lt;/span&gt; docker 
-$ docker images   &lt;span class="c1"&gt;# 确定docker命令正常&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;安装Kubernetes&lt;/p&gt;
-&lt;p&gt;3.1 安装kubeadm, kubelet, kubectl&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;vim&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;kubernetes&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;repo&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-
-&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;kubernetes&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;Kubernetes&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="n"&gt;baseurl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nl"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;mirrors&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;aliyun&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;kubernetes&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;yum …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;ol&gt;
+$ systemctl start docker …&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;安装基础构建依赖&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ yum -y install yum-utils device-mapper-persistent-data lvm2
@@ -242,30 +225,7 @@ Default Switch默认是可以连接外网的，如果是windows机器不用配�
 
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;编辑&lt;code&gt;/etc/sysconfig/network&lt;/code&gt;, 替换server-name.company.lan为你的主机名：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;NETWORKING&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;yes&lt;/span&gt;
-&lt;span class="n"&gt;HOSTNAME&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;company&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lan&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;重启network服务：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ systemctl restart network
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;确认网络是否网络正常，正常的话重启，再次确认：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ nslookup bing.com
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;参考：
-https://unix.stackexchange.com …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Hyper-V安装Centos，网卡选择Hyper-V的Default Switch。
+&lt;p&gt;编辑&lt;code&gt;/etc/sysconfig/network …&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;Hyper-V安装Centos，网卡选择Hyper-V的Default Switch。
 Default Switch默认是可以连接外网的，如果是windows机器不用配置直接可以联网，但是Linux不行，原因是网卡eth0默认没有配置dhcp：&lt;/p&gt;
 &lt;p&gt;可以通过以下几部配置：&lt;/p&gt;
 &lt;ol&gt;
@@ -318,11 +278,7 @@ https://unix.stackexchange.com/questions/17436/centos-on-hyperv-eth0-not-in-ifco
 # &lt;span class="nv"&gt;STATUS&lt;/span&gt; &lt;span class="nv"&gt;BAR&lt;/span&gt;
 &lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;status&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;keys&lt;/span&gt; &lt;span class="nv"&gt;vi&lt;/span&gt;
 &lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;status&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;interval&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
-&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;status&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;attr&lt;/span&gt; &lt;span class="nv"&gt;bright&lt;/span&gt;
-&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;status&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;fg&lt;/span&gt; &lt;span class="nv"&gt;white&lt;/span&gt;
-&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;status&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;bg&lt;/span&gt; &lt;span class="nv"&gt;black&lt;/span&gt;
-&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;status&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;left&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;length&lt;/span&gt; &lt;span class="mi"&gt;20&lt;/span&gt;
-&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;status&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;left&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;#[fg …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;ul&gt;
+&lt;span class="nv"&gt;set …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;putty的执行命令填入如下命令，tmux名称同session名称，以便开多个putty窗口时候识别&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ tmux new -A -s &lt;span class="o"&gt;{&lt;/span&gt;session_name&lt;span class="o"&gt;}&lt;/span&gt;
@@ -405,25 +361,12 @@ https://unix.stackexchange.com/questions/17436/centos-on-hyperv-eth0-not-in-ifco
 
 
 &lt;/li&gt;
-&lt;/ul&gt;</content><category term="tmux"></category><category term="putty"></category><category term="ssh"></category><category term="windows"></category></entry><entry><title>在虚拟机里跑资源占用超低的Linux桌面环境i3</title><link href="https://gccpacman.github.io/zai-xu-ni-ji-li-pao-zi-yuan-zhan-yong-chao-di-de-linuxzhuo-mian-huan-jing-i3.html" rel="alternate"></link><published>2018-05-04T10:20:00+08:00</published><updated>2018-05-04T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2018-05-04:/zai-xu-ni-ji-li-pao-zi-yuan-zhan-yong-chao-di-de-linuxzhuo-mian-huan-jing-i3.html</id><summary type="html">&lt;p&gt;现在的电脑是Surface，跑虚拟机很吃力了，但是不是不能跑，重点是优化后把linux的资源降下来，还是可以非常流畅。i3是个比xfce4更加轻量级的桌面管理器，而且不是像Windows那样悬浮窗口式的，而是tiling的桌面。随便网上找了个截图，大概就是这个意思：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="i3" src="https://i3wm.org/screenshots/i3-1.png"&gt;&lt;/p&gt;
-&lt;p&gt;这边的例子以Vmware为例：&lt;/p&gt;
+&lt;/ul&gt;</content><category term="tmux"></category><category term="putty"></category><category term="ssh"></category><category term="windows"></category></entry><entry><title>在虚拟机里跑资源占用超低的Linux桌面环境i3</title><link href="https://gccpacman.github.io/zai-xu-ni-ji-li-pao-zi-yuan-zhan-yong-chao-di-de-linuxzhuo-mian-huan-jing-i3.html" rel="alternate"></link><published>2018-05-04T10:20:00+08:00</published><updated>2018-05-04T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2018-05-04:/zai-xu-ni-ji-li-pao-zi-yuan-zhan-yong-chao-di-de-linuxzhuo-mian-huan-jing-i3.html</id><summary type="html">&lt;p&gt;现在的电脑是SurfacePro3，如果安装了Linux桌面环境，如Gnome或者xfce等，跑虚拟机会很吃力了，但是不是不能跑，重点是优化后把Linux的资源降下来非常流畅，而且还可以使用桌面应用。i3是个比xfce4更加轻量级的桌面管理器，Tiling的桌面可以保证所有打开的窗口都平铺满桌面，然后通过快捷键和鼠标切换应用，这边只讲述下我的安装过程，以及如何安装Vmware插件以支持剪切板，自动缩放虚拟机分辨率等:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;首先要安装i3：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo yum install i3   &lt;span class="c1"&gt;# centos&lt;/span&gt;
-$ sudo apt install i3   &lt;span class="c1"&gt;# debian &amp;amp; ubuntu&lt;/span&gt;
-$ sudo pacman -S i3     &lt;span class="c1"&gt;# archlinux&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;备份并修改i3的配置文件，可以参考我的github，或者直接下载替换：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;cp&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;i3&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;i3&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;bak&lt;/span&gt;
-&lt;span class="n"&gt;wget&lt;/span&gt; &lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;raw&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;githubusercontent&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;gccpacman&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;vm&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;i3wm&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;master&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;config …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;现在的电脑是Surface，跑虚拟机很吃力了，但是不是不能跑，重点是优化后把linux的资源降下来，还是可以非常流畅。i3是个比xfce4更加轻量级的桌面管理器，而且不是像Windows那样悬浮窗口式的，而是tiling的桌面。随便网上找了个截图，大概就是这个意思：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="i3" src="https://i3wm.org/screenshots/i3-1.png"&gt;&lt;/p&gt;
-&lt;p&gt;这边的例子以Vmware为例：&lt;/p&gt;
+$ sudo apt install i3   &lt;span class="c1"&gt;# debian &amp;amp; ubuntu …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;现在的电脑是SurfacePro3，如果安装了Linux桌面环境，如Gnome或者xfce等，跑虚拟机会很吃力了，但是不是不能跑，重点是优化后把Linux的资源降下来非常流畅，而且还可以使用桌面应用。i3是个比xfce4更加轻量级的桌面管理器，Tiling的桌面可以保证所有打开的窗口都平铺满桌面，然后通过快捷键和鼠标切换应用，这边只讲述下我的安装过程，以及如何安装Vmware插件以支持剪切板，自动缩放虚拟机分辨率等:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;首先要安装i3：&lt;/p&gt;
@@ -494,7 +437,9 @@ $ sudo pacman -S open-vm-tools     &lt;span class="c1"&gt;# archlinux&lt;/span&g
 
 
 &lt;/li&gt;
-&lt;/ol&gt;</content><category term="linux"></category><category term="gtk"></category><category term="vitual machine"></category></entry><entry><title>Windows安装MSys32配置Git等开发环境并集成VSCode</title><link href="https://gccpacman.github.io/windowsan-zhuang-msys32pei-zhi-gitdeng-kai-fa-huan-jing-bing-ji-cheng-vscode.html" rel="alternate"></link><published>2018-02-01T10:20:00+08:00</published><updated>2018-02-01T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2018-02-01:/windowsan-zhuang-msys32pei-zhi-gitdeng-kai-fa-huan-jing-bing-ji-cheng-vscode.html</id><summary type="html">&lt;p&gt;在不久之前发现了Msys2，基于Cygwin但是却又有一个让我觉得无比美好的包管理器Pacman(和Arch Linux的一样)，于是决定试试。但是真的用于Windows的终端还有很多麻烦的地方要解决，主要是以下几点：
+&lt;/ol&gt;
+&lt;p&gt;安装完成后效果如图：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="i3" src="https://i3wm.org/screenshots/i3-1.png"&gt;&lt;/p&gt;</content><category term="linux"></category><category term="gtk"></category><category term="vitual machine"></category></entry><entry><title>Windows安装MSys32配置Git等开发环境并集成VSCode</title><link href="https://gccpacman.github.io/windowsan-zhuang-msys32pei-zhi-gitdeng-kai-fa-huan-jing-bing-ji-cheng-vscode.html" rel="alternate"></link><published>2018-02-01T10:20:00+08:00</published><updated>2018-02-01T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2018-02-01:/windowsan-zhuang-msys32pei-zhi-gitdeng-kai-fa-huan-jing-bing-ji-cheng-vscode.html</id><summary type="html">&lt;p&gt;在不久之前发现了Msys2，基于Cygwin但是却又有一个让我觉得无比美好的包管理器Pacman(和Arch Linux的一样)，于是决定试试。但是真的用于Windows的终端还有很多麻烦的地方要解决，主要是以下几点：
 1. Git的ssh_keygen配置，你和windows自己的CMD里的ssh_keygen能否共用
 2. Msys用的换行符是和Linux一样的LF，而Windows的是CRLF
 3. Python能不能直接用Windows的Python而不用模拟Unix环境的Python（有很多的bug）
@@ -505,20 +450,7 @@ $ sudo pacman -S open-vm-tools     &lt;span class="c1"&gt;# archlinux&lt;/span&g
 &lt;p&gt;下载并安装 &lt;a href="http://www.msys2.org/"&gt;Msys2&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;安装和配置 &lt;code&gt;git&lt;/code&gt;, 配置在windows上check出crlf格式文本，提交lf格式:&lt;/p&gt;
-&lt;p&gt;2.1 安装git：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pacman --needed -S bash pacman msys2-runtime  git
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;2.2 修改git处理回车的方式：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ git config --global core.autocrlf &lt;span class="nb"&gt;true&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;修改Home目录路径, Msys2默认的Home目录是Mingw64的/home …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;在不久之前发现了Msys2，基于Cygwin但是却又有一个让我觉得无比美好的包管理器Pacman(和Arch Linux的一样)，于是决定试试。但是真的用于Windows的终端还有很多麻烦的地方要解决，主要是以下几点：
+&lt;p&gt;安装和配置 …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;在不久之前发现了Msys2，基于Cygwin但是却又有一个让我觉得无比美好的包管理器Pacman(和Arch Linux的一样)，于是决定试试。但是真的用于Windows的终端还有很多麻烦的地方要解决，主要是以下几点：
 1. Git的ssh_keygen配置，你和windows自己的CMD里的ssh_keygen能否共用
 2. Msys用的换行符是和Linux一样的LF，而Windows的是CRLF
 3. Python能不能直接用Windows的Python而不用模拟Unix环境的Python（有很多的bug）
@@ -576,14 +508,7 @@ $ sudo pacman -S open-vm-tools     &lt;span class="c1"&gt;# archlinux&lt;/span&g
 &lt;p&gt;https://groups.google.com/forum/#!topic/ustc_lug/_wL4OkWrVK4&lt;/p&gt;
 &lt;p&gt;https://stackoverflow.com/questions/33942924/how-to-change-home-directory-and-start-directory-on-msys2&lt;/p&gt;
 &lt;p&gt;https://stackoverflow.com/questions/45836650/how-do-i-integrate-msys2-shell-into-visual-studio-code-on-window/48016561#comment84105772_48016561&lt;/p&gt;</content><category term="windows"></category><category term="shell"></category></entry><entry><title>用Calibre Server创建个人在线电子书阅读网站</title><link href="https://gccpacman.github.io/yong-calibre-serverchuang-jian-ge-ren-zai-xian-dian-zi-shu-yue-du-wang-zhan.html" rel="alternate"></link><published>2017-12-20T10:20:00+08:00</published><updated>2017-12-20T10:20:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2017-12-20:/yong-calibre-serverchuang-jian-ge-ren-zai-xian-dian-zi-shu-yue-du-wang-zhan.html</id><summary type="html">&lt;p&gt;DigitalOcean上有在ubuntu 14.04上安装calibre server的教程——&lt;a href="https://www.digitalocean.com/community/tutorials/how-to-create-a-calibre-ebook-server-on-ubuntu-14-04"&gt;How To Create a Calibre Ebook Server on Ubuntu 14.04&lt;/a&gt;, 但是已经过时了，一是calibre-server的参数已经改变，二是创建系统服务的方式已经不适用之后的Ubuntu版本，我的服务器是16.04，因此需要把/etc/init/里的脚本改写成systemctl脚本&lt;/p&gt;
-&lt;p&gt;改写的方法参考了：https://wiki.ubuntu.com/SystemdForUpstartUsers&lt;/p&gt;
-&lt;p&gt;用户名和密码也不再支持digitalocean里的明文的形式, &lt;a href="https://manual.calibre-ebook.com/server.html#managing-user-accounts-from-the-command-line-only"&gt;官方文档&lt;/a&gt;里看到有&lt;code&gt;enable-auth&lt;/code&gt;和&lt;code&gt;userdb&lt;/code&gt;, 看来是出于安全性进行了改进, userdb指定最简单的sqlite数据库，并按照提示添加用户。
-最终的版本是：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Unit&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;Description&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;Job&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;that&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;runs&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;the&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;calibre&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;daemon&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Service&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;Environment …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;DigitalOcean上有在ubuntu 14.04上安装calibre server的教程——&lt;a href="https://www.digitalocean.com/community/tutorials/how-to-create-a-calibre-ebook-server-on-ubuntu-14-04"&gt;How To Create a Calibre Ebook Server on Ubuntu 14.04&lt;/a&gt;, 但是已经过时了，一是calibre-server的参数已经改变，二是创建系统服务的方式已经不适用之后的Ubuntu版本，我的服务器是16.04，因此需要把/etc/init/里的脚本改写成systemctl脚本&lt;/p&gt;
+&lt;p&gt;改写的方法参考了 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;DigitalOcean上有在ubuntu 14.04上安装calibre server的教程——&lt;a href="https://www.digitalocean.com/community/tutorials/how-to-create-a-calibre-ebook-server-on-ubuntu-14-04"&gt;How To Create a Calibre Ebook Server on Ubuntu 14.04&lt;/a&gt;, 但是已经过时了，一是calibre-server的参数已经改变，二是创建系统服务的方式已经不适用之后的Ubuntu版本，我的服务器是16.04，因此需要把/etc/init/里的脚本改写成systemctl脚本&lt;/p&gt;
 &lt;p&gt;改写的方法参考了：https://wiki.ubuntu.com/SystemdForUpstartUsers&lt;/p&gt;
 &lt;p&gt;用户名和密码也不再支持digitalocean里的明文的形式, &lt;a href="https://manual.calibre-ebook.com/server.html#managing-user-accounts-from-the-command-line-only"&gt;官方文档&lt;/a&gt;里看到有&lt;code&gt;enable-auth&lt;/code&gt;和&lt;code&gt;userdb&lt;/code&gt;, 看来是出于安全性进行了改进, userdb指定最简单的sqlite数据库，并按照提示添加用户。
 最终的版本是：&lt;/p&gt;
@@ -608,9 +533,7 @@ $ sudo pacman -S open-vm-tools     &lt;span class="c1"&gt;# archlinux&lt;/span&g
 1. 自动刷新书库（--auto-reload这个参数已经不能用，需要通过restart service来实现）
 2. 远程同步书籍，可以从本地直接上传书到server&lt;/p&gt;</content><category term="kodi"></category><category term="calibre"></category></entry><entry><title>ArchLinux休眠后唤醒，wifi和蓝牙无法正常使用的解决方法</title><link href="https://gccpacman.github.io/archlinuxxiu-mian-hou-huan-xing-wifihe-lan-ya-wu-fa-zheng-chang-shi-yong-de-jie-jue-fang-fa.html" rel="alternate"></link><published>2017-12-04T10:20:00+08:00</published><updated>2017-12-04T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2017-12-04:/archlinuxxiu-mian-hou-huan-xing-wifihe-lan-ya-wu-fa-zheng-chang-shi-yong-de-jie-jue-fang-fa.html</id><summary type="html">&lt;p&gt;&lt;code&gt;Manjaro Linux&lt;/code&gt;从&lt;code&gt;17.02&lt;/code&gt;版本开始匹配了Surface Pro 3， 这里必须非常感谢下Manjaro Team的工作，我现在可以再次在Surface上用畅快的用Linux了。&lt;/p&gt;
 &lt;p&gt;具体可以看reddit上的这篇文章： https://cd-rw.org/t/running-linux-on-the-surface-pro-3/175/37。&lt;/p&gt;
-&lt;p&gt;我实际安装的版本是&lt;code&gt;17.1pre3&lt;/code&gt;，不管是蓝牙，触摸板，WIFI，touchpad，音量键，甚至触摸屏都可以正常使用，甚至都不用升级内核。&lt;/p&gt;
-&lt;p&gt;唯一的问题是启用休眠以后，wifi和蓝牙功能失灵了，即使通过重启&lt;code&gt;NetworkManager.service&lt;/code&gt;也无法解决，因此基本上就是硬件驱动的问题，网上关于其他一些笔记本在休眠后无法解决的问题基本上就是用lsmod查到和wifi相关的模块，然后重新加载的方法，但是没有和surface pro有关的内容。&lt;/p&gt;
-&lt;p&gt;找了几篇stackoverflow文章做了多次尝试，然后通过&lt;code&gt;lsmod　| grep wifi&lt;/code&gt;和&lt;code&gt;lsmod | grep bluetooth&lt;/code&gt;查出来的模块 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;code&gt;Manjaro Linux&lt;/code&gt;从&lt;code&gt;17.02&lt;/code&gt;版本开始匹配了Surface Pro 3， 这里必须非常感谢下Manjaro Team的工作，我现在可以再次在Surface上用畅快的用Linux了。&lt;/p&gt;
+&lt;p&gt;我实际安装的版本是&lt;code&gt;17.1pre3&lt;/code&gt;，不管是蓝牙，触摸板，WIFI …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;code&gt;Manjaro Linux&lt;/code&gt;从&lt;code&gt;17.02&lt;/code&gt;版本开始匹配了Surface Pro 3， 这里必须非常感谢下Manjaro Team的工作，我现在可以再次在Surface上用畅快的用Linux了。&lt;/p&gt;
 &lt;p&gt;具体可以看reddit上的这篇文章： https://cd-rw.org/t/running-linux-on-the-surface-pro-3/175/37。&lt;/p&gt;
 &lt;p&gt;我实际安装的版本是&lt;code&gt;17.1pre3&lt;/code&gt;，不管是蓝牙，触摸板，WIFI，touchpad，音量键，甚至触摸屏都可以正常使用，甚至都不用升级内核。&lt;/p&gt;
 &lt;p&gt;唯一的问题是启用休眠以后，wifi和蓝牙功能失灵了，即使通过重启&lt;code&gt;NetworkManager.service&lt;/code&gt;也无法解决，因此基本上就是硬件驱动的问题，网上关于其他一些笔记本在休眠后无法解决的问题基本上就是用lsmod查到和wifi相关的模块，然后重新加载的方法，但是没有和surface pro有关的内容。&lt;/p&gt;
@@ -645,15 +568,7 @@ $ sudo pacman -S open-vm-tools     &lt;span class="c1"&gt;# archlinux&lt;/span&g
 &lt;/pre&gt;&lt;/div&gt;</content><category term="linux"></category><category term="driver"></category></entry><entry><title>Windows上编译vim文件导航跳转插件command-t</title><link href="https://gccpacman.github.io/windowsshang-bian-yi-vimwen-jian-dao-hang-tiao-zhuan-cha-jian-command-t.html" rel="alternate"></link><published>2017-10-24T10:20:00+08:00</published><updated>2017-10-24T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2017-10-24:/windowsshang-bian-yi-vimwen-jian-dao-hang-tiao-zhuan-cha-jian-command-t.html</id><summary type="html">&lt;p&gt;用Bundle在Windows平台上配置成功了以后，绝大多数插件都已经可以使用，但是唯独强大的文件导航&lt;a href="https://github.com/wincent/Command-T"&gt;Command-T&lt;/a&gt;因为Ruby开发的插件，需要手动编译。&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://github.com/wincent/command-t/blob/master/doc/command-t.txt"&gt;官方文档&lt;/a&gt;写的安装编译过程代码大概是这样的，我省去了使用bundle的安装过程：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span class="nb"&gt;cd&lt;/span&gt; ~/vim&lt;span class="se"&gt;\b&lt;/span&gt;undle&lt;span class="se"&gt;\c&lt;/span&gt;ommand-t&lt;span class="se"&gt;\r&lt;/span&gt;uby&lt;span class="se"&gt;\c&lt;/span&gt;ommand-t&lt;span class="se"&gt;\e&lt;/span&gt;xt&lt;span class="se"&gt;\c&lt;/span&gt;ommand-t&amp;gt;
-$ ruby extconf.rb
-$ make
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;要完成这些肯定得装ruby和make，网上的绝大多数答案也都已经过期，说的是vim7.4左右的版本，而现在已经是vim 8.0。于是只好自己探索。&lt;/p&gt;
-&lt;p&gt;windows的ruby是一个特殊的安装包，和Ruby的官网都分开，网址是&lt;a href="https://rubyinstaller.org/"&gt;RubyInstaller for windows&lt;/a&gt;。&lt;/p&gt;
-&lt;p&gt;可供下载的版本从2.0.0-p648到2.4.2-2版本。&lt;/p&gt;
-&lt;p&gt;我从高版本开始尝试，安装2.4.2-2 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;用Bundle在Windows平台上配置成功了以后，绝大多数插件都已经可以使用，但是唯独强大的文件导航&lt;a href="https://github.com/wincent/Command-T"&gt;Command-T&lt;/a&gt;因为Ruby开发的插件，需要手动编译。&lt;/p&gt;
+$ ruby extconf …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;用Bundle在Windows平台上配置成功了以后，绝大多数插件都已经可以使用，但是唯独强大的文件导航&lt;a href="https://github.com/wincent/Command-T"&gt;Command-T&lt;/a&gt;因为Ruby开发的插件，需要手动编译。&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://github.com/wincent/command-t/blob/master/doc/command-t.txt"&gt;官方文档&lt;/a&gt;写的安装编译过程代码大概是这样的，我省去了使用bundle的安装过程：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span class="nb"&gt;cd&lt;/span&gt; ~/vim&lt;span class="se"&gt;\b&lt;/span&gt;undle&lt;span class="se"&gt;\c&lt;/span&gt;ommand-t&lt;span class="se"&gt;\r&lt;/span&gt;uby&lt;span class="se"&gt;\c&lt;/span&gt;ommand-t&lt;span class="se"&gt;\e&lt;/span&gt;xt&lt;span class="se"&gt;\c&lt;/span&gt;ommand-t&amp;gt;
 $ ruby extconf.rb
@@ -693,13 +608,7 @@ $ make
 &lt;p&gt;于是我尝试带&lt;code&gt;-rdevkit&lt;/code&gt;参数执行extconf.rb，结果果然通过了，但是make命令却无法通过。继续搜索，发现[AskUbuntu]上有个command-t的问题，没有用官方文档的方法编译command-t而是用了&lt;code&gt;rake make&lt;/code&gt;来编译，我知道rake是ruby的一个工具，在jekyll尝试搭博客的时候用到，但不知道原理。但是反正是编译只要过了就行，于是我就尝试执行&lt;code&gt;rake make&lt;/code&gt;结果还是不信，报错&lt;code&gt;You have to install development tools first.&lt;/code&gt;，但是这样我没有理由不去尝试帮&lt;code&gt;rake make&lt;/code&gt; 带上&lt;code&gt;-rdevkit&lt;/code&gt;这样一个参数，结果居然真的成功了。&lt;/p&gt;
 &lt;p&gt;于是迫不及待打开vim，按下command-t的快捷键，一个漂亮的弹窗弹了出来。试着敲了几行，好像没有什么问题，大功告成。&lt;/p&gt;
 &lt;p&gt;&lt;img alt="Command-T on Windows" src="https://gccpacman.github.io/images/command_t1.png"&gt;&lt;/p&gt;</content><category term="windows"></category><category term="vim"></category></entry><entry><title>windows的包管理Chocolate和vim.Vundle</title><link href="https://gccpacman.github.io/windowsde-bao-guan-li-chocolatehe-vimvundle.html" rel="alternate"></link><published>2017-10-22T10:20:00+08:00</published><updated>2017-10-22T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2017-10-22:/windowsde-bao-guan-li-chocolatehe-vimvundle.html</id><summary type="html">&lt;p&gt;Windows的开发环境一直都会让人比较头疼，一般解决方法有用Cygwin等模拟Linux的环境，Windows 10又自带了Ubuntu On Windows 10的环境。但是都或多或少有点问题，例如Cygwin的文件目录和windows分离，Ubuntu On Windows 10不能用Nodejs，打开X应用比较麻烦，只能用终端等。&lt;/p&gt;
-&lt;p&gt;经过很多尝试，我认为最友好的环境还是windows原生的环境，只是你需要偶尔告别命令行搜索某些应用需要的依赖，依次安装，这样其实绝大多数的开发环境都是可以部署的。不过还是有工具可以帮助我们，例如Windows其实也有一个类似apt-get或者&lt;a href="https://brew.sh/"&gt;Homebrew&lt;/a&gt;的包管理工具，叫做&lt;a href="https://chocolatey.org/"&gt;Chocolate&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://chocolatey.org/install"&gt;安装Chocolate&lt;/a&gt;只要在Powershell里写这行代码即可：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;Set&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;ExecutionPolicy&lt;/span&gt; &lt;span class="n"&gt;Bypass&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;iex&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="k"&gt;New&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;Object&lt;/span&gt; &lt;span class="k"&gt;System&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Net&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;WebClient&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="n"&gt;DownloadString&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;https://chocolatey.org/install.ps1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;安装包的方法是&lt;code&gt;choco install &amp;lt;package_name&amp;gt;&lt;/code&gt; 但是这个命令必须用admin权限的powershell来执行。于是想是不是有个windows的&lt;code&gt;sudo …&lt;/code&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;Windows的开发环境一直都会让人比较头疼，一般解决方法有用Cygwin等模拟Linux的环境，Windows 10又自带了Ubuntu On Windows 10的环境。但是都或多或少有点问题，例如Cygwin的文件目录和windows分离，Ubuntu On Windows 10不能用Nodejs，打开X应用比较麻烦，只能用终端等。&lt;/p&gt;
+&lt;p&gt;经过很多尝试，我认为最友好的环境还是windows原生的环境，只是你需要偶尔告别命令行搜索某些应用需要的依赖，依次安装，这样其实绝大多数的开发环境都是可以部署的。不过还是有工具可以帮助我们，例如Windows其实也有一个类似apt-get或者&lt;a href="https://brew.sh/"&gt;Homebrew&lt;/a&gt;的包管理工具，叫做 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Windows的开发环境一直都会让人比较头疼，一般解决方法有用Cygwin等模拟Linux的环境，Windows 10又自带了Ubuntu On Windows 10的环境。但是都或多或少有点问题，例如Cygwin的文件目录和windows分离，Ubuntu On Windows 10不能用Nodejs，打开X应用比较麻烦，只能用终端等。&lt;/p&gt;
 &lt;p&gt;经过很多尝试，我认为最友好的环境还是windows原生的环境，只是你需要偶尔告别命令行搜索某些应用需要的依赖，依次安装，这样其实绝大多数的开发环境都是可以部署的。不过还是有工具可以帮助我们，例如Windows其实也有一个类似apt-get或者&lt;a href="https://brew.sh/"&gt;Homebrew&lt;/a&gt;的包管理工具，叫做&lt;a href="https://chocolatey.org/"&gt;Chocolate&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://chocolatey.org/install"&gt;安装Chocolate&lt;/a&gt;只要在Powershell里写这行代码即可：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;Set&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;ExecutionPolicy&lt;/span&gt; &lt;span class="n"&gt;Bypass&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;iex&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="k"&gt;New&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;Object&lt;/span&gt; &lt;span class="k"&gt;System&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Net&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;WebClient&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="n"&gt;DownloadString&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;https://chocolatey.org/install.ps1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
@@ -726,13 +635,7 @@ $ make
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;安装编译工具：&lt;/p&gt;
-&lt;p&gt;sudo apt-get install libtool pkg-config build-essential autoconf automake&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;安装一个叫做libsodium的依赖，因为apt工具里没有包含这个依赖，因此需要手动编译，去https://download.libsodium.org/libsodium/releases找最新的版本，下载并且编译：&lt;/p&gt;
-&lt;p&gt;mkdir build
-cd build/
-wget https://download.libsodium.org/libsodium …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;为什么就不言而喻不加解释了，就算你没有翻墙的打算，也建议你有一个优秀和安全的dns，因为国内的运营商除了干掉国外域名，还会帮你的国内网址投广告，甚至利用你进行ddns攻击。。&lt;/p&gt;
+&lt;p&gt;sudo apt-get install …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;为什么就不言而喻不加解释了，就算你没有翻墙的打算，也建议你有一个优秀和安全的dns，因为国内的运营商除了干掉国外域名，还会帮你的国内网址投广告，甚至利用你进行ddns攻击。。&lt;/p&gt;
 &lt;p&gt;很早以前dnscrypt这个东西就在热炒,后来不知道什么原因谈起的人也比较少了。因此我决定重新尝试一下是不是还有用呢。答案是肯定的。不过如果你只是在本机上使用，那么如果是桌面系统，似乎我有看到dnscrypt是有windows/macOS的客户端的，但是手机怎么办呢。这个时候就是树霉派发挥作用的时候了。&lt;/p&gt;
 &lt;p&gt;树梅派安装dnscrypt相对与ubuntu之类的发行版其实也大同小异（我也没有试过ubuntu，arch上倒是非常简单，两三个命令就可以搞定），不过有些依赖包包括dnscrypt都是需要手动编译的。&lt;/p&gt;
 &lt;ol&gt;
@@ -762,15 +665,7 @@ make install&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;</content><category term="linux"></category><category term="kodi"></category><category term="resource"></category></entry><entry><title>Linux把用户态systemd服务改成系统服务，开机自启动迅雷(xware)</title><link href="https://gccpacman.github.io/linuxba-yong-hu-tai-systemdfu-wu-gai-cheng-xi-tong-fu-wu-kai-ji-zi-qi-dong-xun-lei-xware.html" rel="alternate"></link><published>2016-01-08T10:20:00+08:00</published><updated>2016-01-08T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2016-01-08:/linuxba-yong-hu-tai-systemdfu-wu-gai-cheng-xi-tong-fu-wu-kai-ji-zi-qi-dong-xun-lei-xware.html</id><summary type="html">&lt;p&gt;OK.. 怎么给xubuntu装个迅雷远程呢，迅雷的Linux版本Xware-Desktop，目前是很稳定的，而且有很详细的官方教程：
 https://github.com/Xinkai/XwareDesktop/wiki/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E&lt;/p&gt;
-&lt;p&gt;这个就是针对ubuntu的，所以原封不动的执行就行了。&lt;/p&gt;
-&lt;p&gt;但是我的需求有点不一样，迅雷xware版自己提供了几个开机自启动选项：
-1）由用户态systemd托管
-2）由用户态upstart托管
-3）简单的自动启动。&lt;/p&gt;
-&lt;p&gt;这三个选项的特点就是都是以用户态启动，事实上，xware的配置文件也确实是保存在用户的HOME目录下的.xware-desktop里的。&lt;/p&gt;
-&lt;p&gt;但是我希望Linux开机的时候并不会自动登录，更何况我的linux是运行kodi的，我也不会去手动登录，因此用户态的服务是不会自动启动的。&lt;/p&gt;
-&lt;p&gt;但是我希望一开机，xware就自动打开，开始执行下载任务。因此依赖原来的代码显然不太符合我的需求，就自己写一个系统的service吧。&lt;/p&gt;
-&lt;p&gt;还好几乎不需要改变xware用户态的服务，就可以搞定。用户态的服务创建在用户目录的&lt;code&gt;$HOME …&lt;/code&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;OK.. 怎么给xubuntu装个迅雷远程呢，迅雷的Linux版本Xware-Desktop，目前是很稳定的，而且有很详细的官方教程：
+&lt;p&gt;这个就是针对ubuntu的，所以原封不动的执行就行了 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;OK.. 怎么给xubuntu装个迅雷远程呢，迅雷的Linux版本Xware-Desktop，目前是很稳定的，而且有很详细的官方教程：
 https://github.com/Xinkai/XwareDesktop/wiki/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E&lt;/p&gt;
 &lt;p&gt;这个就是针对ubuntu的，所以原封不动的执行就行了。&lt;/p&gt;
 &lt;p&gt;但是我的需求有点不一样，迅雷xware版自己提供了几个开机自启动选项：
@@ -814,12 +709,7 @@ https://github.com/Xinkai/XwareDesktop/wiki/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E
 又没有办法在应用程序菜单里找到，即使是gnome下，按super然后全局搜索，也找到这个。&lt;/p&gt;
 &lt;p&gt;不过好在linux是自由的系统，自己建一个应用程序的启动器一点问题都没有。&lt;/p&gt;
 &lt;p&gt;比如我的eclipse装在&lt;code&gt;/opt/eclipse-jee/&lt;/code&gt;下,怎么新建一个启动器呢？&lt;/p&gt;
-&lt;p&gt;所有用户共享的应用启动器的目录是&lt;code&gt;/usr/share/applications/&lt;/code&gt;目录，那么用户自定义的启动器目录在哪里？找了下用户目录下的.config/，没有找到，只好去百度google了一下，原来启动器是在.local/下，具体是&lt;code&gt;.local/share/applications&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;新建一个eclipse.desktop的文件，然后输入以下内容：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[Desktop Entry]&lt;/span&gt;
-&lt;span class="na"&gt;Encoding&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;UTF-8&lt;/span&gt;
-&lt;span class="na"&gt;Name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;Eclipse J2ee&lt;/span&gt;
-&lt;span class="na"&gt;Comment&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;Official desktop version of Telegram …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;eclipse在linux下，下载以后不需要安装，直接在目录下执行.\eclipse就可以运行了，不过同时，每次都要切换到该目录去执行eclipse似乎也比较麻烦。
+&lt;p&gt;所有用户共享的应用启动器的目录是&lt;code&gt;/usr/share/applications/&lt;/code&gt;目录，那么用户自定义的启动器目录在哪里？找了下用户目录下的.config …&lt;/p&gt;</summary><content type="html">&lt;p&gt;eclipse在linux下，下载以后不需要安装，直接在目录下执行.\eclipse就可以运行了，不过同时，每次都要切换到该目录去执行eclipse似乎也比较麻烦。
 又没有办法在应用程序菜单里找到，即使是gnome下，按super然后全局搜索，也找到这个。&lt;/p&gt;
 &lt;p&gt;不过好在linux是自由的系统，自己建一个应用程序的启动器一点问题都没有。&lt;/p&gt;
 &lt;p&gt;比如我的eclipse装在&lt;code&gt;/opt/eclipse-jee/&lt;/code&gt;下,怎么新建一个启动器呢？&lt;/p&gt;
@@ -841,15 +731,7 @@ https://github.com/Xinkai/XwareDesktop/wiki/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E
 &lt;a href="http://askubuntu.com/questions/112186/how-do-you-create-a-custom-application-launcher-in-gnome-shell"&gt;How do you create a custom application launcher in Gnome Shell? &lt;/a&gt;&lt;/p&gt;</content><category term="linux"></category><category term="gnome"></category><category term="gtk"></category></entry><entry><title>ArchLinux将nvidia driver替换成开源的nouveau解决显卡驱动问题</title><link href="https://gccpacman.github.io/archlinuxjiang-nvidia-driverti-huan-cheng-kai-yuan-de-nouveaujie-jue-xian-qia-qu-dong-wen-ti.html" rel="alternate"></link><published>2016-01-05T10:20:00+08:00</published><updated>2016-01-05T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2016-01-05:/archlinuxjiang-nvidia-driverti-huan-cheng-kai-yuan-de-nouveaujie-jue-xian-qia-qu-dong-wen-ti.html</id><summary type="html">&lt;p&gt;昨天还装完arch兴高采烈，今天就差点放弃整个系统，罪魁祸首就是当年被linus喷了的nvidia.&lt;/p&gt;
 &lt;p&gt;Archlinux装了使用nvidia驱动，一开始发现根本就没有加载，装了和没装没啥区别，但是跑的好好的阿跑的好好的，结果不小心手贱点了&lt;code&gt;nvidia-xconfig&lt;/code&gt;的应用，莫名其妙的起不来了。（这个原因我想了半天才想出来，不然我实在是无力吐槽他妈跑了一天多好好的什么也没干突然就起步来的情况，一度怀疑是显卡硬件坏了）&lt;/p&gt;
 &lt;p&gt;于是抢救三个多小时，&lt;code&gt;/var/log/xorg.0.log&lt;/code&gt;里的报错也莫名其妙，比如:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;not&lt;/span&gt; &lt;span class="n"&gt;detect&lt;/span&gt; &lt;span class="n"&gt;device&lt;/span&gt; &lt;span class="n"&gt;nvidia&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;no&lt;/span&gt; &lt;span class="n"&gt;screen&lt;/span&gt; &lt;span class="k"&gt;found&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;简直是日到狗。于是想着解决办法应该是彻底不要装nvidia的驱动， 用intel的集成显卡，照例来说应该也ok阿，于是直接删掉驱动：&lt;/p&gt;
-&lt;p&gt;pacman -R nvidia nvidia-utils&lt;/p&gt;
-&lt;p&gt;然后reboot, 没想到发生的事情更加奇葩了，连命令行就出不来了，直接黑屏了我草。&lt;/p&gt;
-&lt;p&gt;心里十万个草尼马，还好安装过arch的人毕竟还是知道有个arch-chroot, 放入安装介质（我的是u盘），重启， mount各种好盘:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;mount&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dev …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;昨天还装完arch兴高采烈，今天就差点放弃整个系统，罪魁祸首就是当年被linus喷了的nvidia.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;not&lt;/span&gt; &lt;span class="n"&gt;detect&lt;/span&gt; &lt;span class="n"&gt;device …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;昨天还装完arch兴高采烈，今天就差点放弃整个系统，罪魁祸首就是当年被linus喷了的nvidia.&lt;/p&gt;
 &lt;p&gt;Archlinux装了使用nvidia驱动，一开始发现根本就没有加载，装了和没装没啥区别，但是跑的好好的阿跑的好好的，结果不小心手贱点了&lt;code&gt;nvidia-xconfig&lt;/code&gt;的应用，莫名其妙的起不来了。（这个原因我想了半天才想出来，不然我实在是无力吐槽他妈跑了一天多好好的什么也没干突然就起步来的情况，一度怀疑是显卡硬件坏了）&lt;/p&gt;
 &lt;p&gt;于是抢救三个多小时，&lt;code&gt;/var/log/xorg.0.log&lt;/code&gt;里的报错也莫名其妙，比如:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;not&lt;/span&gt; &lt;span class="n"&gt;detect&lt;/span&gt; &lt;span class="n"&gt;device&lt;/span&gt; &lt;span class="n"&gt;nvidia&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;no&lt;/span&gt; &lt;span class="n"&gt;screen&lt;/span&gt; &lt;span class="k"&gt;found&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
@@ -942,11 +824,7 @@ https://github.com/Xinkai/XwareDesktop/wiki/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E
 
 
 &lt;p&gt;然后终端会显示New 'X' desktop is kodi-kodibuntu:1&lt;/p&gt;
-&lt;p&gt;3）（可选）如果需要改变桌面，例如不想用xvnc，可以编辑&lt;code&gt;$HOME/.vnc/xstartup&lt;/code&gt;的内容。具体操作暂略。&lt;/p&gt;
-&lt;p&gt;4）（可选）如果需要开机启动，一个是用supervisor，另外就是在/etc/systemd/system/下手动写一个服务。具体操作暂略。&lt;/p&gt;
-&lt;p&gt;在客户端:&lt;/p&gt;
-&lt;p&gt;1) 安装tigervnc:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo pacman -S tigervnc   &lt;span class="o"&gt;(&lt;/span&gt;archlinux …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;服务器端：&lt;/p&gt;
+&lt;p&gt;3）（可选）如果需要改变桌面 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;服务器端：&lt;/p&gt;
 &lt;p&gt;1）在终端安装tigervnc：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt-get install tigervnc
 &lt;/pre&gt;&lt;/div&gt;
@@ -1002,11 +880,7 @@ $ vncserver
 &lt;h2&gt;开机自动启动&lt;/h2&gt;
 &lt;p&gt;&lt;a href="https://www.howtoforge.com/how-to-install-vnc-server-on-ubuntu-14.04"&gt;How To Install VNC Server On Ubuntu 14.04&lt;/a&gt;&lt;/p&gt;</content><category term="linux"></category><category term="vnc"></category><category term="gtk"></category><category term="rdp"></category></entry><entry><title>Linux安装并开机进入Kodi媒体中心</title><link href="https://gccpacman.github.io/linuxan-zhuang-bing-kai-ji-jin-ru-kodimei-ti-zhong-xin.html" rel="alternate"></link><published>2016-01-04T10:20:00+08:00</published><updated>2016-01-04T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2016-01-04:/linuxan-zhuang-bing-kai-ji-jin-ru-kodimei-ti-zhong-xin.html</id><summary type="html">&lt;p&gt;把2G的硬盘拆到了一台旧电脑上，并且给旧电脑装了xubuntu,打算直接打造一个媒体中心。目前知道有里那个用的不错的东西，KODI（XBMC）是一个很不错的选择。当然用PLEX也是个不错的选择，整理资料库方面PLEX更加强大。不过KODI是开源和免费的，既然用了linux，就用个开源的吧。况且我发现kodi还有不少的好处，并且更加轻量级。&lt;/p&gt;
 &lt;p&gt;其实Kodi有个基于ubuntu的发行版叫做kodibuntu，直接装得话效果其实也差不多。但是我还是喜欢从ubuntu去扩展，毕竟任何基于ubuntu的版本，相对ubuntu的开发肯定是有所滞后的。和Android的Rom一个道理。不过kubuntu因为是非常流行的发行版不用担心这个问题。&lt;/p&gt;
-&lt;p&gt;下面的步骤基本上是参考了askubuntu的一个答案&lt;a href="http://askubuntu.com/questions/596839/autostart-kodi-on-vivid"&gt;Autostart Kodi on Vivid&lt;/a&gt;，只不过它是在纯净的server版本安装，而desktop版则因为有自身的启动器，需要将其禁用掉而已。&lt;/p&gt;
-&lt;p&gt;1）安装kodi: sudo apt-get install kodi&lt;/p&gt;
-&lt;p&gt;2）创建一个kodi的用户，并添加到和视频播放有关的组
-    sudo adduser --disabled-password --disabled-login --gecos "" kodi
-    sudo usermod -a -G audio kodi …&lt;/p&gt;</summary><content type="html">&lt;p&gt;把2G的硬盘拆到了一台旧电脑上，并且给旧电脑装了xubuntu,打算直接打造一个媒体中心。目前知道有里那个用的不错的东西，KODI（XBMC）是一个很不错的选择。当然用PLEX也是个不错的选择，整理资料库方面PLEX更加强大。不过KODI是开源和免费的，既然用了linux，就用个开源的吧。况且我发现kodi还有不少的好处，并且更加轻量级。&lt;/p&gt;
+&lt;p&gt;下面的步骤基本上是参考了askubuntu的一个答案&lt;a href="http://askubuntu.com/questions/596839/autostart-kodi-on-vivid"&gt;Autostart Kodi on …&lt;/a&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;把2G的硬盘拆到了一台旧电脑上，并且给旧电脑装了xubuntu,打算直接打造一个媒体中心。目前知道有里那个用的不错的东西，KODI（XBMC）是一个很不错的选择。当然用PLEX也是个不错的选择，整理资料库方面PLEX更加强大。不过KODI是开源和免费的，既然用了linux，就用个开源的吧。况且我发现kodi还有不少的好处，并且更加轻量级。&lt;/p&gt;
 &lt;p&gt;其实Kodi有个基于ubuntu的发行版叫做kodibuntu，直接装得话效果其实也差不多。但是我还是喜欢从ubuntu去扩展，毕竟任何基于ubuntu的版本，相对ubuntu的开发肯定是有所滞后的。和Android的Rom一个道理。不过kubuntu因为是非常流行的发行版不用担心这个问题。&lt;/p&gt;
 &lt;p&gt;下面的步骤基本上是参考了askubuntu的一个答案&lt;a href="http://askubuntu.com/questions/596839/autostart-kodi-on-vivid"&gt;Autostart Kodi on Vivid&lt;/a&gt;，只不过它是在纯净的server版本安装，而desktop版则因为有自身的启动器，需要将其禁用掉而已。&lt;/p&gt;
 &lt;p&gt;1）安装kodi: sudo apt-get install kodi&lt;/p&gt;
@@ -1051,18 +925,7 @@ $ vncserver
 &lt;p&gt;下次电脑开机就可以直接进入kodi的界面了&lt;/p&gt;</content><category term="linux"></category><category term="kodi"></category><category term="resource"></category></entry><entry><title>Linux安装deluge下载工具自动远程下载</title><link href="https://gccpacman.github.io/linuxan-zhuang-delugexia-zai-gong-ju-zi-dong-yuan-cheng-xia-zai.html" rel="alternate"></link><published>2016-01-04T10:20:00+08:00</published><updated>2016-01-04T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2016-01-04:/linuxan-zhuang-delugexia-zai-gong-ju-zi-dong-yuan-cheng-xia-zai.html</id><summary type="html">&lt;p&gt;上一篇装完kodi后，我的旧电脑就彻底变成了一个kodi/XBMC媒体中心，那么比如我要下载新的美剧什么的，好像就还是不那么方便。
 p2p的torrent一直是我的最爱。deluge是一个跨平台的操作系统，支持linux, windows 和mac，还有远程控制等功能，什么是远程下载呢。我们都知道有迅雷远程下载，那么deluge其实也是一样，就是你在一台电脑操作，有一个下载链接，然后你可以直接在这台电脑上添加这个下载链接，唯一不同的是下载的任务被添加到了远程的机器上，文件也会下载到远程的机器上。
 这样的需求正符合我媒体中心的需要，我找到新的片源，并不需要下载到我的计算机，而是可以让我的Kodi在播放电影的同时，又可以执行下载的任务。&lt;/p&gt;
-&lt;h1&gt;服务器端：&lt;/h1&gt;
-&lt;p&gt;安装:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt-get install deluged deluge-web
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;新建一个deluge用户和用户组:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo adduser --system  --gecos &lt;span class="s2"&gt;&amp;quot;Deluge Service&amp;quot;&lt;/span&gt; --disabled-password --group --home /var/lib/deluge deluge
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;把用户添加到deluge用户组&lt;code&gt;adduser &amp;lt;username&amp;gt; deluge&lt;/code&gt;，便于用户操作torrent和下载到的文件 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;上一篇装完kodi后，我的旧电脑就彻底变成了一个kodi/XBMC媒体中心，那么比如我要下载新的美剧什么的，好像就还是不那么方便。
+&lt;h1&gt;服务器端 …&lt;/h1&gt;</summary><content type="html">&lt;p&gt;上一篇装完kodi后，我的旧电脑就彻底变成了一个kodi/XBMC媒体中心，那么比如我要下载新的美剧什么的，好像就还是不那么方便。
 p2p的torrent一直是我的最爱。deluge是一个跨平台的操作系统，支持linux, windows 和mac，还有远程控制等功能，什么是远程下载呢。我们都知道有迅雷远程下载，那么deluge其实也是一样，就是你在一台电脑操作，有一个下载链接，然后你可以直接在这台电脑上添加这个下载链接，唯一不同的是下载的任务被添加到了远程的机器上，文件也会下载到远程的机器上。
 这样的需求正符合我媒体中心的需要，我找到新的片源，并不需要下载到我的计算机，而是可以让我的Kodi在播放电影的同时，又可以执行下载的任务。&lt;/p&gt;
 &lt;h1&gt;服务器端：&lt;/h1&gt;
@@ -1150,10 +1013,7 @@ Username用户名和Password密码就是之前在auth文件里的配置&lt;/p&gt
 &lt;/ul&gt;</content><category term="linux"></category><category term="resource"></category></entry><entry><title>调整Linux主分区的大小</title><link href="https://gccpacman.github.io/diao-zheng-linuxzhu-fen-qu-de-da-xiao.html" rel="alternate"></link><published>2016-01-03T10:20:00+08:00</published><updated>2016-01-03T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2016-01-03:/diao-zheng-linuxzhu-fen-qu-de-da-xiao.html</id><summary type="html">&lt;p&gt;在安装我笔记本商的archlinux的时候，root分区和主分区是分开的，后来为了尝试KaliLinux，就把home分区牺牲掉，放弃了/home的单独分区。可是如今60G的空间已经不够用了。&lt;/p&gt;
 &lt;p&gt;于是打算重新调整一个root分区的大小。我分区之前，256G硬盘的分区表大概是这样的，boot分区在最前，大概500M，，home分区紧随其后，66G左右，然后是8G的swap交换空间。还剩下170G左右的剩余空间。&lt;/p&gt;
 &lt;p&gt;我的目标是把swap分区弄到最后，其他都扩展给HOME分区。&lt;/p&gt;
-&lt;p&gt;依稀记得装arch的时候，swap并不是多大不了的事情，甚至说可以不需要swap。于是我打算先把swap禁用掉，然后删除。再重新创建swap分区，然后resize以下Root分区的大小基本就可以大功告成了。不过调整root分区的大小是不可以在当前系统下完成的。因此很有必要弄一个usb的镜像，通过镜像系统进去后调整没有mount的swap分区。&lt;/p&gt;
-&lt;p&gt;在linux下把镜像刻录到usb是非常方便的。接上U盘以后，可以通过&lt;code&gt;lsblk&lt;/code&gt; 查看一下u盘的设备路径,比如我的是&lt;code&gt;/dev/sdc&lt;/code&gt;,基本上可以通过大小就能判断出来了。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sdc&lt;/span&gt;                   &lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;32&lt;/span&gt;   &lt;span class="mi"&gt;1&lt;/span&gt;   &lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="k"&gt;G&lt;/span&gt;  &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="n"&gt;disk&lt;/span&gt;
-&lt;span class="err"&gt;├─&lt;/span&gt;&lt;span class="n"&gt;sdc1&lt;/span&gt;                &lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;33&lt;/span&gt;   &lt;span class="mi"&gt;1 …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;在安装我笔记本商的archlinux的时候，root分区和主分区是分开的，后来为了尝试KaliLinux，就把home分区牺牲掉，放弃了/home的单独分区。可是如今60G的空间已经不够用了。&lt;/p&gt;
+&lt;p&gt;依稀记得装arch的时候，swap并不是多大不了的事情，甚至说可以不需要swap。于是我打算先把swap禁用掉，然后删除。再重新创建swap分区，然后resize以下Root分区的大小基本就可以大功告成了 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;在安装我笔记本商的archlinux的时候，root分区和主分区是分开的，后来为了尝试KaliLinux，就把home分区牺牲掉，放弃了/home的单独分区。可是如今60G的空间已经不够用了。&lt;/p&gt;
 &lt;p&gt;于是打算重新调整一个root分区的大小。我分区之前，256G硬盘的分区表大概是这样的，boot分区在最前，大概500M，，home分区紧随其后，66G左右，然后是8G的swap交换空间。还剩下170G左右的剩余空间。&lt;/p&gt;
 &lt;p&gt;我的目标是把swap分区弄到最后，其他都扩展给HOME分区。&lt;/p&gt;
 &lt;p&gt;依稀记得装arch的时候，swap并不是多大不了的事情，甚至说可以不需要swap。于是我打算先把swap禁用掉，然后删除。再重新创建swap分区，然后resize以下Root分区的大小基本就可以大功告成了。不过调整root分区的大小是不可以在当前系统下完成的。因此很有必要弄一个usb的镜像，通过镜像系统进去后调整没有mount的swap分区。&lt;/p&gt;
@@ -1202,8 +1062,7 @@ Username用户名和Password密码就是之前在auth文件里的配置&lt;/p&gt
 
 &lt;p&gt;重启，reboot。重启以后&lt;/p&gt;</content><category term="linux"></category><category term="partition"></category></entry><entry><title>Docker搭建openvpn server</title><link href="https://gccpacman.github.io/dockerda-jian-openvpn-server.html" rel="alternate"></link><published>2015-12-29T10:20:00+08:00</published><updated>2015-12-29T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2015-12-29:/dockerda-jian-openvpn-server.html</id><summary type="html">&lt;p&gt;I always intersted in build services in my own VPS.
 specially things like a server can help me free browser the internet.
-But sometimes the connection between my own pc and the vps server are not quite good. So things not always go luck.&lt;/p&gt;
-&lt;p&gt;I find out openvpn is quite …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I always intersted in build services in my own VPS.
+But sometimes the …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I always intersted in build services in my own VPS.
 specially things like a server can help me free browser the internet.
 But sometimes the connection between my own pc and the vps server are not quite good. So things not always go luck.&lt;/p&gt;
 &lt;p&gt;I find out openvpn is quite useful these days. So I'm thinking I will build one of my own. I picked one of my VPS for the test. It was installed with Ubuntu 14.04 and has 512MB memory. Here are the steps of how I did it:&lt;/p&gt;
@@ -1332,13 +1191,7 @@ group nogroup
 
 
 &lt;p&gt;2）然后启动， 指定端口号和进程号：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;uwsgi&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="mi"&gt;127&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;38803&lt;/span&gt; &lt;span class="c1"&gt;--http :8000 --module blog.wsgi&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;3) 配置nginx配置文件，放在&lt;code&gt;/etc/nginx/site-enabled/&lt;/code&gt;目录下，注意如果你要用80端口，就不要和其他的例如默认的配置冲突，如果有个default的文件，应该是一个软连接，可以直接删掉。我就直接贴我自己的了：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;upstream&lt;/span&gt; &lt;span class="nv"&gt;django&lt;/span&gt; {
-    &lt;span class="nv"&gt;server&lt;/span&gt; &lt;span class="mi"&gt;127 …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;没人访问的博客也不是不能升级。不过最近有点懒，趁着睡不着搞了下&lt;code&gt;uwsgi&lt;/code&gt;。
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;uwsgi&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="mi"&gt;127&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0 …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;没人访问的博客也不是不能升级。不过最近有点懒，趁着睡不着搞了下&lt;code&gt;uwsgi&lt;/code&gt;。
 额。平台ubuntu, 你最好有个django项目，假设已经用了&lt;code&gt;virtualenv&lt;/code&gt;，假设已经安装好&lt;code&gt;nginx&lt;/code&gt;并启动服务。&lt;/p&gt;
 &lt;p&gt;1）首先安装&lt;code&gt;uwsgi&lt;/code&gt;:  &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;uwsgi&lt;/span&gt;
@@ -1385,11 +1238,7 @@ group nogroup
 
 &lt;p&gt;注意里面的R参数，就是要用到的参数：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;R&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;bind_address&lt;/span&gt;&lt;span class="p"&gt;:]&lt;/span&gt;&lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="k"&gt;host&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;hostport&lt;/span&gt;
-         &lt;span class="n"&gt;Specifies&lt;/span&gt; &lt;span class="n"&gt;that&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;given&lt;/span&gt; &lt;span class="n"&gt;port&lt;/span&gt; &lt;span class="k"&gt;on&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;remote&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;host&lt;/span&gt; &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;be&lt;/span&gt; &lt;span class="n"&gt;forwarded&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;given&lt;/span&gt; &lt;span class="k"&gt;host&lt;/span&gt; &lt;span class="k"&gt;and&lt;/span&gt; &lt;span class="n"&gt;port&lt;/span&gt; &lt;span class="k"&gt;on&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="k"&gt;local&lt;/span&gt; &lt;span class="n"&gt;side&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;  &lt;span class="n"&gt;This&lt;/span&gt; &lt;span class="n"&gt;works&lt;/span&gt; &lt;span class="k"&gt;by&lt;/span&gt; &lt;span class="n"&gt;allocating&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;socket&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="k"&gt;listen&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;port&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;意思就是把一个远程主机的端口用于本地端口的端口转发。于是对应于假设远程主机IP …&lt;/p&gt;</summary><content type="html">&lt;p&gt;从本地Host用SSH连接到目标主机，怎么让目标主机也可以连接本地的SSH呢？
+         &lt;span class="n"&gt;Specifies&lt;/span&gt; &lt;span class="n"&gt;that&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;given&lt;/span&gt; &lt;span class="n"&gt;port&lt;/span&gt; &lt;span class="k"&gt;on&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;remote&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;host&lt;/span&gt; &lt;span class="k"&gt;is …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;从本地Host用SSH连接到目标主机，怎么让目标主机也可以连接本地的SSH呢？
 答案很简单，只要把本地主机的SSH端口转发到目标主机即可。可以先查看一下SSH命令的man手册:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;man&lt;/span&gt; &lt;span class="n"&gt;ssh&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -1418,11 +1267,7 @@ group nogroup
 &lt;li&gt;&lt;code&gt;Ctrl+a [&lt;/code&gt;开始复制&lt;/li&gt;
 &lt;li&gt;把光标移动到开始复制的位置(上下左右键，或者Ctrl+n/p/b/f键移动光标)&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;Ctrl+Space&lt;/code&gt;  开始选择内容，类似vim的按下V的效果&lt;/li&gt;
-&lt;li&gt;完成选择，&lt;code&gt;Alt+w&lt;/code&gt; 完成复制&lt;/li&gt;
-&lt;li&gt;然后到你想要黏贴的地方， &lt;code&gt;Ctrl+a ]&lt;/code&gt; 黏贴成功&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;需要注意的是， Ctrl+space在windows和linux的某些桌面环境下，都是输入法切换键，所以如果这个方法不成功，很可能是因为快捷键冲突的原因了。那么解决方法一个是把冲突的快捷键解决掉，另一个这是通过配置.tmux.conf。其实上面的快捷键默认的快捷键，模仿的按键是emacs，因为我不用emacs（因为我不用emacs，所以也只觉得很不习惯)，其实还有另外的一种快捷键模式是模仿vim的，不过需要你在tmux配置文件里配置一下, 把下面这行加入.tmux.conf里:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;set …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;tmux确实是一个吊炸的东西，功能和那个和他类似的鼻祖screen相比，确实多出了不少。比如他又一个可以对终端的内容进行复制和黏贴的功能。
+&lt;li&gt;完成选择，&lt;code&gt;Alt+w&lt;/code&gt; 完成复制 …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;tmux确实是一个吊炸的东西，功能和那个和他类似的鼻祖screen相比，确实多出了不少。比如他又一个可以对终端的内容进行复制和黏贴的功能。
 这里假定你设置的快捷键前缀是Ctrl+a:
 进行复制的操作是：&lt;/p&gt;
 &lt;ol&gt;
@@ -1448,18 +1293,7 @@ group nogroup
 &lt;/ol&gt;</content><category term="tmux"></category><category term="linux"></category></entry><entry><title>Windowss上利用babun, tmux, zsh高度定制shell</title><link href="https://gccpacman.github.io/windowssshang-li-yong-babun-tmux-zshgao-du-ding-zhi-shell.html" rel="alternate"></link><published>2015-10-22T10:20:00+08:00</published><updated>2015-10-22T10:20:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2015-10-22:/windowssshang-li-yong-babun-tmux-zshgao-du-ding-zhi-shell.html</id><summary type="html">&lt;p&gt;深刻和彻底的切换到linux平台后，深切的感受到linux平台对程序员带来的便利。因此日常环境已经不再使用windows啦，奈何博主虽然是个穷逼，然而却舍得钱买一堆电脑，所以没事还是会折腾下windows，毕竟娱乐还是需要的。&lt;/p&gt;
 &lt;p&gt;之前折腾过cygwin好一阵子，最终还是觉得真的搬到开发环境确实有很多麻烦的地方，不过现在既然为了娱乐又有一台没有装任何开发环境的win10，那就娱乐一下好了。&lt;/p&gt;
 &lt;h1&gt;1） 安装和配置babun&lt;/h1&gt;
-&lt;p&gt;首先可以装一个定制得非常好的cygwin shell, 那就是&lt;a href="http://babun.github.io/"&gt;babun&lt;/a&gt;, 已经默认为你装好并配置了cygwin环境下的zsh，用起来可比普通的shell爽多了。另外有个强大的包管理器，pact命令，用起来很像rpm和apt之类的，非常方便。例如要装tmux, 那么就执行&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pact&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;tmux&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;就可以成功安装了。
-不过值得注意的是pact默认用的是kernel.org的镜像，国内访问非常慢，这时通过help发现有个--mirror的参数，可以手动指定成163的：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pact&lt;/span&gt; &lt;span class="c1"&gt;--mirror http://mirrors.163.com/cygwin/ install tree&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;不过每次要输入这个太麻烦，可以用alias, 在home目录下新建一个.bash_aliases的文件，输入alias pact='pact …&lt;/p&gt;</summary><content type="html">&lt;p&gt;深刻和彻底的切换到linux平台后，深切的感受到linux平台对程序员带来的便利。因此日常环境已经不再使用windows啦，奈何博主虽然是个穷逼，然而却舍得钱买一堆电脑，所以没事还是会折腾下windows，毕竟娱乐还是需要的。&lt;/p&gt;
+&lt;p&gt;首先可以装一个定制得非常好的cygwin shell, 那就是&lt;a href="http://babun.github.io/"&gt;babun&lt;/a&gt;, 已经默认为你装好并配置了cygwin环境下的zsh，用起来可比普通的shell爽多了。另外有个强大的包管理器，pact命令，用起来很像rpm和apt之类的，非常方便。例如要装tmux, 那么就执行 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;深刻和彻底的切换到linux平台后，深切的感受到linux平台对程序员带来的便利。因此日常环境已经不再使用windows啦，奈何博主虽然是个穷逼，然而却舍得钱买一堆电脑，所以没事还是会折腾下windows，毕竟娱乐还是需要的。&lt;/p&gt;
 &lt;p&gt;之前折腾过cygwin好一阵子，最终还是觉得真的搬到开发环境确实有很多麻烦的地方，不过现在既然为了娱乐又有一台没有装任何开发环境的win10，那就娱乐一下好了。&lt;/p&gt;
 &lt;h1&gt;1） 安装和配置babun&lt;/h1&gt;
 &lt;p&gt;首先可以装一个定制得非常好的cygwin shell, 那就是&lt;a href="http://babun.github.io/"&gt;babun&lt;/a&gt;, 已经默认为你装好并配置了cygwin环境下的zsh，用起来可比普通的shell爽多了。另外有个强大的包管理器，pact命令，用起来很像rpm和apt之类的，非常方便。例如要装tmux, 那么就执行&lt;/p&gt;
@@ -1512,15 +1346,7 @@ group nogroup
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    ### &lt;span class="nv"&gt;Basic&lt;/span&gt; &lt;span class="nv"&gt;configuration&lt;/span&gt;
 
     # &lt;span class="nv"&gt;Add&lt;/span&gt; &lt;span class="nv"&gt;your&lt;/span&gt; &lt;span class="nv"&gt;proxy&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;s address&lt;/span&gt;
-    &lt;span class="nv"&gt;proxyAddress&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;192&lt;/span&gt;.&lt;span class="mi"&gt;168&lt;/span&gt;.&lt;span class="mi"&gt;0&lt;/span&gt;.&lt;span class="mi"&gt;1&lt;/span&gt;
-
-    # &lt;span class="nv"&gt;Allow&lt;/span&gt; &lt;span class="nv"&gt;from&lt;/span&gt; &lt;span class="nv"&gt;anyone&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="mi"&gt;192&lt;/span&gt;.&lt;span class="mi"&gt;168&lt;/span&gt;.&lt;span class="mi"&gt;0&lt;/span&gt;.&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="nv"&gt;range&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="k"&gt;connect&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="nv"&gt;your&lt;/span&gt; &lt;span class="nv"&gt;proxy&lt;/span&gt;
-    &lt;span class="nv"&gt;allowedClients&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;192&lt;/span&gt;.&lt;span class="mi"&gt;168&lt;/span&gt;.&lt;span class="mi"&gt;0&lt;/span&gt;.&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;24&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;重启服务：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;init …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;安装polipo：&lt;/p&gt;
+    &lt;span class="nv"&gt;proxyAddress&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;192&lt;/span&gt;.&lt;span class="mi"&gt;168&lt;/span&gt;.&lt;span class="mi"&gt;0 …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;安装polipo：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;get&lt;/span&gt; &lt;span class="k"&gt;update&lt;/span&gt;
 &lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;get&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;polipo&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -1549,22 +1375,7 @@ group nogroup
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="k"&gt;On&lt;/span&gt; &lt;span class="n"&gt;CentOS&lt;/span&gt; &lt;span class="mi"&gt;6&lt;/span&gt; &lt;span class="n"&gt;x64&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
 &lt;span class="n"&gt;rpm&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;poptop&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sourceforge&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;net&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;yum&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;stable&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;rhel6&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;pptp&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;release&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;current&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;noarch&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rpm&lt;/span&gt;
 &lt;span class="n"&gt;yum&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;pptpd&lt;/span&gt;
-&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="k"&gt;On&lt;/span&gt; &lt;span class="n"&gt;Ubuntu&lt;/span&gt; &lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="n"&gt;x64&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-&lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;get&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;pptpd&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;编辑 &lt;strong&gt;/etc/pptpd.conf&lt;/strong&gt; 添加以下行:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;localip&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;
-&lt;span class="n"&gt;remoteip&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;200&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;localip本机ip(vpn的服务器ip …&lt;/p&gt;</summary><content type="html">&lt;ol&gt;
+&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="k"&gt;On&lt;/span&gt; &lt;span class="n"&gt;Ubuntu …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;安装server&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="k"&gt;On&lt;/span&gt; &lt;span class="n"&gt;CentOS&lt;/span&gt; &lt;span class="mi"&gt;6&lt;/span&gt; &lt;span class="n"&gt;x64&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;

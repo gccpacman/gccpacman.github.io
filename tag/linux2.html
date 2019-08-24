@@ -20,7 +20,7 @@
 <div class="top-bar">
 <div class="row">
     <div class="large-9 large-centered columns">
-	    <h1><a href="https://gccpacman.github.io">Pacman News</a></h1>
+	    <h1><a href="/">Pacman News</a></h1>
     </div>
 </div>
 </div>
@@ -69,13 +69,9 @@
 
 
 <p>然后终端会显示New 'X' desktop is kodi-kodibuntu:1</p>
-<p>3）（可选）如果需要改变桌面，例如不想用xvnc，可以编辑<code>$HOME/.vnc/xstartup</code>的内容。具体操作暂略。</p>
-<p>4）（可选）如果需要开机启动，一个是用supervisor，另外就是在/etc/systemd/system/下手动写一个服务。具体操作暂略。</p>
-<p>在客户端:</p>
-<p>1) 安装tigervnc:</p>
-<div class="highlight"><pre><span></span>$ sudo pacman -S tigervnc   <span class="o">(</span>archlinux …</pre></div><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+<p>3）（可选）如果需要改变桌面 …</p><p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
-    Tagged: 
+    标签: 
     <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
     <a href="https://gccpacman.github.io/tag/vnc.html">vnc </a>
     <a href="https://gccpacman.github.io/tag/gtk.html">gtk </a>
@@ -84,7 +80,7 @@
 
 
 
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/linuxda-jian-vncfu-wu-qi.html">Read More</a>
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/linuxda-jian-vncfu-wu-qi.html">阅读全文</a>
                 <hr  class="gradient"/>
             </article>
 
@@ -99,13 +95,9 @@
 
 <p>把2G的硬盘拆到了一台旧电脑上，并且给旧电脑装了xubuntu,打算直接打造一个媒体中心。目前知道有里那个用的不错的东西，KODI（XBMC）是一个很不错的选择。当然用PLEX也是个不错的选择，整理资料库方面PLEX更加强大。不过KODI是开源和免费的，既然用了linux，就用个开源的吧。况且我发现kodi还有不少的好处，并且更加轻量级。</p>
 <p>其实Kodi有个基于ubuntu的发行版叫做kodibuntu，直接装得话效果其实也差不多。但是我还是喜欢从ubuntu去扩展，毕竟任何基于ubuntu的版本，相对ubuntu的开发肯定是有所滞后的。和Android的Rom一个道理。不过kubuntu因为是非常流行的发行版不用担心这个问题。</p>
-<p>下面的步骤基本上是参考了askubuntu的一个答案<a href="http://askubuntu.com/questions/596839/autostart-kodi-on-vivid">Autostart Kodi on Vivid</a>，只不过它是在纯净的server版本安装，而desktop版则因为有自身的启动器，需要将其禁用掉而已。</p>
-<p>1）安装kodi: sudo apt-get install kodi</p>
-<p>2）创建一个kodi的用户，并添加到和视频播放有关的组
-    sudo adduser --disabled-password --disabled-login --gecos "" kodi
-    sudo usermod -a -G audio kodi …</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+<p>下面的步骤基本上是参考了askubuntu的一个答案<a href="http://askubuntu.com/questions/596839/autostart-kodi-on-vivid">Autostart Kodi on …</a></p><p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
-    Tagged: 
+    标签: 
     <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
     <a href="https://gccpacman.github.io/tag/kodi.html">kodi </a>
     <a href="https://gccpacman.github.io/tag/resource.html">resource </a>
@@ -113,7 +105,7 @@
 
 
 
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/linuxan-zhuang-bing-kai-ji-jin-ru-kodimei-ti-zhong-xin.html">Read More</a>
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/linuxan-zhuang-bing-kai-ji-jin-ru-kodimei-ti-zhong-xin.html">阅读全文</a>
                 <hr  class="gradient"/>
             </article>
 
@@ -129,27 +121,16 @@
 <p>上一篇装完kodi后，我的旧电脑就彻底变成了一个kodi/XBMC媒体中心，那么比如我要下载新的美剧什么的，好像就还是不那么方便。
 p2p的torrent一直是我的最爱。deluge是一个跨平台的操作系统，支持linux, windows 和mac，还有远程控制等功能，什么是远程下载呢。我们都知道有迅雷远程下载，那么deluge其实也是一样，就是你在一台电脑操作，有一个下载链接，然后你可以直接在这台电脑上添加这个下载链接，唯一不同的是下载的任务被添加到了远程的机器上，文件也会下载到远程的机器上。
 这样的需求正符合我媒体中心的需要，我找到新的片源，并不需要下载到我的计算机，而是可以让我的Kodi在播放电影的同时，又可以执行下载的任务。</p>
-<h1>服务器端：</h1>
-<p>安装:</p>
-<div class="highlight"><pre><span></span>$ sudo apt-get install deluged deluge-web
-</pre></div>
+<h1>服务器端 …</h1><p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
-
-<p>新建一个deluge用户和用户组:</p>
-<div class="highlight"><pre><span></span>$ sudo adduser --system  --gecos <span class="s2">&quot;Deluge Service&quot;</span> --disabled-password --group --home /var/lib/deluge deluge
-</pre></div>
-
-
-<p>把用户添加到deluge用户组<code>adduser &lt;username&gt; deluge</code>，便于用户操作torrent和下载到的文件 …</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
-
-    Tagged: 
+    标签: 
     <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
     <a href="https://gccpacman.github.io/tag/resource.html">resource </a>
 </p>
 
 
 
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/linuxan-zhuang-delugexia-zai-gong-ju-zi-dong-yuan-cheng-xia-zai.html">Read More</a>
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/linuxan-zhuang-delugexia-zai-gong-ju-zi-dong-yuan-cheng-xia-zai.html">阅读全文</a>
                 <hr  class="gradient"/>
             </article>
 
@@ -165,19 +146,16 @@ p2p的torrent一直是我的最爱。deluge是一个跨平台的操作系统，�
 <p>在安装我笔记本商的archlinux的时候，root分区和主分区是分开的，后来为了尝试KaliLinux，就把home分区牺牲掉，放弃了/home的单独分区。可是如今60G的空间已经不够用了。</p>
 <p>于是打算重新调整一个root分区的大小。我分区之前，256G硬盘的分区表大概是这样的，boot分区在最前，大概500M，，home分区紧随其后，66G左右，然后是8G的swap交换空间。还剩下170G左右的剩余空间。</p>
 <p>我的目标是把swap分区弄到最后，其他都扩展给HOME分区。</p>
-<p>依稀记得装arch的时候，swap并不是多大不了的事情，甚至说可以不需要swap。于是我打算先把swap禁用掉，然后删除。再重新创建swap分区，然后resize以下Root分区的大小基本就可以大功告成了。不过调整root分区的大小是不可以在当前系统下完成的。因此很有必要弄一个usb的镜像，通过镜像系统进去后调整没有mount的swap分区。</p>
-<p>在linux下把镜像刻录到usb是非常方便的。接上U盘以后，可以通过<code>lsblk</code> 查看一下u盘的设备路径,比如我的是<code>/dev/sdc</code>,基本上可以通过大小就能判断出来了。</p>
-<div class="highlight"><pre><span></span><span class="n">sdc</span>                   <span class="mi">8</span><span class="p">:</span><span class="mi">32</span>   <span class="mi">1</span>   <span class="mi">7</span><span class="p">.</span><span class="mi">2</span><span class="k">G</span>  <span class="mi">0</span> <span class="n">disk</span>
-<span class="err">├─</span><span class="n">sdc1</span>                <span class="mi">8</span><span class="p">:</span><span class="mi">33</span>   <span class="mi">1 …</span></pre></div><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+<p>依稀记得装arch的时候，swap并不是多大不了的事情，甚至说可以不需要swap。于是我打算先把swap禁用掉，然后删除。再重新创建swap分区，然后resize以下Root分区的大小基本就可以大功告成了 …</p><p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
-    Tagged: 
+    标签: 
     <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
     <a href="https://gccpacman.github.io/tag/partition.html">partition </a>
 </p>
 
 
 
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/diao-zheng-linuxzhu-fen-qu-de-da-xiao.html">Read More</a>
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/diao-zheng-linuxzhu-fen-qu-de-da-xiao.html">阅读全文</a>
                 <hr  class="gradient"/>
             </article>
 
@@ -192,10 +170,9 @@ p2p的torrent一直是我的最爱。deluge是一个跨平台的操作系统，�
 
 <p>I always intersted in build services in my own VPS.
 specially things like a server can help me free browser the internet.
-But sometimes the connection between my own pc and the vps server are not quite good. So things not always go luck.</p>
-<p>I find out openvpn is quite …</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+But sometimes the …</p><p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
-    Tagged: 
+    标签: 
     <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
     <a href="https://gccpacman.github.io/tag/vpn.html">vpn </a>
     <a href="https://gccpacman.github.io/tag/openvpn.html">openvpn </a>
@@ -203,7 +180,7 @@ But sometimes the connection between my own pc and the vps server are not quite 
 
 
 
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/dockerda-jian-openvpn-server.html">Read More</a>
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/dockerda-jian-openvpn-server.html">阅读全文</a>
                 <hr  class="gradient"/>
             </article>
 
@@ -224,13 +201,9 @@ But sometimes the connection between my own pc and the vps server are not quite 
 
 <p>注意里面的R参数，就是要用到的参数：</p>
 <div class="highlight"><pre><span></span><span class="o">-</span><span class="n">R</span> <span class="p">[</span><span class="n">bind_address</span><span class="p">:]</span><span class="n">port</span><span class="p">:</span><span class="k">host</span><span class="p">:</span><span class="n">hostport</span>
-         <span class="n">Specifies</span> <span class="n">that</span> <span class="n">the</span> <span class="n">given</span> <span class="n">port</span> <span class="k">on</span> <span class="n">the</span> <span class="n">remote</span> <span class="p">(</span><span class="n">server</span><span class="p">)</span> <span class="k">host</span> <span class="k">is</span> <span class="k">to</span> <span class="n">be</span> <span class="n">forwarded</span> <span class="k">to</span> <span class="n">the</span> <span class="n">given</span> <span class="k">host</span> <span class="k">and</span> <span class="n">port</span> <span class="k">on</span> <span class="n">the</span> <span class="k">local</span> <span class="n">side</span><span class="p">.</span>  <span class="n">This</span> <span class="n">works</span> <span class="k">by</span> <span class="n">allocating</span> <span class="n">a</span> <span class="n">socket</span> <span class="k">to</span> <span class="k">listen</span> <span class="k">to</span> <span class="n">port</span>
-</pre></div>
+         <span class="n">Specifies</span> <span class="n">that</span> <span class="n">the</span> <span class="n">given</span> <span class="n">port</span> <span class="k">on</span> <span class="n">the</span> <span class="n">remote</span> <span class="p">(</span><span class="n">server</span><span class="p">)</span> <span class="k">host</span> <span class="k">is …</span></pre></div><p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
-
-<p>意思就是把一个远程主机的端口用于本地端口的端口转发。于是对应于假设远程主机IP …</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
-
-    Tagged: 
+    标签: 
     <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
     <a href="https://gccpacman.github.io/tag/ssh.html">ssh </a>
     <a href="https://gccpacman.github.io/tag/port-forward.html">port-forward </a>
@@ -238,7 +211,7 @@ But sometimes the connection between my own pc and the vps server are not quite 
 
 
 
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/linuxli-yong-sshfan-xiang-duan-kou-zhuan-fa-bao-lu-nei-wang-duan-kou.html">Read More</a>
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/linuxli-yong-sshfan-xiang-duan-kou-zhuan-fa-bao-lu-nei-wang-duan-kou.html">阅读全文</a>
                 <hr  class="gradient"/>
             </article>
 
@@ -258,14 +231,13 @@ But sometimes the connection between my own pc and the vps server are not quite 
 
     <!-- Sidebar -->
     <aside class="large-3 columns">
-        <h5 class="sidebar-title">Site</h5>
         <ul class="side-nav">
-            <li><a href="https://gccpacman.github.io/archives.html">Archives</a>
-            <li><a href="https://gccpacman.github.io/tags.html">Tags</a>
+            <li><a href="https://gccpacman.github.io/archives.html">归档</a>
+            <li><a href="https://gccpacman.github.io/tags.html">标签</a>
         </ul>
 
 		
-        <h5 class="sidebar-title">Categories</h5>
+        <h5 class="sidebar-title">分类</h5>
         <ul class="side-nav">
             <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
             <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
@@ -276,17 +248,13 @@ But sometimes the connection between my own pc and the vps server are not quite 
             <li><a href="https://gccpacman.github.io/category/windows.html">Windows</a></li>
    
         </ul>
-
-        <h5 class="sidebar-title">Links</h5>
-        <ul class="side-nav">
-            <li><a href="http://getpelican.com/">Pelican</a></li>
-        </ul>
 		
-        <h5 class="sidebar-title">Social</h5>
+        <h5 class="sidebar-title">我的社交账号</h5>
         <ul class="side-nav">
-            <li><a href="https://github.com/gccpacman">GccPacman @Github</a></li>
-            <li><a href="https://stackoverflow.com/users/4124310/realhu">r341h @StackOverflow</a></li>
+            <li><a href="https://github.com/gccpacman">Github</a></li>
+            <li><a href="https://stackoverflow.com/users/4124310/realhu">StackOverflow</a></li>
         </ul>
+
 
     </aside> <!-- End Sidebar -->
 

@@ -20,7 +20,7 @@
 <div class="top-bar">
 <div class="row">
     <div class="large-9 large-centered columns">
-	    <h1><a href="https://gccpacman.github.io">Pacman News</a></h1>
+	    <h1><a href="/">Pacman News</a></h1>
     </div>
 </div>
 </div>
@@ -65,33 +65,9 @@ Default Switch默认是可以连接外网的，如果是windows机器不用配�
 
 </li>
 <li>
-<p>编辑<code>/etc/sysconfig/network</code>, 替换server-name.company.lan为你的主机名：</p>
-<div class="highlight"><pre><span></span><span class="n">NETWORKING</span><span class="o">=</span><span class="n">yes</span>
-<span class="n">HOSTNAME</span><span class="o">=</span><span class="n">server</span><span class="o">-</span><span class="n">name</span><span class="p">.</span><span class="n">company</span><span class="p">.</span><span class="n">lan</span>
-</pre></div>
+<p>编辑<code>/etc/sysconfig/network …</code></p></li></ol><p class="subheader">分类: <a href="https://gccpacman.github.io/category/windows.html">Windows</a>
 
-
-</li>
-<li>
-<p>重启network服务：</p>
-<div class="highlight"><pre><span></span>$ systemctl restart network
-</pre></div>
-
-
-</li>
-<li>
-<p>确认网络是否网络正常，正常的话重启，再次确认：</p>
-<div class="highlight"><pre><span></span>$ nslookup bing.com
-</pre></div>
-
-
-</li>
-</ol>
-<p>参考：
-https://unix.stackexchange.com/questions/17436/centos-on-hyperv-eth0-not-in-ifconfig</p>
-<p>https://www.krizna.com/centos/setup-network-centos-7/</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/windows.html">Windows</a>
-
-    Tagged: 
+    标签: 
     <a href="https://gccpacman.github.io/tag/windows.html">windows </a>
     <a href="https://gccpacman.github.io/tag/hyper-v.html">hyper-v </a>
     <a href="https://gccpacman.github.io/tag/centos.html">centos </a>
@@ -100,6 +76,7 @@ https://unix.stackexchange.com/questions/17436/centos-on-hyperv-eth0-not-in-ifco
 
 
 
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/windowszai-hypervan-zhuang-centos7bing-pei-zhi-wang-luo.html">阅读全文</a>
             </article>
 
 
@@ -115,25 +92,14 @@ https://unix.stackexchange.com/questions/17436/centos-on-hyperv-eth0-not-in-ifco
 </h6>
 
 
-<p>现在的电脑是Surface，跑虚拟机很吃力了，但是不是不能跑，重点是优化后把linux的资源降下来，还是可以非常流畅。i3是个比xfce4更加轻量级的桌面管理器，而且不是像Windows那样悬浮窗口式的，而是tiling的桌面。随便网上找了个截图，大概就是这个意思：</p>
-<p><img alt="i3" src="https://i3wm.org/screenshots/i3-1.png"></p>
-<p>这边的例子以Vmware为例：</p>
+<p>现在的电脑是SurfacePro3，如果安装了Linux桌面环境，如Gnome或者xfce等，跑虚拟机会很吃力了，但是不是不能跑，重点是优化后把Linux的资源降下来非常流畅，而且还可以使用桌面应用。i3是个比xfce4更加轻量级的桌面管理器，Tiling的桌面可以保证所有打开的窗口都平铺满桌面，然后通过快捷键和鼠标切换应用，这边只讲述下我的安装过程，以及如何安装Vmware插件以支持剪切板，自动缩放虚拟机分辨率等:</p>
 <ol>
 <li>
 <p>首先要安装i3：</p>
 <div class="highlight"><pre><span></span>$ sudo yum install i3   <span class="c1"># centos</span>
-$ sudo apt install i3   <span class="c1"># debian &amp; ubuntu</span>
-$ sudo pacman -S i3     <span class="c1"># archlinux</span>
-</pre></div>
+$ sudo apt install i3   <span class="c1"># debian &amp; ubuntu …</span></pre></div></li></ol><p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
-
-</li>
-<li>
-<p>备份并修改i3的配置文件，可以参考我的github，或者直接下载替换：</p>
-<div class="highlight"><pre><span></span><span class="n">cp</span> <span class="o">~/</span><span class="p">.</span><span class="n">config</span><span class="o">/</span><span class="n">i3</span><span class="o">/</span><span class="n">config</span> <span class="o">~/</span><span class="p">.</span><span class="n">config</span><span class="o">/</span><span class="n">i3</span><span class="o">/</span><span class="n">config</span><span class="p">.</span><span class="n">bak</span>
-<span class="n">wget</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">raw</span><span class="p">.</span><span class="n">githubusercontent</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">gccpacman</span><span class="o">/</span><span class="n">vm</span><span class="o">-</span><span class="n">i3wm</span><span class="o">-</span><span class="n">config</span><span class="o">/</span><span class="n">master</span><span class="o">/</span><span class="n">config …</span></pre></div></li></ol><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
-
-    Tagged: 
+    标签: 
     <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
     <a href="https://gccpacman.github.io/tag/gtk.html">gtk </a>
     <a href="https://gccpacman.github.io/tag/vitual-machine.html">vitual machine </a>
@@ -141,7 +107,7 @@ $ sudo pacman -S i3     <span class="c1"># archlinux</span>
 
 
 
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/zai-xu-ni-ji-li-pao-zi-yuan-zhan-yong-chao-di-de-linuxzhuo-mian-huan-jing-i3.html">Read More</a>
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/zai-xu-ni-ji-li-pao-zi-yuan-zhan-yong-chao-di-de-linuxzhuo-mian-huan-jing-i3.html">阅读全文</a>
                 <hr  class="gradient"/>
             </article>
 
@@ -159,14 +125,13 @@ $ sudo pacman -S i3     <span class="c1"># archlinux</span>
 
     <!-- Sidebar -->
     <aside class="large-3 columns">
-        <h5 class="sidebar-title">Site</h5>
         <ul class="side-nav">
-            <li><a href="https://gccpacman.github.io/archives.html">Archives</a>
-            <li><a href="https://gccpacman.github.io/tags.html">Tags</a>
+            <li><a href="https://gccpacman.github.io/archives.html">归档</a>
+            <li><a href="https://gccpacman.github.io/tags.html">标签</a>
         </ul>
 
 		
-        <h5 class="sidebar-title">Categories</h5>
+        <h5 class="sidebar-title">分类</h5>
         <ul class="side-nav">
             <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
             <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
@@ -177,17 +142,13 @@ $ sudo pacman -S i3     <span class="c1"># archlinux</span>
             <li><a href="https://gccpacman.github.io/category/windows.html">Windows</a></li>
    
         </ul>
-
-        <h5 class="sidebar-title">Links</h5>
-        <ul class="side-nav">
-            <li><a href="http://getpelican.com/">Pelican</a></li>
-        </ul>
 		
-        <h5 class="sidebar-title">Social</h5>
+        <h5 class="sidebar-title">我的社交账号</h5>
         <ul class="side-nav">
-            <li><a href="https://github.com/gccpacman">GccPacman @Github</a></li>
-            <li><a href="https://stackoverflow.com/users/4124310/realhu">r341h @StackOverflow</a></li>
+            <li><a href="https://github.com/gccpacman">Github</a></li>
+            <li><a href="https://stackoverflow.com/users/4124310/realhu">StackOverflow</a></li>
         </ul>
+
 
     </aside> <!-- End Sidebar -->
 

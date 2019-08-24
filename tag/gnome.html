@@ -20,7 +20,7 @@
 <div class="top-bar">
 <div class="row">
     <div class="large-9 large-centered columns">
-	    <h1><a href="https://gccpacman.github.io">Pacman News</a></h1>
+	    <h1><a href="/">Pacman News</a></h1>
     </div>
 </div>
 </div>
@@ -55,24 +55,9 @@
 又没有办法在应用程序菜单里找到，即使是gnome下，按super然后全局搜索，也找到这个。</p>
 <p>不过好在linux是自由的系统，自己建一个应用程序的启动器一点问题都没有。</p>
 <p>比如我的eclipse装在<code>/opt/eclipse-jee/</code>下,怎么新建一个启动器呢？</p>
-<p>所有用户共享的应用启动器的目录是<code>/usr/share/applications/</code>目录，那么用户自定义的启动器目录在哪里？找了下用户目录下的.config/，没有找到，只好去百度google了一下，原来启动器是在.local/下，具体是<code>.local/share/applications</code>.</p>
-<p>新建一个eclipse.desktop的文件，然后输入以下内容：</p>
-<div class="highlight"><pre><span></span><span class="k">[Desktop Entry]</span>
-<span class="na">Encoding</span><span class="o">=</span><span class="s">UTF-8</span>
-<span class="na">Name</span><span class="o">=</span><span class="s">Eclipse J2ee</span>
-<span class="na">Comment</span><span class="o">=</span><span class="s">Official desktop version of Telegram messaging app</span>
-<span class="na">Exec</span><span class="o">=</span><span class="s">/opt/eclipse-jee/eclipse</span>
-<span class="na">Icon</span><span class="o">=</span><span class="s">/opt/eclipse-jee/icon.xpm</span>
-<span class="na">Type</span><span class="o">=</span><span class="s">Application</span>
-<span class="na">Categories</span><span class="o">=</span><span class="s">Development;</span>
-</pre></div>
+<p>所有用户共享的应用启动器的目录是<code>/usr/share/applications/</code>目录，那么用户自定义的启动器目录在哪里？找了下用户目录下的.config …</p><p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
-
-<p>Categories就是类目，可以输入多个。编辑保存，不需要再做任何操作，eclipse就可以搜索到了。</p>
-<p>参考：
-<a href="http://askubuntu.com/questions/112186/how-do-you-create-a-custom-application-launcher-in-gnome-shell">How do you create a custom application launcher in Gnome Shell? </a></p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
-
-    Tagged: 
+    标签: 
     <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
     <a href="https://gccpacman.github.io/tag/gnome.html">gnome </a>
     <a href="https://gccpacman.github.io/tag/gtk.html">gtk </a>
@@ -80,6 +65,7 @@
 
 
 
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/linuxchuang-jian-zi-ding-yi-de-ying-yong-cheng-xu-qi-dong-qi.html">阅读全文</a>
             </article>
 
 <div class="pagination-centered">
@@ -99,14 +85,13 @@
 
     <!-- Sidebar -->
     <aside class="large-3 columns">
-        <h5 class="sidebar-title">Site</h5>
         <ul class="side-nav">
-            <li><a href="https://gccpacman.github.io/archives.html">Archives</a>
-            <li><a href="https://gccpacman.github.io/tags.html">Tags</a>
+            <li><a href="https://gccpacman.github.io/archives.html">归档</a>
+            <li><a href="https://gccpacman.github.io/tags.html">标签</a>
         </ul>
 
 		
-        <h5 class="sidebar-title">Categories</h5>
+        <h5 class="sidebar-title">分类</h5>
         <ul class="side-nav">
             <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
             <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
@@ -117,17 +102,13 @@
             <li><a href="https://gccpacman.github.io/category/windows.html">Windows</a></li>
    
         </ul>
-
-        <h5 class="sidebar-title">Links</h5>
-        <ul class="side-nav">
-            <li><a href="http://getpelican.com/">Pelican</a></li>
-        </ul>
 		
-        <h5 class="sidebar-title">Social</h5>
+        <h5 class="sidebar-title">我的社交账号</h5>
         <ul class="side-nav">
-            <li><a href="https://github.com/gccpacman">GccPacman @Github</a></li>
-            <li><a href="https://stackoverflow.com/users/4124310/realhu">r341h @StackOverflow</a></li>
+            <li><a href="https://github.com/gccpacman">Github</a></li>
+            <li><a href="https://stackoverflow.com/users/4124310/realhu">StackOverflow</a></li>
         </ul>
+
 
     </aside> <!-- End Sidebar -->
 

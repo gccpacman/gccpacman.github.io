@@ -20,7 +20,7 @@
 <div class="top-bar">
 <div class="row">
     <div class="large-9 large-centered columns">
-	    <h1><a href="https://gccpacman.github.io">Pacman News</a></h1>
+	    <h1><a href="/">Pacman News</a></h1>
     </div>
 </div>
 </div>
@@ -59,20 +59,16 @@
 <li><code>Ctrl+a [</code>开始复制</li>
 <li>把光标移动到开始复制的位置(上下左右键，或者Ctrl+n/p/b/f键移动光标)</li>
 <li><code>Ctrl+Space</code>  开始选择内容，类似vim的按下V的效果</li>
-<li>完成选择，<code>Alt+w</code> 完成复制</li>
-<li>然后到你想要黏贴的地方， <code>Ctrl+a ]</code> 黏贴成功</li>
-</ol>
-<p>需要注意的是， Ctrl+space在windows和linux的某些桌面环境下，都是输入法切换键，所以如果这个方法不成功，很可能是因为快捷键冲突的原因了。那么解决方法一个是把冲突的快捷键解决掉，另一个这是通过配置.tmux.conf。其实上面的快捷键默认的快捷键，模仿的按键是emacs，因为我不用emacs（因为我不用emacs，所以也只觉得很不习惯)，其实还有另外的一种快捷键模式是模仿vim的，不过需要你在tmux配置文件里配置一下, 把下面这行加入.tmux.conf里:</p>
-<div class="highlight"><pre><span></span><span class="k">set …</span></pre></div><p class="subheader">Category: <a href="https://gccpacman.github.io/category/tmux.html">Tmux</a>
+<li>完成选择，<code>Alt+w</code> 完成复制 …</li></ol><p class="subheader">分类: <a href="https://gccpacman.github.io/category/tmux.html">Tmux</a>
 
-    Tagged: 
+    标签: 
     <a href="https://gccpacman.github.io/tag/tmux.html">tmux </a>
     <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
 </p>
 
 
 
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/tmuxde-fu-zhi-he-nian-tie.html">Read More</a>
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/tmuxde-fu-zhi-he-nian-tie.html">阅读全文</a>
                 <hr  class="gradient"/>
             </article>
 
@@ -95,24 +91,16 @@
 <div class="highlight"><pre><span></span>    ### <span class="nv">Basic</span> <span class="nv">configuration</span>
 
     # <span class="nv">Add</span> <span class="nv">your</span> <span class="nv">proxy</span><span class="s1">&#39;</span><span class="s">s address</span>
-    <span class="nv">proxyAddress</span> <span class="o">=</span> <span class="mi">192</span>.<span class="mi">168</span>.<span class="mi">0</span>.<span class="mi">1</span>
+    <span class="nv">proxyAddress</span> <span class="o">=</span> <span class="mi">192</span>.<span class="mi">168</span>.<span class="mi">0 …</span></pre></div><p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
-    # <span class="nv">Allow</span> <span class="nv">from</span> <span class="nv">anyone</span> <span class="nv">in</span> <span class="nv">the</span> <span class="mi">192</span>.<span class="mi">168</span>.<span class="mi">0</span>.<span class="o">*</span> <span class="nv">range</span> <span class="nv">to</span> <span class="k">connect</span> <span class="nv">to</span> <span class="nv">your</span> <span class="nv">proxy</span>
-    <span class="nv">allowedClients</span> <span class="o">=</span> <span class="mi">192</span>.<span class="mi">168</span>.<span class="mi">0</span>.<span class="mi">0</span><span class="o">/</span><span class="mi">24</span>
-</pre></div>
-
-
-<p>重启服务：</p>
-<div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init …</span></pre></div><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
-
-    Tagged: 
+    标签: 
     <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
     <a href="https://gccpacman.github.io/tag/proxy.html">proxy </a>
 </p>
 
 
 
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/linuxjiang-socksdai-li-zhuan-huan-cheng-httpdai-li.html">Read More</a>
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/linuxjiang-socksdai-li-zhuan-huan-cheng-httpdai-li.html">阅读全文</a>
                 <hr  class="gradient"/>
             </article>
 
@@ -131,31 +119,16 @@
 <div class="highlight"><pre><span></span><span class="o">#</span> <span class="k">On</span> <span class="n">CentOS</span> <span class="mi">6</span> <span class="n">x64</span><span class="p">:</span>
 <span class="n">rpm</span> <span class="o">-</span><span class="n">i</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">poptop</span><span class="p">.</span><span class="n">sourceforge</span><span class="p">.</span><span class="n">net</span><span class="o">/</span><span class="n">yum</span><span class="o">/</span><span class="k">stable</span><span class="o">/</span><span class="n">rhel6</span><span class="o">/</span><span class="n">pptp</span><span class="o">-</span><span class="n">release</span><span class="o">-</span><span class="k">current</span><span class="p">.</span><span class="n">noarch</span><span class="p">.</span><span class="n">rpm</span>
 <span class="n">yum</span> <span class="o">-</span><span class="n">y</span> <span class="n">install</span> <span class="n">pptpd</span>
-<span class="o">#</span> <span class="k">On</span> <span class="n">Ubuntu</span> <span class="mi">12</span><span class="p">.</span><span class="mi">10</span> <span class="n">x64</span><span class="p">:</span>
-<span class="n">apt</span><span class="o">-</span><span class="k">get</span> <span class="n">install</span> <span class="n">pptpd</span>
-</pre></div>
+<span class="o">#</span> <span class="k">On</span> <span class="n">Ubuntu …</span></pre></div></li></ol><p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
-
-</li>
-<li>
-<p>编辑 <strong>/etc/pptpd.conf</strong> 添加以下行:</p>
-<div class="highlight"><pre><span></span><span class="n">localip</span> <span class="mi">10</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">1</span>
-<span class="n">remoteip</span> <span class="mi">10</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">100</span><span class="o">-</span><span class="mi">200</span>
-</pre></div>
-
-
-</li>
-</ol>
-<p>localip本机ip(vpn的服务器ip …</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
-
-    Tagged: 
+    标签: 
     <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
     <a href="https://gccpacman.github.io/tag/vpn.html">vpn </a>
 </p>
 
 
 
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/linuxda-jian-pptp-vpn-server.html">Read More</a>
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/linuxda-jian-pptp-vpn-server.html">阅读全文</a>
                 <hr  class="gradient"/>
             </article>
 
@@ -174,14 +147,13 @@
 
     <!-- Sidebar -->
     <aside class="large-3 columns">
-        <h5 class="sidebar-title">Site</h5>
         <ul class="side-nav">
-            <li><a href="https://gccpacman.github.io/archives.html">Archives</a>
-            <li><a href="https://gccpacman.github.io/tags.html">Tags</a>
+            <li><a href="https://gccpacman.github.io/archives.html">归档</a>
+            <li><a href="https://gccpacman.github.io/tags.html">标签</a>
         </ul>
 
 		
-        <h5 class="sidebar-title">Categories</h5>
+        <h5 class="sidebar-title">分类</h5>
         <ul class="side-nav">
             <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
             <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
@@ -192,17 +164,13 @@
             <li><a href="https://gccpacman.github.io/category/windows.html">Windows</a></li>
    
         </ul>
-
-        <h5 class="sidebar-title">Links</h5>
-        <ul class="side-nav">
-            <li><a href="http://getpelican.com/">Pelican</a></li>
-        </ul>
 		
-        <h5 class="sidebar-title">Social</h5>
+        <h5 class="sidebar-title">我的社交账号</h5>
         <ul class="side-nav">
-            <li><a href="https://github.com/gccpacman">GccPacman @Github</a></li>
-            <li><a href="https://stackoverflow.com/users/4124310/realhu">r341h @StackOverflow</a></li>
+            <li><a href="https://github.com/gccpacman">Github</a></li>
+            <li><a href="https://stackoverflow.com/users/4124310/realhu">StackOverflow</a></li>
         </ul>
+
 
     </aside> <!-- End Sidebar -->
 

@@ -20,7 +20,7 @@
 <div class="top-bar">
 <div class="row">
     <div class="large-9 large-centered columns">
-	    <h1><a href="https://gccpacman.github.io">Pacman News</a></h1>
+	    <h1><a href="/">Pacman News</a></h1>
     </div>
 </div>
 </div>
@@ -59,40 +59,9 @@
 
 
 <p>2）然后启动， 指定端口号和进程号：</p>
-<div class="highlight"><pre><span></span><span class="n">uwsgi</span> <span class="o">-</span><span class="n">s</span> <span class="mi">127</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">1</span><span class="p">:</span><span class="mi">38803</span> <span class="c1">--http :8000 --module blog.wsgi</span>
-</pre></div>
+<div class="highlight"><pre><span></span><span class="n">uwsgi</span> <span class="o">-</span><span class="n">s</span> <span class="mi">127</span><span class="p">.</span><span class="mi">0 …</span></pre></div><p class="subheader">分类: <a href="https://gccpacman.github.io/category/python.html">python</a>
 
-
-<p>3) 配置nginx配置文件，放在<code>/etc/nginx/site-enabled/</code>目录下，注意如果你要用80端口，就不要和其他的例如默认的配置冲突，如果有个default的文件，应该是一个软连接，可以直接删掉。我就直接贴我自己的了：</p>
-<div class="highlight"><pre><span></span><span class="nv">upstream</span> <span class="nv">django</span> {
-    <span class="nv">server</span> <span class="mi">127</span>.<span class="mi">0</span>.<span class="mi">0</span>.<span class="mi">1</span>:<span class="mi">38803</span><span class="c1">;</span>
-}
-
-<span class="nv">server</span> {
-    <span class="nv">listen</span> <span class="mi">80</span><span class="c1">;</span>
-    <span class="nv">server_name</span> <span class="nv">localhost</span><span class="c1">;</span>
-    <span class="nv">charset</span> <span class="nv">utf</span><span class="o">-</span><span class="mi">8</span><span class="c1">;</span>
-    <span class="nv">client_max_body_size</span> <span class="mi">75</span><span class="nv">M</span><span class="c1">;</span>
-    <span class="nv">location</span> <span class="o">/</span> {
-        <span class="nv">uwsgi_pass</span> <span class="nv">django</span><span class="c1">;</span>
-        <span class="k">include</span> <span class="o">/</span><span class="nv">etc</span><span class="o">/</span><span class="nv">nginx</span><span class="o">/</span><span class="nv">uwsgi_params</span><span class="c1">;</span>
-    }
-    <span class="nv">location</span> <span class="o">/</span><span class="nv">static</span> {
-        <span class="nv">alias</span>   <span class="o">/</span><span class="nv">webapps</span><span class="o">/</span><span class="nv">blog</span><span class="o">/</span><span class="nv">static</span><span class="c1">;</span>
-    }
-}
-</pre></div>
-
-
-<p>4) 关于static，你应该在服务器某个地方建个目录(例如我的配置文件是<code>/webapps/blog/static</code>)，然后配置一下<code>setting.py</code>里的<code>STATIC_ROOT</code>成该目录，然后每次static有更改就重新执行</p>
-<div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="p">.</span><span class="n">py</span> <span class="n">collectstatic</span><span class="p">.</span>
-</pre></div>
-
-
-<p>然后尝试一下访问<code>127.0.0.1</code>，当然如果是远程服务器，就是你的网址了。
-看看是否work了吧！</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/python.html">python</a>
-
-    Tagged: 
+    标签: 
     <a href="https://gccpacman.github.io/tag/python.html">python </a>
     <a href="https://gccpacman.github.io/tag/django.html">django </a>
     <a href="https://gccpacman.github.io/tag/web.html">web </a>
@@ -101,6 +70,7 @@
 
 
 
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/uwsgifang-shi-qi-dong-django.html">阅读全文</a>
             </article>
 
 <div class="pagination-centered">
@@ -120,14 +90,13 @@
 
     <!-- Sidebar -->
     <aside class="large-3 columns">
-        <h5 class="sidebar-title">Site</h5>
         <ul class="side-nav">
-            <li><a href="https://gccpacman.github.io/archives.html">Archives</a>
-            <li><a href="https://gccpacman.github.io/tags.html">Tags</a>
+            <li><a href="https://gccpacman.github.io/archives.html">归档</a>
+            <li><a href="https://gccpacman.github.io/tags.html">标签</a>
         </ul>
 
 		
-        <h5 class="sidebar-title">Categories</h5>
+        <h5 class="sidebar-title">分类</h5>
         <ul class="side-nav">
             <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
             <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
@@ -138,17 +107,13 @@
             <li><a href="https://gccpacman.github.io/category/windows.html">Windows</a></li>
    
         </ul>
-
-        <h5 class="sidebar-title">Links</h5>
-        <ul class="side-nav">
-            <li><a href="http://getpelican.com/">Pelican</a></li>
-        </ul>
 		
-        <h5 class="sidebar-title">Social</h5>
+        <h5 class="sidebar-title">我的社交账号</h5>
         <ul class="side-nav">
-            <li><a href="https://github.com/gccpacman">GccPacman @Github</a></li>
-            <li><a href="https://stackoverflow.com/users/4124310/realhu">r341h @StackOverflow</a></li>
+            <li><a href="https://github.com/gccpacman">Github</a></li>
+            <li><a href="https://stackoverflow.com/users/4124310/realhu">StackOverflow</a></li>
         </ul>
+
 
     </aside> <!-- End Sidebar -->
 

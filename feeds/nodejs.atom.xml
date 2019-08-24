@@ -4,7 +4,7 @@
 &lt;p&gt;首先在托管静态网站的时候，创建OSS桶需要注意两点配置：&lt;/p&gt;
 &lt;p&gt;1） OSS桶必须设置公共读，因为网站需要所有人都可以访问&lt;/p&gt;
 &lt;p&gt;2） OSS桶里有个默认首页的配置，需要配置成 &lt;code&gt;index.html&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;因为使用了Vue-Router，在阿里云上一开始部署的时候有个严重的问题，就是在非主页刷新页面，OSS都找不到资源，这时候重新刷新，阿里云又找不到该目录下的这个文件，就会报找不到资源的错误。例如有一个路径是 &lt;code&gt;www.example.com/hello/world&lt;/code&gt; ，通过主页 &lt;code&gt;www.example.com/index.html&lt;/code&gt; 跳转到 &lt;code&gt;www.example.com/hello/worlds&lt;/code&gt; 是正常的 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;code&gt;VueJS&lt;/code&gt; 非常不错，对于一个后端开发也很友好。近期我有机会在写一个网站的时候接触了VueJS，虽然不是一个很专业的前端，但是感觉VueJS非常容易上手。
+&lt;p&gt;因为使用了Vue-Router …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;code&gt;VueJS&lt;/code&gt; 非常不错，对于一个后端开发也很友好。近期我有机会在写一个网站的时候接触了VueJS，虽然不是一个很专业的前端，但是感觉VueJS非常容易上手。
 出于为了性能的需要，打算将该网站通过 &lt;code&gt;webpack&lt;/code&gt; 编译后上传到阿里云的 &lt;code&gt;OSS&lt;/code&gt; 作为静态网站发布，但是遇到了一些坑，特意将踩坑的过程分享一下。&lt;/p&gt;
 &lt;p&gt;首先在托管静态网站的时候，创建OSS桶需要注意两点配置：&lt;/p&gt;
 &lt;p&gt;1） OSS桶必须设置公共读，因为网站需要所有人都可以访问&lt;/p&gt;

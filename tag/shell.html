@@ -20,7 +20,7 @@
 <div class="top-bar">
 <div class="row">
     <div class="large-9 large-centered columns">
-	    <h1><a href="https://gccpacman.github.io">Pacman News</a></h1>
+	    <h1><a href="/">Pacman News</a></h1>
     </div>
 </div>
 </div>
@@ -62,61 +62,16 @@
 <p>下载并安装 <a href="http://www.msys2.org/">Msys2</a></p>
 </li>
 <li>
-<p>安装和配置 <code>git</code>, 配置在windows上check出crlf格式文本，提交lf格式:</p>
-<p>2.1 安装git：</p>
-<div class="highlight"><pre><span></span>$ pacman --needed -S bash pacman msys2-runtime  git
-</pre></div>
+<p>安装和配置 …</p></li></ol><p class="subheader">分类: <a href="https://gccpacman.github.io/category/windows.html">Windows</a>
 
-
-<p>2.2 修改git处理回车的方式：</p>
-<div class="highlight"><pre><span></span>$ git config --global core.autocrlf <span class="nb">true</span>
-</pre></div>
-
-
-</li>
-<li>
-<p>修改Home目录路径, Msys2默认的Home目录是Mingw64的/home/username, 但是我希望使用windows的Home目录/c/Users/username. 方法是编辑<code>/etc/nsswitch.conf</code>, 并修改</p>
-<div class="highlight"><pre><span></span>$ db_home: windows
-</pre></div>
-
-
-</li>
-<li>
-<p><del> Install Python &amp; Pip </del><br>
-(直接用windows的Python就好，用Mingw64的Python反而可能会有很多问题)</p>
-</li>
-<li>
-<p>让VSCode里的继承终端（VSCode Integrated Terminal）使用Msys2，在VSCode的settings里加入以下内容:</p>
-</li>
-</ol>
-<div class="highlight"><pre><span></span>    <span class="err">{</span>
-        <span class="ss">&quot;terminal.integrated.shell.windows&quot;</span><span class="p">:</span> <span class="ss">&quot;C:\\msys64\\usr\\bin\\bash.exe&quot;</span><span class="p">,</span>
-        <span class="ss">&quot;terminal.integrated.shellArgs.windows&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="ss">&quot;--login&quot;</span><span class="p">,</span>
-        <span class="p">],</span>
-        <span class="ss">&quot;terminal.integrated.env.windows&quot;</span><span class="p">:</span> <span class="err">{</span>
-        <span class="ss">&quot;CHERE_INVOKING&quot;</span><span class="p">:</span> <span class="ss">&quot;1&quot;</span><span class="p">,</span>
-        <span class="ss">&quot;MSYSTEM&quot;</span><span class="p">:</span> <span class="ss">&quot;MINGW64&quot;</span><span class="p">,</span>
-    <span class="ss">&quot;MSYS2_PATH_TYPE&quot;</span><span class="p">:</span> <span class="ss">&quot;inherit&quot;</span><span class="p">,</span>
-        <span class="err">}</span><span class="p">,</span>
-    <span class="err">}</span> 
-</pre></div>
-
-
-<p>参考：</p>
-<p>https://getpocket.com/a/read/1169705865</p>
-<p>https://help.github.com/articles/dealing-with-line-endings</p>
-<p>https://groups.google.com/forum/#!topic/ustc_lug/_wL4OkWrVK4</p>
-<p>https://stackoverflow.com/questions/33942924/how-to-change-home-directory-and-start-directory-on-msys2</p>
-<p>https://stackoverflow.com/questions/45836650/how-do-i-integrate-msys2-shell-into-visual-studio-code-on-window/48016561#comment84105772_48016561</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/windows.html">Windows</a>
-
-    Tagged: 
+    标签: 
     <a href="https://gccpacman.github.io/tag/windows.html">windows </a>
     <a href="https://gccpacman.github.io/tag/shell.html">shell </a>
 </p>
 
 
 
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/windowsan-zhuang-msys32pei-zhi-gitdeng-kai-fa-huan-jing-bing-ji-cheng-vscode.html">阅读全文</a>
             </article>
 
 <div class="pagination-centered">
@@ -136,14 +91,13 @@
 
     <!-- Sidebar -->
     <aside class="large-3 columns">
-        <h5 class="sidebar-title">Site</h5>
         <ul class="side-nav">
-            <li><a href="https://gccpacman.github.io/archives.html">Archives</a>
-            <li><a href="https://gccpacman.github.io/tags.html">Tags</a>
+            <li><a href="https://gccpacman.github.io/archives.html">归档</a>
+            <li><a href="https://gccpacman.github.io/tags.html">标签</a>
         </ul>
 
 		
-        <h5 class="sidebar-title">Categories</h5>
+        <h5 class="sidebar-title">分类</h5>
         <ul class="side-nav">
             <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
             <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
@@ -154,17 +108,13 @@
             <li><a href="https://gccpacman.github.io/category/windows.html">Windows</a></li>
    
         </ul>
-
-        <h5 class="sidebar-title">Links</h5>
-        <ul class="side-nav">
-            <li><a href="http://getpelican.com/">Pelican</a></li>
-        </ul>
 		
-        <h5 class="sidebar-title">Social</h5>
+        <h5 class="sidebar-title">我的社交账号</h5>
         <ul class="side-nav">
-            <li><a href="https://github.com/gccpacman">GccPacman @Github</a></li>
-            <li><a href="https://stackoverflow.com/users/4124310/realhu">r341h @StackOverflow</a></li>
+            <li><a href="https://github.com/gccpacman">Github</a></li>
+            <li><a href="https://stackoverflow.com/users/4124310/realhu">StackOverflow</a></li>
         </ul>
+
 
     </aside> <!-- End Sidebar -->
 

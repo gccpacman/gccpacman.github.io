@@ -13,30 +13,7 @@ Default Switch默认是可以连接外网的，如果是windows机器不用配�
 
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;编辑&lt;code&gt;/etc/sysconfig/network&lt;/code&gt;, 替换server-name.company.lan为你的主机名：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;NETWORKING&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;yes&lt;/span&gt;
-&lt;span class="n"&gt;HOSTNAME&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;company&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lan&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;重启network服务：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ systemctl restart network
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;确认网络是否网络正常，正常的话重启，再次确认：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ nslookup bing.com
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;参考：
-https://unix.stackexchange.com …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Hyper-V安装Centos，网卡选择Hyper-V的Default Switch。
+&lt;p&gt;编辑&lt;code&gt;/etc/sysconfig/network …&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;Hyper-V安装Centos，网卡选择Hyper-V的Default Switch。
 Default Switch默认是可以连接外网的，如果是windows机器不用配置直接可以联网，但是Linux不行，原因是网卡eth0默认没有配置dhcp：&lt;/p&gt;
 &lt;p&gt;可以通过以下几部配置：&lt;/p&gt;
 &lt;ol&gt;
@@ -85,20 +62,7 @@ https://unix.stackexchange.com/questions/17436/centos-on-hyperv-eth0-not-in-ifco
 &lt;p&gt;下载并安装 &lt;a href="http://www.msys2.org/"&gt;Msys2&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;安装和配置 &lt;code&gt;git&lt;/code&gt;, 配置在windows上check出crlf格式文本，提交lf格式:&lt;/p&gt;
-&lt;p&gt;2.1 安装git：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pacman --needed -S bash pacman msys2-runtime  git
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;2.2 修改git处理回车的方式：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ git config --global core.autocrlf &lt;span class="nb"&gt;true&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;修改Home目录路径, Msys2默认的Home目录是Mingw64的/home …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;在不久之前发现了Msys2，基于Cygwin但是却又有一个让我觉得无比美好的包管理器Pacman(和Arch Linux的一样)，于是决定试试。但是真的用于Windows的终端还有很多麻烦的地方要解决，主要是以下几点：
+&lt;p&gt;安装和配置 …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;在不久之前发现了Msys2，基于Cygwin但是却又有一个让我觉得无比美好的包管理器Pacman(和Arch Linux的一样)，于是决定试试。但是真的用于Windows的终端还有很多麻烦的地方要解决，主要是以下几点：
 1. Git的ssh_keygen配置，你和windows自己的CMD里的ssh_keygen能否共用
 2. Msys用的换行符是和Linux一样的LF，而Windows的是CRLF
 3. Python能不能直接用Windows的Python而不用模拟Unix环境的Python（有很多的bug）
@@ -158,18 +122,7 @@ https://unix.stackexchange.com/questions/17436/centos-on-hyperv-eth0-not-in-ifco
 &lt;p&gt;https://stackoverflow.com/questions/45836650/how-do-i-integrate-msys2-shell-into-visual-studio-code-on-window/48016561#comment84105772_48016561&lt;/p&gt;</content><category term="windows"></category><category term="shell"></category></entry><entry><title>Windowss上利用babun, tmux, zsh高度定制shell</title><link href="https://gccpacman.github.io/windowssshang-li-yong-babun-tmux-zshgao-du-ding-zhi-shell.html" rel="alternate"></link><published>2015-10-22T10:20:00+08:00</published><updated>2015-10-22T10:20:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2015-10-22:/windowssshang-li-yong-babun-tmux-zshgao-du-ding-zhi-shell.html</id><summary type="html">&lt;p&gt;深刻和彻底的切换到linux平台后，深切的感受到linux平台对程序员带来的便利。因此日常环境已经不再使用windows啦，奈何博主虽然是个穷逼，然而却舍得钱买一堆电脑，所以没事还是会折腾下windows，毕竟娱乐还是需要的。&lt;/p&gt;
 &lt;p&gt;之前折腾过cygwin好一阵子，最终还是觉得真的搬到开发环境确实有很多麻烦的地方，不过现在既然为了娱乐又有一台没有装任何开发环境的win10，那就娱乐一下好了。&lt;/p&gt;
 &lt;h1&gt;1） 安装和配置babun&lt;/h1&gt;
-&lt;p&gt;首先可以装一个定制得非常好的cygwin shell, 那就是&lt;a href="http://babun.github.io/"&gt;babun&lt;/a&gt;, 已经默认为你装好并配置了cygwin环境下的zsh，用起来可比普通的shell爽多了。另外有个强大的包管理器，pact命令，用起来很像rpm和apt之类的，非常方便。例如要装tmux, 那么就执行&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pact&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;tmux&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;就可以成功安装了。
-不过值得注意的是pact默认用的是kernel.org的镜像，国内访问非常慢，这时通过help发现有个--mirror的参数，可以手动指定成163的：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pact&lt;/span&gt; &lt;span class="c1"&gt;--mirror http://mirrors.163.com/cygwin/ install tree&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;不过每次要输入这个太麻烦，可以用alias, 在home目录下新建一个.bash_aliases的文件，输入alias pact='pact …&lt;/p&gt;</summary><content type="html">&lt;p&gt;深刻和彻底的切换到linux平台后，深切的感受到linux平台对程序员带来的便利。因此日常环境已经不再使用windows啦，奈何博主虽然是个穷逼，然而却舍得钱买一堆电脑，所以没事还是会折腾下windows，毕竟娱乐还是需要的。&lt;/p&gt;
+&lt;p&gt;首先可以装一个定制得非常好的cygwin shell, 那就是&lt;a href="http://babun.github.io/"&gt;babun&lt;/a&gt;, 已经默认为你装好并配置了cygwin环境下的zsh，用起来可比普通的shell爽多了。另外有个强大的包管理器，pact命令，用起来很像rpm和apt之类的，非常方便。例如要装tmux, 那么就执行 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;深刻和彻底的切换到linux平台后，深切的感受到linux平台对程序员带来的便利。因此日常环境已经不再使用windows啦，奈何博主虽然是个穷逼，然而却舍得钱买一堆电脑，所以没事还是会折腾下windows，毕竟娱乐还是需要的。&lt;/p&gt;
 &lt;p&gt;之前折腾过cygwin好一阵子，最终还是觉得真的搬到开发环境确实有很多麻烦的地方，不过现在既然为了娱乐又有一台没有装任何开发环境的win10，那就娱乐一下好了。&lt;/p&gt;
 &lt;h1&gt;1） 安装和配置babun&lt;/h1&gt;
 &lt;p&gt;首先可以装一个定制得非常好的cygwin shell, 那就是&lt;a href="http://babun.github.io/"&gt;babun&lt;/a&gt;, 已经默认为你装好并配置了cygwin环境下的zsh，用起来可比普通的shell爽多了。另外有个强大的包管理器，pact命令，用起来很像rpm和apt之类的，非常方便。例如要装tmux, 那么就执行&lt;/p&gt;

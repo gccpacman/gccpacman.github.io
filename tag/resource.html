@@ -20,7 +20,7 @@
 <div class="top-bar">
 <div class="row">
     <div class="large-9 large-centered columns">
-	    <h1><a href="https://gccpacman.github.io">Pacman News</a></h1>
+	    <h1><a href="/">Pacman News</a></h1>
     </div>
 </div>
 </div>
@@ -57,31 +57,9 @@
 <ol>
 <li>
 <p>安装编译工具：</p>
-<p>sudo apt-get install libtool pkg-config build-essential autoconf automake</p>
-</li>
-<li>
-<p>安装一个叫做libsodium的依赖，因为apt工具里没有包含这个依赖，因此需要手动编译，去https://download.libsodium.org/libsodium/releases找最新的版本，下载并且编译：</p>
-<p>mkdir build
-cd build/
-wget https://download.libsodium.org/libsodium/releases/libsodium-1.0.3.tar.gz
-tar -zxvf libsodium-1.0.3.tar.gz
-cd libsodium-1.0.3/
-./configure
-make
-sudo make install</p>
-</li>
-<li>
-<p>下载dnscrypt编译：</p>
-<p>wget https://github.com/jedisct1/dnscrypt-proxy/releases/download/1.6.1/dnscrypt-proxy-1.6.1.tar.bz2
-tar -jxvf dnscrypt-proxy-1.6.1.tar.bz2
-cd dnscrypt-proxy-1.6.1
-./configure
-make -j2
-make install</p>
-</li>
-</ol><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+<p>sudo apt-get install …</p></li></ol><p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
-    Tagged: 
+    标签: 
     <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
     <a href="https://gccpacman.github.io/tag/kodi.html">kodi </a>
     <a href="https://gccpacman.github.io/tag/resource.html">resource </a>
@@ -89,6 +67,7 @@ make install</p>
 
 
 
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/linuxan-zhuang-dnscrypt.html">阅读全文</a>
             </article>
 
 
@@ -106,17 +85,9 @@ make install</p>
 
 <p>OK.. 怎么给xubuntu装个迅雷远程呢，迅雷的Linux版本Xware-Desktop，目前是很稳定的，而且有很详细的官方教程：
 https://github.com/Xinkai/XwareDesktop/wiki/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E</p>
-<p>这个就是针对ubuntu的，所以原封不动的执行就行了。</p>
-<p>但是我的需求有点不一样，迅雷xware版自己提供了几个开机自启动选项：
-1）由用户态systemd托管
-2）由用户态upstart托管
-3）简单的自动启动。</p>
-<p>这三个选项的特点就是都是以用户态启动，事实上，xware的配置文件也确实是保存在用户的HOME目录下的.xware-desktop里的。</p>
-<p>但是我希望Linux开机的时候并不会自动登录，更何况我的linux是运行kodi的，我也不会去手动登录，因此用户态的服务是不会自动启动的。</p>
-<p>但是我希望一开机，xware就自动打开，开始执行下载任务。因此依赖原来的代码显然不太符合我的需求，就自己写一个系统的service吧。</p>
-<p>还好几乎不需要改变xware用户态的服务，就可以搞定。用户态的服务创建在用户目录的<code>$HOME …</code></p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+<p>这个就是针对ubuntu的，所以原封不动的执行就行了 …</p><p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
-    Tagged: 
+    标签: 
     <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
     <a href="https://gccpacman.github.io/tag/download.html">download </a>
     <a href="https://gccpacman.github.io/tag/resource.html">resource </a>
@@ -124,7 +95,7 @@ https://github.com/Xinkai/XwareDesktop/wiki/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E
 
 
 
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/linuxba-yong-hu-tai-systemdfu-wu-gai-cheng-xi-tong-fu-wu-kai-ji-zi-qi-dong-xun-lei-xware.html">Read More</a>
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/linuxba-yong-hu-tai-systemdfu-wu-gai-cheng-xi-tong-fu-wu-kai-ji-zi-qi-dong-xun-lei-xware.html">阅读全文</a>
                 <hr  class="gradient"/>
             </article>
 
@@ -139,13 +110,9 @@ https://github.com/Xinkai/XwareDesktop/wiki/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E
 
 <p>把2G的硬盘拆到了一台旧电脑上，并且给旧电脑装了xubuntu,打算直接打造一个媒体中心。目前知道有里那个用的不错的东西，KODI（XBMC）是一个很不错的选择。当然用PLEX也是个不错的选择，整理资料库方面PLEX更加强大。不过KODI是开源和免费的，既然用了linux，就用个开源的吧。况且我发现kodi还有不少的好处，并且更加轻量级。</p>
 <p>其实Kodi有个基于ubuntu的发行版叫做kodibuntu，直接装得话效果其实也差不多。但是我还是喜欢从ubuntu去扩展，毕竟任何基于ubuntu的版本，相对ubuntu的开发肯定是有所滞后的。和Android的Rom一个道理。不过kubuntu因为是非常流行的发行版不用担心这个问题。</p>
-<p>下面的步骤基本上是参考了askubuntu的一个答案<a href="http://askubuntu.com/questions/596839/autostart-kodi-on-vivid">Autostart Kodi on Vivid</a>，只不过它是在纯净的server版本安装，而desktop版则因为有自身的启动器，需要将其禁用掉而已。</p>
-<p>1）安装kodi: sudo apt-get install kodi</p>
-<p>2）创建一个kodi的用户，并添加到和视频播放有关的组
-    sudo adduser --disabled-password --disabled-login --gecos "" kodi
-    sudo usermod -a -G audio kodi …</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+<p>下面的步骤基本上是参考了askubuntu的一个答案<a href="http://askubuntu.com/questions/596839/autostart-kodi-on-vivid">Autostart Kodi on …</a></p><p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
-    Tagged: 
+    标签: 
     <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
     <a href="https://gccpacman.github.io/tag/kodi.html">kodi </a>
     <a href="https://gccpacman.github.io/tag/resource.html">resource </a>
@@ -153,7 +120,7 @@ https://github.com/Xinkai/XwareDesktop/wiki/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E
 
 
 
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/linuxan-zhuang-bing-kai-ji-jin-ru-kodimei-ti-zhong-xin.html">Read More</a>
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/linuxan-zhuang-bing-kai-ji-jin-ru-kodimei-ti-zhong-xin.html">阅读全文</a>
                 <hr  class="gradient"/>
             </article>
 
@@ -169,27 +136,16 @@ https://github.com/Xinkai/XwareDesktop/wiki/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E
 <p>上一篇装完kodi后，我的旧电脑就彻底变成了一个kodi/XBMC媒体中心，那么比如我要下载新的美剧什么的，好像就还是不那么方便。
 p2p的torrent一直是我的最爱。deluge是一个跨平台的操作系统，支持linux, windows 和mac，还有远程控制等功能，什么是远程下载呢。我们都知道有迅雷远程下载，那么deluge其实也是一样，就是你在一台电脑操作，有一个下载链接，然后你可以直接在这台电脑上添加这个下载链接，唯一不同的是下载的任务被添加到了远程的机器上，文件也会下载到远程的机器上。
 这样的需求正符合我媒体中心的需要，我找到新的片源，并不需要下载到我的计算机，而是可以让我的Kodi在播放电影的同时，又可以执行下载的任务。</p>
-<h1>服务器端：</h1>
-<p>安装:</p>
-<div class="highlight"><pre><span></span>$ sudo apt-get install deluged deluge-web
-</pre></div>
+<h1>服务器端 …</h1><p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
-
-<p>新建一个deluge用户和用户组:</p>
-<div class="highlight"><pre><span></span>$ sudo adduser --system  --gecos <span class="s2">&quot;Deluge Service&quot;</span> --disabled-password --group --home /var/lib/deluge deluge
-</pre></div>
-
-
-<p>把用户添加到deluge用户组<code>adduser &lt;username&gt; deluge</code>，便于用户操作torrent和下载到的文件 …</p><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
-
-    Tagged: 
+    标签: 
     <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
     <a href="https://gccpacman.github.io/tag/resource.html">resource </a>
 </p>
 
 
 
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/linuxan-zhuang-delugexia-zai-gong-ju-zi-dong-yuan-cheng-xia-zai.html">Read More</a>
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/linuxan-zhuang-delugexia-zai-gong-ju-zi-dong-yuan-cheng-xia-zai.html">阅读全文</a>
                 <hr  class="gradient"/>
             </article>
 
@@ -207,14 +163,13 @@ p2p的torrent一直是我的最爱。deluge是一个跨平台的操作系统，�
 
     <!-- Sidebar -->
     <aside class="large-3 columns">
-        <h5 class="sidebar-title">Site</h5>
         <ul class="side-nav">
-            <li><a href="https://gccpacman.github.io/archives.html">Archives</a>
-            <li><a href="https://gccpacman.github.io/tags.html">Tags</a>
+            <li><a href="https://gccpacman.github.io/archives.html">归档</a>
+            <li><a href="https://gccpacman.github.io/tags.html">标签</a>
         </ul>
 
 		
-        <h5 class="sidebar-title">Categories</h5>
+        <h5 class="sidebar-title">分类</h5>
         <ul class="side-nav">
             <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
             <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
@@ -225,17 +180,13 @@ p2p的torrent一直是我的最爱。deluge是一个跨平台的操作系统，�
             <li><a href="https://gccpacman.github.io/category/windows.html">Windows</a></li>
    
         </ul>
-
-        <h5 class="sidebar-title">Links</h5>
-        <ul class="side-nav">
-            <li><a href="http://getpelican.com/">Pelican</a></li>
-        </ul>
 		
-        <h5 class="sidebar-title">Social</h5>
+        <h5 class="sidebar-title">我的社交账号</h5>
         <ul class="side-nav">
-            <li><a href="https://github.com/gccpacman">GccPacman @Github</a></li>
-            <li><a href="https://stackoverflow.com/users/4124310/realhu">r341h @StackOverflow</a></li>
+            <li><a href="https://github.com/gccpacman">Github</a></li>
+            <li><a href="https://stackoverflow.com/users/4124310/realhu">StackOverflow</a></li>
         </ul>
+
 
     </aside> <!-- End Sidebar -->
 

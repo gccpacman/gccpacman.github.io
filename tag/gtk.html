@@ -20,7 +20,7 @@
 <div class="top-bar">
 <div class="row">
     <div class="large-9 large-centered columns">
-	    <h1><a href="https://gccpacman.github.io">Pacman News</a></h1>
+	    <h1><a href="/">Pacman News</a></h1>
     </div>
 </div>
 </div>
@@ -51,82 +51,14 @@
 </h6>
 
 
-<p>现在的电脑是Surface，跑虚拟机很吃力了，但是不是不能跑，重点是优化后把linux的资源降下来，还是可以非常流畅。i3是个比xfce4更加轻量级的桌面管理器，而且不是像Windows那样悬浮窗口式的，而是tiling的桌面。随便网上找了个截图，大概就是这个意思：</p>
-<p><img alt="i3" src="https://i3wm.org/screenshots/i3-1.png"></p>
-<p>这边的例子以Vmware为例：</p>
+<p>现在的电脑是SurfacePro3，如果安装了Linux桌面环境，如Gnome或者xfce等，跑虚拟机会很吃力了，但是不是不能跑，重点是优化后把Linux的资源降下来非常流畅，而且还可以使用桌面应用。i3是个比xfce4更加轻量级的桌面管理器，Tiling的桌面可以保证所有打开的窗口都平铺满桌面，然后通过快捷键和鼠标切换应用，这边只讲述下我的安装过程，以及如何安装Vmware插件以支持剪切板，自动缩放虚拟机分辨率等:</p>
 <ol>
 <li>
 <p>首先要安装i3：</p>
 <div class="highlight"><pre><span></span>$ sudo yum install i3   <span class="c1"># centos</span>
-$ sudo apt install i3   <span class="c1"># debian &amp; ubuntu</span>
-$ sudo pacman -S i3     <span class="c1"># archlinux</span>
-</pre></div>
+$ sudo apt install i3   <span class="c1"># debian &amp; ubuntu …</span></pre></div></li></ol><p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
-
-</li>
-<li>
-<p>备份并修改i3的配置文件，可以参考我的github，或者直接下载替换：</p>
-<div class="highlight"><pre><span></span><span class="n">cp</span> <span class="o">~/</span><span class="p">.</span><span class="n">config</span><span class="o">/</span><span class="n">i3</span><span class="o">/</span><span class="n">config</span> <span class="o">~/</span><span class="p">.</span><span class="n">config</span><span class="o">/</span><span class="n">i3</span><span class="o">/</span><span class="n">config</span><span class="p">.</span><span class="n">bak</span>
-<span class="n">wget</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">raw</span><span class="p">.</span><span class="n">githubusercontent</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">gccpacman</span><span class="o">/</span><span class="n">vm</span><span class="o">-</span><span class="n">i3wm</span><span class="o">-</span><span class="n">config</span><span class="o">/</span><span class="n">master</span><span class="o">/</span><span class="n">config</span>
-<span class="n">cp</span> <span class="n">config</span> <span class="o">~/</span><span class="p">.</span><span class="n">config</span><span class="o">/</span><span class="n">i3</span><span class="o">/</span><span class="n">config</span>
-</pre></div>
-
-
-</li>
-<li>
-<p>因为我的是高分屏，默认vmware不支持，但是可以修改i3的dpi让文字和界面看起来舒服：</p>
-<div class="highlight"><pre><span></span><span class="n">echo</span> <span class="ss">&quot;Xft.dpi: 118&quot;</span> <span class="o">&gt;&gt;</span> <span class="o">~/</span><span class="p">.</span><span class="n">Xresources</span>
-</pre></div>
-
-
-</li>
-<li>
-<p>安装lightdm/gdm后，，设置session成i3，并且因为是虚拟机不想每次开机都输入用户名密码，可以设置自动登陆：</p>
-<p>4.1 <code>lightdm</code>修改<code>/etc/lightdm/lightdm.conf</code>:</p>
-<div class="highlight"><pre><span></span><span class="k">[SeatDefaults]</span>
-<span class="na">autologin-user</span><span class="o">=</span> <span class="s">{{your username}}</span>
-<span class="na">autologin-user-timeout</span><span class="o">=</span><span class="s">0</span>
-<span class="na">user-session</span><span class="o">=</span><span class="s">i3</span>
-</pre></div>
-
-
-<p>4.2 <code>gdm</code>修改<code>/etc/gdm3/daemon.conf</code>:</p>
-<div class="highlight"><pre><span></span><span class="k">[daemon]</span>
-<span class="na">AutomaticLoginEnable</span><span class="o">=</span><span class="s">true</span>
-<span class="na">AutomaticLogin</span><span class="o">=</span><span class="s">teotfw</span>
-</pre></div>
-
-
-<p>4.3 或者直接disable x-manager, 用startx方式启动</p>
-<div class="highlight"><pre><span></span><span class="nv">sudo</span> <span class="nv">systemctl</span> <span class="nv">set</span><span class="o">-</span><span class="nv">default</span> <span class="nv">multi</span><span class="o">-</span><span class="nv">user</span>.<span class="nv">target</span>
-<span class="nv">echo</span> <span class="s2">&quot;</span><span class="s">exec i3</span><span class="s2">&quot;</span> <span class="o">&gt;</span> <span class="o">~/</span>.<span class="nv">xinitrc</span>
-<span class="nv">startx</span> # <span class="nv">reboot</span>并<span class="nv">login</span>后执行
-</pre></div>
-
-
-</li>
-<li>
-<p>根据你的系统安装open-vm-tools</p>
-<div class="highlight"><pre><span></span>$ sudo yum install open-vm-tools   <span class="c1"># centos</span>
-$ sudo apt install open-vm-tools   <span class="c1"># debian &amp; ubuntu</span>
-$ sudo pacman -S open-vm-tools     <span class="c1"># archlinux</span>
-</pre></div>
-
-
-</li>
-<li>
-<p>如果你无法加载open-vm-tools, 则需要做如下配置：</p>
-<div class="highlight"><pre><span></span><span class="nv">cp</span> <span class="o">~/</span>.<span class="nv">xsession</span> <span class="o">~/</span>.<span class="nv">xsession</span>.<span class="nv">bak</span>
-<span class="nv">echo</span> <span class="s2">&quot;</span><span class="s">#!/bin/sh</span>
-<span class="nv">xrandr</span>
-<span class="k">exec</span> <span class="nv">i3</span><span class="s2">&quot;</span><span class="s"> &gt; ~/.xsession</span>
-</pre></div>
-
-
-</li>
-</ol><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
-
-    Tagged: 
+    标签: 
     <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
     <a href="https://gccpacman.github.io/tag/gtk.html">gtk </a>
     <a href="https://gccpacman.github.io/tag/vitual-machine.html">vitual machine </a>
@@ -134,6 +66,7 @@ $ sudo pacman -S open-vm-tools     <span class="c1"># archlinux</span>
 
 
 
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/zai-xu-ni-ji-li-pao-zi-yuan-zhan-yong-chao-di-de-linuxzhuo-mian-huan-jing-i3.html">阅读全文</a>
             </article>
 
 
@@ -153,14 +86,9 @@ $ sudo pacman -S open-vm-tools     <span class="c1"># archlinux</span>
 又没有办法在应用程序菜单里找到，即使是gnome下，按super然后全局搜索，也找到这个。</p>
 <p>不过好在linux是自由的系统，自己建一个应用程序的启动器一点问题都没有。</p>
 <p>比如我的eclipse装在<code>/opt/eclipse-jee/</code>下,怎么新建一个启动器呢？</p>
-<p>所有用户共享的应用启动器的目录是<code>/usr/share/applications/</code>目录，那么用户自定义的启动器目录在哪里？找了下用户目录下的.config/，没有找到，只好去百度google了一下，原来启动器是在.local/下，具体是<code>.local/share/applications</code>.</p>
-<p>新建一个eclipse.desktop的文件，然后输入以下内容：</p>
-<div class="highlight"><pre><span></span><span class="k">[Desktop Entry]</span>
-<span class="na">Encoding</span><span class="o">=</span><span class="s">UTF-8</span>
-<span class="na">Name</span><span class="o">=</span><span class="s">Eclipse J2ee</span>
-<span class="na">Comment</span><span class="o">=</span><span class="s">Official desktop version of Telegram …</span></pre></div><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+<p>所有用户共享的应用启动器的目录是<code>/usr/share/applications/</code>目录，那么用户自定义的启动器目录在哪里？找了下用户目录下的.config …</p><p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
-    Tagged: 
+    标签: 
     <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
     <a href="https://gccpacman.github.io/tag/gnome.html">gnome </a>
     <a href="https://gccpacman.github.io/tag/gtk.html">gtk </a>
@@ -168,7 +96,7 @@ $ sudo pacman -S open-vm-tools     <span class="c1"># archlinux</span>
 
 
 
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/linuxchuang-jian-zi-ding-yi-de-ying-yong-cheng-xu-qi-dong-qi.html">Read More</a>
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/linuxchuang-jian-zi-ding-yi-de-ying-yong-cheng-xu-qi-dong-qi.html">阅读全文</a>
                 <hr  class="gradient"/>
             </article>
 
@@ -184,17 +112,9 @@ $ sudo pacman -S open-vm-tools     <span class="c1"># archlinux</span>
 <p>昨天还装完arch兴高采烈，今天就差点放弃整个系统，罪魁祸首就是当年被linus喷了的nvidia.</p>
 <p>Archlinux装了使用nvidia驱动，一开始发现根本就没有加载，装了和没装没啥区别，但是跑的好好的阿跑的好好的，结果不小心手贱点了<code>nvidia-xconfig</code>的应用，莫名其妙的起不来了。（这个原因我想了半天才想出来，不然我实在是无力吐槽他妈跑了一天多好好的什么也没干突然就起步来的情况，一度怀疑是显卡硬件坏了）</p>
 <p>于是抢救三个多小时，<code>/var/log/xorg.0.log</code>里的报错也莫名其妙，比如:</p>
-<div class="highlight"><pre><span></span><span class="k">not</span> <span class="n">detect</span> <span class="n">device</span> <span class="n">nvidia</span><span class="p">,</span> <span class="k">no</span> <span class="n">screen</span> <span class="k">found</span><span class="p">.</span>
-</pre></div>
+<div class="highlight"><pre><span></span><span class="k">not</span> <span class="n">detect</span> <span class="n">device …</span></pre></div><p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
-
-<p>简直是日到狗。于是想着解决办法应该是彻底不要装nvidia的驱动， 用intel的集成显卡，照例来说应该也ok阿，于是直接删掉驱动：</p>
-<p>pacman -R nvidia nvidia-utils</p>
-<p>然后reboot, 没想到发生的事情更加奇葩了，连命令行就出不来了，直接黑屏了我草。</p>
-<p>心里十万个草尼马，还好安装过arch的人毕竟还是知道有个arch-chroot, 放入安装介质（我的是u盘），重启， mount各种好盘:</p>
-<div class="highlight"><pre><span></span><span class="n">mount</span> <span class="o">/</span><span class="n">dev …</span></pre></div><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
-
-    Tagged: 
+    标签: 
     <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
     <a href="https://gccpacman.github.io/tag/driver.html">driver </a>
     <a href="https://gccpacman.github.io/tag/gtk.html">gtk </a>
@@ -203,7 +123,7 @@ $ sudo pacman -S open-vm-tools     <span class="c1"># archlinux</span>
 
 
 
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/archlinuxjiang-nvidia-driverti-huan-cheng-kai-yuan-de-nouveaujie-jue-xian-qia-qu-dong-wen-ti.html">Read More</a>
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/archlinuxjiang-nvidia-driverti-huan-cheng-kai-yuan-de-nouveaujie-jue-xian-qia-qu-dong-wen-ti.html">阅读全文</a>
                 <hr  class="gradient"/>
             </article>
 
@@ -233,13 +153,9 @@ $ sudo pacman -S open-vm-tools     <span class="c1"># archlinux</span>
 
 
 <p>然后终端会显示New 'X' desktop is kodi-kodibuntu:1</p>
-<p>3）（可选）如果需要改变桌面，例如不想用xvnc，可以编辑<code>$HOME/.vnc/xstartup</code>的内容。具体操作暂略。</p>
-<p>4）（可选）如果需要开机启动，一个是用supervisor，另外就是在/etc/systemd/system/下手动写一个服务。具体操作暂略。</p>
-<p>在客户端:</p>
-<p>1) 安装tigervnc:</p>
-<div class="highlight"><pre><span></span>$ sudo pacman -S tigervnc   <span class="o">(</span>archlinux …</pre></div><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+<p>3）（可选）如果需要改变桌面 …</p><p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
-    Tagged: 
+    标签: 
     <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
     <a href="https://gccpacman.github.io/tag/vnc.html">vnc </a>
     <a href="https://gccpacman.github.io/tag/gtk.html">gtk </a>
@@ -248,7 +164,7 @@ $ sudo pacman -S open-vm-tools     <span class="c1"># archlinux</span>
 
 
 
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/linuxda-jian-vncfu-wu-qi.html">Read More</a>
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/linuxda-jian-vncfu-wu-qi.html">阅读全文</a>
                 <hr  class="gradient"/>
             </article>
 
@@ -266,14 +182,13 @@ $ sudo pacman -S open-vm-tools     <span class="c1"># archlinux</span>
 
     <!-- Sidebar -->
     <aside class="large-3 columns">
-        <h5 class="sidebar-title">Site</h5>
         <ul class="side-nav">
-            <li><a href="https://gccpacman.github.io/archives.html">Archives</a>
-            <li><a href="https://gccpacman.github.io/tags.html">Tags</a>
+            <li><a href="https://gccpacman.github.io/archives.html">归档</a>
+            <li><a href="https://gccpacman.github.io/tags.html">标签</a>
         </ul>
 
 		
-        <h5 class="sidebar-title">Categories</h5>
+        <h5 class="sidebar-title">分类</h5>
         <ul class="side-nav">
             <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
             <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
@@ -284,17 +199,13 @@ $ sudo pacman -S open-vm-tools     <span class="c1"># archlinux</span>
             <li><a href="https://gccpacman.github.io/category/windows.html">Windows</a></li>
    
         </ul>
-
-        <h5 class="sidebar-title">Links</h5>
-        <ul class="side-nav">
-            <li><a href="http://getpelican.com/">Pelican</a></li>
-        </ul>
 		
-        <h5 class="sidebar-title">Social</h5>
+        <h5 class="sidebar-title">我的社交账号</h5>
         <ul class="side-nav">
-            <li><a href="https://github.com/gccpacman">GccPacman @Github</a></li>
-            <li><a href="https://stackoverflow.com/users/4124310/realhu">r341h @StackOverflow</a></li>
+            <li><a href="https://github.com/gccpacman">Github</a></li>
+            <li><a href="https://stackoverflow.com/users/4124310/realhu">StackOverflow</a></li>
         </ul>
+
 
     </aside> <!-- End Sidebar -->
 

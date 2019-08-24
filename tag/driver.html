@@ -20,7 +20,7 @@
 <div class="top-bar">
 <div class="row">
     <div class="large-9 large-centered columns">
-	    <h1><a href="https://gccpacman.github.io">Pacman News</a></h1>
+	    <h1><a href="/">Pacman News</a></h1>
     </div>
 </div>
 </div>
@@ -53,45 +53,16 @@
 
 <p><code>Manjaro Linux</code>从<code>17.02</code>版本开始匹配了Surface Pro 3， 这里必须非常感谢下Manjaro Team的工作，我现在可以再次在Surface上用畅快的用Linux了。</p>
 <p>具体可以看reddit上的这篇文章： https://cd-rw.org/t/running-linux-on-the-surface-pro-3/175/37。</p>
-<p>我实际安装的版本是<code>17.1pre3</code>，不管是蓝牙，触摸板，WIFI，touchpad，音量键，甚至触摸屏都可以正常使用，甚至都不用升级内核。</p>
-<p>唯一的问题是启用休眠以后，wifi和蓝牙功能失灵了，即使通过重启<code>NetworkManager.service</code>也无法解决，因此基本上就是硬件驱动的问题，网上关于其他一些笔记本在休眠后无法解决的问题基本上就是用lsmod查到和wifi相关的模块，然后重新加载的方法，但是没有和surface pro有关的内容。</p>
-<p>找了几篇stackoverflow文章做了多次尝试，然后通过<code>lsmod　| grep wifi</code>和<code>lsmod | grep bluetooth</code>查出来的模块，依次尝试，终于找到了正确的模块。</p>
-<p>和wifi相关的模块是<code>mwifiex_pcie</code>， 和蓝牙相关的模块是<code>btusb</code>。</p>
-<p>因此要做的操作就是<code>rmmod</code>和<code>modprobe</code>，休眠后执行下面的命令后，wifi和蓝牙就可以正常工作了。</p>
-<div class="highlight"><pre><span></span> <span class="n">sudo</span> <span class="n">rmmod</span> <span class="o">-</span><span class="n">v</span> <span class="n">btusb</span>
- <span class="n">sudo</span> <span class="n">rmbanbenmod</span> <span class="o">-</span><span class="n">v</span> <span class="n">mwifiex_pcie</span>
- <span class="n">sudo</span> <span class="n">modprobe</span> <span class="o">-</span><span class="n">v</span> <span class="n">btusb</span>
- <span class="n">sudo</span> <span class="n">modprobe</span> <span class="o">-</span><span class="n">v</span> <span class="n">mwifiex_pcie</span>
-</pre></div>
+<p>我实际安装的版本是<code>17.1pre3</code>，不管是蓝牙，触摸板，WIFI …</p><p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
-
-<p>但是这样就是每次都得再休眠后执行这些命令好像也略麻烦，最后看到又休眠后自动执行脚本的方法，<code>pm</code>和<code>systemctl</code>的休眠脚本位置不同，我对<code>pm</code>没印象，觉得arch的休眠几乎肯定是<code>systemctl</code>的，于是直接尝试了<code>systemctl</code>，<code>systemctl</code>的脚本位置在<code>/usr/lib/systemd/system-sleep</code>，这里的脚本会在sleep或者休眠时被调用。</p>
-<p>我的脚本<code>/usr/lib/systemd/system-sleep/wakeup_suspend_dev.sh</code>的内容是：</p>
-<div class="highlight"><pre><span></span>    <span class="o">#!/</span><span class="n">bin</span><span class="o">/</span><span class="n">bash</span>
-    <span class="k">case</span> <span class="err">$</span><span class="mi">1</span> <span class="k">in</span>
-        <span class="n">pre</span><span class="p">)</span>
-          <span class="n">rmmod</span> <span class="n">btusb</span>
-          <span class="n">rmmod</span> <span class="n">mwifiex_pcie</span>
-        <span class="p">;;</span>
-        <span class="n">post</span><span class="p">)</span>
-          <span class="n">modprobe</span> <span class="n">btusb</span>
-                <span class="n">modprobe</span> <span class="n">mwifiex_pcie</span>
-        <span class="p">;;</span>
-    <span class="n">esac</span>
-</pre></div>
-
-
-<p><code>pre</code>是在休眠之前执行<code>rmmod</code>的操作，post是在休眠之后执行<code>modprobe</code>的操作。需要注意的是必须把这个脚本加可执行权限：</p>
-<div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">chmod</span> <span class="o">+</span><span class="n">x</span> <span class="n">wakeup_suspend_dev</span><span class="p">.</span><span class="n">sh</span>
-</pre></div><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
-
-    Tagged: 
+    标签: 
     <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
     <a href="https://gccpacman.github.io/tag/driver.html">driver </a>
 </p>
 
 
 
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/archlinuxxiu-mian-hou-huan-xing-wifihe-lan-ya-wu-fa-zheng-chang-shi-yong-de-jie-jue-fang-fa.html">阅读全文</a>
             </article>
 
 
@@ -110,17 +81,9 @@
 <p>昨天还装完arch兴高采烈，今天就差点放弃整个系统，罪魁祸首就是当年被linus喷了的nvidia.</p>
 <p>Archlinux装了使用nvidia驱动，一开始发现根本就没有加载，装了和没装没啥区别，但是跑的好好的阿跑的好好的，结果不小心手贱点了<code>nvidia-xconfig</code>的应用，莫名其妙的起不来了。（这个原因我想了半天才想出来，不然我实在是无力吐槽他妈跑了一天多好好的什么也没干突然就起步来的情况，一度怀疑是显卡硬件坏了）</p>
 <p>于是抢救三个多小时，<code>/var/log/xorg.0.log</code>里的报错也莫名其妙，比如:</p>
-<div class="highlight"><pre><span></span><span class="k">not</span> <span class="n">detect</span> <span class="n">device</span> <span class="n">nvidia</span><span class="p">,</span> <span class="k">no</span> <span class="n">screen</span> <span class="k">found</span><span class="p">.</span>
-</pre></div>
+<div class="highlight"><pre><span></span><span class="k">not</span> <span class="n">detect</span> <span class="n">device …</span></pre></div><p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
-
-<p>简直是日到狗。于是想着解决办法应该是彻底不要装nvidia的驱动， 用intel的集成显卡，照例来说应该也ok阿，于是直接删掉驱动：</p>
-<p>pacman -R nvidia nvidia-utils</p>
-<p>然后reboot, 没想到发生的事情更加奇葩了，连命令行就出不来了，直接黑屏了我草。</p>
-<p>心里十万个草尼马，还好安装过arch的人毕竟还是知道有个arch-chroot, 放入安装介质（我的是u盘），重启， mount各种好盘:</p>
-<div class="highlight"><pre><span></span><span class="n">mount</span> <span class="o">/</span><span class="n">dev …</span></pre></div><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
-
-    Tagged: 
+    标签: 
     <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
     <a href="https://gccpacman.github.io/tag/driver.html">driver </a>
     <a href="https://gccpacman.github.io/tag/gtk.html">gtk </a>
@@ -129,7 +92,7 @@
 
 
 
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/archlinuxjiang-nvidia-driverti-huan-cheng-kai-yuan-de-nouveaujie-jue-xian-qia-qu-dong-wen-ti.html">Read More</a>
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/archlinuxjiang-nvidia-driverti-huan-cheng-kai-yuan-de-nouveaujie-jue-xian-qia-qu-dong-wen-ti.html">阅读全文</a>
                 <hr  class="gradient"/>
             </article>
 
@@ -147,14 +110,13 @@
 
     <!-- Sidebar -->
     <aside class="large-3 columns">
-        <h5 class="sidebar-title">Site</h5>
         <ul class="side-nav">
-            <li><a href="https://gccpacman.github.io/archives.html">Archives</a>
-            <li><a href="https://gccpacman.github.io/tags.html">Tags</a>
+            <li><a href="https://gccpacman.github.io/archives.html">归档</a>
+            <li><a href="https://gccpacman.github.io/tags.html">标签</a>
         </ul>
 
 		
-        <h5 class="sidebar-title">Categories</h5>
+        <h5 class="sidebar-title">分类</h5>
         <ul class="side-nav">
             <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
             <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
@@ -165,17 +127,13 @@
             <li><a href="https://gccpacman.github.io/category/windows.html">Windows</a></li>
    
         </ul>
-
-        <h5 class="sidebar-title">Links</h5>
-        <ul class="side-nav">
-            <li><a href="http://getpelican.com/">Pelican</a></li>
-        </ul>
 		
-        <h5 class="sidebar-title">Social</h5>
+        <h5 class="sidebar-title">我的社交账号</h5>
         <ul class="side-nav">
-            <li><a href="https://github.com/gccpacman">GccPacman @Github</a></li>
-            <li><a href="https://stackoverflow.com/users/4124310/realhu">r341h @StackOverflow</a></li>
+            <li><a href="https://github.com/gccpacman">Github</a></li>
+            <li><a href="https://stackoverflow.com/users/4124310/realhu">StackOverflow</a></li>
         </ul>
+
 
     </aside> <!-- End Sidebar -->
 

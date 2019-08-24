@@ -20,7 +20,7 @@
 <div class="top-bar">
 <div class="row">
     <div class="large-9 large-centered columns">
-	    <h1><a href="https://gccpacman.github.io">Pacman News</a></h1>
+	    <h1><a href="/">Pacman News</a></h1>
     </div>
 </div>
 </div>
@@ -60,74 +60,9 @@
 </li>
 <li>
 <p>用kubectl获取k8s集群的基本信息：</p>
-<div class="highlight"><pre><span></span>$ <span class="nv">kubectl</span> <span class="nv">get</span> <span class="nv">pods</span> # 查看<span class="nv">default</span>命名空间下的<span class="nv">pods</span>
-$ <span class="nv">kubectl</span> <span class="nv">get</span> <span class="nv">pods</span> <span class="o">-</span><span class="nv">n</span> <span class="nv">test</span> # 查看<span class="nv">test</span>命名空间下的<span class="nv">pods</span>
-$ <span class="nv">kubectl</span> <span class="nv">get</span> <span class="nv">deployments</span> # 查看<span class="nv">default</span>命名空间下的部署
-$ <span class="nv">kubectl</span> <span class="nv">get</span> <span class="nv">services</span> # 查看<span class="nv">default</span>命名空间下的服务
-$ <span class="nv">kubectl</span> <span class="nv">get</span> <span class="nv">pods</span> <span class="o">-</span><span class="nv">o</span><span class="o">=</span><span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">{range .items[*]}{&#39;</span><span class="se">\n</span><span class="s">&#39;}{.metadata.name}{&#39;:</span><span class="se">\t</span><span class="s">&#39;}{range .spec.containers[*]}{.image}{&#39;, &#39;}{end}{end}</span><span class="s2">&quot;</span> # 查看<span class="nv">pods</span>里<span class="nv">container</span>的镜像和版本
-</pre></div>
+<div class="highlight"><pre><span></span>$ <span class="nv">kubectl</span> <span class="nv">get</span> <span class="nv">pods</span> # 查看<span class="nv">default …</span></pre></div></li></ul><p class="subheader">分类: <a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a>
 
-
-</li>
-<li>
-<p>查看资源情况：</p>
-<div class="highlight"><pre><span></span>$ kubectl top pod <span class="c1"># 查看pods的cpu和memory资源占用</span>
-$ kubectl top node <span class="c1"># 查看节点的cpu和memory资源占用和百分比</span>
-</pre></div>
-
-
-</li>
-<li>
-<p>调试和进入Pod：</p>
-<div class="highlight"><pre><span></span>$ <span class="nv">kubectl</span> <span class="nv">describe</span> <span class="nv">pod</span> ${<span class="nv">pod_name</span>} # 查看某个<span class="nv">pod</span>的信息（例如在<span class="nv">pod</span>有问题可以<span class="nv">debug</span>）
-$ <span class="nv">kubectl</span> <span class="k">exec</span> <span class="o">-</span><span class="nv">it</span> ${<span class="nv">pod_name</span>} <span class="nv">bash</span> # 进入某个<span class="nv">pod</span>的某个容器进行调试
-</pre></div>
-
-
-</li>
-<li>
-<p>通过端口转发调试接口：</p>
-<div class="highlight"><pre><span></span>$ kubectl port-forward pods/pod_name <span class="m">30000</span>:30000 -n cicd
-$ curl <span class="m">127</span>.0.0.1:30000
-</pre></div>
-
-
-</li>
-<li>
-<p>通过kube-api代理调试接口：</p>
-<div class="highlight"><pre><span></span>$ kubectl proxy
-$ curl http://localhost:8001/api/v1/namespaces/default/pods/<span class="si">${</span><span class="nv">pod_name</span><span class="si">}</span><span class="o">[</span>:port_name<span class="o">]</span>/proxy/
-</pre></div>
-
-
-</li>
-<li>
-<p>Deployments手动伸缩Pods:</p>
-<div class="highlight"><pre><span></span>$ kubectl scale deployment &lt;deployment_name&gt; --replicas<span class="o">=</span><span class="m">3</span>
-$ kubectl scale deployment &lt;deployment_name&gt; --replicas<span class="o">=</span><span class="m">0</span>
-</pre></div>
-
-
-</li>
-<li>
-<p>Deployments添加和删除HorizontalPodScaler,自动伸缩pod：</p>
-<div class="highlight"><pre><span></span>$ kubectl autoscale deployment &lt;deployment_name&gt; -name &lt;hpa_name&gt; --min<span class="o">=</span><span class="m">1</span> --max<span class="o">=</span><span class="m">8</span> --cpu-percent<span class="o">=</span><span class="m">50</span>
-$ kubectl get hpa
-$ kubectl delete hpa &lt;hpa_name&gt;
-</pre></div>
-
-
-</li>
-<li>
-<p>切换kubectl配置文件</p>
-<div class="highlight"><pre><span></span>$ kubectl config use-context &lt;config-name&gt;
-</pre></div>
-
-
-</li>
-</ul><p class="subheader">Category: <a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a>
-
-    Tagged: 
+    标签: 
     <a href="https://gccpacman.github.io/tag/kubernetes.html">kubernetes </a>
     <a href="https://gccpacman.github.io/tag/docker.html">docker </a>
     <a href="https://gccpacman.github.io/tag/kubectl.html">kubectl </a>
@@ -135,6 +70,7 @@ $ kubectl delete hpa &lt;hpa_name&gt;
 
 
 
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/k8sming-ling-xing-gong-ju-kubectlde-shi-yong-ming-ling.html">阅读全文</a>
             </article>
 
 
@@ -162,22 +98,9 @@ $ kubectl delete hpa &lt;hpa_name&gt;
 <p>安装Docker</p>
 <div class="highlight"><pre><span></span>$ yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 $ yum -y install docker-ce
-$ systemctl start docker <span class="o">&amp;&amp;</span> systemctl <span class="nb">enable</span> docker 
-$ docker images   <span class="c1"># 确定docker命令正常</span>
-</pre></div>
+$ systemctl start docker …</pre></div></li></ol><p class="subheader">分类: <a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a>
 
-
-</li>
-<li>
-<p>安装Kubernetes</p>
-<p>3.1 安装kubeadm, kubelet, kubectl</p>
-<div class="highlight"><pre><span></span><span class="err">$</span><span class="w"> </span><span class="n">vim</span><span class="w"> </span><span class="n">kubernetes</span><span class="p">.</span><span class="n">repo</span><span class="w"></span>
-
-<span class="o">[</span><span class="n">kubernetes</span><span class="o">]</span><span class="w"></span>
-<span class="n">name</span><span class="o">=</span><span class="n">Kubernetes</span><span class="w"></span>
-<span class="n">baseurl</span><span class="o">=</span><span class="nl">https</span><span class="p">:</span><span class="o">//</span><span class="n">mirrors</span><span class="p">.</span><span class="n">aliyun</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">kubernetes</span><span class="o">/</span><span class="n">yum …</span></pre></div></li></ol><p class="subheader">Category: <a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a>
-
-    Tagged: 
+    标签: 
     <a href="https://gccpacman.github.io/tag/kubernetes.html">kubernetes </a>
     <a href="https://gccpacman.github.io/tag/centos.html">centos </a>
     <a href="https://gccpacman.github.io/tag/docker.html">docker </a>
@@ -185,7 +108,7 @@ $ docker images   <span class="c1"># 确定docker命令正常</span>
 
 
 
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/qiang-nei-de-centos7-linuxan-zhuang-k8s.html">Read More</a>
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/qiang-nei-de-centos7-linuxan-zhuang-k8s.html">阅读全文</a>
                 <hr  class="gradient"/>
             </article>
 
@@ -203,14 +126,13 @@ $ docker images   <span class="c1"># 确定docker命令正常</span>
 
     <!-- Sidebar -->
     <aside class="large-3 columns">
-        <h5 class="sidebar-title">Site</h5>
         <ul class="side-nav">
-            <li><a href="https://gccpacman.github.io/archives.html">Archives</a>
-            <li><a href="https://gccpacman.github.io/tags.html">Tags</a>
+            <li><a href="https://gccpacman.github.io/archives.html">归档</a>
+            <li><a href="https://gccpacman.github.io/tags.html">标签</a>
         </ul>
 
 		
-        <h5 class="sidebar-title">Categories</h5>
+        <h5 class="sidebar-title">分类</h5>
         <ul class="side-nav">
             <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
             <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
@@ -221,17 +143,13 @@ $ docker images   <span class="c1"># 确定docker命令正常</span>
             <li><a href="https://gccpacman.github.io/category/windows.html">Windows</a></li>
    
         </ul>
-
-        <h5 class="sidebar-title">Links</h5>
-        <ul class="side-nav">
-            <li><a href="http://getpelican.com/">Pelican</a></li>
-        </ul>
 		
-        <h5 class="sidebar-title">Social</h5>
+        <h5 class="sidebar-title">我的社交账号</h5>
         <ul class="side-nav">
-            <li><a href="https://github.com/gccpacman">GccPacman @Github</a></li>
-            <li><a href="https://stackoverflow.com/users/4124310/realhu">r341h @StackOverflow</a></li>
+            <li><a href="https://github.com/gccpacman">Github</a></li>
+            <li><a href="https://stackoverflow.com/users/4124310/realhu">StackOverflow</a></li>
         </ul>
+
 
     </aside> <!-- End Sidebar -->
 

@@ -20,7 +20,7 @@
 <div class="top-bar">
 <div class="row">
     <div class="large-9 large-centered columns">
-	    <h1><a href="https://gccpacman.github.io">Pacman News</a></h1>
+	    <h1><a href="/">Pacman News</a></h1>
     </div>
 </div>
 </div>
@@ -53,128 +53,9 @@
 
 <p>I always intersted in build services in my own VPS.
 specially things like a server can help me free browser the internet.
-But sometimes the connection between my own pc and the vps server are not quite good. So things not always go luck.</p>
-<p>I find out openvpn is quite useful these days. So I'm thinking I will build one of my own. I picked one of my VPS for the test. It was installed with Ubuntu 14.04 and has 512MB memory. Here are the steps of how I did it:</p>
-<p>1st, I install the openvpn and easy-rsa:</p>
-<div class="highlight"><pre><span></span>$ apt-get install openvpn easy-rsa
-</pre></div>
+But sometimes the …</p><p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
-
-<p>2nd, change the value of <code>net.ipv4.ip_forward=1</code> in /etc/sysctl.conf, then do <code>sysctl -p</code></p>
-<p>3rd, copy <code>/usr/share/easy-rsa/</code> to  <code>/etc/openvpn/</code> and generate the openvpn keys in the directory of :</p>
-<div class="highlight"><pre><span></span>$ <span class="nv">make</span><span class="o">-</span><span class="nv">cadir</span> <span class="o">/</span><span class="nv">etc</span><span class="o">/</span><span class="nv">openvpn</span><span class="o">/</span><span class="nv">easy</span><span class="o">-</span><span class="nv">rsa</span> <span class="ss">(</span><span class="nv">ps</span>: <span class="nv">this</span> <span class="nv">seems</span> <span class="nv">another</span> <span class="nv">way</span> <span class="nv">to</span> <span class="k">do</span> <span class="nv">this</span><span class="ss">)</span>
-</pre></div>
-
-
-<p>OR</p>
-<div class="highlight"><pre><span></span><span class="n">cp</span> <span class="o">-</span><span class="n">r</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="k">share</span><span class="o">/</span><span class="n">easy</span><span class="o">-</span><span class="n">rsa</span><span class="o">/</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">openvpn</span>
-<span class="n">mkdir</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">openvpn</span><span class="o">/</span><span class="n">easy</span><span class="o">-</span><span class="n">rsa</span><span class="o">/</span><span class="n">keys</span>
-<span class="n">openssl</span> <span class="n">dhparam</span> <span class="o">-</span><span class="k">out</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">openvpn</span><span class="o">/</span><span class="n">dh2048</span><span class="p">.</span><span class="n">pem</span> <span class="mi">2048</span>
-</pre></div>
-
-
-<p>4th, change the directory to easy-rsa, then do the following command:</p>
-<div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">openvpn</span><span class="o">/</span><span class="n">easy</span><span class="o">-</span><span class="n">rsa</span><span class="o">/</span>
-<span class="k">source</span> <span class="n">vars</span>
-<span class="p">.</span><span class="o">/</span><span class="n">clean</span><span class="o">-</span><span class="k">all</span>
-<span class="p">.</span><span class="o">/</span><span class="n">build</span><span class="o">-</span><span class="n">dh</span>
-<span class="p">.</span><span class="o">/</span><span class="n">pkitool</span> <span class="c1">--initca</span>
-<span class="p">.</span><span class="o">/</span><span class="n">pkitool</span> <span class="c1">--server server</span>
-<span class="n">cd</span> <span class="n">keys</span>
-<span class="n">openvpn</span> <span class="c1">--genkey --secret ta.key</span>
-<span class="n">ln</span> <span class="o">-</span><span class="n">s</span> <span class="n">openssl</span><span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="n">cnf</span> <span class="n">openssl</span><span class="p">.</span><span class="n">cnf</span>     
-<span class="p">.</span><span class="o">/</span><span class="n">pkitool</span> <span class="c1">--initca</span>
-</pre></div>
-
-
-<p>OR</p>
-<div class="highlight"><pre><span></span><span class="p">.</span><span class="o">/</span><span class="n">clean</span><span class="o">-</span><span class="k">all</span>
-<span class="p">.</span><span class="o">/</span><span class="n">build</span><span class="o">-</span><span class="n">ca</span>
-<span class="p">.</span><span class="o">/</span><span class="n">build</span><span class="o">-</span><span class="k">key</span><span class="o">-</span><span class="n">server</span> <span class="n">server</span>
-</pre></div>
-
-
-<p>5th, cp the generated keys to <code>/etc/openvpn</code>:</p>
-<div class="highlight"><pre><span></span><span class="n">cp</span> <span class="n">server</span><span class="p">.</span><span class="n">crt</span> <span class="n">server</span><span class="p">.</span><span class="k">key</span> <span class="n">ca</span><span class="p">.</span><span class="n">crt</span> <span class="n">dh1024</span><span class="p">.</span><span class="n">pem</span> <span class="n">ta</span><span class="p">.</span><span class="k">key</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">openvpn</span><span class="o">/</span>
-</pre></div>
-
-
-<p>6th, cp the <code>server.conf</code> sample to <code>/etc/openvpn/server.conf</code></p>
-<div class="highlight"><pre><span></span><span class="n">gunzip</span> <span class="o">-</span><span class="k">c</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="k">share</span><span class="o">/</span><span class="n">doc</span><span class="o">/</span><span class="n">openvpn</span><span class="o">/</span><span class="n">examples</span><span class="o">/</span><span class="n">sample</span><span class="o">-</span><span class="n">config</span><span class="o">-</span><span class="n">files</span><span class="o">/</span><span class="n">server</span><span class="p">.</span><span class="n">conf</span><span class="p">.</span><span class="n">gz</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">openvpn</span><span class="o">/</span><span class="n">server</span><span class="p">.</span><span class="n">conf</span>
-</pre></div>
-
-
-<p>7th, change some value of the <code>server.conf</code> file:</p>
-<div class="highlight"><pre><span></span><span class="p">;</span><span class="n">push</span> <span class="ss">&quot;redirect-gateway def1 bypass-dhcp&quot;</span>
-</pre></div>
-
-
-<p>to</p>
-<div class="highlight"><pre><span></span><span class="n">push</span> <span class="ss">&quot;redirect-gateway def1 bypass-dhcp&quot;</span>
-
-<span class="p">;</span><span class="n">push</span> <span class="ss">&quot;dhcp-option DNS 208.67.222.222&quot;</span>
-<span class="p">;</span><span class="n">push</span> <span class="ss">&quot;dhcp-option DNS 208.67.220.220&quot;</span>
-</pre></div>
-
-
-<p>to</p>
-<div class="highlight"><pre><span></span><span class="n">push</span> <span class="ss">&quot;dhcp-option DNS 208.67.222.222&quot;</span>
-<span class="n">push</span> <span class="ss">&quot;dhcp-option DNS 208.67.220.220&quot;</span>  <span class="p">(</span><span class="n">change</span> <span class="k">to</span> <span class="k">some</span> <span class="n">dns</span> <span class="n">server</span> <span class="n">you</span> <span class="n">trust</span><span class="p">)</span>
-
-<span class="p">;</span><span class="k">user</span> <span class="n">nobody</span>
-<span class="p">;</span><span class="k">group</span> <span class="n">nogroup</span>
-</pre></div>
-
-
-<p>to</p>
-<div class="highlight"><pre><span></span><span class="k">user</span> <span class="n">nobody</span>
-<span class="k">group</span> <span class="n">nogroup</span>
-</pre></div>
-
-
-<p>8th,  start and check the openvpn service:</p>
-<div class="highlight"><pre><span></span><span class="n">service</span> <span class="n">openvpn</span> <span class="k">start</span>
-<span class="n">service</span> <span class="n">openvpn</span> <span class="n">status</span>
-</pre></div>
-
-
-<p>9th, generate key of client:</p>
-<div class="highlight"><pre><span></span><span class="p">.</span><span class="o">/</span><span class="n">build</span><span class="o">-</span><span class="k">key</span> <span class="n">client1</span>
-</pre></div>
-
-
-<p>10th, copy the sample and change the value of client.ovpn:</p>
-<div class="highlight"><pre><span></span>cp /usr/share/doc/openvpn/examples/sample-config-files/client.conf /etc/openvpn/easy-rsa/keys/client.ovpn
-
-remote my-server-1 1194
-user nobody
-group nogroup
-
-# SSL/TLS parms.
-# . . .
-#ca ca.crt
-#cert client.crt
-#key client.key
-<span class="nt">&lt;ca&gt;</span>
-(insert ca.crt here)
-<span class="nt">&lt;/ca&gt;</span>
-<span class="nt">&lt;cert&gt;</span>
-(insert client1.crt here)
-<span class="nt">&lt;/cert&gt;</span>
-<span class="nt">&lt;key&gt;</span>
-(insert client1.key here)
-<span class="nt">&lt;/key&gt;</span>
-</pre></div>
-
-
-<p>参考：</p>
-<ol>
-<li><a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-an-openvpn-server-on-ubuntu-14-04">How To Set Up an OpenVPN Server on Ubuntu 14.04 | DigitalOcean</a></li>
-<li><a href="http://www.slsmk.com/getting-started-with-openvpn/installing-openvpn-on-ubuntu-server-12-04-or-14-04-using-tap/">Installing OpenVPN on Ubuntu Server 12.04 or 14.04 using TAP – Super Library of Solutions</a></li>
-<li><a href="https://wiki.archlinux.org/index.php/OpenVPN#Routing_all_client_traffic_through_the_server">OpenVPN - ArchWiki</a></li>
-</ol><p class="subheader">Category: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
-
-    Tagged: 
+    标签: 
     <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
     <a href="https://gccpacman.github.io/tag/vpn.html">vpn </a>
     <a href="https://gccpacman.github.io/tag/openvpn.html">openvpn </a>
@@ -182,6 +63,7 @@ group nogroup
 
 
 
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/dockerda-jian-openvpn-server.html">阅读全文</a>
             </article>
 
 <div class="pagination-centered">
@@ -201,14 +83,13 @@ group nogroup
 
     <!-- Sidebar -->
     <aside class="large-3 columns">
-        <h5 class="sidebar-title">Site</h5>
         <ul class="side-nav">
-            <li><a href="https://gccpacman.github.io/archives.html">Archives</a>
-            <li><a href="https://gccpacman.github.io/tags.html">Tags</a>
+            <li><a href="https://gccpacman.github.io/archives.html">归档</a>
+            <li><a href="https://gccpacman.github.io/tags.html">标签</a>
         </ul>
 
 		
-        <h5 class="sidebar-title">Categories</h5>
+        <h5 class="sidebar-title">分类</h5>
         <ul class="side-nav">
             <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
             <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
@@ -219,17 +100,13 @@ group nogroup
             <li><a href="https://gccpacman.github.io/category/windows.html">Windows</a></li>
    
         </ul>
-
-        <h5 class="sidebar-title">Links</h5>
-        <ul class="side-nav">
-            <li><a href="http://getpelican.com/">Pelican</a></li>
-        </ul>
 		
-        <h5 class="sidebar-title">Social</h5>
+        <h5 class="sidebar-title">我的社交账号</h5>
         <ul class="side-nav">
-            <li><a href="https://github.com/gccpacman">GccPacman @Github</a></li>
-            <li><a href="https://stackoverflow.com/users/4124310/realhu">r341h @StackOverflow</a></li>
+            <li><a href="https://github.com/gccpacman">Github</a></li>
+            <li><a href="https://stackoverflow.com/users/4124310/realhu">StackOverflow</a></li>
         </ul>
+
 
     </aside> <!-- End Sidebar -->
 
