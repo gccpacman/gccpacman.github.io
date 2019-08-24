@@ -1,7 +1,7 @@
 Title: putty + tmux多窗口可用配置
 Date: 2018-08-28 10:20
 Category: Tmux
-Tags: tmux, putty
+Tags: tmux, putty, ssh, windows
 Authors: r341h
 
 - putty的执行命令填入如下命令，tmux名称同session名称，以便开多个putty窗口时候识别

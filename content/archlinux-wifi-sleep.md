@@ -1,8 +1,8 @@
-Title: Linux休眠后唤醒，wifi和蓝牙无法正常使用的解决方法
+Title: ArchLinux休眠后唤醒，wifi和蓝牙无法正常使用的解决方法
 Date: 2017-12-04 10:20
 Modified: 2017-12-04 19:30
 Category: Linux
-Tags: linux, drivers
+Tags: linux, driver
 Authors: r341h
 
 

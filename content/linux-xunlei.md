@@ -1,8 +1,8 @@
-Title: 把用户态systemd服务改成系统服务，开机自启动xware
+Title: Linux把用户态systemd服务改成系统服务，开机自启动迅雷(xware)
 Date: 2016-01-08 10:20
 Modified: 2016-01-08 19:30
 Category: Linux
-Tags: linux, kodi, resource
+Tags: linux, download, resource
 Authors: r341h
 
 

@@ -1,7 +1,7 @@
 Title: 墙内的Centos7 Linux安装K8S
 Date: 2019-05-07 11:13
 Category: Kubernetes
-Tags: kubernetes, centos7, docker
+Tags: kubernetes, centos, docker
 Authors: r341h
 
 1. 安装基础构建依赖

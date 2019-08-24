@@ -1,4 +1,4 @@
-Title: vim插件command-t在windows上编译
+Title: Windows上编译vim文件导航跳转插件command-t
 Date: 2017-10-24 10:20
 Modified: 2017-10-24 19:30
 Category: Vim
@@ -6,7 +6,7 @@ Tags: windows, vim
 Authors: r341h
 
 
-用Bundle在Windows平台上配置成功了以后，绝大多数插件都已经可以使用，但是唯独[Command-T](https://github.com/wincent/Command-T)因为是Ruby集成的插件，需要手动编译。
+用Bundle在Windows平台上配置成功了以后，绝大多数插件都已经可以使用，但是唯独强大的文件导航[Command-T](https://github.com/wincent/Command-T)因为Ruby开发的插件，需要手动编译。
 
 [官方文档](https://github.com/wincent/command-t/blob/master/doc/command-t.txt)写的安装编译过程代码大概是这样的，我省去了使用bundle的安装过程：
 

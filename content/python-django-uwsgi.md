@@ -2,7 +2,7 @@ Title: uwsgi方式启动django
 Date: 2015-11-23 10:20
 Modified: 2015-11-23 19:30
 Category: python
-Tags: python, django, webapps
+Tags: python, django, web, develop
 Authors: r341h
 
 

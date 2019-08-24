@@ -1,4 +1,4 @@
-Title: 资源占用超级低的i3桌面
+Title: 在虚拟机里跑资源占用超低的Linux桌面环境i3
 Date: 2018-05-04 10:20
 Modified: 2018-05-04 19:30
 Category: Linux

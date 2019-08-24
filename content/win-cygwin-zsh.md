@@ -1,4 +1,4 @@
-Title: 利用babun, tmux, zsh高度定制shell
+Title: Windowss上利用babun, tmux, zsh高度定制shell
 Date: 2015-10-22 10:20
 Category: Windows
 Tags: windows, cygwin, tmux, zsh

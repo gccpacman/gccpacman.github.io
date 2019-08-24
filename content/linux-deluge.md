@@ -1,4 +1,4 @@
-Title: 安装deluge下载工具自动远程下载
+Title: Linux安装deluge下载工具自动远程下载
 Date: 2016-01-04 10:20
 Modified: 2016-01-04 19:30
 Category: Linux

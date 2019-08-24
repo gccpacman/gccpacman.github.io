@@ -1,7 +1,7 @@
 Title: K8S命令行工具Kubectl的实用命令
 Date: 2019-05-08 14:13
 Category: Kubernetes
-Tags: kubernetes, docker
+Tags: kubernetes, docker, kubectl
 Authors: r341h
 
 - 安装配置Kubectl:
