@@ -5,12 +5,7 @@ Category: Linux
 Tags: linux, gtk, vitual machine
 Authors: r341h
 
-现在的电脑是Surface，跑虚拟机很吃力了，但是不是不能跑，重点是优化后把linux的资源降下来，还是可以非常流畅。i3是个比xfce4更加轻量级的桌面管理器，而且不是像Windows那样悬浮窗口式的，而是tiling的桌面。随便网上找了个截图，大概就是这个意思：
-
-![i3](https://i3wm.org/screenshots/i3-1.png)
-
-这边的例子以Vmware为例：
-
+现在的电脑是SurfacePro3，如果安装了Linux桌面环境，如Gnome或者xfce等，跑虚拟机会很吃力了，但是不是不能跑，重点是优化后把Linux的资源降下来非常流畅，而且还可以使用桌面应用。i3是个比xfce4更加轻量级的桌面管理器，Tiling的桌面可以保证所有打开的窗口都平铺满桌面，然后通过快捷键和鼠标切换应用，这边只讲述下我的安装过程，以及如何安装Vmware插件以支持剪切板，自动缩放虚拟机分辨率等:
 
 1. 首先要安装i3：
 
@@ -62,3 +57,7 @@ Authors: r341h
         echo "#!/bin/sh
         xrandr
         exec i3" > ~/.xsession
+
+安装完成后效果如图：
+
+![i3](https://i3wm.org/screenshots/i3-1.png)

@@ -5,6 +5,7 @@ from __future__ import unicode_literals
 AUTHOR = 'r341h'
 SITENAME = 'Pacman News'
 SITEURL = ''
+AVATAR = 'images/7122066.jpg'
 
 PATH = 'content'
 
@@ -18,16 +19,17 @@ CATEGORY_FEED_ATOM = None
 TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
+SUMMARY_MAX_LENGTH = 25
 
-THEME = "../pelican-themes/zurb-F5-basic"
+THEME = "./themes/zurb-F5-basic"
 
 # Blogroll
-LINKS = (('Pelican', 'http://getpelican.com/'),
-         )
 
 # Social widget
-SOCIAL = (('GccPacman @Github', 'https://github.com/gccpacman'),
-          ('r341h @StackOverflow', 'https://stackoverflow.com/users/4124310/realhu'),)
+SOCIAL = (('Github', 'https://github.com/gccpacman'),
+          ('StackOverflow', 'https://stackoverflow.com/users/4124310/realhu'),)
+
+GITHUB_BLOG_SITE = u'https://github.com/gccpacman/gccpacman.github.io'
 
 DEFAULT_PAGINATION = 6
 
