@@ -56,16 +56,6 @@
 
     <!-- Sidebar -->
     <aside class="large-3 columns">
-        <ul class="side-nav">
-            <li><a href="{{ SITEURL }}/archives.html">归档</a>
-            <li><a href="{{ SITEURL }}/tags.html">标签</a>
-            {% if FEED_RSS %}
-            <li><a href="{{ FEED_DOMAIN }}/{{ FEED_ATOM }}" rel="alternate">Atom feed</a></li>
-            {% endif %}
-            {% if FEED_RSS %}
-            <li><a href="{{ FEED_DOMAIN }}/{{ FEED_RSS }}" rel="alternate">RSS feed</a></li>
-            {% endif %}
-        </ul>
 
         {% if categories %}		
         <h5 class="sidebar-title">分类</h5>
@@ -91,6 +81,14 @@
         {% for name, link in LINKS %}
             <li><a href="{{ link }}">{{ name }}</a></li>
         {% endfor %}
+            <li><a href="{{ SITEURL }}/archives.html">归档</a>
+            <li><a href="{{ SITEURL }}/tags.html">标签汇总</a>
+            {% if FEED_RSS %}
+            <li><a href="{{ FEED_DOMAIN }}/{{ FEED_ATOM }}" rel="alternate">Atom feed</a></li>
+            {% endif %}
+            {% if FEED_RSS %}
+            <li><a href="{{ FEED_DOMAIN }}/{{ FEED_RSS }}" rel="alternate">RSS feed</a></li>
+            {% endif %}
         </ul>
         {% endif %}
 
