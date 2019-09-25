@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="https://gccpacman.github.io/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="https://gccpacman.github.io/theme/css/style.css" />
     <link rel="stylesheet" href="https://gccpacman.github.io/theme/css/pygments.css" />	
-    <link rel="shortcut icon" href="https://gccpacman.github.io/theme/images/favicon.png" />
     <script src="https://gccpacman.github.io/theme/js/modernizr.js"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146579327-1"></script>
@@ -21,6 +20,7 @@
 
     gtag('config', 'UA-146579327-1');
     </script>
+
 </head>
 
 <body>
@@ -57,8 +57,39 @@
 
 
             <article>
+                <a href="https://gccpacman.github.io/linuxli-yong-sshfan-xiang-duan-kou-zhuan-fa-bao-lu-nei-wang-duan-kou.html"><h3 class="article-title">Linux利用ssh反向端口转发暴露内网端口</h3></a>
+<h6 class="subheader" title="2015-10-30T10:20:00+08:00">Fri 30 October 2015
+</h6>
+
+
+<p>从本地Host用SSH连接到目标主机，怎么让目标主机也可以连接本地的SSH呢？
+答案很简单，只要把本地主机的SSH端口转发到目标主机即可。可以先查看一下SSH命令的man手册:</p>
+<div class="highlight"><pre><span></span><span class="n">man</span> <span class="n">ssh</span>
+</pre></div>
+
+
+<p>注意里面的R参数，就是要用到的参数：</p>
+<div class="highlight"><pre><span></span><span class="o">-</span><span class="n">R</span> <span class="p">[</span><span class="n">bind_address</span><span class="p">:]</span><span class="n">port</span><span class="p">:</span><span class="k">host</span><span class="p">:</span><span class="n">hostport</span>
+         <span class="n">Specifies</span> <span class="n">that</span> <span class="n">the</span> <span class="n">given</span> <span class="n">port</span> <span class="k">on</span> <span class="n">the</span> <span class="n">remote</span> <span class="p">(</span><span class="n">server</span><span class="p">)</span> <span class="k">host</span> <span class="k">is …</span></pre></div><p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+
+    标签: 
+    <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
+    <a href="https://gccpacman.github.io/tag/ssh.html">ssh </a>
+    <a href="https://gccpacman.github.io/tag/port-forward.html">port-forward </a>
+</p>
+
+
+
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/linuxli-yong-sshfan-xiang-duan-kou-zhuan-fa-bao-lu-nei-wang-duan-kou.html">阅读全文</a>
+                <hr  class="gradient"/>
+            </article>
+
+        
+
+
+            <article>
                 <a href="https://gccpacman.github.io/tmuxde-fu-zhi-he-nian-tie.html"><h3 class="article-title">Tmux的复制和黏贴</h3></a>
-<h6 class="subheader" title="2015-10-29T10:20:00+08:00">周四 29 十月 2015
+<h6 class="subheader" title="2015-10-29T10:20:00+08:00">Thu 29 October 2015
 </h6>
 
 
@@ -69,7 +100,7 @@
 <li><code>Ctrl+a [</code>开始复制</li>
 <li>把光标移动到开始复制的位置(上下左右键，或者Ctrl+n/p/b/f键移动光标)</li>
 <li><code>Ctrl+Space</code>  开始选择内容，类似vim的按下V的效果</li>
-<li>完成选择，<code>Alt+w</code> 完成复制 …</li></ol><p class="subheader">分类: <a href="https://gccpacman.github.io/category/tmux.html">Tmux</a>
+<li>完成选择，<code>Alt+w</code> 完成复制 …</li></ol><p class="subheader">分类: <a href="https://gccpacman.github.io/category/terminal.html">Terminal</a>
 
     标签: 
     <a href="https://gccpacman.github.io/tag/tmux.html">tmux </a>
@@ -87,7 +118,7 @@
 
             <article>
                 <a href="https://gccpacman.github.io/linuxjiang-socksdai-li-zhuan-huan-cheng-httpdai-li.html"><h3 class="article-title">Linux将Socks代理转换成Http代理</h3></a>
-<h6 class="subheader" title="2015-05-14T10:20:00+08:00">周四 14 五月 2015
+<h6 class="subheader" title="2015-05-14T10:20:00+08:00">Thu 14 May 2015
 </h6>
 
 
@@ -119,7 +150,7 @@
 
             <article>
                 <a href="https://gccpacman.github.io/linuxda-jian-pptp-vpn-server.html"><h3 class="article-title">Linux搭建PPTP VPN Server</h3></a>
-<h6 class="subheader" title="2015-04-19T10:20:00+08:00">周日 19 四月 2015
+<h6 class="subheader" title="2015-04-19T10:20:00+08:00">Sun 19 April 2015
 </h6>
 
 
@@ -165,9 +196,10 @@
             <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
             <li><a href="https://gccpacman.github.io/category/nodejs.html">Nodejs</a></li>
             <li><a href="https://gccpacman.github.io/category/python.html">python</a></li>
-            <li><a href="https://gccpacman.github.io/category/tmux.html">Tmux</a></li>
+            <li><a href="https://gccpacman.github.io/category/terminal.html">Terminal</a></li>
             <li><a href="https://gccpacman.github.io/category/vim.html">Vim</a></li>
             <li><a href="https://gccpacman.github.io/category/windows.html">Windows</a></li>
+            <li><a href="https://gccpacman.github.io/category/wsl.html">WSL</a></li>
    
         </ul>
 		
@@ -177,24 +209,7 @@
             <li><a href="https://stackoverflow.com/users/4124310/evan-hu?tab=profile">StackOverflow: @evan-hu</a></li>
         </ul>
 
-        <h5 class="sidebar-title">链接</h5>
-        <ul class="side-nav">
-            <li><a href="https://gccpacman.github.io/archives.html">归档</a>
-            <li><a href="https://gccpacman.github.io/tags.html">标签</a>
-        </ul>
-        <div>
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <!-- ad1 -->
-            <ins class="adsbygoogle"
-                style="display:block"
-                data-ad-client="ca-pub-8793956340609221"
-                data-ad-slot="6268981024"
-                data-ad-format="auto"
-                data-full-width-responsive="true"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
+
     </aside> <!-- End Sidebar -->
 
 </div> <!-- End Main Content and Sidebar -->
