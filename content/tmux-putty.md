@@ -1,6 +1,6 @@
 Title: putty + tmux多窗口可用配置
 Date: 2018-08-28 10:20
-Category: Tmux
+Category: Terminal
 Tags: tmux, putty, ssh, windows
 Authors: r341h
 

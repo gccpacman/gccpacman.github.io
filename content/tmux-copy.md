@@ -1,6 +1,6 @@
 Title: Tmux的复制和黏贴
 Date: 2015-10-29 10:20
-Category: Tmux
+Category: Terminal
 Tags: tmux, linux
 Authors: r341h
 
