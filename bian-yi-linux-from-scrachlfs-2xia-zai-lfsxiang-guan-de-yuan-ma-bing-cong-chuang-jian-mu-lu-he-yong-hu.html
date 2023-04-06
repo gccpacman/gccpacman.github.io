@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>编译Linux From Scrach（LFS） --（2）下载LFS相关的源码并从创建目录和用户</title>
+
+    <link rel="stylesheet" href="https://gccpacman.github.io/theme/css/normalize.css" />
+    <link rel="stylesheet" href="https://gccpacman.github.io/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="https://gccpacman.github.io/theme/css/style.css" />
+    <link rel="stylesheet" href="https://gccpacman.github.io/theme/css/pygments.css" />	
+    <script src="https://gccpacman.github.io/theme/js/modernizr.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146579327-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-146579327-1');
+    </script>
+
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="/">Pacman News</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="https://gccpacman.github.io/bian-yi-linux-from-scrachlfs-2xia-zai-lfsxiang-guan-de-yuan-ma-bing-cong-chuang-jian-mu-lu-he-yong-hu.html" rel="bookmark"
+        title="Permalink to 编译Linux From Scrach（LFS） --（2）下载LFS相关的源码并从创建目录和用户">编译Linux From Scrach（LFS） --（2）下载LFS相关的源码并从创建目录和用户</a></h3>
+    </header>
+
+<h6 class="subheader" title="2022-04-06T17:20:00+08:00">三 06 四月 2022
+</h6>
+
+
+    <p>按照文档里的链接，每行一个链接的方法，创建wget-list-sysv和needed-patches-list，源码我放在我的github仓库： https://github.com/gccpacman/LFS-ubuntu2204</p>
+<h3>0） 假设已经完成了LFS（1）的步骤 -- 宿主机分区，设置LFS环境变量等</h3>
+<h3>1） 在$LFS/sources/目录下，创建wget-list-sysv，执行以下命令批量下载源代码tar包</h3>
+<div class="highlight"><pre><span></span><code>#<span class="w"> </span><span class="nv">wget</span><span class="o">-</span><span class="nv">list</span><span class="o">-</span><span class="nv">sysv</span>
+<span class="nv">wget</span><span class="w"> </span><span class="o">--</span><span class="nv">input</span><span class="o">-</span><span class="nv">file</span><span class="o">=</span><span class="nv">wget</span><span class="o">-</span><span class="nv">list</span><span class="o">-</span><span class="nv">sysv</span><span class="w"> </span><span class="o">--</span><span class="k">continue</span><span class="w"> </span><span class="o">--</span><span class="nv">directory</span><span class="o">-</span><span class="nv">prefix</span><span class="o">=</span>$<span class="nv">LFS</span><span class="o">/</span><span class="nv">sources</span>
+</code></pre></div>
+
+<h3>2）在$LFS/sources/patches目录下，创建needed-patches-list，执行以下命令批量下载源代码tar包</h3>
+<div class="highlight"><pre><span></span><code>#<span class="w"> </span><span class="nv">needed</span><span class="o">-</span><span class="nv">patches</span><span class="o">-</span><span class="nv">list</span>
+<span class="nv">wget</span><span class="w"> </span><span class="o">--</span><span class="nv">input</span><span class="o">-</span><span class="nv">file</span><span class="o">=</span><span class="nv">needed</span><span class="o">-</span><span class="nv">patches</span><span class="o">-</span><span class="nv">list</span><span class="w"> </span><span class="o">--</span><span class="k">continue</span><span class="w"> </span><span class="o">--</span><span class="nv">directory</span><span class="o">-</span><span class="nv">prefix</span><span class="o">=</span>$<span class="nv">LFS</span><span class="o">/</span><span class="nv">sources</span><span class="o">/</span><span class="nv">patches</span>
+</code></pre></div>
+
+<h3>3） 创建基本LFS Linux目录</h3>
+<div class="highlight"><pre><span></span><code><span class="n">mkdir</span><span class="w"> </span><span class="o">-</span><span class="n">pv</span><span class="w"> </span><span class="o">$</span><span class="n">LFS</span><span class="o">/</span><span class="p">{</span><span class="n">etc</span><span class="p">,</span><span class="k">var</span><span class="p">}</span><span class="w"> </span><span class="o">$</span><span class="n">LFS</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="p">{</span><span class="n">bin</span><span class="p">,</span><span class="n">lib</span><span class="p">,</span><span class="n">sbin</span><span class="p">}</span>
+<span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">bin</span><span class="w"> </span><span class="n">lib</span><span class="w"> </span><span class="n">sbin</span><span class="p">;</span><span class="w"> </span><span class="n">do</span>
+<span class="w">  </span><span class="n">ln</span><span class="w"> </span><span class="o">-</span><span class="n">sv</span><span class="w"> </span><span class="n">usr</span><span class="o">/$</span><span class="n">i</span><span class="w"> </span><span class="o">$</span><span class="n">LFS</span><span class="o">/$</span><span class="n">i</span>
+<span class="n">done</span>
+<span class="n">case</span><span class="w"> </span><span class="o">$</span><span class="p">(</span><span class="n">uname</span><span class="w"> </span><span class="o">-</span><span class="n">m</span><span class="p">)</span><span class="w"> </span><span class="ow">in</span>
+<span class="w">  </span><span class="n">x86_64</span><span class="p">)</span><span class="w"> </span><span class="n">mkdir</span><span class="w"> </span><span class="o">-</span><span class="n">pv</span><span class="w"> </span><span class="o">$</span><span class="n">LFS</span><span class="o">/</span><span class="n">lib64</span><span class="w"> </span><span class="p">;;</span>
+<span class="n">esac</span>
+
+<span class="n">mkdir</span><span class="w"> </span><span class="o">-</span><span class="n">pv</span><span class="w"> </span><span class="o">$</span><span class="n">LFS</span><span class="o">/</span><span class="n">tools</span>
+</code></pre></div>
+
+<h3>4） 创建LFS宿主机用户</h3>
+<div class="highlight"><pre><span></span><code><span class="n">groupadd</span><span class="w"> </span><span class="n">lfs</span>
+<span class="n">useradd</span><span class="w"> </span><span class="o">-</span><span class="n">s</span><span class="w"> </span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">bash</span><span class="w"> </span><span class="o">-</span><span class="n">g</span><span class="w"> </span><span class="n">lfs</span><span class="w"> </span><span class="o">-</span><span class="n">m</span><span class="w"> </span><span class="o">-</span><span class="n">k</span><span class="w"> </span><span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="nb nb-Type">null</span><span class="w"> </span><span class="n">lfs</span>
+<span class="n">passwd</span><span class="w"> </span><span class="n">lfs</span>
+<span class="c1"># enter passwords for lfs user</span>
+
+<span class="c1"># grant lfs $LFS directory permission</span>
+<span class="n">chown</span><span class="w"> </span><span class="o">-</span><span class="n">v</span><span class="w"> </span><span class="n">lfs</span><span class="w"> </span><span class="o">$</span><span class="n">LFS</span><span class="o">/</span><span class="p">{</span><span class="n">usr</span><span class="p">{,</span><span class="o">/*</span><span class="p">},</span><span class="n">lib</span><span class="p">,</span><span class="k">var</span><span class="p">,</span><span class="n">etc</span><span class="p">,</span><span class="n">bin</span><span class="p">,</span><span class="n">sbin</span><span class="p">,</span><span class="n">tools</span><span class="p">}</span>
+<span class="n">case</span><span class="w"> </span><span class="o">$</span><span class="p">(</span><span class="n">uname</span><span class="w"> </span><span class="o">-</span><span class="n">m</span><span class="p">)</span><span class="w"> </span><span class="ow">in</span>
+<span class="w">  </span><span class="n">x86_64</span><span class="p">)</span><span class="w"> </span><span class="n">chown</span><span class="w"> </span><span class="o">-</span><span class="n">v</span><span class="w"> </span><span class="n">lfs</span><span class="w"> </span><span class="o">$</span><span class="n">LFS</span><span class="o">/</span><span class="n">lib64</span><span class="w"> </span><span class="p">;;</span>
+<span class="n">esac</span>
+</code></pre></div>
+
+<h3>5) 初始化lfs用户的bashrc</h3>
+<div class="highlight"><pre><span></span><code><span class="n">cat</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="o">~/.</span><span class="n">bash_profile</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s2">&quot;EOF&quot;</span>
+<span class="n">exec</span><span class="w"> </span><span class="n">env</span><span class="w"> </span><span class="o">-</span><span class="n">i</span><span class="w"> </span><span class="n">HOME</span><span class="o">=$</span><span class="n">HOME</span><span class="w"> </span><span class="n">TERM</span><span class="o">=$</span><span class="n">TERM</span><span class="w"> </span><span class="n">PS1</span><span class="o">=</span><span class="s1">&#39;\u:\w\$ &#39;</span><span class="w"> </span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">bash</span>
+<span class="n">EOF</span>
+
+<span class="n">cat</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="o">~/.</span><span class="n">bashrc</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s2">&quot;EOF&quot;</span>
+<span class="n">set</span><span class="w"> </span><span class="o">+</span><span class="n">h</span>
+<span class="n">umask</span><span class="w"> </span><span class="mi">022</span>
+<span class="n">LFS</span><span class="o">=/</span><span class="n">mnt</span><span class="o">/</span><span class="n">lfs</span>
+<span class="n">LC_ALL</span><span class="o">=</span><span class="n">POSIX</span>
+<span class="n">LFS_TGT</span><span class="o">=$</span><span class="p">(</span><span class="n">uname</span><span class="w"> </span><span class="o">-</span><span class="n">m</span><span class="p">)</span><span class="o">-</span><span class="n">lfs</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="w"> </span>
+<span class="n">PATH</span><span class="o">=/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span>
+<span class="k">if</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="o">!</span><span class="w"> </span><span class="o">-</span><span class="n">L</span><span class="w"> </span><span class="o">/</span><span class="n">bin</span><span class="w"> </span><span class="p">];</span><span class="w"> </span><span class="n">then</span><span class="w"> </span><span class="n">PATH</span><span class="o">=/</span><span class="n">bin</span><span class="p">:</span><span class="o">$</span><span class="n">PATH</span><span class="p">;</span><span class="w"> </span><span class="n">fi</span><span class="w"> </span>
+<span class="n">PATH</span><span class="o">=$</span><span class="n">LFS</span><span class="o">/</span><span class="n">tools</span><span class="o">/</span><span class="n">bin</span><span class="p">:</span><span class="o">$</span><span class="n">PATH</span><span class="w"> </span>
+<span class="n">CONFIG_SITE</span><span class="o">=$</span><span class="n">LFS</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">config</span><span class="o">.</span><span class="n">site</span><span class="w"> </span>
+<span class="k">export</span><span class="w"> </span><span class="n">LFS</span><span class="w"> </span><span class="n">LC_ALL</span><span class="w"> </span><span class="n">LFS_TGT</span><span class="w"> </span><span class="n">PATH</span><span class="w"> </span><span class="n">CONFIG_SITE</span><span class="w"> </span>
+<span class="n">EOF</span>
+</code></pre></div>
+<p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+
+    标签: 
+    <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
+    <a href="https://gccpacman.github.io/tag/lfs.html">lfs </a>
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+
+		
+        <h5 class="sidebar-title">分类</h5>
+        <ul class="side-nav">
+            <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
+            <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
+            <li><a href="https://gccpacman.github.io/category/nodejs.html">Nodejs</a></li>
+            <li><a href="https://gccpacman.github.io/category/python.html">python</a></li>
+            <li><a href="https://gccpacman.github.io/category/terminal.html">Terminal</a></li>
+            <li><a href="https://gccpacman.github.io/category/vim.html">Vim</a></li>
+            <li><a href="https://gccpacman.github.io/category/windows.html">Windows</a></li>
+            <li><a href="https://gccpacman.github.io/category/wsl.html">WSL</a></li>
+   
+        </ul>
+		
+        <h5 class="sidebar-title">我的社交账号</h5>
+        <ul class="side-nav">
+            <li><a href="https://github.com/gccpacman">Github: @gccpacman</a></li>
+            <li><a href="https://stackoverflow.com/users/4124310/evan-hu?tab=profile">StackOverflow: @evan-hu</a></li>
+        </ul>
+
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Pacman News by r341h</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

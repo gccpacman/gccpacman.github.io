@@ -178,6 +178,10 @@ g++<span class="w"> </span>compilation<span class="w"> </span>OK
 <span class="n">mount</span><span class="p">:</span><span class="w"> </span><span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">sda3</span><span class="w"> </span><span class="n">mounted</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="o">/</span><span class="n">mnt</span><span class="o">/</span><span class="n">lfs</span>
 </code></pre></div>
 
+<h2>4） 设置宿主机（ubuntu22.04） 环境变量, 建议root和普通用户都设置</h2>
+<div class="highlight"><pre><span></span><code><span class="n">echo</span><span class="w"> </span><span class="s2">&quot;export LFS=/mnt/lfs&quot;</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="o">.</span><span class="n">bashrc</span>
+</code></pre></div>
+
 <hr>
 <p>至此宿主机（ubuntu22.04）的安装依赖，和为lfs编译准备的分区创建完毕，也作为我自己规划的第一步。</p>
 <p>根据LFS文档下一步需要下载Linux和相关组件的源码并进行编译，将在第二篇中详细记录。</p>
