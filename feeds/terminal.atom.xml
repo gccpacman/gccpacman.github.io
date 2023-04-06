@@ -2,109 +2,97 @@
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Pacman News - Terminal</title><link href="https://gccpacman.github.io/" rel="alternate"></link><link href="https://gccpacman.github.io/feeds/terminal.atom.xml" rel="self"></link><id>https://gccpacman.github.io/</id><updated>2018-08-28T10:20:00+08:00</updated><entry><title>putty + tmux多窗口可用配置</title><link href="https://gccpacman.github.io/putty-tmuxduo-chuang-kou-ke-yong-pei-zhi.html" rel="alternate"></link><published>2018-08-28T10:20:00+08:00</published><updated>2018-08-28T10:20:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2018-08-28:/putty-tmuxduo-chuang-kou-ke-yong-pei-zhi.html</id><summary type="html">&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;putty的执行命令填入如下命令，tmux名称同session名称，以便开多个putty窗口时候识别&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ tmux new -A -s &lt;span class="o"&gt;{&lt;/span&gt;session_name&lt;span class="o"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$&lt;span class="w"&gt; &lt;/span&gt;tmux&lt;span class="w"&gt; &lt;/span&gt;new&lt;span class="w"&gt; &lt;/span&gt;-A&lt;span class="w"&gt; &lt;/span&gt;-s&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;{&lt;/span&gt;session_name&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;添加.tmux.conf配置&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
-##########################################
-# &lt;span class="nv"&gt;STATUS&lt;/span&gt; &lt;span class="nv"&gt;BAR&lt;/span&gt;
-&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;status&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;keys&lt;/span&gt; &lt;span class="nv"&gt;vi&lt;/span&gt;
-&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;status&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;interval&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
-&lt;span class="nv"&gt;set …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;echo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;&lt;/span&gt;
+&lt;span class="ss"&gt;##########################################&lt;/span&gt;
+&lt;span class="ss"&gt;# STATUS BAR&lt;/span&gt;
+&lt;span class="ss"&gt;set -g status-keys vi&lt;/span&gt;
+&lt;span class="ss"&gt;set …&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;putty的执行命令填入如下命令，tmux名称同session名称，以便开多个putty窗口时候识别&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ tmux new -A -s &lt;span class="o"&gt;{&lt;/span&gt;session_name&lt;span class="o"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$&lt;span class="w"&gt; &lt;/span&gt;tmux&lt;span class="w"&gt; &lt;/span&gt;new&lt;span class="w"&gt; &lt;/span&gt;-A&lt;span class="w"&gt; &lt;/span&gt;-s&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;{&lt;/span&gt;session_name&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;添加.tmux.conf配置&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
-##########################################
-# &lt;span class="nv"&gt;STATUS&lt;/span&gt; &lt;span class="nv"&gt;BAR&lt;/span&gt;
-&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;status&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;keys&lt;/span&gt; &lt;span class="nv"&gt;vi&lt;/span&gt;
-&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;status&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;interval&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
-&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;status&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;attr&lt;/span&gt; &lt;span class="nv"&gt;bright&lt;/span&gt;
-&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;status&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;fg&lt;/span&gt; &lt;span class="nv"&gt;white&lt;/span&gt;
-&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;status&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;bg&lt;/span&gt; &lt;span class="nv"&gt;black&lt;/span&gt;
-&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;status&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;left&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;length&lt;/span&gt; &lt;span class="mi"&gt;20&lt;/span&gt;
-&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;status&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;left&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;#[fg=green][#[fg=red]#S#[fg=green]]#[default]&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;
-&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;status&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;justify&lt;/span&gt; &lt;span class="nv"&gt;centre&lt;/span&gt;
-&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;status&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;right&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;#[fg=green][ %m/%d %H:%M:%S ]#[default]&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;
-&lt;span class="nv"&gt;setw&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;window&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;status&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;current&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;format&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;#[fg=yellow](#I.#P#F#W)#[default]&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;
-&lt;span class="nv"&gt;setw&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;window&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;status&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;format&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;#I#F#W&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;echo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;&lt;/span&gt;
+&lt;span class="ss"&gt;##########################################&lt;/span&gt;
+&lt;span class="ss"&gt;# STATUS BAR&lt;/span&gt;
+&lt;span class="ss"&gt;set -g status-keys vi&lt;/span&gt;
+&lt;span class="ss"&gt;set -g status-interval 1&lt;/span&gt;
+&lt;span class="ss"&gt;set -g status-attr bright&lt;/span&gt;
+&lt;span class="ss"&gt;set -g status-fg white&lt;/span&gt;
+&lt;span class="ss"&gt;set -g status-bg black&lt;/span&gt;
+&lt;span class="ss"&gt;set -g status-left-length 20&lt;/span&gt;
+&lt;span class="ss"&gt;set -g status-left &amp;#39;#[fg=green][#[fg=red]#S#[fg=green]]#[default]&amp;#39;&lt;/span&gt;
+&lt;span class="ss"&gt;set -g status-justify centre&lt;/span&gt;
+&lt;span class="ss"&gt;set -g status-right &amp;#39;#[fg=green][ %m/%d %H:%M:%S ]#[default]&amp;#39;&lt;/span&gt;
+&lt;span class="ss"&gt;setw -g window-status-current-format &amp;#39;#[fg=yellow](#I.#P#F#W)#[default]&amp;#39;&lt;/span&gt;
+&lt;span class="ss"&gt;setw -g window-status-format &amp;#39;#I#F#W&amp;#39;&lt;/span&gt;
 
-##########################################
-# &lt;span class="nv"&gt;TERMINAL&lt;/span&gt; &lt;span class="nv"&gt;EMULATOR&lt;/span&gt; &lt;span class="nv"&gt;TITLES&lt;/span&gt;
-&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;set&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;titles&lt;/span&gt; &lt;span class="nv"&gt;on&lt;/span&gt;
-&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;set&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;titles&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;string&lt;/span&gt; \&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;#(tmux ls | awk -F: &amp;#39;{print $1}&amp;#39; | xargs | sed &amp;#39;s/\ / | /g&amp;#39;)\&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+&lt;span class="ss"&gt;##########################################&lt;/span&gt;
+&lt;span class="ss"&gt;# TERMINAL EMULATOR TITLES&lt;/span&gt;
+&lt;span class="ss"&gt;set -g set-titles on&lt;/span&gt;
+&lt;span class="ss"&gt;set -g set-titles-string \&amp;quot;&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;tmux&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;ls&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;awk&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nl"&gt;F&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;{print $1}&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;xargs&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;sed&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;s/\ / | /g&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;&lt;/span&gt;
 
-# &lt;span class="nv"&gt;Scroll&lt;/span&gt; &lt;span class="nv"&gt;History&lt;/span&gt;
-&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;history&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;limit&lt;/span&gt; &lt;span class="mi"&gt;30000&lt;/span&gt;
+&lt;span class="ss"&gt;# Scroll History&lt;/span&gt;
+&lt;span class="ss"&gt;set -g history-limit 30000&lt;/span&gt;
 
-# &lt;span class="nv"&gt;Set&lt;/span&gt; &lt;span class="nv"&gt;ability&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="nv"&gt;capture&lt;/span&gt; &lt;span class="nv"&gt;on&lt;/span&gt; &lt;span class="nv"&gt;start&lt;/span&gt; &lt;span class="nv"&gt;and&lt;/span&gt; &lt;span class="nv"&gt;restore&lt;/span&gt; &lt;span class="nv"&gt;on&lt;/span&gt; &lt;span class="k"&gt;exit&lt;/span&gt; &lt;span class="nv"&gt;window&lt;/span&gt; &lt;span class="nv"&gt;data&lt;/span&gt; &lt;span class="nv"&gt;when&lt;/span&gt; &lt;span class="nv"&gt;running&lt;/span&gt; &lt;span class="nv"&gt;an&lt;/span&gt; &lt;span class="nv"&gt;application&lt;/span&gt;
-&lt;span class="nv"&gt;setw&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;alternate&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;screen&lt;/span&gt; &lt;span class="nv"&gt;on&lt;/span&gt;
+&lt;span class="ss"&gt;# Set ability to capture on start and restore on exit window data when running an application&lt;/span&gt;
+&lt;span class="ss"&gt;setw -g alternate-screen on&lt;/span&gt;
 
-# &lt;span class="nv"&gt;Lower&lt;/span&gt; &lt;span class="nv"&gt;escape&lt;/span&gt; &lt;span class="nv"&gt;timing&lt;/span&gt; &lt;span class="nv"&gt;from&lt;/span&gt; &lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="nv"&gt;ms&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="nv"&gt;ms&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nv"&gt;quicker&lt;/span&gt; &lt;span class="nv"&gt;response&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="nv"&gt;scroll&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;buffer&lt;/span&gt; &lt;span class="nv"&gt;access&lt;/span&gt;.
-&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;s&lt;/span&gt; &lt;span class="nv"&gt;escape&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;time&lt;/span&gt; &lt;span class="mi"&gt;50&lt;/span&gt;
-&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt; &amp;gt; .tmux.conf&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;span class="ss"&gt;# Lower escape timing from 500ms to 50ms for quicker response to scroll-buffer access.&lt;/span&gt;
+&lt;span class="ss"&gt;set -s escape-time 50&lt;/span&gt;
+&lt;span class="ss"&gt;&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tmux&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;conf&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;（可选）Shell标题控制， 在.profile文件里添加&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;look_for_cmd&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
-&lt;span class="nv"&gt;print_cmd&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt; {
-  &lt;span class="k"&gt;if&lt;/span&gt; [ ${&lt;span class="nv"&gt;look_for_cmd&lt;/span&gt;} &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; ] &lt;span class="c1"&gt;;then&lt;/span&gt;
-    &lt;span class="k"&gt;if&lt;/span&gt; [ &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;${BASH_COMMAND}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;print_host&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt; ] &lt;span class="c1"&gt;;then&lt;/span&gt;
-      &lt;span class="nv"&gt;cmdline&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;$&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;history&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;xargs&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;cut&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;d&lt;/span&gt;\  &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;f3&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
-      &lt;span class="k"&gt;if&lt;/span&gt; [[ &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;${cmdline}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;=~&lt;/span&gt; &lt;span class="o"&gt;^&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;sudo&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="nv"&gt;ssh&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="nv"&gt;vi&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="nv"&gt;man&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="nv"&gt;more&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="nv"&gt;less&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;\  ]] &lt;span class="c1"&gt;;then&lt;/span&gt;
-        &lt;span class="nv"&gt;first&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;$&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;${cmdline}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;awk&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;{print $1}&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
-        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nv"&gt;i&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt; ${&lt;span class="nv"&gt;cmdline&lt;/span&gt;} &lt;span class="c1"&gt;;do&lt;/span&gt;
-          &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;!&lt;/span&gt; [[ &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;${i}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;=~&lt;/span&gt; &lt;span class="o"&gt;^-&lt;/span&gt;.&lt;span class="o"&gt;*&lt;/span&gt;$ ]] &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="o"&gt;!&lt;/span&gt; [[ &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;${i}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;=~&lt;/span&gt; &lt;span class="o"&gt;^&lt;/span&gt;${&lt;span class="nv"&gt;first&lt;/span&gt;}$ ]] &lt;span class="c1"&gt;;then&lt;/span&gt;
-            &lt;span class="nv"&gt;cmd&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;${first}[${i}]&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
-            &lt;span class="k"&gt;break&lt;/span&gt;
-          &lt;span class="nv"&gt;fi&lt;/span&gt;
-        &lt;span class="nv"&gt;done&lt;/span&gt;
-      &lt;span class="nv"&gt;elif&lt;/span&gt; [[ &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;${cmdline}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;=~&lt;/span&gt; &lt;span class="o"&gt;^&lt;/span&gt;[&lt;span class="nv"&gt;A&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;Z&lt;/span&gt;]&lt;span class="o"&gt;*=&lt;/span&gt;.&lt;span class="o"&gt;*&lt;/span&gt;$ ]] &lt;span class="c1"&gt;;then&lt;/span&gt;
-        &lt;span class="nv"&gt;cmd&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;$&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;echo&lt;/span&gt; ${&lt;span class="nv"&gt;cmdline&lt;/span&gt;} &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;awk&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;{print $2}&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
-      &lt;span class="k"&gt;else&lt;/span&gt;
-        &lt;span class="nv"&gt;cmd&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;$&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;echo&lt;/span&gt; ${&lt;span class="nv"&gt;cmdline&lt;/span&gt;} &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;awk&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;{print $1}&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
-      &lt;span class="nv"&gt;fi&lt;/span&gt;
-      &lt;span class="nv"&gt;echo&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;ne&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;\033k${cmd}\033&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;amp;&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;
-      &lt;span class="nv"&gt;look_for_cmd&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
-    &lt;span class="k"&gt;else&lt;/span&gt;
-      &lt;span class="k"&gt;return&lt;/span&gt;
-    &lt;span class="nv"&gt;fi&lt;/span&gt;
-  &lt;span class="nv"&gt;fi&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;look_for_cmd=0
+print_cmd()&lt;span class="w"&gt; &lt;/span&gt;{
+&lt;span class="w"&gt;  &lt;/span&gt;if&lt;span class="w"&gt; &lt;/span&gt;[&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;look_for_cmd&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;=&lt;span class="w"&gt; &lt;/span&gt;1&lt;span class="w"&gt; &lt;/span&gt;]&lt;span class="w"&gt; &lt;/span&gt;;then
+&lt;span class="w"&gt;    &lt;/span&gt;if&lt;span class="w"&gt; &lt;/span&gt;[&lt;span class="w"&gt; &lt;/span&gt;&amp;quot;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;BASH_COMMAND&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;&amp;quot;&lt;span class="w"&gt; &lt;/span&gt;!=&lt;span class="w"&gt; &lt;/span&gt;&amp;#39;print_host&amp;#39;&lt;span class="w"&gt; &lt;/span&gt;]&lt;span class="w"&gt; &lt;/span&gt;;then
+&lt;span class="w"&gt;      &lt;/span&gt;cmdline=$(history&lt;span class="w"&gt; &lt;/span&gt;1&lt;span class="w"&gt; &lt;/span&gt;|&lt;span class="w"&gt; &lt;/span&gt;xargs&lt;span class="w"&gt; &lt;/span&gt;|&lt;span class="w"&gt; &lt;/span&gt;cut&lt;span class="w"&gt; &lt;/span&gt;-d\&lt;span class="w"&gt;  &lt;/span&gt;-f3-)
+&lt;span class="w"&gt;      &lt;/span&gt;if&lt;span class="w"&gt; &lt;/span&gt;[[&lt;span class="w"&gt; &lt;/span&gt;&amp;quot;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;cmdline&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;&amp;quot;&lt;span class="w"&gt; &lt;/span&gt;=~&lt;span class="w"&gt; &lt;/span&gt;^(sudo|ssh|vi|man|more|less)\&lt;span class="w"&gt;  &lt;/span&gt;]]&lt;span class="w"&gt; &lt;/span&gt;;then
+&lt;span class="w"&gt;        &lt;/span&gt;first=$(echo&lt;span class="w"&gt; &lt;/span&gt;&amp;quot;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;cmdline&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;&amp;quot;&lt;span class="w"&gt; &lt;/span&gt;|&lt;span class="w"&gt; &lt;/span&gt;awk&lt;span class="w"&gt; &lt;/span&gt;&amp;#39;{print&lt;span class="w"&gt; &lt;/span&gt;$1}&amp;#39;)
+&lt;span class="w"&gt;        &lt;/span&gt;for&lt;span class="w"&gt; &lt;/span&gt;i&lt;span class="w"&gt; &lt;/span&gt;in&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;cmdline&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;;do
+&lt;span class="w"&gt;          &lt;/span&gt;if&lt;span class="w"&gt; &lt;/span&gt;!&lt;span class="w"&gt; &lt;/span&gt;[[&lt;span class="w"&gt; &lt;/span&gt;&amp;quot;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;&amp;quot;&lt;span class="w"&gt; &lt;/span&gt;=~&lt;span class="w"&gt; &lt;/span&gt;^-.*$&lt;span class="w"&gt; &lt;/span&gt;]]&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;&amp;amp;&amp;amp;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;!&lt;span class="w"&gt; &lt;/span&gt;[[&lt;span class="w"&gt; &lt;/span&gt;&amp;quot;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;&amp;quot;&lt;span class="w"&gt; &lt;/span&gt;=~&lt;span class="w"&gt; &lt;/span&gt;^&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;first&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;$&lt;span class="w"&gt; &lt;/span&gt;]]&lt;span class="w"&gt; &lt;/span&gt;;then
+&lt;span class="w"&gt;            &lt;/span&gt;cmd=&amp;quot;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;first&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;[&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;]&amp;quot;
+&lt;span class="w"&gt;            &lt;/span&gt;break
+&lt;span class="w"&gt;          &lt;/span&gt;fi
+&lt;span class="w"&gt;        &lt;/span&gt;done
+&lt;span class="w"&gt;      &lt;/span&gt;elif&lt;span class="w"&gt; &lt;/span&gt;[[&lt;span class="w"&gt; &lt;/span&gt;&amp;quot;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;cmdline&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;&amp;quot;&lt;span class="w"&gt; &lt;/span&gt;=~&lt;span class="w"&gt; &lt;/span&gt;^[A-Z]*=.*$&lt;span class="w"&gt; &lt;/span&gt;]]&lt;span class="w"&gt; &lt;/span&gt;;then
+&lt;span class="w"&gt;        &lt;/span&gt;cmd=$(echo&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;cmdline&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;|&lt;span class="w"&gt; &lt;/span&gt;awk&lt;span class="w"&gt; &lt;/span&gt;&amp;#39;{print&lt;span class="w"&gt; &lt;/span&gt;$2}&amp;#39;)
+&lt;span class="w"&gt;      &lt;/span&gt;else
+&lt;span class="w"&gt;        &lt;/span&gt;cmd=$(echo&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;cmdline&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;|&lt;span class="w"&gt; &lt;/span&gt;awk&lt;span class="w"&gt; &lt;/span&gt;&amp;#39;{print&lt;span class="w"&gt; &lt;/span&gt;$1}&amp;#39;)
+&lt;span class="w"&gt;      &lt;/span&gt;fi
+&lt;span class="w"&gt;      &lt;/span&gt;echo&lt;span class="w"&gt; &lt;/span&gt;-ne&lt;span class="w"&gt; &lt;/span&gt;&amp;quot;\033k&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;cmd&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;\033\\&amp;quot;&lt;span class="w"&gt; &lt;/span&gt;1&amp;gt;&lt;span class="err"&gt;&amp;amp;&lt;/span&gt;2
+&lt;span class="w"&gt;      &lt;/span&gt;look_for_cmd=0
+&lt;span class="w"&gt;    &lt;/span&gt;else
+&lt;span class="w"&gt;      &lt;/span&gt;return
+&lt;span class="w"&gt;    &lt;/span&gt;fi
+&lt;span class="w"&gt;  &lt;/span&gt;fi
 }
 
-&lt;span class="nv"&gt;print_host&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt; {
-  &lt;span class="nv"&gt;echo&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;ne&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;\033k${HOSTNAME}\033&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;amp;&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;
-  &lt;span class="nv"&gt;look_for_cmd&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;
+print_host()&lt;span class="w"&gt; &lt;/span&gt;{
+&lt;span class="w"&gt;  &lt;/span&gt;echo&lt;span class="w"&gt; &lt;/span&gt;-ne&lt;span class="w"&gt; &lt;/span&gt;&amp;quot;\033k&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;HOSTNAME&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;\033\\&amp;quot;&lt;span class="w"&gt; &lt;/span&gt;1&amp;gt;&lt;span class="err"&gt;&amp;amp;&lt;/span&gt;2
+&lt;span class="w"&gt;  &lt;/span&gt;look_for_cmd=1
 }
 
-&lt;span class="nv"&gt;PROMPT_COMMAND&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;print_host&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+PROMPT_COMMAND=&amp;quot;print_host&amp;quot;
 
-&lt;span class="nv"&gt;trap&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;print_cmd&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;DEBUG&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+trap&lt;span class="w"&gt; &lt;/span&gt;&amp;quot;print_cmd&amp;quot;&lt;span class="w"&gt; &lt;/span&gt;DEBUG
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;/li&gt;
-&lt;/ul&gt;</content><category term="tmux"></category><category term="putty"></category><category term="ssh"></category><category term="windows"></category></entry><entry><title>Tmux的复制和黏贴</title><link href="https://gccpacman.github.io/tmuxde-fu-zhi-he-nian-tie.html" rel="alternate"></link><published>2015-10-29T10:20:00+08:00</published><updated>2015-10-29T10:20:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2015-10-29:/tmuxde-fu-zhi-he-nian-tie.html</id><summary type="html">&lt;p&gt;tmux确实是一个吊炸的东西，功能和那个和他类似的鼻祖screen相比，确实多出了不少。比如他又一个可以对终端的内容进行复制和黏贴的功能。
-这里假定你设置的快捷键前缀是Ctrl+a:
-进行复制的操作是：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;code&gt;Ctrl+a [&lt;/code&gt;开始复制&lt;/li&gt;
-&lt;li&gt;把光标移动到开始复制的位置(上下左右键，或者Ctrl+n/p/b/f键移动光标)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Ctrl+Space&lt;/code&gt;  开始选择内容，类似vim的按下V的效果&lt;/li&gt;
-&lt;li&gt;完成选择，&lt;code&gt;Alt+w&lt;/code&gt; 完成复制 …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;tmux确实是一个吊炸的东西，功能和那个和他类似的鼻祖screen相比，确实多出了不少。比如他又一个可以对终端的内容进行复制和黏贴的功能。
+&lt;/ul&gt;</content><category term="Terminal"></category><category term="tmux"></category><category term="putty"></category><category term="ssh"></category><category term="windows"></category></entry><entry><title>Tmux的复制和黏贴</title><link href="https://gccpacman.github.io/tmuxde-fu-zhi-he-nian-tie.html" rel="alternate"></link><published>2015-10-29T10:20:00+08:00</published><updated>2015-10-29T10:20:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2015-10-29:/tmuxde-fu-zhi-he-nian-tie.html</id><summary type="html">&lt;p&gt;tmux确实是一个吊炸的东西，功能和那个和他类似的鼻祖screen相比，确实多出了不少。比如他又 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;tmux确实是一个吊炸的东西，功能和那个和他类似的鼻祖screen相比，确实多出了不少。比如他又一个可以对终端的内容进行复制和黏贴的功能。
 这里假定你设置的快捷键前缀是Ctrl+a:
 进行复制的操作是：&lt;/p&gt;
 &lt;ol&gt;
@@ -115,9 +103,8 @@
 &lt;li&gt;然后到你想要黏贴的地方， &lt;code&gt;Ctrl+a ]&lt;/code&gt; 黏贴成功&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;需要注意的是， Ctrl+space在windows和linux的某些桌面环境下，都是输入法切换键，所以如果这个方法不成功，很可能是因为快捷键冲突的原因了。那么解决方法一个是把冲突的快捷键解决掉，另一个这是通过配置.tmux.conf。其实上面的快捷键默认的快捷键，模仿的按键是emacs，因为我不用emacs（因为我不用emacs，所以也只觉得很不习惯)，其实还有另外的一种快捷键模式是模仿vim的，不过需要你在tmux配置文件里配置一下, 把下面这行加入.tmux.conf里:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;set&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;window&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;option&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;g&lt;/span&gt; &lt;span class="k"&gt;mode&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;keys&lt;/span&gt; &lt;span class="n"&gt;vi&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;set-window-option -g mode-keys vi
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;设置成这样以后，重新载入配置（可以用&lt;code&gt;ctrl+a :&lt;/code&gt;然后输入&lt;code&gt;source-file ~/.tmux.conf&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;然后复制黏贴的操作就变成了：&lt;/p&gt;
@@ -127,29 +114,23 @@
 &lt;li&gt;&lt;code&gt;Space&lt;/code&gt;  开始选择内容，类似vim的按下V的效果&lt;/li&gt;
 &lt;li&gt;完成选择，&lt;code&gt;Enter&lt;/code&gt; 完成复制&lt;/li&gt;
 &lt;li&gt;然后到你想要黏贴的地方， &lt;code&gt;Ctrl+a ]&lt;/code&gt; 黏贴成功&lt;/li&gt;
-&lt;/ol&gt;</content><category term="tmux"></category><category term="linux"></category></entry><entry><title>Windowss上利用babun, tmux, zsh高度定制shell</title><link href="https://gccpacman.github.io/windowssshang-li-yong-babun-tmux-zshgao-du-ding-zhi-shell.html" rel="alternate"></link><published>2015-10-22T10:20:00+08:00</published><updated>2015-10-22T10:20:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2015-10-22:/windowssshang-li-yong-babun-tmux-zshgao-du-ding-zhi-shell.html</id><summary type="html">&lt;p&gt;深刻和彻底的切换到linux平台后，深切的感受到linux平台对程序员带来的便利。因此日常环境已经不再使用windows啦，奈何博主虽然是个穷逼，然而却舍得钱买一堆电脑，所以没事还是会折腾下windows，毕竟娱乐还是需要的。&lt;/p&gt;
-&lt;p&gt;之前折腾过cygwin好一阵子，最终还是觉得真的搬到开发环境确实有很多麻烦的地方，不过现在既然为了娱乐又有一台没有装任何开发环境的win10，那就娱乐一下好了。&lt;/p&gt;
-&lt;h1&gt;1） 安装和配置babun&lt;/h1&gt;
-&lt;p&gt;首先可以装一个定制得非常好的cygwin shell, 那就是&lt;a href="http://babun.github.io/"&gt;babun&lt;/a&gt;, 已经默认为你装好并配置了cygwin环境下的zsh，用起来可比普通的shell爽多了。另外有个强大的包管理器，pact命令，用起来很像rpm和apt之类的，非常方便。例如要装tmux, 那么就执行 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;深刻和彻底的切换到linux平台后，深切的感受到linux平台对程序员带来的便利。因此日常环境已经不再使用windows啦，奈何博主虽然是个穷逼，然而却舍得钱买一堆电脑，所以没事还是会折腾下windows，毕竟娱乐还是需要的。&lt;/p&gt;
+&lt;/ol&gt;</content><category term="Terminal"></category><category term="tmux"></category><category term="linux"></category></entry><entry><title>Windowss上利用babun, tmux, zsh高度定制shell</title><link href="https://gccpacman.github.io/windowssshang-li-yong-babun-tmux-zshgao-du-ding-zhi-shell.html" rel="alternate"></link><published>2015-10-22T10:20:00+08:00</published><updated>2015-10-22T10:20:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2015-10-22:/windowssshang-li-yong-babun-tmux-zshgao-du-ding-zhi-shell.html</id><summary type="html">&lt;p&gt;深刻和彻底的切换到linux平台后，深切的感受到linux平台对程序员带来的便利。因此日常环境已经 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;深刻和彻底的切换到linux平台后，深切的感受到linux平台对程序员带来的便利。因此日常环境已经不再使用windows啦，奈何博主虽然是个穷逼，然而却舍得钱买一堆电脑，所以没事还是会折腾下windows，毕竟娱乐还是需要的。&lt;/p&gt;
 &lt;p&gt;之前折腾过cygwin好一阵子，最终还是觉得真的搬到开发环境确实有很多麻烦的地方，不过现在既然为了娱乐又有一台没有装任何开发环境的win10，那就娱乐一下好了。&lt;/p&gt;
 &lt;h1&gt;1） 安装和配置babun&lt;/h1&gt;
 &lt;p&gt;首先可以装一个定制得非常好的cygwin shell, 那就是&lt;a href="http://babun.github.io/"&gt;babun&lt;/a&gt;, 已经默认为你装好并配置了cygwin环境下的zsh，用起来可比普通的shell爽多了。另外有个强大的包管理器，pact命令，用起来很像rpm和apt之类的，非常方便。例如要装tmux, 那么就执行&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pact&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;tmux&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pact install tmux
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;就可以成功安装了。
 不过值得注意的是pact默认用的是kernel.org的镜像，国内访问非常慢，这时通过help发现有个--mirror的参数，可以手动指定成163的：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pact&lt;/span&gt; &lt;span class="c1"&gt;--mirror http://mirrors.163.com/cygwin/ install tree&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pact --mirror http://mirrors.163.com/cygwin/ install tree
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;不过每次要输入这个太麻烦，可以用alias, 在home目录下新建一个.bash_aliases的文件，输入alias pact='pact --mirror http://mirrors.163.com/cygwin/'这样下次就不需要再输--mirror了。&lt;/p&gt;
 &lt;h1&gt;2） 安装和配置tmux&lt;/h1&gt;
 &lt;p&gt;OK第一步装babun已经完成，接下来装tmux，也非常easy，其实上面已经介绍过了&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pact&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;tmux&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pact install tmux
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;然后就可以用了，输入tmux, 下面就有了一个标签栏，tmux默认的前缀按键是Ctrl+B，然后再按另一个键，随便举几个例子：&lt;/p&gt;
 &lt;ol&gt;
@@ -162,15 +143,13 @@
 &lt;p&gt;tmux非常强大，甚至有分屏这样的操作，具体可以在帮助里看。重要的是我们现在已经可以只打开一个窗口，就在几个window之前切换了。&lt;/p&gt;
 &lt;p&gt;OK, 看起来非常不错，但是用过vim的同学知道，Ctrl+b是向下翻页的按键啊，所以我想把前缀按键换成Ctrl+a怎么办, 还是配置文件，linux的一切都是配置文件。
 在Home目录创建一个.tmux.conf文件，输入以下内容：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;unbind&lt;/span&gt; &lt;span class="nv"&gt;C&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;b&lt;/span&gt;
-&lt;span class="nv"&gt;set&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;prefix&lt;/span&gt; &lt;span class="nv"&gt;C&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;a&lt;/span&gt;
-&lt;span class="nv"&gt;bind&lt;/span&gt; &lt;span class="nv"&gt;C&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;a&lt;/span&gt; &lt;span class="k"&gt;send&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;prefix&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;unbind&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;C&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;b&lt;/span&gt;
+&lt;span class="nv"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;prefix&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;C&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;a&lt;/span&gt;
+&lt;span class="nv"&gt;bind&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;C&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;a&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;send&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;prefix&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;如果你的tmux已经打开，你想重载配置，怎么操作呢? 前缀Ctrl+b ：然后标签栏就会出现一个冒号，输入&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;source&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tmux&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;conf&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;source-file ~/.tmux.conf
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
-&lt;p&gt;回车，好了，此时前缀应该就已经变成了Ctrl+a了&lt;/p&gt;</content><category term="windows"></category><category term="cygwin"></category><category term="tmux"></category><category term="zsh"></category></entry></feed>
+&lt;p&gt;回车，好了，此时前缀应该就已经变成了Ctrl+a了&lt;/p&gt;</content><category term="Terminal"></category><category term="windows"></category><category term="cygwin"></category><category term="tmux"></category><category term="zsh"></category></entry></feed>

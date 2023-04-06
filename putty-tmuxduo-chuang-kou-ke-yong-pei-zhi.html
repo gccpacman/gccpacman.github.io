@@ -58,91 +58,88 @@
         title="Permalink to putty + tmux多窗口可用配置">putty + tmux多窗口可用配置</a></h3>
     </header>
 
-<h6 class="subheader" title="2018-08-28T10:20:00+08:00">Tue 28 August 2018
+<h6 class="subheader" title="2018-08-28T10:20:00+08:00">二 28 八月 2018
 </h6>
 
 
     <ul>
 <li>
 <p>putty的执行命令填入如下命令，tmux名称同session名称，以便开多个putty窗口时候识别</p>
-<div class="highlight"><pre><span></span>$ tmux new -A -s <span class="o">{</span>session_name<span class="o">}</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>tmux<span class="w"> </span>new<span class="w"> </span>-A<span class="w"> </span>-s<span class="w"> </span><span class="o">{</span>session_name<span class="o">}</span>
+</code></pre></div>
 
 </li>
 <li>
 <p>添加.tmux.conf配置</p>
-<div class="highlight"><pre><span></span><span class="nv">echo</span> <span class="s2">&quot;</span>
-##########################################
-# <span class="nv">STATUS</span> <span class="nv">BAR</span>
-<span class="nv">set</span> <span class="o">-</span><span class="nv">g</span> <span class="nv">status</span><span class="o">-</span><span class="nv">keys</span> <span class="nv">vi</span>
-<span class="nv">set</span> <span class="o">-</span><span class="nv">g</span> <span class="nv">status</span><span class="o">-</span><span class="nv">interval</span> <span class="mi">1</span>
-<span class="nv">set</span> <span class="o">-</span><span class="nv">g</span> <span class="nv">status</span><span class="o">-</span><span class="nv">attr</span> <span class="nv">bright</span>
-<span class="nv">set</span> <span class="o">-</span><span class="nv">g</span> <span class="nv">status</span><span class="o">-</span><span class="nv">fg</span> <span class="nv">white</span>
-<span class="nv">set</span> <span class="o">-</span><span class="nv">g</span> <span class="nv">status</span><span class="o">-</span><span class="nv">bg</span> <span class="nv">black</span>
-<span class="nv">set</span> <span class="o">-</span><span class="nv">g</span> <span class="nv">status</span><span class="o">-</span><span class="nv">left</span><span class="o">-</span><span class="nv">length</span> <span class="mi">20</span>
-<span class="nv">set</span> <span class="o">-</span><span class="nv">g</span> <span class="nv">status</span><span class="o">-</span><span class="nv">left</span> <span class="s1">&#39;</span><span class="s">#[fg=green][#[fg=red]#S#[fg=green]]#[default]</span><span class="s1">&#39;</span>
-<span class="nv">set</span> <span class="o">-</span><span class="nv">g</span> <span class="nv">status</span><span class="o">-</span><span class="nv">justify</span> <span class="nv">centre</span>
-<span class="nv">set</span> <span class="o">-</span><span class="nv">g</span> <span class="nv">status</span><span class="o">-</span><span class="nv">right</span> <span class="s1">&#39;</span><span class="s">#[fg=green][ %m/%d %H:%M:%S ]#[default]</span><span class="s1">&#39;</span>
-<span class="nv">setw</span> <span class="o">-</span><span class="nv">g</span> <span class="nv">window</span><span class="o">-</span><span class="nv">status</span><span class="o">-</span><span class="nv">current</span><span class="o">-</span><span class="nv">format</span> <span class="s1">&#39;</span><span class="s">#[fg=yellow](#I.#P#F#W)#[default]</span><span class="s1">&#39;</span>
-<span class="nv">setw</span> <span class="o">-</span><span class="nv">g</span> <span class="nv">window</span><span class="o">-</span><span class="nv">status</span><span class="o">-</span><span class="nv">format</span> <span class="s1">&#39;</span><span class="s">#I#F#W</span><span class="s1">&#39;</span>
+<div class="highlight"><pre><span></span><code><span class="n">echo</span><span class="w"> </span><span class="ss">&quot;</span>
+<span class="ss">##########################################</span>
+<span class="ss"># STATUS BAR</span>
+<span class="ss">set -g status-keys vi</span>
+<span class="ss">set -g status-interval 1</span>
+<span class="ss">set -g status-attr bright</span>
+<span class="ss">set -g status-fg white</span>
+<span class="ss">set -g status-bg black</span>
+<span class="ss">set -g status-left-length 20</span>
+<span class="ss">set -g status-left &#39;#[fg=green][#[fg=red]#S#[fg=green]]#[default]&#39;</span>
+<span class="ss">set -g status-justify centre</span>
+<span class="ss">set -g status-right &#39;#[fg=green][ %m/%d %H:%M:%S ]#[default]&#39;</span>
+<span class="ss">setw -g window-status-current-format &#39;#[fg=yellow](#I.#P#F#W)#[default]&#39;</span>
+<span class="ss">setw -g window-status-format &#39;#I#F#W&#39;</span>
 
-##########################################
-# <span class="nv">TERMINAL</span> <span class="nv">EMULATOR</span> <span class="nv">TITLES</span>
-<span class="nv">set</span> <span class="o">-</span><span class="nv">g</span> <span class="nv">set</span><span class="o">-</span><span class="nv">titles</span> <span class="nv">on</span>
-<span class="nv">set</span> <span class="o">-</span><span class="nv">g</span> <span class="nv">set</span><span class="o">-</span><span class="nv">titles</span><span class="o">-</span><span class="nv">string</span> \<span class="s2">&quot;</span><span class="s">#(tmux ls | awk -F: &#39;{print $1}&#39; | xargs | sed &#39;s/\ / | /g&#39;)\</span><span class="s2">&quot;</span>
+<span class="ss">##########################################</span>
+<span class="ss"># TERMINAL EMULATOR TITLES</span>
+<span class="ss">set -g set-titles on</span>
+<span class="ss">set -g set-titles-string \&quot;</span><span class="err">#</span><span class="p">(</span><span class="n">tmux</span><span class="w"> </span><span class="n">ls</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">awk</span><span class="w"> </span><span class="o">-</span><span class="nl">F</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;{print $1}&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">xargs</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">sed</span><span class="w"> </span><span class="s1">&#39;s/\ / | /g&#39;</span><span class="p">)</span><span class="err">\</span><span class="ss">&quot;</span>
 
-# <span class="nv">Scroll</span> <span class="nv">History</span>
-<span class="nv">set</span> <span class="o">-</span><span class="nv">g</span> <span class="nv">history</span><span class="o">-</span><span class="nv">limit</span> <span class="mi">30000</span>
+<span class="ss"># Scroll History</span>
+<span class="ss">set -g history-limit 30000</span>
 
-# <span class="nv">Set</span> <span class="nv">ability</span> <span class="nv">to</span> <span class="nv">capture</span> <span class="nv">on</span> <span class="nv">start</span> <span class="nv">and</span> <span class="nv">restore</span> <span class="nv">on</span> <span class="k">exit</span> <span class="nv">window</span> <span class="nv">data</span> <span class="nv">when</span> <span class="nv">running</span> <span class="nv">an</span> <span class="nv">application</span>
-<span class="nv">setw</span> <span class="o">-</span><span class="nv">g</span> <span class="nv">alternate</span><span class="o">-</span><span class="nv">screen</span> <span class="nv">on</span>
+<span class="ss"># Set ability to capture on start and restore on exit window data when running an application</span>
+<span class="ss">setw -g alternate-screen on</span>
 
-# <span class="nv">Lower</span> <span class="nv">escape</span> <span class="nv">timing</span> <span class="nv">from</span> <span class="mi">500</span><span class="nv">ms</span> <span class="nv">to</span> <span class="mi">50</span><span class="nv">ms</span> <span class="k">for</span> <span class="nv">quicker</span> <span class="nv">response</span> <span class="nv">to</span> <span class="nv">scroll</span><span class="o">-</span><span class="nv">buffer</span> <span class="nv">access</span>.
-<span class="nv">set</span> <span class="o">-</span><span class="nv">s</span> <span class="nv">escape</span><span class="o">-</span><span class="nv">time</span> <span class="mi">50</span>
-<span class="s2">&quot;</span><span class="s"> &gt; .tmux.conf</span>
-</pre></div>
-
+<span class="ss"># Lower escape timing from 500ms to 50ms for quicker response to scroll-buffer access.</span>
+<span class="ss">set -s escape-time 50</span>
+<span class="ss">&quot;</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="p">.</span><span class="n">tmux</span><span class="p">.</span><span class="n">conf</span>
+</code></pre></div>
 
 </li>
 <li>
 <p>（可选）Shell标题控制， 在.profile文件里添加</p>
-<div class="highlight"><pre><span></span><span class="nv">look_for_cmd</span><span class="o">=</span><span class="mi">0</span>
-<span class="nv">print_cmd</span><span class="ss">()</span> {
-  <span class="k">if</span> [ ${<span class="nv">look_for_cmd</span>} <span class="o">=</span> <span class="mi">1</span> ] <span class="c1">;then</span>
-    <span class="k">if</span> [ <span class="s2">&quot;</span><span class="s">${BASH_COMMAND}</span><span class="s2">&quot;</span> <span class="o">!=</span> <span class="s1">&#39;</span><span class="s">print_host</span><span class="s1">&#39;</span> ] <span class="c1">;then</span>
-      <span class="nv">cmdline</span><span class="o">=</span>$<span class="ss">(</span><span class="nv">history</span> <span class="mi">1</span> <span class="o">|</span> <span class="nv">xargs</span> <span class="o">|</span> <span class="nv">cut</span> <span class="o">-</span><span class="nv">d</span>\  <span class="o">-</span><span class="nv">f3</span><span class="o">-</span><span class="ss">)</span>
-      <span class="k">if</span> [[ <span class="s2">&quot;</span><span class="s">${cmdline}</span><span class="s2">&quot;</span> <span class="o">=~</span> <span class="o">^</span><span class="ss">(</span><span class="nv">sudo</span><span class="o">|</span><span class="nv">ssh</span><span class="o">|</span><span class="nv">vi</span><span class="o">|</span><span class="nv">man</span><span class="o">|</span><span class="nv">more</span><span class="o">|</span><span class="nv">less</span><span class="ss">)</span>\  ]] <span class="c1">;then</span>
-        <span class="nv">first</span><span class="o">=</span>$<span class="ss">(</span><span class="nv">echo</span> <span class="s2">&quot;</span><span class="s">${cmdline}</span><span class="s2">&quot;</span> <span class="o">|</span> <span class="nv">awk</span> <span class="s1">&#39;</span><span class="s">{print $1}</span><span class="s1">&#39;</span><span class="ss">)</span>
-        <span class="k">for</span> <span class="nv">i</span> <span class="nv">in</span> ${<span class="nv">cmdline</span>} <span class="c1">;do</span>
-          <span class="k">if</span> <span class="o">!</span> [[ <span class="s2">&quot;</span><span class="s">${i}</span><span class="s2">&quot;</span> <span class="o">=~</span> <span class="o">^-</span>.<span class="o">*</span>$ ]] <span class="o">&amp;&amp;</span> <span class="o">!</span> [[ <span class="s2">&quot;</span><span class="s">${i}</span><span class="s2">&quot;</span> <span class="o">=~</span> <span class="o">^</span>${<span class="nv">first</span>}$ ]] <span class="c1">;then</span>
-            <span class="nv">cmd</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">${first}[${i}]</span><span class="s2">&quot;</span>
-            <span class="k">break</span>
-          <span class="nv">fi</span>
-        <span class="nv">done</span>
-      <span class="nv">elif</span> [[ <span class="s2">&quot;</span><span class="s">${cmdline}</span><span class="s2">&quot;</span> <span class="o">=~</span> <span class="o">^</span>[<span class="nv">A</span><span class="o">-</span><span class="nv">Z</span>]<span class="o">*=</span>.<span class="o">*</span>$ ]] <span class="c1">;then</span>
-        <span class="nv">cmd</span><span class="o">=</span>$<span class="ss">(</span><span class="nv">echo</span> ${<span class="nv">cmdline</span>} <span class="o">|</span> <span class="nv">awk</span> <span class="s1">&#39;</span><span class="s">{print $2}</span><span class="s1">&#39;</span><span class="ss">)</span>
-      <span class="k">else</span>
-        <span class="nv">cmd</span><span class="o">=</span>$<span class="ss">(</span><span class="nv">echo</span> ${<span class="nv">cmdline</span>} <span class="o">|</span> <span class="nv">awk</span> <span class="s1">&#39;</span><span class="s">{print $1}</span><span class="s1">&#39;</span><span class="ss">)</span>
-      <span class="nv">fi</span>
-      <span class="nv">echo</span> <span class="o">-</span><span class="nv">ne</span> <span class="s2">&quot;</span><span class="s">\033k${cmd}\033</span><span class="se">\\</span><span class="s2">&quot;</span> <span class="mi">1</span><span class="o">&gt;&amp;</span><span class="mi">2</span>
-      <span class="nv">look_for_cmd</span><span class="o">=</span><span class="mi">0</span>
-    <span class="k">else</span>
-      <span class="k">return</span>
-    <span class="nv">fi</span>
-  <span class="nv">fi</span>
+<div class="highlight"><pre><span></span><code>look_for_cmd=0
+print_cmd()<span class="w"> </span>{
+<span class="w">  </span>if<span class="w"> </span>[<span class="w"> </span><span class="cp">${</span><span class="n">look_for_cmd</span><span class="cp">}</span><span class="w"> </span>=<span class="w"> </span>1<span class="w"> </span>]<span class="w"> </span>;then
+<span class="w">    </span>if<span class="w"> </span>[<span class="w"> </span>&quot;<span class="cp">${</span><span class="n">BASH_COMMAND</span><span class="cp">}</span>&quot;<span class="w"> </span>!=<span class="w"> </span>&#39;print_host&#39;<span class="w"> </span>]<span class="w"> </span>;then
+<span class="w">      </span>cmdline=$(history<span class="w"> </span>1<span class="w"> </span>|<span class="w"> </span>xargs<span class="w"> </span>|<span class="w"> </span>cut<span class="w"> </span>-d\<span class="w">  </span>-f3-)
+<span class="w">      </span>if<span class="w"> </span>[[<span class="w"> </span>&quot;<span class="cp">${</span><span class="n">cmdline</span><span class="cp">}</span>&quot;<span class="w"> </span>=~<span class="w"> </span>^(sudo|ssh|vi|man|more|less)\<span class="w">  </span>]]<span class="w"> </span>;then
+<span class="w">        </span>first=$(echo<span class="w"> </span>&quot;<span class="cp">${</span><span class="n">cmdline</span><span class="cp">}</span>&quot;<span class="w"> </span>|<span class="w"> </span>awk<span class="w"> </span>&#39;{print<span class="w"> </span>$1}&#39;)
+<span class="w">        </span>for<span class="w"> </span>i<span class="w"> </span>in<span class="w"> </span><span class="cp">${</span><span class="n">cmdline</span><span class="cp">}</span><span class="w"> </span>;do
+<span class="w">          </span>if<span class="w"> </span>!<span class="w"> </span>[[<span class="w"> </span>&quot;<span class="cp">${</span><span class="n">i</span><span class="cp">}</span>&quot;<span class="w"> </span>=~<span class="w"> </span>^-.*$<span class="w"> </span>]]<span class="w"> </span><span class="err">&amp;&amp;</span><span class="w"> </span>!<span class="w"> </span>[[<span class="w"> </span>&quot;<span class="cp">${</span><span class="n">i</span><span class="cp">}</span>&quot;<span class="w"> </span>=~<span class="w"> </span>^<span class="cp">${</span><span class="n">first</span><span class="cp">}</span>$<span class="w"> </span>]]<span class="w"> </span>;then
+<span class="w">            </span>cmd=&quot;<span class="cp">${</span><span class="n">first</span><span class="cp">}</span>[<span class="cp">${</span><span class="n">i</span><span class="cp">}</span>]&quot;
+<span class="w">            </span>break
+<span class="w">          </span>fi
+<span class="w">        </span>done
+<span class="w">      </span>elif<span class="w"> </span>[[<span class="w"> </span>&quot;<span class="cp">${</span><span class="n">cmdline</span><span class="cp">}</span>&quot;<span class="w"> </span>=~<span class="w"> </span>^[A-Z]*=.*$<span class="w"> </span>]]<span class="w"> </span>;then
+<span class="w">        </span>cmd=$(echo<span class="w"> </span><span class="cp">${</span><span class="n">cmdline</span><span class="cp">}</span><span class="w"> </span>|<span class="w"> </span>awk<span class="w"> </span>&#39;{print<span class="w"> </span>$2}&#39;)
+<span class="w">      </span>else
+<span class="w">        </span>cmd=$(echo<span class="w"> </span><span class="cp">${</span><span class="n">cmdline</span><span class="cp">}</span><span class="w"> </span>|<span class="w"> </span>awk<span class="w"> </span>&#39;{print<span class="w"> </span>$1}&#39;)
+<span class="w">      </span>fi
+<span class="w">      </span>echo<span class="w"> </span>-ne<span class="w"> </span>&quot;\033k<span class="cp">${</span><span class="n">cmd</span><span class="cp">}</span>\033\\&quot;<span class="w"> </span>1&gt;<span class="err">&amp;</span>2
+<span class="w">      </span>look_for_cmd=0
+<span class="w">    </span>else
+<span class="w">      </span>return
+<span class="w">    </span>fi
+<span class="w">  </span>fi
 }
 
-<span class="nv">print_host</span><span class="ss">()</span> {
-  <span class="nv">echo</span> <span class="o">-</span><span class="nv">ne</span> <span class="s2">&quot;</span><span class="s">\033k${HOSTNAME}\033</span><span class="se">\\</span><span class="s2">&quot;</span> <span class="mi">1</span><span class="o">&gt;&amp;</span><span class="mi">2</span>
-  <span class="nv">look_for_cmd</span><span class="o">=</span><span class="mi">1</span>
+print_host()<span class="w"> </span>{
+<span class="w">  </span>echo<span class="w"> </span>-ne<span class="w"> </span>&quot;\033k<span class="cp">${</span><span class="n">HOSTNAME</span><span class="cp">}</span>\033\\&quot;<span class="w"> </span>1&gt;<span class="err">&amp;</span>2
+<span class="w">  </span>look_for_cmd=1
 }
 
-<span class="nv">PROMPT_COMMAND</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">print_host</span><span class="s2">&quot;</span>
+PROMPT_COMMAND=&quot;print_host&quot;
 
-<span class="nv">trap</span> <span class="s2">&quot;</span><span class="s">print_cmd</span><span class="s2">&quot;</span> <span class="nv">DEBUG</span>
-</pre></div>
-
+trap<span class="w"> </span>&quot;print_cmd&quot;<span class="w"> </span>DEBUG
+</code></pre></div>
 
 </li>
 </ul>

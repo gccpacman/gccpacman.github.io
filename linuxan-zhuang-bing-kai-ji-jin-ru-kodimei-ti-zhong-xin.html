@@ -58,7 +58,7 @@
         title="Permalink to Linux安装并开机进入Kodi媒体中心">Linux安装并开机进入Kodi媒体中心</a></h3>
     </header>
 
-<h6 class="subheader" title="2016-01-04T10:20:00+08:00">Mon 04 January 2016
+<h6 class="subheader" title="2016-01-04T10:20:00+08:00">一 04 一月 2016
 </h6>
 
 
@@ -77,7 +77,7 @@
 <p>3) sudo dpkg-reconfigure x11-common 弹出的选项框选择任何人（anybody）</p>
 <p>4) sudo vim /etc/systemd/system/kodi.service
 输入以下内容：</p>
-<div class="highlight"><pre><span></span><span class="k">[Unit]</span>
+<div class="highlight"><pre><span></span><code><span class="k">[Unit]</span>
 <span class="na">Description</span><span class="o">=</span><span class="s">Job that runs Kodi</span>
 <span class="na">After</span><span class="o">=</span><span class="s">default.target graphical.target getty.target sound.target</span>
 
@@ -89,20 +89,17 @@
 
 <span class="k">[Install]</span>
 <span class="na">WantedBy</span><span class="o">=</span><span class="s">default.target</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>5) 开机启动kodi的服务， 并禁止启动lightdm的服务</p>
-<div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">systemctl</span> <span class="n">daemon</span><span class="o">-</span><span class="n">reload</span>
-<span class="n">sudo</span> <span class="n">systemctl</span> <span class="n">disable</span> <span class="n">lightdm</span>
-<span class="n">sudo</span> <span class="n">systemctl</span> <span class="n">enable</span> <span class="n">kodi</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">sudo</span><span class="w"> </span><span class="n">systemctl</span><span class="w"> </span><span class="n">daemon</span><span class="o">-</span><span class="n">reload</span>
+<span class="n">sudo</span><span class="w"> </span><span class="n">systemctl</span><span class="w"> </span><span class="n">disable</span><span class="w"> </span><span class="n">lightdm</span>
+<span class="n">sudo</span><span class="w"> </span><span class="n">systemctl</span><span class="w"> </span><span class="n">enable</span><span class="w"> </span><span class="n">kodi</span>
+</code></pre></div>
 
 <p>6) 重启</p>
-<div class="highlight"><pre><span></span><span class="n">reboot</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>reboot
+</code></pre></div>
 
 <p>下次电脑开机就可以直接进入kodi的界面了</p>
 <p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>

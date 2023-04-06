@@ -58,7 +58,7 @@
         title="Permalink to 在虚拟机里跑资源占用超低的Linux桌面环境i3">在虚拟机里跑资源占用超低的Linux桌面环境i3</a></h3>
     </header>
 
-<h6 class="subheader" title="2018-05-04T10:20:00+08:00">Fri 04 May 2018
+<h6 class="subheader" title="2018-05-04T10:20:00+08:00">五 04 五月 2018
 </h6>
 
 
@@ -66,71 +66,63 @@
 <ol>
 <li>
 <p>首先要安装i3：</p>
-<div class="highlight"><pre><span></span>$ sudo yum install i3   <span class="c1"># centos</span>
-$ sudo apt install i3   <span class="c1"># debian &amp; ubuntu</span>
-$ sudo pacman -S i3     <span class="c1"># archlinux</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>sudo<span class="w"> </span>yum<span class="w"> </span>install<span class="w"> </span>i3<span class="w">   </span><span class="c1"># centos</span>
+$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>i3<span class="w">   </span><span class="c1"># debian &amp; ubuntu</span>
+$<span class="w"> </span>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>i3<span class="w">     </span><span class="c1"># archlinux</span>
+</code></pre></div>
 
 </li>
 <li>
 <p>备份并修改i3的配置文件，可以参考我的github，或者直接下载替换：</p>
-<div class="highlight"><pre><span></span><span class="n">cp</span> <span class="o">~/</span><span class="p">.</span><span class="n">config</span><span class="o">/</span><span class="n">i3</span><span class="o">/</span><span class="n">config</span> <span class="o">~/</span><span class="p">.</span><span class="n">config</span><span class="o">/</span><span class="n">i3</span><span class="o">/</span><span class="n">config</span><span class="p">.</span><span class="n">bak</span>
-<span class="n">wget</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">raw</span><span class="p">.</span><span class="n">githubusercontent</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">gccpacman</span><span class="o">/</span><span class="n">vm</span><span class="o">-</span><span class="n">i3wm</span><span class="o">-</span><span class="n">config</span><span class="o">/</span><span class="n">master</span><span class="o">/</span><span class="n">config</span>
-<span class="n">cp</span> <span class="n">config</span> <span class="o">~/</span><span class="p">.</span><span class="n">config</span><span class="o">/</span><span class="n">i3</span><span class="o">/</span><span class="n">config</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>cp ~/.config/i3/config ~/.config/i3/config.bak
+wget https://raw.githubusercontent.com/gccpacman/vm-i3wm-config/master/config
+cp config ~/.config/i3/config
+</code></pre></div>
 
 </li>
 <li>
 <p>因为我的是高分屏，默认vmware不支持，但是可以修改i3的dpi让文字和界面看起来舒服：</p>
-<div class="highlight"><pre><span></span><span class="n">echo</span> <span class="ss">&quot;Xft.dpi: 118&quot;</span> <span class="o">&gt;&gt;</span> <span class="o">~/</span><span class="p">.</span><span class="n">Xresources</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>echo &quot;Xft.dpi: 118&quot; &gt;&gt; ~/.Xresources
+</code></pre></div>
 
 </li>
 <li>
 <p>安装lightdm/gdm后，，设置session成i3，并且因为是虚拟机不想每次开机都输入用户名密码，可以设置自动登陆：</p>
 <p>4.1 <code>lightdm</code>修改<code>/etc/lightdm/lightdm.conf</code>:</p>
-<div class="highlight"><pre><span></span><span class="k">[SeatDefaults]</span>
-<span class="na">autologin-user</span><span class="o">=</span> <span class="s">{{your username}}</span>
+<div class="highlight"><pre><span></span><code><span class="k">[SeatDefaults]</span>
+<span class="na">autologin-user</span><span class="o">=</span><span class="w"> </span><span class="s">{{your username}}</span>
 <span class="na">autologin-user-timeout</span><span class="o">=</span><span class="s">0</span>
 <span class="na">user-session</span><span class="o">=</span><span class="s">i3</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>4.2 <code>gdm</code>修改<code>/etc/gdm3/daemon.conf</code>:</p>
-<div class="highlight"><pre><span></span><span class="k">[daemon]</span>
+<div class="highlight"><pre><span></span><code><span class="k">[daemon]</span>
 <span class="na">AutomaticLoginEnable</span><span class="o">=</span><span class="s">true</span>
 <span class="na">AutomaticLogin</span><span class="o">=</span><span class="s">teotfw</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>4.3 或者直接disable x-manager, 用startx方式启动</p>
-<div class="highlight"><pre><span></span><span class="nv">sudo</span> <span class="nv">systemctl</span> <span class="nv">set</span><span class="o">-</span><span class="nv">default</span> <span class="nv">multi</span><span class="o">-</span><span class="nv">user</span>.<span class="nv">target</span>
-<span class="nv">echo</span> <span class="s2">&quot;</span><span class="s">exec i3</span><span class="s2">&quot;</span> <span class="o">&gt;</span> <span class="o">~/</span>.<span class="nv">xinitrc</span>
-<span class="nv">startx</span> # <span class="nv">reboot</span>并<span class="nv">login</span>后执行
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="nv">sudo</span><span class="w"> </span><span class="nv">systemctl</span><span class="w"> </span><span class="nv">set</span><span class="o">-</span><span class="nv">default</span><span class="w"> </span><span class="nv">multi</span><span class="o">-</span><span class="nv">user</span>.<span class="nv">target</span>
+<span class="nv">echo</span><span class="w"> </span><span class="s2">&quot;exec i3&quot;</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="o">~/</span>.<span class="nv">xinitrc</span>
+<span class="nv">startx</span><span class="w"> </span>#<span class="w"> </span><span class="nv">reboot</span>并<span class="nv">login</span>后执行
+</code></pre></div>
 
 </li>
 <li>
 <p>根据你的系统安装open-vm-tools</p>
-<div class="highlight"><pre><span></span>$ sudo yum install open-vm-tools   <span class="c1"># centos</span>
-$ sudo apt install open-vm-tools   <span class="c1"># debian &amp; ubuntu</span>
-$ sudo pacman -S open-vm-tools     <span class="c1"># archlinux</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>sudo<span class="w"> </span>yum<span class="w"> </span>install<span class="w"> </span>open-vm-tools<span class="w">   </span><span class="c1"># centos</span>
+$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>open-vm-tools<span class="w">   </span><span class="c1"># debian &amp; ubuntu</span>
+$<span class="w"> </span>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>open-vm-tools<span class="w">     </span><span class="c1"># archlinux</span>
+</code></pre></div>
 
 </li>
 <li>
 <p>如果你无法加载open-vm-tools, 则需要做如下配置：</p>
-<div class="highlight"><pre><span></span><span class="nv">cp</span> <span class="o">~/</span>.<span class="nv">xsession</span> <span class="o">~/</span>.<span class="nv">xsession</span>.<span class="nv">bak</span>
-<span class="nv">echo</span> <span class="s2">&quot;</span><span class="s">#!/bin/sh</span>
-<span class="nv">xrandr</span>
-<span class="k">exec</span> <span class="nv">i3</span><span class="s2">&quot;</span><span class="s"> &gt; ~/.xsession</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="nv">cp</span><span class="w"> </span><span class="o">~/</span>.<span class="nv">xsession</span><span class="w"> </span><span class="o">~/</span>.<span class="nv">xsession</span>.<span class="nv">bak</span>
+<span class="nv">echo</span><span class="w"> </span><span class="err">&quot;#!/bin/sh</span>
+<span class="err">xrandr</span>
+<span class="k">exec</span><span class="w"> </span><span class="nv">i3</span><span class="err">&quot; &gt; ~/.xsession</span>
+</code></pre></div>
 
 </li>
 </ol>

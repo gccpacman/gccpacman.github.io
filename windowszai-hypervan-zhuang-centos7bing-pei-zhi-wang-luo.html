@@ -58,7 +58,7 @@
         title="Permalink to Windows在Hyperv安装Centos7并配置网络">Windows在Hyperv安装Centos7并配置网络</a></h3>
     </header>
 
-<h6 class="subheader" title="2019-05-07T11:13:00+08:00">Tue 07 May 2019
+<h6 class="subheader" title="2019-05-07T11:13:00+08:00">二 07 五月 2019
 </h6>
 
 
@@ -68,33 +68,29 @@ Default Switch默认是可以连接外网的，如果是windows机器不用配�
 <ol>
 <li>
 <p>编辑<code>/etc/sysconfig/network-scripts/ifcfg-eth0</code>,修改以下三项:</p>
-<div class="highlight"><pre><span></span><span class="n">DEVICE</span><span class="o">=</span><span class="n">eth0</span>
-<span class="n">BOOTPROTO</span><span class="o">=</span><span class="n">dhcp</span>
-<span class="n">ONBOOT</span><span class="o">=</span><span class="n">yes</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>DEVICE=eth0
+BOOTPROTO=dhcp
+ONBOOT=yes
+</code></pre></div>
 
 </li>
 <li>
 <p>编辑<code>/etc/sysconfig/network</code>, 替换server-name.company.lan为你的主机名：</p>
-<div class="highlight"><pre><span></span><span class="n">NETWORKING</span><span class="o">=</span><span class="n">yes</span>
-<span class="n">HOSTNAME</span><span class="o">=</span><span class="n">server</span><span class="o">-</span><span class="n">name</span><span class="p">.</span><span class="n">company</span><span class="p">.</span><span class="n">lan</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>NETWORKING=yes
+HOSTNAME=server-name.company.lan
+</code></pre></div>
 
 </li>
 <li>
 <p>重启network服务：</p>
-<div class="highlight"><pre><span></span>$ systemctl restart network
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>network
+</code></pre></div>
 
 </li>
 <li>
 <p>确认网络是否网络正常，正常的话重启，再次确认：</p>
-<div class="highlight"><pre><span></span>$ nslookup bing.com
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>nslookup<span class="w"> </span>bing.com
+</code></pre></div>
 
 </li>
 </ol>

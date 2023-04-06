@@ -57,26 +57,24 @@
 
             <article>
                 <a href="https://gccpacman.github.io/putty-tmuxduo-chuang-kou-ke-yong-pei-zhi.html"><h3 class="article-title">putty + tmux多窗口可用配置</h3></a>
-<h6 class="subheader" title="2018-08-28T10:20:00+08:00">Tue 28 August 2018
+<h6 class="subheader" title="2018-08-28T10:20:00+08:00">二 28 八月 2018
 </h6>
 
 
 <ul>
 <li>
 <p>putty的执行命令填入如下命令，tmux名称同session名称，以便开多个putty窗口时候识别</p>
-<div class="highlight"><pre><span></span>$ tmux new -A -s <span class="o">{</span>session_name<span class="o">}</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>tmux<span class="w"> </span>new<span class="w"> </span>-A<span class="w"> </span>-s<span class="w"> </span><span class="o">{</span>session_name<span class="o">}</span>
+</code></pre></div>
 
 </li>
 <li>
 <p>添加.tmux.conf配置</p>
-<div class="highlight"><pre><span></span><span class="nv">echo</span> <span class="s2">&quot;</span>
-##########################################
-# <span class="nv">STATUS</span> <span class="nv">BAR</span>
-<span class="nv">set</span> <span class="o">-</span><span class="nv">g</span> <span class="nv">status</span><span class="o">-</span><span class="nv">keys</span> <span class="nv">vi</span>
-<span class="nv">set</span> <span class="o">-</span><span class="nv">g</span> <span class="nv">status</span><span class="o">-</span><span class="nv">interval</span> <span class="mi">1</span>
-<span class="nv">set …</span></pre></div></li></ul><p class="subheader">分类: <a href="https://gccpacman.github.io/category/terminal.html">Terminal</a>
+<div class="highlight"><pre><span></span><code><span class="n">echo</span><span class="w"> </span><span class="ss">&quot;</span>
+<span class="ss">##########################################</span>
+<span class="ss"># STATUS BAR</span>
+<span class="ss">set -g status-keys vi</span>
+<span class="ss">set …</span></code></pre></div></li></ul><p class="subheader">分类: <a href="https://gccpacman.github.io/category/terminal.html">Terminal</a>
 
     标签: 
     <a href="https://gccpacman.github.io/tag/tmux.html">tmux </a>

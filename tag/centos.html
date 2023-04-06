@@ -57,23 +57,20 @@
 
             <article>
                 <a href="https://gccpacman.github.io/qiang-nei-de-centos7-linuxan-zhuang-k8s.html"><h3 class="article-title">墙内的Centos7 Linux安装K8S</h3></a>
-<h6 class="subheader" title="2019-05-07T11:13:00+08:00">Tue 07 May 2019
+<h6 class="subheader" title="2019-05-07T11:13:00+08:00">二 07 五月 2019
 </h6>
 
 
 <ol>
 <li>
 <p>安装基础构建依赖</p>
-<div class="highlight"><pre><span></span>$ yum -y install yum-utils device-mapper-persistent-data lvm2
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>yum<span class="w"> </span>-y<span class="w"> </span>install<span class="w"> </span>yum-utils<span class="w"> </span>device-mapper-persistent-data<span class="w"> </span>lvm2
+</code></pre></div>
 
 </li>
 <li>
 <p>安装Docker</p>
-<div class="highlight"><pre><span></span>$ yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-$ yum -y install docker-ce
-$ systemctl start docker …</pre></div></li></ol><p class="subheader">分类: <a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a>
+<div class="highlight"><pre><span></span><code><span class="o">$</span><span class="w"> </span><span class="n">yum</span><span class="o">-</span><span class="n">config</span><span class="o">-</span><span class="n">manager</span><span class="w"> </span><span class="o">--</span><span class="n">add</span><span class="o">-</span><span class="n">repo</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">download</span><span class="o">.</span><span class="n">docker …</span></code></pre></div></li></ol><p class="subheader">分类: <a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a>
 
     标签: 
     <a href="https://gccpacman.github.io/tag/kubernetes.html">kubernetes </a>
@@ -95,25 +92,13 @@ $ systemctl start docker …</pre></div></li></ol><p class="subheader">分类: <
 
             <article>
                 <a href="https://gccpacman.github.io/windowszai-hypervan-zhuang-centos7bing-pei-zhi-wang-luo.html"><h3 class="article-title">Windows在Hyperv安装Centos7并配置网络</h3></a>
-<h6 class="subheader" title="2019-05-07T11:13:00+08:00">Tue 07 May 2019
+<h6 class="subheader" title="2019-05-07T11:13:00+08:00">二 07 五月 2019
 </h6>
 
 
 <p>Hyper-V安装Centos，网卡选择Hyper-V的Default Switch。
 Default Switch默认是可以连接外网的，如果是windows机器不用配置直接可以联网，但是Linux不行，原因是网卡eth0默认没有配置dhcp：</p>
-<p>可以通过以下几部配置：</p>
-<ol>
-<li>
-<p>编辑<code>/etc/sysconfig/network-scripts/ifcfg-eth0</code>,修改以下三项:</p>
-<div class="highlight"><pre><span></span><span class="n">DEVICE</span><span class="o">=</span><span class="n">eth0</span>
-<span class="n">BOOTPROTO</span><span class="o">=</span><span class="n">dhcp</span>
-<span class="n">ONBOOT</span><span class="o">=</span><span class="n">yes</span>
-</pre></div>
-
-
-</li>
-<li>
-<p>编辑<code>/etc/sysconfig/network …</code></p></li></ol><p class="subheader">分类: <a href="https://gccpacman.github.io/category/windows.html">Windows</a>
+<p>可以通 …</p><p class="subheader">分类: <a href="https://gccpacman.github.io/category/windows.html">Windows</a>
 
     标签: 
     <a href="https://gccpacman.github.io/tag/windows.html">windows </a>

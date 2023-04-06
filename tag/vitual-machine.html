@@ -57,25 +57,13 @@
 
             <article>
                 <a href="https://gccpacman.github.io/windowszai-hypervan-zhuang-centos7bing-pei-zhi-wang-luo.html"><h3 class="article-title">Windows在Hyperv安装Centos7并配置网络</h3></a>
-<h6 class="subheader" title="2019-05-07T11:13:00+08:00">Tue 07 May 2019
+<h6 class="subheader" title="2019-05-07T11:13:00+08:00">二 07 五月 2019
 </h6>
 
 
 <p>Hyper-V安装Centos，网卡选择Hyper-V的Default Switch。
 Default Switch默认是可以连接外网的，如果是windows机器不用配置直接可以联网，但是Linux不行，原因是网卡eth0默认没有配置dhcp：</p>
-<p>可以通过以下几部配置：</p>
-<ol>
-<li>
-<p>编辑<code>/etc/sysconfig/network-scripts/ifcfg-eth0</code>,修改以下三项:</p>
-<div class="highlight"><pre><span></span><span class="n">DEVICE</span><span class="o">=</span><span class="n">eth0</span>
-<span class="n">BOOTPROTO</span><span class="o">=</span><span class="n">dhcp</span>
-<span class="n">ONBOOT</span><span class="o">=</span><span class="n">yes</span>
-</pre></div>
-
-
-</li>
-<li>
-<p>编辑<code>/etc/sysconfig/network …</code></p></li></ol><p class="subheader">分类: <a href="https://gccpacman.github.io/category/windows.html">Windows</a>
+<p>可以通 …</p><p class="subheader">分类: <a href="https://gccpacman.github.io/category/windows.html">Windows</a>
 
     标签: 
     <a href="https://gccpacman.github.io/tag/windows.html">windows </a>
@@ -98,16 +86,11 @@ Default Switch默认是可以连接外网的，如果是windows机器不用配�
 
             <article>
                 <a href="https://gccpacman.github.io/zai-xu-ni-ji-li-pao-zi-yuan-zhan-yong-chao-di-de-linuxzhuo-mian-huan-jing-i3.html"><h3 class="article-title">在虚拟机里跑资源占用超低的Linux桌面环境i3</h3></a>
-<h6 class="subheader" title="2018-05-04T10:20:00+08:00">Fri 04 May 2018
+<h6 class="subheader" title="2018-05-04T10:20:00+08:00">五 04 五月 2018
 </h6>
 
 
-<p>现在的电脑是SurfacePro3，如果安装了Linux桌面环境，如Gnome或者xfce等，跑虚拟机会很吃力了，但是不是不能跑，重点是优化后把Linux的资源降下来非常流畅，而且还可以使用桌面应用。i3是个比xfce4更加轻量级的桌面管理器，Tiling的桌面可以保证所有打开的窗口都平铺满桌面，然后通过快捷键和鼠标切换应用，这边只讲述下我的安装过程，以及如何安装Vmware插件以支持剪切板，自动缩放虚拟机分辨率等:</p>
-<ol>
-<li>
-<p>首先要安装i3：</p>
-<div class="highlight"><pre><span></span>$ sudo yum install i3   <span class="c1"># centos</span>
-$ sudo apt install i3   <span class="c1"># debian &amp; ubuntu …</span></pre></div></li></ol><p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+<p>现在的电脑是SurfacePro3，如果安装了Linux桌面环境，如Gnome或者xfce等，跑虚拟机会很吃力了，但 …</p><p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
     标签: 
     <a href="https://gccpacman.github.io/tag/linux.html">linux </a>

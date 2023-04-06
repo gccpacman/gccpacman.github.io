@@ -1,68 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Pacman News - Windows</title><link href="https://gccpacman.github.io/" rel="alternate"></link><link href="https://gccpacman.github.io/feeds/windows.atom.xml" rel="self"></link><id>https://gccpacman.github.io/</id><updated>2019-05-07T11:13:00+08:00</updated><entry><title>Windows在Hyperv安装Centos7并配置网络</title><link href="https://gccpacman.github.io/windowszai-hypervan-zhuang-centos7bing-pei-zhi-wang-luo.html" rel="alternate"></link><published>2019-05-07T11:13:00+08:00</published><updated>2019-05-07T11:13:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2019-05-07:/windowszai-hypervan-zhuang-centos7bing-pei-zhi-wang-luo.html</id><summary type="html">&lt;p&gt;Hyper-V安装Centos，网卡选择Hyper-V的Default Switch。
 Default Switch默认是可以连接外网的，如果是windows机器不用配置直接可以联网，但是Linux不行，原因是网卡eth0默认没有配置dhcp：&lt;/p&gt;
-&lt;p&gt;可以通过以下几部配置：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;编辑&lt;code&gt;/etc/sysconfig/network-scripts/ifcfg-eth0&lt;/code&gt;,修改以下三项:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;DEVICE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;eth0&lt;/span&gt;
-&lt;span class="n"&gt;BOOTPROTO&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;dhcp&lt;/span&gt;
-&lt;span class="n"&gt;ONBOOT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;yes&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;编辑&lt;code&gt;/etc/sysconfig/network …&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;Hyper-V安装Centos，网卡选择Hyper-V的Default Switch。
+&lt;p&gt;可以通 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Hyper-V安装Centos，网卡选择Hyper-V的Default Switch。
 Default Switch默认是可以连接外网的，如果是windows机器不用配置直接可以联网，但是Linux不行，原因是网卡eth0默认没有配置dhcp：&lt;/p&gt;
 &lt;p&gt;可以通过以下几部配置：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;编辑&lt;code&gt;/etc/sysconfig/network-scripts/ifcfg-eth0&lt;/code&gt;,修改以下三项:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;DEVICE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;eth0&lt;/span&gt;
-&lt;span class="n"&gt;BOOTPROTO&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;dhcp&lt;/span&gt;
-&lt;span class="n"&gt;ONBOOT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;yes&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;DEVICE=eth0
+BOOTPROTO=dhcp
+ONBOOT=yes
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;编辑&lt;code&gt;/etc/sysconfig/network&lt;/code&gt;, 替换server-name.company.lan为你的主机名：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;NETWORKING&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;yes&lt;/span&gt;
-&lt;span class="n"&gt;HOSTNAME&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;company&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lan&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;NETWORKING=yes
+HOSTNAME=server-name.company.lan
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;重启network服务：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ systemctl restart network
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$&lt;span class="w"&gt; &lt;/span&gt;systemctl&lt;span class="w"&gt; &lt;/span&gt;restart&lt;span class="w"&gt; &lt;/span&gt;network
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;确认网络是否网络正常，正常的话重启，再次确认：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ nslookup bing.com
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$&lt;span class="w"&gt; &lt;/span&gt;nslookup&lt;span class="w"&gt; &lt;/span&gt;bing.com
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;参考：
 https://unix.stackexchange.com/questions/17436/centos-on-hyperv-eth0-not-in-ifconfig&lt;/p&gt;
-&lt;p&gt;https://www.krizna.com/centos/setup-network-centos-7/&lt;/p&gt;</content><category term="windows"></category><category term="hyper-v"></category><category term="centos"></category><category term="vitual machine"></category></entry><entry><title>Windows安装MSys32配置Git等开发环境并集成VSCode</title><link href="https://gccpacman.github.io/windowsan-zhuang-msys32pei-zhi-gitdeng-kai-fa-huan-jing-bing-ji-cheng-vscode.html" rel="alternate"></link><published>2018-02-01T10:20:00+08:00</published><updated>2018-02-01T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2018-02-01:/windowsan-zhuang-msys32pei-zhi-gitdeng-kai-fa-huan-jing-bing-ji-cheng-vscode.html</id><summary type="html">&lt;p&gt;在不久之前发现了Msys2，基于Cygwin但是却又有一个让我觉得无比美好的包管理器Pacman(和Arch Linux的一样)，于是决定试试。但是真的用于Windows的终端还有很多麻烦的地方要解决，主要是以下几点：
-1. Git的ssh_keygen配置，你和windows自己的CMD里的ssh_keygen能否共用
-2. Msys用的换行符是和Linux一样的LF，而Windows的是CRLF
-3. Python能不能直接用Windows的Python而不用模拟Unix环境的Python（有很多的bug）
-4. 能否和我目前用的最多的VSCode编辑器无缝集成&lt;/p&gt;
-&lt;p&gt;经过一段时间的研究，每个问题都得到了很好的解决，目前来讲非常的完美，在这里分享一下：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;下载并安装 &lt;a href="http://www.msys2.org/"&gt;Msys2&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;安装和配置 …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;在不久之前发现了Msys2，基于Cygwin但是却又有一个让我觉得无比美好的包管理器Pacman(和Arch Linux的一样)，于是决定试试。但是真的用于Windows的终端还有很多麻烦的地方要解决，主要是以下几点：
+&lt;p&gt;https://www.krizna.com/centos/setup-network-centos-7/&lt;/p&gt;</content><category term="Windows"></category><category term="windows"></category><category term="hyper-v"></category><category term="centos"></category><category term="vitual machine"></category></entry><entry><title>Windows安装MSys32配置Git等开发环境并集成VSCode</title><link href="https://gccpacman.github.io/windowsan-zhuang-msys32pei-zhi-gitdeng-kai-fa-huan-jing-bing-ji-cheng-vscode.html" rel="alternate"></link><published>2018-02-01T10:20:00+08:00</published><updated>2018-02-01T19:30:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2018-02-01:/windowsan-zhuang-msys32pei-zhi-gitdeng-kai-fa-huan-jing-bing-ji-cheng-vscode.html</id><summary type="html">&lt;p&gt;在不久之前发现了Msys2，基于Cygwin但是却又有一个让我觉得无比美好的包管理器Pacman(和Arch Linux的一样)，于是决定试试。但是真的 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;在不久之前发现了Msys2，基于Cygwin但是却又有一个让我觉得无比美好的包管理器Pacman(和Arch Linux的一样)，于是决定试试。但是真的用于Windows的终端还有很多麻烦的地方要解决，主要是以下几点：
 1. Git的ssh_keygen配置，你和windows自己的CMD里的ssh_keygen能否共用
 2. Msys用的换行符是和Linux一样的LF，而Windows的是CRLF
 3. Python能不能直接用Windows的Python而不用模拟Unix环境的Python（有很多的bug）
@@ -75,21 +48,18 @@ https://unix.stackexchange.com/questions/17436/centos-on-hyperv-eth0-not-in-ifco
 &lt;li&gt;
 &lt;p&gt;安装和配置 &lt;code&gt;git&lt;/code&gt;, 配置在windows上check出crlf格式文本，提交lf格式:&lt;/p&gt;
 &lt;p&gt;2.1 安装git：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pacman --needed -S bash pacman msys2-runtime  git
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$&lt;span class="w"&gt; &lt;/span&gt;pacman&lt;span class="w"&gt; &lt;/span&gt;--needed&lt;span class="w"&gt; &lt;/span&gt;-S&lt;span class="w"&gt; &lt;/span&gt;bash&lt;span class="w"&gt; &lt;/span&gt;pacman&lt;span class="w"&gt; &lt;/span&gt;msys2-runtime&lt;span class="w"&gt;  &lt;/span&gt;git
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;2.2 修改git处理回车的方式：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ git config --global core.autocrlf &lt;span class="nb"&gt;true&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$&lt;span class="w"&gt; &lt;/span&gt;git&lt;span class="w"&gt; &lt;/span&gt;config&lt;span class="w"&gt; &lt;/span&gt;--global&lt;span class="w"&gt; &lt;/span&gt;core.autocrlf&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;修改Home目录路径, Msys2默认的Home目录是Mingw64的/home/username, 但是我希望使用windows的Home目录/c/Users/username. 方法是编辑&lt;code&gt;/etc/nsswitch.conf&lt;/code&gt;, 并修改&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ db_home: windows
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$&lt;span class="w"&gt; &lt;/span&gt;db_home:&lt;span class="w"&gt; &lt;/span&gt;windows
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;/li&gt;
 &lt;li&gt;
@@ -100,23 +70,22 @@ https://unix.stackexchange.com/questions/17436/centos-on-hyperv-eth0-not-in-ifco
 &lt;p&gt;让VSCode里的继承终端（VSCode Integrated Terminal）使用Msys2，在VSCode的settings里加入以下内容:&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class="err"&gt;{&lt;/span&gt;
-        &lt;span class="ss"&gt;&amp;quot;terminal.integrated.shell.windows&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;C:\\msys64\\usr\\bin\\bash.exe&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-        &lt;span class="ss"&gt;&amp;quot;terminal.integrated.shellArgs.windows&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
-        &lt;span class="ss"&gt;&amp;quot;--login&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-        &lt;span class="p"&gt;],&lt;/span&gt;
-        &lt;span class="ss"&gt;&amp;quot;terminal.integrated.env.windows&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
-        &lt;span class="ss"&gt;&amp;quot;CHERE_INVOKING&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;1&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-        &lt;span class="ss"&gt;&amp;quot;MSYSTEM&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;MINGW64&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="ss"&gt;&amp;quot;MSYS2_PATH_TYPE&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;inherit&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-        &lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="err"&gt;}&lt;/span&gt; 
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;    {
+        &amp;quot;terminal.integrated.shell.windows&amp;quot;: &amp;quot;C:\\msys64\\usr\\bin\\bash.exe&amp;quot;,
+        &amp;quot;terminal.integrated.shellArgs.windows&amp;quot;: [
+        &amp;quot;--login&amp;quot;,
+        ],
+        &amp;quot;terminal.integrated.env.windows&amp;quot;: {
+        &amp;quot;CHERE_INVOKING&amp;quot;: &amp;quot;1&amp;quot;,
+        &amp;quot;MSYSTEM&amp;quot;: &amp;quot;MINGW64&amp;quot;,
+    &amp;quot;MSYS2_PATH_TYPE&amp;quot;: &amp;quot;inherit&amp;quot;,
+        },
+    } 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;参考：&lt;/p&gt;
 &lt;p&gt;https://getpocket.com/a/read/1169705865&lt;/p&gt;
 &lt;p&gt;https://help.github.com/articles/dealing-with-line-endings&lt;/p&gt;
 &lt;p&gt;https://groups.google.com/forum/#!topic/ustc_lug/_wL4OkWrVK4&lt;/p&gt;
 &lt;p&gt;https://stackoverflow.com/questions/33942924/how-to-change-home-directory-and-start-directory-on-msys2&lt;/p&gt;
-&lt;p&gt;https://stackoverflow.com/questions/45836650/how-do-i-integrate-msys2-shell-into-visual-studio-code-on-window/48016561#comment84105772_48016561&lt;/p&gt;</content><category term="windows"></category><category term="shell"></category></entry></feed>
+&lt;p&gt;https://stackoverflow.com/questions/45836650/how-do-i-integrate-msys2-shell-into-visual-studio-code-on-window/48016561#comment84105772_48016561&lt;/p&gt;</content><category term="Windows"></category><category term="windows"></category><category term="shell"></category></entry></feed>

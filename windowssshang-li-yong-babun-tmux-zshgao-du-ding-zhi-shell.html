@@ -58,7 +58,7 @@
         title="Permalink to Windowss上利用babun, tmux, zsh高度定制shell">Windowss上利用babun, tmux, zsh高度定制shell</a></h3>
     </header>
 
-<h6 class="subheader" title="2015-10-22T10:20:00+08:00">Thu 22 October 2015
+<h6 class="subheader" title="2015-10-22T10:20:00+08:00">四 22 十月 2015
 </h6>
 
 
@@ -66,22 +66,19 @@
 <p>之前折腾过cygwin好一阵子，最终还是觉得真的搬到开发环境确实有很多麻烦的地方，不过现在既然为了娱乐又有一台没有装任何开发环境的win10，那就娱乐一下好了。</p>
 <h1>1） 安装和配置babun</h1>
 <p>首先可以装一个定制得非常好的cygwin shell, 那就是<a href="http://babun.github.io/">babun</a>, 已经默认为你装好并配置了cygwin环境下的zsh，用起来可比普通的shell爽多了。另外有个强大的包管理器，pact命令，用起来很像rpm和apt之类的，非常方便。例如要装tmux, 那么就执行</p>
-<div class="highlight"><pre><span></span><span class="n">pact</span> <span class="n">install</span> <span class="n">tmux</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>pact install tmux
+</code></pre></div>
 
 <p>就可以成功安装了。
 不过值得注意的是pact默认用的是kernel.org的镜像，国内访问非常慢，这时通过help发现有个--mirror的参数，可以手动指定成163的：</p>
-<div class="highlight"><pre><span></span><span class="n">pact</span> <span class="c1">--mirror http://mirrors.163.com/cygwin/ install tree</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>pact --mirror http://mirrors.163.com/cygwin/ install tree
+</code></pre></div>
 
 <p>不过每次要输入这个太麻烦，可以用alias, 在home目录下新建一个.bash_aliases的文件，输入alias pact='pact --mirror http://mirrors.163.com/cygwin/'这样下次就不需要再输--mirror了。</p>
 <h1>2） 安装和配置tmux</h1>
 <p>OK第一步装babun已经完成，接下来装tmux，也非常easy，其实上面已经介绍过了</p>
-<div class="highlight"><pre><span></span><span class="n">pact</span> <span class="n">install</span> <span class="n">tmux</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>pact install tmux
+</code></pre></div>
 
 <p>然后就可以用了，输入tmux, 下面就有了一个标签栏，tmux默认的前缀按键是Ctrl+B，然后再按另一个键，随便举几个例子：</p>
 <ol>
@@ -94,16 +91,14 @@
 <p>tmux非常强大，甚至有分屏这样的操作，具体可以在帮助里看。重要的是我们现在已经可以只打开一个窗口，就在几个window之前切换了。</p>
 <p>OK, 看起来非常不错，但是用过vim的同学知道，Ctrl+b是向下翻页的按键啊，所以我想把前缀按键换成Ctrl+a怎么办, 还是配置文件，linux的一切都是配置文件。
 在Home目录创建一个.tmux.conf文件，输入以下内容：</p>
-<div class="highlight"><pre><span></span><span class="nv">unbind</span> <span class="nv">C</span><span class="o">-</span><span class="nv">b</span>
-<span class="nv">set</span> <span class="o">-</span><span class="nv">g</span> <span class="nv">prefix</span> <span class="nv">C</span><span class="o">-</span><span class="nv">a</span>
-<span class="nv">bind</span> <span class="nv">C</span><span class="o">-</span><span class="nv">a</span> <span class="k">send</span><span class="o">-</span><span class="nv">prefix</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="nv">unbind</span><span class="w"> </span><span class="nv">C</span><span class="o">-</span><span class="nv">b</span>
+<span class="nv">set</span><span class="w"> </span><span class="o">-</span><span class="nv">g</span><span class="w"> </span><span class="nv">prefix</span><span class="w"> </span><span class="nv">C</span><span class="o">-</span><span class="nv">a</span>
+<span class="nv">bind</span><span class="w"> </span><span class="nv">C</span><span class="o">-</span><span class="nv">a</span><span class="w"> </span><span class="k">send</span><span class="o">-</span><span class="nv">prefix</span>
+</code></pre></div>
 
 <p>如果你的tmux已经打开，你想重载配置，怎么操作呢? 前缀Ctrl+b ：然后标签栏就会出现一个冒号，输入</p>
-<div class="highlight"><pre><span></span><span class="k">source</span><span class="o">-</span><span class="n">file</span> <span class="o">~/</span><span class="p">.</span><span class="n">tmux</span><span class="p">.</span><span class="n">conf</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>source-file ~/.tmux.conf
+</code></pre></div>
 
 <p>回车，好了，此时前缀应该就已经变成了Ctrl+a了</p>
 <p class="subheader">分类: <a href="https://gccpacman.github.io/category/terminal.html">Terminal</a>

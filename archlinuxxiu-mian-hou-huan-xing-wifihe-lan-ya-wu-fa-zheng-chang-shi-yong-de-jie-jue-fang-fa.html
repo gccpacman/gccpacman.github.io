@@ -58,7 +58,7 @@
         title="Permalink to ArchLinux休眠后唤醒，wifi和蓝牙无法正常使用的解决方法">ArchLinux休眠后唤醒，wifi和蓝牙无法正常使用的解决方法</a></h3>
     </header>
 
-<h6 class="subheader" title="2017-12-04T10:20:00+08:00">Mon 04 December 2017
+<h6 class="subheader" title="2017-12-04T10:20:00+08:00">一 04 十二月 2017
 </h6>
 
 
@@ -69,32 +69,30 @@
 <p>找了几篇stackoverflow文章做了多次尝试，然后通过<code>lsmod　| grep wifi</code>和<code>lsmod | grep bluetooth</code>查出来的模块，依次尝试，终于找到了正确的模块。</p>
 <p>和wifi相关的模块是<code>mwifiex_pcie</code>， 和蓝牙相关的模块是<code>btusb</code>。</p>
 <p>因此要做的操作就是<code>rmmod</code>和<code>modprobe</code>，休眠后执行下面的命令后，wifi和蓝牙就可以正常工作了。</p>
-<div class="highlight"><pre><span></span> <span class="n">sudo</span> <span class="n">rmmod</span> <span class="o">-</span><span class="n">v</span> <span class="n">btusb</span>
- <span class="n">sudo</span> <span class="n">rmbanbenmod</span> <span class="o">-</span><span class="n">v</span> <span class="n">mwifiex_pcie</span>
- <span class="n">sudo</span> <span class="n">modprobe</span> <span class="o">-</span><span class="n">v</span> <span class="n">btusb</span>
- <span class="n">sudo</span> <span class="n">modprobe</span> <span class="o">-</span><span class="n">v</span> <span class="n">mwifiex_pcie</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code> sudo rmmod -v btusb
+ sudo rmbanbenmod -v mwifiex_pcie
+ sudo modprobe -v btusb
+ sudo modprobe -v mwifiex_pcie
+</code></pre></div>
 
 <p>但是这样就是每次都得再休眠后执行这些命令好像也略麻烦，最后看到又休眠后自动执行脚本的方法，<code>pm</code>和<code>systemctl</code>的休眠脚本位置不同，我对<code>pm</code>没印象，觉得arch的休眠几乎肯定是<code>systemctl</code>的，于是直接尝试了<code>systemctl</code>，<code>systemctl</code>的脚本位置在<code>/usr/lib/systemd/system-sleep</code>，这里的脚本会在sleep或者休眠时被调用。</p>
 <p>我的脚本<code>/usr/lib/systemd/system-sleep/wakeup_suspend_dev.sh</code>的内容是：</p>
-<div class="highlight"><pre><span></span>    <span class="o">#!/</span><span class="n">bin</span><span class="o">/</span><span class="n">bash</span>
-    <span class="k">case</span> <span class="err">$</span><span class="mi">1</span> <span class="k">in</span>
-        <span class="n">pre</span><span class="p">)</span>
-          <span class="n">rmmod</span> <span class="n">btusb</span>
-          <span class="n">rmmod</span> <span class="n">mwifiex_pcie</span>
-        <span class="p">;;</span>
-        <span class="n">post</span><span class="p">)</span>
-          <span class="n">modprobe</span> <span class="n">btusb</span>
-                <span class="n">modprobe</span> <span class="n">mwifiex_pcie</span>
-        <span class="p">;;</span>
-    <span class="n">esac</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>    #!/bin/bash
+    case $1 in
+        pre)
+          rmmod btusb
+          rmmod mwifiex_pcie
+        ;;
+        post)
+          modprobe btusb
+                modprobe mwifiex_pcie
+        ;;
+    esac
+</code></pre></div>
 
 <p><code>pre</code>是在休眠之前执行<code>rmmod</code>的操作，post是在休眠之后执行<code>modprobe</code>的操作。需要注意的是必须把这个脚本加可执行权限：</p>
-<div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">chmod</span> <span class="o">+</span><span class="n">x</span> <span class="n">wakeup_suspend_dev</span><span class="p">.</span><span class="n">sh</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code>sudo chmod +x wakeup_suspend_dev.sh
+</code></pre></div>
 <p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
     标签: 

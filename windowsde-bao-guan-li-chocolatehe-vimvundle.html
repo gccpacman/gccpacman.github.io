@@ -58,30 +58,27 @@
         title="Permalink to windows的包管理Chocolate和vim.Vundle">windows的包管理Chocolate和vim.Vundle</a></h3>
     </header>
 
-<h6 class="subheader" title="2017-10-22T10:20:00+08:00">Sun 22 October 2017
+<h6 class="subheader" title="2017-10-22T10:20:00+08:00">日 22 十月 2017
 </h6>
 
 
     <p>Windows的开发环境一直都会让人比较头疼，一般解决方法有用Cygwin等模拟Linux的环境，Windows 10又自带了Ubuntu On Windows 10的环境。但是都或多或少有点问题，例如Cygwin的文件目录和windows分离，Ubuntu On Windows 10不能用Nodejs，打开X应用比较麻烦，只能用终端等。</p>
 <p>经过很多尝试，我认为最友好的环境还是windows原生的环境，只是你需要偶尔告别命令行搜索某些应用需要的依赖，依次安装，这样其实绝大多数的开发环境都是可以部署的。不过还是有工具可以帮助我们，例如Windows其实也有一个类似apt-get或者<a href="https://brew.sh/">Homebrew</a>的包管理工具，叫做<a href="https://chocolatey.org/">Chocolate</a>.</p>
 <p><a href="https://chocolatey.org/install">安装Chocolate</a>只要在Powershell里写这行代码即可：</p>
-<div class="highlight"><pre><span></span><span class="k">Set</span><span class="o">-</span><span class="n">ExecutionPolicy</span> <span class="n">Bypass</span><span class="p">;</span> <span class="n">iex</span> <span class="p">((</span><span class="k">New</span><span class="o">-</span><span class="k">Object</span> <span class="k">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">WebClient</span><span class="p">).</span><span class="n">DownloadString</span><span class="p">(</span><span class="s1">&#39;https://chocolatey.org/install.ps1&#39;</span><span class="p">))</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">Set</span><span class="o">-</span><span class="n">ExecutionPolicy</span><span class="w"> </span><span class="n">Bypass</span><span class="p">;</span><span class="w"> </span><span class="n">iex</span><span class="w"> </span><span class="p">((</span><span class="n">New</span><span class="o">-</span><span class="nb nb-Type">Object</span><span class="w"> </span><span class="n">System</span><span class="o">.</span><span class="n">Net</span><span class="o">.</span><span class="n">WebClient</span><span class="p">)</span><span class="o">.</span><span class="n">DownloadString</span><span class="p">(</span><span class="s1">&#39;https://chocolatey.org/install.ps1&#39;</span><span class="p">))</span>
+</code></pre></div>
 
 <p>安装包的方法是<code>choco install &lt;package_name&gt;</code> 但是这个命令必须用admin权限的powershell来执行。于是想是不是有个windows的<code>sudo</code>，结果一查还真的有，而且可以用chocolate安装。于是admin执行powershell并运行了<code>choco install sudo</code>就安装好了。以后只要在普通用户的powershell执行<code>sudo choco install &lt;package_name&gt;</code>即可了。</p>
 <p>我用choco安装了<code>git</code>, <code>vim</code>, <code>python</code>，<code>curl</code>，<code>wget</code>等工具，安装后powershell可以执行不少的类似linux的命令了。
 但vim是裸奔状态，如果我直接把以前配置的.vimrc文件拿过来，显然用不来，甚至连Vundle包管理都用不来。Vundle的官方文档有<a href="https://github.com/VundleVim/Vundle.vim/wiki/Vundle-for-Windows">windows上配置的方法</a>就是把:</p>
-<div class="highlight"><pre><span></span><span class="k">set</span> <span class="n">rtp</span><span class="o">+=~/</span><span class="p">.</span><span class="n">vim</span><span class="o">/</span><span class="n">bundle</span><span class="o">/</span><span class="n">Vundle</span><span class="p">.</span><span class="n">vim</span>
-<span class="k">call</span> <span class="n">vundle</span><span class="o">#</span><span class="k">begin</span><span class="p">()</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+</code></pre></div>
 
 <p>改成</p>
-<div class="highlight"><pre><span></span><span class="k">set</span> <span class="n">rtp</span><span class="o">+=</span><span class="err">$</span><span class="n">HOME</span><span class="o">/</span><span class="p">.</span><span class="n">vim</span><span class="o">/</span><span class="n">bundle</span><span class="o">/</span><span class="n">Vundle</span><span class="p">.</span><span class="n">vim</span><span class="o">/</span>
-<span class="k">call</span> <span class="n">vundle</span><span class="o">#</span><span class="k">begin</span><span class="p">(</span><span class="s1">&#39;$HOME/.vim/bundle/&#39;</span><span class="p">)</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>set rtp+=$HOME/.vim/bundle/Vundle.vim/
+call vundle#begin(&#39;$HOME/.vim/bundle/&#39;)
+</code></pre></div>
 
 <p>然后再执行<code>vim +BundleInstall +qall</code>就好了。</p>
 <p class="subheader">分类: <a href="https://gccpacman.github.io/category/vim.html">Vim</a>

@@ -58,40 +58,36 @@
         title="Permalink to Windows上编译vim文件导航跳转插件command-t">Windows上编译vim文件导航跳转插件command-t</a></h3>
     </header>
 
-<h6 class="subheader" title="2017-10-24T10:20:00+08:00">Tue 24 October 2017
+<h6 class="subheader" title="2017-10-24T10:20:00+08:00">二 24 十月 2017
 </h6>
 
 
     <p>用Bundle在Windows平台上配置成功了以后，绝大多数插件都已经可以使用，但是唯独强大的文件导航<a href="https://github.com/wincent/Command-T">Command-T</a>因为Ruby开发的插件，需要手动编译。</p>
 <p><a href="https://github.com/wincent/command-t/blob/master/doc/command-t.txt">官方文档</a>写的安装编译过程代码大概是这样的，我省去了使用bundle的安装过程：</p>
-<div class="highlight"><pre><span></span>$ <span class="nb">cd</span> ~/vim<span class="se">\b</span>undle<span class="se">\c</span>ommand-t<span class="se">\r</span>uby<span class="se">\c</span>ommand-t<span class="se">\e</span>xt<span class="se">\c</span>ommand-t&gt;
-$ ruby extconf.rb
-$ make
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>~/vim<span class="se">\b</span>undle<span class="se">\c</span>ommand-t<span class="se">\r</span>uby<span class="se">\c</span>ommand-t<span class="se">\e</span>xt<span class="se">\c</span>ommand-t&gt;
+$<span class="w"> </span>ruby<span class="w"> </span>extconf.rb
+$<span class="w"> </span>make
+</code></pre></div>
 
 <p>要完成这些肯定得装ruby和make，网上的绝大多数答案也都已经过期，说的是vim7.4左右的版本，而现在已经是vim 8.0。于是只好自己探索。</p>
 <p>windows的ruby是一个特殊的安装包，和Ruby的官网都分开，网址是<a href="https://rubyinstaller.org/">RubyInstaller for windows</a>。</p>
 <p>可供下载的版本从2.0.0-p648到2.4.2-2版本。</p>
 <p>我从高版本开始尝试，安装2.4.2-2，安装成功并设置好windows环境变量，开始编译。结果发现报错 <code>You have to install development tools first.</code>. 于是我在官网发现了<code>DEVELOPMENT KIT</code>可以下载，但是居然只支持（Ruby 2.0 到 2.3），只好重新安装了Ruby 2.3, 并且按照官网development tools。</p>
 <p>假设Ruby 安装到 C:\Ruby22-x64， 配置PATH环境变量。然后将Development tools 就解压到 C:\Ruby22-x64\DevKit, 然后进入该目录执行</p>
-<div class="highlight"><pre><span></span>$ ruby dk.rb init
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>ruby<span class="w"> </span>dk.rb<span class="w"> </span>init
+</code></pre></div>
 
 <p>成功后再执行</p>
-<div class="highlight"><pre><span></span>$ ruby dk.rb install
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>ruby<span class="w"> </span>dk.rb<span class="w"> </span>install
+</code></pre></div>
 
 <p>接着进入<code>~/vim\bundle\command-t\ruby\command-t\ext\command-t&gt;</code>文件夹，执行<code>ruby extconf.rb</code>命令，发现ruby执行成功了，用choco安装make并执行make一切都顺利。
 但是进入vim一按command-t的快捷键报错，报错内容是：</p>
-<div class="highlight"><pre><span></span><span class="n">command</span><span class="o">-</span><span class="n">t</span><span class="p">.</span><span class="n">vim</span> <span class="n">could</span> <span class="k">not</span> <span class="k">load</span> <span class="n">the</span> <span class="k">C</span> <span class="n">extension</span>
-<span class="n">Please</span> <span class="n">see</span> <span class="n">INSTALLATION</span> <span class="k">and</span> <span class="n">TROUBLE</span><span class="o">-</span><span class="n">SHOOTING</span> <span class="k">in</span> <span class="n">the</span> <span class="n">help</span>
-<span class="n">Vim</span> <span class="n">Ruby</span> <span class="k">version</span><span class="p">:</span> <span class="mi">2</span><span class="p">.</span><span class="mi">2</span><span class="p">.</span><span class="mi">6</span>
-<span class="n">Expected</span> <span class="k">version</span><span class="p">:</span> <span class="mi">2</span><span class="p">.</span><span class="mi">3</span><span class="p">.</span><span class="mi">3</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">command</span><span class="o">-</span><span class="n">t</span><span class="o">.</span><span class="n">vim</span><span class="w"> </span><span class="n">could</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="nb">load</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">C</span><span class="w"> </span><span class="n">extension</span>
+<span class="n">Please</span><span class="w"> </span><span class="n">see</span><span class="w"> </span><span class="n">INSTALLATION</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">TROUBLE</span><span class="o">-</span><span class="n">SHOOTING</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">help</span>
+<span class="n">Vim</span><span class="w"> </span><span class="n">Ruby</span><span class="w"> </span><span class="n">version</span><span class="p">:</span><span class="w"> </span><span class="mf">2.2</span><span class="o">.</span><span class="mi">6</span>
+<span class="n">Expected</span><span class="w"> </span><span class="n">version</span><span class="p">:</span><span class="w"> </span><span class="mf">2.3</span><span class="o">.</span><span class="mi">3</span>
+</code></pre></div>
 
 <p>也就是vim内置的ruby版本和这个版本不匹配，看来我确实遗漏了vim内置版本的问题。于是继续降级到Ruby 2.2, 结果居然还是报错。报错内容依旧是<code>You have to install development tools first.</code> 然而我明明已经安装了development tools. </p>
 <p>求助google，结果在<a href="https://github.com/OneClick/RubyInstaller/wiki/Development-Kit">RubyInstaller wiki</a>

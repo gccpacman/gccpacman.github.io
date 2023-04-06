@@ -57,16 +57,11 @@
 
             <article>
                 <a href="https://gccpacman.github.io/zai-xu-ni-ji-li-pao-zi-yuan-zhan-yong-chao-di-de-linuxzhuo-mian-huan-jing-i3.html"><h3 class="article-title">在虚拟机里跑资源占用超低的Linux桌面环境i3</h3></a>
-<h6 class="subheader" title="2018-05-04T10:20:00+08:00">Fri 04 May 2018
+<h6 class="subheader" title="2018-05-04T10:20:00+08:00">五 04 五月 2018
 </h6>
 
 
-<p>现在的电脑是SurfacePro3，如果安装了Linux桌面环境，如Gnome或者xfce等，跑虚拟机会很吃力了，但是不是不能跑，重点是优化后把Linux的资源降下来非常流畅，而且还可以使用桌面应用。i3是个比xfce4更加轻量级的桌面管理器，Tiling的桌面可以保证所有打开的窗口都平铺满桌面，然后通过快捷键和鼠标切换应用，这边只讲述下我的安装过程，以及如何安装Vmware插件以支持剪切板，自动缩放虚拟机分辨率等:</p>
-<ol>
-<li>
-<p>首先要安装i3：</p>
-<div class="highlight"><pre><span></span>$ sudo yum install i3   <span class="c1"># centos</span>
-$ sudo apt install i3   <span class="c1"># debian &amp; ubuntu …</span></pre></div></li></ol><p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+<p>现在的电脑是SurfacePro3，如果安装了Linux桌面环境，如Gnome或者xfce等，跑虚拟机会很吃力了，但 …</p><p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
     标签: 
     <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
@@ -88,15 +83,11 @@ $ sudo apt install i3   <span class="c1"># debian &amp; ubuntu …</span></pre><
 
             <article>
                 <a href="https://gccpacman.github.io/linuxchuang-jian-zi-ding-yi-de-ying-yong-cheng-xu-qi-dong-qi.html"><h3 class="article-title">Linux创建自定义的应用程序启动器</h3></a>
-<h6 class="subheader" title="2016-01-06T10:20:00+08:00">Wed 06 January 2016
+<h6 class="subheader" title="2016-01-06T10:20:00+08:00">三 06 一月 2016
 </h6>
 
 
-<p>eclipse在linux下，下载以后不需要安装，直接在目录下执行.\eclipse就可以运行了，不过同时，每次都要切换到该目录去执行eclipse似乎也比较麻烦。
-又没有办法在应用程序菜单里找到，即使是gnome下，按super然后全局搜索，也找到这个。</p>
-<p>不过好在linux是自由的系统，自己建一个应用程序的启动器一点问题都没有。</p>
-<p>比如我的eclipse装在<code>/opt/eclipse-jee/</code>下,怎么新建一个启动器呢？</p>
-<p>所有用户共享的应用启动器的目录是<code>/usr/share/applications/</code>目录，那么用户自定义的启动器目录在哪里？找了下用户目录下的.config …</p><p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+<p>eclipse在linux下，下载以后不需要安装，直接在目录下执行.\eclipse就可以运行了，不过同时，每次 …</p><p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
     标签: 
     <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
@@ -115,14 +106,11 @@ $ sudo apt install i3   <span class="c1"># debian &amp; ubuntu …</span></pre><
 
             <article>
                 <a href="https://gccpacman.github.io/archlinuxjiang-nvidia-driverti-huan-cheng-kai-yuan-de-nouveaujie-jue-xian-qia-qu-dong-wen-ti.html"><h3 class="article-title">ArchLinux将nvidia driver替换成开源的nouveau解决显卡驱动问题</h3></a>
-<h6 class="subheader" title="2016-01-05T10:20:00+08:00">Tue 05 January 2016
+<h6 class="subheader" title="2016-01-05T10:20:00+08:00">二 05 一月 2016
 </h6>
 
 
-<p>昨天还装完arch兴高采烈，今天就差点放弃整个系统，罪魁祸首就是当年被linus喷了的nvidia.</p>
-<p>Archlinux装了使用nvidia驱动，一开始发现根本就没有加载，装了和没装没啥区别，但是跑的好好的阿跑的好好的，结果不小心手贱点了<code>nvidia-xconfig</code>的应用，莫名其妙的起不来了。（这个原因我想了半天才想出来，不然我实在是无力吐槽他妈跑了一天多好好的什么也没干突然就起步来的情况，一度怀疑是显卡硬件坏了）</p>
-<p>于是抢救三个多小时，<code>/var/log/xorg.0.log</code>里的报错也莫名其妙，比如:</p>
-<div class="highlight"><pre><span></span><span class="k">not</span> <span class="n">detect</span> <span class="n">device …</span></pre></div><p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+<p>昨天还装完arch兴高采烈，今天就差点放弃整个系统，罪魁祸首就是当年 …</p><p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
     标签: 
     <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
@@ -142,28 +130,20 @@ $ sudo apt install i3   <span class="c1"># debian &amp; ubuntu …</span></pre><
 
             <article>
                 <a href="https://gccpacman.github.io/linuxda-jian-vncfu-wu-qi.html"><h3 class="article-title">Linux搭建VNC服务器</h3></a>
-<h6 class="subheader" title="2016-01-05T10:20:00+08:00">Tue 05 January 2016
+<h6 class="subheader" title="2016-01-05T10:20:00+08:00">二 05 一月 2016
 </h6>
 
 
 <p>服务器端：</p>
 <p>1）在终端安装tigervnc：</p>
-<div class="highlight"><pre><span></span>$ sudo apt-get install tigervnc
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>tigervnc
+</code></pre></div>
 
 <p>2）启动tigervnc</p>
-<div class="highlight"><pre><span></span>$ vncserver
-</pre></div>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>vncserver
+</code></pre></div>
 
-
-<p>提示你输入vnc的密码：</p>
-<div class="highlight"><pre><span></span><span class="n">enter</span> <span class="n">your</span> <span class="n">password</span> (<span class="n">length</span> <span class="mi">8</span>)
-</pre></div>
-
-
-<p>然后终端会显示New 'X' desktop is kodi-kodibuntu:1</p>
-<p>3）（可选）如果需要改变桌面 …</p><p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+<p>提示你输入 …</p><p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
     标签: 
     <a href="https://gccpacman.github.io/tag/linux.html">linux </a>

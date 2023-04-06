@@ -57,20 +57,11 @@
 
             <article>
                 <a href="https://gccpacman.github.io/wslwu-feng-shi-yong-windowsde-vagrant.html"><h3 class="article-title">WSL无缝使用windows的Vagrant</h3></a>
-<h6 class="subheader" title="2019-09-25T10:23:00+08:00">Wed 25 September 2019
+<h6 class="subheader" title="2019-09-25T10:23:00+08:00">三 25 九月 2019
 </h6>
 
 
-<p>同时安装windows和wsl下的linux版本的vagrant，配置环境变量就可以使用。linux下vagrant的好处很多，首先文件的换行和权限的烦恼没有了，然后可以使用一些revision工具，例如ansible，在vagrantfile初始化的时候带来很多好处</p>
-<p>下载地址：https://www.vagrantup.com/downloads.html</p>
-<ol>
-<li>Windows下安装就直接exe了</li>
-<li>
-<p>Linux我的是Ubuntu，因此就下官网的deb包</p>
-<p>dpkg -i vagrant_amd64.deb</p>
-</li>
-<li>
-<p>需要在Linux的Home目录下的<code>.bashrc</code>或者<code>.zshrc …</code></p></li></ol><p class="subheader">分类: <a href="https://gccpacman.github.io/category/wsl.html">WSL</a>
+<p>同时安装windows和wsl下的linux版本的vagrant，配置环境变量就可以使用。linux下vagrant的好处很多，首先文件的换行和 …</p><p class="subheader">分类: <a href="https://gccpacman.github.io/category/wsl.html">WSL</a>
 
     标签: 
     <a href="https://gccpacman.github.io/tag/windows.html">windows </a>
@@ -92,25 +83,13 @@
 
             <article>
                 <a href="https://gccpacman.github.io/windowszai-hypervan-zhuang-centos7bing-pei-zhi-wang-luo.html"><h3 class="article-title">Windows在Hyperv安装Centos7并配置网络</h3></a>
-<h6 class="subheader" title="2019-05-07T11:13:00+08:00">Tue 07 May 2019
+<h6 class="subheader" title="2019-05-07T11:13:00+08:00">二 07 五月 2019
 </h6>
 
 
 <p>Hyper-V安装Centos，网卡选择Hyper-V的Default Switch。
 Default Switch默认是可以连接外网的，如果是windows机器不用配置直接可以联网，但是Linux不行，原因是网卡eth0默认没有配置dhcp：</p>
-<p>可以通过以下几部配置：</p>
-<ol>
-<li>
-<p>编辑<code>/etc/sysconfig/network-scripts/ifcfg-eth0</code>,修改以下三项:</p>
-<div class="highlight"><pre><span></span><span class="n">DEVICE</span><span class="o">=</span><span class="n">eth0</span>
-<span class="n">BOOTPROTO</span><span class="o">=</span><span class="n">dhcp</span>
-<span class="n">ONBOOT</span><span class="o">=</span><span class="n">yes</span>
-</pre></div>
-
-
-</li>
-<li>
-<p>编辑<code>/etc/sysconfig/network …</code></p></li></ol><p class="subheader">分类: <a href="https://gccpacman.github.io/category/windows.html">Windows</a>
+<p>可以通 …</p><p class="subheader">分类: <a href="https://gccpacman.github.io/category/windows.html">Windows</a>
 
     标签: 
     <a href="https://gccpacman.github.io/tag/windows.html">windows </a>
@@ -130,26 +109,24 @@ Default Switch默认是可以连接外网的，如果是windows机器不用配�
 
             <article>
                 <a href="https://gccpacman.github.io/putty-tmuxduo-chuang-kou-ke-yong-pei-zhi.html"><h3 class="article-title">putty + tmux多窗口可用配置</h3></a>
-<h6 class="subheader" title="2018-08-28T10:20:00+08:00">Tue 28 August 2018
+<h6 class="subheader" title="2018-08-28T10:20:00+08:00">二 28 八月 2018
 </h6>
 
 
 <ul>
 <li>
 <p>putty的执行命令填入如下命令，tmux名称同session名称，以便开多个putty窗口时候识别</p>
-<div class="highlight"><pre><span></span>$ tmux new -A -s <span class="o">{</span>session_name<span class="o">}</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>tmux<span class="w"> </span>new<span class="w"> </span>-A<span class="w"> </span>-s<span class="w"> </span><span class="o">{</span>session_name<span class="o">}</span>
+</code></pre></div>
 
 </li>
 <li>
 <p>添加.tmux.conf配置</p>
-<div class="highlight"><pre><span></span><span class="nv">echo</span> <span class="s2">&quot;</span>
-##########################################
-# <span class="nv">STATUS</span> <span class="nv">BAR</span>
-<span class="nv">set</span> <span class="o">-</span><span class="nv">g</span> <span class="nv">status</span><span class="o">-</span><span class="nv">keys</span> <span class="nv">vi</span>
-<span class="nv">set</span> <span class="o">-</span><span class="nv">g</span> <span class="nv">status</span><span class="o">-</span><span class="nv">interval</span> <span class="mi">1</span>
-<span class="nv">set …</span></pre></div></li></ul><p class="subheader">分类: <a href="https://gccpacman.github.io/category/terminal.html">Terminal</a>
+<div class="highlight"><pre><span></span><code><span class="n">echo</span><span class="w"> </span><span class="ss">&quot;</span>
+<span class="ss">##########################################</span>
+<span class="ss"># STATUS BAR</span>
+<span class="ss">set -g status-keys vi</span>
+<span class="ss">set …</span></code></pre></div></li></ul><p class="subheader">分类: <a href="https://gccpacman.github.io/category/terminal.html">Terminal</a>
 
     标签: 
     <a href="https://gccpacman.github.io/tag/tmux.html">tmux </a>
@@ -169,22 +146,11 @@ Default Switch默认是可以连接外网的，如果是windows机器不用配�
 
             <article>
                 <a href="https://gccpacman.github.io/windowsan-zhuang-msys32pei-zhi-gitdeng-kai-fa-huan-jing-bing-ji-cheng-vscode.html"><h3 class="article-title">Windows安装MSys32配置Git等开发环境并集成VSCode</h3></a>
-<h6 class="subheader" title="2018-02-01T10:20:00+08:00">Thu 01 February 2018
+<h6 class="subheader" title="2018-02-01T10:20:00+08:00">四 01 二月 2018
 </h6>
 
 
-<p>在不久之前发现了Msys2，基于Cygwin但是却又有一个让我觉得无比美好的包管理器Pacman(和Arch Linux的一样)，于是决定试试。但是真的用于Windows的终端还有很多麻烦的地方要解决，主要是以下几点：
-1. Git的ssh_keygen配置，你和windows自己的CMD里的ssh_keygen能否共用
-2. Msys用的换行符是和Linux一样的LF，而Windows的是CRLF
-3. Python能不能直接用Windows的Python而不用模拟Unix环境的Python（有很多的bug）
-4. 能否和我目前用的最多的VSCode编辑器无缝集成</p>
-<p>经过一段时间的研究，每个问题都得到了很好的解决，目前来讲非常的完美，在这里分享一下：</p>
-<ol>
-<li>
-<p>下载并安装 <a href="http://www.msys2.org/">Msys2</a></p>
-</li>
-<li>
-<p>安装和配置 …</p></li></ol><p class="subheader">分类: <a href="https://gccpacman.github.io/category/windows.html">Windows</a>
+<p>在不久之前发现了Msys2，基于Cygwin但是却又有一个让我觉得无比美好的包管理器Pacman(和Arch Linux的一样)，于是决定试试。但是真的 …</p><p class="subheader">分类: <a href="https://gccpacman.github.io/category/windows.html">Windows</a>
 
     标签: 
     <a href="https://gccpacman.github.io/tag/windows.html">windows </a>
@@ -202,14 +168,11 @@ Default Switch默认是可以连接外网的，如果是windows机器不用配�
 
             <article>
                 <a href="https://gccpacman.github.io/windowsshang-bian-yi-vimwen-jian-dao-hang-tiao-zhuan-cha-jian-command-t.html"><h3 class="article-title">Windows上编译vim文件导航跳转插件command-t</h3></a>
-<h6 class="subheader" title="2017-10-24T10:20:00+08:00">Tue 24 October 2017
+<h6 class="subheader" title="2017-10-24T10:20:00+08:00">二 24 十月 2017
 </h6>
 
 
-<p>用Bundle在Windows平台上配置成功了以后，绝大多数插件都已经可以使用，但是唯独强大的文件导航<a href="https://github.com/wincent/Command-T">Command-T</a>因为Ruby开发的插件，需要手动编译。</p>
-<p><a href="https://github.com/wincent/command-t/blob/master/doc/command-t.txt">官方文档</a>写的安装编译过程代码大概是这样的，我省去了使用bundle的安装过程：</p>
-<div class="highlight"><pre><span></span>$ <span class="nb">cd</span> ~/vim<span class="se">\b</span>undle<span class="se">\c</span>ommand-t<span class="se">\r</span>uby<span class="se">\c</span>ommand-t<span class="se">\e</span>xt<span class="se">\c</span>ommand-t&gt;
-$ ruby extconf …</pre></div><p class="subheader">分类: <a href="https://gccpacman.github.io/category/vim.html">Vim</a>
+<p>用Bundle在Windows平台上配置成功了以后，绝大多数插件都已经可以使用，但是唯独强大的文件导 …</p><p class="subheader">分类: <a href="https://gccpacman.github.io/category/vim.html">Vim</a>
 
     标签: 
     <a href="https://gccpacman.github.io/tag/windows.html">windows </a>
@@ -227,12 +190,11 @@ $ ruby extconf …</pre></div><p class="subheader">分类: <a href="https://gccp
 
             <article>
                 <a href="https://gccpacman.github.io/windowsde-bao-guan-li-chocolatehe-vimvundle.html"><h3 class="article-title">windows的包管理Chocolate和vim.Vundle</h3></a>
-<h6 class="subheader" title="2017-10-22T10:20:00+08:00">Sun 22 October 2017
+<h6 class="subheader" title="2017-10-22T10:20:00+08:00">日 22 十月 2017
 </h6>
 
 
-<p>Windows的开发环境一直都会让人比较头疼，一般解决方法有用Cygwin等模拟Linux的环境，Windows 10又自带了Ubuntu On Windows 10的环境。但是都或多或少有点问题，例如Cygwin的文件目录和windows分离，Ubuntu On Windows 10不能用Nodejs，打开X应用比较麻烦，只能用终端等。</p>
-<p>经过很多尝试，我认为最友好的环境还是windows原生的环境，只是你需要偶尔告别命令行搜索某些应用需要的依赖，依次安装，这样其实绝大多数的开发环境都是可以部署的。不过还是有工具可以帮助我们，例如Windows其实也有一个类似apt-get或者<a href="https://brew.sh/">Homebrew</a>的包管理工具，叫做 …</p><p class="subheader">分类: <a href="https://gccpacman.github.io/category/vim.html">Vim</a>
+<p>Windows的开发环境一直都会让人比较头疼，一般解决方法有用Cygwin等模拟Linux的环境，Windows 10又自带了Ubuntu On Windows 10的环境。但是都或多或少有点问 …</p><p class="subheader">分类: <a href="https://gccpacman.github.io/category/vim.html">Vim</a>
 
     标签: 
     <a href="https://gccpacman.github.io/tag/windows.html">windows </a>

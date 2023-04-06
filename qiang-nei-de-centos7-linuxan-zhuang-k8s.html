@@ -58,95 +58,86 @@
         title="Permalink to 墙内的Centos7 Linux安装K8S">墙内的Centos7 Linux安装K8S</a></h3>
     </header>
 
-<h6 class="subheader" title="2019-05-07T11:13:00+08:00">Tue 07 May 2019
+<h6 class="subheader" title="2019-05-07T11:13:00+08:00">二 07 五月 2019
 </h6>
 
 
     <ol>
 <li>
 <p>安装基础构建依赖</p>
-<div class="highlight"><pre><span></span>$ yum -y install yum-utils device-mapper-persistent-data lvm2
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>yum<span class="w"> </span>-y<span class="w"> </span>install<span class="w"> </span>yum-utils<span class="w"> </span>device-mapper-persistent-data<span class="w"> </span>lvm2
+</code></pre></div>
 
 </li>
 <li>
 <p>安装Docker</p>
-<div class="highlight"><pre><span></span>$ yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-$ yum -y install docker-ce
-$ systemctl start docker <span class="o">&amp;&amp;</span> systemctl <span class="nb">enable</span> docker 
-$ docker images   <span class="c1"># 确定docker命令正常</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="o">$</span><span class="w"> </span><span class="n">yum</span><span class="o">-</span><span class="n">config</span><span class="o">-</span><span class="n">manager</span><span class="w"> </span><span class="o">--</span><span class="n">add</span><span class="o">-</span><span class="n">repo</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">download</span><span class="o">.</span><span class="n">docker</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">linux</span><span class="o">/</span><span class="n">centos</span><span class="o">/</span><span class="n">docker</span><span class="o">-</span><span class="n">ce</span><span class="o">.</span><span class="n">repo</span>
+<span class="o">$</span><span class="w"> </span><span class="n">yum</span><span class="w"> </span><span class="o">-</span><span class="n">y</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">docker</span><span class="o">-</span><span class="n">ce</span>
+<span class="o">$</span><span class="w"> </span><span class="n">systemctl</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">systemctl</span><span class="w"> </span><span class="n">enable</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span>
+<span class="o">$</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="n">images</span><span class="w">   </span><span class="c1"># 确定docker命令正常</span>
+</code></pre></div>
 
 </li>
 <li>
 <p>安装Kubernetes</p>
 <p>3.1 安装kubeadm, kubelet, kubectl</p>
-<div class="highlight"><pre><span></span><span class="err">$</span><span class="w"> </span><span class="n">vim</span><span class="w"> </span><span class="n">kubernetes</span><span class="p">.</span><span class="n">repo</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="err">$</span><span class="w"> </span><span class="n">vim</span><span class="w"> </span><span class="n">kubernetes</span><span class="p">.</span><span class="n">repo</span>
 
-<span class="o">[</span><span class="n">kubernetes</span><span class="o">]</span><span class="w"></span>
-<span class="n">name</span><span class="o">=</span><span class="n">Kubernetes</span><span class="w"></span>
-<span class="n">baseurl</span><span class="o">=</span><span class="nl">https</span><span class="p">:</span><span class="o">//</span><span class="n">mirrors</span><span class="p">.</span><span class="n">aliyun</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">kubernetes</span><span class="o">/</span><span class="n">yum</span><span class="o">/</span><span class="n">repos</span><span class="o">/</span><span class="n">kubernetes</span><span class="o">-</span><span class="n">el7</span><span class="o">-</span><span class="n">x86_64</span><span class="w"></span>
-<span class="n">enabled</span><span class="o">=</span><span class="mi">1</span><span class="w"></span>
-<span class="n">gpgcheck</span><span class="o">=</span><span class="mi">0</span><span class="w"></span>
+<span class="o">[</span><span class="n">kubernetes</span><span class="o">]</span>
+<span class="n">name</span><span class="o">=</span><span class="n">Kubernetes</span>
+<span class="n">baseurl</span><span class="o">=</span><span class="nl">https</span><span class="p">:</span><span class="o">//</span><span class="n">mirrors</span><span class="p">.</span><span class="n">aliyun</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">kubernetes</span><span class="o">/</span><span class="n">yum</span><span class="o">/</span><span class="n">repos</span><span class="o">/</span><span class="n">kubernetes</span><span class="o">-</span><span class="n">el7</span><span class="o">-</span><span class="n">x86_64</span>
+<span class="n">enabled</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">gpgcheck</span><span class="o">=</span><span class="mi">0</span>
 
-<span class="err">$</span><span class="w"> </span><span class="n">yum</span><span class="w"> </span><span class="o">-</span><span class="n">y</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">kubelet</span><span class="w"> </span><span class="n">kubeadm</span><span class="w"> </span><span class="n">kubectl</span><span class="w"> </span><span class="n">kubernetes</span><span class="o">-</span><span class="n">cni</span><span class="w"></span>
-<span class="err">$</span><span class="w"> </span><span class="n">systemctl</span><span class="w"> </span><span class="n">enable</span><span class="w"> </span><span class="n">kubelet</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">systemctl</span><span class="w"> </span><span class="k">start</span><span class="w"> </span><span class="n">kubelet</span><span class="w"></span>
-</pre></div>
-
+<span class="err">$</span><span class="w"> </span><span class="n">yum</span><span class="w"> </span><span class="o">-</span><span class="n">y</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">kubelet</span><span class="w"> </span><span class="n">kubeadm</span><span class="w"> </span><span class="n">kubectl</span><span class="w"> </span><span class="n">kubernetes</span><span class="o">-</span><span class="n">cni</span>
+<span class="err">$</span><span class="w"> </span><span class="n">systemctl</span><span class="w"> </span><span class="n">enable</span><span class="w"> </span><span class="n">kubelet</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">systemctl</span><span class="w"> </span><span class="k">start</span><span class="w"> </span><span class="n">kubelet</span>
+</code></pre></div>
 
 <p>3.2 pull下来kubernetes要要到的镜像，因为k8s.gcr.io这个域名被墙，需要从阿里云pull下来然后重新打tag，参考文档里的几篇版本都对不上，首先可以通过这个命令<code>列出</code>确定需要pull的镜像和版本：</p>
-<div class="highlight"><pre><span></span>$ kubeadm config images list
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>kubeadm<span class="w"> </span>config<span class="w"> </span>images<span class="w"> </span>list
+</code></pre></div>
 
 <p>3.3 根据上一步列出的镜像和版本号，参考<code>https://github.com/cookcodeblog/k8s-deploy</code>的目录<code>kubeadm_v1.13.0/04_pull_kubernetes_images_from_aliyun.sh</code>编写一个脚本，注意替换成你需要的版本，然后执行。</p>
 <p>3.4 关闭swap，注释掉<code>/etc/fstab</code>里的swap一行，重启后生效，并关闭selinux</p>
-<div class="highlight"><pre><span></span>$ swapoff -a
-$ setenforce <span class="m">0</span>
-$ sed -i <span class="s1">&#39;s/SELINUX=permissive/SELINUX=disabled/&#39;</span> /etc/sysconfig/selinux
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>swapoff<span class="w"> </span>-a
+$<span class="w"> </span>setenforce<span class="w"> </span><span class="m">0</span>
+$<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/SELINUX=permissive/SELINUX=disabled/&#39;</span><span class="w"> </span>/etc/sysconfig/selinux
+</code></pre></div>
 
 <p>3.5 配置网络转发</p>
-<div class="highlight"><pre><span></span>$ vim /etc/sysctl.d/k8s.conf
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>vim<span class="w"> </span>/etc/sysctl.d/k8s.conf
 
-net.bridge.bridge-nf-call-ip6tables <span class="o">=</span> <span class="m">1</span>
-net.bridge.bridge-nf-call-iptables <span class="o">=</span> <span class="m">1</span>
-net.ipv4.conf.all.forwarding <span class="o">=</span> <span class="m">1</span>
-vm.swappiness <span class="o">=</span> <span class="m">0</span>
+net.bridge.bridge-nf-call-ip6tables<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span>
+net.bridge.bridge-nf-call-iptables<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span>
+net.ipv4.conf.all.forwarding<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span>
+vm.swappiness<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
 
-$ sysctl --system  <span class="c1"># 确定配置生效</span>
-</pre></div>
-
+$<span class="w"> </span>sysctl<span class="w"> </span>--system<span class="w">  </span><span class="c1"># 确定配置生效</span>
+</code></pre></div>
 
 <p>3.6 初始化kubeadm，等待命令执行完成</p>
-<div class="highlight"><pre><span></span>$ kubeadm init
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>kubeadm<span class="w"> </span>init
+</code></pre></div>
 
 <p>3.7 配置kubectl</p>
-<div class="highlight"><pre><span></span>$ mkdir -p <span class="nv">$HOME</span>/.kube
-$ cp -i /etc/kubernetes/admin.conf <span class="nv">$HOME</span>/.kube/config
-$ chown <span class="k">$(</span>id -u<span class="k">)</span>:<span class="k">$(</span>id -g<span class="k">)</span> <span class="nv">$HOME</span>/.kube/config
-$ kubectl get nodes <span class="c1"># 确认kubectl配置成功</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="nv">$HOME</span>/.kube
+$<span class="w"> </span>cp<span class="w"> </span>-i<span class="w"> </span>/etc/kubernetes/admin.conf<span class="w"> </span><span class="nv">$HOME</span>/.kube/config
+$<span class="w"> </span>chown<span class="w"> </span><span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span>:<span class="k">$(</span>id<span class="w"> </span>-g<span class="k">)</span><span class="w"> </span><span class="nv">$HOME</span>/.kube/config
+$<span class="w"> </span>kubectl<span class="w"> </span>get<span class="w"> </span>nodes<span class="w"> </span><span class="c1"># 确认kubectl配置成功</span>
+</code></pre></div>
 
 </li>
 <li>
 <p>在Kubenetes里安装Flannel网络</p>
 <p>4.1 pull下Flannel镜像过程因为防火墙的原因依旧类似3.3操作，参考<code>https://github.com/cookcodeblog/k8s-deploy/tree/master/kubeadm_v1.13.0</code>里的<code>kubeadm_v1.13.0/pull_flannel_images_from_aliyun.sh</code>写一个脚本文件，这次的版本就用<code>v0.11.0</code>就好，便写完成执行脚本</p>
 <p>4.2 安装Flannel网络</p>
-<div class="highlight"><pre><span></span><span class="n">wget</span> <span class="o">-</span><span class="n">O</span> <span class="n">kube</span><span class="o">-</span><span class="n">flannel</span><span class="p">.</span><span class="n">yml</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">raw</span><span class="p">.</span><span class="n">githubusercontent</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">coreos</span><span class="o">/</span><span class="n">flannel</span><span class="o">/</span><span class="n">a70459be0084506e4ec919aa1c114638878db11b</span><span class="o">/</span><span class="n">Documentation</span><span class="o">/</span><span class="n">kube</span><span class="o">-</span><span class="n">flannel</span><span class="p">.</span><span class="n">yml</span>
-<span class="n">kubectl</span> <span class="n">apply</span> <span class="o">-</span><span class="n">f</span> <span class="n">kube</span><span class="o">-</span><span class="n">flannel</span><span class="p">.</span><span class="n">yml</span>
+<div class="highlight"><pre><span></span><code>wget -O kube-flannel.yml https://raw.githubusercontent.com/coreos/flannel/a70459be0084506e4ec919aa1c114638878db11b/Documentation/kube-flannel.yml
+kubectl apply -f kube-flannel.yml
 
-<span class="o">#</span> <span class="err">过几十秒确认是否启动成功</span>
-<span class="n">kubectl</span> <span class="k">get</span> <span class="n">pods</span> <span class="c1">--all-namespaces</span>
-<span class="n">kubectl</span> <span class="k">get</span> <span class="n">cs</span>
-</pre></div>
-
+# 过几十秒确认是否启动成功
+kubectl get pods --all-namespaces
+kubectl get cs
+</code></pre></div>
 
 </li>
 </ol>

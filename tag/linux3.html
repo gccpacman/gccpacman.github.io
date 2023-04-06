@@ -57,20 +57,38 @@
 
 
             <article>
+                <a href="https://gccpacman.github.io/dockerda-jian-openvpn-server.html"><h3 class="article-title">Docker搭建openvpn server</h3></a>
+<h6 class="subheader" title="2015-12-29T10:20:00+08:00">二 29 十二月 2015
+</h6>
+
+
+<p>I always intersted in build services in my own VPS.
+specially things like a server can help me free browser the internet.
+But sometimes the …</p><p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+
+    标签: 
+    <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
+    <a href="https://gccpacman.github.io/tag/vpn.html">vpn </a>
+    <a href="https://gccpacman.github.io/tag/openvpn.html">openvpn </a>
+</p>
+
+
+
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/dockerda-jian-openvpn-server.html">阅读全文</a>
+                <hr  class="gradient"/>
+            </article>
+
+        
+
+
+            <article>
                 <a href="https://gccpacman.github.io/linuxli-yong-sshfan-xiang-duan-kou-zhuan-fa-bao-lu-nei-wang-duan-kou.html"><h3 class="article-title">Linux利用ssh反向端口转发暴露内网端口</h3></a>
-<h6 class="subheader" title="2015-10-30T10:20:00+08:00">Fri 30 October 2015
+<h6 class="subheader" title="2015-10-30T10:20:00+08:00">五 30 十月 2015
 </h6>
 
 
 <p>从本地Host用SSH连接到目标主机，怎么让目标主机也可以连接本地的SSH呢？
-答案很简单，只要把本地主机的SSH端口转发到目标主机即可。可以先查看一下SSH命令的man手册:</p>
-<div class="highlight"><pre><span></span><span class="n">man</span> <span class="n">ssh</span>
-</pre></div>
-
-
-<p>注意里面的R参数，就是要用到的参数：</p>
-<div class="highlight"><pre><span></span><span class="o">-</span><span class="n">R</span> <span class="p">[</span><span class="n">bind_address</span><span class="p">:]</span><span class="n">port</span><span class="p">:</span><span class="k">host</span><span class="p">:</span><span class="n">hostport</span>
-         <span class="n">Specifies</span> <span class="n">that</span> <span class="n">the</span> <span class="n">given</span> <span class="n">port</span> <span class="k">on</span> <span class="n">the</span> <span class="n">remote</span> <span class="p">(</span><span class="n">server</span><span class="p">)</span> <span class="k">host</span> <span class="k">is …</span></pre></div><p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+答案很简单 …</p><p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
     标签: 
     <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
@@ -89,18 +107,11 @@
 
             <article>
                 <a href="https://gccpacman.github.io/tmuxde-fu-zhi-he-nian-tie.html"><h3 class="article-title">Tmux的复制和黏贴</h3></a>
-<h6 class="subheader" title="2015-10-29T10:20:00+08:00">Thu 29 October 2015
+<h6 class="subheader" title="2015-10-29T10:20:00+08:00">四 29 十月 2015
 </h6>
 
 
-<p>tmux确实是一个吊炸的东西，功能和那个和他类似的鼻祖screen相比，确实多出了不少。比如他又一个可以对终端的内容进行复制和黏贴的功能。
-这里假定你设置的快捷键前缀是Ctrl+a:
-进行复制的操作是：</p>
-<ol>
-<li><code>Ctrl+a [</code>开始复制</li>
-<li>把光标移动到开始复制的位置(上下左右键，或者Ctrl+n/p/b/f键移动光标)</li>
-<li><code>Ctrl+Space</code>  开始选择内容，类似vim的按下V的效果</li>
-<li>完成选择，<code>Alt+w</code> 完成复制 …</li></ol><p class="subheader">分类: <a href="https://gccpacman.github.io/category/terminal.html">Terminal</a>
+<p>tmux确实是一个吊炸的东西，功能和那个和他类似的鼻祖screen相比，确实多出了不少。比如他又 …</p><p class="subheader">分类: <a href="https://gccpacman.github.io/category/terminal.html">Terminal</a>
 
     标签: 
     <a href="https://gccpacman.github.io/tag/tmux.html">tmux </a>
@@ -118,21 +129,20 @@
 
             <article>
                 <a href="https://gccpacman.github.io/linuxjiang-socksdai-li-zhuan-huan-cheng-httpdai-li.html"><h3 class="article-title">Linux将Socks代理转换成Http代理</h3></a>
-<h6 class="subheader" title="2015-05-14T10:20:00+08:00">Thu 14 May 2015
+<h6 class="subheader" title="2015-05-14T10:20:00+08:00">四 14 五月 2015
 </h6>
 
 
 <p>安装polipo：</p>
-<div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="k">get</span> <span class="k">update</span>
-<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="k">get</span> <span class="n">install</span> <span class="n">polipo</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>sudo apt-get update
+sudo apt-get install polipo
+</code></pre></div>
 
 <p>编辑polipo配置文件 <code>/etc/polipo/config</code> ：</p>
-<div class="highlight"><pre><span></span>    ### <span class="nv">Basic</span> <span class="nv">configuration</span>
+<div class="highlight"><pre><span></span><code><span class="w">    </span>###<span class="w"> </span><span class="nv">Basic</span><span class="w"> </span><span class="nv">configuration</span>
 
-    # <span class="nv">Add</span> <span class="nv">your</span> <span class="nv">proxy</span><span class="s1">&#39;</span><span class="s">s address</span>
-    <span class="nv">proxyAddress</span> <span class="o">=</span> <span class="mi">192</span>.<span class="mi">168</span>.<span class="mi">0 …</span></pre></div><p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+<span class="w">    </span>#<span class="w"> </span><span class="nv">Add</span><span class="w"> </span><span class="nv">your</span><span class="w"> </span><span class="nv">proxy</span><span class="err">&#39;s address</span>
+<span class="err">    proxyAddress = 192 …</span></code></pre></div><p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
     标签: 
     <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
@@ -150,17 +160,17 @@
 
             <article>
                 <a href="https://gccpacman.github.io/linuxda-jian-pptp-vpn-server.html"><h3 class="article-title">Linux搭建PPTP VPN Server</h3></a>
-<h6 class="subheader" title="2015-04-19T10:20:00+08:00">Sun 19 April 2015
+<h6 class="subheader" title="2015-04-19T10:20:00+08:00">日 19 四月 2015
 </h6>
 
 
 <ol>
 <li>
 <p>安装server</p>
-<div class="highlight"><pre><span></span><span class="o">#</span> <span class="k">On</span> <span class="n">CentOS</span> <span class="mi">6</span> <span class="n">x64</span><span class="p">:</span>
-<span class="n">rpm</span> <span class="o">-</span><span class="n">i</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">poptop</span><span class="p">.</span><span class="n">sourceforge</span><span class="p">.</span><span class="n">net</span><span class="o">/</span><span class="n">yum</span><span class="o">/</span><span class="k">stable</span><span class="o">/</span><span class="n">rhel6</span><span class="o">/</span><span class="n">pptp</span><span class="o">-</span><span class="n">release</span><span class="o">-</span><span class="k">current</span><span class="p">.</span><span class="n">noarch</span><span class="p">.</span><span class="n">rpm</span>
-<span class="n">yum</span> <span class="o">-</span><span class="n">y</span> <span class="n">install</span> <span class="n">pptpd</span>
-<span class="o">#</span> <span class="k">On</span> <span class="n">Ubuntu …</span></pre></div></li></ol><p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+<div class="highlight"><pre><span></span><code># On CentOS 6 x64:
+rpm -i http://poptop.sourceforge.net/yum/stable/rhel6/pptp-release-current.noarch.rpm
+yum -y install pptpd
+# On Ubuntu …</code></pre></div></li></ol><p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
     标签: 
     <a href="https://gccpacman.github.io/tag/linux.html">linux </a>

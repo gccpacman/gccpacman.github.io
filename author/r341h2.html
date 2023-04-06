@@ -57,17 +57,49 @@
 
 
             <article>
-                <a href="https://gccpacman.github.io/zai-xu-ni-ji-li-pao-zi-yuan-zhan-yong-chao-di-de-linuxzhuo-mian-huan-jing-i3.html"><h3 class="article-title">在虚拟机里跑资源占用超低的Linux桌面环境i3</h3></a>
-<h6 class="subheader" title="2018-05-04T10:20:00+08:00">Fri 04 May 2018
+                <a href="https://gccpacman.github.io/putty-tmuxduo-chuang-kou-ke-yong-pei-zhi.html"><h3 class="article-title">putty + tmux多窗口可用配置</h3></a>
+<h6 class="subheader" title="2018-08-28T10:20:00+08:00">二 28 八月 2018
 </h6>
 
 
-<p>现在的电脑是SurfacePro3，如果安装了Linux桌面环境，如Gnome或者xfce等，跑虚拟机会很吃力了，但是不是不能跑，重点是优化后把Linux的资源降下来非常流畅，而且还可以使用桌面应用。i3是个比xfce4更加轻量级的桌面管理器，Tiling的桌面可以保证所有打开的窗口都平铺满桌面，然后通过快捷键和鼠标切换应用，这边只讲述下我的安装过程，以及如何安装Vmware插件以支持剪切板，自动缩放虚拟机分辨率等:</p>
-<ol>
+<ul>
 <li>
-<p>首先要安装i3：</p>
-<div class="highlight"><pre><span></span>$ sudo yum install i3   <span class="c1"># centos</span>
-$ sudo apt install i3   <span class="c1"># debian &amp; ubuntu …</span></pre></div></li></ol><p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+<p>putty的执行命令填入如下命令，tmux名称同session名称，以便开多个putty窗口时候识别</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>tmux<span class="w"> </span>new<span class="w"> </span>-A<span class="w"> </span>-s<span class="w"> </span><span class="o">{</span>session_name<span class="o">}</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>添加.tmux.conf配置</p>
+<div class="highlight"><pre><span></span><code><span class="n">echo</span><span class="w"> </span><span class="ss">&quot;</span>
+<span class="ss">##########################################</span>
+<span class="ss"># STATUS BAR</span>
+<span class="ss">set -g status-keys vi</span>
+<span class="ss">set …</span></code></pre></div></li></ul><p class="subheader">分类: <a href="https://gccpacman.github.io/category/terminal.html">Terminal</a>
+
+    标签: 
+    <a href="https://gccpacman.github.io/tag/tmux.html">tmux </a>
+    <a href="https://gccpacman.github.io/tag/putty.html">putty </a>
+    <a href="https://gccpacman.github.io/tag/ssh.html">ssh </a>
+    <a href="https://gccpacman.github.io/tag/windows.html">windows </a>
+</p>
+
+
+
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/putty-tmuxduo-chuang-kou-ke-yong-pei-zhi.html">阅读全文</a>
+                <hr  class="gradient"/>
+            </article>
+
+        
+
+
+            <article>
+                <a href="https://gccpacman.github.io/zai-xu-ni-ji-li-pao-zi-yuan-zhan-yong-chao-di-de-linuxzhuo-mian-huan-jing-i3.html"><h3 class="article-title">在虚拟机里跑资源占用超低的Linux桌面环境i3</h3></a>
+<h6 class="subheader" title="2018-05-04T10:20:00+08:00">五 04 五月 2018
+</h6>
+
+
+<p>现在的电脑是SurfacePro3，如果安装了Linux桌面环境，如Gnome或者xfce等，跑虚拟机会很吃力了，但 …</p><p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
     标签: 
     <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
@@ -86,22 +118,11 @@ $ sudo apt install i3   <span class="c1"># debian &amp; ubuntu …</span></pre><
 
             <article>
                 <a href="https://gccpacman.github.io/windowsan-zhuang-msys32pei-zhi-gitdeng-kai-fa-huan-jing-bing-ji-cheng-vscode.html"><h3 class="article-title">Windows安装MSys32配置Git等开发环境并集成VSCode</h3></a>
-<h6 class="subheader" title="2018-02-01T10:20:00+08:00">Thu 01 February 2018
+<h6 class="subheader" title="2018-02-01T10:20:00+08:00">四 01 二月 2018
 </h6>
 
 
-<p>在不久之前发现了Msys2，基于Cygwin但是却又有一个让我觉得无比美好的包管理器Pacman(和Arch Linux的一样)，于是决定试试。但是真的用于Windows的终端还有很多麻烦的地方要解决，主要是以下几点：
-1. Git的ssh_keygen配置，你和windows自己的CMD里的ssh_keygen能否共用
-2. Msys用的换行符是和Linux一样的LF，而Windows的是CRLF
-3. Python能不能直接用Windows的Python而不用模拟Unix环境的Python（有很多的bug）
-4. 能否和我目前用的最多的VSCode编辑器无缝集成</p>
-<p>经过一段时间的研究，每个问题都得到了很好的解决，目前来讲非常的完美，在这里分享一下：</p>
-<ol>
-<li>
-<p>下载并安装 <a href="http://www.msys2.org/">Msys2</a></p>
-</li>
-<li>
-<p>安装和配置 …</p></li></ol><p class="subheader">分类: <a href="https://gccpacman.github.io/category/windows.html">Windows</a>
+<p>在不久之前发现了Msys2，基于Cygwin但是却又有一个让我觉得无比美好的包管理器Pacman(和Arch Linux的一样)，于是决定试试。但是真的 …</p><p class="subheader">分类: <a href="https://gccpacman.github.io/category/windows.html">Windows</a>
 
     标签: 
     <a href="https://gccpacman.github.io/tag/windows.html">windows </a>
@@ -119,12 +140,11 @@ $ sudo apt install i3   <span class="c1"># debian &amp; ubuntu …</span></pre><
 
             <article>
                 <a href="https://gccpacman.github.io/yong-calibre-serverchuang-jian-ge-ren-zai-xian-dian-zi-shu-yue-du-wang-zhan.html"><h3 class="article-title">用Calibre Server创建个人在线电子书阅读网站</h3></a>
-<h6 class="subheader" title="2017-12-20T10:20:00+08:00">Wed 20 December 2017
+<h6 class="subheader" title="2017-12-20T10:20:00+08:00">三 20 十二月 2017
 </h6>
 
 
-<p>DigitalOcean上有在ubuntu 14.04上安装calibre server的教程——<a href="https://www.digitalocean.com/community/tutorials/how-to-create-a-calibre-ebook-server-on-ubuntu-14-04">How To Create a Calibre Ebook Server on Ubuntu 14.04</a>, 但是已经过时了，一是calibre-server的参数已经改变，二是创建系统服务的方式已经不适用之后的Ubuntu版本，我的服务器是16.04，因此需要把/etc/init/里的脚本改写成systemctl脚本</p>
-<p>改写的方法参考了 …</p><p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+<p>DigitalOcean上有在ubuntu 14.04上安装calibre server的教程——<a href="https://www.digitalocean.com/community/tutorials/how-to-create-a-calibre-ebook-server-on-ubuntu-14-04">How To Create a Calibre Ebook Server on Ubuntu 14.04</a>, 但是已经过时了，一是calibre-server的参数已经改变 …</p><p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
     标签: 
     <a href="https://gccpacman.github.io/tag/kodi.html">kodi </a>
@@ -142,13 +162,11 @@ $ sudo apt install i3   <span class="c1"># debian &amp; ubuntu …</span></pre><
 
             <article>
                 <a href="https://gccpacman.github.io/archlinuxxiu-mian-hou-huan-xing-wifihe-lan-ya-wu-fa-zheng-chang-shi-yong-de-jie-jue-fang-fa.html"><h3 class="article-title">ArchLinux休眠后唤醒，wifi和蓝牙无法正常使用的解决方法</h3></a>
-<h6 class="subheader" title="2017-12-04T10:20:00+08:00">Mon 04 December 2017
+<h6 class="subheader" title="2017-12-04T10:20:00+08:00">一 04 十二月 2017
 </h6>
 
 
-<p><code>Manjaro Linux</code>从<code>17.02</code>版本开始匹配了Surface Pro 3， 这里必须非常感谢下Manjaro Team的工作，我现在可以再次在Surface上用畅快的用Linux了。</p>
-<p>具体可以看reddit上的这篇文章： https://cd-rw.org/t/running-linux-on-the-surface-pro-3/175/37。</p>
-<p>我实际安装的版本是<code>17.1pre3</code>，不管是蓝牙，触摸板，WIFI …</p><p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+<p><code>Manjaro Linux</code>从<code>17.02</code>版本开始匹配了Surface Pro 3， 这里必须非常感谢下Manjaro …</p><p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
     标签: 
     <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
@@ -166,14 +184,11 @@ $ sudo apt install i3   <span class="c1"># debian &amp; ubuntu …</span></pre><
 
             <article>
                 <a href="https://gccpacman.github.io/windowsshang-bian-yi-vimwen-jian-dao-hang-tiao-zhuan-cha-jian-command-t.html"><h3 class="article-title">Windows上编译vim文件导航跳转插件command-t</h3></a>
-<h6 class="subheader" title="2017-10-24T10:20:00+08:00">Tue 24 October 2017
+<h6 class="subheader" title="2017-10-24T10:20:00+08:00">二 24 十月 2017
 </h6>
 
 
-<p>用Bundle在Windows平台上配置成功了以后，绝大多数插件都已经可以使用，但是唯独强大的文件导航<a href="https://github.com/wincent/Command-T">Command-T</a>因为Ruby开发的插件，需要手动编译。</p>
-<p><a href="https://github.com/wincent/command-t/blob/master/doc/command-t.txt">官方文档</a>写的安装编译过程代码大概是这样的，我省去了使用bundle的安装过程：</p>
-<div class="highlight"><pre><span></span>$ <span class="nb">cd</span> ~/vim<span class="se">\b</span>undle<span class="se">\c</span>ommand-t<span class="se">\r</span>uby<span class="se">\c</span>ommand-t<span class="se">\e</span>xt<span class="se">\c</span>ommand-t&gt;
-$ ruby extconf …</pre></div><p class="subheader">分类: <a href="https://gccpacman.github.io/category/vim.html">Vim</a>
+<p>用Bundle在Windows平台上配置成功了以后，绝大多数插件都已经可以使用，但是唯独强大的文件导 …</p><p class="subheader">分类: <a href="https://gccpacman.github.io/category/vim.html">Vim</a>
 
     标签: 
     <a href="https://gccpacman.github.io/tag/windows.html">windows </a>
@@ -183,29 +198,6 @@ $ ruby extconf …</pre></div><p class="subheader">分类: <a href="https://gccp
 
 
                 <a class="button radius secondary small right" href="https://gccpacman.github.io/windowsshang-bian-yi-vimwen-jian-dao-hang-tiao-zhuan-cha-jian-command-t.html">阅读全文</a>
-                <hr  class="gradient"/>
-            </article>
-
-        
-
-
-            <article>
-                <a href="https://gccpacman.github.io/windowsde-bao-guan-li-chocolatehe-vimvundle.html"><h3 class="article-title">windows的包管理Chocolate和vim.Vundle</h3></a>
-<h6 class="subheader" title="2017-10-22T10:20:00+08:00">Sun 22 October 2017
-</h6>
-
-
-<p>Windows的开发环境一直都会让人比较头疼，一般解决方法有用Cygwin等模拟Linux的环境，Windows 10又自带了Ubuntu On Windows 10的环境。但是都或多或少有点问题，例如Cygwin的文件目录和windows分离，Ubuntu On Windows 10不能用Nodejs，打开X应用比较麻烦，只能用终端等。</p>
-<p>经过很多尝试，我认为最友好的环境还是windows原生的环境，只是你需要偶尔告别命令行搜索某些应用需要的依赖，依次安装，这样其实绝大多数的开发环境都是可以部署的。不过还是有工具可以帮助我们，例如Windows其实也有一个类似apt-get或者<a href="https://brew.sh/">Homebrew</a>的包管理工具，叫做 …</p><p class="subheader">分类: <a href="https://gccpacman.github.io/category/vim.html">Vim</a>
-
-    标签: 
-    <a href="https://gccpacman.github.io/tag/windows.html">windows </a>
-    <a href="https://gccpacman.github.io/tag/vim.html">vim </a>
-</p>
-
-
-
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/windowsde-bao-guan-li-chocolatehe-vimvundle.html">阅读全文</a>
                 <hr  class="gradient"/>
             </article>
 

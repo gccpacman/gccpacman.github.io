@@ -56,31 +56,25 @@
         
 
             <article>
-                <a href="https://gccpacman.github.io/wslwu-feng-shi-yong-windowsde-vagrant.html"><h3 class="article-title">WSL无缝使用windows的Vagrant</h3></a>
-<h6 class="subheader" title="2019-09-25T10:23:00+08:00">Wed 25 September 2019
+                <a href="https://gccpacman.github.io/bian-yi-lfslinux-from-scrach-1an-zhuang-bian-yi-yi-lai.html"><h3 class="article-title">编译LFS(Linux From Scrach) --（1）安装编译依赖</h3></a>
+<h6 class="subheader" title="2022-04-06T14:20:00+08:00">三 06 四月 2022
 </h6>
 
 
-<p>同时安装windows和wsl下的linux版本的vagrant，配置环境变量就可以使用。linux下vagrant的好处很多，首先文件的换行和权限的烦恼没有了，然后可以使用一些revision工具，例如ansible，在vagrantfile初始化的时候带来很多好处</p>
-<p>下载地址：https://www.vagrantup.com/downloads.html</p>
-<ol>
-<li>Windows下安装就直接exe了</li>
-<li>
-<p>Linux我的是Ubuntu，因此就下官网的deb包</p>
-<p>dpkg -i vagrant_amd64.deb</p>
-</li>
-<li>
-<p>需要在Linux的Home目录下的<code>.bashrc</code>或者<code>.zshrc …</code></p></li></ol><p class="subheader">分类: <a href="https://gccpacman.github.io/category/wsl.html">WSL</a>
+<h1>1. 安装编译依赖</h1>
+<p>在ubuntu22.04 安装编译依赖</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>qemu-system-x86
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>binutils
+sudo …</code></pre></div><p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
     标签: 
-    <a href="https://gccpacman.github.io/tag/windows.html">windows </a>
-    <a href="https://gccpacman.github.io/tag/vagrant.html">vagrant </a>
     <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
+    <a href="https://gccpacman.github.io/tag/lfs.html">lfs </a>
 </p>
 
 
 
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/wslwu-feng-shi-yong-windowsde-vagrant.html">阅读全文</a>
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/bian-yi-lfslinux-from-scrach-1an-zhuang-bian-yi-yi-lai.html">阅读全文</a>
             </article>
 
 
@@ -91,17 +85,35 @@
 
 
             <article>
-                <a href="https://gccpacman.github.io/bu-shu-vuejsjing-tai-wang-zhan-dao-a-li-yun-oss.html"><h3 class="article-title">部署VueJS静态网站到阿里云OSS</h3></a>
-<h6 class="subheader" title="2019-08-19T10:20:00+08:00">Mon 19 August 2019
+                <a href="https://gccpacman.github.io/wslwu-feng-shi-yong-windowsde-vagrant.html"><h3 class="article-title">WSL无缝使用windows的Vagrant</h3></a>
+<h6 class="subheader" title="2019-09-25T10:23:00+08:00">三 25 九月 2019
 </h6>
 
 
-<p><code>VueJS</code> 非常不错，对于一个后端开发也很友好。近期我有机会在写一个网站的时候接触了VueJS，虽然不是一个很专业的前端，但是感觉VueJS非常容易上手。
-出于为了性能的需要，打算将该网站通过 <code>webpack</code> 编译后上传到阿里云的 <code>OSS</code> 作为静态网站发布，但是遇到了一些坑，特意将踩坑的过程分享一下。</p>
-<p>首先在托管静态网站的时候，创建OSS桶需要注意两点配置：</p>
-<p>1） OSS桶必须设置公共读，因为网站需要所有人都可以访问</p>
-<p>2） OSS桶里有个默认首页的配置，需要配置成 <code>index.html</code></p>
-<p>因为使用了Vue-Router …</p><p class="subheader">分类: <a href="https://gccpacman.github.io/category/nodejs.html">Nodejs</a>
+<p>同时安装windows和wsl下的linux版本的vagrant，配置环境变量就可以使用。linux下vagrant的好处很多，首先文件的换行和 …</p><p class="subheader">分类: <a href="https://gccpacman.github.io/category/wsl.html">WSL</a>
+
+    标签: 
+    <a href="https://gccpacman.github.io/tag/windows.html">windows </a>
+    <a href="https://gccpacman.github.io/tag/vagrant.html">vagrant </a>
+    <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
+</p>
+
+
+
+                <a class="button radius secondary small right" href="https://gccpacman.github.io/wslwu-feng-shi-yong-windowsde-vagrant.html">阅读全文</a>
+                <hr  class="gradient"/>
+            </article>
+
+        
+
+
+            <article>
+                <a href="https://gccpacman.github.io/bu-shu-vuejsjing-tai-wang-zhan-dao-a-li-yun-oss.html"><h3 class="article-title">部署VueJS静态网站到阿里云OSS</h3></a>
+<h6 class="subheader" title="2019-08-19T10:20:00+08:00">一 19 八月 2019
+</h6>
+
+
+<p><code>VueJS</code> 非常不错，对于一个后端开发也很友好。近期我有机会在写 …</p><p class="subheader">分类: <a href="https://gccpacman.github.io/category/nodejs.html">Nodejs</a>
 
     标签: 
     <a href="https://gccpacman.github.io/tag/aliyun.html">aliyun </a>
@@ -122,20 +134,14 @@
 
             <article>
                 <a href="https://gccpacman.github.io/k8sming-ling-xing-gong-ju-kubectlde-shi-yong-ming-ling.html"><h3 class="article-title">K8S命令行工具Kubectl的实用命令</h3></a>
-<h6 class="subheader" title="2019-05-08T14:13:00+08:00">Wed 08 May 2019
+<h6 class="subheader" title="2019-05-08T14:13:00+08:00">三 08 五月 2019
 </h6>
 
 
 <ul>
 <li>安装配置Kubectl:<ul>
 <li>下载kubectl，地址：https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl</li>
-<li>下载完成后放置到本地$Path路径</li>
-<li>修改本地<code>$HOME/.kube/config</code>，设置集群地址，凭证等信息</li>
-</ul>
-</li>
-<li>
-<p>用kubectl获取k8s集群的基本信息：</p>
-<div class="highlight"><pre><span></span>$ <span class="nv">kubectl</span> <span class="nv">get</span> <span class="nv">pods</span> # 查看<span class="nv">default …</span></pre></div></li></ul><p class="subheader">分类: <a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a>
+<li>下载完成后放置 …</li></ul></li></ul><p class="subheader">分类: <a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a>
 
     标签: 
     <a href="https://gccpacman.github.io/tag/kubernetes.html">kubernetes </a>
@@ -154,23 +160,20 @@
 
             <article>
                 <a href="https://gccpacman.github.io/qiang-nei-de-centos7-linuxan-zhuang-k8s.html"><h3 class="article-title">墙内的Centos7 Linux安装K8S</h3></a>
-<h6 class="subheader" title="2019-05-07T11:13:00+08:00">Tue 07 May 2019
+<h6 class="subheader" title="2019-05-07T11:13:00+08:00">二 07 五月 2019
 </h6>
 
 
 <ol>
 <li>
 <p>安装基础构建依赖</p>
-<div class="highlight"><pre><span></span>$ yum -y install yum-utils device-mapper-persistent-data lvm2
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>yum<span class="w"> </span>-y<span class="w"> </span>install<span class="w"> </span>yum-utils<span class="w"> </span>device-mapper-persistent-data<span class="w"> </span>lvm2
+</code></pre></div>
 
 </li>
 <li>
 <p>安装Docker</p>
-<div class="highlight"><pre><span></span>$ yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-$ yum -y install docker-ce
-$ systemctl start docker …</pre></div></li></ol><p class="subheader">分类: <a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a>
+<div class="highlight"><pre><span></span><code><span class="o">$</span><span class="w"> </span><span class="n">yum</span><span class="o">-</span><span class="n">config</span><span class="o">-</span><span class="n">manager</span><span class="w"> </span><span class="o">--</span><span class="n">add</span><span class="o">-</span><span class="n">repo</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">download</span><span class="o">.</span><span class="n">docker …</span></code></pre></div></li></ol><p class="subheader">分类: <a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a>
 
     标签: 
     <a href="https://gccpacman.github.io/tag/kubernetes.html">kubernetes </a>
@@ -189,25 +192,13 @@ $ systemctl start docker …</pre></div></li></ol><p class="subheader">分类: <
 
             <article>
                 <a href="https://gccpacman.github.io/windowszai-hypervan-zhuang-centos7bing-pei-zhi-wang-luo.html"><h3 class="article-title">Windows在Hyperv安装Centos7并配置网络</h3></a>
-<h6 class="subheader" title="2019-05-07T11:13:00+08:00">Tue 07 May 2019
+<h6 class="subheader" title="2019-05-07T11:13:00+08:00">二 07 五月 2019
 </h6>
 
 
 <p>Hyper-V安装Centos，网卡选择Hyper-V的Default Switch。
 Default Switch默认是可以连接外网的，如果是windows机器不用配置直接可以联网，但是Linux不行，原因是网卡eth0默认没有配置dhcp：</p>
-<p>可以通过以下几部配置：</p>
-<ol>
-<li>
-<p>编辑<code>/etc/sysconfig/network-scripts/ifcfg-eth0</code>,修改以下三项:</p>
-<div class="highlight"><pre><span></span><span class="n">DEVICE</span><span class="o">=</span><span class="n">eth0</span>
-<span class="n">BOOTPROTO</span><span class="o">=</span><span class="n">dhcp</span>
-<span class="n">ONBOOT</span><span class="o">=</span><span class="n">yes</span>
-</pre></div>
-
-
-</li>
-<li>
-<p>编辑<code>/etc/sysconfig/network …</code></p></li></ol><p class="subheader">分类: <a href="https://gccpacman.github.io/category/windows.html">Windows</a>
+<p>可以通 …</p><p class="subheader">分类: <a href="https://gccpacman.github.io/category/windows.html">Windows</a>
 
     标签: 
     <a href="https://gccpacman.github.io/tag/windows.html">windows </a>
@@ -219,45 +210,6 @@ Default Switch默认是可以连接外网的，如果是windows机器不用配�
 
 
                 <a class="button radius secondary small right" href="https://gccpacman.github.io/windowszai-hypervan-zhuang-centos7bing-pei-zhi-wang-luo.html">阅读全文</a>
-                <hr  class="gradient"/>
-            </article>
-
-        
-
-
-            <article>
-                <a href="https://gccpacman.github.io/putty-tmuxduo-chuang-kou-ke-yong-pei-zhi.html"><h3 class="article-title">putty + tmux多窗口可用配置</h3></a>
-<h6 class="subheader" title="2018-08-28T10:20:00+08:00">Tue 28 August 2018
-</h6>
-
-
-<ul>
-<li>
-<p>putty的执行命令填入如下命令，tmux名称同session名称，以便开多个putty窗口时候识别</p>
-<div class="highlight"><pre><span></span>$ tmux new -A -s <span class="o">{</span>session_name<span class="o">}</span>
-</pre></div>
-
-
-</li>
-<li>
-<p>添加.tmux.conf配置</p>
-<div class="highlight"><pre><span></span><span class="nv">echo</span> <span class="s2">&quot;</span>
-##########################################
-# <span class="nv">STATUS</span> <span class="nv">BAR</span>
-<span class="nv">set</span> <span class="o">-</span><span class="nv">g</span> <span class="nv">status</span><span class="o">-</span><span class="nv">keys</span> <span class="nv">vi</span>
-<span class="nv">set</span> <span class="o">-</span><span class="nv">g</span> <span class="nv">status</span><span class="o">-</span><span class="nv">interval</span> <span class="mi">1</span>
-<span class="nv">set …</span></pre></div></li></ul><p class="subheader">分类: <a href="https://gccpacman.github.io/category/terminal.html">Terminal</a>
-
-    标签: 
-    <a href="https://gccpacman.github.io/tag/tmux.html">tmux </a>
-    <a href="https://gccpacman.github.io/tag/putty.html">putty </a>
-    <a href="https://gccpacman.github.io/tag/ssh.html">ssh </a>
-    <a href="https://gccpacman.github.io/tag/windows.html">windows </a>
-</p>
-
-
-
-                <a class="button radius secondary small right" href="https://gccpacman.github.io/putty-tmuxduo-chuang-kou-ke-yong-pei-zhi.html">阅读全文</a>
                 <hr  class="gradient"/>
             </article>
 

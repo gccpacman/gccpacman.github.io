@@ -58,7 +58,7 @@
         title="Permalink to Linux创建自定义的应用程序启动器">Linux创建自定义的应用程序启动器</a></h3>
     </header>
 
-<h6 class="subheader" title="2016-01-06T10:20:00+08:00">Wed 06 January 2016
+<h6 class="subheader" title="2016-01-06T10:20:00+08:00">三 06 一月 2016
 </h6>
 
 
@@ -68,16 +68,15 @@
 <p>比如我的eclipse装在<code>/opt/eclipse-jee/</code>下,怎么新建一个启动器呢？</p>
 <p>所有用户共享的应用启动器的目录是<code>/usr/share/applications/</code>目录，那么用户自定义的启动器目录在哪里？找了下用户目录下的.config/，没有找到，只好去百度google了一下，原来启动器是在.local/下，具体是<code>.local/share/applications</code>.</p>
 <p>新建一个eclipse.desktop的文件，然后输入以下内容：</p>
-<div class="highlight"><pre><span></span><span class="k">[Desktop Entry]</span>
+<div class="highlight"><pre><span></span><code><span class="k">[Desktop Entry]</span>
 <span class="na">Encoding</span><span class="o">=</span><span class="s">UTF-8</span>
 <span class="na">Name</span><span class="o">=</span><span class="s">Eclipse J2ee</span>
 <span class="na">Comment</span><span class="o">=</span><span class="s">Official desktop version of Telegram messaging app</span>
 <span class="na">Exec</span><span class="o">=</span><span class="s">/opt/eclipse-jee/eclipse</span>
 <span class="na">Icon</span><span class="o">=</span><span class="s">/opt/eclipse-jee/icon.xpm</span>
 <span class="na">Type</span><span class="o">=</span><span class="s">Application</span>
-<span class="na">Categories</span><span class="o">=</span><span class="s">Development;</span>
-</pre></div>
-
+<span class="na">Categories</span><span class="o">=</span><span class="s">Development</span><span class="c1">;</span>
+</code></pre></div>
 
 <p>Categories就是类目，可以输入多个。编辑保存，不需要再做任何操作，eclipse就可以搜索到了。</p>
 <p>参考：

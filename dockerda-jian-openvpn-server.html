@@ -58,7 +58,7 @@
         title="Permalink to Docker搭建openvpn server">Docker搭建openvpn server</a></h3>
     </header>
 
-<h6 class="subheader" title="2015-12-29T10:20:00+08:00">Tue 29 December 2015
+<h6 class="subheader" title="2015-12-29T10:20:00+08:00">二 29 十二月 2015
 </h6>
 
 
@@ -67,116 +67,102 @@ specially things like a server can help me free browser the internet.
 But sometimes the connection between my own pc and the vps server are not quite good. So things not always go luck.</p>
 <p>I find out openvpn is quite useful these days. So I'm thinking I will build one of my own. I picked one of my VPS for the test. It was installed with Ubuntu 14.04 and has 512MB memory. Here are the steps of how I did it:</p>
 <p>1st, I install the openvpn and easy-rsa:</p>
-<div class="highlight"><pre><span></span>$ apt-get install openvpn easy-rsa
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>openvpn<span class="w"> </span>easy-rsa
+</code></pre></div>
 
 <p>2nd, change the value of <code>net.ipv4.ip_forward=1</code> in /etc/sysctl.conf, then do <code>sysctl -p</code></p>
 <p>3rd, copy <code>/usr/share/easy-rsa/</code> to  <code>/etc/openvpn/</code> and generate the openvpn keys in the directory of :</p>
-<div class="highlight"><pre><span></span>$ <span class="nv">make</span><span class="o">-</span><span class="nv">cadir</span> <span class="o">/</span><span class="nv">etc</span><span class="o">/</span><span class="nv">openvpn</span><span class="o">/</span><span class="nv">easy</span><span class="o">-</span><span class="nv">rsa</span> <span class="ss">(</span><span class="nv">ps</span>: <span class="nv">this</span> <span class="nv">seems</span> <span class="nv">another</span> <span class="nv">way</span> <span class="nv">to</span> <span class="k">do</span> <span class="nv">this</span><span class="ss">)</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>make-cadir<span class="w"> </span>/etc/openvpn/easy-rsa<span class="w"> </span><span class="o">(</span>ps:<span class="w"> </span>this<span class="w"> </span>seems<span class="w"> </span>another<span class="w"> </span>way<span class="w"> </span>to<span class="w"> </span><span class="k">do</span><span class="w"> </span>this<span class="o">)</span>
+</code></pre></div>
 
 <p>OR</p>
-<div class="highlight"><pre><span></span><span class="n">cp</span> <span class="o">-</span><span class="n">r</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="k">share</span><span class="o">/</span><span class="n">easy</span><span class="o">-</span><span class="n">rsa</span><span class="o">/</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">openvpn</span>
-<span class="n">mkdir</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">openvpn</span><span class="o">/</span><span class="n">easy</span><span class="o">-</span><span class="n">rsa</span><span class="o">/</span><span class="n">keys</span>
-<span class="n">openssl</span> <span class="n">dhparam</span> <span class="o">-</span><span class="k">out</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">openvpn</span><span class="o">/</span><span class="n">dh2048</span><span class="p">.</span><span class="n">pem</span> <span class="mi">2048</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>cp -r /usr/share/easy-rsa/ /etc/openvpn
+mkdir /etc/openvpn/easy-rsa/keys
+openssl dhparam -out /etc/openvpn/dh2048.pem 2048
+</code></pre></div>
 
 <p>4th, change the directory to easy-rsa, then do the following command:</p>
-<div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">openvpn</span><span class="o">/</span><span class="n">easy</span><span class="o">-</span><span class="n">rsa</span><span class="o">/</span>
-<span class="k">source</span> <span class="n">vars</span>
-<span class="p">.</span><span class="o">/</span><span class="n">clean</span><span class="o">-</span><span class="k">all</span>
-<span class="p">.</span><span class="o">/</span><span class="n">build</span><span class="o">-</span><span class="n">dh</span>
-<span class="p">.</span><span class="o">/</span><span class="n">pkitool</span> <span class="c1">--initca</span>
-<span class="p">.</span><span class="o">/</span><span class="n">pkitool</span> <span class="c1">--server server</span>
-<span class="n">cd</span> <span class="n">keys</span>
-<span class="n">openvpn</span> <span class="c1">--genkey --secret ta.key</span>
-<span class="n">ln</span> <span class="o">-</span><span class="n">s</span> <span class="n">openssl</span><span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="n">cnf</span> <span class="n">openssl</span><span class="p">.</span><span class="n">cnf</span>     
-<span class="p">.</span><span class="o">/</span><span class="n">pkitool</span> <span class="c1">--initca</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">cd</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">openvpn</span><span class="o">/</span><span class="n">easy</span><span class="o">-</span><span class="n">rsa</span><span class="o">/</span>
+<span class="n">source</span><span class="w"> </span><span class="n">vars</span>
+<span class="o">./</span><span class="n">clean</span><span class="o">-</span><span class="n">all</span>
+<span class="o">./</span><span class="n">build</span><span class="o">-</span><span class="n">dh</span>
+<span class="o">./</span><span class="n">pkitool</span><span class="w"> </span><span class="o">--</span><span class="n">initca</span>
+<span class="o">./</span><span class="n">pkitool</span><span class="w"> </span><span class="o">--</span><span class="n">server</span><span class="w"> </span><span class="n">server</span>
+<span class="n">cd</span><span class="w"> </span><span class="n">keys</span>
+<span class="n">openvpn</span><span class="w"> </span><span class="o">--</span><span class="n">genkey</span><span class="w"> </span><span class="o">--</span><span class="n">secret</span><span class="w"> </span><span class="n">ta</span><span class="o">.</span><span class="n">key</span>
+<span class="n">ln</span><span class="w"> </span><span class="o">-</span><span class="n">s</span><span class="w"> </span><span class="n">openssl</span><span class="o">-</span><span class="mf">1.0</span><span class="o">.</span><span class="mf">0.</span><span class="n">cnf</span><span class="w"> </span><span class="n">openssl</span><span class="o">.</span><span class="n">cnf</span><span class="w">     </span>
+<span class="o">./</span><span class="n">pkitool</span><span class="w"> </span><span class="o">--</span><span class="n">initca</span>
+</code></pre></div>
 
 <p>OR</p>
-<div class="highlight"><pre><span></span><span class="p">.</span><span class="o">/</span><span class="n">clean</span><span class="o">-</span><span class="k">all</span>
-<span class="p">.</span><span class="o">/</span><span class="n">build</span><span class="o">-</span><span class="n">ca</span>
-<span class="p">.</span><span class="o">/</span><span class="n">build</span><span class="o">-</span><span class="k">key</span><span class="o">-</span><span class="n">server</span> <span class="n">server</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>./clean-all
+./build-ca
+./build-key-server server
+</code></pre></div>
 
 <p>5th, cp the generated keys to <code>/etc/openvpn</code>:</p>
-<div class="highlight"><pre><span></span><span class="n">cp</span> <span class="n">server</span><span class="p">.</span><span class="n">crt</span> <span class="n">server</span><span class="p">.</span><span class="k">key</span> <span class="n">ca</span><span class="p">.</span><span class="n">crt</span> <span class="n">dh1024</span><span class="p">.</span><span class="n">pem</span> <span class="n">ta</span><span class="p">.</span><span class="k">key</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">openvpn</span><span class="o">/</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>cp server.crt server.key ca.crt dh1024.pem ta.key /etc/openvpn/
+</code></pre></div>
 
 <p>6th, cp the <code>server.conf</code> sample to <code>/etc/openvpn/server.conf</code></p>
-<div class="highlight"><pre><span></span><span class="n">gunzip</span> <span class="o">-</span><span class="k">c</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="k">share</span><span class="o">/</span><span class="n">doc</span><span class="o">/</span><span class="n">openvpn</span><span class="o">/</span><span class="n">examples</span><span class="o">/</span><span class="n">sample</span><span class="o">-</span><span class="n">config</span><span class="o">-</span><span class="n">files</span><span class="o">/</span><span class="n">server</span><span class="p">.</span><span class="n">conf</span><span class="p">.</span><span class="n">gz</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">openvpn</span><span class="o">/</span><span class="n">server</span><span class="p">.</span><span class="n">conf</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>gunzip -c /usr/share/doc/openvpn/examples/sample-config-files/server.conf.gz &gt; /etc/openvpn/server.conf
+</code></pre></div>
 
 <p>7th, change some value of the <code>server.conf</code> file:</p>
-<div class="highlight"><pre><span></span><span class="p">;</span><span class="n">push</span> <span class="ss">&quot;redirect-gateway def1 bypass-dhcp&quot;</span>
-</pre></div>
-
-
-<p>to</p>
-<div class="highlight"><pre><span></span><span class="n">push</span> <span class="ss">&quot;redirect-gateway def1 bypass-dhcp&quot;</span>
-
-<span class="p">;</span><span class="n">push</span> <span class="ss">&quot;dhcp-option DNS 208.67.222.222&quot;</span>
-<span class="p">;</span><span class="n">push</span> <span class="ss">&quot;dhcp-option DNS 208.67.220.220&quot;</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>;push &quot;redirect-gateway def1 bypass-dhcp&quot;
+</code></pre></div>
 
 <p>to</p>
-<div class="highlight"><pre><span></span><span class="n">push</span> <span class="ss">&quot;dhcp-option DNS 208.67.222.222&quot;</span>
-<span class="n">push</span> <span class="ss">&quot;dhcp-option DNS 208.67.220.220&quot;</span>  <span class="p">(</span><span class="n">change</span> <span class="k">to</span> <span class="k">some</span> <span class="n">dns</span> <span class="n">server</span> <span class="n">you</span> <span class="n">trust</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code>push &quot;redirect-gateway def1 bypass-dhcp&quot;
 
-<span class="p">;</span><span class="k">user</span> <span class="n">nobody</span>
-<span class="p">;</span><span class="k">group</span> <span class="n">nogroup</span>
-</pre></div>
-
+;push &quot;dhcp-option DNS 208.67.222.222&quot;
+;push &quot;dhcp-option DNS 208.67.220.220&quot;
+</code></pre></div>
 
 <p>to</p>
-<div class="highlight"><pre><span></span><span class="k">user</span> <span class="n">nobody</span>
-<span class="k">group</span> <span class="n">nogroup</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code>push &quot;dhcp-option DNS 208.67.222.222&quot;
+push &quot;dhcp-option DNS 208.67.220.220&quot;  (change to some dns server you trust)
 
+;user nobody
+;group nogroup
+</code></pre></div>
+
+<p>to</p>
+<div class="highlight"><pre><span></span><code>user nobody
+group nogroup
+</code></pre></div>
 
 <p>8th,  start and check the openvpn service:</p>
-<div class="highlight"><pre><span></span><span class="n">service</span> <span class="n">openvpn</span> <span class="k">start</span>
-<span class="n">service</span> <span class="n">openvpn</span> <span class="n">status</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>service openvpn start
+service openvpn status
+</code></pre></div>
 
 <p>9th, generate key of client:</p>
-<div class="highlight"><pre><span></span><span class="p">.</span><span class="o">/</span><span class="n">build</span><span class="o">-</span><span class="k">key</span> <span class="n">client1</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>./build-key client1
+</code></pre></div>
 
 <p>10th, copy the sample and change the value of client.ovpn:</p>
-<div class="highlight"><pre><span></span>cp /usr/share/doc/openvpn/examples/sample-config-files/client.conf /etc/openvpn/easy-rsa/keys/client.ovpn
+<div class="highlight"><pre><span></span><code>cp<span class="w"> </span>/usr/share/doc/openvpn/examples/sample-config-files/client.conf<span class="w"> </span>/etc/openvpn/easy-rsa/keys/client.ovpn
 
-remote my-server-1 1194
-user nobody
-group nogroup
+remote<span class="w"> </span>my-server-1<span class="w"> </span>1194
+user<span class="w"> </span>nobody
+group<span class="w"> </span>nogroup
 
-# SSL/TLS parms.
-# . . .
-#ca ca.crt
-#cert client.crt
-#key client.key
+#<span class="w"> </span>SSL/TLS<span class="w"> </span>parms.
+#<span class="w"> </span>.<span class="w"> </span>.<span class="w"> </span>.
+#ca<span class="w"> </span>ca.crt
+#cert<span class="w"> </span>client.crt
+#key<span class="w"> </span>client.key
 <span class="nt">&lt;ca&gt;</span>
-(insert ca.crt here)
+(insert<span class="w"> </span>ca.crt<span class="w"> </span>here)
 <span class="nt">&lt;/ca&gt;</span>
 <span class="nt">&lt;cert&gt;</span>
-(insert client1.crt here)
+(insert<span class="w"> </span>client1.crt<span class="w"> </span>here)
 <span class="nt">&lt;/cert&gt;</span>
 <span class="nt">&lt;key&gt;</span>
-(insert client1.key here)
+(insert<span class="w"> </span>client1.key<span class="w"> </span>here)
 <span class="nt">&lt;/key&gt;</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>参考：</p>
 <ol>

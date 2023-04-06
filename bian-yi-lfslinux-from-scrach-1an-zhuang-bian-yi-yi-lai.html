@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>编译LFS(Linux From Scrach) --（1）安装编译依赖</title>
+
+    <link rel="stylesheet" href="https://gccpacman.github.io/theme/css/normalize.css" />
+    <link rel="stylesheet" href="https://gccpacman.github.io/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="https://gccpacman.github.io/theme/css/style.css" />
+    <link rel="stylesheet" href="https://gccpacman.github.io/theme/css/pygments.css" />	
+    <script src="https://gccpacman.github.io/theme/js/modernizr.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146579327-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-146579327-1');
+    </script>
+
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="/">Pacman News</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="https://gccpacman.github.io/bian-yi-lfslinux-from-scrach-1an-zhuang-bian-yi-yi-lai.html" rel="bookmark"
+        title="Permalink to 编译LFS(Linux From Scrach) --（1）安装编译依赖">编译LFS(Linux From Scrach) --（1）安装编译依赖</a></h3>
+    </header>
+
+<h6 class="subheader" title="2022-04-06T14:20:00+08:00">三 06 四月 2022
+</h6>
+
+
+    <h1>1. 安装编译依赖</h1>
+<p>在ubuntu22.04 安装编译依赖</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>qemu-system-x86
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>binutils
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>bison
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>coreutils
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>findutils
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>gcc
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>build-essential<span class="w"> </span>
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>m4
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>patch
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>perl
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>texinfo
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>xz
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>gawk
+</code></pre></div>
+
+<p>确认是否正确安装 version_check.sh</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="c1"># Simple script to list version numbers of critical development tools</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">LC_ALL</span><span class="o">=</span>C
+bash<span class="w"> </span>--version<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-n1<span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d<span class="s2">&quot; &quot;</span><span class="w"> </span>-f2-4
+<span class="nv">MYSH</span><span class="o">=</span><span class="k">$(</span>readlink<span class="w"> </span>-f<span class="w"> </span>/bin/sh<span class="k">)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;/bin/sh -&gt; </span><span class="nv">$MYSH</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="nv">$MYSH</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span>bash<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;ERROR: /bin/sh does not point to bash&quot;</span>
+<span class="nb">unset</span><span class="w"> </span>MYSH
+<span class="nb">echo</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;Binutils: &quot;</span><span class="p">;</span><span class="w"> </span>ld<span class="w"> </span>--version<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-n1<span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d<span class="s2">&quot; &quot;</span><span class="w"> </span>-f3-
+bison<span class="w"> </span>--version<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-n1
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-h<span class="w"> </span>/usr/bin/yacc<span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;/usr/bin/yacc -&gt; `readlink -f /usr/bin/yacc`&quot;</span><span class="p">;</span>
+<span class="k">elif</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-x<span class="w"> </span>/usr/bin/yacc<span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span>yacc<span class="w"> </span>is<span class="w"> </span><span class="sb">`</span>/usr/bin/yacc<span class="w"> </span>--version<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-n1<span class="sb">`</span>
+<span class="k">else</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;yacc not found&quot;</span>
+<span class="k">fi</span>
+<span class="nb">echo</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;Coreutils: &quot;</span><span class="p">;</span><span class="w"> </span>chown<span class="w"> </span>--version<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-n1<span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d<span class="s2">&quot;)&quot;</span><span class="w"> </span>-f2
+diff<span class="w"> </span>--version<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-n1
+find<span class="w"> </span>--version<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-n1
+gawk<span class="w"> </span>--version<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-n1
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-h<span class="w"> </span>/usr/bin/awk<span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;/usr/bin/awk -&gt; `readlink -f /usr/bin/awk`&quot;</span><span class="p">;</span>
+<span class="k">elif</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-x<span class="w"> </span>/usr/bin/awk<span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span>awk<span class="w"> </span>is<span class="w"> </span><span class="sb">`</span>/usr/bin/awk<span class="w"> </span>--version<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-n1<span class="sb">`</span>
+<span class="k">else</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;awk not found&quot;</span>
+<span class="k">fi</span>
+gcc<span class="w"> </span>--version<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-n1
+g++<span class="w"> </span>--version<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-n1
+grep<span class="w"> </span>--version<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-n1
+gzip<span class="w"> </span>--version<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-n1
+cat<span class="w"> </span>/proc/version
+m4<span class="w"> </span>--version<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-n1
+make<span class="w"> </span>--version<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-n1
+patch<span class="w"> </span>--version<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-n1
+<span class="nb">echo</span><span class="w"> </span>Perl<span class="w"> </span><span class="sb">`</span>perl<span class="w"> </span>-V:version<span class="sb">`</span>
+python3<span class="w"> </span>--version
+sed<span class="w"> </span>--version<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-n1
+tar<span class="w"> </span>--version<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-n1
+makeinfo<span class="w"> </span>--version<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-n1<span class="w">  </span><span class="c1"># texinfo version</span>
+xz<span class="w"> </span>--version<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-n1
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;int main(){}&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>dummy.c<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>g++<span class="w"> </span>-o<span class="w"> </span>dummy<span class="w"> </span>dummy.c
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-x<span class="w"> </span>dummy<span class="w"> </span><span class="o">]</span>
+<span class="w">  </span><span class="k">then</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;g++ compilation OK&quot;</span><span class="p">;</span>
+<span class="k">else</span><span class="w"> </span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;g++ compilation failed&quot;</span><span class="p">;</span><span class="w"> </span>
+<span class="k">fi</span><span class="w"> </span>
+rm<span class="w"> </span>-f<span class="w"> </span>dummy.c<span class="w"> </span>dummy
+</code></pre></div>
+
+<p>输出：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 输出</span>
+bash,<span class="w"> </span>version<span class="w"> </span><span class="m">5</span>.1.16<span class="o">(</span><span class="m">1</span><span class="o">)</span>-release
+/bin/sh<span class="w"> </span>-&gt;<span class="w"> </span>/usr/bin/dash
+ERROR:<span class="w"> </span>/bin/sh<span class="w"> </span>does<span class="w"> </span>not<span class="w"> </span>point<span class="w"> </span>to<span class="w"> </span>bash
+Binutils:<span class="w"> </span><span class="o">(</span>GNU<span class="w"> </span>Binutils<span class="w"> </span><span class="k">for</span><span class="w"> </span>Ubuntu<span class="o">)</span><span class="w"> </span><span class="m">2</span>.38
+bison<span class="w"> </span><span class="o">(</span>GNU<span class="w"> </span>Bison<span class="o">)</span><span class="w"> </span><span class="m">3</span>.8.2
+/usr/bin/yacc<span class="w"> </span>-&gt;<span class="w"> </span>/usr/bin/bison.yacc
+Coreutils:<span class="w">  </span><span class="m">8</span>.32
+diff<span class="w"> </span><span class="o">(</span>GNU<span class="w"> </span>diffutils<span class="o">)</span><span class="w"> </span><span class="m">3</span>.8
+find<span class="w"> </span><span class="o">(</span>GNU<span class="w"> </span>findutils<span class="o">)</span><span class="w"> </span><span class="m">4</span>.8.0
+GNU<span class="w"> </span>Awk<span class="w"> </span><span class="m">5</span>.1.0,<span class="w"> </span>API:<span class="w"> </span><span class="m">3</span>.0<span class="w"> </span><span class="o">(</span>GNU<span class="w"> </span>MPFR<span class="w"> </span><span class="m">4</span>.1.0,<span class="w"> </span>GNU<span class="w"> </span>MP<span class="w"> </span><span class="m">6</span>.2.1<span class="o">)</span>
+/usr/bin/awk<span class="w"> </span>-&gt;<span class="w"> </span>/usr/bin/gawk
+gcc<span class="w"> </span><span class="o">(</span>Ubuntu<span class="w"> </span><span class="m">11</span>.3.0-1ubuntu1~22.04<span class="o">)</span><span class="w"> </span><span class="m">11</span>.3.0
+g++<span class="w"> </span><span class="o">(</span>Ubuntu<span class="w"> </span><span class="m">11</span>.3.0-1ubuntu1~22.04<span class="o">)</span><span class="w"> </span><span class="m">11</span>.3.0
+grep<span class="w"> </span><span class="o">(</span>GNU<span class="w"> </span>grep<span class="o">)</span><span class="w"> </span><span class="m">3</span>.7
+gzip<span class="w"> </span><span class="m">1</span>.10
+Linux<span class="w"> </span>version<span class="w"> </span><span class="m">5</span>.19.0-38-generic<span class="w"> </span><span class="o">(</span>buildd@lcy02-amd64-001<span class="o">)</span><span class="w"> </span><span class="o">(</span>x86_64-linux-gnu-gcc<span class="w"> </span><span class="o">(</span>Ubuntu<span class="w"> </span><span class="m">11</span>.3.0-1ubuntu1~22.04<span class="o">)</span><span class="w"> </span><span class="m">11</span>.3.0,<span class="w"> </span>GNU<span class="w"> </span>ld<span class="w"> </span><span class="o">(</span>GNU<span class="w"> </span>Binutils<span class="w"> </span><span class="k">for</span><span class="w"> </span>Ubuntu<span class="o">)</span><span class="w"> </span><span class="m">2</span>.38<span class="o">)</span><span class="w"> </span><span class="c1">#39~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Mar 17 21:16:15 UTC 2</span>
+m4<span class="w"> </span><span class="o">(</span>GNU<span class="w"> </span>M4<span class="o">)</span><span class="w"> </span><span class="m">1</span>.4.18
+GNU<span class="w"> </span>Make<span class="w"> </span><span class="m">4</span>.3
+GNU<span class="w"> </span>patch<span class="w"> </span><span class="m">2</span>.7.6
+Perl<span class="w"> </span><span class="nv">version</span><span class="o">=</span><span class="s1">&#39;5.34.0&#39;</span><span class="p">;</span>
+Python<span class="w"> </span><span class="m">3</span>.10.6
+sed<span class="w"> </span><span class="o">(</span>GNU<span class="w"> </span>sed<span class="o">)</span><span class="w"> </span><span class="m">4</span>.8
+tar<span class="w"> </span><span class="o">(</span>GNU<span class="w"> </span>tar<span class="o">)</span><span class="w"> </span><span class="m">1</span>.34
+texi2any<span class="w"> </span><span class="o">(</span>GNU<span class="w"> </span>texinfo<span class="o">)</span><span class="w"> </span><span class="m">6</span>.8
+xz<span class="w"> </span><span class="o">(</span>XZ<span class="w"> </span>Utils<span class="o">)</span><span class="w"> </span><span class="m">5</span>.2.5
+g++<span class="w"> </span>compilation<span class="w"> </span>OK
+</code></pre></div>
+<p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
+
+    标签: 
+    <a href="https://gccpacman.github.io/tag/linux.html">linux </a>
+    <a href="https://gccpacman.github.io/tag/lfs.html">lfs </a>
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+
+		
+        <h5 class="sidebar-title">分类</h5>
+        <ul class="side-nav">
+            <li><a href="https://gccpacman.github.io/category/kubernetes.html">Kubernetes</a></li>
+            <li><a href="https://gccpacman.github.io/category/linux.html">Linux</a></li>
+            <li><a href="https://gccpacman.github.io/category/nodejs.html">Nodejs</a></li>
+            <li><a href="https://gccpacman.github.io/category/python.html">python</a></li>
+            <li><a href="https://gccpacman.github.io/category/terminal.html">Terminal</a></li>
+            <li><a href="https://gccpacman.github.io/category/vim.html">Vim</a></li>
+            <li><a href="https://gccpacman.github.io/category/windows.html">Windows</a></li>
+            <li><a href="https://gccpacman.github.io/category/wsl.html">WSL</a></li>
+   
+        </ul>
+		
+        <h5 class="sidebar-title">我的社交账号</h5>
+        <ul class="side-nav">
+            <li><a href="https://github.com/gccpacman">Github: @gccpacman</a></li>
+            <li><a href="https://stackoverflow.com/users/4124310/evan-hu?tab=profile">StackOverflow: @evan-hu</a></li>
+        </ul>
+
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Pacman News by r341h</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

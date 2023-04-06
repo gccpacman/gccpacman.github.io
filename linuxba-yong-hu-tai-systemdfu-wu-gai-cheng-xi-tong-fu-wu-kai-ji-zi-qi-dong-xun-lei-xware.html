@@ -58,7 +58,7 @@
         title="Permalink to Linux把用户态systemd服务改成系统服务，开机自启动迅雷(xware)">Linux把用户态systemd服务改成系统服务，开机自启动迅雷(xware)</a></h3>
     </header>
 
-<h6 class="subheader" title="2016-01-08T10:20:00+08:00">Fri 08 January 2016
+<h6 class="subheader" title="2016-01-08T10:20:00+08:00">五 08 一月 2016
 </h6>
 
 
@@ -73,7 +73,7 @@ https://github.com/Xinkai/XwareDesktop/wiki/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E
 <p>但是我希望Linux开机的时候并不会自动登录，更何况我的linux是运行kodi的，我也不会去手动登录，因此用户态的服务是不会自动启动的。</p>
 <p>但是我希望一开机，xware就自动打开，开始执行下载任务。因此依赖原来的代码显然不太符合我的需求，就自己写一个系统的service吧。</p>
 <p>还好几乎不需要改变xware用户态的服务，就可以搞定。用户态的服务创建在用户目录的<code>$HOME/.config/systemd/user</code>下，代码是这样的：</p>
-<div class="highlight"><pre><span></span><span class="k">[Unit]</span>
+<div class="highlight"><pre><span></span><code><span class="k">[Unit]</span>
 <span class="na">Description</span><span class="o">=</span><span class="s">Xware Service</span>
 <span class="na">After</span><span class="o">=</span><span class="s">network.target</span>
 
@@ -83,11 +83,10 @@ https://github.com/Xinkai/XwareDesktop/wiki/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E
 
 <span class="k">[Install]</span>
 <span class="na">WantedBy</span><span class="o">=</span><span class="s">default.target</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>而系统服务在Ubuntu 14.04上位于<code>/etc/systemd/system/</code>目录下, 因此可以先把这个拷贝过来，然后稍作修改即可，修改的文件如下所示：</p>
-<div class="highlight"><pre><span></span><span class="k">[Unit]</span>
+<div class="highlight"><pre><span></span><code><span class="k">[Unit]</span>
 <span class="na">Description</span><span class="o">=</span><span class="s">Xwared Service</span>
 <span class="na">After</span><span class="o">=</span><span class="s">network.target</span>
 
@@ -99,8 +98,7 @@ https://github.com/Xinkai/XwareDesktop/wiki/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E
 
 <span class="k">[Install]</span>
 <span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>其实就是简单的加入了User和Group的选项而已，让系统知道以哪个用户启动，这样就可以了。</p>
 <p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>

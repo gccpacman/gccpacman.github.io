@@ -1,14 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Pacman News - WSL</title><link href="https://gccpacman.github.io/" rel="alternate"></link><link href="https://gccpacman.github.io/feeds/wsl.atom.xml" rel="self"></link><id>https://gccpacman.github.io/</id><updated>2019-09-25T10:23:00+08:00</updated><entry><title>WSL无缝使用windows的Vagrant</title><link href="https://gccpacman.github.io/wslwu-feng-shi-yong-windowsde-vagrant.html" rel="alternate"></link><published>2019-09-25T10:23:00+08:00</published><updated>2019-09-25T10:23:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2019-09-25:/wslwu-feng-shi-yong-windowsde-vagrant.html</id><summary type="html">&lt;p&gt;同时安装windows和wsl下的linux版本的vagrant，配置环境变量就可以使用。linux下vagrant的好处很多，首先文件的换行和权限的烦恼没有了，然后可以使用一些revision工具，例如ansible，在vagrantfile初始化的时候带来很多好处&lt;/p&gt;
-&lt;p&gt;下载地址：https://www.vagrantup.com/downloads.html&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Windows下安装就直接exe了&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Linux我的是Ubuntu，因此就下官网的deb包&lt;/p&gt;
-&lt;p&gt;dpkg -i vagrant_amd64.deb&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;需要在Linux的Home目录下的&lt;code&gt;.bashrc&lt;/code&gt;或者&lt;code&gt;.zshrc …&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;同时安装windows和wsl下的linux版本的vagrant，配置环境变量就可以使用。linux下vagrant的好处很多，首先文件的换行和权限的烦恼没有了，然后可以使用一些revision工具，例如ansible，在vagrantfile初始化的时候带来很多好处&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Pacman News - WSL</title><link href="https://gccpacman.github.io/" rel="alternate"></link><link href="https://gccpacman.github.io/feeds/wsl.atom.xml" rel="self"></link><id>https://gccpacman.github.io/</id><updated>2019-09-25T10:23:00+08:00</updated><entry><title>WSL无缝使用windows的Vagrant</title><link href="https://gccpacman.github.io/wslwu-feng-shi-yong-windowsde-vagrant.html" rel="alternate"></link><published>2019-09-25T10:23:00+08:00</published><updated>2019-09-25T10:23:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2019-09-25:/wslwu-feng-shi-yong-windowsde-vagrant.html</id><summary type="html">&lt;p&gt;同时安装windows和wsl下的linux版本的vagrant，配置环境变量就可以使用。linux下vagrant的好处很多，首先文件的换行和 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;同时安装windows和wsl下的linux版本的vagrant，配置环境变量就可以使用。linux下vagrant的好处很多，首先文件的换行和权限的烦恼没有了，然后可以使用一些revision工具，例如ansible，在vagrantfile初始化的时候带来很多好处&lt;/p&gt;
 &lt;p&gt;下载地址：https://www.vagrantup.com/downloads.html&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Windows下安装就直接exe了&lt;/li&gt;
@@ -26,4 +17,4 @@
 &lt;/ol&gt;
 &lt;p&gt;PS： 需要注意的是，wsl里的vagrant，不能读取Linux下的&lt;code&gt;Vagrantfile&lt;/code&gt;，需要Vagrantfile存在于windows文件系统，因为本质上vagrant还是在windows上执行，调用Virtualbox等虚拟机的SDK，也就是说你的Vagrantfile，必须位于类似于&lt;code&gt;\mnt\c\&lt;/code&gt;这样的windows挂载盘符目录下。&lt;/p&gt;
 &lt;p&gt;Also see：
-https://www.vagrantup.com/docs/other/wsl.html&lt;/p&gt;</content><category term="windows"></category><category term="vagrant"></category><category term="linux"></category></entry></feed>
+https://www.vagrantup.com/docs/other/wsl.html&lt;/p&gt;</content><category term="WSL"></category><category term="windows"></category><category term="vagrant"></category><category term="linux"></category></entry></feed>

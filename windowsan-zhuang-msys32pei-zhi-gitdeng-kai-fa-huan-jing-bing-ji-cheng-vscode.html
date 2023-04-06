@@ -58,7 +58,7 @@
         title="Permalink to Windows安装MSys32配置Git等开发环境并集成VSCode">Windows安装MSys32配置Git等开发环境并集成VSCode</a></h3>
     </header>
 
-<h6 class="subheader" title="2018-02-01T10:20:00+08:00">Thu 01 February 2018
+<h6 class="subheader" title="2018-02-01T10:20:00+08:00">四 01 二月 2018
 </h6>
 
 
@@ -75,21 +75,18 @@
 <li>
 <p>安装和配置 <code>git</code>, 配置在windows上check出crlf格式文本，提交lf格式:</p>
 <p>2.1 安装git：</p>
-<div class="highlight"><pre><span></span>$ pacman --needed -S bash pacman msys2-runtime  git
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>pacman<span class="w"> </span>--needed<span class="w"> </span>-S<span class="w"> </span>bash<span class="w"> </span>pacman<span class="w"> </span>msys2-runtime<span class="w">  </span>git
+</code></pre></div>
 
 <p>2.2 修改git处理回车的方式：</p>
-<div class="highlight"><pre><span></span>$ git config --global core.autocrlf <span class="nb">true</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>core.autocrlf<span class="w"> </span><span class="nb">true</span>
+</code></pre></div>
 
 </li>
 <li>
 <p>修改Home目录路径, Msys2默认的Home目录是Mingw64的/home/username, 但是我希望使用windows的Home目录/c/Users/username. 方法是编辑<code>/etc/nsswitch.conf</code>, 并修改</p>
-<div class="highlight"><pre><span></span>$ db_home: windows
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>db_home:<span class="w"> </span>windows
+</code></pre></div>
 
 </li>
 <li>
@@ -100,19 +97,18 @@
 <p>让VSCode里的继承终端（VSCode Integrated Terminal）使用Msys2，在VSCode的settings里加入以下内容:</p>
 </li>
 </ol>
-<div class="highlight"><pre><span></span>    <span class="err">{</span>
-        <span class="ss">&quot;terminal.integrated.shell.windows&quot;</span><span class="p">:</span> <span class="ss">&quot;C:\\msys64\\usr\\bin\\bash.exe&quot;</span><span class="p">,</span>
-        <span class="ss">&quot;terminal.integrated.shellArgs.windows&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="ss">&quot;--login&quot;</span><span class="p">,</span>
-        <span class="p">],</span>
-        <span class="ss">&quot;terminal.integrated.env.windows&quot;</span><span class="p">:</span> <span class="err">{</span>
-        <span class="ss">&quot;CHERE_INVOKING&quot;</span><span class="p">:</span> <span class="ss">&quot;1&quot;</span><span class="p">,</span>
-        <span class="ss">&quot;MSYSTEM&quot;</span><span class="p">:</span> <span class="ss">&quot;MINGW64&quot;</span><span class="p">,</span>
-    <span class="ss">&quot;MSYS2_PATH_TYPE&quot;</span><span class="p">:</span> <span class="ss">&quot;inherit&quot;</span><span class="p">,</span>
-        <span class="err">}</span><span class="p">,</span>
-    <span class="err">}</span> 
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>    {
+        &quot;terminal.integrated.shell.windows&quot;: &quot;C:\\msys64\\usr\\bin\\bash.exe&quot;,
+        &quot;terminal.integrated.shellArgs.windows&quot;: [
+        &quot;--login&quot;,
+        ],
+        &quot;terminal.integrated.env.windows&quot;: {
+        &quot;CHERE_INVOKING&quot;: &quot;1&quot;,
+        &quot;MSYSTEM&quot;: &quot;MINGW64&quot;,
+    &quot;MSYS2_PATH_TYPE&quot;: &quot;inherit&quot;,
+        },
+    } 
+</code></pre></div>
 
 <p>参考：</p>
 <p>https://getpocket.com/a/read/1169705865</p>

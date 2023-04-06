@@ -58,7 +58,7 @@
         title="Permalink to 用Calibre Server创建个人在线电子书阅读网站">用Calibre Server创建个人在线电子书阅读网站</a></h3>
     </header>
 
-<h6 class="subheader" title="2017-12-20T10:20:00+08:00">Wed 20 December 2017
+<h6 class="subheader" title="2017-12-20T10:20:00+08:00">三 20 十二月 2017
 </h6>
 
 
@@ -66,19 +66,18 @@
 <p>改写的方法参考了：https://wiki.ubuntu.com/SystemdForUpstartUsers</p>
 <p>用户名和密码也不再支持digitalocean里的明文的形式, <a href="https://manual.calibre-ebook.com/server.html#managing-user-accounts-from-the-command-line-only">官方文档</a>里看到有<code>enable-auth</code>和<code>userdb</code>, 看来是出于安全性进行了改进, userdb指定最简单的sqlite数据库，并按照提示添加用户。
 最终的版本是：</p>
-<div class="highlight"><pre><span></span><span class="w">  </span><span class="o">[</span><span class="n">Unit</span><span class="o">]</span><span class="w"></span>
-<span class="w">  </span><span class="n">Description</span><span class="o">=</span><span class="n">Job</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">runs</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">calibre</span><span class="w"> </span><span class="n">daemon</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="o">[</span><span class="n">Unit</span><span class="o">]</span>
+<span class="w">  </span><span class="n">Description</span><span class="o">=</span><span class="n">Job</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">runs</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">calibre</span><span class="w"> </span><span class="n">daemon</span>
 
-<span class="w">  </span><span class="o">[</span><span class="n">Service</span><span class="o">]</span><span class="w"></span>
-<span class="w">  </span><span class="n">Environment</span><span class="o">=</span><span class="n">LIBRARY_PATH</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">huyunyan_cn</span><span class="o">/</span><span class="n">calibre</span><span class="o">-</span><span class="n">library</span><span class="w"></span>
-<span class="w">  </span><span class="n">Environment</span><span class="o">=</span><span class="n">PORT</span><span class="o">=</span><span class="mi">8080</span><span class="w"></span>
-<span class="w">  </span><span class="n">Environment</span><span class="o">=</span><span class="n">USERDB</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">huyunyan_cn</span><span class="o">/</span><span class="n">calibre</span><span class="o">-</span><span class="n">library</span><span class="o">/</span><span class="n">users</span><span class="p">.</span><span class="n">sqlite</span><span class="w"></span>
-<span class="w">  </span><span class="n">ExecStart</span><span class="o">=/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">calibre</span><span class="o">-</span><span class="n">server</span><span class="w"> </span><span class="err">$</span><span class="n">LIBRARY_PATH</span><span class="w"> </span><span class="err">\</span><span class="w"></span>
-<span class="w">                                   </span><span class="c1">--port $PORT --enable-auth --userdb $USERDB</span>
-<span class="w">  </span><span class="o">[</span><span class="n">Install</span><span class="o">]</span><span class="w"></span>
-<span class="w">  </span><span class="n">WantedBy</span><span class="o">=</span><span class="n">multi</span><span class="o">-</span><span class="k">user</span><span class="p">.</span><span class="n">target</span><span class="w"></span>
-</pre></div>
-
+<span class="w">  </span><span class="o">[</span><span class="n">Service</span><span class="o">]</span>
+<span class="w">  </span><span class="n">Environment</span><span class="o">=</span><span class="n">LIBRARY_PATH</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">huyunyan_cn</span><span class="o">/</span><span class="n">calibre</span><span class="o">-</span><span class="n">library</span>
+<span class="w">  </span><span class="n">Environment</span><span class="o">=</span><span class="n">PORT</span><span class="o">=</span><span class="mi">8080</span>
+<span class="w">  </span><span class="n">Environment</span><span class="o">=</span><span class="n">USERDB</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">huyunyan_cn</span><span class="o">/</span><span class="n">calibre</span><span class="o">-</span><span class="n">library</span><span class="o">/</span><span class="n">users</span><span class="p">.</span><span class="n">sqlite</span>
+<span class="w">  </span><span class="n">ExecStart</span><span class="o">=/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">calibre</span><span class="o">-</span><span class="n">server</span><span class="w"> </span><span class="err">$</span><span class="n">LIBRARY_PATH</span><span class="w"> </span><span class="err">\</span>
+<span class="w">                                   </span><span class="o">--</span><span class="n">port</span><span class="w"> </span><span class="err">$</span><span class="n">PORT</span><span class="w"> </span><span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">auth</span><span class="w"> </span><span class="o">--</span><span class="n">userdb</span><span class="w"> </span><span class="err">$</span><span class="n">USERDB</span>
+<span class="w">  </span><span class="o">[</span><span class="n">Install</span><span class="o">]</span>
+<span class="w">  </span><span class="n">WantedBy</span><span class="o">=</span><span class="n">multi</span><span class="o">-</span><span class="k">user</span><span class="p">.</span><span class="n">target</span>
+</code></pre></div>
 
 <p>用户名和密码需要通过另一个参数<code>--manage-users</code>启动server后手动配置：</p>
 <p><code>sudo  calibre-server /home/huyunyan_cn/calibre-library/ --port 8080 --manage-users --userdb /home/huyunyan_cn/calibre-library/users.sqlite</code></p>

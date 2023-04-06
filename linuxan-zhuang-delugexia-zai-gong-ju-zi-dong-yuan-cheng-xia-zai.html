@@ -58,7 +58,7 @@
         title="Permalink to Linux安装deluge下载工具自动远程下载">Linux安装deluge下载工具自动远程下载</a></h3>
     </header>
 
-<h6 class="subheader" title="2016-01-04T10:20:00+08:00">Mon 04 January 2016
+<h6 class="subheader" title="2016-01-04T10:20:00+08:00">一 04 一月 2016
 </h6>
 
 
@@ -67,66 +67,55 @@ p2p的torrent一直是我的最爱。deluge是一个跨平台的操作系统，�
 这样的需求正符合我媒体中心的需要，我找到新的片源，并不需要下载到我的计算机，而是可以让我的Kodi在播放电影的同时，又可以执行下载的任务。</p>
 <h1>服务器端：</h1>
 <p>安装:</p>
-<div class="highlight"><pre><span></span>$ sudo apt-get install deluged deluge-web
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>deluged<span class="w"> </span>deluge-web
+</code></pre></div>
 
 <p>新建一个deluge用户和用户组:</p>
-<div class="highlight"><pre><span></span>$ sudo adduser --system  --gecos <span class="s2">&quot;Deluge Service&quot;</span> --disabled-password --group --home /var/lib/deluge deluge
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>sudo<span class="w"> </span>adduser<span class="w"> </span>--system<span class="w">  </span>--gecos<span class="w"> </span><span class="s2">&quot;Deluge Service&quot;</span><span class="w"> </span>--disabled-password<span class="w"> </span>--group<span class="w"> </span>--home<span class="w"> </span>/var/lib/deluge<span class="w"> </span>deluge
+</code></pre></div>
 
 <p>把用户添加到deluge用户组<code>adduser &lt;username&gt; deluge</code>，便于用户操作torrent和下载到的文件，在我的kodi的xubuntu，当然就是kodi用户了：</p>
-<div class="highlight"><pre><span></span>$ sudo adduser kodi deluge
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>sudo<span class="w"> </span>adduser<span class="w"> </span>kodi<span class="w"> </span>deluge
+</code></pre></div>
 
 <p>需要临时登录deluge用户配置远程管理, 因此如果系统不允许没有密码的用户登录，则需要给deluge设置一个密码</p>
-<div class="highlight"><pre><span></span>$ sudo passwd deluge：
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>sudo<span class="w"> </span>passwd<span class="w"> </span>deluge：
+</code></pre></div>
 
 <p>然后再登录deluge用户：</p>
-<div class="highlight"><pre><span></span>$ su deluge
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>su<span class="w"> </span>deluge
 
-$ deluge-console <span class="s2">&quot;config -s allow_remote True&quot;</span>
-$ deluge-console <span class="s2">&quot;config allow_remote&quot;</span>
-</pre></div>
-
+$<span class="w"> </span>deluge-console<span class="w"> </span><span class="s2">&quot;config -s allow_remote True&quot;</span>
+$<span class="w"> </span>deluge-console<span class="w"> </span><span class="s2">&quot;config allow_remote&quot;</span>
+</code></pre></div>
 
 <p>修改远程控制的密码，格式是<code>&lt;username&gt;:&lt;password&gt;:10</code>：</p>
-<div class="highlight"><pre><span></span>$ cp ~/.config/deluge/auth ~/.conf/deluge/auth.bak
-$ vim ~/.config/deluge/auth
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>cp<span class="w"> </span>~/.config/deluge/auth<span class="w"> </span>~/.conf/deluge/auth.bak
+$<span class="w"> </span>vim<span class="w"> </span>~/.config/deluge/auth
+</code></pre></div>
 
 <p>退出deluge：</p>
-<div class="highlight"><pre><span></span>$ <span class="k">exit</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span><span class="nb">exit</span>
+</code></pre></div>
 
 <p>执行deluge的守护进程：</p>
-<div class="highlight"><pre><span></span>$ deluged
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>deluged
+</code></pre></div>
 
 <p>(可选)让deluge作为服务运行，暂略。</p>
 <h1>客户端</h1>
 <p>现在回到我的笔记本上：</p>
 <p>安装deluge：</p>
-<div class="highlight"><pre><span></span>$ sudo pacman -S deluge
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>deluge
+</code></pre></div>
 
 <p>OR</p>
-<div class="highlight"><pre><span></span>$ sudo apt-get install deluge
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>deluge
+</code></pre></div>
 
 <p>deluge安装好了，在终端执行deluge, 或者直接打开应用程序，在菜单中选择：</p>
-<div class="highlight"><pre><span></span><span class="n">Preferences</span> <span class="o">-&gt;</span> <span class="n">Interface</span> <span class="p">:</span> <span class="err">把</span> <span class="n">Classic</span> <span class="k">Mode</span> <span class="err">的勾勾掉</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">Preferences</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kr">Interface</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="err">把</span><span class="w"> </span><span class="n">Classic</span><span class="w"> </span><span class="n">Mode</span><span class="w"> </span><span class="err">的勾勾掉</span>
+</code></pre></div>
 
 <p>然后会自动重启deluge，重新启动后，系统会让你选择一个服务器，默认有一个127.0.0.1的本地deluge服务，显然这不是我们想要的：
 点击Add，输入服务器的ip地址:</p>

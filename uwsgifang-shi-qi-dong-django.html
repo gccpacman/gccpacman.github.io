@@ -58,47 +58,43 @@
         title="Permalink to uwsgi方式启动django">uwsgi方式启动django</a></h3>
     </header>
 
-<h6 class="subheader" title="2015-11-23T10:20:00+08:00">Mon 23 November 2015
+<h6 class="subheader" title="2015-11-23T10:20:00+08:00">一 23 十一月 2015
 </h6>
 
 
     <p>没人访问的博客也不是不能升级。不过最近有点懒，趁着睡不着搞了下<code>uwsgi</code>。
 额。平台ubuntu, 你最好有个django项目，假设已经用了<code>virtualenv</code>，假设已经安装好<code>nginx</code>并启动服务。</p>
 <p>1）首先安装<code>uwsgi</code>:  </p>
-<div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">uwsgi</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>pip install uwsgi
+</code></pre></div>
 
 <p>2）然后启动， 指定端口号和进程号：</p>
-<div class="highlight"><pre><span></span><span class="n">uwsgi</span> <span class="o">-</span><span class="n">s</span> <span class="mi">127</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">1</span><span class="p">:</span><span class="mi">38803</span> <span class="c1">--http :8000 --module blog.wsgi</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>uwsgi -s 127.0.0.1:38803 --http :8000 --module blog.wsgi
+</code></pre></div>
 
 <p>3) 配置nginx配置文件，放在<code>/etc/nginx/site-enabled/</code>目录下，注意如果你要用80端口，就不要和其他的例如默认的配置冲突，如果有个default的文件，应该是一个软连接，可以直接删掉。我就直接贴我自己的了：</p>
-<div class="highlight"><pre><span></span><span class="nv">upstream</span> <span class="nv">django</span> {
-    <span class="nv">server</span> <span class="mi">127</span>.<span class="mi">0</span>.<span class="mi">0</span>.<span class="mi">1</span>:<span class="mi">38803</span><span class="c1">;</span>
-}
+<div class="highlight"><pre><span></span><code><span class="nt">upstream</span><span class="w"> </span><span class="nt">django</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="err">server</span><span class="w"> </span><span class="err">127.0.0.1:38803</span><span class="p">;</span>
+<span class="p">}</span>
 
-<span class="nv">server</span> {
-    <span class="nv">listen</span> <span class="mi">80</span><span class="c1">;</span>
-    <span class="nv">server_name</span> <span class="nv">localhost</span><span class="c1">;</span>
-    <span class="nv">charset</span> <span class="nv">utf</span><span class="o">-</span><span class="mi">8</span><span class="c1">;</span>
-    <span class="nv">client_max_body_size</span> <span class="mi">75</span><span class="nv">M</span><span class="c1">;</span>
-    <span class="nv">location</span> <span class="o">/</span> {
-        <span class="nv">uwsgi_pass</span> <span class="nv">django</span><span class="c1">;</span>
-        <span class="k">include</span> <span class="o">/</span><span class="nv">etc</span><span class="o">/</span><span class="nv">nginx</span><span class="o">/</span><span class="nv">uwsgi_params</span><span class="c1">;</span>
-    }
-    <span class="nv">location</span> <span class="o">/</span><span class="nv">static</span> {
-        <span class="nv">alias</span>   <span class="o">/</span><span class="nv">webapps</span><span class="o">/</span><span class="nv">blog</span><span class="o">/</span><span class="nv">static</span><span class="c1">;</span>
-    }
-}
-</pre></div>
-
+<span class="nt">server</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="err">listen</span><span class="w"> </span><span class="err">80</span><span class="p">;</span>
+<span class="w">    </span><span class="err">server_name</span><span class="w"> </span><span class="err">localhost</span><span class="p">;</span>
+<span class="w">    </span><span class="err">charset</span><span class="w"> </span><span class="err">utf-8</span><span class="p">;</span>
+<span class="w">    </span><span class="err">client_max_body_size</span><span class="w"> </span><span class="err">75M</span><span class="p">;</span>
+<span class="w">    </span><span class="err">location</span><span class="w"> </span><span class="err">/</span><span class="w"> </span><span class="err">{</span>
+<span class="w">        </span><span class="err">uwsgi_pass</span><span class="w"> </span><span class="err">django</span><span class="p">;</span>
+<span class="w">        </span><span class="err">include</span><span class="w"> </span><span class="err">/etc/nginx/uwsgi_params</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nt">location</span><span class="w"> </span><span class="o">/</span><span class="nt">static</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="err">alias</span><span class="w">   </span><span class="err">/webapps/blog/static</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="err">}</span>
+</code></pre></div>
 
 <p>4) 关于static，你应该在服务器某个地方建个目录(例如我的配置文件是<code>/webapps/blog/static</code>)，然后配置一下<code>setting.py</code>里的<code>STATIC_ROOT</code>成该目录，然后每次static有更改就重新执行</p>
-<div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="p">.</span><span class="n">py</span> <span class="n">collectstatic</span><span class="p">.</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>python manage.py collectstatic.
+</code></pre></div>
 
 <p>然后尝试一下访问<code>127.0.0.1</code>，当然如果是远程服务器，就是你的网址了。
 看看是否work了吧！</p>
