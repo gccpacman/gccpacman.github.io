@@ -22,6 +22,8 @@ wget --input-file=wget-list-sysv --continue --directory-prefix=$LFS/sources
 
 ```
 
+![lfs source code]({static}/images/lfs2.png)
+
 ### 2）在$LFS/sources/patches目录下，创建needed-patches-list，执行以下命令批量下载源代码tar包
 
 ```
@@ -31,7 +33,9 @@ wget --input-file=needed-patches-list --continue --directory-prefix=$LFS/sources
 
 ```
 
-### 3） 创建基本LFS Linux目录
+![lfs  source code]({static}/images/lfs2-2.png)
+
+### 3） 创建基本LFS Linux目录结构
 
 ```
 
@@ -47,7 +51,9 @@ mkdir -pv $LFS/tools
 
 ```
 
-### 4） 创建LFS宿主机用户
+![lfs  source code]({static}/images/lfs2-3.png)
+
+### 4） 创建LFS宿主机用户, 并且将$LFS下的目录chown给lfs用户
 
 ```
 
@@ -64,7 +70,7 @@ esac
 
 ```
 
-### 5) 初始化lfs用户的bashrc
+### 5) 初始化lfs用户的bashrc和bash_profile, 添加LFS, LFS_TGT等环境变量
 
 ```
 

@@ -7,11 +7,11 @@ Authors: r341h
 
 大概一年多以前看到了一个项目叫做Linux From Scrach，大致意思就是现在有无数的Linux发行版，但是最好的发行版就是你自己编译的。我倒是没有打算真的用自己编译的发行版，但是既然有时间就不妨看看能不能编译出来。于是下载了官方指导LFS安装的stable版本的PDF（https://www.linuxfromscratch.org/lfs/downloads/stable/），打算尝试看看。
 
-## 0） 准备一台linux操作系统的主机
+### 0） 准备一台linux操作系统的主机
 
 之前已经在自己的一台台式主机上安装了Ubuntu22.04 Desktop，打算以此作为LFS的编译环境。毕竟是裸金属的机器，有i7和固态硬盘加持，编译的效率应该就不用担心了。
 
-## 1） 在ubuntu22.04主机根据LFS文档安装了缺失的编译依赖环境
+### 1） 在ubuntu22.04主机根据LFS文档安装了缺失的编译依赖环境
 
 ```bash
 sudo apt install qemu-system-x86
@@ -29,7 +29,7 @@ sudo apt install xz
 sudo apt install gawk
 ```
 
-## 2） 确认是否正确安装所有依赖version_check.sh
+### 2） 确认是否正确安装所有依赖version_check.sh
 
 ```bash
 #!/bin/bash
@@ -116,7 +116,7 @@ xz (XZ Utils) 5.2.5
 g++ compilation OK
 ```
 
-## 3） 为LFS创建磁盘分区
+### 3） 为LFS创建磁盘分区
 
 主要需要创建LFS ext4主分区和swap分区, 这里我直接利用了ubuntu的图形分区工具分区了
 
@@ -137,7 +137,7 @@ mount: /dev/sda3 mounted on /mnt/lfs
 ```
 
 
-## 4） 设置宿主机（ubuntu22.04） 环境变量, 建议root和普通用户都设置
+### 4） 设置宿主机（ubuntu22.04） 环境变量, 建议root和普通用户都设置
 
 ```
 echo "export LFS=/mnt/lfs" > .bashrc
