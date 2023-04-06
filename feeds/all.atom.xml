@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Pacman News</title><link href="https://gccpacman.github.io/" rel="alternate"></link><link href="https://gccpacman.github.io/feeds/all.atom.xml" rel="self"></link><id>https://gccpacman.github.io/</id><updated>2022-04-06T14:20:00+08:00</updated><entry><title>编译LFS(Linux From Scrach) --（1）安装编译依赖</title><link href="https://gccpacman.github.io/bian-yi-lfslinux-from-scrach-1an-zhuang-bian-yi-yi-lai.html" rel="alternate"></link><published>2022-04-06T14:20:00+08:00</published><updated>2022-04-06T14:20:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2022-04-06:/bian-yi-lfslinux-from-scrach-1an-zhuang-bian-yi-yi-lai.html</id><summary type="html">&lt;h1&gt;1. 安装编译依赖&lt;/h1&gt;
-&lt;p&gt;在ubuntu22.04 安装编译依赖&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;apt&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;qemu-system-x86
-sudo&lt;span class="w"&gt; &lt;/span&gt;apt&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;binutils
-sudo …&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h1&gt;1. 安装编译依赖&lt;/h1&gt;
-&lt;p&gt;在ubuntu22.04 安装编译依赖&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Pacman News</title><link href="https://gccpacman.github.io/" rel="alternate"></link><link href="https://gccpacman.github.io/feeds/all.atom.xml" rel="self"></link><id>https://gccpacman.github.io/</id><updated>2022-04-06T14:20:00+08:00</updated><entry><title>编译Linux From Scrach（LFS） --（1）准备编译linux主机环境和磁盘分区</title><link href="https://gccpacman.github.io/bian-yi-linux-from-scrachlfs-1zhun-bei-bian-yi-linuxzhu-ji-huan-jing-he-ci-pan-fen-qu.html" rel="alternate"></link><published>2022-04-06T14:20:00+08:00</published><updated>2022-04-06T14:20:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2022-04-06:/bian-yi-linux-from-scrachlfs-1zhun-bei-bian-yi-linuxzhu-ji-huan-jing-he-ci-pan-fen-qu.html</id><summary type="html">&lt;p&gt;大概一年多以前看到了一个项目叫做Linux From Scrach，大致意思就是 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;大概一年多以前看到了一个项目叫做Linux From Scrach，大致意思就是现在有无数的Linux发行版，但是最好的发行版就是你自己编译的。我倒是没有打算真的用自己编译的发行版，但是既然有时间就不妨看看能不能编译出来。于是下载了官方指导LFS安装的stable版本的PDF（https://www.linuxfromscratch.org/lfs/downloads/stable/），打算尝试看看。&lt;/p&gt;
+&lt;h2&gt;0） 准备一台linux操作系统的主机&lt;/h2&gt;
+&lt;p&gt;之前已经在自己的一台台式主机上安装了Ubuntu22.04 Desktop，打算以此作为LFS的编译环境。毕竟是裸金属的机器，有i7和固态硬盘加持，编译的效率应该就不用担心了。&lt;/p&gt;
+&lt;h2&gt;1） 在ubuntu22.04主机根据LFS文档安装了缺失的编译依赖环境&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;apt&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;qemu-system-x86
 sudo&lt;span class="w"&gt; &lt;/span&gt;apt&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;binutils
 sudo&lt;span class="w"&gt; &lt;/span&gt;apt&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;bison
@@ -20,7 +18,7 @@ sudo&lt;span class="w"&gt; &lt;/span&gt;apt&lt;span class="w"&gt; &lt;/span&gt;i
 sudo&lt;span class="w"&gt; &lt;/span&gt;apt&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;gawk
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;确认是否正确安装 version_check.sh&lt;/p&gt;
+&lt;h2&gt;2） 确认是否正确安装所有依赖version_check.sh&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
 &lt;span class="c1"&gt;# Simple script to list version numbers of critical development tools&lt;/span&gt;
 &lt;span class="nb"&gt;export&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;LC_ALL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;C
@@ -100,7 +98,26 @@ tar&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;GNU&l
 texi2any&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;GNU&lt;span class="w"&gt; &lt;/span&gt;texinfo&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;6&lt;/span&gt;.8
 xz&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;XZ&lt;span class="w"&gt; &lt;/span&gt;Utils&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;5&lt;/span&gt;.2.5
 g++&lt;span class="w"&gt; &lt;/span&gt;compilation&lt;span class="w"&gt; &lt;/span&gt;OK
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="Linux"></category><category term="linux"></category><category term="lfs"></category></entry><entry><title>WSL无缝使用windows的Vagrant</title><link href="https://gccpacman.github.io/wslwu-feng-shi-yong-windowsde-vagrant.html" rel="alternate"></link><published>2019-09-25T10:23:00+08:00</published><updated>2019-09-25T10:23:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2019-09-25:/wslwu-feng-shi-yong-windowsde-vagrant.html</id><summary type="html">&lt;p&gt;同时安装windows和wsl下的linux版本的vagrant，配置环境变量就可以使用。linux下vagrant的好处很多，首先文件的换行和 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;同时安装windows和wsl下的linux版本的vagrant，配置环境变量就可以使用。linux下vagrant的好处很多，首先文件的换行和权限的烦恼没有了，然后可以使用一些revision工具，例如ansible，在vagrantfile初始化的时候带来很多好处&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;3） 为LFS创建磁盘分区&lt;/h2&gt;
+&lt;p&gt;主要需要创建LFS ext4主分区和swap分区, 这里我直接利用了ubuntu的图形分区工具分区了&lt;/p&gt;
+&lt;p&gt;&lt;img alt="lfs partition" src="https://gccpacman.github.io/images/lfs1.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="lfs partition 2" src="https://gccpacman.github.io/images/lfs1-2.png"&gt;&lt;/p&gt;
+&lt;p&gt;创建lfs并，挂载分区，设置$LFS环境变量：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;r341h&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;uAlienR7&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="n"&gt;LinuxFromScrach&lt;/span&gt;&lt;span class="o"&gt;$&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;cat&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;envrc&lt;/span&gt;
+&lt;span class="k"&gt;export&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;LFS&lt;/span&gt;&lt;span class="o"&gt;=/&lt;/span&gt;&lt;span class="n"&gt;mnt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;lfs&lt;/span&gt;
+
+&lt;span class="n"&gt;r341h&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;uAlienR7&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="n"&gt;LinuxFromScrach&lt;/span&gt;&lt;span class="o"&gt;$&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;mkdir&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;pv&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;$&lt;/span&gt;&lt;span class="n"&gt;LFS&lt;/span&gt;
+&lt;span class="n"&gt;mkdir&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;created&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;directory&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/mnt/lfs&amp;#39;&lt;/span&gt;
+
+&lt;span class="n"&gt;r341h&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;uAlienR7&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="n"&gt;LinuxFromScrach&lt;/span&gt;&lt;span class="o"&gt;$&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;mount&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;ext4&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sda3&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;$&lt;/span&gt;&lt;span class="n"&gt;LFS&lt;/span&gt;
+&lt;span class="n"&gt;mount&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sda3&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;mounted&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;on&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mnt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;lfs&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;hr&gt;
+&lt;p&gt;至此宿主机（ubuntu22.04）的安装依赖，和为lfs编译准备的分区创建完毕，也作为我自己规划的第一步。&lt;/p&gt;
+&lt;p&gt;根据LFS文档下一步需要下载Linux和相关组件的源码并进行编译，将在第二篇中详细记录。&lt;/p&gt;</content><category term="Linux"></category><category term="linux"></category><category term="lfs"></category></entry><entry><title>WSL无缝使用windows的Vagrant</title><link href="https://gccpacman.github.io/wslwu-feng-shi-yong-windowsde-vagrant.html" rel="alternate"></link><published>2019-09-25T10:23:00+08:00</published><updated>2019-09-25T10:23:00+08:00</updated><author><name>r341h</name></author><id>tag:gccpacman.github.io,2019-09-25:/wslwu-feng-shi-yong-windowsde-vagrant.html</id><summary type="html">&lt;p&gt;同时安装windows和wsl下的linux版本的vagrant，配置环境变量就可以使用。linux下vagrant的好处很多，首先文件的换行和 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;同时安装windows和wsl下的linux版本的vagrant，配置环境变量就可以使用。linux下vagrant的好处很多，首先文件的换行和权限的烦恼没有了，然后可以使用一些revision工具，例如ansible，在vagrantfile初始化的时候带来很多好处&lt;/p&gt;
 &lt;p&gt;下载地址：https://www.vagrantup.com/downloads.html&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Windows下安装就直接exe了&lt;/li&gt;

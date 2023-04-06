@@ -4,7 +4,7 @@
     <!-- Set the viewport width to device width for mobile -->
     <meta name="viewport" content="width=device-width" />
 
-    <title>编译LFS(Linux From Scrach) --（1）安装编译依赖</title>
+    <title>编译Linux From Scrach（LFS） --（1）准备编译linux主机环境和磁盘分区</title>
 
     <link rel="stylesheet" href="https://gccpacman.github.io/theme/css/normalize.css" />
     <link rel="stylesheet" href="https://gccpacman.github.io/theme/css/foundation.min.css" />
@@ -54,16 +54,18 @@
     <div class="large-9 columns">
 <article>
     <header>
-        <h3 class="article-title"><a href="https://gccpacman.github.io/bian-yi-lfslinux-from-scrach-1an-zhuang-bian-yi-yi-lai.html" rel="bookmark"
-        title="Permalink to 编译LFS(Linux From Scrach) --（1）安装编译依赖">编译LFS(Linux From Scrach) --（1）安装编译依赖</a></h3>
+        <h3 class="article-title"><a href="https://gccpacman.github.io/bian-yi-linux-from-scrachlfs-1zhun-bei-bian-yi-linuxzhu-ji-huan-jing-he-ci-pan-fen-qu.html" rel="bookmark"
+        title="Permalink to 编译Linux From Scrach（LFS） --（1）准备编译linux主机环境和磁盘分区">编译Linux From Scrach（LFS） --（1）准备编译linux主机环境和磁盘分区</a></h3>
     </header>
 
 <h6 class="subheader" title="2022-04-06T14:20:00+08:00">三 06 四月 2022
 </h6>
 
 
-    <h1>1. 安装编译依赖</h1>
-<p>在ubuntu22.04 安装编译依赖</p>
+    <p>大概一年多以前看到了一个项目叫做Linux From Scrach，大致意思就是现在有无数的Linux发行版，但是最好的发行版就是你自己编译的。我倒是没有打算真的用自己编译的发行版，但是既然有时间就不妨看看能不能编译出来。于是下载了官方指导LFS安装的stable版本的PDF（https://www.linuxfromscratch.org/lfs/downloads/stable/），打算尝试看看。</p>
+<h2>0） 准备一台linux操作系统的主机</h2>
+<p>之前已经在自己的一台台式主机上安装了Ubuntu22.04 Desktop，打算以此作为LFS的编译环境。毕竟是裸金属的机器，有i7和固态硬盘加持，编译的效率应该就不用担心了。</p>
+<h2>1） 在ubuntu22.04主机根据LFS文档安装了缺失的编译依赖环境</h2>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>qemu-system-x86
 sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>binutils
 sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>bison
@@ -79,7 +81,7 @@ sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> <
 sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>gawk
 </code></pre></div>
 
-<p>确认是否正确安装 version_check.sh</p>
+<h2>2） 确认是否正确安装所有依赖version_check.sh</h2>
 <div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
 <span class="c1"># Simple script to list version numbers of critical development tools</span>
 <span class="nb">export</span><span class="w"> </span><span class="nv">LC_ALL</span><span class="o">=</span>C
@@ -160,6 +162,25 @@ texi2any<span class="w"> </span><span class="o">(</span>GNU<span class="w"> </sp
 xz<span class="w"> </span><span class="o">(</span>XZ<span class="w"> </span>Utils<span class="o">)</span><span class="w"> </span><span class="m">5</span>.2.5
 g++<span class="w"> </span>compilation<span class="w"> </span>OK
 </code></pre></div>
+
+<h2>3） 为LFS创建磁盘分区</h2>
+<p>主要需要创建LFS ext4主分区和swap分区, 这里我直接利用了ubuntu的图形分区工具分区了</p>
+<p><img alt="lfs partition" src="https://gccpacman.github.io/images/lfs1.png"></p>
+<p><img alt="lfs partition 2" src="https://gccpacman.github.io/images/lfs1-2.png"></p>
+<p>创建lfs并，挂载分区，设置$LFS环境变量：</p>
+<div class="highlight"><pre><span></span><code><span class="n">r341h</span><span class="err">@</span><span class="n">uAlienR7</span><span class="p">:</span><span class="o">~/</span><span class="n">LinuxFromScrach</span><span class="o">$</span><span class="w"> </span><span class="n">cat</span><span class="w"> </span><span class="o">.</span><span class="n">envrc</span>
+<span class="k">export</span><span class="w"> </span><span class="n">LFS</span><span class="o">=/</span><span class="n">mnt</span><span class="o">/</span><span class="n">lfs</span>
+
+<span class="n">r341h</span><span class="err">@</span><span class="n">uAlienR7</span><span class="p">:</span><span class="o">~/</span><span class="n">LinuxFromScrach</span><span class="o">$</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">mkdir</span><span class="w"> </span><span class="o">-</span><span class="n">pv</span><span class="w"> </span><span class="o">$</span><span class="n">LFS</span>
+<span class="n">mkdir</span><span class="p">:</span><span class="w"> </span><span class="n">created</span><span class="w"> </span><span class="n">directory</span><span class="w"> </span><span class="s1">&#39;/mnt/lfs&#39;</span>
+
+<span class="n">r341h</span><span class="err">@</span><span class="n">uAlienR7</span><span class="p">:</span><span class="o">~/</span><span class="n">LinuxFromScrach</span><span class="o">$</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">mount</span><span class="w"> </span><span class="o">-</span><span class="n">v</span><span class="w"> </span><span class="o">-</span><span class="n">t</span><span class="w"> </span><span class="n">ext4</span><span class="w"> </span><span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">sda3</span><span class="w"> </span><span class="o">$</span><span class="n">LFS</span>
+<span class="n">mount</span><span class="p">:</span><span class="w"> </span><span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">sda3</span><span class="w"> </span><span class="n">mounted</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="o">/</span><span class="n">mnt</span><span class="o">/</span><span class="n">lfs</span>
+</code></pre></div>
+
+<hr>
+<p>至此宿主机（ubuntu22.04）的安装依赖，和为lfs编译准备的分区创建完毕，也作为我自己规划的第一步。</p>
+<p>根据LFS文档下一步需要下载Linux和相关组件的源码并进行编译，将在第二篇中详细记录。</p>
 <p class="subheader">分类: <a href="https://gccpacman.github.io/category/linux.html">Linux</a>
 
     标签: 
