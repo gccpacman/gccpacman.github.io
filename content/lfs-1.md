@@ -137,6 +137,12 @@ mount: /dev/sda3 mounted on /mnt/lfs
 ```
 
 
+## 4） 设置宿主机（ubuntu22.04） 环境变量, 建议root和普通用户都设置
+
+```
+echo "export LFS=/mnt/lfs" > .bashrc
+```
+
 ---
 
 至此宿主机（ubuntu22.04）的安装依赖，和为lfs编译准备的分区创建完毕，也作为我自己规划的第一步。
