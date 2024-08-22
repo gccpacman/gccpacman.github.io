@@ -1,7 +1,7 @@
-<p class="subheader">Category: <a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category }}</a>
+<p class="subheader">分类: <a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category }}</a>
 
 {% if article.tags %}
-    Tagged: 
+    标签: 
     {% for tag in article.tags %}
     <a href="{{ SITEURL }}/{{ tag.url }}">{{ tag }} </a>
     {% endfor %}

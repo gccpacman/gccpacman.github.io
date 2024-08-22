@@ -26,8 +26,8 @@ THEME = "./themes/zurb-F5-basic"
 # Blogroll
 
 # Social widget
-SOCIAL = (('Github: @gccpacman', 'https://github.com/gccpacman'),
-          ('StackOverflow: @evan-hu', 'https://stackoverflow.com/users/4124310/evan-hu?tab=profile'),)
+SOCIAL = (('Github:@gccpacman', 'https://github.com/gccpacman'),
+          ('StackOverflow:@realhu', 'https://stackoverflow.com/users/4124310/realhu?tab=profile'),)
 
 GITHUB_BLOG_SITE = u'https://github.com/gccpacman/gccpacman.github.io'
 
