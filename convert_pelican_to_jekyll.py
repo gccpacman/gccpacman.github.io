@@ -1,6 +1,5 @@
 import os
 import re
-import shutil
 from datetime import datetime
 
 # 定义 Pelican 格式的正则表达式
@@ -14,7 +13,7 @@ pelican_metadata_pattern = {
 }
 
 # 读取和转换每个Markdown文件
-def convert_file(input_file_path, output_file_path):
+def convert_file(input_file_path, output_file_path, date_str):
     with open(input_file_path, 'r', encoding='utf-8') as f:
         lines = f.readlines()
 
@@ -44,7 +43,6 @@ def convert_file(input_file_path, output_file_path):
     jekyll_front_matter += f"title: {metadata.get('Title', '')}\n"
 
     # 处理 Date 格式
-    date_str = metadata.get('Date', '')
     if date_str:
         try:
             date_obj = datetime.strptime(date_str, "%Y-%m-%d %H:%M")
@@ -83,14 +81,39 @@ def convert_directory(input_directory, output_directory):
         input_file_path = os.path.join(input_directory, filename)
 
         if os.path.isfile(input_file_path) and filename.endswith(".md"):
-            # 解析出文件的标题部分（假设文件名格式为 `YYYY-MM-DD-title.md`）
-            output_file_path = os.path.join(output_directory, filename)
-            # 转换文件
-            convert_file(input_file_path, output_file_path)
+            # 解析出文件的标题部分（假设文件名格式为 `title.md`）
+            match = re.match(r'(.*)\.md', filename)
+            if match:
+                title = match.group(1)
+                
+                # 假设元数据中的 `Date` 是我们需要的日期
+                date_str = None
+                with open(input_file_path, 'r', encoding='utf-8') as f:
+                    lines = f.readlines()
+                    for line in lines:
+                        date_match = pelican_metadata_pattern['Date'].match(line.strip())
+                        if date_match:
+                            date_str = date_match.group(1).strip()
+                            break
+                
+                if date_str:
+                    # 构建新的文件名
+                    try:
+                        date_obj = datetime.strptime(date_str, "%Y-%m-%d %H:%M")
+                        new_filename = f"{date_obj.strftime('%Y-%m-%d')}-{title}.md"
+                    except ValueError:
+                        print(f"Error: Invalid date format in file {input_file_path}. Skipping...")
+                        continue
+                    
+                    output_file_path = os.path.join(output_directory, new_filename)
+                    
+                    # 转换文件
+                    convert_file(input_file_path, output_file_path, date_str)
 
 # 执行脚本
 if __name__ == "__main__":
-    # 修改为你的目标文件夹路径
+    # 设置为你的实际目录路径
     input_directory = "./content"  # 输入文件夹路径（Pelican 格式的文件）
-    output_directory = "/_posts"  # 输出文件夹路径（Jekyll 格式的文件）
+    output_directory = "./_posts"  # 输出文件夹路径（Jekyll 格式的文件）
+    
     convert_directory(input_directory, output_directory)
