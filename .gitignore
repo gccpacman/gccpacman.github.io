@@ -3,3 +3,35 @@ _site
 .jekyll-cache
 .jekyll-metadata
 vendor
+
+# Hugo related files
+/public/
+/resources/
+# Hugo generates a public directory with the static website build
+# Ignore this, since it's a build artifact.
+
+# Ignore the Hugo binary if present
+/hugo
+
+# IDE and editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Operating system files
+.DS_Store         # macOS specific
+Thumbs.db         # Windows specific
+ehthumbs.db       # Windows specific
+
+# Log and temporary files
+*.log
+*.bak
+*.swp
+
+# Node.js related files if using npm/yarn
+node_modules/
+
+# Other possible temp files
+*.tmp
+*.orig

@@ -1,0 +1,4 @@
+baseURL = 'https://gccpacman.github.io/'
+languageCode = 'zh_CN'
+title = 'Pacman News'
+theme = 'ananke'
