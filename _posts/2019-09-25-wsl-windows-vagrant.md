@@ -1,4 +1,5 @@
 ---
+layout: post
 title: WSL无缝使用windows的Vagrant
 date: 2019-09-25 10:23:00 
 categories: WSL

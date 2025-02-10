@@ -1,4 +1,5 @@
 ---
+layout: post
 title: Linux安装deluge下载工具自动远程下载
 date: 2016-01-04 10:20:00 
 categories: Linux

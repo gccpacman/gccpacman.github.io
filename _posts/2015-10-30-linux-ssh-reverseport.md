@@ -1,4 +1,5 @@
 ---
+layout: post
 title: Linux利用ssh反向端口转发暴露内网端口
 date: 2015-10-30 10:20:00 
 categories: Linux

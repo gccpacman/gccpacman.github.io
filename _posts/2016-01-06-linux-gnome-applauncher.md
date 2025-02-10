@@ -1,4 +1,5 @@
 ---
+layout: post
 title: Linux创建自定义的应用程序启动器
 date: 2016-01-06 10:20:00 
 categories: Linux

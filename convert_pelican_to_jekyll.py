@@ -39,7 +39,7 @@ def convert_file(input_file_path, output_file_path, date_str):
             content.append(line)
 
     # 构建 Jekyll 的 Front Matter
-    jekyll_front_matter = "---\n"
+    jekyll_front_matter = "---\nlayout: post\n"
     jekyll_front_matter += f"title: {metadata.get('Title', '')}\n"
 
     # 处理 Date 格式

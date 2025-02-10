@@ -1,4 +1,5 @@
 ---
+layout: post
 title: 用Calibre Server创建个人在线电子书阅读网站
 date: 2017-12-20 10:20:00 
 categories: Linux

@@ -1,4 +1,5 @@
 ---
+layout: post
 title: uwsgi方式启动django
 date: 2015-11-23 10:20:00 
 categories: python

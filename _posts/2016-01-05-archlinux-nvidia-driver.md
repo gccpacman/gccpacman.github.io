@@ -1,4 +1,5 @@
 ---
+layout: post
 title: ArchLinux将nvidia driver替换成开源的nouveau解决显卡驱动问题
 date: 2016-01-05 10:20:00 
 categories: Linux

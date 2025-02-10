@@ -1,4 +1,5 @@
 ---
+layout: post
 title: Windows在Hyperv安装Centos7并配置网络
 date: 2019-05-07 11:13:00 
 categories: Windows

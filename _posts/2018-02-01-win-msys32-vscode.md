@@ -1,4 +1,5 @@
 ---
+layout: post
 title: Windows安装MSys32配置Git等开发环境并集成VSCode
 date: 2018-02-01 10:20:00 
 categories: Windows

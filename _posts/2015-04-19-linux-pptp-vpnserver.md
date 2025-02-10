@@ -1,4 +1,5 @@
 ---
+layout: post
 title: Linux搭建PPTP VPN Server
 date: 2015-04-19 10:20:00 
 categories: Linux

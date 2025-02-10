@@ -1,4 +1,5 @@
 ---
+layout: post
 title: Linux把用户态systemd服务改成系统服务，开机自启动迅雷(xware)
 date: 2016-01-08 10:20:00 
 categories: Linux

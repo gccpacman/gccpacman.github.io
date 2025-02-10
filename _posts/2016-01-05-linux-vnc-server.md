@@ -1,4 +1,5 @@
 ---
+layout: post
 title: Linux搭建VNC服务器
 date: 2016-01-05 10:20:00 
 categories: Linux

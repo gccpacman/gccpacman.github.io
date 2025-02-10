@@ -1,4 +1,5 @@
 ---
+layout: post
 title: Linux将Socks代理转换成Http代理
 date: 2015-05-14 10:20:00 
 categories: Linux

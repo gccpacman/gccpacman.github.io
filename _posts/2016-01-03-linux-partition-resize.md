@@ -1,4 +1,5 @@
 ---
+layout: post
 title: 调整Linux主分区的大小
 date: 2016-01-03 10:20:00 
 categories: Linux

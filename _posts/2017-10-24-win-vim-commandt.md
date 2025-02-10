@@ -1,4 +1,5 @@
 ---
+layout: post
 title: Windows上编译vim文件导航跳转插件command-t
 date: 2017-10-24 10:20:00 
 categories: Vim

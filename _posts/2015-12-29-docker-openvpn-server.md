@@ -1,4 +1,5 @@
 ---
+layout: post
 title: Docker搭建openvpn server
 date: 2015-12-29 10:20:00 
 categories: Linux

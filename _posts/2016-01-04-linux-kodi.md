@@ -1,4 +1,5 @@
 ---
+layout: post
 title: Linux安装并开机进入Kodi媒体中心
 date: 2016-01-04 10:20:00 
 categories: Linux

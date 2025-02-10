@@ -1,4 +1,5 @@
 ---
+layout: post
 title: ArchLinux休眠后唤醒，wifi和蓝牙无法正常使用的解决方法
 date: 2017-12-04 10:20:00 
 categories: Linux

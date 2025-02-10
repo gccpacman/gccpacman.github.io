@@ -1,4 +1,5 @@
 ---
+layout: post
 title: 墙内的Centos7 Linux安装K8S
 date: 2019-05-07 11:13:00 
 categories: Kubernetes

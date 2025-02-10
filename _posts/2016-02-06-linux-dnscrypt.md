@@ -1,4 +1,5 @@
 ---
+layout: post
 title: Linux安装Dnscrypt
 date: 2016-02-06 10:20:00 
 categories: Linux

@@ -1,4 +1,5 @@
 ---
+layout: post
 title: 部署VueJS静态网站到阿里云OSS
 date: 2019-08-19 10:20:00 
 categories: Nodejs

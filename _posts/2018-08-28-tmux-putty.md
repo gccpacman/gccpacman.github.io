@@ -1,4 +1,5 @@
 ---
+layout: post
 title: putty + tmux多窗口可用配置
 date: 2018-08-28 10:20:00 
 categories: Terminal

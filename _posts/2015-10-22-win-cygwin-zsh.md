@@ -1,4 +1,5 @@
 ---
+layout: post
 title: Windowss上利用babun, tmux, zsh高度定制shell
 date: 2015-10-22 10:20:00 
 categories: Terminal
