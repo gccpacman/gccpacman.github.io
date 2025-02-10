@@ -110,6 +110,6 @@ def convert_directory(input_directory, output_directory):
 # 主函数
 if __name__ == "__main__":
     input_directory = "./content-pelican"  # Pelican 的内容目录
-    output_directory = "./content/posts"  # Hugo 的内容目录
+    output_directory = "./hugocontent/cn/posts"  # Hugo 的内容目录
 
     convert_directory(input_directory, output_directory)
