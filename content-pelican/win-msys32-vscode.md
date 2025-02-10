@@ -33,7 +33,7 @@ Authors: r341h
 	    $ db_home: windows
 
 
-4. <del> Install Python & Pip </del>  
+4. Install Python & Pip
 (直接用windows的Python就好，用Mingw64的Python反而可能会有很多问题)
 
 
